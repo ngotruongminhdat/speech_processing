@@ -240,7 +240,14 @@
   <div class="player-card">
     <div class="info"><b>Chương 10: Thức ăn của biển và của đất</b><br>5:12 · bấm đoạn văn để nhảy tới</div>
     <audio id="player" src="chuong10.mp3" controls preload="auto"></audio>
-    <button class="pbtn" id="speed" title="Tốc độ đọc (phím ↑ / ↓)">1.0×</button>
+    <select class="pbtn" id="speed" title="Tốc độ đọc (phím ↑ / ↓)">
+      <option value="0.5">0.5×</option>
+      <option value="0.75">0.75×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.25">1.25×</option>
+      <option value="1.5">1.5×</option>
+      <option value="2">2×</option>
+    </select>
     <a class="pbtn" id="dl" href="daisy.zip" download="Totto-chan Bên Cửa Sổ - Chương 10.zip" title="Tải bản DAISY (.zip) mở bằng Thorium / EasyReader">⬇ DAISY</a>
   </div>
 </footer>
@@ -292,14 +299,14 @@
   }
 
   // ---- tốc độ đọc ----
-  const speeds = [0.75, 1, 1.25, 1.5];
-  const speedBtn = document.getElementById('speed');
-  let si = 1;
+  const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+  const speedSel = document.getElementById('speed');
+  let si = 2;
   const savedRate = parseFloat(localStorage.getItem('ttc-rate'));
   if (savedRate && speeds.includes(savedRate)) si = speeds.indexOf(savedRate);
-  function applyRate() { player.playbackRate = speeds[si]; speedBtn.textContent = speeds[si].toFixed(2).replace(/0$/, '') + '×'; localStorage.setItem('ttc-rate', speeds[si]); }
+  function applyRate() { player.playbackRate = speeds[si]; speedSel.value = String(speeds[si]); localStorage.setItem('ttc-rate', speeds[si]); }
   applyRate();
-  speedBtn.addEventListener('click', () => { si = (si + 1) % speeds.length; applyRate(); });
+  speedSel.addEventListener('change', () => { si = speeds.indexOf(parseFloat(speedSel.value)); applyRate(); });
 
   // ---- resume: khôi phục vị trí đang nghe ----
   const savedPos = parseFloat(localStorage.getItem(POS_KEY));
