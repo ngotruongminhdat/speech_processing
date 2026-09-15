@@ -72,12 +72,17 @@ def gen(chapter_no: int):
     h1_clip = clips["id_1"]
     header_label = data.get("label") or ("Mở đầu" if chapter_no == 0 else f"Chương {chapter_no}")
 
-    # chương kế tiếp đã build (tính tại thời điểm sinh trang) để auto-chuyển khi nghe hết
+    # chương kế tiếp / liền trước đã build (tính tại thời điểm sinh trang)
     next_href, next_title = "", ""
     for j, t in units:
         if j > chapter_no and (ROOT / "build" / f"chapter_{j:02d}" / "preview.html").exists():
             next_href = f"../chapter_{j:02d}/preview.html?autoplay=1"
             next_title = t
+            break
+    prev_href = ""
+    for j, t in reversed(units):
+        if j < chapter_no and (ROOT / "build" / f"chapter_{j:02d}" / "preview.html").exists():
+            prev_href = f"../chapter_{j:02d}/preview.html?autoplay=1"
             break
 
     html = f"""<!DOCTYPE html>
@@ -236,8 +241,8 @@ def gen(chapter_no: int):
   </div>
 </footer>
 <div class="keyhint">
-  <b>Space</b> phát/dừng · <b>←</b><b>→</b> đoạn trước/sau<br>
-  <b>↑</b><b>↓</b> tốc độ · <b>N</b> phần sau · <b>H</b> trang bìa
+  <b>Space</b> phát/dừng · <b>←</b><b>→</b> đoạn · <b>↑</b><b>↓</b> tốc độ<br>
+  <b>Shift</b>+<b>→</b> phần sau · <b>Shift</b>+<b>←</b> phần trước
 </div>
 <script>
   const CH = {chapter_no};
@@ -246,6 +251,7 @@ def gen(chapter_no: int):
   const segs = [...document.querySelectorAll('.seg')];
   const NEXT_HREF = "{next_href}";
   const NEXT_TITLE = "{next_title}";
+  const PREV_HREF = "{prev_href}";
   const POS_KEY = 'ttc-pos-' + CH;
   const DONE_KEY = 'ttc-done';
 
@@ -314,14 +320,16 @@ def gen(chapter_no: int):
   // ---- phím tắt ---- (dùng pha capture để không bị thanh audio nuốt phím)
   document.addEventListener('keydown', (e) => {{
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    const next = () => {{ if (NEXT_HREF) location.href = NEXT_HREF; }};
+    const prev = () => {{ if (PREV_HREF) location.href = PREV_HREF; }};
     switch (e.key) {{
-      case ' ': e.preventDefault(); player.paused ? player.play() : player.pause(); break;
-      case 'ArrowRight': e.preventDefault(); jumpSeg(1); break;
-      case 'ArrowLeft': e.preventDefault(); jumpSeg(-1); break;
+      case ' ': case 'k': e.preventDefault(); player.paused ? player.play() : player.pause(); break;
+      case 'ArrowRight': e.preventDefault(); e.shiftKey ? next() : jumpSeg(1); break;
+      case 'ArrowLeft': e.preventDefault(); e.shiftKey ? prev() : jumpSeg(-1); break;
       case 'ArrowUp': e.preventDefault(); si = Math.min(si + 1, speeds.length - 1); applyRate(); break;
       case 'ArrowDown': e.preventDefault(); si = Math.max(si - 1, 0); applyRate(); break;
-      case 'n': case 'N': if (NEXT_HREF) location.href = NEXT_HREF; break;
-      case 'h': case 'H': location.href = '../index.html'; break;
+      case ']': e.preventDefault(); next(); break;
+      case '[': e.preventDefault(); prev(); break;
     }}
   }}, true);
 

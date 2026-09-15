@@ -228,8 +228,8 @@
   </div>
 </footer>
 <div class="keyhint">
-  <b>Space</b> phát/dừng · <b>←</b><b>→</b> đoạn trước/sau<br>
-  <b>↑</b><b>↓</b> tốc độ · <b>N</b> phần sau · <b>H</b> trang bìa
+  <b>Space</b> phát/dừng · <b>←</b><b>→</b> đoạn · <b>↑</b><b>↓</b> tốc độ<br>
+  <b>Shift</b>+<b>→</b> phần sau · <b>Shift</b>+<b>←</b> phần trước
 </div>
 <script>
   const CH = 6;
@@ -238,6 +238,7 @@
   const segs = [...document.querySelectorAll('.seg')];
   const NEXT_HREF = "../chapter_07/preview.html?autoplay=1";
   const NEXT_TITLE = "Totto-chan bắt đầu đi học";
+  const PREV_HREF = "../chapter_05/preview.html?autoplay=1";
   const POS_KEY = 'ttc-pos-' + CH;
   const DONE_KEY = 'ttc-done';
 
@@ -306,14 +307,16 @@
   // ---- phím tắt ---- (dùng pha capture để không bị thanh audio nuốt phím)
   document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    const next = () => { if (NEXT_HREF) location.href = NEXT_HREF; };
+    const prev = () => { if (PREV_HREF) location.href = PREV_HREF; };
     switch (e.key) {
-      case ' ': e.preventDefault(); player.paused ? player.play() : player.pause(); break;
-      case 'ArrowRight': e.preventDefault(); jumpSeg(1); break;
-      case 'ArrowLeft': e.preventDefault(); jumpSeg(-1); break;
+      case ' ': case 'k': e.preventDefault(); player.paused ? player.play() : player.pause(); break;
+      case 'ArrowRight': e.preventDefault(); e.shiftKey ? next() : jumpSeg(1); break;
+      case 'ArrowLeft': e.preventDefault(); e.shiftKey ? prev() : jumpSeg(-1); break;
       case 'ArrowUp': e.preventDefault(); si = Math.min(si + 1, speeds.length - 1); applyRate(); break;
       case 'ArrowDown': e.preventDefault(); si = Math.max(si - 1, 0); applyRate(); break;
-      case 'n': case 'N': if (NEXT_HREF) location.href = NEXT_HREF; break;
-      case 'h': case 'H': location.href = '../index.html'; break;
+      case ']': e.preventDefault(); next(); break;
+      case '[': e.preventDefault(); prev(); break;
     }
   }, true);
 
