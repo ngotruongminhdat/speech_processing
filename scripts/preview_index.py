@@ -118,7 +118,7 @@ def gen():
     background: linear-gradient(90deg, transparent, var(--hero-ink)); }}
   .divider::after {{ background: linear-gradient(90deg, var(--hero-ink), transparent); }}
   .divider i {{ font-style: normal; font-size: .8rem; transform: rotate(45deg); }}
-  .lede p.desc {{ font-size: .95rem; line-height: 1.8; opacity: .92; margin: 0 0 1.4rem; }}
+  .lede p.desc {{ font-size: .95rem; line-height: 1.8; opacity: .92; margin: 0 0 1.4rem; text-align: justify; }}
   .cta {{ display: flex; gap: .8rem; flex-wrap: wrap; font-family: system-ui, sans-serif; margin-top: 1.5rem; }}
   .btn {{ display: inline-flex; align-items: center; gap: .55rem; text-decoration: none;
     font-size: .88rem; font-weight: 600; border-radius: 999px; padding: .72rem 1.5rem;
