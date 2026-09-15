@@ -178,6 +178,7 @@ def gen():
   footer .mark {{ color: var(--accent); font-size: .9rem; }}
   footer .members {{ display: inline-block; margin-top: .35rem; color: var(--ink);
     font-size: .8rem; letter-spacing: .02em; }}
+  footer .hits {{ margin-top: .7rem; height: 18px; opacity: .75; }}
 </style>
 </head>
 <body>
@@ -230,7 +231,8 @@ def gen():
     <div class="mark">◆</div>
     Bộ dữ liệu sách nói DAISY dành cho người khiếm thị<br>
     Đồ án giữa kỳ Xử lý tiếng nói K35 · Nhóm Totto-chan<br>
-    <span class="members">{" · ".join(m.strip() for m in META['collector'].split(','))}</span>
+    <span class="members">{" · ".join(m.strip() for m in META['collector'].split(','))}</span><br>
+    <img class="hits" src="https://hits.sh/ngotruongminhdat.github.io/speech_processing.svg?label=l%C6%B0%E1%BB%A3t%20xem&color=b8860b&labelColor=555555" alt="số lượt xem trang">
   </footer>
 </div>
 </body>
