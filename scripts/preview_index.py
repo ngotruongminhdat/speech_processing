@@ -134,7 +134,7 @@ def gen():
 
   /* thông tin xuất bản — khối nhỏ trong hero, dưới nút bấm */
   .metas {{ margin-top: .2rem; font-family: system-ui, sans-serif; font-size: .8rem;
-    border-top: 1px solid rgba(255,248,238,.22); max-width: 420px; }}
+    border-top: 1px solid rgba(255,248,238,.22); }}
   .metas div {{ display: flex; gap: 1rem; padding: .42rem 0; align-items: baseline;
     border-bottom: 1px solid rgba(255,248,238,.13); }}
   .metas span {{ flex: 0 0 108px; font-size: .66rem; font-weight: 600;
