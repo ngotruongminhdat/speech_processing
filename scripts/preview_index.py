@@ -221,7 +221,7 @@ def gen():
     <a class="book" href="{listen_href}" title="Bấm để bắt đầu nghe">
       <div class="vol">
         <div class="inner">
-          <q>“Em thật là một cô bé ngoan.”</q>
+          <q>“Hãy để các cháu phát triển tự nhiên. Đừng cản trở khát vọng của các cháu. Ước mơ của các cháu lớn hơn mơ ước của các cô.”</q>
           <div class="who">— Thầy hiệu trưởng Kobayashi —</div>
           <div class="credits">
             <i>Nhóm Totto-chan thực hiện</i>
