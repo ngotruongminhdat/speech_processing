@@ -285,22 +285,41 @@ def gen():
 </section>
 
 <div class="train-band" aria-hidden="true">
-  <svg viewBox="0 0 300 96" fill="none" stroke="currentColor" stroke-width="2.2"
+  <svg viewBox="0 0 340 112" fill="none" stroke="currentColor" stroke-width="2.2"
        stroke-linejoin="round" stroke-linecap="round">
-    <!-- thân toa tàu -->
-    <path d="M18 20 h250 a12 12 0 0 1 12 12 v34 a6 6 0 0 1-6 6 H12 a6 6 0 0 1-6-6 V32 a12 12 0 0 1 12-12 Z"/>
-    <!-- 5 ô cửa sổ mái vòm + 1 cửa lên xuống -->
-    <path d="M26 34 a8 8 0 0 1 8-8 h20 a8 8 0 0 1 8 8 v18 h-36 Z"/>
-    <path d="M72 34 a8 8 0 0 1 8-8 h20 a8 8 0 0 1 8 8 v18 h-36 Z"/>
-    <path d="M118 34 a8 8 0 0 1 8-8 h20 a8 8 0 0 1 8 8 v18 h-36 Z"/>
-    <path d="M164 34 a8 8 0 0 1 8-8 h20 a8 8 0 0 1 8 8 v18 h-36 Z"/>
-    <path d="M210 34 a8 8 0 0 1 8-8 h20 a8 8 0 0 1 8 8 v18 h-36 Z"/>
-    <rect x="256" y="30" width="20" height="36" rx="4"/>
-    <!-- bánh xe -->
-    <circle cx="70" cy="80" r="9"/>
-    <circle cx="220" cy="80" r="9"/>
+    <!-- mái + thân toa tàu -->
+    <path d="M14 24 q0 -8 12 -8 h288 q12 0 12 8"/>
+    <rect x="8" y="24" width="324" height="46" rx="7"/>
+    <!-- dải hông dưới cửa sổ -->
+    <line x1="12" y1="60" x2="328" y2="60"/>
+    <!-- 6 ô cửa sổ mái vòm -->
+    <path d="M22 56 v-14 a7 7 0 0 1 7 -7 h20 a7 7 0 0 1 7 7 v14 Z"/>
+    <path d="M66 56 v-14 a7 7 0 0 1 7 -7 h20 a7 7 0 0 1 7 7 v14 Z"/>
+    <path d="M110 56 v-14 a7 7 0 0 1 7 -7 h20 a7 7 0 0 1 7 7 v14 Z"/>
+    <path d="M154 56 v-14 a7 7 0 0 1 7 -7 h20 a7 7 0 0 1 7 7 v14 Z"/>
+    <path d="M198 56 v-14 a7 7 0 0 1 7 -7 h20 a7 7 0 0 1 7 7 v14 Z"/>
+    <!-- cửa lên xuống -->
+    <rect x="244" y="33" width="24" height="35" rx="3"/>
+    <line x1="264" y1="50" x2="266" y2="50"/>
+    <path d="M284 56 v-14 a7 7 0 0 1 7 -7 h14 a7 7 0 0 1 7 7 v14 Z"/>
+    <!-- 2 giá chuyển hướng (bogie) + bánh xe đặt trên ray -->
+    <line x1="52" y1="70" x2="92" y2="70"/>
+    <circle cx="60" cy="80" r="8"/>
+    <circle cx="84" cy="80" r="8"/>
+    <line x1="248" y1="70" x2="288" y2="70"/>
+    <circle cx="256" cy="80" r="8"/>
+    <circle cx="280" cy="80" r="8"/>
+    <!-- đường ray + tà vẹt -->
+    <line x1="0" y1="90" x2="340" y2="90"/>
+    <line x1="0" y1="96" x2="340" y2="96"/>
+    <g stroke-width="1.6" opacity=".7">
+      <line x1="20" y1="88" x2="20" y2="98"/><line x1="56" y1="88" x2="56" y2="98"/>
+      <line x1="92" y1="88" x2="92" y2="98"/><line x1="128" y1="88" x2="128" y2="98"/>
+      <line x1="164" y1="88" x2="164" y2="98"/><line x1="200" y1="88" x2="200" y2="98"/>
+      <line x1="236" y1="88" x2="236" y2="98"/><line x1="272" y1="88" x2="272" y2="98"/>
+      <line x1="308" y1="88" x2="308" y2="98"/>
+    </g>
   </svg>
-  <div class="rail"></div>
   <div class="cap">Lớp học trên con tàu · Trường Tomoe</div>
 </div>
 
