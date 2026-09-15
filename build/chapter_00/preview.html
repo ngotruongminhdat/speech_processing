@@ -118,11 +118,89 @@
     border-radius: 999px; padding: .5rem 1rem; box-shadow: var(--shadow);
     transition: transform .18s ease, background .18s ease; }
   .home-btn:hover { transform: translateY(-2px); background: var(--accent-soft); }
+
+  /* ---- nút + bảng cài đặt đọc ---- */
+  .set-btn { position: fixed; top: .9rem; right: 9.2rem; z-index: 15;
+    display: inline-flex; align-items: center; gap: .4rem; cursor: pointer;
+    font-family: system-ui, sans-serif; font-size: .8rem; font-weight: 600;
+    color: var(--ink); background: var(--card); border: 1px solid var(--line);
+    border-radius: 999px; padding: .5rem 1rem; box-shadow: var(--shadow);
+    transition: transform .18s ease, background .18s ease; }
+  .set-btn:hover { transform: translateY(-2px); background: var(--accent-soft); }
+  .set-panel { position: fixed; top: 3.4rem; right: .9rem; z-index: 16; width: 270px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    box-shadow: var(--shadow); padding: 1rem 1.1rem 1.15rem;
+    font-family: system-ui, sans-serif; display: none; }
+  .set-panel.open { display: block; }
+  .set-panel h3 { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-soft); margin: .9rem 0 .45rem; }
+  .set-panel h3:first-child { margin-top: 0; }
+  .set-row { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .set-row button { flex: 1; min-width: 3rem; cursor: pointer; font-family: inherit;
+    font-size: .8rem; color: var(--ink); background: var(--paper-2);
+    border: 1px solid var(--line); border-radius: 8px; padding: .42rem .3rem;
+    transition: background .15s ease; }
+  .set-row button:hover { background: var(--accent-soft); }
+  .set-row button[aria-pressed="true"] { background: var(--accent); color: #fff8e6;
+    border-color: var(--accent); }
+
+  /* cỡ chữ đọc */
+  .page { --rsize: 1; }
+  .seg { font-size: calc(1.05rem * var(--rsize)); }
+  h1.chapter { font-size: calc(2rem * var(--rsize)); }
+  /* chế độ font dễ đọc */
+  body.legible .seg { font-family: system-ui, "Segoe UI", sans-serif;
+    letter-spacing: .02em; word-spacing: .14em; line-height: 2.15; text-align: left; }
+  body.legible .dropcap::first-letter { float: none; font-size: 1em; color: inherit;
+    padding: 0; font-weight: inherit; }
+
+  /* chủ đề tương phản */
+  :root.theme-dark { --paper: #191613; --paper-2: #141210; --ink: #e8e0cf; --ink-soft: #9a8f77;
+    --accent: #d4a531; --accent-soft: #3a2f14; --hi: #4a3a10; --hi-ring: #8a6d1d;
+    --card: #211d18; --line: #38321f; --shadow: 0 10px 30px rgba(0,0,0,.5); }
+  :root.theme-paper { --paper: #faf6ee; --paper-2: #f2ecdd; --ink: #2c2417; --ink-soft: #7d7259;
+    --accent: #b8860b; --accent-soft: #f5e5b8; --hi: #ffedad; --hi-ring: #e5c25b;
+    --card: #fffdf8; --line: #e3d9c2; --shadow: 0 10px 30px rgba(90,70,20,.12); }
+  :root.theme-contrast { --paper: #000; --paper-2: #111; --ink: #ffe100; --ink-soft: #d9c200;
+    --accent: #ffe100; --accent-soft: #333; --hi: #ffe100; --hi-ring: #fff;
+    --card: #0a0a0a; --line: #ffe100; --shadow: none; }
+  :root.theme-contrast .seg.active { color: #000; }
+
+  .sleep-info { font-size: .72rem; color: var(--ink-soft); margin-top: .5rem; }
 </style>
 </head>
 <body>
 <div id="progress"></div>
 <a class="home-btn" href="../index.html" title="Về trang bìa">📖 Trang bìa</a>
+<button class="set-btn" id="setBtn" aria-expanded="false" title="Cài đặt đọc">⚙ Cài đặt</button>
+<div class="set-panel" id="setPanel" role="dialog" aria-label="Cài đặt đọc">
+  <h3>Cỡ chữ</h3>
+  <div class="set-row" id="sizeRow">
+    <button data-size="0.9">A−</button>
+    <button data-size="1" aria-pressed="true">A</button>
+    <button data-size="1.2">A+</button>
+    <button data-size="1.45">A++</button>
+  </div>
+  <h3>Nền &amp; tương phản</h3>
+  <div class="set-row" id="themeRow">
+    <button data-theme="paper" aria-pressed="true">Giấy</button>
+    <button data-theme="dark">Tối</button>
+    <button data-theme="contrast">Tương phản cao</button>
+  </div>
+  <h3>Kiểu chữ</h3>
+  <div class="set-row" id="legRow">
+    <button data-leg="0" aria-pressed="true">Mặc định</button>
+    <button data-leg="1">Dễ đọc</button>
+  </div>
+  <h3>Hẹn giờ tắt</h3>
+  <div class="set-row" id="sleepRow">
+    <button data-sleep="0" aria-pressed="true">Tắt</button>
+    <button data-sleep="15">15′</button>
+    <button data-sleep="30">30′</button>
+    <button data-sleep="60">60′</button>
+  </div>
+  <div class="sleep-info" id="sleepInfo"></div>
+</div>
 <nav>
   <div class="brand">
     <a href="../index.html" style="text-decoration:none;color:inherit">
@@ -397,6 +475,63 @@
       case '[': e.preventDefault(); prev(); break;
     }
   }, true);
+
+  // ---- bảng cài đặt đọc ----
+  const setBtn = document.getElementById('setBtn');
+  const setPanel = document.getElementById('setPanel');
+  setBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = setPanel.classList.toggle('open');
+    setBtn.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', (e) => {
+    if (!setPanel.contains(e.target) && e.target !== setBtn) setPanel.classList.remove('open');
+  });
+  function press(row, el) { row.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b === el)); }
+
+  // cỡ chữ
+  const sizeRow = document.getElementById('sizeRow');
+  const page = document.querySelector('.page');
+  function applySize(v, el) { page.style.setProperty('--rsize', v); localStorage.setItem('ttc-size', v); if (el) press(sizeRow, el); }
+  sizeRow.querySelectorAll('button').forEach(b => b.addEventListener('click', () => applySize(b.dataset.size, b)));
+  const savedSize = localStorage.getItem('ttc-size');
+  if (savedSize) applySize(savedSize, [...sizeRow.children].find(b => b.dataset.size === savedSize));
+
+  // chủ đề
+  const themeRow = document.getElementById('themeRow');
+  function applyTheme(t, el) {
+    document.documentElement.classList.remove('theme-paper', 'theme-dark', 'theme-contrast');
+    document.documentElement.classList.add('theme-' + t);
+    localStorage.setItem('ttc-theme', t); if (el) press(themeRow, el);
+  }
+  themeRow.querySelectorAll('button').forEach(b => b.addEventListener('click', () => applyTheme(b.dataset.theme, b)));
+  const savedTheme = localStorage.getItem('ttc-theme');
+  if (savedTheme) applyTheme(savedTheme, [...themeRow.children].find(b => b.dataset.theme === savedTheme));
+  else themeRow.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+
+  // font dễ đọc
+  const legRow = document.getElementById('legRow');
+  function applyLeg(v, el) { document.body.classList.toggle('legible', v === '1'); localStorage.setItem('ttc-leg', v); if (el) press(legRow, el); }
+  legRow.querySelectorAll('button').forEach(b => b.addEventListener('click', () => applyLeg(b.dataset.leg, b)));
+  const savedLeg = localStorage.getItem('ttc-leg');
+  if (savedLeg) applyLeg(savedLeg, [...legRow.children].find(b => b.dataset.leg === savedLeg));
+
+  // hẹn giờ tắt (không lưu qua lần tải)
+  const sleepRow = document.getElementById('sleepRow');
+  const sleepInfo = document.getElementById('sleepInfo');
+  let sleepTimer = null, sleepAt = 0, sleepTick = null;
+  function applySleep(min, el) {
+    if (sleepTimer) clearTimeout(sleepTimer);
+    if (sleepTick) clearInterval(sleepTick);
+    press(sleepRow, el);
+    if (min === '0') { sleepInfo.textContent = ''; return; }
+    sleepAt = Date.now() + min * 60000;
+    sleepTimer = setTimeout(() => { player.pause(); sleepInfo.textContent = '⏸ Đã tắt theo hẹn giờ.'; }, min * 60000);
+    const upd = () => { const s = Math.max(0, Math.round((sleepAt - Date.now()) / 1000));
+      sleepInfo.textContent = '⏱ Còn ' + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+    upd(); sleepTick = setInterval(upd, 1000);
+  }
+  sleepRow.querySelectorAll('button').forEach(b => b.addEventListener('click', () => applySleep(b.dataset.sleep, b)));
 
   // autoplay khi đến từ trang bìa (?autoplay=1): chờ 1s rồi tự phát
   if (new URLSearchParams(location.search).get('autoplay') === '1') {
