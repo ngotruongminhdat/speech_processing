@@ -174,8 +174,23 @@ def gen(chapter_no: int):
   .player-card .info {{ font-family: system-ui, sans-serif; font-size: .74rem; color: var(--ink-soft);
     white-space: nowrap; line-height: 1.35; }}
   .player-card .info b {{ color: var(--ink); font-size: .8rem; }}
-  audio {{ width: min(430px, 55vw); height: 38px; }}
+  audio {{ width: min(360px, 46vw); height: 38px; }}
+  .pbtn {{ pointer-events: auto; cursor: pointer; font-family: system-ui, sans-serif;
+    font-size: .74rem; font-weight: 600; color: var(--ink); background: var(--card);
+    border: 1px solid var(--line); border-radius: 999px; padding: .42rem .7rem;
+    text-decoration: none; white-space: nowrap; transition: background .18s ease; }}
+  .pbtn:hover {{ background: var(--accent-soft); }}
+  #speed {{ min-width: 3.1em; text-align: center; }}
   @media (max-width: 940px) {{ nav {{ display: none; }} }}
+
+  /* ---- gợi ý phím tắt ---- */
+  .keyhint {{ position: fixed; bottom: 1.15rem; left: 1.1rem; z-index: 9;
+    font-family: system-ui, sans-serif; font-size: .68rem; color: var(--ink-soft);
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: .5rem .7rem; box-shadow: var(--shadow); max-width: 210px; line-height: 1.7; }}
+  .keyhint b {{ color: var(--ink); background: var(--paper-2); border: 1px solid var(--line);
+    border-radius: 4px; padding: 0 .32em; font-family: ui-monospace, monospace; font-size: .92em; }}
+  @media (max-width: 940px) {{ .keyhint {{ display: none; }} }}
 
   /* ---- nút về trang bìa ---- */
   .home-btn {{ position: fixed; top: .9rem; right: .9rem; z-index: 15;
@@ -214,34 +229,78 @@ def gen(chapter_no: int):
 </main>
 <footer>
   <div class="player-card">
-    <div class="info"><b>🎧 {header_label}: {data['title']}</b><br>{mins}:{secs:02d} · bấm đoạn văn để nhảy tới</div>
+    <div class="info"><b>{header_label}: {data['title']}</b><br>{mins}:{secs:02d} · bấm đoạn văn để nhảy tới</div>
     <audio id="player" src="{mp3}" controls preload="auto"></audio>
+    <button class="pbtn" id="speed" title="Tốc độ đọc (phím ↑ / ↓)">1.0×</button>
+    <a class="pbtn" id="dl" href="daisy.zip" download="{meta['title']} - {header_label}.zip" title="Tải bản DAISY (.zip) mở bằng Thorium / EasyReader">⬇ DAISY</a>
   </div>
 </footer>
+<div class="keyhint">
+  <b>Space</b> phát/dừng · <b>←</b><b>→</b> đoạn trước/sau<br>
+  <b>↑</b><b>↓</b> tốc độ · <b>N</b> phần sau · <b>H</b> trang bìa
+</div>
 <script>
+  const CH = {chapter_no};
   const player = document.getElementById('player');
   const bar = document.getElementById('progress');
   const segs = [...document.querySelectorAll('.seg')];
+  const NEXT_HREF = "{next_href}";
+  const NEXT_TITLE = "{next_title}";
+  const POS_KEY = 'ttc-pos-' + CH;
+  const DONE_KEY = 'ttc-done';
+
+  function getDone() {{ try {{ return JSON.parse(localStorage.getItem(DONE_KEY)) || []; }} catch (e) {{ return []; }} }}
+  function markDone() {{ const d = getDone(); if (!d.includes(CH)) {{ d.push(CH); localStorage.setItem(DONE_KEY, JSON.stringify(d)); }} }}
+
   segs.forEach(el => el.addEventListener('click', () => {{
     player.currentTime = parseFloat(el.dataset.b) + 0.01;
     player.play();
   }}));
+
+  // đoạn đang đọc hiện tại (dùng cho phím ← →)
+  let curIdx = -1;
   player.addEventListener('timeupdate', () => {{
     const t = player.currentTime;
     if (player.duration) bar.style.width = (t / player.duration * 100) + '%';
-    segs.forEach(el => {{
+    segs.forEach((el, i) => {{
       const on = t >= parseFloat(el.dataset.b) && t < parseFloat(el.dataset.e);
+      if (on) curIdx = i;
       el.classList.toggle('active', on);
       if (on && el.dataset.scrolled !== el.dataset.b) {{
         el.dataset.scrolled = el.dataset.b;
         el.scrollIntoView({{ block: 'center', behavior: 'smooth' }});
       }}
     }});
+    // lưu vị trí đang nghe (resume) — mỗi ~3s
+    if (Math.floor(t) % 3 === 0) {{ localStorage.setItem(POS_KEY, t); localStorage.setItem('ttc-last', CH); }}
   }});
-  // nghe hết chương -> tự chuyển sang chương kế tiếp (nếu có)
-  const NEXT_HREF = "{next_href}";
-  const NEXT_TITLE = "{next_title}";
+
+  function jumpSeg(delta) {{
+    let i = Math.min(Math.max(curIdx + delta, 0), segs.length - 1);
+    player.currentTime = parseFloat(segs[i].dataset.b) + 0.01;
+    player.play();
+  }}
+
+  // ---- tốc độ đọc ----
+  const speeds = [0.75, 1, 1.25, 1.5];
+  const speedBtn = document.getElementById('speed');
+  let si = 1;
+  const savedRate = parseFloat(localStorage.getItem('ttc-rate'));
+  if (savedRate && speeds.includes(savedRate)) si = speeds.indexOf(savedRate);
+  function applyRate() {{ player.playbackRate = speeds[si]; speedBtn.textContent = speeds[si].toFixed(2).replace(/0$/, '') + '×'; localStorage.setItem('ttc-rate', speeds[si]); }}
+  applyRate();
+  speedBtn.addEventListener('click', () => {{ si = (si + 1) % speeds.length; applyRate(); }});
+
+  // ---- resume: khôi phục vị trí đang nghe ----
+  const savedPos = parseFloat(localStorage.getItem(POS_KEY));
+  player.addEventListener('loadedmetadata', () => {{
+    if (savedPos > 1 && savedPos < player.duration - 2) player.currentTime = savedPos;
+  }});
+
+  // nghe hết -> đánh dấu đã xong + tự chuyển phần kế tiếp
   player.addEventListener('ended', () => {{
+    markDone();
+    localStorage.removeItem(POS_KEY);
     if (!NEXT_HREF) return;
     const toast = document.createElement('div');
     toast.textContent = '▶ Tiếp theo: ' + NEXT_TITLE + ' …';
@@ -251,11 +310,25 @@ def gen(chapter_no: int):
     document.body.appendChild(toast);
     setTimeout(() => {{ location.href = NEXT_HREF; }}, 2000);
   }});
+
+  // ---- phím tắt ----
+  document.addEventListener('keydown', (e) => {{
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    switch (e.key) {{
+      case ' ': e.preventDefault(); player.paused ? player.play() : player.pause(); break;
+      case 'ArrowRight': e.preventDefault(); jumpSeg(1); break;
+      case 'ArrowLeft': e.preventDefault(); jumpSeg(-1); break;
+      case 'ArrowUp': e.preventDefault(); si = Math.min(si + 1, speeds.length - 1); applyRate(); break;
+      case 'ArrowDown': e.preventDefault(); si = Math.max(si - 1, 0); applyRate(); break;
+      case 'n': case 'N': if (NEXT_HREF) location.href = NEXT_HREF; break;
+      case 'h': case 'H': location.href = '../index.html'; break;
+    }}
+  }});
+
   // autoplay khi đến từ trang bìa (?autoplay=1): chờ 1s rồi tự phát
   if (new URLSearchParams(location.search).get('autoplay') === '1') {{
     setTimeout(() => {{
       player.play().catch(() => {{
-        // trình duyệt chặn autoplay -> nhấp nháy player để gợi ý bấm play
         document.querySelector('.player-card').animate(
           [{{ boxShadow: '0 0 0 0 rgba(184,134,11,.65)' }},
            {{ boxShadow: '0 0 0 14px rgba(184,134,11,0)' }}],

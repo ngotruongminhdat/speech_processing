@@ -51,6 +51,10 @@ def package(chapter_no: int):
     sums_path = out_dir / f"{slug}_sha256sums.txt"
     sums_path.write_text(f"{sha256(zip_path)}  {slug}.zip\n", encoding="utf-8")
 
+    # bản sao để trang preview cho tải trực tiếp qua GitHub Pages
+    import shutil
+    shutil.copy(zip_path, ch / "daisy.zip")
+
     size_mb = zip_path.stat().st_size / 1e6
     print(f"✅ {zip_path} ({size_mb:.1f} MB)")
     print(f"✅ {sums_path}")

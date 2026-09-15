@@ -102,6 +102,7 @@
     box-shadow: 0 8px 26px rgba(0,0,0,.35); }
   .btn.ghost { color: var(--hero-ink); border: 1px solid rgba(255,248,238,.55); }
   .btn.ghost:hover { background: rgba(255,248,238,.12); }
+  .btn.resume { background: var(--accent); color: #fff8ee; box-shadow: 0 8px 26px rgba(0,0,0,.3); }
   @keyframes rise { from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { .book, .lede, .book .vol { animation: none; } }
@@ -126,6 +127,7 @@
   .toc-note { font-family: system-ui, sans-serif; font-size: .76rem; color: var(--ink-soft); }
   .toc-note b { color: var(--accent); font-weight: 600; }
 
+  ol li.seen .t::after { content: ' ✓'; color: #3a9d5d; font-weight: 700; }
   .toc-card { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
     box-shadow: var(--shadow); padding: 1.1rem 1.4rem; }
   ol { list-style: none; margin: 0; padding: 0;
@@ -198,6 +200,7 @@
       </div>
       <div class="cta">
         <a class="btn primary" href="chapter_00/preview.html?autoplay=1">▶&nbsp; Bắt đầu nghe</a>
+        <a class="btn resume" id="resume" href="#" style="display:none"></a>
         <a class="btn ghost" href="#muc-luc">Mục lục</a>
       </div>
     </div>
@@ -210,17 +213,17 @@
   </div>
   <div class="toc-card">
     <ol>
-      <li class="done"><a href="chapter_00/preview.html?autoplay=1"><em>★</em><span class="t">Phần mở đầu</span><span class="dots"></span><b>🎧 32:56</b></a></li>
-      <li class="done"><a href="chapter_01/preview.html?autoplay=1"><em>01</em><span class="t">Nhà ga</span><span class="dots"></span><b>🎧 2:57</b></a></li>
-      <li class="done"><a href="chapter_02/preview.html?autoplay=1"><em>02</em><span class="t">Cô bé bên cửa sổ</span><span class="dots"></span><b>🎧 9:28</b></a></li>
-      <li class="done"><a href="chapter_03/preview.html?autoplay=1"><em>03</em><span class="t">Trường mới</span><span class="dots"></span><b>🎧 1:17</b></a></li>
-      <li class="done"><a href="chapter_04/preview.html?autoplay=1"><em>04</em><span class="t">Con thích trường này</span><span class="dots"></span><b>🎧 2:47</b></a></li>
-      <li class="done"><a href="chapter_05/preview.html?autoplay=1"><em>05</em><span class="t">Thầy hiệu trưởng</span><span class="dots"></span><b>🎧 5:32</b></a></li>
-      <li class="done"><a href="chapter_06/preview.html?autoplay=1"><em>06</em><span class="t">Giờ ăn trưa</span><span class="dots"></span><b>🎧 1:51</b></a></li>
-      <li class="done"><a href="chapter_07/preview.html?autoplay=1"><em>07</em><span class="t">Totto-chan bắt đầu đi học</span><span class="dots"></span><b>🎧 3:49</b></a></li>
-      <li class="done"><a href="chapter_08/preview.html?autoplay=1"><em>08</em><span class="t">Lớp học trên con tàu</span><span class="dots"></span><b>🎧 2:39</b></a></li>
-      <li class="done"><a href="chapter_09/preview.html?autoplay=1"><em>09</em><span class="t">Bài học ở trường Tomoe</span><span class="dots"></span><b>🎧 4:31</b></a></li>
-      <li class="done"><a href="chapter_10/preview.html?autoplay=1"><em>10</em><span class="t">Thức ăn của biển và của đất</span><span class="dots"></span><b>🎧 5:12</b></a></li>
+      <li class="done" data-ch="0"><a href="chapter_00/preview.html?autoplay=1"><em>★</em><span class="t">Phần mở đầu</span><span class="dots"></span><b>🎧 32:56</b></a></li>
+      <li class="done" data-ch="1"><a href="chapter_01/preview.html?autoplay=1"><em>01</em><span class="t">Nhà ga</span><span class="dots"></span><b>🎧 2:57</b></a></li>
+      <li class="done" data-ch="2"><a href="chapter_02/preview.html?autoplay=1"><em>02</em><span class="t">Cô bé bên cửa sổ</span><span class="dots"></span><b>🎧 9:28</b></a></li>
+      <li class="done" data-ch="3"><a href="chapter_03/preview.html?autoplay=1"><em>03</em><span class="t">Trường mới</span><span class="dots"></span><b>🎧 1:17</b></a></li>
+      <li class="done" data-ch="4"><a href="chapter_04/preview.html?autoplay=1"><em>04</em><span class="t">Con thích trường này</span><span class="dots"></span><b>🎧 2:47</b></a></li>
+      <li class="done" data-ch="5"><a href="chapter_05/preview.html?autoplay=1"><em>05</em><span class="t">Thầy hiệu trưởng</span><span class="dots"></span><b>🎧 5:32</b></a></li>
+      <li class="done" data-ch="6"><a href="chapter_06/preview.html?autoplay=1"><em>06</em><span class="t">Giờ ăn trưa</span><span class="dots"></span><b>🎧 1:51</b></a></li>
+      <li class="done" data-ch="7"><a href="chapter_07/preview.html?autoplay=1"><em>07</em><span class="t">Totto-chan bắt đầu đi học</span><span class="dots"></span><b>🎧 3:49</b></a></li>
+      <li class="done" data-ch="8"><a href="chapter_08/preview.html?autoplay=1"><em>08</em><span class="t">Lớp học trên con tàu</span><span class="dots"></span><b>🎧 2:39</b></a></li>
+      <li class="done" data-ch="9"><a href="chapter_09/preview.html?autoplay=1"><em>09</em><span class="t">Bài học ở trường Tomoe</span><span class="dots"></span><b>🎧 4:31</b></a></li>
+      <li class="done" data-ch="10"><a href="chapter_10/preview.html?autoplay=1"><em>10</em><span class="t">Thức ăn của biển và của đất</span><span class="dots"></span><b>🎧 5:12</b></a></li>
       <li class="todo"><em>11</em><span class="t">“Nhai cho kỹ”</span><span class="dots"></span><b>—</b></li>
       <li class="todo"><em>12</em><span class="t">Cuộc dạo chơi ở trường</span><span class="dots"></span><b>—</b></li>
       <li class="todo"><em>13</em><span class="t">Bài hát của trường</span><span class="dots"></span><b>—</b></li>
@@ -269,10 +272,10 @@
       <li class="todo"><em>56</em><span class="t">Người tình báo</span><span class="dots"></span><b>—</b></li>
       <li class="todo"><em>57</em><span class="t">Cây đàn violon của bố</span><span class="dots"></span><b>—</b></li>
       <li class="todo"><em>58</em><span class="t">Lời hứa</span><span class="dots"></span><b>—</b></li>
-      <li class="done"><a href="chapter_59/preview.html?autoplay=1"><em>59</em><span class="t">Con Rocky biến mất</span><span class="dots"></span><b>🎧 6:10</b></a></li>
+      <li class="done" data-ch="59"><a href="chapter_59/preview.html?autoplay=1"><em>59</em><span class="t">Con Rocky biến mất</span><span class="dots"></span><b>🎧 6:10</b></a></li>
       <li class="todo"><em>60</em><span class="t">Bữa tiệc trà</span><span class="dots"></span><b>—</b></li>
       <li class="todo"><em>61</em><span class="t">Sayonara, Sayonara (Tạm biệt)</span><span class="dots"></span><b>—</b></li>
-      <li class="done"><a href="chapter_62/preview.html?autoplay=1"><em>✦</em><span class="t">Phần kết</span><span class="dots"></span><b>🎧 10:20</b></a></li>
+      <li class="done" data-ch="62"><a href="chapter_62/preview.html?autoplay=1"><em>✦</em><span class="t">Phần kết</span><span class="dots"></span><b>🎧 10:20</b></a></li>
     </ol>
   </div>
   <footer>
@@ -282,5 +285,24 @@
     <span class="members">Lê Thị Tường Vy · Ngô Trương Minh Đạt · Nguyễn Thạch Hà Anh · Nguyễn Đình Lộc</span>
   </footer>
 </div>
+<script>
+  // đánh dấu ✓ các phần đã nghe xong + nút "Nghe tiếp" (lưu trong máy người xem)
+  (function () {
+    let done = [];
+    try { done = JSON.parse(localStorage.getItem('ttc-done')) || []; } catch (e) {}
+    done.forEach(ch => {
+      const li = document.querySelector('li[data-ch="' + ch + '"]');
+      if (li) li.classList.add('seen');
+    });
+    const last = localStorage.getItem('ttc-last');
+    const titles = {"0": "Phần mở đầu", "1": "Nhà ga", "2": "Cô bé bên cửa sổ", "3": "Trường mới", "4": "Con thích trường này", "5": "Thầy hiệu trưởng", "6": "Giờ ăn trưa", "7": "Totto-chan bắt đầu đi học", "8": "Lớp học trên con tàu", "9": "Bài học ở trường Tomoe", "10": "Thức ăn của biển và của đất", "59": "Con Rocky biến mất", "62": "Phần kết"};
+    if (last !== null && document.querySelector('li[data-ch="' + last + '"]') && titles[last]) {
+      const r = document.getElementById('resume');
+      r.textContent = '⏵ Nghe tiếp: ' + titles[last];
+      r.href = 'chapter_' + String(last).padStart(2, '0') + '/preview.html?autoplay=1';
+      r.style.display = '';
+    }
+  })();
+</script>
 </body>
 </html>

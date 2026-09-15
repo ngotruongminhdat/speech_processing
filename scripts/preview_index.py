@@ -45,7 +45,7 @@ def gen():
             if first_built is None:
                 first_built = i
             rows.append(
-                f'<li class="done"><a href="chapter_{i:02d}/preview.html?autoplay=1">'
+                f'<li class="done" data-ch="{i}"><a href="chapter_{i:02d}/preview.html?autoplay=1">'
                 f'<em>{num}</em><span class="t">{title}</span><span class="dots"></span>'
                 f'<b>🎧 {fmt(dur)}</b></a></li>'
             )
@@ -55,6 +55,11 @@ def gen():
                 f'<span class="dots"></span><b>—</b></li>'
             )
     listen_href = f"chapter_{first_built:02d}/preview.html?autoplay=1" if first_built is not None else "#"
+
+    # bản đồ số phần -> tiêu đề (chỉ phần đã build) cho nút "Nghe tiếp" phía client
+    toc_titles_json = json.dumps(
+        {str(i): t for i, t in units if unit_status(i)[0]}, ensure_ascii=False
+    )
 
     html = f"""<!DOCTYPE html>
 <html lang="vi">
@@ -160,6 +165,7 @@ def gen():
     box-shadow: 0 8px 26px rgba(0,0,0,.35); }}
   .btn.ghost {{ color: var(--hero-ink); border: 1px solid rgba(255,248,238,.55); }}
   .btn.ghost:hover {{ background: rgba(255,248,238,.12); }}
+  .btn.resume {{ background: var(--accent); color: #fff8ee; box-shadow: 0 8px 26px rgba(0,0,0,.3); }}
   @keyframes rise {{ from {{ opacity: 0; transform: translateY(18px); }}
     to {{ opacity: 1; transform: none; }} }}
   @media (prefers-reduced-motion: reduce) {{ .book, .lede, .book .vol {{ animation: none; }} }}
@@ -184,6 +190,7 @@ def gen():
   .toc-note {{ font-family: system-ui, sans-serif; font-size: .76rem; color: var(--ink-soft); }}
   .toc-note b {{ color: var(--accent); font-weight: 600; }}
 
+  ol li.seen .t::after {{ content: ' ✓'; color: #3a9d5d; font-weight: 700; }}
   .toc-card {{ background: var(--card); border: 1px solid var(--line); border-radius: 16px;
     box-shadow: var(--shadow); padding: 1.1rem 1.4rem; }}
   ol {{ list-style: none; margin: 0; padding: 0;
@@ -256,6 +263,7 @@ def gen():
       </div>
       <div class="cta">
         <a class="btn primary" href="{listen_href}">▶&nbsp; Bắt đầu nghe</a>
+        <a class="btn resume" id="resume" href="#" style="display:none"></a>
         <a class="btn ghost" href="#muc-luc">Mục lục</a>
       </div>
     </div>
@@ -278,6 +286,25 @@ def gen():
     <span class="members">{" · ".join(m.strip() for m in META['collector'].split(','))}</span>
   </footer>
 </div>
+<script>
+  // đánh dấu ✓ các phần đã nghe xong + nút "Nghe tiếp" (lưu trong máy người xem)
+  (function () {{
+    let done = [];
+    try {{ done = JSON.parse(localStorage.getItem('ttc-done')) || []; }} catch (e) {{}}
+    done.forEach(ch => {{
+      const li = document.querySelector('li[data-ch="' + ch + '"]');
+      if (li) li.classList.add('seen');
+    }});
+    const last = localStorage.getItem('ttc-last');
+    const titles = {toc_titles_json};
+    if (last !== null && document.querySelector('li[data-ch="' + last + '"]') && titles[last]) {{
+      const r = document.getElementById('resume');
+      r.textContent = '⏵ Nghe tiếp: ' + titles[last];
+      r.href = 'chapter_' + String(last).padStart(2, '0') + '/preview.html?autoplay=1';
+      r.style.display = '';
+    }}
+  }})();
+</script>
 </body>
 </html>
 """
