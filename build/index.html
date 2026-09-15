@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Totto-chan Bên Cửa Sổ — Tetsuko Kuroyanagi</title>
+<style>
+  :root {
+    --paper: #f7f1e5; --ink: #2b2214; --ink-soft: #85795e;
+    --accent: #c1651f; --accent-2: #b8860b; --accent-soft: #f7e3c8;
+    --card: #fffdf8; --line: #e6dbc4; --shadow: 0 18px 50px rgba(90, 55, 15, .16);
+    --hero-ink: #fff8ee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #17130e; --ink: #ece3d0; --ink-soft: #a2937a;
+      --accent: #e08a45; --accent-2: #d4a531; --accent-soft: #3b2b16;
+      --card: #201a13; --line: #37301f; --shadow: 0 18px 50px rgba(0, 0, 0, .55);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif; }
+  ::selection { background: var(--accent-soft); }
+
+  /* ================= HERO ================= */
+  .hero { position: relative; overflow: hidden; color: var(--hero-ink); }
+  .hero .bg { position: absolute; inset: -40px; background: url('cover.jpg') center/cover;
+    filter: blur(48px) saturate(1.15) brightness(.62); transform: scale(1.25); }
+  .hero .tint { position: absolute; inset: 0;
+    background: linear-gradient(160deg, rgba(40,18,4,.25), rgba(24,10,2,.72) 78%); }
+  .hero-in { position: relative; max-width: 860px; margin: 0 auto;
+    padding: clamp(3rem, 7vw, 5.5rem) 1.4rem clamp(3.4rem, 7vw, 6rem);
+    display: flex; gap: clamp(2rem, 5vw, 4rem); align-items: center; flex-wrap: wrap;
+    justify-content: center; }
+
+  /* bìa sách 3D */
+  .book { perspective: 1200px; flex-shrink: 0; animation: rise .9s ease both; }
+  .book .vol { position: relative; width: clamp(190px, 24vw, 250px);
+    transform: rotateY(-14deg); transform-style: preserve-3d; transition: transform .5s ease; }
+  .book:hover .vol { transform: rotateY(-6deg); }
+  .book img { display: block; width: 100%; height: auto; border-radius: 3px 8px 8px 3px;
+    box-shadow: 14px 24px 60px rgba(0, 0, 0, .55); }
+  .book .pages { position: absolute; top: 1.2%; right: -9px; width: 10px; height: 97.6%;
+    transform: rotateY(28deg);
+    background: repeating-linear-gradient(to bottom, #f4ecd9 0 2px, #d9cdb2 2px 3px);
+    border-radius: 0 3px 3px 0; }
+
+  .lede { max-width: 480px; animation: rise .9s .12s ease both; }
+  .kicker { font-family: system-ui, sans-serif; font-size: .72rem; font-weight: 600;
+    letter-spacing: .28em; text-transform: uppercase; opacity: .85; }
+  .lede h1 { font-size: clamp(2.1rem, 4.6vw, 3.1rem); line-height: 1.12;
+    margin: .45rem 0 .3rem; font-weight: normal; text-wrap: balance;
+    text-shadow: 0 2px 18px rgba(0,0,0,.35); }
+  .author { font-style: italic; font-size: 1.02rem; opacity: .9; }
+  .divider { display: flex; align-items: center; gap: .8rem; margin: 1.15rem 0;
+    max-width: 300px; opacity: .85; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--hero-ink)); }
+  .divider::after { background: linear-gradient(90deg, var(--hero-ink), transparent); }
+  .divider i { font-style: normal; font-size: .8rem; transform: rotate(45deg); }
+  .lede p.desc { font-size: .95rem; line-height: 1.8; opacity: .92; margin: 0 0 1.4rem; }
+  .cta { display: flex; gap: .8rem; flex-wrap: wrap; font-family: system-ui, sans-serif; }
+  .btn { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none;
+    font-size: .88rem; font-weight: 600; border-radius: 999px; padding: .72rem 1.5rem;
+    transition: transform .18s ease, box-shadow .18s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--hero-ink); color: #6b3410;
+    box-shadow: 0 8px 26px rgba(0,0,0,.35); }
+  .btn.ghost { color: var(--hero-ink); border: 1px solid rgba(255,248,238,.55); }
+  .btn.ghost:hover { background: rgba(255,248,238,.12); }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; } }
+
+  /* dải thông tin xuất bản */
+  .factbar { position: relative; border-top: 1px solid rgba(255,248,238,.18); }
+  .factbar-in { max-width: 860px; margin: 0 auto; padding: .85rem 1.4rem;
+    display: flex; flex-wrap: wrap; gap: .4rem 2.4rem;
+    font-family: system-ui, sans-serif; font-size: .74rem; opacity: .88; }
+  .factbar b { font-weight: 600; }
+
+  /* ================= MỤC LỤC ================= */
+  .wrap { max-width: 860px; margin: 0 auto; padding: 3rem 1.4rem 4rem; }
+  .toc-head { display: flex; align-items: baseline; justify-content: space-between;
+    gap: 1rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
+  .toc-head h2 { font-size: 1.35rem; font-weight: normal; margin: 0; }
+  .toc-head h2::after { content: ''; display: block; width: 64px; height: 3px;
+    margin-top: .45rem; border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent); }
+  .toc-note { font-family: system-ui, sans-serif; font-size: .76rem; color: var(--ink-soft); }
+  .toc-note b { color: var(--accent); font-weight: 600; }
+
+  .toc-card { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: var(--shadow); padding: 1.1rem 1.4rem; }
+  ol { list-style: none; margin: 0; padding: 0;
+    column-count: 2; column-gap: 2.6rem; }
+  @media (max-width: 720px) { ol { column-count: 1; } }
+  ol li { break-inside: avoid; }
+  ol li a, ol li.todo { display: flex; align-items: baseline; gap: .6rem;
+    padding: .5rem .45rem; text-decoration: none; color: var(--ink);
+    border-radius: 9px; transition: background .18s ease, padding-left .18s ease; }
+  ol li a:hover { background: var(--accent-soft); padding-left: .8rem; }
+  ol li em { font-style: normal; font-family: system-ui, sans-serif; font-size: .7rem;
+    font-weight: 700; color: var(--accent); min-width: 1.7em; }
+  ol li .t { font-size: .95rem; }
+  ol li .dots { flex: 1; border-bottom: 1px dotted var(--line); transform: translateY(-4px);
+    min-width: 1.2rem; }
+  ol li b { font-family: system-ui, sans-serif; font-size: .7rem; font-weight: 500;
+    color: var(--ink-soft); white-space: nowrap; }
+  ol li.done b { color: var(--accent); }
+  ol li.todo { opacity: .4; }
+
+  footer { text-align: center; color: var(--ink-soft); font-size: .78rem;
+    margin-top: 2.6rem; font-family: system-ui, sans-serif; line-height: 1.8; }
+  footer .mark { color: var(--accent); font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="bg"></div>
+  <div class="tint"></div>
+  <div class="hero-in">
+    <div class="book">
+      <div class="vol">
+        <img src="cover.jpg" alt="Bìa sách Totto-chan Bên Cửa Sổ">
+        <div class="pages"></div>
+      </div>
+    </div>
+    <div class="lede">
+      <div class="kicker">Sách nói DAISY · Trẻ em & Thiếu nhi</div>
+      <h1>Totto-chan Bên Cửa Sổ</h1>
+      <div class="author">Tetsuko Kuroyanagi</div>
+      <div class="divider"><i>◆</i></div>
+      <p class="desc">Hồi ký tuổi thơ của cô bé Totto-chan - một đứa trẻ hiếu động bị cho là "khác thường" và bị đuổi khỏi trường công lập. Cô được nhận vào trường Tomoe - nơi các lớp học diễn ra trong những toa tàu cũ - do thầy hiệu trưởng Kobayashi sáng lập. Tại đây, Totto-chan được tự do khám phá, học theo cách riêng và dần nhận ra giá trị của bản thân. Câu chuyện là bức thư tình gửi đến tuổi thơ, sự giáo dục nhân văn và lòng bao dung.</p>
+      <div class="cta">
+        <a class="btn primary" href="chapter_00/preview.html?autoplay=1">▶&nbsp; Bắt đầu nghe</a>
+        <a class="btn ghost" href="#muc-luc">Mục lục</a>
+      </div>
+    </div>
+  </div>
+  <div class="factbar">
+    <div class="factbar-in">
+      <div>ISBN&nbsp;<b>9786041194861</b></div>
+      <div>NXB&nbsp;<b>NXB Văn Học - Nhã Nam</b></div>
+      <div>Năm&nbsp;<b>2011</b></div>
+      <div>Ngôn ngữ&nbsp;<b>Tiếng Việt</b></div>
+      <div>Chuẩn&nbsp;<b>DAISY 3</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" id="muc-luc">
+  <div class="toc-head">
+    <h2>Mục lục</h2>
+    <div class="toc-note">đã xây dựng <b>3/48</b> phần · <b>45:23</b> audio · bấm chương để nghe</div>
+  </div>
+  <div class="toc-card">
+    <ol>
+      <li class="done"><a href="chapter_00/preview.html?autoplay=1"><em>★</em><span class="t">Phần mở đầu</span><span class="dots"></span><b>🎧 32:56</b></a></li>
+      <li class="done"><a href="chapter_01/preview.html?autoplay=1"><em>01</em><span class="t">Nhà ga</span><span class="dots"></span><b>🎧 2:57</b></a></li>
+      <li class="done"><a href="chapter_02/preview.html?autoplay=1"><em>02</em><span class="t">Cô bé bên cửa sổ</span><span class="dots"></span><b>🎧 9:28</b></a></li>
+      <li class="todo"><em>03</em><span class="t">Trường mới</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>04</em><span class="t">Con thích trường này</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>05</em><span class="t">Thầy hiệu trưởng</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>06</em><span class="t">Giờ ăn trưa</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>07</em><span class="t">Totto-chan bắt đầu đi học</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>08</em><span class="t">Lớp học trên con tàu</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>09</em><span class="t">Bài học ở trường Tomoe</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>10</em><span class="t">Thức ăn của biển và của đất</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>11</em><span class="t">“Nhai cho kỹ”</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>12</em><span class="t">Cuộc dạo chơi ở trường</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>13</em><span class="t">Bài hát của trường</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>14</em><span class="t">Dọn đi cho sạch sẽ</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>15</em><span class="t">Tên của Totto-chan</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>16</em><span class="t">Các diễn viên hài kịch của đài phát thanh</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>17</em><span class="t">Một toa xe khác lại tới</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>18</em><span class="t">Bể bơi</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>19</em><span class="t">Phiếu báo điểm</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>20</em><span class="t">Kỳ nghỉ hè bắt đầu</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>21</em><span class="t">Một cuộc phiêu lưu mạo hiểm</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>22</em><span class="t">Thử thách lòng dũng cảm</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>23</em><span class="t">Phòng diễn tập</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>24</em><span class="t">Chuyến đi suối nước nóng</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>25</em><span class="t">Bộ môn thể dục nghệ thuật</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>26</em><span class="t">Thứ con thích nhất</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>27</em><span class="t">Quần áo xoàng xĩnh nhất</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>28</em><span class="t">Takahashi</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>29</em><span class="t">Cẩn thận trước khi nhảy</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>30</em><span class="t">Và rồi ờ... ờ...</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>31</em><span class="t">Chúng con chỉ đùa thôi</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>32</em><span class="t">Ngày thể thao</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>33</em><span class="t">Nhà thơ Isa</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>34</em><span class="t">Rất huyền bí</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>35</em><span class="t">Nói bằng tay</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>36</em><span class="t">Bốn mươi bảy Ronin</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>37</em><span class="t">Masow-chan</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>38</em><span class="t">Bím đuôi sam</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>39</em><span class="t">Xin cám ơn</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>40</em><span class="t">Toa xe thư viện</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>41</em><span class="t">Cái đuôi</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>42</em><span class="t">Năm thứ hai của em ở Tomoe</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>43</em><span class="t">Hồ thiên nga</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>44</em><span class="t">Thầy giáo nông nghiệp</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>45</em><span class="t">Bếp dã chiến</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>46</em><span class="t">Em thật là một cô bé ngoan</span><span class="dots"></span><b>—</b></li>
+      <li class="todo"><em>47</em><span class="t">Cô dâu</span><span class="dots"></span><b>—</b></li>
+    </ol>
+  </div>
+  <footer>
+    <div class="mark">◆</div>
+    Bộ dữ liệu sách nói DAISY dành cho người khiếm thị<br>
+    Đồ án giữa kỳ Xử lý tiếng nói K35 · Nhóm Totto-chan
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Totto-chan Bên Cửa Sổ — Chương 2: Cô bé bên cửa sổ</title>
+<style>
+  :root {
+    --paper: #faf6ee; --paper-2: #f2ecdd; --ink: #2c2417; --ink-soft: #7d7259;
+    --accent: #b8860b; --accent-soft: #f5e5b8; --hi: #ffedad; --hi-ring: #e5c25b;
+    --card: #fffdf8; --line: #e3d9c2; --shadow: 0 10px 30px rgba(90, 70, 20, .12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191613; --paper-2: #141210; --ink: #e8e0cf; --ink-soft: #9a8f77;
+      --accent: #d4a531; --accent-soft: #3a2f14; --hi: #4a3a10; --hi-ring: #8a6d1d;
+      --card: #211d18; --line: #38321f; --shadow: 0 10px 30px rgba(0, 0, 0, .5);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; display: flex; background: var(--paper); color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+  /* ---- thanh tiến độ đọc ---- */
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--accent), #e0b64f); z-index: 20; transition: width .3s linear; }
+
+  /* ---- sidebar mục lục ---- */
+  nav {
+    width: 300px; min-width: 240px; height: 100vh; position: sticky; top: 0; overflow-y: auto;
+    background: var(--paper-2); border-right: 1px solid var(--line); padding: 1.6rem 1rem 7rem;
+  }
+  nav .brand { padding: 0 .4rem 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+  nav .brand b { display: block; font-size: 1.02rem; line-height: 1.35; }
+  nav .brand i { color: var(--ink-soft); font-size: .84rem; }
+  nav h2 { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 .5rem .4rem; font-family: system-ui, sans-serif; }
+  nav ol { list-style: none; margin: 0; padding: 0; font-size: .88rem; }
+  nav li a, nav li span {
+    display: flex; gap: .55rem; align-items: baseline; padding: .34rem .55rem;
+    border-radius: 8px; text-decoration: none; color: var(--ink); line-height: 1.4;
+  }
+  nav li em { font-style: normal; font-family: system-ui, sans-serif; font-size: .7rem;
+    color: var(--ink-soft); min-width: 1.4em; }
+  nav li a:hover { background: var(--accent-soft); }
+  nav li.current > span { background: var(--accent); color: #fff8e6; font-weight: bold;
+    box-shadow: var(--shadow); }
+  nav li.current em { color: #fff3cf; }
+  nav li.missing { opacity: .38; }
+
+  /* ---- trang sách ---- */
+  main { flex: 1; display: flex; justify-content: center; padding: 2.2rem 1.2rem 9rem; }
+  .page {
+    max-width: 700px; width: 100%; background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; box-shadow: var(--shadow); padding: 3rem clamp(1.4rem, 5vw, 3.4rem) 3.4rem;
+  }
+  .kicker { font-family: system-ui, sans-serif; font-size: .72rem; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); text-align: center; }
+  h1.chapter { text-align: center; font-size: 2rem; margin: .4rem 0 .2rem; font-weight: normal;
+    cursor: pointer; }
+  h1.chapter:hover { color: var(--accent); }
+  .byline { text-align: center; color: var(--ink-soft); font-size: .88rem; font-style: italic; }
+  .flourish { display: flex; align-items: center; gap: .9rem; margin: 1.4rem auto 2rem;
+    max-width: 420px; color: var(--accent); }
+  .flourish::before, .flourish::after { content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent)); }
+  .flourish::after { background: linear-gradient(90deg, var(--accent), transparent); }
+  .flourish i { font-style: normal; font-size: .95rem; transform: rotate(45deg); line-height: 1; }
+  .seg { font-size: 1.05rem; line-height: 1.95; margin: 0 0 1.05em; padding: .1rem .45rem;
+    border-radius: 8px; cursor: pointer; transition: background .25s, box-shadow .25s; }
+  .seg:hover { background: var(--accent-soft); }
+  .seg.active { background: var(--hi); box-shadow: 0 0 0 2px var(--hi-ring); }
+  .dropcap::first-letter { float: left; font-size: 3.4em; line-height: .82; padding: .04em .12em 0 0;
+    color: var(--accent); font-weight: bold; }
+  .endmark { text-align: center; color: var(--ink-soft); margin-top: 2.2rem; font-size: 1.1rem; }
+
+  /* ---- thanh audio ---- */
+  footer {
+    position: fixed; bottom: 1.1rem; left: 0; right: 0; display: flex; justify-content: center;
+    pointer-events: none; z-index: 10;
+  }
+  .player-card {
+    pointer-events: auto; display: flex; align-items: center; gap: .9rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    box-shadow: var(--shadow); padding: .55rem 1.1rem .55rem .8rem; max-width: 94vw;
+  }
+  .player-card .info { font-family: system-ui, sans-serif; font-size: .74rem; color: var(--ink-soft);
+    white-space: nowrap; line-height: 1.35; }
+  .player-card .info b { color: var(--ink); font-size: .8rem; }
+  audio { width: min(430px, 55vw); height: 38px; }
+  @media (max-width: 940px) { nav { display: none; } }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav>
+  <div class="brand">
+    <b>Totto-chan Bên Cửa Sổ</b>
+    <i>Tetsuko Kuroyanagi</i>
+  </div>
+  <h2>Mục lục</h2>
+  <ol>
+    <li><a href="../chapter_00/preview.html?autoplay=1"><em>★</em>Phần mở đầu</a></li>
+    <li><a href="../chapter_01/preview.html?autoplay=1"><em>01</em>Nhà ga</a></li>
+    <li class="current"><span><em>02</em>Cô bé bên cửa sổ</span></li>
+    <li class="missing"><span><em>03</em>Trường mới</span></li>
+    <li class="missing"><span><em>04</em>Con thích trường này</span></li>
+    <li class="missing"><span><em>05</em>Thầy hiệu trưởng</span></li>
+    <li class="missing"><span><em>06</em>Giờ ăn trưa</span></li>
+    <li class="missing"><span><em>07</em>Totto-chan bắt đầu đi học</span></li>
+    <li class="missing"><span><em>08</em>Lớp học trên con tàu</span></li>
+    <li class="missing"><span><em>09</em>Bài học ở trường Tomoe</span></li>
+    <li class="missing"><span><em>10</em>Thức ăn của biển và của đất</span></li>
+    <li class="missing"><span><em>11</em>“Nhai cho kỹ”</span></li>
+    <li class="missing"><span><em>12</em>Cuộc dạo chơi ở trường</span></li>
+    <li class="missing"><span><em>13</em>Bài hát của trường</span></li>
+    <li class="missing"><span><em>14</em>Dọn đi cho sạch sẽ</span></li>
+    <li class="missing"><span><em>15</em>Tên của Totto-chan</span></li>
+    <li class="missing"><span><em>16</em>Các diễn viên hài kịch của đài phát thanh</span></li>
+    <li class="missing"><span><em>17</em>Một toa xe khác lại tới</span></li>
+    <li class="missing"><span><em>18</em>Bể bơi</span></li>
+    <li class="missing"><span><em>19</em>Phiếu báo điểm</span></li>
+    <li class="missing"><span><em>20</em>Kỳ nghỉ hè bắt đầu</span></li>
+    <li class="missing"><span><em>21</em>Một cuộc phiêu lưu mạo hiểm</span></li>
+    <li class="missing"><span><em>22</em>Thử thách lòng dũng cảm</span></li>
+    <li class="missing"><span><em>23</em>Phòng diễn tập</span></li>
+    <li class="missing"><span><em>24</em>Chuyến đi suối nước nóng</span></li>
+    <li class="missing"><span><em>25</em>Bộ môn thể dục nghệ thuật</span></li>
+    <li class="missing"><span><em>26</em>Thứ con thích nhất</span></li>
+    <li class="missing"><span><em>27</em>Quần áo xoàng xĩnh nhất</span></li>
+    <li class="missing"><span><em>28</em>Takahashi</span></li>
+    <li class="missing"><span><em>29</em>Cẩn thận trước khi nhảy</span></li>
+    <li class="missing"><span><em>30</em>Và rồi ờ... ờ...</span></li>
+    <li class="missing"><span><em>31</em>Chúng con chỉ đùa thôi</span></li>
+    <li class="missing"><span><em>32</em>Ngày thể thao</span></li>
+    <li class="missing"><span><em>33</em>Nhà thơ Isa</span></li>
+    <li class="missing"><span><em>34</em>Rất huyền bí</span></li>
+    <li class="missing"><span><em>35</em>Nói bằng tay</span></li>
+    <li class="missing"><span><em>36</em>Bốn mươi bảy Ronin</span></li>
+    <li class="missing"><span><em>37</em>Masow-chan</span></li>
+    <li class="missing"><span><em>38</em>Bím đuôi sam</span></li>
+    <li class="missing"><span><em>39</em>Xin cám ơn</span></li>
+    <li class="missing"><span><em>40</em>Toa xe thư viện</span></li>
+    <li class="missing"><span><em>41</em>Cái đuôi</span></li>
+    <li class="missing"><span><em>42</em>Năm thứ hai của em ở Tomoe</span></li>
+    <li class="missing"><span><em>43</em>Hồ thiên nga</span></li>
+    <li class="missing"><span><em>44</em>Thầy giáo nông nghiệp</span></li>
+    <li class="missing"><span><em>45</em>Bếp dã chiến</span></li>
+    <li class="missing"><span><em>46</em>Em thật là một cô bé ngoan</span></li>
+    <li class="missing"><span><em>47</em>Cô dâu</span></li>
+  </ol>
+</nav>
+<main>
+  <article class="page">
+    <div class="kicker">Chương 2</div>
+    <h1 class="chapter seg" data-b="0.000" data-e="3.744">Cô bé bên cửa sổ</h1>
+    <div class="byline">Totto-chan Bên Cửa Sổ · Tetsuko Kuroyanagi</div>
+    <div class="flourish"><i>◆</i></div>
+    <p class="seg dropcap" data-b="3.744" data-e="13.320">Lý do khiến bà mẹ lo lắng là mặc dù Totto-chan vừa mới đi học, em đã bị đuổi ra khỏi trường. Niềm yêu thích đã bị gạt bỏ ngay từ lớp một!</p>
+    <p class="seg" data-b="13.320" data-e="22.056">Chuyện xảy ra cách đây mới một tuần. Cô chủ nhiệm lớp Totto-chan đã mời mẹ em đến. Cô đi thẳng vào vấn đề:</p>
+    <p class="seg" data-b="22.056" data-e="34.392">- Con gái bà làm loạn cả lớp tôi. Tôi buộc phải đề nghị với bà chuyển em sang trường khác! - Cô giáo trẻ và xinh đẹp thở dài. - Thực sự tôi không còn cách nào khác!</p>
+    <p class="seg" data-b="34.392" data-e="41.976">Người mẹ vô cùng sững sốt. Bà phân vân tự hỏi, Totto-chan đã làm gì để đến nỗi loạn cả lớp lên?</p>
+    <p class="seg" data-b="41.976" data-e="49.032">Cô giáo đưa tay lùa mái tóc cắt ngắn kiểu con trai, đôi mắt chớp chớp lia lịa vẻ lo lắng, và bắt đầu kể rõ:</p>
+    <p class="seg" data-b="49.032" data-e="124.872">- Thưa bà, trước hết là chuyện em ấy cứ mở và đóng nắp bàn hàng trăm lần. Tôi có dặn là không em nào được mở và đóng nắp bàn trừ phi phải lấy ra hoặc cất đi một cái gì đó. Thế là con gái bà luôn tay lấy cái này ra, cất cái kia vào - lấy ra hoặc cất vào quyển vở, hộp bút chì, những cuốn sách giáo khoa và những thứ lặt vặt khác của em ấy. Ví dụ khi cả lớp viết bảng chữ cái, con bà mở nắp bàn lấy vở ra rồi đóng sầm lại. Tiếp đó em lại mở nắp bàn, thò đầu vào, lấy ra chiếc bút chì, rồi lại mau chóng đóng sầm nắp bàn lại, sau đó viết chữ “A”. Nếu em viết bẩn hay viết lỗi, em mở ngăn bàn, lấy cái tẩy ra đóng nắp bàn lại, tẩy chữ đó, rồi lại mở và đóng nắp bàn cất tẩy vào - tất cả các động tác diễn ra rất nhanh. Khi em viết xong chữ “A”, em đặt từng thứ một vào trong ngăn bàn. Em cất bút chì xong, đóng nắp bàn lại, liền đó lại mở nắp bàn để cất quyển vở vào. Khi viết đến chữ khác, em lại lặp lại từ đầu tất cả - trước tiên là quyển vở, rồi đến cái bút chì, đến cái tẩy - mở và đóng nắp bàn với từng thứ một. Những động tác đó làm đầu óc tôi quay cuồng. Và tôi cũng không thể trách em được vì mỗi lần em mở hay đóng nắp bàn đều có lý do cả!</p>
+    <p class="seg" data-b="124.872" data-e="130.200">Đôi hàng mi dài của cô giáo chớp chớp như thể cảnh tượng đó đang sống lại trong đầu cô.</p>
+    <p class="seg" data-b="130.200" data-e="156.624">Một ý nghĩ lóe sáng trong đầu người mẹ: Tại sao Totto-chan lại mở và đóng nắp ngăn bàn nhiều lần như vậy? Bà nhớ lại Totto-chan tỏ ra rất xúc động trong buổi đầu sau khi ở trường về. Em nói: “Trường học thật tuyệt! Bàn học của con ở nhà thì có các ngăn kéo, nhưng bàn học ở trường lại có nắp nâng lên. Nó giống như một cái hộp, và mẹ có thể cất mọi thứ vào đó. Thật là thú vị!”.</p>
+    <p class="seg" data-b="156.624" data-e="175.248">Người mẹ hình dung cảnh con gái mình khoái chí hết mở, rồi lại đóng nắp chiếc bàn mới kia. Và người mẹ cũng không nghĩ rằng việc làm đó là nghịch ngợm. Dù sao thì Totto-chan cũng sẽ chấm dứt trò mở, đóng nắp bàn khi nó thấy không còn mới lạ nữa. Nhưng bà chỉ nói với cô giáo rằng:</p>
+    <p class="seg" data-b="175.248" data-e="178.176">- Tôi sẽ nói với cháu về chuyện này.</p>
+    <p class="seg" data-b="178.176" data-e="180.888">Cô giáo nói tiếp giọng to hơn:</p>
+    <p class="seg" data-b="180.888" data-e="184.344">- Nếu chuyện chỉ có thế, tôi đã cho qua...</p>
+    <p class="seg" data-b="184.344" data-e="188.160">Người mẹ hơi lùi lại khi cô giáo chồm về phía trước:</p>
+    <p class="seg" data-b="188.160" data-e="194.616">- Khi đã chấm dứt trò cập kênh với chiếc nắp bàn em ấy lại đứng dậy. Đứng suốt cả buổi học.</p>
+    <p class="seg" data-b="194.616" data-e="200.280">- Đứng dậy ư? Ở đâu? - người mẹ vô cùng ngạc nhiên hỏi.</p>
+    <p class="seg" data-b="200.280" data-e="204.000">- Bên cửa sổ, - cô giáo trả lời vẻ bực dọc.</p>
+    <p class="seg" data-b="204.000" data-e="209.760">- Tại sao cháu lại đứng bên cửa sổ ạ? - người mẹ hỏi một cách bối rối.</p>
+    <p class="seg" data-b="209.760" data-e="214.848">- Để em ấy có thể gọi những người hát rong lại, - cô giáo gần như gào lên.</p>
+    <p class="seg" data-b="214.848" data-e="260.904">Đại khái câu chuyện của cô giáo là thế này: Sau gần một giờ cập kênh với chiếc nắp bàn, Totto-chan rời chỗ ngồi đến bên cửa sổ nhìn ra đường phố. Sau đó, đúng vào lúc cô giáo hy vọng rằng, nghĩ đến trật tự, em ấy có thể trở về chỗ ngồi, thì Totto-chan bỗng gọi to đoàn hát rong ăn mặc lòe loẹt đang đi ngang qua. Phòng học ở ngay tầng trệt nhìn ra đường phố là niềm vui của Totto-chan và cũng là nỗi khổ của cô giáo. Chỉ có một hàng rào thấp ngăn cách, cho nên bất kể ai trong lớp cũng có thể nói chuyện dễ dàng với những người qua lại. Nghe Totto-chan gọi, những người hát rong đến ngay bên cửa sổ. Cô giáo kể tiếp: Thế là Totto-chan nói to với cả lớp “Họ đến rồi đấy!” và tất cả học sinh trong lớp ùa đến ngay bên cửa sổ, nói chuyện với những người hát rong.</p>
+    <p class="seg" data-b="260.904" data-e="278.208">“Chơi bài gì đi!”, Totto-chan đề nghị. Và thế là đoàn hát rong, vốn thường đi qua trường lặng lẽ, đã dùng ngay các nhạc cụ như kèn cla-ri-nét, cồng, trống, đàn ba dây biểu diễn cho học sinh xem trong lúc cô giáo tội nghiệp chẳng biết làm gì ngoài việc kiên trì chờ đợi cho đến khi cuộc vui kết thúc.</p>
+    <p class="seg" data-b="278.208" data-e="299.376">Cuối cùng, cuộc biểu diễn chấm dứt, đoàn hát rong ra đi, còn học sinh trở về chỗ của mình. Tất cả, chỉ trừ Totto-chan. Khi cô giáo hỏi: “Tại sao em còn đứng đó?”, Totto-chan trả lời một cách nghiêm túc: “Thưa cô, có thể là ban nhạc khác sẽ đến. Và thật là tiếc nếu họ đến mà chúng em không được gặp”.</p>
+    <p class="seg" data-b="299.376" data-e="307.008">- Bà có thể nhận thấy những sự việc này gây mất trật tự đến chừng nào rồi, có đúng không? - cô giáo xúc động nói.</p>
+    <p class="seg" data-b="307.008" data-e="313.152">Bà mẹ tỏ vẻ đồng tình. Cô giáo lại tiếp tục kể, giọng gay gắt hơn:</p>
+    <p class="seg" data-b="313.152" data-e="316.800">- Và sau đó, ngoài những chuyện tôi vừa kể trên...</p>
+    <p class="seg" data-b="316.800" data-e="323.136">- Cháu nó còn làm những gì nữa ạ? - bà mẹ hỏi trong tâm trạng của người bị yếu thế.</p>
+    <p class="seg" data-b="323.136" data-e="332.856">- Gì nữa ấy à? - cô giáo kêu lên. - Nếu tôi có thể kể hết được những việc mà em đã làm thì tôi không phải đề nghị bà cho cháu chuyển trường.</p>
+    <p class="seg" data-b="332.856" data-e="337.392">Cô giáo trấn tĩnh lại, nhìn thẳng vào mặt bà mẹ và lại nói:</p>
+    <p class="seg" data-b="337.392" data-e="399.384">- Hôm qua, Totto-chan lại tiếp tục đứng ở bên cửa sổ như thường lệ. Tôi tiếp tục giảng bài, nghĩ rằng em ấy lại đứng đợi những người hát rong thì bỗng nhiên tôi nghe thấy em ấy hỏi một người nào đó: “Bạn đang làm gì thế?”. Từ nơi tôi đứng, tôi chả nhìn thấy ai và tôi cũng không hiểu chuyện gì đang xảy ra. Sau đó em lại hỏi: “Bạn đang làm gì thế?”. Em không nói chuyện với người đi trên đường mà với một ai đó ở trên cao kia. Tôi bắt đầu tò mò và có nghe tiếng trả lời nhưng không thấy gì. Trong lúc đó, vì con gái bà cứ liên tục hỏi “Bạn đang làm gì thế?” nên tôi không thể nào giảng bài được. Tôi đi đến bên cửa sổ để xem con bà đang nói chuyện với ai. Khi tôi ngoái đầu ra ngoài cửa sổ nhìn lên, tôi thấy một đôi chim nhạn đang làm tổ dưới mái hiên của nhà trường. Em đang nói chuyện với đôi chim nhạn! Bây giờ khi đã hiểu các em, tôi không cho rằng nói chuyện với chim nhạn là xấu đâu! Chỉ có điều tôi muốn nói là không nên hỏi chim nhạn đang làm gì khi còn ở trong lớp.</p>
+    <p class="seg" data-b="399.384" data-e="403.104">Bà mẹ chưa kịp xin lỗi thì cô giáo đã nói tiếp:</p>
+    <p class="seg" data-b="403.104" data-e="462.336">- Sau đó là tiết vẽ. Tôi yêu cầu các em vẽ lá cờ nước Nhật. Tất cả các em khác đều vẽ đúng, chỉ trừ con gái bà. Em không vẽ quốc kỳ mà lại vẽ lá cờ của hải quân, loại cờ có tua xung quanh như bà biết đấy. Theo tôi, vẽ như vậy cũng không có gì là sai. Nhưng ngay sau đó em vẽ những đường diềm ở xung quanh. Vẽ đường diêm! Bà biết không, nó giống như những đường diềm ở cờ thiếu nhi ấy mà. Có lẽ em đã nhìn thấy một chiếc cờ như thế ở một nơi nào đó. Trước khi tôi nhận ra em vẽ như thế nào, thì em đã vẽ đường tua vàng vượt ra khỏi trang giấy xuống mặt bàn. Bà biết không, em vẽ lá cờ gần hết cả trang giấy nên không còn đủ chỗ để vẽ đường diềm nữa. Thế là em cầm cái bút màu vàng vẽ hàng trăm nét quanh lá cờ, vượt cả ra ngoài trang giấy và khi em nhấc quyển vở lên, mặt bàn đã đầy những vệt vàng không thể nào lau sạch được. Cũng may là em chỉ vẽ những đường đó ở ba phía.</p>
+    <p class="seg" data-b="462.336" data-e="468.768">- Cô nói, chỉ có ở ba phía, có nghĩa là thế nào? - bà mẹ lúng túng hỏi.</p>
+    <p class="seg" data-b="468.768" data-e="472.464">Tuy đã thấm mệt, cô giáo vẫn ôn tồn giải thích:</p>
+    <p class="seg" data-b="472.464" data-e="477.672">- Em ấy vẽ cán cờ ở phía bên trái nên đường diềm chỉ ở ba phía xung quanh thôi.</p>
+    <p class="seg" data-b="477.672" data-e="481.224">Bà mẹ phần nào cảm thấy vợi đi nỗi lo lắng:</p>
+    <p class="seg" data-b="481.224" data-e="484.392">- Tôi hiểu rồi, chỉ có ở ba phía...</p>
+    <p class="seg" data-b="484.392" data-e="501.120">- Nhưng phần lớn cán cờ lại cũng vượt ra ngoài trang giấy, và nó vẫn còn để nguyên dấu vết trên mặt bàn. - Sau đó cô giáo đứng dậy, lạnh lùng, nói to như nổ một loạt súng để từ biệt. - Không phải chỉ có tôi bực mình, mà ngay cả cô giáo phòng bên cũng rất khó chịu.</p>
+    <p class="seg" data-b="501.120" data-e="517.920">Như vậy rõ ràng là bà mẹ phải làm một việc gì đây. Hành động của con gái bà như vậy là không hay đối với những học sinh khác. Bà sẽ phải đi tìm một trường học nào đó, nơi người ta có thể hiểu được cô con gái nhỏ bé của bà, và dạy cho nó biết cách sống hòa hợp với người khác.</p>
+    <p class="seg" data-b="517.920" data-e="523.920">Nhà trường mà hai mẹ con bà đang trên đường đi tới đã được bà phát hiện ra sau khi dày công tìm kiếm.</p>
+    <p class="seg" data-b="523.920" data-e="542.184">Bà mẹ không hề nói với Totto-chan rằng em đã bị đuổi học. Bà nhận thấy rằng Totto-chan không thể hiểu nổi những việc làm sai trái của em, và bà cũng không muốn con gái bà có những mặc cảm, nên bà quyết định không nói với Totto-chan về chuyện này cho đến khi nào em lớn lên. Trước sau, bà chỉ hỏi:</p>
+    <p class="seg" data-b="542.184" data-e="547.968">- Con có thích đến trường mới học không? Mẹ nghe nói đây là một trường rất tốt.</p>
+    <p class="seg" data-b="547.968" data-e="553.560">- Cũng thích mẹ ạ, - Totto-chan trả lời sau một thoáng suy nghĩ. - Nhưng...</p>
+    <p class="seg" data-b="553.560" data-e="561.744">“Lại còn những gì nữa đây?”, bà mẹ lo lắng nghĩ. “Liệu con bà có nhận biết rằng nó đã bị đuổi học không?”.</p>
+    <p class="seg" data-b="561.744" data-e="565.032">Một lúc sau Totto-chan phấn khởi hỏi bà:</p>
+    <p class="seg" data-b="565.032" data-e="568.704">- Nhưng những người hát rong cũng sẽ đến trường mới chứ mẹ?</p>
+    <div class="endmark">✦ &nbsp; Hết chương 2 &nbsp; ✦</div>
+  </article>
+</main>
+<footer>
+  <div class="player-card">
+    <div class="info"><b>🎧 Chương 2: Cô bé bên cửa sổ</b><br>9:28 · bấm đoạn văn để nhảy tới</div>
+    <audio id="player" src="chuong02.mp3" controls preload="auto"></audio>
+  </div>
+</footer>
+<script>
+  const player = document.getElementById('player');
+  const bar = document.getElementById('progress');
+  const segs = [...document.querySelectorAll('.seg')];
+  segs.forEach(el => el.addEventListener('click', () => {
+    player.currentTime = parseFloat(el.dataset.b) + 0.01;
+    player.play();
+  }));
+  player.addEventListener('timeupdate', () => {
+    const t = player.currentTime;
+    if (player.duration) bar.style.width = (t / player.duration * 100) + '%';
+    segs.forEach(el => {
+      const on = t >= parseFloat(el.dataset.b) && t < parseFloat(el.dataset.e);
+      el.classList.toggle('active', on);
+      if (on && el.dataset.scrolled !== el.dataset.b) {
+        el.dataset.scrolled = el.dataset.b;
+        el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    });
+  });
+  // nghe hết chương -> tự chuyển sang chương kế tiếp (nếu có)
+  const NEXT_HREF = "";
+  const NEXT_TITLE = "";
+  player.addEventListener('ended', () => {
+    if (!NEXT_HREF) return;
+    const toast = document.createElement('div');
+    toast.textContent = '▶ Tiếp theo: ' + NEXT_TITLE + ' …';
+    toast.style.cssText = 'position:fixed;bottom:5.2rem;left:50%;transform:translateX(-50%);' +
+      'background:var(--accent);color:#fff8e6;font-family:system-ui,sans-serif;font-size:.85rem;' +
+      'padding:.6rem 1.3rem;border-radius:999px;box-shadow:var(--shadow);z-index:30';
+    document.body.appendChild(toast);
+    setTimeout(() => { location.href = NEXT_HREF; }, 2000);
+  });
+  // autoplay khi đến từ trang bìa (?autoplay=1): chờ 1s rồi tự phát
+  if (new URLSearchParams(location.search).get('autoplay') === '1') {
+    setTimeout(() => {
+      player.play().catch(() => {
+        // trình duyệt chặn autoplay -> nhấp nháy player để gợi ý bấm play
+        document.querySelector('.player-card').animate(
+          [{ boxShadow: '0 0 0 0 rgba(184,134,11,.65)' },
+           { boxShadow: '0 0 0 14px rgba(184,134,11,0)' }],
+          { duration: 900, iterations: 4 });
+      });
+    }, 1000);
+  }
+</script>
+</body>
+</html>
