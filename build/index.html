@@ -134,6 +134,11 @@
     background: linear-gradient(90deg, var(--accent), transparent); }
   .toc-note { font-family: system-ui, sans-serif; font-size: .76rem; color: var(--ink-soft); }
   .toc-note b { color: var(--accent); font-weight: 600; }
+  .reset-btn { display: none; cursor: pointer; font-family: system-ui, sans-serif;
+    font-size: .74rem; color: var(--ink-soft); background: transparent;
+    border: 1px solid var(--line); border-radius: 999px; padding: .34rem .8rem;
+    transition: background .15s ease, color .15s ease; }
+  .reset-btn:hover { background: var(--accent-soft); color: var(--ink); }
 
   ol li.seen .t::after { content: ' ✓'; color: #3a9d5d; font-weight: 700; }
   .toc-card { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
@@ -329,6 +334,7 @@
 <div class="wrap" id="muc-luc">
   <div class="toc-head">
     <h2>Mục lục</h2>
+    <button class="reset-btn" id="resetProg" title="Xoá vị trí đang nghe và dấu đã nghe của mọi phần">↺ Đặt lại tiến độ</button>
   </div>
   <div class="toc-card">
     <ol>
@@ -421,6 +427,17 @@
       r.href = 'chapter_' + String(last).padStart(2, '0') + '/preview.html?autoplay=1';
       r.style.display = '';
     }
+    // nút đặt lại tiến độ — chỉ hiện khi có tiến độ đã lưu
+    const hasProgress = done.length || last !== null ||
+      Object.keys(localStorage).some(k => k.indexOf('ttc-pos-') === 0);
+    const resetBtn = document.getElementById('resetProg');
+    if (hasProgress) resetBtn.style.display = 'inline-block';
+    resetBtn.addEventListener('click', () => {
+      if (!confirm('Đặt lại toàn bộ tiến độ nghe về 0?\n(Vị trí đang nghe và dấu ✓ của mọi phần sẽ bị xoá. Cài đặt cỡ chữ, giao diện vẫn giữ nguyên.)')) return;
+      Object.keys(localStorage).filter(k => k === 'ttc-done' || k === 'ttc-last' || k.indexOf('ttc-pos-') === 0)
+        .forEach(k => localStorage.removeItem(k));
+      location.reload();
+    });
   })();
 </script>
 </body>
