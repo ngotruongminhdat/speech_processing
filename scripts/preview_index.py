@@ -110,6 +110,13 @@ def gen():
     font-size: clamp(.82rem, 1.3vw, 1rem); line-height: 1.75; }}
   .book .inner .who {{ font-size: .68rem; font-family: system-ui, sans-serif;
     letter-spacing: .12em; text-transform: uppercase; opacity: .65; }}
+  .book .inner .credits {{ font-family: Georgia, serif; font-size: .7rem; line-height: 1.65;
+    color: #6d5a30; padding-top: .8rem; margin-top: .2rem; position: relative; }}
+  .book .inner .credits::before {{ content: ''; position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%); width: 46px; height: 1px; background: #c9ae76; }}
+  .book .inner .credits i {{ display: block; font-style: normal;
+    font-family: system-ui, sans-serif; font-size: .58rem; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; opacity: .6; margin-bottom: .3rem; }}
   .book .inner .play-hint {{ font-family: system-ui, sans-serif; font-size: .74rem;
     font-weight: 600; color: #a06a10; }}
   .book .leaf {{ position: absolute; inset: 0; transform-origin: left center;
@@ -215,6 +222,10 @@ def gen():
         <div class="inner">
           <q>“Em thật là một cô bé ngoan.”</q>
           <div class="who">— Thầy hiệu trưởng Kobayashi —</div>
+          <div class="credits">
+            <i>Nhóm Totto-chan thực hiện</i>
+            {"<br>".join(m.strip() for m in META['collector'].split(','))}
+          </div>
           <div class="play-hint">▶ Bấm để bắt đầu nghe</div>
         </div>
         <div class="leaf">
