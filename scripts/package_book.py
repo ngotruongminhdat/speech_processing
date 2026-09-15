@@ -45,10 +45,9 @@ def package(chapter_no: int):
         for f in files:
             z.write(ch / f, f)
 
+    # chỉ hash file zip — để `sha256sum -c` chạy được ngay trong thư mục nộp
     sums_path = out_dir / f"{slug}_sha256sums.txt"
-    lines = [f"{sha256(ch / f)}  {f}" for f in files]
-    lines.append(f"{sha256(zip_path)}  {slug}.zip")
-    sums_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    sums_path.write_text(f"{sha256(zip_path)}  {slug}.zip\n", encoding="utf-8")
 
     size_mb = zip_path.stat().st_size / 1e6
     print(f"✅ {zip_path} ({size_mb:.1f} MB)")
