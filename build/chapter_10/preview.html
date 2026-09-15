@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Totto-chan Bên Cửa Sổ — Chương 10: Thức ăn của biển và của đất</title>
+<style>
+  :root {
+    --paper: #faf6ee; --paper-2: #f2ecdd; --ink: #2c2417; --ink-soft: #7d7259;
+    --accent: #b8860b; --accent-soft: #f5e5b8; --hi: #ffedad; --hi-ring: #e5c25b;
+    --card: #fffdf8; --line: #e3d9c2; --shadow: 0 10px 30px rgba(90, 70, 20, .12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191613; --paper-2: #141210; --ink: #e8e0cf; --ink-soft: #9a8f77;
+      --accent: #d4a531; --accent-soft: #3a2f14; --hi: #4a3a10; --hi-ring: #8a6d1d;
+      --card: #211d18; --line: #38321f; --shadow: 0 10px 30px rgba(0, 0, 0, .5);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; display: flex; background: var(--paper); color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+  /* ---- thanh tiến độ đọc ---- */
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--accent), #e0b64f); z-index: 20; transition: width .3s linear; }
+
+  /* ---- sidebar mục lục ---- */
+  nav {
+    width: 300px; min-width: 240px; height: 100vh; position: sticky; top: 0; overflow-y: auto;
+    background: var(--paper-2); border-right: 1px solid var(--line); padding: 1.6rem 1rem 7rem;
+  }
+  nav .brand { padding: 0 .4rem 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+  nav .brand b { display: block; font-size: 1.02rem; line-height: 1.35; }
+  nav .brand i { color: var(--ink-soft); font-size: .84rem; }
+  nav h2 { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 .5rem .4rem; font-family: system-ui, sans-serif; }
+  nav ol { list-style: none; margin: 0; padding: 0; font-size: .88rem; }
+  nav li a, nav li span {
+    display: flex; gap: .55rem; align-items: baseline; padding: .34rem .55rem;
+    border-radius: 8px; text-decoration: none; color: var(--ink); line-height: 1.4;
+  }
+  nav li em { font-style: normal; font-family: system-ui, sans-serif; font-size: .7rem;
+    color: var(--ink-soft); min-width: 1.4em; }
+  nav li a:hover { background: var(--accent-soft); }
+  nav li.current > span { background: var(--accent); color: #fff8e6; font-weight: bold;
+    box-shadow: var(--shadow); }
+  nav li.current em { color: #fff3cf; }
+  nav li.missing { opacity: .38; }
+
+  /* ---- trang sách ---- */
+  main { flex: 1; display: flex; justify-content: center; padding: 2.2rem 1.2rem 9rem; }
+  .page {
+    max-width: 700px; width: 100%; background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; box-shadow: var(--shadow); padding: 3rem clamp(1.4rem, 5vw, 3.4rem) 3.4rem;
+  }
+  .kicker { font-family: system-ui, sans-serif; font-size: .72rem; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); text-align: center; }
+  h1.chapter { text-align: center; font-size: 2rem; margin: .4rem 0 .2rem; font-weight: normal;
+    cursor: pointer; }
+  h1.chapter:hover { color: var(--accent); }
+  .byline { text-align: center; color: var(--ink-soft); font-size: .88rem; font-style: italic; }
+  .flourish { display: flex; align-items: center; gap: .9rem; margin: 1.4rem auto 2rem;
+    max-width: 420px; color: var(--accent); }
+  .flourish::before, .flourish::after { content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent)); }
+  .flourish::after { background: linear-gradient(90deg, var(--accent), transparent); }
+  .flourish i { font-style: normal; font-size: .95rem; transform: rotate(45deg); line-height: 1; }
+  .seg { font-size: 1.05rem; line-height: 1.95; margin: 0 0 1.05em; padding: .1rem .45rem;
+    border-radius: 8px; cursor: pointer; transition: background .25s, box-shadow .25s; }
+  .seg:hover { background: var(--accent-soft); }
+  .seg.active { background: var(--hi); box-shadow: 0 0 0 2px var(--hi-ring); }
+  .dropcap::first-letter { float: left; font-size: 3.4em; line-height: .82; padding: .04em .12em 0 0;
+    color: var(--accent); font-weight: bold; }
+  .endmark { text-align: center; color: var(--ink-soft); margin-top: 2.2rem; font-size: 1.1rem; }
+  .footnote { font-size: .88rem; color: var(--ink-soft); border-left: 3px solid var(--accent);
+    background: var(--accent-soft); margin-top: 2rem; }
+  sup.noteref a { color: var(--accent); text-decoration: none; font-weight: bold; }
+
+  /* ---- thanh audio ---- */
+  footer {
+    position: fixed; bottom: 1.1rem; left: 0; right: 0; display: flex; justify-content: center;
+    pointer-events: none; z-index: 10;
+  }
+  .player-card {
+    pointer-events: auto; display: flex; align-items: center; gap: .9rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    box-shadow: var(--shadow); padding: .55rem 1.1rem .55rem .8rem; max-width: 94vw;
+  }
+  .player-card .info { font-family: system-ui, sans-serif; font-size: .74rem; color: var(--ink-soft);
+    white-space: nowrap; line-height: 1.35; }
+  .player-card .info b { color: var(--ink); font-size: .8rem; }
+  audio { width: min(430px, 55vw); height: 38px; }
+  @media (max-width: 940px) { nav { display: none; } }
+
+  /* ---- nút về trang bìa ---- */
+  .home-btn { position: fixed; top: .9rem; right: .9rem; z-index: 15;
+    display: inline-flex; align-items: center; gap: .45rem; text-decoration: none;
+    font-family: system-ui, sans-serif; font-size: .8rem; font-weight: 600;
+    color: var(--ink); background: var(--card); border: 1px solid var(--line);
+    border-radius: 999px; padding: .5rem 1rem; box-shadow: var(--shadow);
+    transition: transform .18s ease, background .18s ease; }
+  .home-btn:hover { transform: translateY(-2px); background: var(--accent-soft); }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<a class="home-btn" href="../index.html" title="Về trang bìa">📖 Trang bìa</a>
+<nav>
+  <div class="brand">
+    <a href="../index.html" style="text-decoration:none;color:inherit">
+      <b>Totto-chan Bên Cửa Sổ</b>
+      <i>Tetsuko Kuroyanagi</i>
+    </a>
+  </div>
+  <h2>Mục lục</h2>
+  <ol>
+    <li><a href="../chapter_00/preview.html?autoplay=1"><em>★</em>Phần mở đầu</a></li>
+    <li><a href="../chapter_01/preview.html?autoplay=1"><em>01</em>Nhà ga</a></li>
+    <li><a href="../chapter_02/preview.html?autoplay=1"><em>02</em>Cô bé bên cửa sổ</a></li>
+    <li><a href="../chapter_03/preview.html?autoplay=1"><em>03</em>Trường mới</a></li>
+    <li><a href="../chapter_04/preview.html?autoplay=1"><em>04</em>Con thích trường này</a></li>
+    <li><a href="../chapter_05/preview.html?autoplay=1"><em>05</em>Thầy hiệu trưởng</a></li>
+    <li><a href="../chapter_06/preview.html?autoplay=1"><em>06</em>Giờ ăn trưa</a></li>
+    <li><a href="../chapter_07/preview.html?autoplay=1"><em>07</em>Totto-chan bắt đầu đi học</a></li>
+    <li><a href="../chapter_08/preview.html?autoplay=1"><em>08</em>Lớp học trên con tàu</a></li>
+    <li><a href="../chapter_09/preview.html?autoplay=1"><em>09</em>Bài học ở trường Tomoe</a></li>
+    <li class="current"><span><em>10</em>Thức ăn của biển và của đất</span></li>
+    <li class="missing"><span><em>11</em>“Nhai cho kỹ”</span></li>
+    <li class="missing"><span><em>12</em>Cuộc dạo chơi ở trường</span></li>
+    <li class="missing"><span><em>13</em>Bài hát của trường</span></li>
+    <li class="missing"><span><em>14</em>Dọn đi cho sạch sẽ</span></li>
+    <li class="missing"><span><em>15</em>Tên của Totto-chan</span></li>
+    <li class="missing"><span><em>16</em>Các diễn viên hài kịch của đài phát thanh</span></li>
+    <li class="missing"><span><em>17</em>Một toa xe khác lại tới</span></li>
+    <li class="missing"><span><em>18</em>Bể bơi</span></li>
+    <li class="missing"><span><em>19</em>Phiếu báo điểm</span></li>
+    <li class="missing"><span><em>20</em>Kỳ nghỉ hè bắt đầu</span></li>
+    <li class="missing"><span><em>21</em>Một cuộc phiêu lưu mạo hiểm</span></li>
+    <li class="missing"><span><em>22</em>Thử thách lòng dũng cảm</span></li>
+    <li class="missing"><span><em>23</em>Phòng diễn tập</span></li>
+    <li class="missing"><span><em>24</em>Chuyến đi suối nước nóng</span></li>
+    <li class="missing"><span><em>25</em>Bộ môn thể dục nghệ thuật</span></li>
+    <li class="missing"><span><em>26</em>Thứ con thích nhất</span></li>
+    <li class="missing"><span><em>27</em>Quần áo xoàng xĩnh nhất</span></li>
+    <li class="missing"><span><em>28</em>Takahashi</span></li>
+    <li class="missing"><span><em>29</em>Cẩn thận trước khi nhảy</span></li>
+    <li class="missing"><span><em>30</em>Và rồi ờ... ờ...</span></li>
+    <li class="missing"><span><em>31</em>Chúng con chỉ đùa thôi</span></li>
+    <li class="missing"><span><em>32</em>Ngày thể thao</span></li>
+    <li class="missing"><span><em>33</em>Nhà thơ Isa</span></li>
+    <li class="missing"><span><em>34</em>Rất huyền bí</span></li>
+    <li class="missing"><span><em>35</em>Nói bằng tay</span></li>
+    <li class="missing"><span><em>36</em>Bốn mươi bảy Ronin</span></li>
+    <li class="missing"><span><em>37</em>Masow-chan</span></li>
+    <li class="missing"><span><em>38</em>Bím đuôi sam</span></li>
+    <li class="missing"><span><em>39</em>Xin cám ơn</span></li>
+    <li class="missing"><span><em>40</em>Toa xe thư viện</span></li>
+    <li class="missing"><span><em>41</em>Cái đuôi</span></li>
+    <li class="missing"><span><em>42</em>Năm thứ hai của em ở Tomoe</span></li>
+    <li class="missing"><span><em>43</em>Hồ thiên nga</span></li>
+    <li class="missing"><span><em>44</em>Thầy giáo nông nghiệp</span></li>
+    <li class="missing"><span><em>45</em>Bếp dã chiến</span></li>
+    <li class="missing"><span><em>46</em>Em thật là một cô bé ngoan</span></li>
+    <li class="missing"><span><em>47</em>Cô dâu</span></li>
+    <li class="missing"><span><em>48</em>Ngôi trường cũ đổ nát</span></li>
+    <li class="missing"><span><em>49</em>Dải băng buộc tóc</span></li>
+    <li class="missing"><span><em>50</em>Đi thăm thương binh</span></li>
+    <li class="missing"><span><em>51</em>Vỏ cây đoán sức khỏe</span></li>
+    <li class="missing"><span><em>52</em>Em bé nói tiếng Anh</span></li>
+    <li class="missing"><span><em>53</em>Kịch nghiệp dư</span></li>
+    <li class="missing"><span><em>54</em>Phấn viết</span></li>
+    <li class="missing"><span><em>55</em>Yasuaki-chan đã mất</span></li>
+    <li class="missing"><span><em>56</em>Người tình báo</span></li>
+    <li class="missing"><span><em>57</em>Cây đàn violon của bố</span></li>
+    <li class="missing"><span><em>58</em>Lời hứa</span></li>
+    <li><a href="../chapter_59/preview.html?autoplay=1"><em>59</em>Con Rocky biến mất</a></li>
+    <li class="missing"><span><em>60</em>Bữa tiệc trà</span></li>
+    <li class="missing"><span><em>61</em>Sayonara, Sayonara (Tạm biệt)</span></li>
+    <li class="missing"><span><em>✦</em>Phần kết</span></li>
+  </ol>
+</nav>
+<main>
+  <article class="page">
+    <div class="kicker">Chương 10</div>
+    <h1 class="chapter seg" data-b="0.000" data-e="3.984">Thức ăn của biển và của đất</h1>
+    <div class="byline">Totto-chan Bên Cửa Sổ · Tetsuko Kuroyanagi</div>
+    <div class="flourish"><i>◆</i></div>
+    <p class="seg dropcap" data-b="3.984" data-e="12.936">Giờ ăn trưa đã tới - giờ phút mà Totto-chan hằng mong đợi. Đây là lúc để các bạn giới thiệu “những thức ăn của biển và của đất”.</p>
+    <p class="seg" data-b="12.936" data-e="31.632">Thầy hiệu trưởng nói câu đó để diễn tả một bữa ăn đủ thành phần dinh dưỡng. Thay cho cách nói “Phải luyện cho con em chúng ta ăn được mọi thức ăn” hoặc “Yêu cầu các bậc phụ huynh cho con em mình ăn trưa đủ chất dinh dưỡng”, thầy hiệu trưởng trường này kêu gọi các bậc cha mẹ hãy cho thêm vào khẩu phần ăn trưa của học sinh “những thức ăn của biển và của đất”.</p>
+    <p class="seg" data-b="31.632" data-e="46.440">“Những thức ăn của biển” là hải sản như cá, cua, tôm, tép, hàu, sò, v.v... Còn “những thức ăn của đất” là nông sản - ví dụ như cơm, rau, quả, thịt lợn, thịt bò, thịt gà...</p>
+    <p class="seg" data-b="46.440" data-e="82.968">Bà mẹ Totto-chan rất quan tâm đến vấn đề này. Bà nghĩ hiếm có một thầy hiệu trưởng nào có thể diễn đạt khẩu phần ăn có đầy đủ dinh dưỡng một cách đơn giản đến như vậy. Điều thú vị là chỉ cần lựa chọn một trong hai loại đó là việc làm bữa ăn trưa trở nên đơn giản hơn. Ngoài ra thầy hiệu trưởng còn nói rõ rằng không ai phải lo nghĩ quá nhiều, hay phải mất nhiều công sức để đạt cho được hai yêu cầu đó. Nông sản ở đây có khi chỉ là một quả trứng tráng, và hải sản có khi chỉ là một lát cá ngừ kho. Hoặc đơn giản hơn chỉ cần món tảo biển đại diện cho “đại dương”, và món dưa ngâm dấm thay cho “những sản phẩm của đất”.</p>
+    <p class="seg" data-b="82.968" data-e="91.800">Hôm trước, trong lúc Totto-chan đang mải theo dõi một cách thèm muốn bữa ăn trưa của các bạn mình, thì thầy hiệu trưởng đến, và xem tất cả các hộp cơm trưa.</p>
+    <p class="seg" data-b="91.800" data-e="103.464">- Cháu có những thức ăn của biển và của đất không? - ông vừa hỏi vừa kiểm tra từng hộp một. Thật vui khi nhận mặt những thức ăn mà các bạn “đưa từ biển lên và lấy từ đất liền”.</p>
+    <p class="seg" data-b="103.464" data-e="133.392">Có những trường hợp vì mẹ quá bận, nên thức ăn mang theo chỉ có thức ăn của biển hoặc của đất. Nhưng không sao. Khi thầy hiệu trưởng đi kiểm tra, vợ ông cũng đi theo, ngực đeo một chiếc tạp dề trắng, hai tay cầm hay cái xoong. Nếu thầy dừng lại trước mặt một học sinh nào đó và nói “biển” thì lập tức bà vợ ông gắp ngay hai viên chả cá từ chiếc xoong “biển” ra cho em đó. Ngược lại nếu ông nói “đất” thì lập tức bà vợ ông lại gắp ngay những miếng khoai tây rán từ chiếc xoong “đất” ra cho.</p>
+    <p class="seg" data-b="133.392" data-e="153.912">Ở đây không còn một ai muốn nói rằng em không thích chả cá, hay nghĩ rằng một bữa ăn trưa ngon phải như thế nào, hay bữa ăn trưa tồi là như thế nào. Sự quan tâm chủ yếu của các em ở chỗ thức ăn của các em có đủ cả hai yêu cầu về biển và về đất hay không. Và nếu chỉ có vậy thì niềm vui của các em đã được thỏa mãn, các em rất phấn khởi.</p>
+    <p class="seg" data-b="153.912" data-e="173.016">Khi bắt đầu hiểu được “những thức ăn của biển và của đất” là thế nào rồi, Totto-chan thấy lo sợ, không hiểu bữa ăn trưa mà mẹ em đã chuẩn bị một cách rất vội vã sáng nay, có được chấp nhận hay không. Nhưng khi mở hộp ra em thấy thức ăn trưa của em thật là tuyệt vời và em cố giữ để khỏi thốt ra những từ “tuyệt, tuyệt, tuyệt quá!”.</p>
+    <p class="seg" data-b="173.016" data-e="183.384">Thức ăn trưa của Totto-chan gồm có trứng rán vàng, đậu xanh, denbu màu nâu và buồng trứng cá thu màu hồng. Thức ăn đủ màu sắc trông như một vườn hoa.</p>
+    <p class="seg" data-b="183.384" data-e="186.240">- Đẹp quá - thầy hiệu trưởng nói.</p>
+    <p class="seg" data-b="186.240" data-e="188.688">Totto-chan hơi run run:</p>
+    <p class="seg" data-b="188.688" data-e="191.928">- Mẹ cháu nấu ăn giỏi lắm, - em nói.</p>
+    <p class="seg" data-b="191.928" data-e="203.808">- Đúng, đúng, - thầy hiệu trưởng trả lời. Sau đó thầy chỉ vào món denbu (ruốc cá) và hỏi - Đây là món gì? Nó là thức ăn của biển hay là của đất?</p>
+    <p class="seg" data-b="203.808" data-e="214.824">Totto-chan nhìn món ăn này, rất phân vân không hiểu thuộc loại nào. Nó có màu của đất như vậy rất có thể nó là của đất. Nhưng em không dám chắc điều đó.</p>
+    <p class="seg" data-b="214.824" data-e="217.512">- Cháu không biết ạ, - em nói.</p>
+    <p class="seg" data-b="217.512" data-e="220.440">Sau đó thầy hiệu trưởng hỏi cả lớp:</p>
+    <p class="seg" data-b="220.440" data-e="225.048">- Các em có biết denbu từ đâu ra không nào, từ biển hay từ đất?</p>
+    <p class="seg" data-b="225.048" data-e="229.104">Dừng lại một lúc để suy nghĩ, một số em reo lên:</p>
+    <p class="seg" data-b="229.104" data-e="230.976">- Từ đất ạ.</p>
+    <p class="seg" data-b="230.976" data-e="233.688">Nhưng không em nào biết chắc chắn.</p>
+    <p class="seg" data-b="233.688" data-e="241.128">- Thôi được, thầy sẽ kể cho các em nghe - thầy hiệu trưởng nói. - Denbu là thức ăn lấy từ biển lên.</p>
+    <p class="seg" data-b="241.128" data-e="244.872">- Tại sao ạ? - Một cậu bé hỏi.</p>
+    <p class="seg" data-b="244.872" data-e="248.784">Đứng ở giữa vòng tròn bàn ghế, thầy hiệu trưởng giải thích:</p>
+    <p class="seg" data-b="248.784" data-e="254.712">- Denbu là thịt cá lọc bỏ xương, rang nhỏ lửa sau đó nghiền nhỏ và nêm gia vị vào.</p>
+    <p class="seg" data-b="254.712" data-e="262.296">- Ôi! - Các em kêu lên. Sau đó một vài em đề nghị được xem món ruốc cá của Totto-chan.</p>
+    <p class="seg" data-b="262.296" data-e="265.440">- Tất nhiên là được, - thầy hiệu trưởng nói.</p>
+    <p class="seg" data-b="265.440" data-e="284.184">Và thế là cả lớp xúm vào xem món ruốc cá của Totto-chan. Chắc chắn có em đã biết denbu là gì rồi, nhưng vẫn cứ thích xem và cũng có bạn muốn xem món denbu của Totto-chan có khác gì món đó của nhà em không. Quá nhiều bạn nhìn em, tới mức, Totto-chan ngại rằng những sợi ruốc có thể bay mất.</p>
+    <p class="seg" data-b="284.184" data-e="307.032">Totto-chan hơi hoảng sợ trong bữa ăn trưa đầu tiên đó, nhưng nhộn thật. Thú vị biết bao nhiêu khi hiểu được “hải sản” và “nông sản” là gì. Em cũng đã hiểu thêm được rằng denbu làm từ cá. Và mẹ em đã nhớ bỏ vào hộp cơm trưa của em những thức ăn của biển và những thức ăn của đất. Cuối cùng mọi chuyện đều tốt đẹp, em hài lòng nghĩ như vậy.</p>
+    <p class="seg" data-b="307.032" data-e="312.048">Totto-chan đặc biệt phấn khởi khi bắt đầu ăn những món ngon miệng do mẹ em làm.</p>
+    <div class="endmark">✦ &nbsp; Hết chương 10 &nbsp; ✦</div>
+  </article>
+</main>
+<footer>
+  <div class="player-card">
+    <div class="info"><b>🎧 Chương 10: Thức ăn của biển và của đất</b><br>5:12 · bấm đoạn văn để nhảy tới</div>
+    <audio id="player" src="chuong10.mp3" controls preload="auto"></audio>
+  </div>
+</footer>
+<script>
+  const player = document.getElementById('player');
+  const bar = document.getElementById('progress');
+  const segs = [...document.querySelectorAll('.seg')];
+  segs.forEach(el => el.addEventListener('click', () => {
+    player.currentTime = parseFloat(el.dataset.b) + 0.01;
+    player.play();
+  }));
+  player.addEventListener('timeupdate', () => {
+    const t = player.currentTime;
+    if (player.duration) bar.style.width = (t / player.duration * 100) + '%';
+    segs.forEach(el => {
+      const on = t >= parseFloat(el.dataset.b) && t < parseFloat(el.dataset.e);
+      el.classList.toggle('active', on);
+      if (on && el.dataset.scrolled !== el.dataset.b) {
+        el.dataset.scrolled = el.dataset.b;
+        el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    });
+  });
+  // nghe hết chương -> tự chuyển sang chương kế tiếp (nếu có)
+  const NEXT_HREF = "../chapter_59/preview.html?autoplay=1";
+  const NEXT_TITLE = "Con Rocky biến mất";
+  player.addEventListener('ended', () => {
+    if (!NEXT_HREF) return;
+    const toast = document.createElement('div');
+    toast.textContent = '▶ Tiếp theo: ' + NEXT_TITLE + ' …';
+    toast.style.cssText = 'position:fixed;bottom:5.2rem;left:50%;transform:translateX(-50%);' +
+      'background:var(--accent);color:#fff8e6;font-family:system-ui,sans-serif;font-size:.85rem;' +
+      'padding:.6rem 1.3rem;border-radius:999px;box-shadow:var(--shadow);z-index:30';
+    document.body.appendChild(toast);
+    setTimeout(() => { location.href = NEXT_HREF; }, 2000);
+  });
+  // autoplay khi đến từ trang bìa (?autoplay=1): chờ 1s rồi tự phát
+  if (new URLSearchParams(location.search).get('autoplay') === '1') {
+    setTimeout(() => {
+      player.play().catch(() => {
+        // trình duyệt chặn autoplay -> nhấp nháy player để gợi ý bấm play
+        document.querySelector('.player-card').animate(
+          [{ boxShadow: '0 0 0 0 rgba(184,134,11,.65)' },
+           { boxShadow: '0 0 0 14px rgba(184,134,11,0)' }],
+          { duration: 900, iterations: 4 });
+      });
+    }, 1000);
+  }
+</script>
+</body>
+</html>

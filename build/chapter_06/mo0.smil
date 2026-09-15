@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE smil PUBLIC "-//NISO//DTD dtbsmil 2005-2//EN" "http://www.daisy.org/z3986/2005/dtbsmil-2005-2.dtd">
+<smil xmlns="http://www.w3.org/2001/SMIL20/">
+  <head>
+    <meta name="dtb:uid" content="9786041194861-ch06"/>
+    <meta name="dtb:totalElapsedTime" content="0:00:00"/>
+    <meta name="dtb:generator" content="totto-chan daisy scripts"/>
+    <customAttributes>
+      <customTest defaultState="false" id="pagenum" override="visible"/>
+      <customTest defaultState="false" id="note" override="visible"/>
+      <customTest defaultState="false" id="noteref" override="visible"/>
+      <customTest defaultState="false" id="annotation" override="visible"/>
+      <customTest defaultState="false" id="linenum" override="visible"/>
+      <customTest defaultState="false" id="sidebar" override="visible"/>
+      <customTest defaultState="false" id="prodnote" override="visible"/>
+    </customAttributes>
+  </head>
+  <body>
+    <seq id="root-seq">
+      <seq id="seq_1" class="p">
+        <par id="sid_1" class="h1">
+          <text src="dtbook.xml#id_1"/>
+          <audio src="chuong06.mp3" clipBegin="0.000s" clipEnd="3.336s"/>
+        </par>
+      </seq>
+      <seq id="seq_2" class="p">
+        <par id="sid_2" class="sent">
+          <text src="dtbook.xml#id_2"/>
+          <audio src="chuong06.mp3" clipBegin="3.336s" clipEnd="8.616s"/>
+        </par>
+      </seq>
+      <seq id="seq_3" class="p">
+        <par id="sid_3" class="sent">
+          <text src="dtbook.xml#id_3"/>
+          <audio src="chuong06.mp3" clipBegin="8.616s" clipEnd="12.456s"/>
+        </par>
+      </seq>
+      <seq id="seq_4" class="p">
+        <par id="sid_4" class="sent">
+          <text src="dtbook.xml#id_4"/>
+          <audio src="chuong06.mp3" clipBegin="12.456s" clipEnd="27.672s"/>
+        </par>
+      </seq>
+      <seq id="seq_5" class="p">
+        <par id="sid_5" class="sent">
+          <text src="dtbook.xml#id_5"/>
+          <audio src="chuong06.mp3" clipBegin="27.672s" clipEnd="30.528s"/>
+        </par>
+      </seq>
+      <seq id="seq_6" class="p">
+        <par id="sid_6" class="sent">
+          <text src="dtbook.xml#id_6"/>
+          <audio src="chuong06.mp3" clipBegin="30.528s" clipEnd="34.488s"/>
+        </par>
+      </seq>
+      <seq id="seq_7" class="p">
+        <par id="sid_7" class="sent">
+          <text src="dtbook.xml#id_7"/>
+          <audio src="chuong06.mp3" clipBegin="34.488s" clipEnd="46.920s"/>
+        </par>
+      </seq>
+      <seq id="seq_8" class="p">
+        <par id="sid_8" class="sent">
+          <text src="dtbook.xml#id_8"/>
+          <audio src="chuong06.mp3" clipBegin="46.920s" clipEnd="50.904s"/>
+        </par>
+      </seq>
+      <seq id="seq_9" class="p">
+        <par id="sid_9" class="sent">
+          <text src="dtbook.xml#id_9"/>
+          <audio src="chuong06.mp3" clipBegin="50.904s" clipEnd="55.632s"/>
+        </par>
+      </seq>
+      <seq id="seq_10" class="p">
+        <par id="sid_10" class="sent">
+          <text src="dtbook.xml#id_10"/>
+          <audio src="chuong06.mp3" clipBegin="55.632s" clipEnd="63.360s"/>
+        </par>
+      </seq>
+      <seq id="seq_11" class="p">
+        <par id="sid_11" class="sent">
+          <text src="dtbook.xml#id_11"/>
+          <audio src="chuong06.mp3" clipBegin="63.360s" clipEnd="69.144s"/>
+        </par>
+      </seq>
+      <seq id="seq_12" class="p">
+        <par id="sid_12" class="sent">
+          <text src="dtbook.xml#id_12"/>
+          <audio src="chuong06.mp3" clipBegin="69.144s" clipEnd="77.664s"/>
+        </par>
+      </seq>
+      <seq id="seq_13" class="p">
+        <par id="sid_13" class="sent">
+          <text src="dtbook.xml#id_13"/>
+          <audio src="chuong06.mp3" clipBegin="77.664s" clipEnd="105.432s"/>
+        </par>
+      </seq>
+      <seq id="seq_14" class="p">
+        <par id="sid_14" class="sent">
+          <text src="dtbook.xml#id_14"/>
+          <audio src="chuong06.mp3" clipBegin="105.432s" clipEnd="111.816s"/>
+        </par>
+      </seq>
+    </seq>
+  </body>
+</smil>

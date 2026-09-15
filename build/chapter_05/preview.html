@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Totto-chan Bên Cửa Sổ — Chương 5: Thầy hiệu trưởng</title>
+<style>
+  :root {
+    --paper: #faf6ee; --paper-2: #f2ecdd; --ink: #2c2417; --ink-soft: #7d7259;
+    --accent: #b8860b; --accent-soft: #f5e5b8; --hi: #ffedad; --hi-ring: #e5c25b;
+    --card: #fffdf8; --line: #e3d9c2; --shadow: 0 10px 30px rgba(90, 70, 20, .12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191613; --paper-2: #141210; --ink: #e8e0cf; --ink-soft: #9a8f77;
+      --accent: #d4a531; --accent-soft: #3a2f14; --hi: #4a3a10; --hi-ring: #8a6d1d;
+      --card: #211d18; --line: #38321f; --shadow: 0 10px 30px rgba(0, 0, 0, .5);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; display: flex; background: var(--paper); color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+  /* ---- thanh tiến độ đọc ---- */
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--accent), #e0b64f); z-index: 20; transition: width .3s linear; }
+
+  /* ---- sidebar mục lục ---- */
+  nav {
+    width: 300px; min-width: 240px; height: 100vh; position: sticky; top: 0; overflow-y: auto;
+    background: var(--paper-2); border-right: 1px solid var(--line); padding: 1.6rem 1rem 7rem;
+  }
+  nav .brand { padding: 0 .4rem 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+  nav .brand b { display: block; font-size: 1.02rem; line-height: 1.35; }
+  nav .brand i { color: var(--ink-soft); font-size: .84rem; }
+  nav h2 { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 .5rem .4rem; font-family: system-ui, sans-serif; }
+  nav ol { list-style: none; margin: 0; padding: 0; font-size: .88rem; }
+  nav li a, nav li span {
+    display: flex; gap: .55rem; align-items: baseline; padding: .34rem .55rem;
+    border-radius: 8px; text-decoration: none; color: var(--ink); line-height: 1.4;
+  }
+  nav li em { font-style: normal; font-family: system-ui, sans-serif; font-size: .7rem;
+    color: var(--ink-soft); min-width: 1.4em; }
+  nav li a:hover { background: var(--accent-soft); }
+  nav li.current > span { background: var(--accent); color: #fff8e6; font-weight: bold;
+    box-shadow: var(--shadow); }
+  nav li.current em { color: #fff3cf; }
+  nav li.missing { opacity: .38; }
+
+  /* ---- trang sách ---- */
+  main { flex: 1; display: flex; justify-content: center; padding: 2.2rem 1.2rem 9rem; }
+  .page {
+    max-width: 700px; width: 100%; background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; box-shadow: var(--shadow); padding: 3rem clamp(1.4rem, 5vw, 3.4rem) 3.4rem;
+  }
+  .kicker { font-family: system-ui, sans-serif; font-size: .72rem; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); text-align: center; }
+  h1.chapter { text-align: center; font-size: 2rem; margin: .4rem 0 .2rem; font-weight: normal;
+    cursor: pointer; }
+  h1.chapter:hover { color: var(--accent); }
+  .byline { text-align: center; color: var(--ink-soft); font-size: .88rem; font-style: italic; }
+  .flourish { display: flex; align-items: center; gap: .9rem; margin: 1.4rem auto 2rem;
+    max-width: 420px; color: var(--accent); }
+  .flourish::before, .flourish::after { content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent)); }
+  .flourish::after { background: linear-gradient(90deg, var(--accent), transparent); }
+  .flourish i { font-style: normal; font-size: .95rem; transform: rotate(45deg); line-height: 1; }
+  .seg { font-size: 1.05rem; line-height: 1.95; margin: 0 0 1.05em; padding: .1rem .45rem;
+    border-radius: 8px; cursor: pointer; transition: background .25s, box-shadow .25s; }
+  .seg:hover { background: var(--accent-soft); }
+  .seg.active { background: var(--hi); box-shadow: 0 0 0 2px var(--hi-ring); }
+  .dropcap::first-letter { float: left; font-size: 3.4em; line-height: .82; padding: .04em .12em 0 0;
+    color: var(--accent); font-weight: bold; }
+  .endmark { text-align: center; color: var(--ink-soft); margin-top: 2.2rem; font-size: 1.1rem; }
+  .footnote { font-size: .88rem; color: var(--ink-soft); border-left: 3px solid var(--accent);
+    background: var(--accent-soft); margin-top: 2rem; }
+  sup.noteref a { color: var(--accent); text-decoration: none; font-weight: bold; }
+
+  /* ---- thanh audio ---- */
+  footer {
+    position: fixed; bottom: 1.1rem; left: 0; right: 0; display: flex; justify-content: center;
+    pointer-events: none; z-index: 10;
+  }
+  .player-card {
+    pointer-events: auto; display: flex; align-items: center; gap: .9rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    box-shadow: var(--shadow); padding: .55rem 1.1rem .55rem .8rem; max-width: 94vw;
+  }
+  .player-card .info { font-family: system-ui, sans-serif; font-size: .74rem; color: var(--ink-soft);
+    white-space: nowrap; line-height: 1.35; }
+  .player-card .info b { color: var(--ink); font-size: .8rem; }
+  audio { width: min(430px, 55vw); height: 38px; }
+  @media (max-width: 940px) { nav { display: none; } }
+
+  /* ---- nút về trang bìa ---- */
+  .home-btn { position: fixed; top: .9rem; right: .9rem; z-index: 15;
+    display: inline-flex; align-items: center; gap: .45rem; text-decoration: none;
+    font-family: system-ui, sans-serif; font-size: .8rem; font-weight: 600;
+    color: var(--ink); background: var(--card); border: 1px solid var(--line);
+    border-radius: 999px; padding: .5rem 1rem; box-shadow: var(--shadow);
+    transition: transform .18s ease, background .18s ease; }
+  .home-btn:hover { transform: translateY(-2px); background: var(--accent-soft); }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<a class="home-btn" href="../index.html" title="Về trang bìa">📖 Trang bìa</a>
+<nav>
+  <div class="brand">
+    <a href="../index.html" style="text-decoration:none;color:inherit">
+      <b>Totto-chan Bên Cửa Sổ</b>
+      <i>Tetsuko Kuroyanagi</i>
+    </a>
+  </div>
+  <h2>Mục lục</h2>
+  <ol>
+    <li><a href="../chapter_00/preview.html?autoplay=1"><em>★</em>Phần mở đầu</a></li>
+    <li><a href="../chapter_01/preview.html?autoplay=1"><em>01</em>Nhà ga</a></li>
+    <li><a href="../chapter_02/preview.html?autoplay=1"><em>02</em>Cô bé bên cửa sổ</a></li>
+    <li><a href="../chapter_03/preview.html?autoplay=1"><em>03</em>Trường mới</a></li>
+    <li><a href="../chapter_04/preview.html?autoplay=1"><em>04</em>Con thích trường này</a></li>
+    <li class="current"><span><em>05</em>Thầy hiệu trưởng</span></li>
+    <li class="missing"><span><em>06</em>Giờ ăn trưa</span></li>
+    <li class="missing"><span><em>07</em>Totto-chan bắt đầu đi học</span></li>
+    <li class="missing"><span><em>08</em>Lớp học trên con tàu</span></li>
+    <li class="missing"><span><em>09</em>Bài học ở trường Tomoe</span></li>
+    <li class="missing"><span><em>10</em>Thức ăn của biển và của đất</span></li>
+    <li class="missing"><span><em>11</em>“Nhai cho kỹ”</span></li>
+    <li class="missing"><span><em>12</em>Cuộc dạo chơi ở trường</span></li>
+    <li class="missing"><span><em>13</em>Bài hát của trường</span></li>
+    <li class="missing"><span><em>14</em>Dọn đi cho sạch sẽ</span></li>
+    <li class="missing"><span><em>15</em>Tên của Totto-chan</span></li>
+    <li class="missing"><span><em>16</em>Các diễn viên hài kịch của đài phát thanh</span></li>
+    <li class="missing"><span><em>17</em>Một toa xe khác lại tới</span></li>
+    <li class="missing"><span><em>18</em>Bể bơi</span></li>
+    <li class="missing"><span><em>19</em>Phiếu báo điểm</span></li>
+    <li class="missing"><span><em>20</em>Kỳ nghỉ hè bắt đầu</span></li>
+    <li class="missing"><span><em>21</em>Một cuộc phiêu lưu mạo hiểm</span></li>
+    <li class="missing"><span><em>22</em>Thử thách lòng dũng cảm</span></li>
+    <li class="missing"><span><em>23</em>Phòng diễn tập</span></li>
+    <li class="missing"><span><em>24</em>Chuyến đi suối nước nóng</span></li>
+    <li class="missing"><span><em>25</em>Bộ môn thể dục nghệ thuật</span></li>
+    <li class="missing"><span><em>26</em>Thứ con thích nhất</span></li>
+    <li class="missing"><span><em>27</em>Quần áo xoàng xĩnh nhất</span></li>
+    <li class="missing"><span><em>28</em>Takahashi</span></li>
+    <li class="missing"><span><em>29</em>Cẩn thận trước khi nhảy</span></li>
+    <li class="missing"><span><em>30</em>Và rồi ờ... ờ...</span></li>
+    <li class="missing"><span><em>31</em>Chúng con chỉ đùa thôi</span></li>
+    <li class="missing"><span><em>32</em>Ngày thể thao</span></li>
+    <li class="missing"><span><em>33</em>Nhà thơ Isa</span></li>
+    <li class="missing"><span><em>34</em>Rất huyền bí</span></li>
+    <li class="missing"><span><em>35</em>Nói bằng tay</span></li>
+    <li class="missing"><span><em>36</em>Bốn mươi bảy Ronin</span></li>
+    <li class="missing"><span><em>37</em>Masow-chan</span></li>
+    <li class="missing"><span><em>38</em>Bím đuôi sam</span></li>
+    <li class="missing"><span><em>39</em>Xin cám ơn</span></li>
+    <li class="missing"><span><em>40</em>Toa xe thư viện</span></li>
+    <li class="missing"><span><em>41</em>Cái đuôi</span></li>
+    <li class="missing"><span><em>42</em>Năm thứ hai của em ở Tomoe</span></li>
+    <li class="missing"><span><em>43</em>Hồ thiên nga</span></li>
+    <li class="missing"><span><em>44</em>Thầy giáo nông nghiệp</span></li>
+    <li class="missing"><span><em>45</em>Bếp dã chiến</span></li>
+    <li class="missing"><span><em>46</em>Em thật là một cô bé ngoan</span></li>
+    <li class="missing"><span><em>47</em>Cô dâu</span></li>
+    <li class="missing"><span><em>48</em>Ngôi trường cũ đổ nát</span></li>
+    <li class="missing"><span><em>49</em>Dải băng buộc tóc</span></li>
+    <li class="missing"><span><em>50</em>Đi thăm thương binh</span></li>
+    <li class="missing"><span><em>51</em>Vỏ cây đoán sức khỏe</span></li>
+    <li class="missing"><span><em>52</em>Em bé nói tiếng Anh</span></li>
+    <li class="missing"><span><em>53</em>Kịch nghiệp dư</span></li>
+    <li class="missing"><span><em>54</em>Phấn viết</span></li>
+    <li class="missing"><span><em>55</em>Yasuaki-chan đã mất</span></li>
+    <li class="missing"><span><em>56</em>Người tình báo</span></li>
+    <li class="missing"><span><em>57</em>Cây đàn violon của bố</span></li>
+    <li class="missing"><span><em>58</em>Lời hứa</span></li>
+    <li><a href="../chapter_59/preview.html?autoplay=1"><em>59</em>Con Rocky biến mất</a></li>
+    <li class="missing"><span><em>60</em>Bữa tiệc trà</span></li>
+    <li class="missing"><span><em>61</em>Sayonara, Sayonara (Tạm biệt)</span></li>
+    <li class="missing"><span><em>✦</em>Phần kết</span></li>
+  </ol>
+</nav>
+<main>
+  <article class="page">
+    <div class="kicker">Chương 5</div>
+    <h1 class="chapter seg" data-b="0.000" data-e="3.312">Thầy hiệu trưởng</h1>
+    <div class="byline">Totto-chan Bên Cửa Sổ · Tetsuko Kuroyanagi</div>
+    <div class="flourish"><i>◆</i></div>
+    <p class="seg dropcap" data-b="3.312" data-e="8.400">Thấy hai mẹ con Totto-chan bước vào phòng, một ông già rời ghế đứng dậy.</p>
+    <p class="seg" data-b="8.400" data-e="22.680">Mái tóc ông lưa thưa, mấy chiếc răng đã bị gãy, nhưng vẻ mặt ông vẫn hồng hào. Người ông không cao lắm, đôi vai và đôi cánh tay vạm vỡ. Ông ăn mặc gọn gàng, trong bộ comple đen có cả áo ghile.</p>
+    <p class="seg" data-b="22.680" data-e="27.192">Sau khi cúi đầu chào vội vã, Totto-chan phấn chấn hỏi luôn:</p>
+    <p class="seg" data-b="27.192" data-e="31.056">- Thưa bác, bác là thầy hiệu trưởng hay là trưởng tàu ạ?</p>
+    <p class="seg" data-b="31.056" data-e="36.600">Bà mẹ ngượng quá, nhưng bà chưa kịp nói gì thì ông giáo đã vừa cười vừa trả lời:</p>
+    <p class="seg" data-b="36.600" data-e="39.456">- Bác là thầy hiệu trưởng của trường này.</p>
+    <p class="seg" data-b="39.456" data-e="41.856">Totto-chan rất hài lòng:</p>
+    <p class="seg" data-b="41.856" data-e="48.624">- Ôi cháu rất vui, - em nói, - vì cháu muốn được bác giúp đỡ. Cháu thích học trường của bác.</p>
+    <p class="seg" data-b="48.624" data-e="53.040">Thầy hiệu trưởng đưa cho em cái ghế rồi quay sang nói với bà mẹ:</p>
+    <p class="seg" data-b="53.040" data-e="59.232">- Bây giờ bà có thể về nhà được rồi đó. Tôi muốn nói chuyện với Totto-chan.</p>
+    <p class="seg" data-b="59.232" data-e="65.112">Totto-chan hơi lúng túng một chút, nhưng rồi em cảm thấy có thể nói chuyện với ông hiệu trưởng.</p>
+    <p class="seg" data-b="65.112" data-e="71.064">- Vâng, tôi xin gửi cháu lại cho bác - bà mẹ mạnh dạn nói rồi bước ra và khép cửa lại.</p>
+    <p class="seg" data-b="71.064" data-e="78.600">Thầy hiệu trưởng kéo ghế ngồi đối diện với Totto-chan. Khi hai bác cháu ngồi gần lại với nhau, thầy nói:</p>
+    <p class="seg" data-b="78.600" data-e="85.584">- Nào bây giờ cháu hãy kể cho bác nghe về cháu đi! Cứ kể với bác bất cứ chuyện gì mà cháu thích.</p>
+    <p class="seg" data-b="85.584" data-e="99.384">“Bất cứ chuyện gì mà cháu thích ư?”. Totto-chan cứ tưởng rằng bác ấy sẽ hỏi và em sẽ trả lời. Nên khi thầy hiệu trưởng nói vậy, Totto-chan rất phấn khởi và em bắt đầu ngay. Chuyện của em hơi lộn xộn một chút, nhưng em kể rất say sưa. Em kể cho thầy hiệu trưởng nghe về con tàu chở hai mẹ con em đến đây chạy nhanh đến mức nào; em đề nghị bác soát vé nhưng bác ấy không cho em giữ lại vé.</p>
+    <p class="seg" data-b="99.384" data-e="126.984">Chuyện cô chủ nhiệm lớp em trước đây rất xinh đẹp ra sao; chuyện về tổ chim nhạn, về chú chó Rocky màu nâu của nhà em, nó có thể làm mọi trò; chuyện em hay ngậm kéo hồi học mẫu giáo và cô giáo thường khuyên em cẩn thận kẻo đứt lưỡi; nhưng rồi em vẫn cứ ngậm; chuyện em thường hay phải vắt mũi vì nếu để thò lò sẽ bị mẹ mắng; chuyện cha em bơi rất giỏi lại còn có thể lao đầu xuống nước lặn một hơi. Em kể rất say sưa. Thầy hiệu trưởng luôn miệng cười, gật đầu và nói:</p>
+    <p class="seg" data-b="126.984" data-e="129.240">- Rồi sau đó thì sao?</p>
+    <p class="seg" data-b="129.240" data-e="139.584">Totto-chan rất vui mừng, em tiếp tục kể mãi. Nhưng rồi em chẳng còn gì để kể nữa. Em ngồi im, cố nặn ra một chuyện gì đó.</p>
+    <p class="seg" data-b="139.584" data-e="144.648">- Cháu còn gì kể cho bác nghe nữa không? - thầy hiệu trưởng hỏi.</p>
+    <p class="seg" data-b="144.648" data-e="160.440">“Bây giờ mà dừng lại thì ngượng quá”. Totto-chan tự bảo. Đây là dịp may tuyệt vời. Totto-chan vắt óc suy nghĩ. Em không hiểu có còn gì để kể nữa không? Bỗng em nảy ra được một ý.</p>
+    <p class="seg" data-b="160.440" data-e="210.168">Em có thể kể về bộ quần áo em đang mặc. Hầu hết quần áo của em đều do mẹ may nhưng riêng bộ quần áo này lại mua ở cửa hàng. Quần áo của em thường xuyên rách rất to. Mẹ chẳng bao giờ hiểu tại sao quần áo em lại rách như vậy. Thậm chí chiếc quần sợi bông màu trắng của em đôi khi cũng có những chỗ rách nhỏ. Em giải thích cho thầy hiệu trưởng biết quần áo em bị rách là em thường chui rào bọc quanh vườn của những gia đình khác, hoặc khi em đào bới dưới những đám dây kẽm gai ở những lô đất trống. Em nói, sáng nay khi soạn quần áo mặc đến trường em mới biết tất cả những thứ do mẹ may đều rách toạc, thành ra em phải mặc bộ quần áo do mẹ mua. Đây là bộ quần áo sợi pha len kẻ ô vuông đỏ thẫm xen màu xám. Bộ quần áo này không đến nỗi tồi lắm nhưng mẹ em chê những bông hoa màu đỏ thêu trên cổ là không đẹp.</p>
+    <p class="seg" data-b="210.168" data-e="216.360">- Mẹ cháu không thích kiểu cổ này, - vừa nói Totto-chan vừa bẻ cổ áo lên cho thầy hiệu trưởng xem.</p>
+    <p class="seg" data-b="216.360" data-e="227.328">Sau đó dù có vắt óc suy nghĩ em cũng chả còn gì để kể cho thầy hiệu trưởng nghe nữa. Đúng lúc đó thầy hiệu trưởng đứng dậy đặt bàn tay to và ấm áp lên đầu em, rồi nói:</p>
+    <p class="seg" data-b="227.328" data-e="231.048">- Rất tốt, từ giờ cháu là học sinh của trường này.</p>
+    <p class="seg" data-b="231.048" data-e="253.728">Em nhớ mãi câu nói này của thầy hiệu trưởng. Và lúc đó Totto-chan cảm thấy lần đầu tiên trong đời em đã được gặp một người mà em thực sự quý mến. Từ trước đến nay chưa có ai bỏ một thời gian dài đến như vậy để nghe em kể chuyện. Trong lúc nghe em kể chuyện thầy hiệu trưởng không hề ngáp một lần nào, thầy cũng không tỏ ra buồn chán mà ngược lại rất thích thú nghe em kể một cách say sưa.</p>
+    <p class="seg" data-b="253.728" data-e="273.048">Totto-chan chưa biết tính thời gian nhưng em cũng cảm thấy là lâu lắm. Nếu em biết tính, chắc em sẽ vô cùng kinh ngạc và biết ơn thầy hiệu trưởng. Vì hai mẹ con em đến trường lúc tám giờ, sau khi em kể hết chuyện và lúc thầy hiệu trưởng nói rằng em sẽ là học sinh của trường này, ông nhìn vào chiếc đồng hồ bỏ túi và nói:</p>
+    <p class="seg" data-b="273.048" data-e="276.048">- A, đã đến giờ ăn trưa rồi.</p>
+    <p class="seg" data-b="276.048" data-e="280.632">Như thế là thầy hiệu trưởng nghe em kể chuyện vừa đúng bốn tiếng đồng hồ!</p>
+    <p class="seg" data-b="280.632" data-e="296.616">Trước đó cũng như từ đó về sau chưa có một người lớn nào chú ý lắng nghe Totto-chan trong một thời gian dài như vậy. Mặt khác, kể cả mẹ em cũng như cô giáo chủ nhiệm đều kết sức ngạc nhiên là một đứa bé mới bảy tuổi như em đã có thể tìm đủ mọi chuyện để kể liên tục trong bốn giờ liền.</p>
+    <p class="seg" data-b="296.616" data-e="322.032">Tất nhiên lúc đó Totto-chan không hề có ý nghĩ là em bị đuổi học và người ta chẳng biết còn cách nào để giải quyết việc này. Tính sôi nổi tự nhiên có phần hơi đãng trí của em làm em càng thêm hồn nhiên. Nhưng em cảm thấy rằng người ta thấy em hơi khác và có phần hơi kỳ lạ so với những đứa trẻ khác. Tuy nhiên, thầy hiệu trưởng lại làm cho em cảm thấy yên tâm, đầm ấm và hạnh phúc. Em muốn mãi ở bên thầy.</p>
+    <p class="seg" data-b="322.032" data-e="332.928">Đó là cảm tưởng của Totto-chan về thầy hiệu trưởng Sosaku Kobayashi trong ngày đầu tiên gặp mặt. Và, may thay, cảm tưởng của thầy giáo về em cũng là như vậy.</p>
+    <div class="endmark">✦ &nbsp; Hết chương 5 &nbsp; ✦</div>
+  </article>
+</main>
+<footer>
+  <div class="player-card">
+    <div class="info"><b>🎧 Chương 5: Thầy hiệu trưởng</b><br>5:32 · bấm đoạn văn để nhảy tới</div>
+    <audio id="player" src="chuong05.mp3" controls preload="auto"></audio>
+  </div>
+</footer>
+<script>
+  const player = document.getElementById('player');
+  const bar = document.getElementById('progress');
+  const segs = [...document.querySelectorAll('.seg')];
+  segs.forEach(el => el.addEventListener('click', () => {
+    player.currentTime = parseFloat(el.dataset.b) + 0.01;
+    player.play();
+  }));
+  player.addEventListener('timeupdate', () => {
+    const t = player.currentTime;
+    if (player.duration) bar.style.width = (t / player.duration * 100) + '%';
+    segs.forEach(el => {
+      const on = t >= parseFloat(el.dataset.b) && t < parseFloat(el.dataset.e);
+      el.classList.toggle('active', on);
+      if (on && el.dataset.scrolled !== el.dataset.b) {
+        el.dataset.scrolled = el.dataset.b;
+        el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    });
+  });
+  // nghe hết chương -> tự chuyển sang chương kế tiếp (nếu có)
+  const NEXT_HREF = "../chapter_59/preview.html?autoplay=1";
+  const NEXT_TITLE = "Con Rocky biến mất";
+  player.addEventListener('ended', () => {
+    if (!NEXT_HREF) return;
+    const toast = document.createElement('div');
+    toast.textContent = '▶ Tiếp theo: ' + NEXT_TITLE + ' …';
+    toast.style.cssText = 'position:fixed;bottom:5.2rem;left:50%;transform:translateX(-50%);' +
+      'background:var(--accent);color:#fff8e6;font-family:system-ui,sans-serif;font-size:.85rem;' +
+      'padding:.6rem 1.3rem;border-radius:999px;box-shadow:var(--shadow);z-index:30';
+    document.body.appendChild(toast);
+    setTimeout(() => { location.href = NEXT_HREF; }, 2000);
+  });
+  // autoplay khi đến từ trang bìa (?autoplay=1): chờ 1s rồi tự phát
+  if (new URLSearchParams(location.search).get('autoplay') === '1') {
+    setTimeout(() => {
+      player.play().catch(() => {
+        // trình duyệt chặn autoplay -> nhấp nháy player để gợi ý bấm play
+        document.querySelector('.player-card').animate(
+          [{ boxShadow: '0 0 0 0 rgba(184,134,11,.65)' },
+           { boxShadow: '0 0 0 14px rgba(184,134,11,0)' }],
+          { duration: 900, iterations: 4 });
+      });
+    }, 1000);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE smil PUBLIC "-//NISO//DTD dtbsmil 2005-2//EN" "http://www.daisy.org/z3986/2005/dtbsmil-2005-2.dtd">
+<smil xmlns="http://www.w3.org/2001/SMIL20/">
+  <head>
+    <meta name="dtb:uid" content="9786041194861-ch09"/>
+    <meta name="dtb:totalElapsedTime" content="0:00:00"/>
+    <meta name="dtb:generator" content="totto-chan daisy scripts"/>
+    <customAttributes>
+      <customTest defaultState="false" id="pagenum" override="visible"/>
+      <customTest defaultState="false" id="note" override="visible"/>
+      <customTest defaultState="false" id="noteref" override="visible"/>
+      <customTest defaultState="false" id="annotation" override="visible"/>
+      <customTest defaultState="false" id="linenum" override="visible"/>
+      <customTest defaultState="false" id="sidebar" override="visible"/>
+      <customTest defaultState="false" id="prodnote" override="visible"/>
+    </customAttributes>
+  </head>
+  <body>
+    <seq id="root-seq">
+      <seq id="seq_1" class="p">
+        <par id="sid_1" class="h1">
+          <text src="dtbook.xml#id_1"/>
+          <audio src="chuong09.mp3" clipBegin="0.000s" clipEnd="3.888s"/>
+        </par>
+      </seq>
+      <seq id="seq_2" class="p">
+        <par id="sid_2" class="sent">
+          <text src="dtbook.xml#id_2"/>
+          <audio src="chuong09.mp3" clipBegin="3.888s" clipEnd="19.296s"/>
+        </par>
+      </seq>
+      <seq id="seq_3" class="p">
+        <par id="sid_3" class="sent">
+          <text src="dtbook.xml#id_3"/>
+          <audio src="chuong09.mp3" clipBegin="19.296s" clipEnd="27.336s"/>
+        </par>
+      </seq>
+      <seq id="seq_4" class="p">
+        <par id="sid_4" class="sent">
+          <text src="dtbook.xml#id_4"/>
+          <audio src="chuong09.mp3" clipBegin="27.336s" clipEnd="31.848s"/>
+        </par>
+      </seq>
+      <seq id="seq_5" class="p">
+        <par id="sid_5" class="sent">
+          <text src="dtbook.xml#id_5"/>
+          <audio src="chuong09.mp3" clipBegin="31.848s" clipEnd="53.016s"/>
+        </par>
+      </seq>
+      <seq id="seq_6" class="p">
+        <par id="sid_6" class="sent">
+          <text src="dtbook.xml#id_6"/>
+          <audio src="chuong09.mp3" clipBegin="53.016s" clipEnd="70.800s"/>
+        </par>
+      </seq>
+      <seq id="seq_7" class="p">
+        <par id="sid_7" class="sent">
+          <text src="dtbook.xml#id_7"/>
+          <audio src="chuong09.mp3" clipBegin="70.800s" clipEnd="83.808s"/>
+        </par>
+      </seq>
+      <seq id="seq_8" class="p">
+        <par id="sid_8" class="sent">
+          <text src="dtbook.xml#id_8"/>
+          <audio src="chuong09.mp3" clipBegin="83.808s" clipEnd="123.144s"/>
+        </par>
+      </seq>
+      <seq id="seq_9" class="p">
+        <par id="sid_9" class="sent">
+          <text src="dtbook.xml#id_9"/>
+          <audio src="chuong09.mp3" clipBegin="123.144s" clipEnd="131.016s"/>
+        </par>
+      </seq>
+      <seq id="seq_10" class="p">
+        <par id="sid_10" class="sent">
+          <text src="dtbook.xml#id_10"/>
+          <audio src="chuong09.mp3" clipBegin="131.016s" clipEnd="148.896s"/>
+        </par>
+      </seq>
+      <seq id="seq_11" class="p">
+        <par id="sid_11" class="sent">
+          <text src="dtbook.xml#id_11"/>
+          <audio src="chuong09.mp3" clipBegin="148.896s" clipEnd="177.720s"/>
+        </par>
+      </seq>
+      <seq id="seq_12" class="p">
+        <par id="sid_12" class="sent">
+          <text src="dtbook.xml#id_12"/>
+          <audio src="chuong09.mp3" clipBegin="177.720s" clipEnd="193.128s"/>
+        </par>
+      </seq>
+      <seq id="seq_13" class="p">
+        <par id="sid_13" class="sent">
+          <text src="dtbook.xml#id_13"/>
+          <audio src="chuong09.mp3" clipBegin="193.128s" clipEnd="195.816s"/>
+        </par>
+      </seq>
+      <seq id="seq_14" class="p">
+        <par id="sid_14" class="sent">
+          <text src="dtbook.xml#id_14"/>
+          <audio src="chuong09.mp3" clipBegin="195.816s" clipEnd="199.800s"/>
+        </par>
+      </seq>
+      <seq id="seq_15" class="p">
+        <par id="sid_15" class="sent">
+          <text src="dtbook.xml#id_15"/>
+          <audio src="chuong09.mp3" clipBegin="199.800s" clipEnd="201.816s"/>
+        </par>
+      </seq>
+      <seq id="seq_16" class="p">
+        <par id="sid_16" class="sent">
+          <text src="dtbook.xml#id_16"/>
+          <audio src="chuong09.mp3" clipBegin="201.816s" clipEnd="208.344s"/>
+        </par>
+      </seq>
+      <seq id="seq_17" class="p">
+        <par id="sid_17" class="sent">
+          <text src="dtbook.xml#id_17"/>
+          <audio src="chuong09.mp3" clipBegin="208.344s" clipEnd="223.728s"/>
+        </par>
+      </seq>
+      <seq id="seq_18" class="p">
+        <par id="sid_18" class="sent">
+          <text src="dtbook.xml#id_18"/>
+          <audio src="chuong09.mp3" clipBegin="223.728s" clipEnd="237.960s"/>
+        </par>
+      </seq>
+      <seq id="seq_19" class="p">
+        <par id="sid_19" class="sent">
+          <text src="dtbook.xml#id_19"/>
+          <audio src="chuong09.mp3" clipBegin="237.960s" clipEnd="243.576s"/>
+        </par>
+      </seq>
+      <seq id="seq_20" class="p">
+        <par id="sid_20" class="sent">
+          <text src="dtbook.xml#id_20"/>
+          <audio src="chuong09.mp3" clipBegin="243.576s" clipEnd="248.424s"/>
+        </par>
+      </seq>
+      <seq id="seq_21" class="p">
+        <par id="sid_21" class="sent">
+          <text src="dtbook.xml#id_21"/>
+          <audio src="chuong09.mp3" clipBegin="248.424s" clipEnd="250.968s"/>
+        </par>
+      </seq>
+      <seq id="seq_22" class="p">
+        <par id="sid_22" class="sent">
+          <text src="dtbook.xml#id_22"/>
+          <audio src="chuong09.mp3" clipBegin="250.968s" clipEnd="255.984s"/>
+        </par>
+      </seq>
+      <seq id="seq_23" class="p">
+        <par id="sid_23" class="sent">
+          <text src="dtbook.xml#id_23"/>
+          <audio src="chuong09.mp3" clipBegin="255.984s" clipEnd="266.400s"/>
+        </par>
+      </seq>
+      <seq id="seq_24" class="p">
+        <par id="sid_24" class="sent">
+          <text src="dtbook.xml#id_24"/>
+          <audio src="chuong09.mp3" clipBegin="266.400s" clipEnd="271.152s"/>
+        </par>
+      </seq>
+    </seq>
+  </body>
+</smil>

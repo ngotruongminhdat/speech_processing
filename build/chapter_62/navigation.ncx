@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="vi">
+  <head>
+    <meta name="dtb:uid" content="9786041194861-ch62"/>
+    <meta name="dtb:depth" content="1"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+    <meta name="dtb:generator" content="totto-chan daisy scripts"/>
+    <smilCustomTest defaultState="false" id="pagenum" override="visible" bookStruct="PAGE_NUMBER"/>
+    <smilCustomTest defaultState="false" id="note" override="visible" bookStruct="NOTE"/>
+    <smilCustomTest defaultState="false" id="noteref" override="visible" bookStruct="NOTE_REFERENCE"/>
+    <smilCustomTest defaultState="false" id="annotation" override="visible" bookStruct="ANNOTATION"/>
+    <smilCustomTest defaultState="false" id="linenum" override="visible" bookStruct="LINE_NUMBER"/>
+    <smilCustomTest defaultState="false" id="sidebar" override="visible" bookStruct="OPTIONAL_SIDEBAR"/>
+    <smilCustomTest defaultState="false" id="prodnote" override="visible" bookStruct="OPTIONAL_PRODUCER_NOTE"/>
+  </head>
+  <docTitle>
+    <text>Totto-chan Bên Cửa Sổ</text>
+  </docTitle>
+  <docAuthor>
+    <text>Tetsuko Kuroyanagi</text>
+  </docAuthor>
+  <navMap>
+    <navPoint id="nav_1" playOrder="1" class="h1">
+      <navLabel>
+        <text>Lời kết</text>
+        <audio src="chuong62.mp3" clipBegin="0.000s" clipEnd="2.928s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_1"/>
+    </navPoint>
+    <navPoint id="nav_2" playOrder="2" class="h1">
+      <navLabel>
+        <text>Phần kết</text>
+        <audio src="chuong62.mp3" clipBegin="9.480s" clipEnd="11.352s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_3"/>
+    </navPoint>
+    <navPoint id="nav_3" playOrder="3" class="h1">
+      <navLabel>
+        <text>Phần kết</text>
+        <audio src="chuong62.mp3" clipBegin="214.968s" clipEnd="216.840s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_15"/>
+    </navPoint>
+    <navPoint id="nav_4" playOrder="4" class="h1">
+      <navLabel>
+        <text>Phần kết</text>
+        <audio src="chuong62.mp3" clipBegin="239.928s" clipEnd="241.800s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_17"/>
+    </navPoint>
+    <navPoint id="nav_5" playOrder="5" class="h1">
+      <navLabel>
+        <text>Phần kết</text>
+        <audio src="chuong62.mp3" clipBegin="277.752s" clipEnd="279.624s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_20"/>
+    </navPoint>
+    <navPoint id="nav_6" playOrder="6" class="h1">
+      <navLabel>
+        <text>Phần kết</text>
+        <audio src="chuong62.mp3" clipBegin="377.328s" clipEnd="379.200s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_25"/>
+    </navPoint>
+    <navPoint id="nav_7" playOrder="7" class="h1">
+      <navLabel>
+        <text>Phần kết</text>
+        <audio src="chuong62.mp3" clipBegin="491.736s" clipEnd="493.608s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_43"/>
+    </navPoint>
+    <navPoint id="nav_8" playOrder="8" class="h1">
+      <navLabel>
+        <text>Phần kết</text>
+        <audio src="chuong62.mp3" clipBegin="514.152s" clipEnd="516.024s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_45"/>
+    </navPoint>
+    <navPoint id="nav_9" playOrder="9" class="h1">
+      <navLabel>
+        <text>Phần kết</text>
+        <audio src="chuong62.mp3" clipBegin="578.832s" clipEnd="580.704s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_55"/>
+    </navPoint>
+    <navPoint id="nav_10" playOrder="10" class="h1">
+      <navLabel>
+        <text>Phần kết</text>
+        <audio src="chuong62.mp3" clipBegin="589.752s" clipEnd="591.624s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_57"/>
+    </navPoint>
+    <navPoint id="nav_11" playOrder="11" class="h1">
+      <navLabel>
+        <text>Phần kết</text>
+        <audio src="chuong62.mp3" clipBegin="606.168s" clipEnd="608.040s"/>
+      </navLabel>
+      <content src="mo0.smil#sid_59"/>
+    </navPoint>
+  </navMap>
+</ncx>
