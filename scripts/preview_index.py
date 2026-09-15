@@ -93,7 +93,7 @@ def gen():
     filter: blur(48px) saturate(1.15) brightness(.62); transform: scale(1.25); }}
   .hero .tint {{ position: absolute; inset: 0;
     background: linear-gradient(160deg, rgba(40,18,4,.25), rgba(24,10,2,.72) 78%); }}
-  .hero-in {{ position: relative; max-width: 1020px; margin: 0 auto;
+  .hero-in {{ position: relative; z-index: 2; max-width: 1020px; margin: 0 auto;
     padding: clamp(3rem, 7vw, 5.5rem) 1.4rem clamp(3.4rem, 7vw, 6rem);
     display: flex; gap: clamp(2rem, 5vw, 4rem); align-items: center; flex-wrap: wrap;
     justify-content: center; }}
@@ -179,38 +179,13 @@ def gen():
     letter-spacing: .12em; text-transform: uppercase; opacity: .62; }}
   .metas b {{ font-weight: 500; opacity: .95; }}
 
-  /* ---- cột trái: bìa sách + toa tàu Tomoe chạy động ---- */
-  .hero-left {{ display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
-    animation: rise .9s ease both; }}
-  .mini-rail {{ position: relative; width: clamp(230px, 30vw, 330px); height: 66px;
-    overflow: hidden; perspective: 340px; }}
-  .mini-rail .ground {{ position: absolute; left: -10%; right: -10%; bottom: 6px; height: 0;
-    border-top: 2px solid rgba(255,248,238,.5);
-    box-shadow: 0 6px 0 -5px rgba(255,248,238,.35); transform: rotateX(38deg); }}
-  .mini-rail .ground::after {{ content: ''; position: absolute; left: 0; right: 0; top: -1px;
-    height: 8px; background-image: repeating-linear-gradient(90deg,
-      rgba(255,248,238,.4) 0 2px, transparent 2px 20px); }}
-  .mini-train {{ position: absolute; bottom: 8px; left: 0; width: 132px;
-    color: var(--hero-ink); filter: drop-shadow(6px 8px 10px rgba(0,0,0,.45));
-    transform-style: preserve-3d;
-    animation: drive 9s linear infinite; }}
-  .mini-train svg {{ display: block; width: 100%; height: auto; transform: rotateY(-16deg);
-    animation: bob 1.1s ease-in-out infinite; }}
-  .mini-train .wheel {{ transform-box: fill-box; transform-origin: center;
-    animation: spin 1.1s linear infinite; }}
-  .mini-train .steam {{ transform-box: fill-box; transform-origin: center;
-    animation: puff 1.6s ease-out infinite; }}
-  .mini-train .steam.s2 {{ animation-delay: .5s; }}
-  .mini-train .steam.s3 {{ animation-delay: 1s; }}
-  @keyframes drive {{ 0% {{ left: -34%; }} 100% {{ left: 104%; }} }}
-  @keyframes bob {{ 0%, 100% {{ transform: rotateY(-16deg) translateY(0); }}
-    50% {{ transform: rotateY(-16deg) translateY(-2.5px); }} }}
-  @keyframes spin {{ to {{ transform: rotate(360deg); }} }}
-  @keyframes puff {{ 0% {{ opacity: 0; transform: translate(0, 0) scale(.5); }}
-    30% {{ opacity: .8; }} 100% {{ opacity: 0; transform: translate(-10px, -20px) scale(1.4); }} }}
-  @media (prefers-reduced-motion: reduce) {{
-    .mini-train {{ animation: none; left: 30%; }} .mini-train .wheel, .mini-train .steam {{ animation: none; }}
-  }}
+  /* ---- mural đầu tàu hơi nước (tranh sơn dầu) hòa vào nền trái ---- */
+  .hero-art {{ position: absolute; left: 0; bottom: 0; width: min(62%, 720px); z-index: 1;
+    pointer-events: none; opacity: .9;
+    mask-image: linear-gradient(105deg, #000 30%, transparent 82%);
+    -webkit-mask-image: linear-gradient(105deg, #000 30%, transparent 82%); }}
+  .hero-art svg {{ display: block; width: 100%; height: auto; }}
+  @media (max-width: 780px) {{ .hero-art {{ opacity: .5; width: 90%; }} }}
 
   /* ================= MỤC LỤC ================= */
   .wrap {{ max-width: 860px; margin: 0 auto; padding: 3rem 1.4rem 4rem; }}
@@ -257,8 +232,82 @@ def gen():
 <section class="hero">
   <div class="bg"></div>
   <div class="tint"></div>
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 620 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gBoiler" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#d3a951"/><stop offset=".5" stop-color="#82562a"/>
+          <stop offset="1" stop-color="#3a2611"/>
+        </linearGradient>
+        <linearGradient id="gDark" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#4c341a"/><stop offset="1" stop-color="#211508"/>
+        </linearGradient>
+        <radialGradient id="gWheel" cx=".38" cy=".34" r=".75">
+          <stop offset="0" stop-color="#7a5527"/><stop offset="1" stop-color="#190f04"/>
+        </radialGradient>
+        <filter id="oil" x="-25%" y="-25%" width="150%" height="150%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.013 0.02" numOctaves="3" seed="7" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="11" xChannelSelector="R" yChannelSelector="G" result="d"/>
+          <feGaussianBlur in="d" stdDeviation="0.55"/>
+        </filter>
+      </defs>
+      <!-- khói hơi nước -->
+      <g fill="#f3e4c2" filter="url(#oil)">
+        <circle cx="175" cy="70" r="30" opacity=".16"/>
+        <circle cx="220" cy="48" r="26" opacity=".14"/>
+        <circle cx="150" cy="42" r="22" opacity=".12"/>
+        <circle cx="205" cy="86" r="20" opacity=".13"/>
+      </g>
+      <!-- bóng đổ dưới bánh -->
+      <ellipse cx="300" cy="312" rx="245" ry="16" fill="#1a0f04" opacity=".45" filter="url(#oil)"/>
+      <g filter="url(#oil)">
+        <!-- cản trước (cowcatcher) -->
+        <path d="M26 306 L96 306 L96 252 Z" fill="url(#gDark)"/>
+        <!-- bệ máy -->
+        <rect x="92" y="242" width="372" height="14" rx="3" fill="#2c1c0c"/>
+        <!-- nồi hơi -->
+        <rect x="112" y="150" width="322" height="96" rx="47" fill="url(#gBoiler)"/>
+        <circle cx="132" cy="198" r="50" fill="#4b3218"/>
+        <circle cx="132" cy="198" r="50" fill="none" stroke="#caa24e" stroke-width="2.5" opacity=".55"/>
+        <!-- vòng đai nồi hơi -->
+        <path d="M235 152 v92 M320 152 v90" stroke="#2a1b0b" stroke-width="4" opacity=".5"/>
+        <!-- ống khói -->
+        <path d="M150 150 L192 150 L202 96 L140 96 Z" fill="url(#gDark)"/>
+        <rect x="134" y="86" width="74" height="12" rx="3" fill="#3a2611"/>
+        <!-- vòm hơi + vòm cát -->
+        <ellipse cx="250" cy="150" rx="27" ry="21" fill="url(#gBoiler)"/>
+        <ellipse cx="322" cy="151" rx="22" ry="17" fill="url(#gBoiler)"/>
+        <!-- đèn pha -->
+        <circle cx="120" cy="162" r="13" fill="#f6e6ba"/>
+        <circle cx="120" cy="162" r="13" fill="none" stroke="#7c5323" stroke-width="2"/>
+        <!-- ca-bin -->
+        <rect x="404" y="108" width="150" height="16" rx="5" fill="#37240f"/>
+        <rect x="420" y="120" width="122" height="126" rx="6" fill="url(#gBoiler)"/>
+        <rect x="442" y="140" width="66" height="60" rx="9" fill="#efd9a2" opacity=".72"/>
+        <rect x="442" y="140" width="66" height="60" rx="9" fill="none" stroke="#2c1b0a" stroke-width="3"/>
+        <!-- thanh truyền -->
+        <rect x="248" y="266" width="118" height="9" rx="4" fill="#caa24e" opacity=".8"/>
+        <!-- bánh xe -->
+        <g stroke="#caa24e" stroke-width="2.4">
+          <circle cx="152" cy="282" r="26" fill="url(#gWheel)"/>
+          <circle cx="252" cy="262" r="47" fill="url(#gWheel)"/>
+          <circle cx="362" cy="262" r="47" fill="url(#gWheel)"/>
+          <circle cx="480" cy="278" r="31" fill="url(#gWheel)"/>
+        </g>
+        <g stroke="#8a6329" stroke-width="2" opacity=".7">
+          <path d="M252 215 v94 M205 262 h94 M219 229 l66 66 M285 229 l-66 66"/>
+          <path d="M362 215 v94 M315 262 h94 M329 229 l66 66 M395 229 l-66 66"/>
+        </g>
+        <circle cx="252" cy="262" r="9" fill="#caa24e"/>
+        <circle cx="362" cy="262" r="9" fill="#caa24e"/>
+        <!-- vệt sáng cọ (rim light) -->
+        <path d="M118 153 Q273 138 430 153" fill="none" stroke="#f3e4c2" stroke-width="3" opacity=".45"/>
+        <path d="M140 96 L150 150" fill="none" stroke="#f3e4c2" stroke-width="2.5" opacity=".4"/>
+        <path d="M420 126 h120" fill="none" stroke="#f3e4c2" stroke-width="2.5" opacity=".35"/>
+      </g>
+    </svg>
+  </div>
   <div class="hero-in">
-    <div class="hero-left">
     <a class="book" href="{listen_href}" title="Bấm để bắt đầu nghe">
       <div class="vol">
         <div class="inner">
@@ -277,31 +326,6 @@ def gen():
         <div class="pages"></div>
       </div>
     </a>
-    <div class="mini-rail" aria-hidden="true">
-      <div class="ground"></div>
-      <div class="mini-train">
-        <svg viewBox="0 0 150 66" fill="none" stroke="currentColor" stroke-width="2.4"
-             stroke-linejoin="round" stroke-linecap="round">
-          <circle class="steam" cx="16" cy="8" r="3" fill="currentColor" stroke="none" opacity="0"/>
-          <circle class="steam s2" cx="16" cy="8" r="3" fill="currentColor" stroke="none" opacity="0"/>
-          <circle class="steam s3" cx="16" cy="8" r="3" fill="currentColor" stroke="none" opacity="0"/>
-          <path d="M8 16 q0 -6 8 -6 h118 q8 0 8 6"/>
-          <rect x="8" y="16" width="126" height="30" rx="6"/>
-          <path d="M18 40 v-12 a6 6 0 0 1 6 -6 h8 a6 6 0 0 1 6 6 v12 Z"/>
-          <path d="M44 40 v-12 a6 6 0 0 1 6 -6 h8 a6 6 0 0 1 6 6 v12 Z"/>
-          <path d="M70 40 v-12 a6 6 0 0 1 6 -6 h8 a6 6 0 0 1 6 6 v12 Z"/>
-          <path d="M96 40 v-12 a6 6 0 0 1 6 -6 h8 a6 6 0 0 1 6 6 v12 Z"/>
-          <rect x="120" y="24" width="10" height="22" rx="2"/>
-          <line x1="26" y1="48" x2="54" y2="48"/>
-          <line x1="92" y1="48" x2="120" y2="48"/>
-          <g class="wheel"><circle cx="34" cy="54" r="7"/><line x1="34" y1="48" x2="34" y2="60"/><line x1="28" y1="54" x2="40" y2="54"/></g>
-          <g class="wheel"><circle cx="52" cy="54" r="7"/><line x1="52" y1="48" x2="52" y2="60"/><line x1="46" y1="54" x2="58" y2="54"/></g>
-          <g class="wheel"><circle cx="98" cy="54" r="7"/><line x1="98" y1="48" x2="98" y2="60"/><line x1="92" y1="54" x2="104" y2="54"/></g>
-          <g class="wheel"><circle cx="116" cy="54" r="7"/><line x1="116" y1="48" x2="116" y2="60"/><line x1="110" y1="54" x2="122" y2="54"/></g>
-        </svg>
-      </div>
-    </div>
-    </div>
     <div class="lede">
       <div class="kicker">Sách nói DAISY · {META['subject']}</div>
       <h1>{META['title']}</h1>
