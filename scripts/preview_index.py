@@ -173,6 +173,8 @@ def gen():
   footer {{ text-align: center; color: var(--ink-soft); font-size: .78rem;
     margin-top: 2.6rem; font-family: system-ui, sans-serif; line-height: 1.8; }}
   footer .mark {{ color: var(--accent); font-size: .9rem; }}
+  footer .members {{ display: inline-block; margin-top: .35rem; color: var(--ink);
+    font-size: .8rem; letter-spacing: .02em; }}
 </style>
 </head>
 <body>
@@ -222,7 +224,8 @@ def gen():
   <footer>
     <div class="mark">◆</div>
     Bộ dữ liệu sách nói DAISY dành cho người khiếm thị<br>
-    Đồ án giữa kỳ Xử lý tiếng nói K35 · Nhóm Totto-chan
+    Đồ án giữa kỳ Xử lý tiếng nói K35 · Nhóm Totto-chan<br>
+    <span class="members">{" · ".join(m.strip() for m in META['collector'].split(','))}</span>
   </footer>
 </div>
 </body>
