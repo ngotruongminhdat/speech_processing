@@ -311,7 +311,7 @@ def gen(chapter_no: int):
     setTimeout(() => {{ location.href = NEXT_HREF; }}, 2000);
   }});
 
-  // ---- phím tắt ----
+  // ---- phím tắt ---- (dùng pha capture để không bị thanh audio nuốt phím)
   document.addEventListener('keydown', (e) => {{
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     switch (e.key) {{
@@ -323,7 +323,7 @@ def gen(chapter_no: int):
       case 'n': case 'N': if (NEXT_HREF) location.href = NEXT_HREF; break;
       case 'h': case 'H': location.href = '../index.html'; break;
     }}
-  }});
+  }}, true);
 
   // autoplay khi đến từ trang bìa (?autoplay=1): chờ 1s rồi tự phát
   if (new URLSearchParams(location.search).get('autoplay') === '1') {{
