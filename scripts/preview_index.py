@@ -88,14 +88,14 @@ def gen():
     filter: blur(48px) saturate(1.15) brightness(.62); transform: scale(1.25); }}
   .hero .tint {{ position: absolute; inset: 0;
     background: linear-gradient(160deg, rgba(40,18,4,.25), rgba(24,10,2,.72) 78%); }}
-  .hero-in {{ position: relative; max-width: 860px; margin: 0 auto;
+  .hero-in {{ position: relative; max-width: 1020px; margin: 0 auto;
     padding: clamp(3rem, 7vw, 5.5rem) 1.4rem clamp(3.4rem, 7vw, 6rem);
     display: flex; gap: clamp(2rem, 5vw, 4rem); align-items: center; flex-wrap: wrap;
     justify-content: center; }}
 
   /* bìa sách 3D */
   .book {{ perspective: 1200px; flex-shrink: 0; animation: rise .9s ease both; }}
-  .book .vol {{ position: relative; width: clamp(190px, 24vw, 250px);
+  .book .vol {{ position: relative; width: clamp(230px, 30vw, 330px);
     transform: rotateY(-14deg); transform-style: preserve-3d; transition: transform .5s ease; }}
   .book:hover .vol {{ transform: rotateY(-6deg); }}
   .book img {{ display: block; width: 100%; height: auto; border-radius: 3px 8px 8px 3px;
@@ -105,7 +105,7 @@ def gen():
     background: repeating-linear-gradient(to bottom, #f4ecd9 0 2px, #d9cdb2 2px 3px);
     border-radius: 0 3px 3px 0; }}
 
-  .lede {{ max-width: 480px; animation: rise .9s .12s ease both; }}
+  .lede {{ max-width: 520px; animation: rise .9s .12s ease both; }}
   .kicker {{ font-family: system-ui, sans-serif; font-size: .72rem; font-weight: 600;
     letter-spacing: .28em; text-transform: uppercase; opacity: .85; }}
   .lede h1 {{ font-size: clamp(2.1rem, 4.6vw, 3.1rem); line-height: 1.12;
