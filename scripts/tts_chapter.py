@@ -26,16 +26,18 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_VOICE = "vi-VN-HoaiMyNeural"
 
 
-async def synth_segment(text: str, voice: str, out_path: Path, retries: int = 3):
+async def synth_segment(text: str, voice: str, out_path: Path, retries: int = 24):
+    # Dịch vụ edge-tts chập chờn theo từng kết nối (cùng câu lúc lỗi lúc OK),
+    # nên retry dày với nghỉ ngắn hiệu quả hơn backoff dài.
     for attempt in range(retries):
         try:
             await edge_tts.Communicate(text, voice).save(str(out_path))
             if out_path.stat().st_size > 0:
                 return
-        except Exception as e:
+        except Exception:
             if attempt == retries - 1:
                 raise
-            await asyncio.sleep(2 * (attempt + 1))
+            await asyncio.sleep(min(10, 2 + attempt))
 
 
 async def main(chapter_no: int, voice: str):
@@ -50,18 +52,19 @@ async def main(chapter_no: int, voice: str):
     parts_dir.mkdir(exist_ok=True)
 
     # 1. TTS từng đoạn -> file mp3 nhỏ
-    # Riêng tiêu đề đầu chương: xướng thêm số chương ("Chương 1. Nhà ga")
-    # như audiobook chuẩn — text hiển thị trong dtbook vẫn giữ nguyên.
-    prefix = "Phần mở đầu. " if chapter_no == 0 else f"Chương {chapter_no}. "
+    # Riêng tiêu đề đầu đơn vị: xướng thêm nhãn ("Chương 1. Nhà ga") như
+    # audiobook chuẩn — text hiển thị trong dtbook vẫn giữ nguyên.
+    label = data.get("label") or ("Phần mở đầu" if chapter_no == 0 else f"Chương {chapter_no}")
     for i, seg in enumerate(segments):
         part = parts_dir / f"{seg['id']}.mp3"
         if part.exists() and part.stat().st_size > 0:
             continue  # cho phép chạy lại không tốn công đoạn đã xong
         text = seg["text"]
-        if i == 0 and seg["type"] == "h1" and (chapter_no > 0 or not text.startswith("Phần mở đầu")):
-            text = prefix + text
+        if i == 0 and seg["type"] == "h1" and not text.startswith(label):
+            text = f"{label}. {text}"
         await synth_segment(text, voice, part)
         print(f"  [{i + 1}/{len(segments)}] {seg['id']} ({len(text)} ký tự)")
+        await asyncio.sleep(0.5)  # giãn nhịp, tránh bị dịch vụ bóp tần suất
 
     # 2. Ghép thành 1 mp3/chương + tính timestamp từ độ dài từng phần
     mp3_name = f"chuong{chapter_no:02d}.mp3"

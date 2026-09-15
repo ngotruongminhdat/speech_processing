@@ -36,7 +36,9 @@ def package(chapter_no: int):
         if not (ch / f).exists():
             raise SystemExit(f"Thiếu {f} — chạy validate_daisy.py trước.")
 
-    unit = "Mở đầu" if chapter_no == 0 else f"Chương {chapter_no}"
+    from extract_chapter import book_units
+    folders = {no: folder for no, _l, folder, _s in book_units()}
+    unit = folders.get(chapter_no, f"Chương {chapter_no}")
     out_dir = ROOT / "dist" / META["submission_folder"] / f"{slug}-{unit}"
     out_dir.mkdir(parents=True, exist_ok=True)
 

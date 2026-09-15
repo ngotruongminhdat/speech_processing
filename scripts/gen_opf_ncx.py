@@ -41,7 +41,8 @@ def gen(chapter_no: int):
 
     # mỗi mục h1 trong chương = 1 navPoint (chương thường có 1, Phần mở đầu có 3)
     headings = [s for s in seg["segments"] if s["type"] == "h1"]
-    unit_label = "Phần mở đầu" if chapter_no == 0 else f"Chương {chapter_no}: {chapter_title}"
+    base_label = seg.get("label") or ("Phần mở đầu" if chapter_no == 0 else f"Chương {chapter_no}")
+    unit_label = base_label if base_label == chapter_title else f"{base_label}: {chapter_title}"
 
     # ---------- book.opf ----------
     opf = f'''<?xml version="1.0" encoding="utf-8"?>
@@ -90,7 +91,7 @@ def gen(chapter_no: int):
     for order, h in enumerate(headings, start=1):
         c = clips[h["id"]]
         sid = h["id"].replace("id_", "sid_")
-        label = f"Chương {chapter_no}: {escape(h['text'])}" if chapter_no > 0 else escape(h["text"])
+        label = f"{base_label}: {escape(h['text'])}" if len(headings) == 1 and base_label != h["text"] else escape(h["text"])
         nav_parts.append(f'''    <navPoint id="nav_{order}" playOrder="{order}" class="h1">
       <navLabel>
         <text>{label}</text>

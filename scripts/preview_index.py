@@ -10,7 +10,7 @@ import csv
 import json
 from pathlib import Path
 
-from extract_chapter import FRONT_MATTER_ENTRIES, toc_entries
+from extract_chapter import unit_titles
 
 ROOT = Path(__file__).resolve().parent.parent
 META = json.loads((ROOT / "metadata" / "book_meta.json").read_text(encoding="utf-8"))
@@ -33,13 +33,12 @@ def fmt(seconds: float) -> str:
 
 
 def gen():
-    units = [(0, "Phần mở đầu")] + [
-        (i, t) for i, (t, _) in enumerate(toc_entries()[FRONT_MATTER_ENTRIES:], start=1)
-    ]
+    units = [(no, title) for no, _label, title in unit_titles()]
+    last_no = units[-1][0]
     rows, built_n, total_s, first_built = [], 0, 0.0, None
     for i, title in units:
         built, dur = unit_status(i)
-        num = "★" if i == 0 else f"{i:02d}"
+        num = "★" if i == 0 else ("✦" if i == last_no else f"{i:02d}")
         if built:
             built_n += 1
             total_s += dur
@@ -207,7 +206,9 @@ def gen():
       <div><b>{META['publisher']}</b></div>
       <div>Năm&nbsp;<b>{META['date']}</b></div>
       <div>Ngôn ngữ&nbsp;<b>Tiếng Việt</b></div>
-      <div>Chuẩn&nbsp;<b>DAISY 3</b></div>
+      <div>Giọng đọc&nbsp;<b>{META.get('narrator', '')}</b></div>
+      <div>Định dạng&nbsp;<b>Sách nói DAISY 3 (MP3)</b></div>
+      <div>Thời lượng&nbsp;<b>🎧 {fmt(total_s)}</b></div>
     </div>
   </div>
 </section>

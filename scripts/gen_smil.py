@@ -39,6 +39,13 @@ def gen_smil(chapter_no: int):
     dtbook_ids = [i for _, i in id_tags]
     tag_of = dict((i, t) for t, i in id_tags)
 
+    # loại segment (p/h1/note) từ segments.json nếu có — để gắn class/customTest note
+    type_of = {}
+    seg_file = ch_dir / "segments.json"
+    if seg_file.exists():
+        for s in json.loads(seg_file.read_text(encoding="utf-8"))["segments"]:
+            type_of[s["id"]] = s["type"]
+
     with open(ts_csv, encoding="utf-8") as f:
         clips = {r["id"]: r for r in csv.DictReader(f)}
 
@@ -53,9 +60,16 @@ def gen_smil(chapter_no: int):
     for n, seg_id in enumerate(dtbook_ids, 1):
         c = clips[seg_id]
         sid = seg_id.replace("id_", "sid_")
-        cls = "h1" if tag_of[seg_id] == "h1" else "sent"
+        seg_type = type_of.get(seg_id) or ("h1" if tag_of[seg_id] == "h1" else "p")
+        if seg_type == "h1":
+            par_attrs = f'id="{sid}" class="h1"'
+        elif seg_type == "note":
+            # chú thích chia riêng: đánh dấu customTest để trình đọc cho phép skip
+            par_attrs = f'id="{sid}" class="note" customTest="note"'
+        else:
+            par_attrs = f'id="{sid}" class="sent"'
         pars.append(f'''      <seq id="seq_{n}" class="p">
-        <par id="{sid}" class="{cls}">
+        <par {par_attrs}>
           <text src="dtbook.xml#{seg_id}"/>
           <audio src="{c['file_mp3']}" clipBegin="{float(c['clipBegin']):.3f}s" clipEnd="{float(c['clipEnd']):.3f}s"/>
         </par>

@@ -14,7 +14,7 @@ import csv
 import json
 from pathlib import Path
 
-from extract_chapter import FRONT_MATTER_ENTRIES, toc_entries
+from extract_chapter import unit_titles
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -29,12 +29,11 @@ def gen(chapter_no: int):
     total_s = max(float(c["clipEnd"]) for c in clips.values())
     mins, secs = divmod(int(total_s), 60)
 
-    units = [(0, "Phần mở đầu")] + [
-        (i, t) for i, (t, _) in enumerate(toc_entries()[FRONT_MATTER_ENTRIES:], start=1)
-    ]
+    units = [(no, title) for no, _label, title in unit_titles()]
+    last_no = units[-1][0]
     toc_items = []
     for i, title in units:
-        num = "★" if i == 0 else f"{i:02d}"
+        num = "★" if i == 0 else ("✦" if i == last_no else f"{i:02d}")
         built = (ROOT / "build" / f"chapter_{i:02d}" / "preview.html").exists() or i == chapter_no
         if i == chapter_no:
             toc_items.append(f'<li class="current"><span><em>{num}</em>{title}</span></li>')
@@ -58,18 +57,27 @@ def gen(chapter_no: int):
             )
             dropcap_next = True
             continue
+        if seg["type"] == "note":
+            paras.append(
+                f'<p class="seg footnote" id="note_{seg["note_no"]}" data-b="{c["clipBegin"]}"'
+                f' data-e="{c["clipEnd"]}">{seg["text"]}</p>'
+            )
+            continue
         cls = "seg dropcap" if dropcap_next else "seg"
-        paras.append(f'<p class="{cls}" data-b="{c["clipBegin"]}" data-e="{c["clipEnd"]}">{seg["text"]}</p>')
+        body_txt = seg["text"]
+        for k in seg.get("noterefs", []):
+            body_txt += f' <sup class="noteref"><a href="#note_{k}">[{k}]</a></sup>'
+        paras.append(f'<p class="{cls}" data-b="{c["clipBegin"]}" data-e="{c["clipEnd"]}">{body_txt}</p>')
         dropcap_next = False
     h1_clip = clips["id_1"]
-    header_label = "Mở đầu" if chapter_no == 0 else f"Chương {chapter_no}"
+    header_label = data.get("label") or ("Mở đầu" if chapter_no == 0 else f"Chương {chapter_no}")
 
     # chương kế tiếp đã build (tính tại thời điểm sinh trang) để auto-chuyển khi nghe hết
     next_href, next_title = "", ""
     for j, t in units:
         if j > chapter_no and (ROOT / "build" / f"chapter_{j:02d}" / "preview.html").exists():
             next_href = f"../chapter_{j:02d}/preview.html?autoplay=1"
-            next_title = ("Phần mở đầu" if j == 0 else f"Chương {j}: {t}")
+            next_title = t
             break
 
     html = f"""<!DOCTYPE html>
@@ -149,6 +157,9 @@ def gen(chapter_no: int):
   .dropcap::first-letter {{ float: left; font-size: 3.4em; line-height: .82; padding: .04em .12em 0 0;
     color: var(--accent); font-weight: bold; }}
   .endmark {{ text-align: center; color: var(--ink-soft); margin-top: 2.2rem; font-size: 1.1rem; }}
+  .footnote {{ font-size: .88rem; color: var(--ink-soft); border-left: 3px solid var(--accent);
+    background: var(--accent-soft); margin-top: 2rem; }}
+  sup.noteref a {{ color: var(--accent); text-decoration: none; font-weight: bold; }}
 
   /* ---- thanh audio ---- */
   footer {{
@@ -198,7 +209,7 @@ def gen(chapter_no: int):
     <div class="byline">{meta['title']} · {meta['creator']}</div>
     <div class="flourish"><i>◆</i></div>
 {chr(10).join('    ' + p for p in paras)}
-    <div class="endmark">✦ &nbsp; Hết {"phần mở đầu" if chapter_no == 0 else f"chương {chapter_no}"} &nbsp; ✦</div>
+    <div class="endmark">✦ &nbsp; Hết {header_label.lower()} &nbsp; ✦</div>
   </article>
 </main>
 <footer>

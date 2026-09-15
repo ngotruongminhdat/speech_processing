@@ -75,6 +75,9 @@
   .dropcap::first-letter { float: left; font-size: 3.4em; line-height: .82; padding: .04em .12em 0 0;
     color: var(--accent); font-weight: bold; }
   .endmark { text-align: center; color: var(--ink-soft); margin-top: 2.2rem; font-size: 1.1rem; }
+  .footnote { font-size: .88rem; color: var(--ink-soft); border-left: 3px solid var(--accent);
+    background: var(--accent-soft); margin-top: 2rem; }
+  sup.noteref a { color: var(--accent); text-decoration: none; font-weight: bold; }
 
   /* ---- thanh audio ---- */
   footer {
@@ -162,6 +165,21 @@
     <li class="missing"><span><em>45</em>Bếp dã chiến</span></li>
     <li class="missing"><span><em>46</em>Em thật là một cô bé ngoan</span></li>
     <li class="missing"><span><em>47</em>Cô dâu</span></li>
+    <li class="missing"><span><em>48</em>Ngôi trường cũ đổ nát</span></li>
+    <li class="missing"><span><em>49</em>Dải băng buộc tóc</span></li>
+    <li class="missing"><span><em>50</em>Đi thăm thương binh</span></li>
+    <li class="missing"><span><em>51</em>Vỏ cây đoán sức khỏe</span></li>
+    <li class="missing"><span><em>52</em>Em bé nói tiếng Anh</span></li>
+    <li class="missing"><span><em>53</em>Kịch nghiệp dư</span></li>
+    <li class="missing"><span><em>54</em>Phấn viết</span></li>
+    <li class="missing"><span><em>55</em>Yasuaki-chan đã mất</span></li>
+    <li class="missing"><span><em>56</em>Người tình báo</span></li>
+    <li class="missing"><span><em>57</em>Cây đàn violon của bố</span></li>
+    <li class="missing"><span><em>58</em>Lời hứa</span></li>
+    <li class="missing"><span><em>59</em>Con Rocky biến mất</span></li>
+    <li class="missing"><span><em>60</em>Bữa tiệc trà</span></li>
+    <li class="missing"><span><em>61</em>Sayonara, Sayonara (Tạm biệt)</span></li>
+    <li class="missing"><span><em>✦</em>Phần kết</span></li>
   </ol>
 </nav>
 <main>
@@ -226,7 +244,7 @@
   });
   // nghe hết chương -> tự chuyển sang chương kế tiếp (nếu có)
   const NEXT_HREF = "../chapter_02/preview.html?autoplay=1";
-  const NEXT_TITLE = "Chương 2: Cô bé bên cửa sổ";
+  const NEXT_TITLE = "Cô bé bên cửa sổ";
   player.addEventListener('ended', () => {
     if (!NEXT_HREF) return;
     const toast = document.createElement('div');
