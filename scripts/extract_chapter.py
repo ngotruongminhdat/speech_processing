@@ -43,6 +43,22 @@ NOTE_RE = re.compile(r"\s*\[(\d+)\]\s*")
 FRONT_MATTER_ENTRIES = len(FRONT_SPLITS)
 
 
+def has_vietnamese(text: str) -> bool:
+    """True nếu có dấu tiếng Việt (dấu phụ tổ hợp hoặc đ/Đ)."""
+    import unicodedata
+    for ch in unicodedata.normalize("NFD", text):
+        if unicodedata.combining(ch) or ch in "đĐ":
+            return True
+    return False
+
+
+def detect_lang(text: str) -> str:
+    """Đoạn nhiều từ Latin mà không có dấu tiếng Việt -> coi là tiếng Anh.
+    (Sách in song ngữ: lời UNICEF và lời tác giả có kèm nguyên văn tiếng Anh.)"""
+    words = re.findall(r"[A-Za-z]+", text)
+    return "en" if len(words) >= 8 and not has_vietnamese(text) else "vi"
+
+
 def split_path(n: int) -> str:
     return f"OEBPS/Text/Totto-chan_c-uko_Kuroyanagi_split_{n:03d}.html"
 
@@ -167,6 +183,9 @@ def extract(unit_no: int):
                 clean = re.sub(r"\s+", " ", clean).strip()
                 # pos tính lại trên text sạch: đặt tại vị trí match cũ đã thay bằng 1 space
                 seg = {"id": f"id_{n}", "type": "p", "text": clean}
+                lang = detect_lang(clean)
+                if lang != "vi":
+                    seg["lang"] = lang
                 if noterefs:
                     seg["noterefs"] = [d["n"] for d in noterefs]
                     used_notes += [d["n"] for d in noterefs]
@@ -219,8 +238,9 @@ def write_dtbook(path: Path, unit_no: int, label: str, unit_title: str, segments
             for k in seg.get("noterefs", []):
                 inner += (f' <noteref idref="#note_{k}" class="noteref"'
                           f' id="{seg["id"]}_ref{k}">{k}</noteref>')
+            lang_attr = f' xml:lang="{seg["lang"]}"' if seg.get("lang") else ""
             body.append(
-                f'        <p><sent id="{seg["id"]}" smilref="mo0.smil#{sid}">{inner}</sent></p>'
+                f'        <p><sent id="{seg["id"]}"{lang_attr} smilref="mo0.smil#{sid}">{inner}</sent></p>'
             )
     if open_level:
         body.append("      </level1>")

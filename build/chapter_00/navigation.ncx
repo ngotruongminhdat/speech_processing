@@ -32,14 +32,14 @@
     <navPoint id="nav_2" playOrder="2" class="h1">
       <navLabel>
         <text>Lời tác giả gửi bạn đọc Việt Nam</text>
-        <audio src="chuong00.mp3" clipBegin="163.872s" clipEnd="166.776s"/>
+        <audio src="chuong00.mp3" clipBegin="160.008s" clipEnd="162.912s"/>
       </navLabel>
       <content src="mo0.smil#sid_12"/>
     </navPoint>
     <navPoint id="nav_3" playOrder="3" class="h1">
       <navLabel>
         <text>Lời nói đầu</text>
-        <audio src="chuong00.mp3" clipBegin="324.072s" clipEnd="325.944s"/>
+        <audio src="chuong00.mp3" clipBegin="316.944s" clipEnd="318.816s"/>
       </navLabel>
       <content src="mo0.smil#sid_29"/>
     </navPoint>

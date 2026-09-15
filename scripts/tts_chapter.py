@@ -24,6 +24,7 @@ from mutagen.mp3 import MP3
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_VOICE = "vi-VN-HoaiMyNeural"
+EN_VOICE = "en-US-AriaNeural"  # đọc các đoạn tiếng Anh (sách song ngữ)
 
 
 async def synth_segment(text: str, voice: str, out_path: Path, retries: int = 24):
@@ -62,8 +63,10 @@ async def main(chapter_no: int, voice: str):
         text = seg["text"]
         if i == 0 and seg["type"] == "h1" and not text.startswith(label):
             text = f"{label}. {text}"
-        await synth_segment(text, voice, part)
-        print(f"  [{i + 1}/{len(segments)}] {seg['id']} ({len(text)} ký tự)")
+        seg_voice = EN_VOICE if seg.get("lang") == "en" else voice
+        await synth_segment(text, seg_voice, part)
+        tag = " [EN]" if seg.get("lang") == "en" else ""
+        print(f"  [{i + 1}/{len(segments)}] {seg['id']} ({len(text)} ký tự){tag}")
         await asyncio.sleep(0.5)  # giãn nhịp, tránh bị dịch vụ bóp tần suất
 
     # 2. Ghép thành 1 mp3/chương + tính timestamp từ độ dài từng phần
