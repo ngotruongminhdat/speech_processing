@@ -108,11 +108,12 @@ def gen():
   .lede {{ max-width: 520px; animation: rise .9s .12s ease both; }}
   .kicker {{ font-family: system-ui, sans-serif; font-size: .72rem; font-weight: 600;
     letter-spacing: .28em; text-transform: uppercase; opacity: .85; }}
-  .lede h1 {{ font-size: clamp(2.1rem, 4.6vw, 3.1rem); line-height: 1.12;
-    margin: .45rem 0 .3rem; font-weight: normal; text-wrap: balance;
+  .lede h1 {{ font-size: clamp(2.1rem, 4.9vw, 3.42rem); line-height: 1.12;
+    margin: .45rem 0 .3rem; font-weight: normal; white-space: nowrap;
     text-shadow: 0 2px 18px rgba(0,0,0,.35); }}
+  @media (max-width: 700px) {{ .lede h1 {{ white-space: normal; }} }}
   .author {{ font-style: italic; font-size: 1.02rem; opacity: .9; }}
-  .divider {{ display: flex; align-items: center; gap: .8rem; margin: 1.15rem 0;
+  .divider {{ display: flex; align-items: center; gap: .8rem; margin: 1.15rem auto;
     max-width: 300px; opacity: .85; }}
   .divider::before, .divider::after {{ content: ''; flex: 1; height: 1px;
     background: linear-gradient(90deg, transparent, var(--hero-ink)); }}
@@ -206,7 +207,7 @@ def gen():
         <div><span>Thể loại</span><b>{META['subject']}</b></div>
         <div><span>Giọng đọc</span><b>{META.get('narrator', '')}</b></div>
         <div><span>Định dạng</span><b>Sách nói DAISY 3 (Audio MP3)</b></div>
-        <div><span>Thời lượng</span><b>🎧 {fmt(total_s)}</b></div>
+        <div><span>Thời lượng</span><b>{fmt(total_s)}</b></div>
       </div>
       <div class="cta">
         <a class="btn primary" href="{listen_href}">▶&nbsp; Bắt đầu nghe</a>
