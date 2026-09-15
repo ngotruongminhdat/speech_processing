@@ -72,20 +72,16 @@
   .btn.ghost:hover { background: rgba(255,248,238,.12); }
   @keyframes rise { from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .book, .lede { animation: none; } }
 
-  /* dải thông tin xuất bản */
-  .factbar { position: relative; border-top: 1px solid rgba(255,248,238,.18);
-    background: rgba(0,0,0,.22); backdrop-filter: blur(4px); }
-  .factbar-in { max-width: 860px; margin: 0 auto; padding: 1.05rem 1.4rem;
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: .95rem 1.6rem; font-family: system-ui, sans-serif; }
-  @media (max-width: 720px) { .factbar-in { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 440px) { .factbar-in { grid-template-columns: 1fr; } }
-  .fact { min-width: 0; }
-  .fact i { display: block; font-style: normal; font-size: .62rem; font-weight: 600;
-    letter-spacing: .14em; text-transform: uppercase; opacity: .6; margin-bottom: .18rem; }
-  .fact b { display: block; font-size: .82rem; font-weight: 600; line-height: 1.35;
-    overflow-wrap: break-word; }
+  /* thông tin xuất bản — khối nhỏ trong hero, dưới nút bấm */
+  .metas { margin-top: 1.5rem; font-family: system-ui, sans-serif; font-size: .8rem;
+    border-top: 1px solid rgba(255,248,238,.22); max-width: 420px; }
+  .metas div { display: flex; gap: 1rem; padding: .42rem 0; align-items: baseline;
+    border-bottom: 1px solid rgba(255,248,238,.13); }
+  .metas span { flex: 0 0 88px; font-size: .66rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase; opacity: .62; }
+  .metas b { font-weight: 500; opacity: .95; }
 
   /* ================= MỤC LỤC ================= */
   .wrap { max-width: 860px; margin: 0 auto; padding: 3rem 1.4rem 4rem; }
@@ -147,16 +143,12 @@
         <a class="btn primary" href="chapter_00/preview.html?autoplay=1">▶&nbsp; Bắt đầu nghe</a>
         <a class="btn ghost" href="#muc-luc">Mục lục</a>
       </div>
-    </div>
-  </div>
-  <div class="factbar">
-    <div class="factbar-in">
-      <div class="fact"><i>ISBN</i><b>9786041194861</b></div>
-      <div class="fact"><i>Nhà xuất bản</i><b>NXB Văn Học - Nhã Nam</b></div>
-      <div class="fact"><i>Năm · Ngôn ngữ</i><b>2011 · Tiếng Việt</b></div>
-      <div class="fact"><i>Giọng đọc</i><b>Hoài My (Microsoft Neural TTS)</b></div>
-      <div class="fact"><i>Định dạng</i><b>Sách nói DAISY 3 (MP3)</b></div>
-      <div class="fact"><i>Thời lượng</i><b>🎧 51:33</b></div>
+      <div class="metas">
+        <div><span>ISBN</span><b>9786041194861</b></div>
+        <div><span>Xuất bản</span><b>NXB Văn Học - Nhã Nam · 2011 · Tiếng Việt</b></div>
+        <div><span>Giọng đọc</span><b>Hoài My (Microsoft Neural TTS)</b></div>
+        <div><span>Định dạng</span><b>Sách nói DAISY 3 (MP3) · 🎧 51:33</b></div>
+      </div>
     </div>
   </div>
 </section>
