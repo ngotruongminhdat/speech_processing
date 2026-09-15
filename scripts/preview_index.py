@@ -179,8 +179,22 @@ def gen():
     letter-spacing: .12em; text-transform: uppercase; opacity: .62; }}
   .metas b {{ font-weight: 500; opacity: .95; }}
 
+  /* ---- dải toa tàu Tomoe (motif "lớp học trên con tàu") ---- */
+  .train-band {{ max-width: 860px; margin: 0 auto; padding: 2.6rem 1.4rem 0;
+    position: relative; }}
+  .train-band .rail {{ position: absolute; left: 1.4rem; right: 1.4rem; bottom: 0;
+    border-top: 2px solid var(--line); }}
+  .train-band .rail::before, .train-band .rail::after {{ content: ''; position: absolute;
+    top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--line); }}
+  .train-band .rail::before {{ left: 8%; }} .train-band .rail::after {{ right: 8%; }}
+  .train-band svg {{ display: block; width: min(300px, 78%); height: auto; margin: 0 auto;
+    color: var(--accent); opacity: .5; }}
+  .train-band .cap {{ text-align: center; font-family: system-ui, sans-serif; font-size: .68rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft);
+    opacity: .7; margin-top: .5rem; padding-bottom: 1.2rem; }}
+
   /* ================= MỤC LỤC ================= */
-  .wrap {{ max-width: 860px; margin: 0 auto; padding: 3rem 1.4rem 4rem; }}
+  .wrap {{ max-width: 860px; margin: 0 auto; padding: 2rem 1.4rem 4rem; }}
   .toc-head {{ display: flex; align-items: baseline; justify-content: space-between;
     gap: 1rem; margin-bottom: 1.1rem; flex-wrap: wrap; }}
   .toc-head h2 {{ font-size: 1.35rem; font-weight: normal; margin: 0; }}
@@ -269,6 +283,26 @@ def gen():
     </div>
   </div>
 </section>
+
+<div class="train-band" aria-hidden="true">
+  <svg viewBox="0 0 300 96" fill="none" stroke="currentColor" stroke-width="2.2"
+       stroke-linejoin="round" stroke-linecap="round">
+    <!-- thân toa tàu -->
+    <path d="M18 20 h250 a12 12 0 0 1 12 12 v34 a6 6 0 0 1-6 6 H12 a6 6 0 0 1-6-6 V32 a12 12 0 0 1 12-12 Z"/>
+    <!-- 5 ô cửa sổ mái vòm + 1 cửa lên xuống -->
+    <path d="M26 34 a8 8 0 0 1 8-8 h20 a8 8 0 0 1 8 8 v18 h-36 Z"/>
+    <path d="M72 34 a8 8 0 0 1 8-8 h20 a8 8 0 0 1 8 8 v18 h-36 Z"/>
+    <path d="M118 34 a8 8 0 0 1 8-8 h20 a8 8 0 0 1 8 8 v18 h-36 Z"/>
+    <path d="M164 34 a8 8 0 0 1 8-8 h20 a8 8 0 0 1 8 8 v18 h-36 Z"/>
+    <path d="M210 34 a8 8 0 0 1 8-8 h20 a8 8 0 0 1 8 8 v18 h-36 Z"/>
+    <rect x="256" y="30" width="20" height="36" rx="4"/>
+    <!-- bánh xe -->
+    <circle cx="70" cy="80" r="9"/>
+    <circle cx="220" cy="80" r="9"/>
+  </svg>
+  <div class="rail"></div>
+  <div class="cap">Lớp học trên con tàu · Trường Tomoe</div>
+</div>
 
 <div class="wrap" id="muc-luc">
   <div class="toc-head">
