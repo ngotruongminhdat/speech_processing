@@ -202,7 +202,7 @@ def gen():
   <div class="factbar">
     <div class="factbar-in">
       <div>ISBN&nbsp;<b>{META['source']}</b></div>
-      <div>NXB&nbsp;<b>{META['publisher']}</b></div>
+      <div><b>{META['publisher']}</b></div>
       <div>Năm&nbsp;<b>{META['date']}</b></div>
       <div>Ngôn ngữ&nbsp;<b>Tiếng Việt</b></div>
       <div>Chuẩn&nbsp;<b>DAISY 3</b></div>
