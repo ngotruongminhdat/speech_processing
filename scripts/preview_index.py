@@ -178,7 +178,7 @@ def gen():
   footer .mark {{ color: var(--accent); font-size: .9rem; }}
   footer .members {{ display: inline-block; margin-top: .35rem; color: var(--ink);
     font-size: .8rem; letter-spacing: .02em; }}
-  footer .hits {{ margin-top: .7rem; height: 18px; opacity: .75; }}
+  .metas .hitcount {{ height: 21px; vertical-align: -5px; border-radius: 4px; }}
 </style>
 </head>
 <body>
@@ -209,6 +209,7 @@ def gen():
         <div><span>Giọng đọc</span><b>{META.get('narrator', '')}</b></div>
         <div><span>Định dạng</span><b>Sách nói DAISY 3 (Audio MP3)</b></div>
         <div><span>Thời lượng</span><b>{fmt(total_s)}</b></div>
+        <div><span>Lượt xem</span><b><img class="hitcount" src="https://hits.sh/ngotruongminhdat.github.io/speech_processing.svg?label=%20&color=b8860b&labelColor=00000000" alt="lượt xem"></b></div>
       </div>
       <div class="cta">
         <a class="btn primary" href="{listen_href}">▶&nbsp; Bắt đầu nghe</a>
@@ -231,8 +232,7 @@ def gen():
     <div class="mark">◆</div>
     Bộ dữ liệu sách nói DAISY dành cho người khiếm thị<br>
     Đồ án giữa kỳ Xử lý tiếng nói K35 · Nhóm Totto-chan<br>
-    <span class="members">{" · ".join(m.strip() for m in META['collector'].split(','))}</span><br>
-    <img class="hits" src="https://hits.sh/ngotruongminhdat.github.io/speech_processing.svg?label=l%C6%B0%E1%BB%A3t%20xem&color=b8860b&labelColor=555555" alt="số lượt xem trang">
+    <span class="members">{" · ".join(m.strip() for m in META['collector'].split(','))}</span>
   </footer>
 </div>
 </body>
