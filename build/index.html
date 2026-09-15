@@ -61,7 +61,7 @@
   .divider::after { background: linear-gradient(90deg, var(--hero-ink), transparent); }
   .divider i { font-style: normal; font-size: .8rem; transform: rotate(45deg); }
   .lede p.desc { font-size: .95rem; line-height: 1.8; opacity: .92; margin: 0 0 1.4rem; }
-  .cta { display: flex; gap: .8rem; flex-wrap: wrap; font-family: system-ui, sans-serif; }
+  .cta { display: flex; gap: .8rem; flex-wrap: wrap; font-family: system-ui, sans-serif; margin-top: 1.5rem; }
   .btn { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none;
     font-size: .88rem; font-weight: 600; border-radius: 999px; padding: .72rem 1.5rem;
     transition: transform .18s ease, box-shadow .18s ease; }
@@ -75,7 +75,7 @@
   @media (prefers-reduced-motion: reduce) { .book, .lede { animation: none; } }
 
   /* thông tin xuất bản — khối nhỏ trong hero, dưới nút bấm */
-  .metas { margin-top: 1.5rem; font-family: system-ui, sans-serif; font-size: .8rem;
+  .metas { margin-top: .2rem; font-family: system-ui, sans-serif; font-size: .8rem;
     border-top: 1px solid rgba(255,248,238,.22); max-width: 420px; }
   .metas div { display: flex; gap: 1rem; padding: .42rem 0; align-items: baseline;
     border-bottom: 1px solid rgba(255,248,238,.13); }
@@ -139,10 +139,6 @@
       <div class="author">Tetsuko Kuroyanagi</div>
       <div class="divider"><i>◆</i></div>
       <p class="desc">Hồi ký tuổi thơ của cô bé Totto-chan - một đứa trẻ hiếu động bị cho là "khác thường" và bị đuổi khỏi trường công lập. Cô được nhận vào trường Tomoe - nơi các lớp học diễn ra trong những toa tàu cũ - do thầy hiệu trưởng Kobayashi sáng lập. Tại đây, Totto-chan được tự do khám phá, học theo cách riêng và dần nhận ra giá trị của bản thân. Câu chuyện là bức thư tình gửi đến tuổi thơ, sự giáo dục nhân văn và lòng bao dung.</p>
-      <div class="cta">
-        <a class="btn primary" href="chapter_00/preview.html?autoplay=1">▶&nbsp; Bắt đầu nghe</a>
-        <a class="btn ghost" href="#muc-luc">Mục lục</a>
-      </div>
       <div class="metas">
         <div><span>Tác giả</span><b>Tetsuko Kuroyanagi</b></div>
         <div><span>ISBN</span><b>9786041194861</b></div>
@@ -153,6 +149,10 @@
         <div><span>Giọng đọc</span><b>Hoài My (Microsoft Neural TTS)</b></div>
         <div><span>Định dạng</span><b>Sách nói DAISY 3 (Audio MP3)</b></div>
         <div><span>Thời lượng</span><b>🎧 51:33</b></div>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="chapter_00/preview.html?autoplay=1">▶&nbsp; Bắt đầu nghe</a>
+        <a class="btn ghost" href="#muc-luc">Mục lục</a>
       </div>
     </div>
   </div>

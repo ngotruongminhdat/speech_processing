@@ -119,7 +119,7 @@ def gen():
   .divider::after {{ background: linear-gradient(90deg, var(--hero-ink), transparent); }}
   .divider i {{ font-style: normal; font-size: .8rem; transform: rotate(45deg); }}
   .lede p.desc {{ font-size: .95rem; line-height: 1.8; opacity: .92; margin: 0 0 1.4rem; }}
-  .cta {{ display: flex; gap: .8rem; flex-wrap: wrap; font-family: system-ui, sans-serif; }}
+  .cta {{ display: flex; gap: .8rem; flex-wrap: wrap; font-family: system-ui, sans-serif; margin-top: 1.5rem; }}
   .btn {{ display: inline-flex; align-items: center; gap: .55rem; text-decoration: none;
     font-size: .88rem; font-weight: 600; border-radius: 999px; padding: .72rem 1.5rem;
     transition: transform .18s ease, box-shadow .18s ease; }}
@@ -133,7 +133,7 @@ def gen():
   @media (prefers-reduced-motion: reduce) {{ .book, .lede {{ animation: none; }} }}
 
   /* thông tin xuất bản — khối nhỏ trong hero, dưới nút bấm */
-  .metas {{ margin-top: 1.5rem; font-family: system-ui, sans-serif; font-size: .8rem;
+  .metas {{ margin-top: .2rem; font-family: system-ui, sans-serif; font-size: .8rem;
     border-top: 1px solid rgba(255,248,238,.22); max-width: 420px; }}
   .metas div {{ display: flex; gap: 1rem; padding: .42rem 0; align-items: baseline;
     border-bottom: 1px solid rgba(255,248,238,.13); }}
@@ -197,10 +197,6 @@ def gen():
       <div class="author">{META['creator']}</div>
       <div class="divider"><i>◆</i></div>
       <p class="desc">{META['description']}</p>
-      <div class="cta">
-        <a class="btn primary" href="{listen_href}">▶&nbsp; Bắt đầu nghe</a>
-        <a class="btn ghost" href="#muc-luc">Mục lục</a>
-      </div>
       <div class="metas">
         <div><span>Tác giả</span><b>{META['creator']}</b></div>
         <div><span>ISBN</span><b>{META['source']}</b></div>
@@ -211,6 +207,10 @@ def gen():
         <div><span>Giọng đọc</span><b>{META.get('narrator', '')}</b></div>
         <div><span>Định dạng</span><b>Sách nói DAISY 3 (Audio MP3)</b></div>
         <div><span>Thời lượng</span><b>🎧 {fmt(total_s)}</b></div>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="{listen_href}">▶&nbsp; Bắt đầu nghe</a>
+        <a class="btn ghost" href="#muc-luc">Mục lục</a>
       </div>
     </div>
   </div>
