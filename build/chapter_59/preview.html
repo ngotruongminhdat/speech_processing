@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Totto-chan Bên Cửa Sổ — Chương 59: Con Rocky biến mất</title>
+<style>
+  :root {
+    --paper: #faf6ee; --paper-2: #f2ecdd; --ink: #2c2417; --ink-soft: #7d7259;
+    --accent: #b8860b; --accent-soft: #f5e5b8; --hi: #ffedad; --hi-ring: #e5c25b;
+    --card: #fffdf8; --line: #e3d9c2; --shadow: 0 10px 30px rgba(90, 70, 20, .12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191613; --paper-2: #141210; --ink: #e8e0cf; --ink-soft: #9a8f77;
+      --accent: #d4a531; --accent-soft: #3a2f14; --hi: #4a3a10; --hi-ring: #8a6d1d;
+      --card: #211d18; --line: #38321f; --shadow: 0 10px 30px rgba(0, 0, 0, .5);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; display: flex; background: var(--paper); color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+  /* ---- thanh tiến độ đọc ---- */
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--accent), #e0b64f); z-index: 20; transition: width .3s linear; }
+
+  /* ---- sidebar mục lục ---- */
+  nav {
+    width: 300px; min-width: 240px; height: 100vh; position: sticky; top: 0; overflow-y: auto;
+    background: var(--paper-2); border-right: 1px solid var(--line); padding: 1.6rem 1rem 7rem;
+  }
+  nav .brand { padding: 0 .4rem 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+  nav .brand b { display: block; font-size: 1.02rem; line-height: 1.35; }
+  nav .brand i { color: var(--ink-soft); font-size: .84rem; }
+  nav h2 { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 .5rem .4rem; font-family: system-ui, sans-serif; }
+  nav ol { list-style: none; margin: 0; padding: 0; font-size: .88rem; }
+  nav li a, nav li span {
+    display: flex; gap: .55rem; align-items: baseline; padding: .34rem .55rem;
+    border-radius: 8px; text-decoration: none; color: var(--ink); line-height: 1.4;
+  }
+  nav li em { font-style: normal; font-family: system-ui, sans-serif; font-size: .7rem;
+    color: var(--ink-soft); min-width: 1.4em; }
+  nav li a:hover { background: var(--accent-soft); }
+  nav li.current > span { background: var(--accent); color: #fff8e6; font-weight: bold;
+    box-shadow: var(--shadow); }
+  nav li.current em { color: #fff3cf; }
+  nav li.missing { opacity: .38; }
+
+  /* ---- trang sách ---- */
+  main { flex: 1; display: flex; justify-content: center; padding: 2.2rem 1.2rem 9rem; }
+  .page {
+    max-width: 700px; width: 100%; background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; box-shadow: var(--shadow); padding: 3rem clamp(1.4rem, 5vw, 3.4rem) 3.4rem;
+  }
+  .kicker { font-family: system-ui, sans-serif; font-size: .72rem; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); text-align: center; }
+  h1.chapter { text-align: center; font-size: 2rem; margin: .4rem 0 .2rem; font-weight: normal;
+    cursor: pointer; }
+  h1.chapter:hover { color: var(--accent); }
+  .byline { text-align: center; color: var(--ink-soft); font-size: .88rem; font-style: italic; }
+  .flourish { display: flex; align-items: center; gap: .9rem; margin: 1.4rem auto 2rem;
+    max-width: 420px; color: var(--accent); }
+  .flourish::before, .flourish::after { content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent)); }
+  .flourish::after { background: linear-gradient(90deg, var(--accent), transparent); }
+  .flourish i { font-style: normal; font-size: .95rem; transform: rotate(45deg); line-height: 1; }
+  .seg { font-size: 1.05rem; line-height: 1.95; margin: 0 0 1.05em; padding: .1rem .45rem;
+    border-radius: 8px; cursor: pointer; transition: background .25s, box-shadow .25s; }
+  .seg:hover { background: var(--accent-soft); }
+  .seg.active { background: var(--hi); box-shadow: 0 0 0 2px var(--hi-ring); }
+  .dropcap::first-letter { float: left; font-size: 3.4em; line-height: .82; padding: .04em .12em 0 0;
+    color: var(--accent); font-weight: bold; }
+  .endmark { text-align: center; color: var(--ink-soft); margin-top: 2.2rem; font-size: 1.1rem; }
+  .footnote { font-size: .88rem; color: var(--ink-soft); border-left: 3px solid var(--accent);
+    background: var(--accent-soft); margin-top: 2rem; }
+  sup.noteref a { color: var(--accent); text-decoration: none; font-weight: bold; }
+
+  /* ---- thanh audio ---- */
+  footer {
+    position: fixed; bottom: 1.1rem; left: 0; right: 0; display: flex; justify-content: center;
+    pointer-events: none; z-index: 10;
+  }
+  .player-card {
+    pointer-events: auto; display: flex; align-items: center; gap: .9rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    box-shadow: var(--shadow); padding: .55rem 1.1rem .55rem .8rem; max-width: 94vw;
+  }
+  .player-card .info { font-family: system-ui, sans-serif; font-size: .74rem; color: var(--ink-soft);
+    white-space: nowrap; line-height: 1.35; }
+  .player-card .info b { color: var(--ink); font-size: .8rem; }
+  audio { width: min(430px, 55vw); height: 38px; }
+  @media (max-width: 940px) { nav { display: none; } }
+
+  /* ---- nút về trang bìa ---- */
+  .home-btn { position: fixed; top: .9rem; right: .9rem; z-index: 15;
+    display: inline-flex; align-items: center; gap: .45rem; text-decoration: none;
+    font-family: system-ui, sans-serif; font-size: .8rem; font-weight: 600;
+    color: var(--ink); background: var(--card); border: 1px solid var(--line);
+    border-radius: 999px; padding: .5rem 1rem; box-shadow: var(--shadow);
+    transition: transform .18s ease, background .18s ease; }
+  .home-btn:hover { transform: translateY(-2px); background: var(--accent-soft); }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<a class="home-btn" href="../index.html" title="Về trang bìa">📖 Trang bìa</a>
+<nav>
+  <div class="brand">
+    <a href="../index.html" style="text-decoration:none;color:inherit">
+      <b>Totto-chan Bên Cửa Sổ</b>
+      <i>Tetsuko Kuroyanagi</i>
+    </a>
+  </div>
+  <h2>Mục lục</h2>
+  <ol>
+    <li><a href="../chapter_00/preview.html?autoplay=1"><em>★</em>Phần mở đầu</a></li>
+    <li><a href="../chapter_01/preview.html?autoplay=1"><em>01</em>Nhà ga</a></li>
+    <li><a href="../chapter_02/preview.html?autoplay=1"><em>02</em>Cô bé bên cửa sổ</a></li>
+    <li class="missing"><span><em>03</em>Trường mới</span></li>
+    <li class="missing"><span><em>04</em>Con thích trường này</span></li>
+    <li class="missing"><span><em>05</em>Thầy hiệu trưởng</span></li>
+    <li class="missing"><span><em>06</em>Giờ ăn trưa</span></li>
+    <li class="missing"><span><em>07</em>Totto-chan bắt đầu đi học</span></li>
+    <li class="missing"><span><em>08</em>Lớp học trên con tàu</span></li>
+    <li class="missing"><span><em>09</em>Bài học ở trường Tomoe</span></li>
+    <li class="missing"><span><em>10</em>Thức ăn của biển và của đất</span></li>
+    <li class="missing"><span><em>11</em>“Nhai cho kỹ”</span></li>
+    <li class="missing"><span><em>12</em>Cuộc dạo chơi ở trường</span></li>
+    <li class="missing"><span><em>13</em>Bài hát của trường</span></li>
+    <li class="missing"><span><em>14</em>Dọn đi cho sạch sẽ</span></li>
+    <li class="missing"><span><em>15</em>Tên của Totto-chan</span></li>
+    <li class="missing"><span><em>16</em>Các diễn viên hài kịch của đài phát thanh</span></li>
+    <li class="missing"><span><em>17</em>Một toa xe khác lại tới</span></li>
+    <li class="missing"><span><em>18</em>Bể bơi</span></li>
+    <li class="missing"><span><em>19</em>Phiếu báo điểm</span></li>
+    <li class="missing"><span><em>20</em>Kỳ nghỉ hè bắt đầu</span></li>
+    <li class="missing"><span><em>21</em>Một cuộc phiêu lưu mạo hiểm</span></li>
+    <li class="missing"><span><em>22</em>Thử thách lòng dũng cảm</span></li>
+    <li class="missing"><span><em>23</em>Phòng diễn tập</span></li>
+    <li class="missing"><span><em>24</em>Chuyến đi suối nước nóng</span></li>
+    <li class="missing"><span><em>25</em>Bộ môn thể dục nghệ thuật</span></li>
+    <li class="missing"><span><em>26</em>Thứ con thích nhất</span></li>
+    <li class="missing"><span><em>27</em>Quần áo xoàng xĩnh nhất</span></li>
+    <li class="missing"><span><em>28</em>Takahashi</span></li>
+    <li class="missing"><span><em>29</em>Cẩn thận trước khi nhảy</span></li>
+    <li class="missing"><span><em>30</em>Và rồi ờ... ờ...</span></li>
+    <li class="missing"><span><em>31</em>Chúng con chỉ đùa thôi</span></li>
+    <li class="missing"><span><em>32</em>Ngày thể thao</span></li>
+    <li class="missing"><span><em>33</em>Nhà thơ Isa</span></li>
+    <li class="missing"><span><em>34</em>Rất huyền bí</span></li>
+    <li class="missing"><span><em>35</em>Nói bằng tay</span></li>
+    <li class="missing"><span><em>36</em>Bốn mươi bảy Ronin</span></li>
+    <li class="missing"><span><em>37</em>Masow-chan</span></li>
+    <li class="missing"><span><em>38</em>Bím đuôi sam</span></li>
+    <li class="missing"><span><em>39</em>Xin cám ơn</span></li>
+    <li class="missing"><span><em>40</em>Toa xe thư viện</span></li>
+    <li class="missing"><span><em>41</em>Cái đuôi</span></li>
+    <li class="missing"><span><em>42</em>Năm thứ hai của em ở Tomoe</span></li>
+    <li class="missing"><span><em>43</em>Hồ thiên nga</span></li>
+    <li class="missing"><span><em>44</em>Thầy giáo nông nghiệp</span></li>
+    <li class="missing"><span><em>45</em>Bếp dã chiến</span></li>
+    <li class="missing"><span><em>46</em>Em thật là một cô bé ngoan</span></li>
+    <li class="missing"><span><em>47</em>Cô dâu</span></li>
+    <li class="missing"><span><em>48</em>Ngôi trường cũ đổ nát</span></li>
+    <li class="missing"><span><em>49</em>Dải băng buộc tóc</span></li>
+    <li class="missing"><span><em>50</em>Đi thăm thương binh</span></li>
+    <li class="missing"><span><em>51</em>Vỏ cây đoán sức khỏe</span></li>
+    <li class="missing"><span><em>52</em>Em bé nói tiếng Anh</span></li>
+    <li class="missing"><span><em>53</em>Kịch nghiệp dư</span></li>
+    <li class="missing"><span><em>54</em>Phấn viết</span></li>
+    <li class="missing"><span><em>55</em>Yasuaki-chan đã mất</span></li>
+    <li class="missing"><span><em>56</em>Người tình báo</span></li>
+    <li class="missing"><span><em>57</em>Cây đàn violon của bố</span></li>
+    <li class="missing"><span><em>58</em>Lời hứa</span></li>
+    <li class="current"><span><em>59</em>Con Rocky biến mất</span></li>
+    <li class="missing"><span><em>60</em>Bữa tiệc trà</span></li>
+    <li class="missing"><span><em>61</em>Sayonara, Sayonara (Tạm biệt)</span></li>
+    <li class="missing"><span><em>✦</em>Phần kết</span></li>
+  </ol>
+</nav>
+<main>
+  <article class="page">
+    <div class="kicker">Chương 59</div>
+    <h1 class="chapter seg" data-b="0.000" data-e="4.032">Con Rocky biến mất</h1>
+    <div class="byline">Totto-chan Bên Cửa Sổ · Tetsuko Kuroyanagi</div>
+    <div class="flourish"><i>◆</i></div>
+    <p class="seg dropcap" data-b="4.032" data-e="17.856">Rất nhiều binh lính đã chết trận, lương thực, thực phẩm đã trở nên khan hiếm, ai nấy đều sống trong sự sợ hãi - nhưng mùa hạ vẫn đến như thường lệ. Và mặt trời vẫn chiếu sáng trên những nước đã thắng trận cũng như trên những nước không thắng trận.</p>
+    <p class="seg" data-b="17.856" data-e="22.968">Totto-chan vừa mới từ nhà của ông bác ở Kamakura trở về Tokyo.</p>
+    <p class="seg" data-b="22.968" data-e="41.232">Ở Tomoe bây giờ không có cắm trại và cũng không có những cuộc đi chơi thú vị đến suối nước nóng. Hình như các học sinh sẽ không bao giờ được hưởng một ngày vui vẻ như ngày hè năm nào. Totto-chan thường vẫn nghỉ hè cùng với các anh chị em họ ở nhà nghỉ của họ tại Kamakura, nhưng năm nay thì khác hẳn.</p>
+    <p class="seg" data-b="41.232" data-e="63.552">Một chàng trai lớn tuổi hơn, vẫn thường hay kể chuyện ma nghe ghê cả người, đã bị động viên và ra trận. Thế là không còn chuyện ma quỷ nào nữa. Và người bác của em vẫn thường kể các chuyện rất hay về cuộc sống của ông ở London, chẳng ai biết những chuyện ấy là hư hay thực - cũng ở mặt trận. Tên ông Shuji Taguchi và ông là một người quay phim rất giỏi.</p>
+    <p class="seg" data-b="63.552" data-e="105.168">Sau khi phụ trách chi nhánh Hãng Thông tấn Nikon ở New York và làm đại diện Viễn đông của Hãng Thông tấn Metro của Mỹ, ông lại nổi tiếng hơn với cái tên Shu Taguchi. Ông là anh cả của bố, mặc dù bố đã lấy họ của mẹ để ghi nhớ mãi tên họ đó , nếu không, họ của bố cũng là Taguchi. Phim bác Shuji quay, ví dụ như phim “Trận Rabaul” đang được chiếu tại các rạp hát - chiếu bóng, nhưng tất cả những thứ ông gửi về từ mặt trận là phim, nên bác gái và các anh, chị em họ của Totto-chan đều lo cho ông. Các nhà nhiếp ảnh chiến tranh đều chụp hình quân đội ở những vị trí nguy hiểm, cho nên họ phải đi trước để chụp quân đội đang tiến quân. Những người họ hàng có tuổi của Totto-chan vẫn nói thế. <sup class="noteref"><a href="#note_1">[1]</a></sup></p>
+    <p class="seg" data-b="105.168" data-e="128.880">Thậm chí, mùa hè năm ấy bãi biển ở Kamakura hình như cũng bị lãng quên. Mặc dù vậy, Yat-chan vẫn rất vui. Anh là con cả của bác Shuji Yat-chan kém Totto-chan khoảng một tuổi. Tất cả mấy anh chị em đều ngủ trong một cái màn to, và trước khi đi ngủ, Yat-chan thường hô to: “Hoàng đế muôn năm!” rồi ngã xuống như một người lính bị bắn và giả vờ chết.</p>
+    <p class="seg" data-b="128.880" data-e="138.984">Anh làm như vậy nhiều lần. Điều kỳ lạ là hễ khi nào anh làm như vậy, y như rằng anh sẽ đi trong khi ngủ và ngã ở ngoài cổng, khiến mọi người cuống cả lên.</p>
+    <p class="seg" data-b="138.984" data-e="151.680">Mẹ Totto-chan ở lại Tokyo với bố. Ông đã tìm được việc làm ở đây. Bây giờ nghỉ hè đã hết, Totto-chan lại được người chị của cậu thanh niên hay kể chuyện ma đưa về Tokyo.</p>
+    <p class="seg" data-b="151.680" data-e="159.504">Như mọi khi, về đến nhà việc đầu tiên là Totto-chan đi tìm con Rocky. Nhưng không thấy nó đâu cả.</p>
+    <p class="seg" data-b="159.504" data-e="163.128">Trong nhà cũng không có, ngoài sân cũng không có.</p>
+    <p class="seg" data-b="163.128" data-e="184.632">Totto-chan lo ngại, vì thường thường con Rocky vẫn đi thật xa để đón em. Totto-chan ra khỏi nhà, dọc theo đường cái, gọi nó nhưng không thấy bóng dáng đôi mắt, đôi tai và cái đuôi yêu quý của con Rocky đâu cả. Totto-chan nghĩ rằng có thể nó đã về nhà khi em đi tìm nó, nên em chạy vội về nhà để xem, nhưng cũng không có nốt.</p>
+    <p class="seg" data-b="184.632" data-e="186.504">Em hỏi mẹ:</p>
+    <p class="seg" data-b="186.504" data-e="188.952">- Con Rocky đâu rồi mẹ?</p>
+    <p class="seg" data-b="188.952" data-e="194.448">Mẹ chắc chắn đã biết Totto-chan chạy ngược chạy xuôi tìm nó, nhưng bà không nói gì.</p>
+    <p class="seg" data-b="194.448" data-e="198.624">Totto-chan lại hỏi mẹ, vừa hỏi vừa kéo váy bà:</p>
+    <p class="seg" data-b="198.624" data-e="201.144">- Con Rocky đâu hở mẹ?</p>
+    <p class="seg" data-b="201.144" data-e="205.752">Mẹ hình như cũng cảm thấy khó trả lời. Bà nói:</p>
+    <p class="seg" data-b="205.752" data-e="207.768">- Nó đi mất rồi.</p>
+    <p class="seg" data-b="207.768" data-e="212.712">Totto-chan không tin. Làm sao nó lại bỏ đi mất được?</p>
+    <p class="seg" data-b="212.712" data-e="218.208">- Nó đi bao giờ hở mẹ? - em hỏi, nhìn thẳng vào mặt mẹ.</p>
+    <p class="seg" data-b="218.208" data-e="222.816">Mẹ hình như càng lúng túng. Bà nói một cách buồn:</p>
+    <p class="seg" data-b="222.816" data-e="238.248">- Ngay sau khi con đi Kamakura, - rồi bà vội vã nói tiếp. - Bố mẹ đã đi khắp nơi tìm, hỏi tất cả mọi người, nhưng không thấy nó đâu. Mẹ vẫn phân vân không biết nói với con thế nào. Con phải thông cảm thôi.</p>
+    <p class="seg" data-b="238.248" data-e="248.328">Dần dần Totto-chan cũng hiểu ra. Chắc là con Rocky chết. Em nghĩ: “Mẹ không muốn mình buồn, nhưng Rocky chết rồi”.</p>
+    <p class="seg" data-b="248.328" data-e="259.464">Điều đó là rất rõ đối với Totto-chan. Trước đó, dù Totto-chan có đi lâu bao nhiêu nữa thì con Rocky cũng không bao giờ đi xa nhà: Nó biết là em sẽ trở lại.</p>
+    <p class="seg" data-b="259.464" data-e="266.472">Em tự nghĩ: “Rocky không bao giờ đi như vậy mà không bảo mình”. Em tin như vậy lắm.</p>
+    <p class="seg" data-b="266.472" data-e="272.712">Nhưng Totto-chan không nói việc này với mẹ. Em biết, mẹ sẽ buồn như thế nào.</p>
+    <p class="seg" data-b="272.712" data-e="277.704">- Không biết nó đi đâu mẹ nhỉ, - em chỉ nói thế, mắt nhìn xuống đất.</p>
+    <p class="seg" data-b="277.704" data-e="295.656">Chỉ nói được thế, em chạy lên phòng mình ở trên gác. Không có Rocky, nhà hình như không phải nhà của mình nữa. Khi lên đến phòng, em cố gắng thôi khóc mà lại nghĩ về nó. Em băn khoăn không biết mình có làm một việc gì tồi tệ đối với con chó, khiến nó bỏ đi không.</p>
+    <p class="seg" data-b="295.656" data-e="313.800">“Đừng có trêu chọc súc vật”, ông Kobayashi vẫn luôn luôn nói với các học sinh ở trường Tomoe như vậy “Phản lại súc vật khi chúng tin ở ta là một việc làm độc ác. Chớ nên bắt một con chó phải xin ăn, xong lại không cho nó một cái gì. Con chó sẽ không tin ở ta nữa và có thể trở nên xấu”.</p>
+    <p class="seg" data-b="313.800" data-e="325.296">Totto-chan lúc nào cũng tuân theo những lời khuyên đó. Không bao giờ em đánh lừa con Rocky. Cứ như em nghĩ thì em không làm một điều gì sai trái đối với nó cả.</p>
+    <p class="seg" data-b="325.296" data-e="351.912">Em bỗng nhận thấy có cái gì bám vào chân con gấu bông ở trên sàn. Cho đến lúc ấy, em đã cố gắng không khóc nữa, nhưng khi em nhìn thấy cái đó, em lại òa lên khóc. Đó là một túm lông màu nâu nhạt của con Rocky. Chắc là túm lông này đã bị rơi rụng khi em và con chó lăn lộn đùa với nhau trên sàn buổi sáng hôm em đi Kamakura. Em cứ cầm chặt túm lông của con chó berger Đức ấy, và khóc nức nở.</p>
+    <p class="seg" data-b="351.912" data-e="359.304">Đầu tiên là Yasuaki-chan và bây giờ là con Rocky. Totto-chan lại mất một người bạn nữa.</p>
+    <p class="seg footnote" id="note_1" data-b="359.304" data-e="370.632">Chú thích 1. Ở nhiều nước, khi đăng ký kết hôn, người vợ đổi sang họ chồng, nhưng nếu người chồng muốn lấy họ vợ cũng được và trong trường hợp này tất cả con cái sẽ cùng theo họ mẹ.</p>
+    <div class="endmark">✦ &nbsp; Hết chương 59 &nbsp; ✦</div>
+  </article>
+</main>
+<footer>
+  <div class="player-card">
+    <div class="info"><b>🎧 Chương 59: Con Rocky biến mất</b><br>6:10 · bấm đoạn văn để nhảy tới</div>
+    <audio id="player" src="chuong59.mp3" controls preload="auto"></audio>
+  </div>
+</footer>
+<script>
+  const player = document.getElementById('player');
+  const bar = document.getElementById('progress');
+  const segs = [...document.querySelectorAll('.seg')];
+  segs.forEach(el => el.addEventListener('click', () => {
+    player.currentTime = parseFloat(el.dataset.b) + 0.01;
+    player.play();
+  }));
+  player.addEventListener('timeupdate', () => {
+    const t = player.currentTime;
+    if (player.duration) bar.style.width = (t / player.duration * 100) + '%';
+    segs.forEach(el => {
+      const on = t >= parseFloat(el.dataset.b) && t < parseFloat(el.dataset.e);
+      el.classList.toggle('active', on);
+      if (on && el.dataset.scrolled !== el.dataset.b) {
+        el.dataset.scrolled = el.dataset.b;
+        el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    });
+  });
+  // nghe hết chương -> tự chuyển sang chương kế tiếp (nếu có)
+  const NEXT_HREF = "";
+  const NEXT_TITLE = "";
+  player.addEventListener('ended', () => {
+    if (!NEXT_HREF) return;
+    const toast = document.createElement('div');
+    toast.textContent = '▶ Tiếp theo: ' + NEXT_TITLE + ' …';
+    toast.style.cssText = 'position:fixed;bottom:5.2rem;left:50%;transform:translateX(-50%);' +
+      'background:var(--accent);color:#fff8e6;font-family:system-ui,sans-serif;font-size:.85rem;' +
+      'padding:.6rem 1.3rem;border-radius:999px;box-shadow:var(--shadow);z-index:30';
+    document.body.appendChild(toast);
+    setTimeout(() => { location.href = NEXT_HREF; }, 2000);
+  });
+  // autoplay khi đến từ trang bìa (?autoplay=1): chờ 1s rồi tự phát
+  if (new URLSearchParams(location.search).get('autoplay') === '1') {
+    setTimeout(() => {
+      player.play().catch(() => {
+        // trình duyệt chặn autoplay -> nhấp nháy player để gợi ý bấm play
+        document.querySelector('.player-card').animate(
+          [{ boxShadow: '0 0 0 0 rgba(184,134,11,.65)' },
+           { boxShadow: '0 0 0 14px rgba(184,134,11,0)' }],
+          { duration: 900, iterations: 4 });
+      });
+    }, 1000);
+  }
+</script>
+</body>
+</html>
