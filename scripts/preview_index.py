@@ -235,75 +235,110 @@ def gen():
   <div class="hero-art" aria-hidden="true">
     <svg viewBox="0 0 620 400" xmlns="http://www.w3.org/2000/svg">
       <defs>
+        <!-- nồi hơi: dải sáng kim loại gần đỉnh, tối dần xuống đáy -->
         <linearGradient id="gBoiler" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#d3a951"/><stop offset=".5" stop-color="#82562a"/>
-          <stop offset="1" stop-color="#3a2611"/>
+          <stop offset="0" stop-color="#7a5426"/><stop offset=".16" stop-color="#c99a4c"/>
+          <stop offset=".26" stop-color="#e6c074"/><stop offset=".42" stop-color="#8a5f2e"/>
+          <stop offset=".72" stop-color="#4a3016"/><stop offset="1" stop-color="#241608"/>
+        </linearGradient>
+        <linearGradient id="gCab" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#6a481f"/><stop offset=".28" stop-color="#9a6c33"/>
+          <stop offset=".6" stop-color="#4a3016"/><stop offset="1" stop-color="#20140a"/>
         </linearGradient>
         <linearGradient id="gDark" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#4c341a"/><stop offset="1" stop-color="#211508"/>
+          <stop offset="0" stop-color="#3d2913"/><stop offset="1" stop-color="#170d05"/>
         </linearGradient>
-        <radialGradient id="gWheel" cx=".38" cy=".34" r=".75">
-          <stop offset="0" stop-color="#7a5527"/><stop offset="1" stop-color="#190f04"/>
+        <radialGradient id="gSmoke" cx=".36" cy=".32" r=".85">
+          <stop offset="0" stop-color="#6f4c24"/><stop offset=".6" stop-color="#2e1e0d"/>
+          <stop offset="1" stop-color="#140c04"/>
         </radialGradient>
-        <filter id="oil" x="-25%" y="-25%" width="150%" height="150%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.013 0.02" numOctaves="3" seed="7" result="n"/>
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="11" xChannelSelector="R" yChannelSelector="G" result="d"/>
-          <feGaussianBlur in="d" stdDeviation="0.55"/>
+        <radialGradient id="gWheel" cx=".36" cy=".3" r=".85">
+          <stop offset="0" stop-color="#6a4a22"/><stop offset=".55" stop-color="#2c1c0c"/>
+          <stop offset="1" stop-color="#120b03"/>
+        </radialGradient>
+        <linearGradient id="gRod" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c9b48a"/><stop offset=".5" stop-color="#6d5a38"/>
+          <stop offset="1" stop-color="#2c2214"/>
+        </linearGradient>
+        <filter id="oil" x="-28%" y="-28%" width="156%" height="156%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.011 0.017" numOctaves="3" seed="11" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G" result="d"/>
+          <feGaussianBlur in="d" stdDeviation="0.5"/>
+        </filter>
+        <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="7"/>
         </filter>
       </defs>
-      <!-- khói hơi nước -->
-      <g fill="#f3e4c2" filter="url(#oil)">
-        <circle cx="175" cy="70" r="30" opacity=".16"/>
-        <circle cx="220" cy="48" r="26" opacity=".14"/>
-        <circle cx="150" cy="42" r="22" opacity=".12"/>
-        <circle cx="205" cy="86" r="20" opacity=".13"/>
+      <!-- khói hơi nước: tản mềm, dày dần lên cao -->
+      <g fill="#efe0be" filter="url(#soft)">
+        <circle cx="168" cy="78" r="34" opacity=".13"/>
+        <circle cx="150" cy="40" r="26" opacity=".10"/>
+        <circle cx="214" cy="52" r="30" opacity=".11"/>
+        <circle cx="196" cy="92" r="22" opacity=".12"/>
+        <circle cx="250" cy="34" r="22" opacity=".08"/>
       </g>
-      <!-- bóng đổ dưới bánh -->
-      <ellipse cx="300" cy="312" rx="245" ry="16" fill="#1a0f04" opacity=".45" filter="url(#oil)"/>
+      <!-- bóng đổ dưới máy -->
+      <ellipse cx="300" cy="314" rx="250" ry="15" fill="#120a03" opacity=".5" filter="url(#soft)"/>
       <g filter="url(#oil)">
-        <!-- cản trước (cowcatcher) -->
-        <path d="M26 306 L96 306 L96 252 Z" fill="url(#gDark)"/>
-        <!-- bệ máy -->
-        <rect x="92" y="242" width="372" height="14" rx="3" fill="#2c1c0c"/>
+        <!-- xà đỡ + cản trước -->
+        <path d="M26 308 L98 308 L98 250 Z" fill="url(#gDark)"/>
+        <rect x="94" y="240" width="376" height="16" rx="3" fill="#231506"/>
+        <rect x="94" y="240" width="376" height="4" fill="#7a5a2e" opacity=".4"/>
         <!-- nồi hơi -->
         <rect x="112" y="150" width="322" height="96" rx="47" fill="url(#gBoiler)"/>
-        <circle cx="132" cy="198" r="50" fill="#4b3218"/>
-        <circle cx="132" cy="198" r="50" fill="none" stroke="#caa24e" stroke-width="2.5" opacity=".55"/>
-        <!-- vòng đai nồi hơi -->
-        <path d="M235 152 v92 M320 152 v90" stroke="#2a1b0b" stroke-width="4" opacity=".5"/>
+        <!-- gờ đai + đổ bóng dưới bụng nồi hơi -->
+        <path d="M235 151 v94 M312 151 v92" stroke="#1d1207" stroke-width="5" opacity=".45"/>
+        <path d="M118 232 q156 20 308 0 v10 q-156 20 -308 0 Z" fill="#160d04" opacity=".4"/>
+        <!-- mặt trước (smokebox) khối cầu -->
+        <circle cx="132" cy="198" r="50" fill="url(#gSmoke)"/>
+        <path d="M104 168 a50 50 0 0 1 44 -18" fill="none" stroke="#c39a52" stroke-width="4" opacity=".35"/>
+        <circle cx="132" cy="198" r="11" fill="#241708"/>
         <!-- ống khói -->
-        <path d="M150 150 L192 150 L202 96 L140 96 Z" fill="url(#gDark)"/>
-        <rect x="134" y="86" width="74" height="12" rx="3" fill="#3a2611"/>
-        <!-- vòm hơi + vòm cát -->
-        <ellipse cx="250" cy="150" rx="27" ry="21" fill="url(#gBoiler)"/>
-        <ellipse cx="322" cy="151" rx="22" ry="17" fill="url(#gBoiler)"/>
+        <path d="M150 150 L192 150 L201 98 L141 98 Z" fill="url(#gDark)"/>
+        <path d="M143 100 L152 150" stroke="#a9803f" stroke-width="3" opacity=".3"/>
+        <ellipse cx="171" cy="96" rx="33" ry="7" fill="#2c1c0c"/>
+        <ellipse cx="171" cy="94" rx="33" ry="6" fill="#5c4022" opacity=".7"/>
+        <!-- vòm hơi + vòm cát (khối cầu nhỏ) -->
+        <ellipse cx="250" cy="149" rx="27" ry="22" fill="url(#gBoiler)"/>
+        <ellipse cx="243" cy="140" rx="9" ry="5" fill="#eccf86" opacity=".5"/>
+        <ellipse cx="320" cy="150" rx="22" ry="18" fill="url(#gBoiler)"/>
         <!-- đèn pha -->
-        <circle cx="120" cy="162" r="13" fill="#f6e6ba"/>
-        <circle cx="120" cy="162" r="13" fill="none" stroke="#7c5323" stroke-width="2"/>
+        <circle cx="119" cy="160" r="13" fill="#221606"/>
+        <circle cx="119" cy="160" r="8" fill="#f4e3ab" opacity=".85"/>
         <!-- ca-bin -->
-        <rect x="404" y="108" width="150" height="16" rx="5" fill="#37240f"/>
-        <rect x="420" y="120" width="122" height="126" rx="6" fill="url(#gBoiler)"/>
-        <rect x="442" y="140" width="66" height="60" rx="9" fill="#efd9a2" opacity=".72"/>
-        <rect x="442" y="140" width="66" height="60" rx="9" fill="none" stroke="#2c1b0a" stroke-width="3"/>
-        <!-- thanh truyền -->
-        <rect x="248" y="266" width="118" height="9" rx="4" fill="#caa24e" opacity=".8"/>
-        <!-- bánh xe -->
-        <g stroke="#caa24e" stroke-width="2.4">
-          <circle cx="152" cy="282" r="26" fill="url(#gWheel)"/>
-          <circle cx="252" cy="262" r="47" fill="url(#gWheel)"/>
-          <circle cx="362" cy="262" r="47" fill="url(#gWheel)"/>
-          <circle cx="480" cy="278" r="31" fill="url(#gWheel)"/>
+        <path d="M404 122 h150 l-8 -14 h-134 Z" fill="url(#gDark)"/>
+        <rect x="420" y="120" width="122" height="126" rx="5" fill="url(#gCab)"/>
+        <rect x="442" y="140" width="66" height="60" rx="8" fill="#0f0a04"/>
+        <rect x="446" y="176" width="58" height="22" rx="4" fill="#c79a4e" opacity=".28"/>
+        <path d="M456 236 h70" stroke="#1a1006" stroke-width="6" opacity=".5"/>
+        <!-- thanh truyền kim loại -->
+        <rect x="246" y="267" width="122" height="8" rx="4" fill="url(#gRod)"/>
+        <rect x="246" y="267" width="122" height="2" fill="#e4d3a6" opacity=".55"/>
+        <!-- bánh xe: lốp tối, vành, đối trọng, nan hoa -->
+        <g>
+          <circle cx="152" cy="282" r="26" fill="#140c04"/>
+          <circle cx="152" cy="282" r="20" fill="url(#gWheel)"/>
+          <circle cx="252" cy="262" r="47" fill="#140c04"/>
+          <circle cx="252" cy="262" r="39" fill="url(#gWheel)"/>
+          <circle cx="362" cy="262" r="47" fill="#140c04"/>
+          <circle cx="362" cy="262" r="39" fill="url(#gWheel)"/>
+          <circle cx="480" cy="278" r="31" fill="#140c04"/>
+          <circle cx="480" cy="278" r="24" fill="url(#gWheel)"/>
         </g>
-        <g stroke="#8a6329" stroke-width="2" opacity=".7">
-          <path d="M252 215 v94 M205 262 h94 M219 229 l66 66 M285 229 l-66 66"/>
-          <path d="M362 215 v94 M315 262 h94 M329 229 l66 66 M395 229 l-66 66"/>
+        <g stroke="#3f2c14" stroke-width="2.4" opacity=".85" stroke-linecap="round">
+          <path d="M252 226 v72 M216 262 h72 M227 237 l50 50 M277 237 l-50 50"/>
+          <path d="M362 226 v72 M326 262 h72 M337 237 l50 50 M387 237 l-50 50"/>
         </g>
-        <circle cx="252" cy="262" r="9" fill="#caa24e"/>
-        <circle cx="362" cy="262" r="9" fill="#caa24e"/>
-        <!-- vệt sáng cọ (rim light) -->
-        <path d="M118 153 Q273 138 430 153" fill="none" stroke="#f3e4c2" stroke-width="3" opacity=".45"/>
-        <path d="M140 96 L150 150" fill="none" stroke="#f3e4c2" stroke-width="2.5" opacity=".4"/>
-        <path d="M420 126 h120" fill="none" stroke="#f3e4c2" stroke-width="2.5" opacity=".35"/>
+        <!-- đối trọng -->
+        <path d="M252 262 m0 30 a30 30 0 0 1 -22 -12 l22 -18 Z" fill="#241708" opacity=".9"/>
+        <path d="M362 262 m0 30 a30 30 0 0 1 -22 -12 l22 -18 Z" fill="#241708" opacity=".9"/>
+        <circle cx="252" cy="262" r="7" fill="#8a6c3c"/>
+        <circle cx="362" cy="262" r="7" fill="#8a6c3c"/>
+        <!-- vệt sáng bóng đổ trên lốp trên-trái -->
+        <g fill="none" stroke="#caa257" stroke-width="3" opacity=".3" stroke-linecap="round">
+          <path d="M234 236 a40 40 0 0 1 20 -13"/>
+          <path d="M344 236 a40 40 0 0 1 20 -13"/>
+        </g>
       </g>
     </svg>
   </div>
