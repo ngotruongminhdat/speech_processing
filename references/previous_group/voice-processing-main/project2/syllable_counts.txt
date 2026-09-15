@@ -1,0 +1,6 @@
+total_combinations: 130878
+initials: 22
+medials: 2
+nuclei: 16
+codas: 9
+tones: 6

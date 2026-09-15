@@ -1,0 +1,11778 @@
+Total unique phonemes: 6603
+Total syllable tokens: 75443
+Duplicate phonemes (count>1): 5168
+
+Duplicates (count \t phoneme):
+308	koŋ1
+290	hɔ̆k6
+277	li5
+263	cu4
+218	ʂiŋ1
+215	ŋie3
+201	ɲɤ̆n1
+199	doŋ2
+191	za1
+188	daj6
+181	hɛ̆ŋ2
+175	dɤ̆w2
+174	ki2
+170	ka5
+170	vo1
+168	doŋ6
+168	hwa5
+167	kwɤ̆n1
+166	nɯɤk5
+165	ăn1
+155	hiŋ2
+148	zɤ̆n1
+146	ʂo5
+146	kɔn1
+146	tɯ6
+143	tɯ2
+139	dɯɤŋ2
+139	die6
+137	tiŋ2
+136	χi5
+135	tɯ4
+134	ciŋ5
+134	ɲa2
+133	ka1
+132	nɔj5
+131	tɤ̆m1
+131	kɤ1
+129	zăw1
+129	kwan1
+129	ba1
+129	zɛ̆ŋ1
+127	tiŋ5
+127	văn1
+126	do6
+125	măt6
+124	ʈɛ̆ŋ1
+124	kăw1
+123	vɤ̆t6
+123	dɛ̆ŋ5
+121	t'ɤ̆n2
+121	fɤ̆n1
+118	cien5
+118	kɤ̆w2
+117	t'ɛ̆ŋ1
+117	hwa1
+117	t'ɤ̆n1
+117	dien6
+116	biŋ1
+115	ɤ̆m1
+115	χoŋ1
+115	ban4
+114	cɤ̆n1
+114	tiŋ1
+113	t'ien1
+112	tăj1
+112	bo6
+111	t'e4
+111	kiŋ1
+111	t'e5
+108	bɤ̆t5
+108	ce5
+108	t'ɯk6
+107	za5
+106	hoj6
+105	ŋwien1
+105	vi6
+105	lam2
+105	diŋ6
+105	ʈuŋ1
+103	ko4
+103	ki5
+102	ʂɯ6
+101	kwok5
+101	zăw5
+101	măj5
+100	ʐa1
+100	tien2
+99	biŋ2
+99	t'ɛ̆ŋ2
+99	tɯ1
+97	a1
+96	t'wi4
+95	hɤ̆w6
+94	lɯk6
+94	vien1
+94	t'ɯɤŋ1
+93	t'u4
+93	ʂi3
+92	dăw6
+92	t'oŋ1
+92	bɛ̆ŋ5
+91	hɯw3
+91	ʂan4
+89	hɤp6
+89	toŋ4
+89	ʈɯɤŋ2
+88	li1
+86	i5
+86	da1
+86	vi1
+85	hɯɤŋ1
+84	băw5
+84	taj2
+84	lwɤ̆n6
+83	kwien2
+82	kɛ̆ŋ4
+82	t'i6
+82	lɔ̆ŋ2
+82	tɤ̆p6
+82	măt5
+82	kɛ̆k5
+81	kim1
+81	ban5
+80	kam4
+80	t'ɯ1
+80	zaj4
+80	sa1
+79	ci4
+79	ma1
+79	ka2
+79	ŋwaj6
+79	fɔ̆ŋ1
+78	za4
+78	vɛ̆ŋ2
+78	fu6
+78	swɤ̆t5
+78	ha6
+77	tiew1
+77	tik5
+76	fap5
+76	tiew4
+75	ŋiep6
+75	t'u1
+75	do2
+75	diew2
+75	ʈɯɤŋ4
+75	mi3
+74	hiew6
+73	mot6
+73	dɤ̆t5
+72	o1
+72	fɤ̆m4
+72	kɤ̆p5
+72	hwɛ̆ŋ2
+72	lɯw1
+72	ɣa2
+72	t'ɤ̆t5
+71	kwi1
+71	ăw5
+71	fuk6
+71	ʈɤj2
+71	hwa2
+70	dok6
+70	mɛ̆ŋ6
+70	sɛ1
+70	fat5
+70	ci5
+69	ŋɯ3
+69	di1
+69	doj5
+69	t'ɯɤŋ6
+69	t'wiet5
+68	bien5
+68	da5
+68	hoj2
+68	noj6
+68	zɤ̆j1
+67	noŋ1
+67	ʂăk5
+67	tiet5
+67	cɤ̆t5
+67	t'ɯk5
+67	ʈi6
+67	ci1
+66	an1
+66	taj1
+66	bɔ̆ŋ5
+65	1
+65	zɔ5
+65	ban2
+65	dɛn1
+65	cɯŋ5
+65	băt5
+65	zik6
+65	ti4
+64	băw4
+64	ke5
+64	ŋɯɤj2
+64	ket5
+64	dwan2
+64	t'ɤj2
+64	lɤ̆p6
+63	in1
+63	ti1
+63	t'ɛ̆ŋ5
+63	zɯɤŋ1
+63	kuŋ1
+63	bak6
+63	haj4
+63	kwɛ̆ŋ1
+63	za6
+62	za2
+62	ɲɯ1
+62	ko1
+62	la1
+62	tɯɤŋ5
+62	zɤj5
+62	dɔ4
+62	diem4
+62	zɤ̆w2
+61	zan1
+61	te5
+61	dɤn1
+61	fɔ̆ŋ2
+61	lien1
+61	ʈɔ̆ŋ6
+60	lăw1
+60	la5
+60	ʈăŋ5
+60	le6
+59	dɤj2
+59	kɔ5
+59	ʈiŋ2
+59	bɔ4
+59	zɤ̆j5
+59	ʂăw1
+59	ɲɤ̆t5
+59	kien5
+59	fan4
+58	ʂat5
+58	vu3
+58	kɛ̆ŋ5
+58	de2
+58	tak5
+58	kɯɤ4
+58	ʈoŋ5
+58	ki4
+57	dɛn2
+57	băw1
+57	ko5
+57	fɯɤŋ1
+57	ʂɯ1
+56	mieŋ6
+56	lɯɤŋ6
+56	χwa1
+56	bɛ̆k6
+56	biet6
+56	tɛ̆ŋ1
+56	vien6
+55	vɤ̆n6
+55	twan2
+55	tăw2
+55	χaj1
+54	ɯɤk5
+54	t'wɤ̆t6
+54	zuŋ6
+54	dan2
+54	ʂɤn1
+54	kaj4
+54	ʈwien2
+54	hoŋ2
+54	tɯɤŋ1
+54	t'o4
+53	nɯ3
+53	ɲɤ̆p6
+53	cet5
+53	kɛ̆ŋ1
+53	beŋ6
+53	băŋ2
+53	zu1
+52	tiep5
+52	sɛ̆ŋ1
+52	luk6
+52	t'iet5
+51	ak5
+51	ɲiet6
+51	laj6
+51	fi1
+51	miŋ1
+51	ʂoŋ5
+51	lwɤ̆t6
+51	ɲak6
+51	ta1
+51	ʂɤ1
+51	toj6
+51	toj5
+51	ʂɤ4
+51	i1
+50	lɛ̆ŋ2
+50	ɛ̆ŋ1
+50	hăw2
+50	ʂa1
+50	tien1
+50	ho2
+50	hwa6
+50	cwien4
+50	cuŋ1
+50	oŋ1
+50	liew6
+49	mo1
+49	lak6
+49	liŋ1
+49	zak5
+49	zɤ̆n3
+49	ho6
+49	muk6
+49	ɯŋ5
+49	tieŋ5
+49	kwa5
+49	hwa4
+49	dăk6
+48	kaj5
+48	t'ɯɤŋ2
+48	to5
+48	mɤ̆t6
+48	tok6
+48	χo4
+48	doj6
+48	iew5
+48	t'i1
+47	zi1
+47	ʈi5
+47	sak5
+47	ʂɛ̆ŋ5
+47	kɯk6
+47	ba2
+47	mɤ̆w3
+47	kiŋ5
+47	tam1
+47	lɯɤ4
+47	ma3
+46	hwiet5
+46	cwien1
+46	fa5
+46	cɯ3
+46	to1
+46	tien5
+46	t'uok5
+46	twiet6
+46	me1
+46	tuk6
+45	wi4
+45	tɯɤŋ4
+45	hon2
+45	ha2
+45	tan5
+45	ŋăj2
+45	he6
+45	lɤj6
+45	t'aj5
+45	daj2
+45	tin1
+44	la2
+44	baj2
+44	χɛ̆k5
+44	tɯ5
+44	ap5
+44	ʈuŋ2
+44	bi6
+44	tɤ1
+44	nɔn1
+44	zuk6
+44	ʂɯ4
+44	bien1
+44	kɯw5
+44	kwa4
+44	lɛ̆ŋ1
+44	kwi5
+43	ɲien1
+43	bat5
+43	zɤ4
+43	hien6
+43	kik5
+43	kot5
+43	bo4
+43	do4
+43	ʈaj5
+43	vu6
+43	ŋu3
+43	t'ɯ5
+43	hon1
+43	ŋon1
+43	zwi1
+43	ti5
+42	ɛ1
+42	an5
+42	kwiet5
+42	băj1
+42	zien6
+42	lo6
+42	sa3
+42	năŋ1
+42	zien3
+42	kɯɤj2
+42	ʂwi1
+41	hwan2
+41	ʂiew1
+41	lɛ̆ŋ3
+41	ɣan1
+41	lɯɤŋ1
+41	tiŋ4
+41	ʂɛ̆k5
+41	ʂɯk5
+41	tu1
+40	kwɤ̆n2
+40	fi5
+40	t'i2
+40	fu4
+40	tin5
+40	kuŋ2
+40	dɤ̆w6
+40	dien2
+40	cɯk5
+40	ban1
+40	fam6
+40	kɯ4
+40	zi6
+40	kuk6
+40	mɛ̆ŋ1
+40	t'ɤ̆j2
+40	diŋ2
+39	χɤ̆w4
+39	t'u5
+39	băw2
+39	măw5
+39	kăw5
+39	vɯɤŋ1
+39	măw2
+39	nien1
+39	hɤj1
+39	dɤ̆w5
+39	kɤ̆n1
+39	zuŋ1
+39	kwan4
+39	tan2
+39	zɯ3
+39	mat5
+39	ʈɤ̆n2
+39	ʂɤ̆w1
+39	lɤ̆m1
+38	cɯŋ2
+38	noj4
+38	mon1
+38	ʈɯ2
+38	to4
+38	lwan6
+38	miŋ2
+38	kik6
+38	ɲɤ̆n6
+38	ki3
+38	tăw6
+38	do1
+37	huŋ2
+37	diew6
+37	loŋ1
+37	bɛ̆k5
+37	tɤ̆j1
+37	twan5
+37	twɤ̆n2
+37	ŋi6
+37	bo2
+37	ʈɯk6
+37	kɔ4
+37	kɤ̆m2
+37	tɔ̆k5
+37	ŋe6
+36	haj6
+36	liet6
+36	ɛ̆ŋ4
+36	zɯɤŋ3
+36	χu1
+36	vɔ̆ŋ6
+36	lwaj6
+36	lik6
+36	bi5
+36	ŋi1
+36	ve6
+36	tien6
+36	bi1
+36	laj1
+36	ka4
+36	biew4
+36	ŋɯɤ6
+36	k1
+36	hat5
+36	făw5
+36	zwien1
+36	ɣa1
+35	dăw2
+35	ta4
+35	tɯɤŋ6
+35	zap5
+35	mɯw1
+35	lăw3
+35	maj1
+35	căj6
+35	but5
+35	kwa1
+35	lon6
+35	leŋ6
+35	χɤj4
+35	twien5
+35	ki6
+35	taj5
+34	no1
+34	aj5
+34	nam1
+34	ɤ̆m5
+34	zaj2
+34	năm1
+34	zaj1
+34	fɤ̆n2
+34	ʐăw1
+34	bɤ̆w2
+34	t'ɯɤ2
+34	hɛ̆ŋ6
+34	doŋ1
+34	bɔ6
+34	kɤ̆w1
+34	kɤ̆j1
+34	sɯɤŋ1
+34	vɔ3
+34	t'am1
+33	ien1
+33	kɯ1
+33	ɤ̆n4
+33	boŋ1
+33	dăw4
+33	zɤ̆t6
+33	t'ɤ1
+33	mwi3
+33	diŋ1
+33	ʈɤ6
+33	hiew5
+33	băw6
+33	mɛ̆k6
+33	lăw5
+33	lɤ1
+33	kɯɤŋ2
+33	za3
+33	t'oŋ5
+33	mɤ̆t5
+32	t'ɤ̆m1
+32	tɯk5
+32	lɤj2
+32	ʈwi1
+32	meŋ6
+32	ɲiem6
+32	t'ăw4
+32	mom2
+32	zɯɤk6
+32	ca1
+32	hwɛ̆ŋ1
+32	kɤm1
+32	ʂɔ̆ŋ1
+32	tɤ̆n1
+32	zɯ6
+32	mɛ̆ŋ2
+32	lɔ̆ŋ1
+32	fuk5
+32	fɛp5
+32	e1
+31	lo1
+31	tăŋ1
+31	tɯɤj1
+31	boj6
+31	bo5
+31	ʈɤ̆n6
+31	t'ɛ̆k6
+31	ʈɛ̆ŋ5
+31	ma2
+31	zaj6
+31	t'a1
+31	ʂaj1
+31	sɯ4
+31	tɤ̆m2
+31	kɯŋ5
+31	zăj2
+31	ŋɛ̆ŋ1
+31	ʈɛ̆k5
+31	t'an1
+31	le3
+31	len1
+30	tuk5
+30	lɛ̆ŋ6
+30	năw3
+30	faj4
+30	tɔ1
+30	t'wien2
+30	cin5
+30	ɲɤ̆t6
+30	kwan5
+30	zɤ2
+30	ham2
+30	băŋ1
+30	lɔ2
+30	fɔ̆ŋ5
+30	ʈɛ̆ŋ6
+30	dăw1
+30	kan1
+30	tok5
+30	tik6
+30	mɔ̆k5
+30	ʐo1
+30	ku4
+30	ho4
+30	ʂɯ5
+30	ton1
+29	ba5
+29	hiem4
+29	it1
+29	tu2
+29	dăŋ1
+29	kɤ̆n2
+29	zɤ̆w5
+29	le1
+29	te1
+29	kɯɤŋ1
+29	kăn1
+29	cɤ6
+29	cɤ̆p5
+29	bien6
+29	χuk5
+29	ɲɔ4
+29	han2
+29	ʈi1
+29	tɤ̆n6
+29	dɛ̆ŋ4
+29	faj5
+29	năw2
+29	ti2
+29	ʈɤ4
+29	ciew5
+29	ʐoj5
+29	cim1
+29	t'u6
+29	han6
+29	ciew1
+29	nɔ̆ŋ5
+29	hi5
+29	lwien6
+29	sa2
+28	ni1
+28	dɯk5
+28	kwi4
+28	tăk5
+28	bɔ2
+28	ɤ4
+28	si2
+28	sik5
+28	lăŋ1
+28	kat5
+28	χăw4
+28	bi2
+28	ɲăj4
+28	cuoj5
+28	ʐuot6
+28	buŋ6
+28	koŋ6
+28	dăŋ4
+28	χɛ̆ŋ5
+28	tɤ̆t5
+28	mu2
+28	tiŋ3
+28	sɛt5
+28	ʈɔn2
+28	cɔ5
+28	zɛ̆ŋ5
+28	t'ɤ̆m4
+28	hɯɤŋ5
+28	ŋo6
+28	t'ăŋ4
+28	t'ik5
+28	fu1
+28	ŋiem6
+28	hien2
+28	ɲa1
+28	doj1
+27	t1
+27	fɤ̆n6
+27	hat6
+27	ʂwɤ̆t5
+27	ciw6
+27	nat5
+27	lo3
+27	tap6
+27	hăw1
+27	u1
+27	lɯɤk6
+27	vɔ̆ŋ1
+27	zɛ̆ŋ6
+27	zwɛ̆ŋ1
+27	cɛ2
+27	t'u2
+27	iew1
+27	kăj2
+27	kɔ2
+27	mɤ3
+27	tot5
+27	măŋ1
+27	tuoj4
+27	ɣɔ̆k5
+27	ciew2
+27	χăk5
+27	t'ɤ̆p6
+27	dwan6
+27	zɤ̆m1
+27	t'uok6
+27	ʈɤ̆m2
+27	t'ɯɤk5
+26	hoj5
+26	lɔ1
+26	it5
+26	fa1
+26	sa6
+26	mɯɤ1
+26	măk6
+26	cɤj1
+26	ʈɛ4
+26	ban6
+26	lɤ̆w1
+26	fɤ̆n5
+26	ʂɛ̆ŋ1
+26	căŋ4
+26	dăk5
+26	ʐɯɤw6
+26	twi5
+26	ɔ̆ŋ1
+26	cu5
+26	kuo4
+26	dok5
+26	boj2
+26	duoj1
+26	kam1
+26	ʂɛ̆ŋ2
+26	kɤ̆m5
+26	van6
+26	mɤ4
+26	ŋiem1
+26	fu2
+25	mi1
+25	j1
+25	năm2
+25	cie1
+25	ŋoj2
+25	lăŋ6
+25	de5
+25	t'ăŋ5
+25	χwa5
+25	kɤ2
+25	bɛ̆ŋ2
+25	bɛ̆ŋ4
+25	ŋik6
+25	bat6
+25	boŋ2
+25	biet5
+25	bu2
+25	kien6
+25	cuo1
+25	ta2
+25	kɛw5
+25	fɔ5
+25	vɔ̆ŋ2
+25	ku6
+25	χɔ5
+25	hɯ1
+25	vɤ̆n1
+25	mɤ1
+25	kiem4
+25	hiep6
+25	hwat6
+24	t'aj1
+24	mɔ4
+24	tɛ̆ŋ5
+24	năŋ6
+24	ok5
+24	cuo5
+24	t'ăw1
+24	baj6
+24	ʈu6
+24	t'ăw5
+24	dɯŋ5
+24	ta5
+24	χwaj1
+24	hon3
+24	ke1
+24	dan6
+24	ɛp5
+24	zɛ̆ŋ4
+24	ʂăt5
+24	bien4
+24	χiŋ1
+24	ɲiem3
+24	ʂuŋ5
+24	ŋu4
+24	ʂɔ̆ŋ5
+24	ʐɛ̆ŋ2
+24	hɤ̆p5
+24	vɯɤ2
+24	kɤ̆w5
+24	kɤ̆n6
+24	cuot6
+24	dien4
+24	t'iew5
+24	ʂoŋ1
+24	zɯ1
+24	ten1
+24	vien3
+23	aj1
+23	ɤ̆n1
+23	ʈaj1
+23	oŋ5
+23	hɔj4
+23	ʈa4
+23	va6
+23	zu6
+23	ŋwiet6
+23	daj3
+23	be1
+23	zam5
+23	kɔ̆k5
+23	ton2
+23	kwaj5
+23	t'it6
+23	haj1
+23	cwien6
+23	toŋ1
+23	ɲi1
+23	cuŋ4
+23	lɛ̆ŋ5
+23	bɔ̆p5
+23	sep5
+23	ʈɔ2
+23	ʈɛ̆ŋ2
+23	cɤ̆w1
+23	măj1
+23	t'wɤ̆n2
+23	zj2
+23	kwi3
+23	fu5
+23	dɯɤŋ1
+23	luo5
+22	na1
+22	văŋ5
+22	bɔm1
+22	ɣaj1
+22	bɯk5
+22	zam4
+22	ʈăŋ1
+22	vaj1
+22	mɛ6
+22	lɯŋ1
+22	ʈu5
+22	zɔ2
+22	vɔj1
+22	lɤ̆m2
+22	doj4
+22	dɤ̆w1
+22	mɤj5
+22	ɣăw6
+22	nɯɤ4
+22	lɤ̆p5
+22	tu6
+22	tan1
+22	suŋ1
+22	buon2
+22	kuo1
+22	t'ien6
+22	si1
+22	χon1
+22	ciŋ4
+22	ku2
+22	ɯw1
+22	vɤ̆n5
+22	lɛ3
+22	t'wɤ̆n6
+22	te6
+22	de4
+22	mu3
+22	man1
+22	kuoŋ2
+22	la6
+22	vwi1
+22	t'ɤ6
+21	da2
+21	moŋ6
+21	ɛn1
+21	măj2
+21	lɤn5
+21	ɤ̆n5
+21	kɛ1
+21	hɤ̆w2
+21	ʈiew2
+21	văw2
+21	buon1
+21	tom1
+21	ʐăŋ1
+21	lăn1
+21	kɯ5
+21	nɤ6
+21	χa4
+21	man3
+21	ɣi1
+21	kwăj1
+21	t'am4
+21	liŋ5
+21	ik5
+21	ŋɤ̆n1
+21	mɛ1
+21	hwien2
+21	ʈuk6
+21	den5
+21	lɯɤj3
+21	vit6
+21	ʐăn5
+21	ŋɔ̆t6
+21	lɤn6
+21	ʐɯŋ2
+21	cwɤ̆n4
+21	viek6
+21	χo1
+21	ɲɛ6
+21	ɲuk6
+21	zɛ̆ŋ2
+21	fim1
+21	tuŋ1
+21	ɲi6
+21	wan1
+21	măk5
+21	t'we5
+20	de1
+20	mo6
+20	m1
+20	cɛ̆ŋ2
+20	t'uk5
+20	ăw4
+20	taj4
+20	bak5
+20	liŋ3
+20	ɤn1
+20	ŋɯɤk6
+20	zɤ̆w1
+20	ŋɔ̆k6
+20	bɤ2
+20	ŋe2
+20	haj2
+20	ʈɔ̆ŋ1
+20	twien4
+20	ʐăw2
+20	loŋ2
+20	vɤ3
+20	von5
+20	kok5
+20	dăŋ2
+20	ʈɤ̆w1
+20	coŋ5
+20	ɲɔ1
+20	w1
+20	mo2
+20	ʈwien6
+20	maj5
+20	ɲat6
+20	dik6
+20	tăw5
+20	dwan4
+20	taj6
+20	χwɛ̆ŋ5
+19	fɤ̆t6
+19	tɔ̆ŋ2
+19	ɔn1
+19	ʈa1
+19	t'ɤ̆t6
+19	ɤ̆m4
+19	tɤ̆n2
+19	vɛ̆ŋ1
+19	t'ɯɤŋ4
+19	sa5
+19	kuk5
+19	baj3
+19	t'ɯ4
+19	vɛ3
+19	toŋ5
+19	hi4
+19	bɤ̆n2
+19	ʈăk5
+19	mak6
+19	ʈɯŋ1
+19	cɤ̆m5
+19	bok5
+19	kɛ̆ŋ2
+19	ʐut5
+19	ku1
+19	ʂɔn1
+19	ʈɯŋ5
+19	kɤ̆m4
+19	hwɤ̆n5
+19	dɔn2
+19	o4
+19	dwan5
+19	zan2
+19	cu1
+19	t'ɔ6
+19	mɛw2
+19	kɔ1
+19	ʂɛ̆k6
+19	ʂo4
+19	swɤ̆n1
+19	twi2
+19	lɛ1
+19	lɤ2
+19	fe5
+19	lwɤ̆n1
+19	ʈɯɤk5
+19	twien1
+19	va1
+18	tit5
+18	tɯɤŋ2
+18	hɯɤŋ4
+18	daj5
+18	ʂɯɤŋ1
+18	sin1
+18	nɛ̆ŋ1
+18	tɛ̆ŋ2
+18	ɣak5
+18	ma5
+18	măw1
+18	t'waj6
+18	cɔ1
+18	ɣɔ̆p5
+18	vɤ6
+18	noj5
+18	cɯɤŋ1
+18	kăt5
+18	ʂɯɤ3
+18	lan1
+18	băk5
+18	tɤ̆j4
+18	die3
+18	zɔ̆ŋ6
+18	moj5
+18	tăm1
+18	t'e1
+18	bɛ5
+18	ŋwaj2
+18	dat6
+18	ɲăw1
+18	mat6
+18	t'i5
+18	loj1
+18	t'a4
+18	dam2
+18	suk5
+18	lɛw1
+18	kăj1
+18	zan5
+18	dɛp6
+18	ʂot5
+18	kɤ̆t5
+18	ŋwien6
+18	t'ăŋ1
+18	het5
+18	mit5
+18	wi5
+18	tie5
+18	tăt5
+18	hɛn2
+18	dot6
+18	ʂ1
+17	sit5
+17	dɤj5
+17	zɤ̆k5
+17	twa6
+17	kiet6
+17	nuoj1
+17	bɯɤ3
+17	kiem5
+17	be2
+17	ʂăw5
+17	ba6
+17	mien3
+17	ʂan1
+17	bɛ2
+17	bɛw2
+17	ca4
+17	kw1
+17	ʈi2
+17	băw3
+17	ku5
+17	băp5
+17	ɲa3
+17	lwi6
+17	huŋ1
+17	kăn5
+17	ʈuk5
+17	vuŋ2
+17	ʈu2
+17	kin1
+17	hwaj2
+17	hɯŋ5
+17	măw6
+17	kwat6
+17	koŋ5
+17	mok6
+17	ŋăt5
+17	dik5
+17	lɔ̆k6
+17	kwe1
+17	ŋwi1
+17	vɤ̆n2
+17	ze3
+17	kɔj1
+17	hi1
+17	kien1
+17	lɤ3
+17	ɣɛ̆k6
+17	hut5
+17	zɔ̆ŋ2
+17	zun1
+17	dɛ̆ŋ2
+17	dɯɤ1
+17	vu1
+17	diep6
+17	vi3
+17	nan6
+17	ti6
+17	fo4
+17	viŋ1
+17	kɛ4
+17	ɲɤ̆p5
+17	wi1
+16	on1
+16	tɤ̆t6
+16	bɛw5
+16	χɛ̆ŋ1
+16	ŋaj6
+16	am5
+16	ɛ̆ŋ5
+16	zuŋ3
+16	cɛw2
+16	dem1
+16	dăt6
+16	t'ɤ̆p5
+16	căw5
+16	căk5
+16	mɔn2
+16	mɯŋ2
+16	mɔ2
+16	t'ɛw1
+16	kuŋ5
+16	ʂɤ̆w2
+16	vie5
+16	tet5
+16	dɤ3
+16	kɤ̆p6
+16	bo1
+16	ŋa3
+16	ʈăm1
+16	bɛ̆ŋ1
+16	zɔ1
+16	muo1
+16	ʂɤ̆n1
+16	vɤ̆j1
+16	cɯɤ3
+16	dam4
+16	bwi6
+16	bɔ5
+16	bɤ̆p6
+16	ziet6
+16	zi3
+16	toj1
+16	ʐoŋ2
+16	kin5
+16	hoj1
+16	hwi1
+16	bot6
+16	fien2
+16	suoj1
+16	bɯɤk5
+16	vɛ1
+16	ne4
+16	zɯɤ1
+16	lɯɤŋ3
+16	ʐɛ̆k5
+16	kɛ̆ŋ6
+16	ŋɤ̆t5
+16	tɤ̆ŋ2
+16	ʐɛ̆ŋ1
+16	mɯk6
+16	foj5
+16	dɯɤk6
+16	vɯɤn2
+16	fat6
+16	mem2
+16	coŋ2
+16	diem5
+16	kut6
+16	lăk5
+16	nɯɤŋ1
+16	t'on1
+16	kɯw6
+16	ziŋ1
+16	t'wat5
+16	lăw2
+16	ʈiŋ1
+16	dɔj5
+16	mɤ2
+16	hien4
+16	χuon1
+16	ʂɯɤ4
+16	ʐa3
+16	t'waj5
+15	dan1
+15	aj4
+15	ŋin2
+15	ʈɛw1
+15	ɛm1
+15	lɔ̆t5
+15	ʐoŋ6
+15	ʈɤ̆n5
+15	kiep5
+15	dɯt5
+15	dap5
+15	mɛ̆ŋ4
+15	em1
+15	ɤ̆p5
+15	băj4
+15	mɯɤj1
+15	ʐi1
+15	tɯɤk5
+15	vɤ1
+15	ʈuŋ5
+15	ŋa2
+15	ek5
+15	χwaj5
+15	zɔ̆ŋ1
+15	năŋ5
+15	ʐi2
+15	mɤ̆j5
+15	kuok6
+15	lɤ̆n1
+15	ɔ̆k5
+15	kak5
+15	bok6
+15	vi2
+15	fe1
+15	tuŋ6
+15	sɯɤŋ5
+15	kj1
+15	cɛn5
+15	ʐăw5
+15	mɛ̆ŋ5
+15	zoŋ5
+15	kăp6
+15	cɯɤŋ5
+15	so1
+15	χɤ̆n4
+15	dɔ̆ŋ5
+15	χi1
+15	li6
+15	lam1
+15	χăn1
+15	ŋɯ6
+15	ɣaj5
+15	muo2
+15	t'oj5
+15	cuŋ5
+15	văt5
+15	sɯŋ1
+15	fɛ̆k5
+15	vɔ2
+15	sɛm1
+15	zaj3
+15	nɤ4
+15	zɤ̆m5
+15	t'o1
+15	hɛ̆k6
+15	waj1
+15	ziew6
+15	suoŋ5
+15	mɛ̆ŋ3
+15	dɔ1
+15	don2
+15	zan4
+15	ʈoŋ1
+15	hɤ̆m2
+15	fɔ̆ŋ4
+15	noŋ2
+15	vuoŋ1
+15	ho1
+15	twa2
+15	tăw1
+15	muoj5
+15	muon1
+14	fien5
+14	χoj1
+14	wan5
+14	ɲan2
+14	kɔ̆k6
+14	kan5
+14	zɤ̆m2
+14	zo3
+14	hiep5
+14	soj1
+14	măn6
+14	ʈom6
+14	hɔ̆ŋ6
+14	vɯk6
+14	ɯɤŋ1
+14	ɯɤt5
+14	ɤ̆w1
+14	zăŋ1
+14	ciem5
+14	b1
+14	baj5
+14	ta6
+14	dap6
+14	t'ɤ2
+14	kɯw4
+14	daj1
+14	duk5
+14	ɣoj5
+14	laj5
+14	t'ɤ̆w2
+14	buok6
+14	buŋ2
+14	ciet5
+14	fo5
+14	ŋan2
+14	băj2
+14	săŋ1
+14	bɛ4
+14	kot6
+14	ʐe3
+14	bɤ̆m5
+14	hăw4
+14	sɤ̆m1
+14	ɛw1
+14	ɲuŋ1
+14	voj1
+14	lɯŋ4
+14	t'ɤ̆j1
+14	muo5
+14	ŋăn5
+14	h1
+14	no4
+14	dɔn5
+14	ɲi5
+14	cɛ̆ŋ5
+14	ɲɤ5
+14	χwan4
+14	cat5
+14	maj2
+14	buo5
+14	dɛ̆ŋ1
+14	lɔ̆ŋ4
+14	ki1
+14	tɛ1
+14	ŋi3
+14	căj5
+14	ɣɤ̆n2
+14	ʐɤ̆p6
+14	li2
+14	cam6
+14	can5
+14	ʈɯɤŋ1
+14	căj4
+14	cɤ̆m1
+14	kwi2
+14	cɤ̆n5
+14	hien5
+14	ciŋ1
+14	hom1
+14	hăj1
+14	ʈaj6
+14	lăj1
+14	vuŋ1
+14	kɔn2
+14	lok5
+14	ɲiew2
+14	ʂuk5
+14	ŋa1
+14	t'iŋ6
+14	zam1
+14	zăw2
+14	ŋɛw2
+14	ʂɤ6
+14	ɣɯɤŋ1
+14	ʂăj1
+14	dɤ̆j2
+14	t'iet6
+14	diew5
+14	mɯk5
+14	hop6
+14	im1
+14	ɣɔn6
+14	nɔn5
+14	lɛ̆k6
+14	ŋɛ1
+14	noj2
+14	t'oj1
+14	tuŋ2
+14	t'a2
+14	ɲɛ̆ŋ1
+14	tu4
+13	min1
+13	se1
+13	ŋɤ2
+13	ɤ1
+13	ʐit5
+13	koj5
+13	kɯɤp5
+13	ʐoj2
+13	zɤ1
+13	ɣɯj4
+13	nen1
+13	duo3
+13	ɯk5
+13	cim2
+13	be6
+13	ʂwan6
+13	sɯ5
+13	lɛ4
+13	t'iŋ5
+13	ɲan3
+13	bɔ̆t6
+13	ŋɯ1
+13	hɤn1
+13	χwan1
+13	χwan5
+13	t'ăm1
+13	cɔn6
+13	ze1
+13	tɤ̆w5
+13	fiew5
+13	măm5
+13	cɤ̆m6
+13	ʐuoŋ6
+13	kɯɤŋ3
+13	vu5
+13	ʂăn1
+13	cɛ̆ŋ1
+13	dwan1
+13	χaj5
+13	men5
+13	ŋăn1
+13	ʂɛn1
+13	ɣɛt5
+13	zɤ̆n6
+13	tu5
+13	mɔ̆ŋ1
+13	ce1
+13	căw2
+13	căm1
+13	cut5
+13	cɔ̆k6
+13	cuk5
+13	met6
+13	tɤj5
+13	ʐuoj2
+13	lɤ4
+13	cɯɤ1
+13	fien1
+13	diŋ4
+13	ʂɔ1
+13	t'ăt5
+13	dien1
+13	van1
+13	niŋ6
+13	ʐieŋ1
+13	kɛn2
+13	hăk5
+13	mwi2
+13	swăj1
+13	zwi2
+13	moj1
+13	de6
+13	lɤ̆j5
+13	lɯɤ2
+13	săw4
+13	moŋ1
+13	diew1
+13	kɛm5
+13	nwi5
+13	ʈoŋ2
+13	ʂɛ1
+13	ŋɯɤ5
+13	mɔ̆ŋ5
+13	hɔ2
+13	χik5
+13	niem6
+13	hwɛ̆ŋ4
+13	ʂɤm5
+13	kiew1
+13	lɛ̆k5
+13	lɔ̆ŋ5
+13	vuot5
+13	ŋăj1
+13	ŋɤ̆p6
+13	t'ɤm1
+13	tie1
+12	ha1
+12	lu1
+12	mɛn1
+12	bɤ1
+12	ben2
+12	lien2
+12	t'ɤ̆m2
+12	cɯɤ5
+12	lɤ̆w6
+12	kăŋ4
+12	ne1
+12	χɤ̆w5
+12	t'aj4
+12	ɣok5
+12	lɛ̆ŋ4
+12	lăm1
+12	boj5
+12	den2
+12	vɛw1
+12	cuon2
+12	ɲăt6
+12	bɤ̆t6
+12	sɛ5
+12	bep5
+12	hwan1
+12	tɔ̆ŋ1
+12	ɲu1
+12	zoŋ1
+12	kwit5
+12	nan1
+12	t'am5
+12	ɲăw2
+12	kwaj1
+12	zu2
+12	bun2
+12	twi4
+12	buoŋ1
+12	lăp5
+12	ɲăk5
+12	ɣăj5
+12	hɛ̆ŋ1
+12	ʈăw2
+12	dăŋ5
+12	kɯ6
+12	dam5
+12	ɣo3
+12	vɔj2
+12	căn5
+12	zăt5
+12	noj3
+12	va5
+12	cɤ̆p6
+12	hɯŋ1
+12	χɔ1
+12	man6
+12	ʈăw1
+12	lwi3
+12	dɛ4
+12	keŋ2
+12	χwiŋ1
+12	fan5
+12	cuo2
+12	lak5
+12	ɲăŋ2
+12	fuŋ6
+12	χon5
+12	duk6
+12	zɯŋ6
+12	hăt5
+12	ŋu1
+12	zɤ̆p6
+12	vɛ̆ŋ3
+12	liw5
+12	ziw6
+12	zoj5
+12	ʈa5
+12	kɛw1
+12	tuŋ5
+12	ʂɛ̆ŋ4
+12	ʂɤ̆m1
+12	duŋ2
+12	t'ɤ̆w5
+12	dɤ̆m1
+12	van5
+12	ʈwi6
+12	t'ăj1
+12	nɤ̆w5
+12	loj5
+12	ɣɤ̆j2
+12	ŋɤ1
+12	man2
+12	hăŋ2
+12	hwi4
+12	mɛp5
+12	tiek5
+12	hwien6
+12	ŋɤ̆m6
+12	ʈɤ1
+12	lɤ̆n4
+12	lɯŋ2
+12	luŋ4
+12	t'wa4
+11	a5
+11	ŋi4
+11	ăw1
+11	kɯɤj5
+11	kăp5
+11	cɤ2
+11	dɔj2
+11	ʂuŋ1
+11	ʈɤn1
+11	χwɤ̆t5
+11	da4
+11	lat5
+11	sɤ1
+11	ɲɯɤk6
+11	ʈɔ̆k6
+11	ien5
+11	kaj3
+11	kuok5
+11	le2
+11	χo5
+11	mi2
+11	kwe5
+11	ʈoj1
+11	bɔ̆k6
+11	cɛ1
+11	boŋ4
+11	bɤ̆k6
+11	kɤ5
+11	făŋ4
+11	ŋo1
+11	ŋuon2
+11	dot5
+11	ʐon6
+11	kɤ̆n4
+11	be4
+11	kan6
+11	be5
+11	vɯŋ3
+11	t'ɛp5
+11	ŋɤ̆w3
+11	bɔ1
+11	ʐɛ4
+11	ʐɤj1
+11	căw1
+11	liew3
+11	zɤj2
+11	su1
+11	lok6
+11	ci2
+11	hiw1
+11	tɛw1
+11	buoŋ2
+11	bɯɤ2
+11	bɯw1
+11	t'iep5
+11	ʂi1
+11	hɛw1
+11	maj6
+11	kaj1
+11	vɛ4
+11	ʂɛ4
+11	loj3
+11	kăm1
+11	mɤ̆j1
+11	χɔ̆k5
+11	loŋ6
+11	săw5
+11	duo1
+11	lɛp5
+11	nɯɤ3
+11	ziŋ5
+11	lɤ̆n5
+11	dwat6
+11	mɯɤj2
+11	don5
+11	co3
+11	mak5
+11	lɛt5
+11	kɔ̆ŋ1
+11	ham3
+11	ɣɛ̆ŋ5
+11	lɤ̆n2
+11	dɔm5
+11	zăŋ2
+11	vɔ̆k5
+11	ziem1
+11	hɔ6
+11	ʈɯ3
+11	ɣɛ̆ŋ1
+11	zɯɤŋ2
+11	fɤ̆w3
+11	ɣɛn1
+11	om5
+11	dɤ̆j1
+11	dɤ̆j4
+11	du4
+11	ʐɯɤ4
+11	văŋ1
+11	χien4
+11	dɔ2
+11	lɯ2
+11	ʂoj1
+11	ɣɤ̆t6
+11	ɣɤ̆j1
+11	ɣɛ1
+11	ɣe5
+11	ɲiew3
+11	t'uŋ2
+11	ton4
+11	hɛ1
+11	t'uk6
+11	ŋeŋ1
+11	ʈiet6
+11	hɔm2
+11	χɛw5
+11	χuŋ4
+11	laj3
+11	kwɛn1
+11	twɛt5
+11	lăm5
+11	ŋɔn1
+11	ʈɯŋ2
+11	sɤ̆w5
+11	ɔ1
+10	sɛn1
+10	lɛn1
+10	a2
+10	mɔ5
+10	ca2
+10	fɛ1
+10	ŋɔn6
+10	ɲip6
+10	nɔ1
+10	vak5
+10	nuot5
+10	i2
+10	hɤ̆n6
+10	năw5
+10	ɲɤ̆n3
+10	ɤ̆w5
+10	bon5
+10	ʐɛn1
+10	ʈɤn6
+10	la4
+10	mɤ̆w2
+10	ziep6
+10	tɛ̆ŋ6
+10	coj4
+10	hwaj6
+10	χɛn1
+10	ʐa2
+10	zɛw4
+10	nep5
+10	ʂu1
+10	vuo1
+10	bɛ1
+10	ɲăw5
+10	bɯɤm5
+10	ʂaj2
+10	băn5
+10	bɤ̆m4
+10	boŋ3
+10	hu4
+10	bɤ̆j5
+10	bie1
+10	lɛw4
+10	nuŋ1
+10	bɤj1
+10	twa4
+10	hwan6
+10	ɣɤ̆j6
+10	bin1
+10	ku3
+10	kap6
+10	zɯɤ2
+10	bɔj5
+10	bɔn1
+10	boj1
+10	tɤ̆w4
+10	tam5
+10	duo2
+10	t'ɤ̆m5
+10	cok5
+10	dɔ̆ŋ6
+10	kie1
+10	kuoŋ5
+10	kăŋ1
+10	căj2
+10	lɔ̆k5
+10	tiem1
+10	mɛ2
+10	ɲɛw1
+10	ʈik5
+10	ɣɛ4
+10	kwɤ̆j5
+10	lwi1
+10	cie2
+10	hot6
+10	cɤ̆w2
+10	do5
+10	kɤ̆j2
+10	oj1
+10	lɛ2
+10	tiŋ6
+10	dăw5
+10	dăm1
+10	ve2
+10	vaj4
+10	ʈɛ1
+10	zuŋ2
+10	maj3
+10	χwien1
+10	ŋɔj5
+10	te2
+10	ŋɛ̆k6
+10	vɤj5
+10	sɔ4
+10	si5
+10	ɣo1
+10	măŋ5
+10	kɯɤ1
+10	kwɛ̆ŋ6
+10	sɯɤ1
+10	dɤ̆m5
+10	ʂăk6
+10	doj2
+10	zăk6
+10	zɤ̆p5
+10	sɤ̆j1
+10	zăm1
+10	zăm6
+10	zɛw1
+10	zăt6
+10	dɛ̆ŋ3
+10	zwa6
+10	z1
+10	t'ɤ4
+10	zen2
+10	tan4
+10	ɲam1
+10	ɲan1
+10	du1
+10	ŋɤ̆m2
+10	χoj5
+10	kwɛ̆ŋ2
+10	fi2
+10	tɤ2
+10	tien3
+10	săw2
+10	ŋoj1
+10	naj2
+10	kwien5
+10	ʐɤ̆m2
+10	hăw5
+10	vi5
+10	hɛ2
+10	sa4
+10	ʐi4
+10	luŋ2
+10	tim1
+10	t'ak5
+10	kieŋ1
+10	tiem2
+10	fɯk5
+10	luŋ1
+10	lɛm1
+10	fɤ̆t5
+10	ɲɛm1
+10	lɯ4
+10	mɔ̆ŋ4
+10	nɯk5
+10	vɛn6
+10	ɲăj5
+10	ʂuŋ2
+10	ʂɤ2
+10	tam6
+10	t'ɤ̆m6
+10	uon5
+10	vɤ̆t5
+10	vun1
+9	lin1
+9	tɔn1
+9	a4
+9	ik1
+9	um1
+9	ɛt1
+9	lɔ̆t6
+9	tɤj1
+9	at1
+9	ŋɯɤ4
+9	bɤ̆n4
+9	bɤt5
+9	kam5
+9	năj4
+9	zɯŋ1
+9	hɤt5
+9	χat5
+9	mieŋ5
+9	ʐoj3
+9	t'e2
+9	ɯ5
+9	ɲăŋ1
+9	ʂɔj1
+9	zot6
+9	lwi2
+9	kɛp5
+9	ʂi4
+9	bɔ̆ŋ4
+9	cɯŋ1
+9	kuon5
+9	nɛm1
+9	vit5
+9	kwat5
+9	t'ap5
+9	zan6
+9	tɔ4
+9	dɛ2
+9	ɣăp6
+9	ke4
+9	năj1
+9	lu3
+9	bɛn5
+9	tɤ̆m5
+9	ʈe6
+9	kuŋ3
+9	bi4
+9	ben5
+9	loj6
+9	bik5
+9	hɛp6
+9	ʐɤ̆j2
+9	caj2
+9	ɣɤ̆n1
+9	kăw2
+9	χwiet5
+9	bon1
+9	ʈaj4
+9	vɤ̆j6
+9	tim2
+9	cɛm5
+9	ɲɤ1
+9	t'uŋ5
+9	tuoŋ2
+9	vɔ̆t6
+9	t'an5
+9	ho5
+9	kim2
+9	t'ɔj1
+9	lɔj1
+9	kat1
+9	kɛ̆k6
+9	kum1
+9	kɛ2
+9	wɤ̆t5
+9	kăm5
+9	kăn2
+9	ʐăŋ2
+9	lɤp5
+9	lɯɤt6
+9	ŋɛ̆ŋ2
+9	mɤ̆n3
+9	nɔ̆k6
+9	lɤ̆j1
+9	căn1
+9	cɛw5
+9	lɤ̆m5
+9	nɤ̆ŋ1
+9	cɤ̆n4
+9	cɤ̆t6
+9	ɲɛm2
+9	kwɛw1
+9	liew1
+9	zɤ̆m3
+9	hut6
+9	dɔ5
+9	ʐɛ3
+9	ham6
+9	dăm5
+9	moj2
+9	sɔm5
+9	cɔ̆ŋ4
+9	lwan1
+9	nin1
+9	mok5
+9	va4
+9	cup6
+9	ɲɯɤŋ6
+9	van3
+9	ŋwăk6
+9	ɣɤ̆w5
+9	kɔm1
+9	kut5
+9	kon1
+9	vɔ4
+9	dɤ2
+9	zup5
+9	swa1
+9	t'ɛ4
+9	zat6
+9	zeŋ2
+9	lwien5
+9	kiew2
+9	hwiŋ1
+9	fam2
+9	di3
+9	χɤj1
+9	ʈăw5
+9	dɤ̆m2
+9	t'ɔj5
+9	ʐɤ̆w1
+9	lɯɤŋ2
+9	χuŋ1
+9	he2
+9	lɤ̆w2
+9	vɤ2
+9	ʐɛt5
+9	kɛw2
+9	nɯt5
+9	ɣɤj6
+9	lam6
+9	hwi6
+9	hăŋ1
+9	hwak5
+9	siew1
+9	χɔj5
+9	kew1
+9	ʈien4
+9	ɲɯɤŋ2
+9	χwien5
+9	ʐɔ̆ŋ2
+9	kwen1
+9	săw1
+9	săm1
+9	miew5
+9	ʐɛn2
+9	ŋɔ̆ŋ5
+9	lu2
+9	lɯ3
+9	mɛ̆k5
+9	mw1
+9	ɲăm5
+9	mɔ1
+9	ʈɤ̆t6
+9	ŋɤ̆m1
+9	ŋwi6
+9	tɯŋ1
+9	ɲăn1
+9	vɤj2
+9	ʐak5
+9	ʐ1
+9	ʂin1
+9	tăp5
+9	tɤ̆n5
+9	tɛm1
+9	t'iŋ4
+8	zot5
+8	ăŋ1
+8	not5
+8	ɤj1
+8	ʂɯŋ2
+8	bit5
+8	dwaj5
+8	tɛn1
+8	ɛ̆k5
+8	am1
+8	hiew4
+8	dam6
+8	kwɛ4
+8	bu1
+8	dɛ1
+8	mɔn1
+8	ɔm1
+8	ci6
+8	ʐɤm1
+8	lăn6
+8	făw1
+8	siem1
+8	at5
+8	căn6
+8	ʐɤ1
+8	ʈen1
+8	twiet5
+8	va3
+8	i4
+8	ʂi2
+8	u4
+8	zo1
+8	lɤn1
+8	twi1
+8	zăn2
+8	mu6
+8	fɤ1
+8	iet5
+8	tăŋ6
+8	cak5
+8	ma6
+8	tɛ4
+8	u5
+8	ɣɔj5
+8	ɲiew1
+8	ʐɤt5
+8	kɛt5
+8	ɣăt5
+8	lɯɤ5
+8	ʈɛw5
+8	tim5
+8	don6
+8	on4
+8	sɔ1
+8	ɲɛ2
+8	ɣɔ̆t5
+8	ɲɛw2
+8	sɛp5
+8	ʐe1
+8	zɯɤj5
+8	vɯɤt6
+8	cɛp5
+8	ŋăm5
+8	ɲak5
+8	sɯɤŋ4
+8	zaj5
+8	bɔ̆k5
+8	cɛn1
+8	ʂe1
+8	bɔn5
+8	bɔ̆ŋ1
+8	ʐɤ̆m1
+8	koj1
+8	ɲin2
+8	vak6
+8	dăp5
+8	χwɛ̆ŋ4
+8	bɤ6
+8	vet5
+8	lwa1
+8	lɤ̆j2
+8	sɛ̆k5
+8	bɯk6
+8	ʐɯɤj6
+8	but6
+8	sok5
+8	kiet5
+8	ŋɤj6
+8	sɔ̆k5
+8	t'ɛn6
+8	ŋɤ̆n2
+8	kɔm2
+8	huoŋ5
+8	χe5
+8	kɛt1
+8	kɤ̆j5
+8	ŋa4
+8	up5
+8	hɤn2
+8	fɤ̆n3
+8	kɯɤk5
+8	kɤ̆m1
+8	kɤ̆w4
+8	ke2
+8	keŋ1
+8	liem1
+8	χi4
+8	χwɤ̆n4
+8	kɤ̆j6
+8	luo6
+8	lɯɤj5
+8	ŋɔ3
+8	lu5
+8	viet6
+8	căŋ2
+8	ʂɤj6
+8	zet5
+8	zɛ2
+8	tak6
+8	cɛw1
+8	lek6
+8	cwɛ̆ŋ5
+8	vɤ5
+8	ciem1
+8	nɤ̆w1
+8	vɔn1
+8	lɔn4
+8	fɯɤŋ6
+8	cɤ5
+8	twien2
+8	ŋwa1
+8	sɔ̆t5
+8	luon2
+8	duŋ6
+8	hɯŋ4
+8	ʐat5
+8	zan3
+8	ʐa4
+8	ŋɔ5
+8	kɔ̆p5
+8	koŋ2
+8	ɲɤ3
+8	ʂuot5
+8	ŋăk5
+8	twan1
+8	kɯt5
+8	kɯw2
+8	hiem2
+8	ne2
+8	zɤ̆m6
+8	zon2
+8	swan1
+8	ŋuoj6
+8	ɔ̆ŋ5
+8	tiem6
+8	zwiet6
+8	si4
+8	lɯ6
+8	tɛ̆ŋ4
+8	ʈa2
+8	swien1
+8	hɔ̆ŋ4
+8	vɔ̆ŋ3
+8	tăk6
+8	dăj1
+8	ʈan2
+8	hiem5
+8	hɯɤ5
+8	lăj5
+8	hwiŋ2
+8	ŋuk6
+8	kwien4
+8	hwan3
+8	hɔn1
+8	kwien1
+8	viŋ3
+8	mɤ̆m1
+8	ɣɤ̆p5
+8	ʐu1
+8	ʐoŋ3
+8	ɣăŋ1
+8	ɣăw2
+8	ɣɔ2
+8	hɛn6
+8	ɤt5
+8	lɔj2
+8	tɯw4
+8	hɤ1
+8	hwien1
+8	hɔ1
+8	ɲat5
+8	hwi5
+8	muon6
+8	hwɛ̆k6
+8	hɔ̆p6
+8	ŋat6
+8	huŋ5
+8	hɯɤw1
+8	tw1
+8	ke6
+8	χăw1
+8	χiep5
+8	net5
+8	om1
+8	ɲu3
+8	lɯɤt5
+8	ɲɛ̆ŋ2
+8	lăj6
+8	lăŋ5
+8	lɤ̆n3
+8	vɤ̆n4
+8	lɤ̆t6
+8	lɛw2
+8	lik1
+8	lop5
+8	ɲwɤ̆n6
+8	ɲɤp5
+8	fɤt5
+8	luk5
+8	ʂuk6
+8	mi6
+8	u2
+8	ʈɔ̆ŋ2
+8	twɛ̆ŋ1
+8	sien1
+8	ŋieŋ1
+8	ŋăt6
+8	ŋɤ̆m5
+8	t'ɛm2
+8	niem1
+8	nin5
+8	fɤ̆p6
+8	fiew1
+8	kwɤ̆n6
+8	ʐiw1
+8	voŋ1
+8	tɔm5
+8	ʈew1
+8	vɔ1
+8	soŋ1
+8	swi1
+7	tat5
+7	ʐin1
+7	muoj6
+7	tăm5
+7	bɤ̆n6
+7	căj1
+7	dɔ̆ŋ1
+7	dɤj6
+7	ʂɯɤŋ5
+7	t'uo1
+7	ăŋ5
+7	ɤ̆m6
+7	ɤ̆j5
+7	cik5
+7	dak6
+7	foŋ2
+7	tăj2
+7	sɔj1
+7	cɤ̆w6
+7	t'iep6
+7	băt6
+7	min2
+7	nɛt5
+7	mɔn6
+7	beŋ1
+7	beŋ2
+7	sɛn5
+7	bɤ̆j4
+7	ɲɤ̆j2
+7	ŋɔ̆t5
+7	bɤ4
+7	nuk5
+7	χoŋ4
+7	bik6
+7	bien2
+7	ɲi2
+7	dɔ̆ŋ2
+7	lwɛ̆ŋ5
+7	căt5
+7	ʐɤj2
+7	kɤt6
+7	su2
+7	buo2
+7	dɯk6
+7	lɤj1
+7	ŋien1
+7	ʐɯt5
+7	ʐot5
+7	kɤ̆n5
+7	duoj5
+7	mɤ̆p6
+7	t'ie1
+7	t'iew4
+7	lan2
+7	ma4
+7	t'ie2
+7	kɔ6
+7	kwɛt5
+7	ʐɤ3
+7	kan4
+7	kon2
+7	lew1
+7	ŋăw6
+7	kăw4
+7	kăw6
+7	ʂɯɤn2
+7	kwi6
+7	kɛm2
+7	sɯŋ5
+7	cwi1
+7	t'ɤ̆j5
+7	mɤ̆m2
+7	fɛw2
+7	cap6
+7	căm2
+7	căŋ1
+7	cwɛ̆ŋ6
+7	fak5
+7	sam5
+7	lɯɤj2
+7	cit5
+7	ŋɔn5
+7	wien1
+7	ŋɯɤŋ3
+7	nap6
+7	t'ăŋ2
+7	mɔm3
+7	diŋ5
+7	cɔj5
+7	cɔ̆ŋ5
+7	cɔ̆p5
+7	cɤp5
+7	ʂwaj5
+7	cuoŋ2
+7	ʂăw2
+7	lăt5
+7	siw5
+7	cɯɤ4
+7	cɯj4
+7	ʐɔ1
+7	ʐɔj1
+7	nɤj1
+7	ŋɯɤj1
+7	swi5
+7	ɣăŋ5
+7	nɤ1
+7	tɔj1
+7	năj2
+7	lɔ6
+7	ɣɤ̆m2
+7	ʐu2
+7	ʐu4
+7	ʂwat5
+7	ʐu3
+7	kɯɤ6
+7	tot6
+7	no6
+7	ŋɛ5
+7	t'ien2
+7	tɔ2
+7	da3
+7	ɲɔ̆k6
+7	kɯɤj3
+7	zɛ4
+7	lɯɤn1
+7	t'ɯɤt6
+7	zăj6
+7	ziw2
+7	ɲɤt5
+7	zɛ1
+7	zɛp6
+7	zoj2
+7	zuo3
+7	liew2
+7	ʂet6
+7	ʂɤ̆m2
+7	oj5
+7	ʐɤ̆j3
+7	ɲɯk5
+7	dem5
+7	op5
+7	tuo1
+7	die4
+7	tɯɤ6
+7	ɣăj1
+7	ʐɯk6
+7	duŋ5
+7	twe6
+7	ŋăw2
+7	ɲɯɤ6
+7	swăn5
+7	zeŋ5
+7	tɤ̆k5
+7	ɣ1
+7	ɣat6
+7	ɣoŋ1
+7	ʂan2
+7	fuŋ2
+7	ŋwan1
+7	ɣw1
+7	ha4
+7	ʐɔ3
+7	ham1
+7	mɛt5
+7	ɲăn3
+7	hi2
+7	ʈiet5
+7	ʈiew6
+7	t'iew1
+7	hwăk6
+7	ʐiŋ2
+7	hu5
+7	ʐɛ1
+7	l1
+7	vin1
+7	χɯ2
+7	χit5
+7	χɤ̆m1
+7	mɛ3
+7	χok5
+7	t'ieŋ1
+7	mie5
+7	lɤ̆m3
+7	tɛ̆k5
+7	t'iŋ1
+7	lăŋ4
+7	ʈon5
+7	ʐiw5
+7	tit6
+7	luŋ5
+7	t'ɯɤ1
+7	vɯɤŋ5
+7	vɛ̆k6
+7	fɛ̆ŋ1
+7	ɲăn5
+7	mɔj4
+7	mit6
+7	faj1
+7	nɤ̆m5
+7	ŋɤ̆j1
+7	ŋɯɤŋ6
+7	ɲuŋ3
+7	t'ɛ̆k5
+7	vuŋ6
+7	twak5
+7	fo1
+7	kwăt5
+7	kwɛ̆ŋ4
+7	ʐun1
+7	ʂum1
+7	tăw4
+7	tuot6
+7	t'ut6
+7	twe5
+7	twɛ1
+7	ʈoj5
+7	tum2
+7	swaj2
+6	ŋiet6
+6	kik1
+6	ɣɔ1
+6	niŋ1
+6	ăw2
+6	kɛn5
+6	cɯk6
+6	ɲɤ2
+6	ʈɤ̆w2
+6	hăn4
+6	ɤ̆m2
+6	ɯ2
+6	ɛ̆k6
+6	năk6
+6	uŋ5
+6	iem5
+6	leŋ1
+6	kɤn1
+6	ba4
+6	ba3
+6	baj1
+6	vɤ4
+6	coŋ1
+6	zɤ̆n2
+6	sɤj5
+6	bɤ̆j2
+6	dɔ̆k6
+6	ʂăp5
+6	ʈɯɤŋ5
+6	kom5
+6	zɤ̆j2
+6	mɯɤt5
+6	ʈɔ1
+6	na4
+6	mɤ̆w6
+6	liep5
+6	ɲi3
+6	cɯɤk5
+6	ʈɔj5
+6	t'ɤ̆n4
+6	hɤ̆m1
+6	ŋɯŋ1
+6	bɤ̆j6
+6	tɔj4
+6	bɛŋ1
+6	bɛt5
+6	ʈe3
+6	ʐak6
+6	căt6
+6	bip6
+6	bɤm6
+6	sɔ5
+6	cɛt5
+6	bɔn2
+6	nɛm5
+6	ɲwɛ̆ŋ5
+6	mɛw5
+6	hɔn2
+6	lew5
+6	ɣɔ3
+6	ʂɤ̆j5
+6	ɲɔ6
+6	fɤ2
+6	kɔj3
+6	zɤ̆w6
+6	dit5
+6	ɲaj5
+6	bɤj5
+6	bɤn1
+6	bwi2
+6	buŋ5
+6	nen2
+6	non1
+6	teŋ1
+6	lie1
+6	lip5
+6	zj4
+6	cɛ̆k6
+6	caj1
+6	cɔj6
+6	kiŋ2
+6	t'ɤt5
+6	ŋɛ̆ŋ6
+6	ʈak5
+6	lɤ̆j3
+6	uŋ1
+6	kan2
+6	χwie1
+6	dăj5
+6	χwat5
+6	vut5
+6	zăn6
+6	văn6
+6	koj3
+6	nɤ̆j4
+6	kiem6
+6	kip5
+6	vɔ5
+6	kɤ̆t6
+6	ne6
+6	ʈɯɤt6
+6	viet5
+6	sat5
+6	don1
+6	ɲɯŋ3
+6	zɯt5
+6	kwɛ2
+6	văj5
+6	cɤn2
+6	cɯɤŋ4
+6	cɤ4
+6	nu6
+6	cɛ4
+6	ceŋ1
+6	cum2
+6	hɛn1
+6	sɛ4
+6	foj1
+6	cieŋ1
+6	cuoŋ6
+6	fɯɤŋ2
+6	ʐo6
+6	ʂap5
+6	ʂuoj5
+6	ŋăw1
+6	ʂɔj5
+6	cwɛ̆ŋ1
+6	ɲɔm1
+6	cɔ̆ŋ2
+6	mɔ̆ŋ2
+6	kun2
+6	coj5
+6	nɛ̆ŋ6
+6	ɲa4
+6	lwɛt5
+6	lwi4
+6	lun2
+6	χwi1
+6	dew2
+6	cɯ1
+6	kt1
+6	sɤj1
+6	koj6
+6	koŋ4
+6	kɤ3
+6	zɛ3
+6	lut6
+6	kɛp6
+6	kwɤ̆n3
+6	sɛw5
+6	ŋu6
+6	kɯ2
+6	χa2
+6	o2
+6	la3
+6	mwi5
+6	χɤ2
+6	mo4
+6	zăj3
+6	zwi5
+6	zɤ̆n5
+6	tăm2
+6	zɤ̆j6
+6	ziem3
+6	zɔn6
+6	vɛ̆k5
+6	ʈɯɤŋ6
+6	lɔm3
+6	dɤ̆p6
+6	duoj4
+6	t'ɔ̆k6
+6	ʂɤ̆m5
+6	vo3
+6	dăj2
+6	dwa6
+6	t'ăm5
+6	t'ɔ̆k5
+6	dɤ̆m6
+6	ʂɛt5
+6	t'ɛw6
+6	nɛ̆ŋ2
+6	ŋit6
+6	t'wi1
+6	dɛw2
+6	fuŋ5
+6	do3
+6	t'oj4
+6	lwat6
+6	hɤn5
+6	nɔ̆ŋ2
+6	ʐan1
+6	ɛw3
+6	nɔj2
+6	kwɤ̆n4
+6	me2
+6	ʂɔ̆ŋ2
+6	ɲɤ̆m5
+6	ɣɔj6
+6	t'ăŋ6
+6	zăw4
+6	ha5
+6	hɤ4
+6	ʐap5
+6	hok5
+6	muon5
+6	hum2
+6	hien1
+6	χɤ̆t5
+6	ton5
+6	sɤ̆m4
+6	hɯk6
+6	tɤ̆p5
+6	hɔ̆k5
+6	ʐɛw1
+6	ʈon6
+6	hwăk5
+6	hɯw1
+6	mu4
+6	t'wien1
+6	vɯɤn6
+6	kek6
+6	χak5
+6	χam5
+6	χan5
+6	χăŋ4
+6	χɛ1
+6	χɤ̆t6
+6	fɔ2
+6	lɛw5
+6	χiem5
+6	χiew5
+6	χwɛ̆ŋ1
+6	văn2
+6	siet5
+6	noj1
+6	ɯŋ1
+6	kiem2
+6	ɲaj1
+6	mɤ̆j4
+6	t'we1
+6	lɛ6
+6	lăw6
+6	lj1
+6	lat6
+6	tɤ̆m4
+6	lɤ̆m4
+6	mɤ̆n4
+6	kwɤ̆t5
+6	t'ek5
+6	lew2
+6	lɤm6
+6	kwiŋ5
+6	si6
+6	swɛ̆ŋ2
+6	t'wɛ̆ŋ5
+6	lo5
+6	ɲon6
+6	ɲɛ1
+6	mɯɤp5
+6	sek6
+6	mɔ̆t6
+6	kwɛ̆ŋ5
+6	ʂăm5
+6	na3
+6	nuŋ5
+6	vɛt5
+6	nɛn1
+6	năm5
+6	ŋăw5
+6	ŋwɤ̆j4
+6	ɲɛw3
+6	ɲin6
+6	ɲo4
+6	ɲɤn4
+6	ɲun5
+6	vɤ̆j2
+6	ʂwi2
+6	tɛp5
+6	wɛ̆ŋ1
+6	ɔn4
+6	we5
+6	fi4
+6	fiem5
+6	fɤj1
+6	ʐɤ̆m6
+6	ʐen1
+6	ʐuŋ1
+6	ʂɯɤt6
+6	ʂɯŋ1
+6	tɤ̆ŋ1
+6	swa5
+6	tɛ5
+6	tɯw6
+6	t'ot5
+6	t'ɔ2
+6	t'wat6
+6	t'uŋ1
+6	tiek6
+6	ʈu1
+6	sɔj5
+5	mɯɤn6
+5	hit5
+5	bie2
+5	χwak5
+5	ʂo1
+5	bam5
+5	bieŋ5
+5	cɛt6
+5	năn1
+5	ɤ2
+5	ɤ5
+5	hwe6
+5	ʈi3
+5	lit1
+5	lap5
+5	kwɛ1
+5	ʈăw6
+5	buo1
+5	bt1
+5	viw5
+5	ʈo4
+5	zi2
+5	cwɛ6
+5	fɤ4
+5	ʐan5
+5	sɛw2
+5	bw1
+5	tap5
+5	bɛn1
+5	lɯɤn6
+5	ve5
+5	t'ɔ̆p5
+5	tɯɤj4
+5	bɤ̆n5
+5	bɔm3
+5	t'iŋ2
+5	bɤ̆w5
+5	bɤ̆j1
+5	cɯ2
+5	bon6
+5	bew1
+5	tum1
+5	oj4
+5	t'wi2
+5	bim2
+5	ʈam6
+5	mut5
+5	ziw5
+5	tɔ̆t5
+5	bɔ3
+5	ʐɔ6
+5	ʈat5
+5	lot6
+5	bɯɤm1
+5	ʈan5
+5	hɔ̆ŋ5
+5	ʂɤ̆p5
+5	χwek5
+5	fɛt5
+5	twak6
+5	hoj4
+5	bop5
+5	kăn6
+5	bɤj2
+5	bɤj4
+5	zj1
+5	bun5
+5	buŋ4
+5	ɲuŋ2
+5	buoj4
+5	bɯŋ1
+5	ʐɤ̆w2
+5	t'ɛ1
+5	mɔ̆k6
+5	zɔ̆k6
+5	vat5
+5	ko6
+5	χɛw1
+5	ʐieŋ2
+5	t'ɔ̆t6
+5	cien1
+5	mɔj2
+5	fɛn2
+5	t'iew2
+5	va2
+5	kɛn1
+5	ŋien6
+5	kaj2
+5	ʂăj4
+5	ɲoŋ1
+5	văj4
+5	χwɛ5
+5	zɔ̆ŋ4
+5	χiet5
+5	ŋew1
+5	kap5
+5	nɔ̆ŋ1
+5	kăk5
+5	kɛ3
+5	lɤ̆k5
+5	tiet6
+5	dop5
+5	t'ɤ̆n6
+5	lɛn4
+5	haj5
+5	cɤ̆w5
+5	can1
+5	mɤ5
+5	cuok6
+5	ʂɔ̆k5
+5	ɲɛ3
+5	cɤ̆m2
+5	cɯŋ3
+5	χɯ4
+5	lɯw6
+5	hwɛ1
+5	vɛ2
+5	veŋ1
+5	cɔ̆k5
+5	iew4
+5	ɲɛ̆ŋ5
+5	hw1
+5	cwɛ5
+5	t'wi5
+5	χe1
+5	mɛ5
+5	ŋɔ6
+5	sɔ̆ŋ1
+5	dew4
+5	vɛ̆ŋ5
+5	ɣɛw6
+5	lɔj5
+5	cɔm2
+5	cɤ1
+5	ɣɔ̆ŋ6
+5	cɔ̆t5
+5	ʈɛw2
+5	ʈoj6
+5	fiet6
+5	ʂwi5
+5	ʐe4
+5	ʐuk5
+5	cwi5
+5	hum1
+5	cun2
+5	doŋ4
+5	ʐuo4
+5	ʐuo1
+5	mɤ̆n2
+5	ve1
+5	nit5
+5	kɛt6
+5	ko2
+5	ko3
+5	săj1
+5	sɔn1
+5	ŋɤj1
+5	niew1
+5	luoŋ2
+5	ɲɤ̆j1
+5	mi4
+5	twi6
+5	duok5
+5	kuŋ4
+5	kuoj6
+5	kuon6
+5	lun4
+5	t'un1
+5	năk5
+5	nɛ4
+5	swa2
+5	ʐan6
+5	duon3
+5	zat5
+5	zoj3
+5	văt6
+5	hăŋ5
+5	zɤ̆j3
+5	zɛ5
+5	ze4
+5	ze5
+5	hɤm6
+5	zɔ̆ŋ5
+5	zok5
+5	zoj6
+5	nɛn5
+5	lam3
+5	dem6
+5	tɤn6
+5	dɤ̆n6
+5	hok6
+5	ŋɯk6
+5	dɤn5
+5	tɤ5
+5	kit6
+5	die2
+5	dăn5
+5	mɤ̆w5
+5	zɔn2
+5	dɛw1
+5	ɣɔ̆t6
+5	dwɛ̆ŋ4
+5	ɣuok5
+5	ot5
+5	di2
+5	diek5
+5	hwiet6
+5	twa1
+5	nɔ6
+5	hwɛn1
+5	ŋɤ̆w5
+5	ɲwien3
+5	lwa3
+5	du2
+5	du5
+5	ʂɯŋ3
+5	lɔn1
+5	ʂat1
+5	to2
+5	ɣɤ̆m3
+5	ɣin1
+5	ɣan2
+5	ɣăn5
+5	ɣɯɤŋ6
+5	ɣăp5
+5	ɣɤ3
+5	hɤ̆n5
+5	tɤ̆j2
+5	ɣe1
+5	ɣɤm5
+5	ʐɤn6
+5	fa4
+5	ʂut5
+5	hwan5
+5	hwɛ2
+5	t'ɔ̆t5
+5	fut5
+5	nɛw1
+5	ʐăk5
+5	ʈɔ̆k5
+5	zɔj4
+5	zɔ̆t6
+5	ʂan5
+5	ʐit6
+5	t'ɔn1
+5	sieŋ2
+5	tăŋ2
+5	hɛ̆k5
+5	mien1
+5	haj3
+5	hɯ2
+5	hɔj1
+5	hɤ̆m4
+5	hɤ̆m6
+5	hɛt5
+5	huk6
+5	χan1
+5	twɛ̆ŋ2
+5	hot5
+5	o5
+5	kiew4
+5	ho3
+5	kie2
+5	hoŋ4
+5	hwek5
+5	hup5
+5	t'it5
+5	fun1
+5	ɔj1
+5	ʂu2
+5	ʐew1
+5	kwɤ̆t6
+5	viem1
+5	χɛt5
+5	χien1
+5	χiew1
+5	miet6
+5	χwa4
+5	ʂɔ6
+5	χwɛ4
+5	lo2
+5	χu2
+5	ɲu4
+5	kiem1
+5	ŋak6
+5	liem5
+5	lăw4
+5	luŋ6
+5	mɯɤn5
+5	făw2
+5	ɲap5
+5	liŋ4
+5	ʂaj3
+5	ŋɔj2
+5	sɤ̆k5
+5	lut5
+5	lwɛ2
+5	lɛm5
+5	ɲɛp5
+5	sɛp6
+5	let5
+5	lek5
+5	lwɛ̆ŋ1
+5	ɲɔ̆k5
+5	lɔm1
+5	lɤ5
+5	lɯŋ3
+5	ʂe2
+5	ɲuk5
+5	luon1
+5	t'em1
+5	tɯɤm1
+5	vɛn1
+5	mit1
+5	maj4
+5	se5
+5	mɛw6
+5	năn5
+5	ɲun3
+5	t'e6
+5	ŋɤ̆m3
+5	ŋwăj4
+5	ŋɤ̆n4
+5	ŋɯŋ2
+5	ŋɛn6
+5	ŋwɛ1
+5	wien4
+5	ʐoŋ1
+5	ʂăm1
+5	ɲɛ̆ŋ4
+5	ɲɤt6
+5	ɲɤn5
+5	ɲwɤ̆n2
+5	n1
+5	niem2
+5	nɔn3
+5	nɯk6
+5	swit5
+5	kwɤ4
+5	ʐăw6
+5	ʐɔj5
+5	ʐɔ̆ŋ1
+5	twek5
+5	ʐɤ2
+5	vaj3
+5	ʐuŋ2
+5	ʂɤ̆j4
+5	ʂɔ̆t5
+5	ʂat6
+5	ʂɯɤŋ6
+5	ʂup6
+5	ʂit5
+5	ʂut6
+5	ʂɯw1
+5	tiew3
+5	tɔ̆p5
+5	t'ɤ̆w1
+5	t'ien4
+5	t'ɯɤn3
+5	twɛ5
+5	ʈɤ̆j2
+5	ʈɤ̆n1
+5	u6
+5	sɛw4
+5	v1
+5	sak6
+5	săn5
+5	siŋ1
+5	sok6
+4	ʂik1
+4	nɤ̆j5
+4	twɤ̆n5
+4	ɔj4
+4	ɣɤ̆m5
+4	foŋ1
+4	căw4
+4	mot5
+4	ze2
+4	ɣɛm5
+4	ɣɔj4
+4	ɲăm2
+4	kwit6
+4	saj2
+4	t'wa1
+4	waj5
+4	nɤ̆p5
+4	lwat5
+4	ɤ̆w4
+4	ben1
+4	χie5
+4	săw6
+4	hak6
+4	baj4
+4	cɔj2
+4	năj3
+4	caj4
+4	kɛm3
+4	twaj6
+4	ʈon1
+4	dɤ6
+4	bɛ̆ŋ6
+4	ʈum2
+4	tiep6
+4	foj4
+4	ŋat5
+4	dɤ̆w4
+4	băm1
+4	băm6
+4	băn4
+4	ɲɔm5
+4	vaj6
+4	ɲăŋ6
+4	nat6
+4	bɤ̆k5
+4	bɛ6
+4	bɤ̆w1
+4	vɛw5
+4	hwɛ6
+4	zɛn1
+4	bɛt6
+4	bɛw1
+4	bɛp6
+4	bet5
+4	fot5
+4	bek6
+4	bew6
+4	ʐɤ6
+4	lɤ̆n6
+4	tɔ̆ŋ4
+4	bit6
+4	vik5
+4	bɔ̆ŋ2
+4	ʐa6
+4	cwien2
+4	năn6
+4	ʂɯt5
+4	ɲɤ̆m6
+4	zɤ3
+4	ʈɤ̆w5
+4	boj4
+4	bon2
+4	bɤm2
+4	cɛn2
+4	ʐiw2
+4	ŋwi2
+4	bun4
+4	buŋ1
+4	buom2
+4	buot5
+4	t'ɔ̆ŋ3
+4	χwe1
+4	t'ew1
+4	ɣim1
+4	bɯɤj4
+4	bɯɤŋ5
+4	bɯɤw5
+4	ŋoŋ3
+4	lăp6
+4	ʐik6
+4	ʈɤn5
+4	t'ăj4
+4	ciŋ2
+4	lwi5
+4	mɯɤŋ1
+4	ɲam5
+4	nɔ̆k5
+4	ʐɯɤ6
+4	ʂɤ̆w5
+4	ʈăm5
+4	kwɛ̆ŋ3
+4	kɯj4
+4	nie1
+4	ɲăw4
+4	ʂɛ2
+4	kăj5
+4	kăk6
+4	ɲăn2
+4	zip5
+4	kɤ̆k5
+4	ʈik6
+4	kɛw6
+4	kwăk5
+4	χien5
+4	ca6
+4	ʂan6
+4	cuot5
+4	nan4
+4	ŋan5
+4	cɛ̆ŋ6
+4	nɔm1
+4	căp5
+4	fɤ̆j4
+4	zɛp5
+4	kieŋ2
+4	cɤ̆n2
+4	cɤj5
+4	cuŋ2
+4	nik5
+4	dɤ̆j6
+4	ɲăw6
+4	cwak6
+4	kip6
+4	ʈɔ4
+4	lie2
+4	ʐuk6
+4	ciw5
+4	cɔ2
+4	cɔ3
+4	laj2
+4	ŋɤp6
+4	ŋɔ̆k5
+4	lɛk5
+4	cwɛn2
+4	lwa2
+4	hɔn4
+4	lɯɤ6
+4	com1
+4	com2
+4	con1
+4	con5
+4	coŋ4
+4	ʐɯɤŋ2
+4	cot5
+4	vɤj1
+4	te4
+4	ɲwi4
+4	măn5
+4	naj1
+4	ɣik1
+4	nom1
+4	cɯ5
+4	doj3
+4	kum6
+4	ʐum5
+4	nɤj5
+4	ɣăm6
+4	ɲɔm4
+4	dɯɤ5
+4	zɔn1
+4	kok6
+4	kom6
+4	hwɤ̆n1
+4	ʂa5
+4	lɔj3
+4	bɔj4
+4	kɤj1
+4	kɤn3
+4	lit5
+4	nɛw2
+4	ŋwɛw5
+4	mɛm2
+4	ʐik5
+4	vɔ6
+4	kum2
+4	num5
+4	kun1
+4	kwăŋ1
+4	vaj5
+4	kuoj5
+4	kwɤ̆j6
+4	vɤt5
+4	ʂɤ̆n2
+4	ɲɛ̆k5
+4	t'ɔ̆ŋ2
+4	zeŋ1
+4	ɣăm1
+4	făj1
+4	zăw6
+4	zɤ5
+4	zɤn2
+4	vwi2
+4	ɲɤn2
+4	ɣăm5
+4	ziew3
+4	vɤj6
+4	zɔ̆k5
+4	zɔj3
+4	zɔm2
+4	zɔ̆ŋ3
+4	t'waj4
+4	ŋwan6
+4	zwi6
+4	zin1
+4	ʈwɤ̆n1
+4	ʈɔ̆t5
+4	dɤm4
+4	tiew5
+4	hăk6
+4	ʐɯŋ1
+4	dan4
+4	dum1
+4	ŋien5
+4	dăt5
+4	hoŋ1
+4	dɤ̆n2
+4	ʂɔ4
+4	dɛt5
+4	ɲɯŋ1
+4	ʐɛ̆ŋ6
+4	dɛw3
+4	dɛt6
+4	sie4
+4	diem2
+4	ʐo2
+4	din1
+4	hwɛt5
+4	χɛ5
+4	lɯŋ6
+4	ɲɯ2
+4	mɛw1
+4	dɔm1
+4	vɤ̆j5
+4	naj6
+4	dop6
+4	dom5
+4	hun1
+4	t'wɤ4
+4	dwi1
+4	dum2
+4	tum5
+4	dun1
+4	dut5
+4	nut5
+4	dɯ2
+4	dɯɤm6
+4	ɣăj3
+4	hɛm2
+4	ʈɔn1
+4	ɛ2
+4	ut5
+4	uoŋ4
+4	lw1
+4	vo2
+4	ɣj1
+4	ɣɔn1
+4	ɣan5
+4	ɣɛp5
+4	ɣan6
+4	ɣăm2
+4	ʐu5
+4	ɣɤ̆p6
+4	ɣeŋ2
+4	ɲɔ̆ŋ4
+4	ɣɛ5
+4	tɤm4
+4	nwan3
+4	kwiet6
+4	ʂu6
+4	χwiw4
+4	nen5
+4	t'iek5
+4	ʐuoj4
+4	het6
+4	χɛ3
+4	ʂɛ3
+4	zɯɤ3
+4	ɣɔm1
+4	ɣwa5
+4	ɲɔn6
+4	loj2
+4	lɯɤm6
+4	han5
+4	hɛ̆ŋ3
+4	hăj5
+4	hăm1
+4	hăm2
+4	hăn2
+4	him1
+4	hɤ̆j1
+4	hin1
+4	hɛw5
+4	nak6
+4	hip5
+4	swien5
+4	hwɛ̆ŋ6
+4	sɯɤk6
+4	hɤ5
+4	hɤ2
+4	hwit5
+4	vɯɤŋ6
+4	ɤj5
+4	iŋ1
+4	nat1
+4	nɛ5
+4	kɛw4
+4	um5
+4	kek5
+4	χa5
+4	χaj4
+4	χɛ̆ŋ4
+4	χăw5
+4	χăm5
+4	χăŋ1
+4	χɤ̆p5
+4	χeŋ4
+4	χɤ̆w1
+4	lɛt6
+4	χiem1
+4	χit6
+4	lɔj4
+4	χoŋ5
+4	χuo1
+4	mɔ3
+4	χwɤ̆j5
+4	ʐăn1
+4	ŋaj1
+4	χɯ5
+4	lup5
+4	ʐuŋ6
+4	lwaj2
+4	tew5
+4	kwa2
+4	lɛw3
+4	twat5
+4	kwăw2
+4	t'ăw2
+4	ŋɔj1
+4	ɲit5
+4	lăŋ2
+4	ɲăŋ4
+4	ɲăŋ3
+4	lwa5
+4	lɔ̆ŋ6
+4	ɲɤ̆w2
+4	tɛ2
+4	sɛŋ4
+4	leŋ2
+4	lien5
+4	ɲiep5
+4	lim1
+4	ʂwat6
+4	ɲwɛ2
+4	ɲɔj1
+4	ɲɔ̆ŋ1
+4	ɲɔ̆ŋ5
+4	t'ɔm4
+4	ɲo1
+4	t'ok5
+4	mɯɤ4
+4	lɤ6
+4	naj5
+4	kwɤ̆n5
+4	lun3
+4	fiŋ4
+4	t'ɯɤt5
+4	mie1
+4	mj1
+4	mɛ4
+4	ʐwi4
+4	ʂăn3
+4	măn2
+4	ɲiek5
+4	mɤ̆m3
+4	sɯŋ4
+4	sɛw6
+4	muŋ2
+4	t'ɛn1
+4	mɔj6
+4	mɔk5
+4	ʐuoŋ3
+4	mɤj2
+4	mɤn1
+4	na2
+4	nɛ̆k5
+4	nit6
+4	ni4
+4	nan2
+4	năw1
+4	nuot6
+4	ʈiw3
+4	ŋaj5
+4	ŋɤ̆m4
+4	ŋăj5
+4	ŋɤ̆p5
+4	ŋe1
+4	ʐăm1
+4	ŋwăk5
+4	t'ɔ4
+4	ŋoŋ1
+4	ŋwien2
+4	vɯŋ6
+4	ʈɔ6
+4	ɲaj3
+4	ɲɤ4
+4	ɲɛ̆ŋ3
+4	ɲăj6
+4	ɲwa2
+4	ɲɔ̆t5
+4	ɲăm1
+4	ɲum5
+4	ɲɛn1
+4	ɲwɛn4
+4	ɲɔm2
+4	ɲoj2
+4	twɛt6
+4	voj6
+4	on2
+4	făŋ1
+4	ʐom1
+4	fɤj5
+4	fɔ1
+4	fon2
+4	vieŋ5
+4	kwɛw5
+4	kwăn2
+4	ʐum1
+4	ʐaj4
+4	ʐan2
+4	ʐat6
+4	ʐɛ̆ŋ4
+4	ʐăj5
+4	ʐăp5
+4	ʐi3
+4	ʐɤ̆t5
+4	ʐuŋ5
+4	ʐen2
+4	ʐuoŋ2
+4	tie4
+4	ʂăn5
+4	ʂɤ̆p6
+4	ʂot6
+4	ʂun1
+4	t'ăw6
+4	tuon2
+4	t'uŋ4
+4	t'o5
+4	t'wɛ̆ŋ4
+4	vɛn5
+4	văj1
+4	ʈam4
+4	văn5
+4	swɛ1
+4	tuot5
+4	vɤ̆n3
+4	tɯŋ2
+4	un2
+4	ɯɤ1
+4	vj1
+4	vi4
+4	văk6
+4	vɛw6
+4	văŋ2
+4	vɤ̆j3
+4	săk5
+4	săŋ2
+4	sek5
+4	sop5
+4	sum5
+4	sun1
+4	iem4
+3	fɛn1
+3	san1
+3	sj1
+3	nik1
+3	uj1
+3	ak1
+3	ip1
+3	nak5
+3	ɔ̆t1
+3	cwɛ̆ŋ2
+3	nɤ̆w6
+3	t'uŋ6
+3	soŋ5
+3	fik5
+3	ăp5
+3	ɣɤj4
+3	χɤp5
+3	ɣɤ̆k5
+3	ɲɤ̆w6
+3	χwɛt5
+3	ʈok5
+3	soj4
+3	ăt5
+3	siw2
+3	ɯk6
+3	nup5
+3	iw1
+3	ɣak6
+3	ʐɔj6
+3	tɔŋ1
+3	fɯɤk5
+3	fek5
+3	lap6
+3	saj5
+3	miew1
+3	mɯɤŋ2
+3	nɤ̆m6
+3	nɯɤŋ5
+3	biem5
+3	tɤj2
+3	bɔŋ1
+3	buj1
+3	ɲăŋ5
+3	dwi2
+3	cɤt6
+3	nɛ1
+3	bɤ̆m2
+3	bɤ̆m6
+3	biw5
+3	bɤ̆p5
+3	χam1
+3	liŋ2
+3	biŋ3
+3	bɤ̆j3
+3	cɤ̆j2
+3	bɛn2
+3	mup5
+3	bet6
+3	dɤ̆j5
+3	t'ɯ6
+3	t'an4
+3	sit6
+3	biw2
+3	ʂiet5
+3	mɯɤ5
+3	ŋɔ4
+3	sɯ2
+3	nɛt6
+3	vɯŋ2
+3	bwa1
+3	mɔ̆t5
+3	ʐo4
+3	bɔ̆ŋ6
+3	bik1
+3	ŋɛt6
+3	bɔ̆t5
+3	tat6
+3	vat6
+3	twek6
+3	ʈɛt5
+3	bon4
+3	ɣɔn2
+3	fɛŋ2
+3	t'uo2
+3	boŋ5
+3	bop6
+3	bot5
+3	ŋɤ3
+3	sɤm2
+3	bɤn3
+3	sɤ5
+3	χu5
+3	lɔŋ1
+3	bu5
+3	mɤm5
+3	bu6
+3	buo4
+3	buk6
+3	bwi5
+3	ʐun4
+3	sin4
+3	mɛt6
+3	ʐɯɤj2
+3	t'iw1
+3	bup5
+3	bɯ6
+3	fɯɤ5
+3	bɯŋ2
+3	ŋwăt6
+3	bɯɤn1
+3	bɯɤw1
+3	bɯt5
+3	kum4
+3	χew1
+3	mɛŋ2
+3	mɛn2
+3	nieŋ3
+3	ʐa5
+3	ʐɔn2
+3	mu5
+3	lɛp6
+3	lɤn2
+3	ɲɤ̆m1
+3	ɲɛt5
+3	nuk6
+3	ʂop6
+3	cun1
+3	ɲaj2
+3	t'uŋ3
+3	hɤ̆w4
+3	ʐăw4
+3	kiŋ4
+3	kăj6
+3	kăm6
+3	hen5
+3	kɤ̆ŋ1
+3	kɤ̆w6
+3	cam2
+3	fɛ2
+3	vɛ̆ŋ6
+3	căw3
+3	ʐɯɤ3
+3	ɣăn2
+3	ciek5
+3	căn3
+3	cit6
+3	vɤ̆p6
+3	ʐaj3
+3	ʐet5
+3	hɤ̆ŋ4
+3	cɤ̆w3
+3	ʐie2
+3	cɤ̆j1
+3	zew3
+3	cen6
+3	eŋ2
+3	ŋap5
+3	ŋɔm5
+3	ʐɤ̆p5
+3	moj3
+3	cie3
+3	cien2
+3	muoŋ1
+3	iŋ2
+3	ciŋ3
+3	dɯŋ6
+3	cwaj1
+3	cwăt5
+3	cɔj1
+3	lɔj6
+3	cɔm4
+3	cɔn1
+3	cɔ̆ŋ1
+3	vɔ̆t5
+3	hom4
+3	ŋoŋ2
+3	cot6
+3	χăm1
+3	lɔm2
+3	cum1
+3	cum5
+3	cun3
+3	cut6
+3	cuoŋ1
+3	zɯt6
+3	km1
+3	ʐɔ2
+3	ʐɔm5
+3	sɯɤk5
+3	kɔj2
+3	kɔ̆ŋ2
+3	kɔ̆ŋ5
+3	kɔ̆t5
+3	hu3
+3	kom2
+3	kop5
+3	mik6
+3	kum5
+3	kwaj4
+3	kɯ3
+3	nɛw4
+3	kwɛw2
+3	χi2
+3	kɯw3
+3	zip6
+3	duon2
+3	t'ɯɤn2
+3	zam6
+3	kwăm5
+3	zăj1
+3	kop6
+3	zăn1
+3	zum5
+3	zɛw6
+3	zɤ̆ŋ1
+3	ʐaj5
+3	muoŋ5
+3	zɔj6
+3	zɯɤŋ5
+3	ɲɤ6
+3	ʂɛn4
+3	zɛt6
+3	kwɛw6
+3	ɤt6
+3	zwi3
+3	ʈwi3
+3	zet6
+3	te3
+3	ziep5
+3	ziew2
+3	zɔm1
+3	zɔ4
+3	zw1
+3	zoŋ2
+3	zuok5
+3	zɤj1
+3	ɛt6
+3	mɔn5
+3	zɯɤ6
+3	zɯŋ4
+3	ɣa4
+3	diew4
+3	dɤt5
+3	ɣuk6
+3	ʐăm5
+3	dăm2
+3	dɤ̆n3
+3	t'ɔ5
+3	tɤ̆w2
+3	dɤ̆j3
+3	dɛm1
+3	lɔ5
+3	dwɛ̆ŋ2
+3	χuŋ2
+3	χɛ2
+3	ŋɤ̆w2
+3	kwɛ̆k6
+3	dɔ6
+3	dɔm4
+3	ʐɯɤk5
+3	dɔ̆ŋ4
+3	lot5
+3	doŋ5
+3	ŋot6
+3	dɤm1
+3	zɤn3
+3	duŋ4
+3	ʂam1
+3	ʐăj1
+3	swăj5
+3	ɛk5
+3	ɛw5
+3	ɛw6
+3	ɛt5
+3	eŋ3
+3	ie1
+3	ɛp1
+3	ɣɛ6
+3	ɣa6
+3	ʂen1
+3	ɣɛ̆ŋ2
+3	ɣoŋ2
+3	t'ɛt5
+3	ɣăw5
+3	ɣăj2
+3	ɣɛ2
+3	ɣo4
+3	ɣăt6
+3	ɣu2
+3	ɣɤ̆w3
+3	ɣɤ̆j3
+3	hɔm1
+3	χɔm6
+3	χu6
+3	ŋɔ̆ŋ6
+3	χwɤ̆j1
+3	zuo6
+3	mwi1
+3	mɔj1
+3	zn2
+3	kom1
+3	ɣit1
+3	ɣo2
+3	ɣoj6
+3	ɣɤ4
+3	ɣɯŋ2
+3	tăn2
+3	he1
+3	hɯɤk5
+3	ʂăw4
+3	ham5
+3	han1
+3	hɛm4
+3	hɛ̆ŋ5
+3	hen4
+3	hăw3
+3	hap6
+3	hɤ̆ŋ3
+3	hɤ̆t5
+3	lon5
+3	t'wɤ̆n3
+3	hɛk5
+3	heŋ1
+3	t'iem1
+3	hup6
+3	hwăj5
+3	hɔ5
+3	lɔm5
+3	vɛt6
+3	sieŋ4
+3	hɔ̆t5
+3	hɤj4
+3	t'i4
+3	hon4
+3	kwɛt6
+3	hɤj2
+3	hɤj3
+3	hu2
+3	hwe1
+3	hwi2
+3	hun4
+3	hwien3
+3	ŋan6
+3	nok5
+3	in4
+3	it6
+3	wɛ̆ŋ2
+3	iw4
+3	un1
+3	kɛ5
+3	kɛm1
+3	kɛw3
+3	ken1
+3	ken2
+3	kiew6
+3	sɛ̆ŋ5
+3	tuo4
+3	χa1
+3	χɯɤ5
+3	χam4
+3	χiŋ4
+3	χɤ̆n5
+3	χɛm1
+3	χɯ1
+3	nɛp5
+3	lɛn2
+3	mew5
+3	χwɛ1
+3	χwɛw1
+3	χwɛw2
+3	χum5
+3	χwien4
+3	χɯɤk5
+3	kwăk6
+3	kien2
+3	ʈɤ̆p6
+3	kiw3
+3	ɔ5
+3	lɤ̆w4
+3	lɔ̆ŋ3
+3	nuŋ3
+3	ɲam4
+3	sɛt6
+3	lieŋ5
+3	ɲăj1
+3	făn1
+3	ŋup6
+3	lăŋ3
+3	săp5
+3	lăt6
+3	lɤ̆t5
+3	lɤ̆j4
+3	lɛm4
+3	lɛn5
+3	let6
+3	loŋ4
+3	lie6
+3	lik5
+3	liem2
+3	lieŋ4
+3	lum1
+3	ɲiw5
+3	tiw5
+3	lo4
+3	lwɛ1
+3	lɔ̆p5
+3	mo3
+3	ɲo5
+3	lom1
+3	ɲom1
+3	kwăm6
+3	lop6
+3	ŋɤ5
+3	foŋ4
+3	ɲu5
+3	swi2
+3	mun4
+3	fun5
+3	lun6
+3	vun6
+3	luŋ3
+3	luom6
+3	luoŋ5
+3	sup5
+3	lup6
+3	sup6
+3	t'ɯ2
+3	ŋwit5
+3	mie4
+3	mɛt1
+3	ɲen6
+3	soj5
+3	măj4
+3	nem1
+3	măn4
+3	t'ăn5
+3	na6
+3	moŋ5
+3	mɤ̆n1
+3	ɲwe6
+3	mɤ̆p5
+3	mɤ̆w1
+3	meŋ1
+3	mien6
+3	mɔm5
+3	fin1
+3	tip5
+3	moŋ2
+3	vaj2
+3	muot5
+3	tɤ̆w1
+3	van2
+3	ʐɤn1
+3	mɯɤt6
+3	na5
+3	naj4
+3	năw6
+3	nem5
+3	nɤ̆k5
+3	new5
+3	ŋon5
+3	ŋɛ̆k5
+3	ŋwaj4
+3	ŋɯɤ2
+3	tun1
+3	ŋɛw3
+3	ŋɛn5
+3	nɔ5
+3	ŋek6
+3	ŋut5
+3	ŋwăj5
+3	ŋɤm6
+3	ŋien2
+3	ŋwăt5
+3	ŋwɛ̆ŋ4
+3	sɤt5
+3	ŋo4
+3	ŋok5
+3	ŋu2
+3	ŋuk5
+3	ŋuŋ5
+3	ɲăn6
+3	ɲam2
+3	ɲăw3
+3	ɲwɛt5
+3	ɲwɛt6
+3	ɲwi6
+3	ɲɤ̆m2
+3	ɲɤ̆n5
+3	ɲom4
+3	ɲɤ̆j4
+3	ɲuok5
+3	ɲwɛ1
+3	ɲɔj5
+3	ɲɔn5
+3	ɲɔ̆ŋ3
+3	ɲɔ̆t6
+3	ɲot6
+3	ɲɤn1
+3	niew6
+3	niw5
+3	nɔ4
+3	cwɛt6
+3	nuoj5
+3	nɯɤ5
+3	wa1
+3	wăn2
+3	ɔ̆k6
+3	ɛn4
+3	ʈuoŋ2
+3	fa2
+3	fwi1
+3	fit1
+3	făm1
+3	few2
+3	ʈwɤ̆t5
+3	fiŋ5
+3	ʈɛ̆k6
+3	ɯ1
+3	kwak6
+3	kwăw6
+3	kwăj2
+3	kwăn6
+3	kwăt6
+3	kwɤ̆j2
+3	kwet6
+3	ʐien1
+3	ʐam1
+3	ʐɔ̆t6
+3	ʐiet5
+3	ʈɔj6
+3	ʐăn2
+3	ʐɤn2
+3	ʐɤ̆j4
+3	ʐɛn5
+3	ʐe2
+3	ʐew6
+3	ʐw1
+3	ʐiŋ1
+3	ʐɔ5
+3	ʐɔ̆k5
+3	ʐɔ̆k6
+3	ʐok6
+3	ʂa4
+3	ʂa2
+3	ʂam2
+3	ʂɤ3
+3	ʂuo4
+3	ʂɛw1
+3	ʂeŋ1
+3	ʂeŋ4
+3	ʂiŋ5
+3	ʂit6
+3	ʂon2
+3	ʈɯɤ1
+3	ʂɤn4
+3	ʂuŋ4
+3	ʂup5
+3	ʂwit5
+3	ʂɯŋ4
+3	ta3
+3	tj1
+3	tɛw6
+3	t'wi6
+3	t'ɛ̆ŋ4
+3	t'ăm4
+3	t'wăt5
+3	t'ik6
+3	t'eŋ1
+3	t'ɔj2
+3	t'ɔ̆ŋ1
+3	t'ut5
+3	twăj5
+3	tɤn4
+3	s1
+3	tiem5
+3	uŋ4
+3	tiew2
+3	tiw1
+3	tɔm2
+3	toj2
+3	ʈ1
+3	ʈɤ5
+3	ʈɤ̆m1
+3	ʈɔn6
+3	ʈɤ2
+3	twɤ̆n1
+3	twɤ̆n3
+3	tum6
+3	tɯɤj5
+3	wɤ̆n4
+3	uk6
+3	ɯɤn1
+3	vɤ̆p5
+3	vam1
+3	vw1
+3	văj2
+3	vɛw2
+3	vɛw4
+3	vɤ̆ŋ2
+3	vɤ̆j4
+3	vt1
+3	vɔm2
+3	vut6
+3	vɯɤ3
+3	sɤ̆p6
+3	se6
+3	sɤ̆w1
+3	sat1
+3	siem4
+3	sum1
+3	som1
+3	suo1
+3	swe1
+3	suŋ5
+2	mip5
+2	ʈo1
+2	fien6
+2	a6
+2	iek1
+2	cuom1
+2	at6
+2	ɲoŋ6
+2	ăj5
+2	ăm3
+2	uoŋ5
+2	ăŋ4
+2	a3
+2	i3
+2	wɛ6
+2	deŋ1
+2	cwɛ2
+2	tam2
+2	fan2
+2	bat1
+2	fim5
+2	ʐun2
+2	ɲɛ̆ŋ6
+2	tɛt5
+2	ɣom2
+2	bɛm1
+2	bɛt1
+2	văm2
+2	băm2
+2	băŋ3
+2	bɤ5
+2	bɤ̆m3
+2	t'iw4
+2	bɤ̆ŋ1
+2	kwɤ1
+2	ŋi2
+2	mi5
+2	bɤ̆w6
+2	χuk6
+2	bɛ3
+2	bɛk5
+2	bɛm4
+2	bɛŋ5
+2	bɛw4
+2	bɛp5
+2	be3
+2	ziew5
+2	bew2
+2	dat5
+2	ʂi6
+2	bi3
+2	bie6
+2	bot1
+2	biek5
+2	biew5
+2	ʐin6
+2	biŋ4
+2	biŋ5
+2	zim5
+2	ʐuo2
+2	nm1
+2	bɔn6
+2	kep5
+2	cɯŋ4
+2	zɯɤŋ6
+2	ʂɤ̆w6
+2	con2
+2	cop6
+2	t'ɯɤ4
+2	ʂaj4
+2	bɤm1
+2	bɤt6
+2	bj1
+2	tɔ5
+2	ɲun4
+2	sɔ̆ŋ3
+2	bɯ5
+2	bɯɤ5
+2	χie6
+2	ʐɤn3
+2	kɯɤk6
+2	ziek5
+2	zek5
+2	hɛn4
+2	ŋɯ2
+2	ʂăt6
+2	t'ɛn2
+2	t'ɤn2
+2	ʈe1
+2	ka6
+2	kak6
+2	ʂɔŋ1
+2	sɔŋ1
+2	ʐup6
+2	kip1
+2	kam6
+2	kew2
+2	ŋew2
+2	kot1
+2	kăn4
+2	ɲăn4
+2	ʈăt5
+2	nɔj1
+2	voŋ2
+2	ʐɔm1
+2	cɤt5
+2	cak6
+2	cɯɤŋ2
+2	hɛ̆ŋ4
+2	căw6
+2	cat6
+2	văj6
+2	mɤ̆m4
+2	băm4
+2	băp6
+2	căp6
+2	căm6
+2	căn2
+2	ciw1
+2	cɛ3
+2	zoj1
+2	făj4
+2	cwa5
+2	cɯɤŋ3
+2	ɔ̆ŋ4
+2	cek5
+2	cek6
+2	cem3
+2	ce6
+2	ceŋ2
+2	ceŋ5
+2	dieŋ5
+2	zj5
+2	ʂɤt5
+2	ciep5
+2	cieŋ2
+2	ciew4
+2	ŋim4
+2	cin4
+2	muoj2
+2	c1
+2	cwɛ̆ŋ4
+2	hwɛn4
+2	cɔj4
+2	cɔm3
+2	cɔn4
+2	cɔ̆ŋ3
+2	coj2
+2	ʐe5
+2	ʐon5
+2	ɲɤj4
+2	cɤm4
+2	cɤm2
+2	cɤn6
+2	vɤn2
+2	cɤp6
+2	ŋwɛt5
+2	cwi2
+2	cum3
+2	cuoj1
+2	cuoj3
+2	cuoj6
+2	ɲăt5
+2	kn1
+2	kwăp5
+2	kit1
+2	kɔm6
+2	ʈot5
+2	tɤn5
+2	kɔ̆ŋ3
+2	kɔ̆ŋ6
+2	kɔk5
+2	kɔ̆t6
+2	kon4
+2	ʐɛ̆ŋ3
+2	muoŋ2
+2	kɤj4
+2	kɯɤm2
+2	ɣi2
+2	ɔ̆p5
+2	kup5
+2	kup6
+2	kun3
+2	kwăj4
+2	kuŋ6
+2	kit5
+2	ŋun4
+2	kɯɤ5
+2	kɯŋ1
+2	kɔj4
+2	ʂăŋ2
+2	tum4
+2	zăŋ4
+2	ŋwăŋ2
+2	zum6
+2	ɲip5
+2	zăm2
+2	zit6
+2	zăŋ6
+2	zăn4
+2	zɯ5
+2	foŋ6
+2	zɤ̆w3
+2	zɤ6
+2	zɔm4
+2	hɤm2
+2	ziek6
+2	ziem2
+2	zɔ6
+2	zwa1
+2	zwa5
+2	zɔj1
+2	zɔj2
+2	zak6
+2	zo2
+2	zop6
+2	zɔj5
+2	zɤ̆n4
+2	zɤn1
+2	zum1
+2	zwi4
+2	zun5
+2	zuok6
+2	zut5
+2	zɯɤ5
+2	zɯk5
+2	zɯɤt6
+2	lan3
+2	dam1
+2	dum5
+2	ɣăj4
+2	ʂen5
+2	dăm6
+2	dăŋ3
+2	mɤ̆w4
+2	tew1
+2	dăn6
+2	ɲɛm4
+2	ʈwi2
+2	dɛn6
+2	hwe2
+2	de3
+2	hɛ6
+2	mɛn5
+2	ʐep6
+2	diŋ3
+2	dit6
+2	diw2
+2	diw6
+2	ɯŋ4
+2	dwa5
+2	dɔn1
+2	sɛw1
+2	ʂo6
+2	ʐiet6
+2	f1
+2	dom2
+2	dɤ1
+2	t'uo4
+2	dɤn4
+2	du6
+2	dun2
+2	dup6
+2	dɯ5
+2	dɯŋ2
+2	dɯɤn2
+2	dɯɤn3
+2	ɣɔŋ2
+2	fen1
+2	ɛ5
+2	ɛ6
+2	ɛm5
+2	ɲɛm6
+2	ɛŋ1
+2	ɛw4
+2	ɛp6
+2	e2
+2	e5
+2	twie1
+2	uo1
+2	kwɛ5
+2	ɣa5
+2	ɣaj3
+2	ɣam1
+2	ɣăw1
+2	ŋwam6
+2	ɣuok6
+2	ɣɤ1
+2	ɣɯ2
+2	ɣɤ̆m6
+2	ɣɯɤŋ3
+2	ɣɤ̆j5
+2	ɣok6
+2	ɣp1
+2	lɯɤn2
+2	tuoŋ1
+2	nɛw5
+2	ɲɤj2
+2	nop6
+2	zu3
+2	zɛm2
+2	t'ɤj1
+2	luo2
+2	nom2
+2	ʐum6
+2	zoj4
+2	zp5
+2	ɣom1
+2	buo6
+2	ɲɔ̆p5
+2	ɣon1
+2	ɣop6
+2	ɣot6
+2	ɣɤn6
+2	ɣu1
+2	ɣuoŋ2
+2	ʐăm2
+2	han3
+2	hɔj2
+2	hɤ̆p6
+2	hɯ5
+2	hɤ̆n1
+2	hɛm1
+2	hiŋ3
+2	hɤ̆j4
+2	hɛ5
+2	hj1
+2	hit1
+2	ʂwien3
+2	hɛw4
+2	hik1
+2	hek5
+2	hek6
+2	heŋ4
+2	hɤn4
+2	hie1
+2	huo1
+2	hieŋ5
+2	nom6
+2	hiŋ4
+2	ʂɤ̆j6
+2	kwien6
+2	hwɛ̆ŋ5
+2	hwăm5
+2	lɔm4
+2	hɔ̆p5
+2	hɔm5
+2	hɔ̆ŋ1
+2	hoŋ5
+2	hɯŋ3
+2	hɤp5
+2	hu1
+2	hu6
+2	huo2
+2	hun2
+2	hɯ6
+2	hɯŋ2
+2	hɯɤm2
+2	zɯk6
+2	i6
+2	ie4
+2	im4
+2	t'in1
+2	ut1
+2	le4
+2	kɤm6
+2	kem2
+2	keŋ6
+2	χan2
+2	χan4
+2	χɛ̆ŋ6
+2	χɛ̆ŋ2
+2	χăj5
+2	χăk6
+2	lăm2
+2	lăm6
+2	χăn4
+2	kwa6
+2	χăŋ2
+2	χăp5
+2	χăt5
+2	χɤ̆k5
+2	liem6
+2	χɤ̆p6
+2	χieŋ3
+2	χɯɤŋ3
+2	χɛp5
+2	χeŋ1
+2	χeŋ6
+2	χew2
+2	χieŋ1
+2	nɯɤ1
+2	ʈuŋ6
+2	χwăj5
+2	χwăm2
+2	χwăm6
+2	χwăŋ5
+2	χɔj4
+2	χɔm1
+2	χɔm2
+2	χɤ1
+2	χɤ5
+2	χăw6
+2	χwɤ̆n1
+2	χum1
+2	χwiŋ2
+2	χɯŋ6
+2	χɯɤt5
+2	voŋ5
+2	kieŋ4
+2	kiew5
+2	kin2
+2	cɛ̆k5
+2	tɛ̆k6
+2	sɛ̆k6
+2	ɲaj4
+2	lan5
+2	vɛ̆ŋ4
+2	lɛn6
+2	lăj4
+2	lɯ1
+2	lăn2
+2	lwan2
+2	ɲɤ̆m4
+2	lɯɤ3
+2	lɤ̆ŋ1
+2	ɲɤ̆w1
+2	ʐɤ̆j1
+2	lɤ̆j6
+2	lɛ5
+2	lɛm2
+2	lɛm6
+2	lɛŋ4
+2	tɛw2
+2	ɲɛw5
+2	lɛw6
+2	me3
+2	ʂɤj4
+2	liek5
+2	t'wăŋ5
+2	lim6
+2	liw1
+2	kwiw5
+2	liw6
+2	ʐit1
+2	ʂɯɤj4
+2	swa3
+2	swɛ̆ŋ4
+2	lwɛ̆ŋ6
+2	swăn1
+2	sɔ̆k6
+2	lwɛt6
+2	lɔm6
+2	lɔn2
+2	ŋɔ̆p5
+2	ɲok5
+2	ŋok6
+2	lom2
+2	lon4
+2	ŋon4
+2	ɲon5
+2	son6
+2	kwɤ5
+2	lɤm2
+2	tɤn1
+2	lɤp6
+2	lɤt5
+2	lɤt6
+2	χu4
+2	ʂa6
+2	lum5
+2	lun5
+2	lieŋ1
+2	t'uom6
+2	luoŋ1
+2	luot5
+2	dɯ4
+2	lɯɤ1
+2	χɯŋ2
+2	lɯɤm1
+2	lɯɤm2
+2	nip5
+2	cɯɤk6
+2	miet5
+2	mut1
+2	mat1
+2	muŋ1
+2	mip1
+2	măw3
+2	mik1
+2	ʐɤj6
+2	ʐiew1
+2	ʂɯɤ5
+2	map6
+2	mɤ̆n5
+2	mɤ̆j2
+2	mɛk5
+2	mun1
+2	men2
+2	ɲwaj2
+2	miew2
+2	mm1
+2	mim4
+2	mim5
+2	muoj3
+2	min6
+2	sew2
+2	mɔ̆ŋ6
+2	mɔ̆p5
+2	mɤn4
+2	mɤn5
+2	mu1
+2	muk5
+2	mun2
+2	muŋ4
+2	ŋɤ̆w1
+2	fun2
+2	ʐɯɤj1
+2	nɛ̆ŋ5
+2	nw1
+2	nap5
+2	nɔm4
+2	ŋwaj5
+2	năp5
+2	nɤ̆n2
+2	nɤ̆n3
+2	niw1
+2	ʂoŋ2
+2	nɤ̆w3
+2	ŋaj2
+2	ŋaj4
+2	ŋaj3
+2	ŋuŋ2
+2	ŋan1
+2	ŋɛ̆ŋ3
+2	op6
+2	ʐăj2
+2	ŋɯ5
+2	ŋăŋ4
+2	ŋɛw6
+2	viŋ6
+2	ŋew4
+2	ŋɯɤŋ4
+2	siw4
+2	ŋɤ̆t6
+2	ŋɤ̆w6
+2	ŋɤ̆j2
+2	ŋɤ̆j5
+2	ŋɛn3
+2	ŋe4
+2	ŋek5
+2	ŋwa3
+2	ŋwak5
+2	ŋwak6
+2	ŋwăw5
+2	ŋwɛw2
+2	ŋwɛw6
+2	ŋwɛn4
+2	ŋiw6
+2	ŋo3
+2	ŋo5
+2	ŋon6
+2	ŋɤ6
+2	ŋɤj2
+2	swɤ̆n4
+2	ŋuoj1
+2	dan5
+2	ŋɯw1
+2	ʈet6
+2	ɲa5
+2	ɲaj6
+2	ɲɛn6
+2	tɯŋ4
+2	so4
+2	ɲăm6
+2	ɲɤ̆n4
+2	ɲɯ5
+2	ɲɤ̆j3
+2	ɲɛ4
+2	ɲek5
+2	ɲi4
+2	ɲik5
+2	ɲiŋ4
+2	ɲiw6
+2	ɲwăj5
+2	ɲon1
+2	ɲot5
+2	ɲɤm1
+2	ɲɤn3
+2	ɲuŋ5
+2	ɲuom5
+2	ɲuom6
+2	ɲut5
+2	ɲɯt5
+2	nɔ3
+2	ʂɔj3
+2	ʂuoŋ1
+2	sam2
+2	nɯɤŋ2
+2	noŋ5
+2	nɤ3
+2	nɤm1
+2	niw6
+2	niŋ5
+2	nuoŋ1
+2	ʈoŋ6
+2	nɯŋ6
+2	ʈuŋ3
+2	ɔ̆t5
+2	wɛ̆k6
+2	waj4
+2	wăt5
+2	wɛ4
+2	ɔ̆p6
+2	ɔm4
+2	ok6
+2	ʐăm6
+2	om2
+2	oŋ4
+2	feŋ6
+2	ɤn5
+2	fɛ̆k6
+2	fɛ̆ŋ4
+2	fɛ̆ŋ2
+2	făk5
+2	făt5
+2	fɤ̆p5
+2	fɤ̆j1
+2	fe6
+2	fet5
+2	few3
+2	fi6
+2	fie2
+2	fie5
+2	fik6
+2	twaj5
+2	ziew1
+2	fiw6
+2	fɔ̆k5
+2	fat1
+2	fj1
+2	fɔn1
+2	fop5
+2	fɤn4
+2	fu3
+2	fwi4
+2	fut6
+2	fuŋ1
+2	kwak5
+2	kwɛ̆k5
+2	kwaj6
+2	kwăn1
+2	kwăŋ6
+2	ʂɔk5
+2	vɤt6
+2	kwɤ̆ŋ2
+2	kwɤ̆ŋ4
+2	kwɤ̆j1
+2	kwɤ̆j4
+2	kweŋ2
+2	kwet5
+2	kwin1
+2	kwɤ2
+2	kwiŋ2
+2	ʐɤ̆m3
+2	ʐɯɤj4
+2	ʐɯɤj5
+2	ʐɛ̆k6
+2	ʐɔj2
+2	ʐɛ̆ŋ5
+2	ʐap6
+2	ʂăŋ5
+2	ʐɤ̆m5
+2	ʐɤ̆t6
+2	ʐɤ̆n1
+2	ʐɤ̆n5
+2	ʐɤ̆n2
+2	ʐɤ̆n6
+2	ʐeŋ2
+2	ʐie1
+2	ʐɛ2
+2	ʐɛw4
+2	ʐɛw5
+2	ʐek5
+2	ʐi5
+2	ʐie4
+2	ʐɔ̆ŋ5
+2	ʐɛt1
+2	ʐwɛn1
+2	ʐɔj3
+2	ʐɔn5
+2	ʐo3
+2	ʐok5
+2	ʐj1
+2	ʐɤ5
+2	ʐɤm5
+2	ʐɤm2
+2	ʐɤp6
+2	ʐum2
+2	ʐun5
+2	ʐuŋ4
+2	ʐuok5
+2	ʐut6
+2	ʐɯɤ5
+2	ʐɯk5
+2	ʐɯɤm2
+2	ʐɯɤt6
+2	ʂa3
+2	ʂaj5
+2	ʂɔj4
+2	ʂăw6
+2	ʂɯɤ1
+2	ʂăŋ1
+2	ʂɤ̆m4
+2	ʂɤ̆m3
+2	ʂɤ̆n5
+2	ʂɤ̆j1
+2	ʂɛw6
+2	ʂe6
+2	ʂen2
+2	ʂew1
+2	ʂɔ̆p1
+2	ʂie4
+2	ʂieŋ1
+2	ʂiŋ2
+2	ʂɔ2
+2	ʂɔ̆k6
+2	mɔj5
+2	ʂɔn2
+2	ʂɔ̆ŋ3
+2	ʂwaj2
+2	ʂo3
+2	ʂoŋ4
+2	ʂɤn2
+2	ʂu5
+2	ʂum2
+2	ʂuŋ3
+2	ʂuon1
+2	ʂɯk6
+2	vew2
+2	vew5
+2	vu2
+2	ʂɯɤt5
+2	vin6
+2	tɤ̆n4
+2	tɔ̆ŋ6
+2	tt1
+2	tɛk5
+2	tip1
+2	tɛm2
+2	tɛm5
+2	tɛn3
+2	tit1
+2	tɛw4
+2	tek5
+2	t'ăj2
+2	t'ăk5
+2	duot6
+2	t'ɯŋ2
+2	t'ɤ̆n3
+2	t'ew4
+2	t'ɛ5
+2	t'ɛ2
+2	t'uoŋ2
+2	t'em2
+2	t'et5
+2	t'ɔm2
+2	t'on5
+2	t'ɔ1
+2	t'wan5
+2	t'o2
+2	ɲɯɤŋ3
+2	t'ɤ5
+2	t'um1
+2	t'um4
+2	t'up6
+2	t'uon3
+2	twɤ̆t5
+2	tɔj2
+2	twa5
+2	tɔ̆k6
+2	twɛn1
+2	tɔm1
+2	tɔm3
+2	tɔ̆p1
+2	tɔ̆p6
+2	toŋ2
+2	top5
+2	tɤ4
+2	ʈɔm1
+2	ʈe2
+2	ʈăw4
+2	ʈat6
+2	ʈăk6
+2	ʈăm2
+2	ʈo2
+2	ʈăn1
+2	ʈăn2
+2	hew5
+2	ʈɛw4
+2	ʈɤ̆m3
+2	ʈɤ̆m6
+2	ʈɤ̆j1
+2	ʈɤ̆j4
+2	ʈɛm2
+2	ʈɛn3
+2	ʈɛw6
+2	ʈew6
+2	ʈie4
+2	ʈien2
+2	ʈieŋ2
+2	ʈit6
+2	ʈiw2
+2	ʈo5
+2	ʈo6
+2	tweŋ2
+2	ʈɤt6
+2	ʈɯ5
+2	ʈɯw2
+2	tum3
+2	tuok5
+2	tut6
+2	tɯɤk6
+2	tɯɤt5
+2	uŋ2
+2	wik6
+2	ɯɤm1
+2	ɯɤn3
+2	ɯɤp5
+2	suom6
+2	ven6
+2	văŋ4
+2	vɤ̆ŋ1
+2	vɯɤŋ4
+2	vɛ5
+2	vɛk5
+2	vɛk6
+2	ven1
+2	văw5
+2	vew1
+2	vie4
+2	vɔ̆k6
+2	vɔn2
+2	vɔ̆p6
+2	vuŋ3
+2	vɯɤ6
+2	vɯɤn1
+2	sam1
+2	san5
+2	sap5
+2	săm5
+2	sɤ̆m2
+2	sɤ̆p5
+2	siŋ2
+2	swɛ2
+2	sɔ6
+2	sep6
+2	seŋ2
+2	sn1
+2	so2
+2	suk6
+2	swak6
+2	swaj4
+2	sɤ4
+2	swɛt5
+2	swɛt6
+2	som2
+2	son1
+2	son2
+2	son5
+2	soŋ4
+2	sot5
+2	sɤj4
+2	su5
+2	swi6
+2	suŋ4
+2	siŋ5
+
+All unique phonemes (sorted):
+1
+a1
+a2
+a3
+a4
+a5
+a6
+aj1
+aj4
+aj5
+ak1
+ak5
+am1
+am4
+am5
+an1
+an5
+ap5
+at1
+at5
+at6
+b1
+ba1
+ba2
+ba3
+ba4
+ba5
+ba6
+baj1
+baj2
+baj3
+baj4
+baj5
+baj6
+bak5
+bak6
+bam5
+ban1
+ban2
+ban4
+ban5
+ban6
+bap6
+bat1
+bat5
+bat6
+be1
+be2
+be3
+be4
+be5
+be6
+bek6
+ben1
+ben2
+ben4
+ben5
+ben6
+bep5
+bet1
+bet5
+bet6
+bew1
+bew2
+bew6
+beŋ1
+beŋ2
+beŋ6
+bi1
+bi2
+bi3
+bi4
+bi5
+bi6
+bie1
+bie2
+bie6
+biek5
+biem5
+bien1
+bien2
+bien4
+bien5
+bien6
+biet5
+biet6
+biew4
+biew5
+bieŋ5
+bik1
+bik5
+bik6
+bim2
+bim5
+bin1
+bin6
+bip5
+bip6
+bit1
+bit5
+bit6
+biw2
+biw3
+biw4
+biw5
+biw6
+biŋ1
+biŋ2
+biŋ3
+biŋ4
+biŋ5
+biŋ6
+bj1
+bk1
+bo1
+bo2
+bo3
+bo4
+bo5
+bo6
+boj1
+boj2
+boj4
+boj5
+boj6
+bok5
+bok6
+bom2
+bon1
+bon2
+bon4
+bon5
+bon6
+bop5
+bop6
+bot1
+bot5
+bot6
+boŋ1
+boŋ2
+boŋ3
+boŋ4
+boŋ5
+boŋ6
+bt1
+bu1
+bu2
+bu4
+bu5
+bu6
+buj1
+buk6
+bum1
+bum2
+bum6
+bun2
+bun4
+bun5
+buo1
+buo2
+buo4
+buo5
+buo6
+buoj4
+buok6
+buom2
+buom6
+buon1
+buon2
+buot5
+buot6
+buoŋ1
+buoŋ2
+bup5
+bup6
+but1
+but5
+but6
+buŋ1
+buŋ2
+buŋ4
+buŋ5
+buŋ6
+bw1
+bwa1
+bwi2
+bwi5
+bwi6
+bwit5
+băj1
+băj2
+băj4
+băk5
+băm1
+băm2
+băm3
+băm4
+băm6
+băn1
+băn2
+băn4
+băn5
+băn6
+băp5
+băp6
+băt5
+băt6
+băw1
+băw2
+băw3
+băw4
+băw5
+băw6
+băŋ1
+băŋ2
+băŋ3
+băŋ5
+băŋ6
+bɔ1
+bɔ2
+bɔ3
+bɔ4
+bɔ5
+bɔ6
+bɔj4
+bɔj5
+bɔm1
+bɔm3
+bɔm4
+bɔn1
+bɔn2
+bɔn5
+bɔn6
+bɔŋ1
+bɔŋ5
+bɔ̆k1
+bɔ̆k5
+bɔ̆k6
+bɔ̆p5
+bɔ̆t5
+bɔ̆t6
+bɔ̆ŋ1
+bɔ̆ŋ2
+bɔ̆ŋ3
+bɔ̆ŋ4
+bɔ̆ŋ5
+bɔ̆ŋ6
+bɛ1
+bɛ2
+bɛ3
+bɛ4
+bɛ5
+bɛ6
+bɛk5
+bɛm1
+bɛm2
+bɛm4
+bɛn1
+bɛn2
+bɛn3
+bɛn5
+bɛn6
+bɛp5
+bɛp6
+bɛt1
+bɛt5
+bɛt6
+bɛw1
+bɛw2
+bɛw3
+bɛw4
+bɛw5
+bɛw6
+bɛŋ1
+bɛŋ5
+bɛ̆k5
+bɛ̆k6
+bɛ̆ŋ1
+bɛ̆ŋ2
+bɛ̆ŋ4
+bɛ̆ŋ5
+bɛ̆ŋ6
+bɤ1
+bɤ2
+bɤ3
+bɤ4
+bɤ5
+bɤ6
+bɤj1
+bɤj2
+bɤj4
+bɤj5
+bɤm1
+bɤm2
+bɤm6
+bɤn1
+bɤn3
+bɤn6
+bɤp5
+bɤp6
+bɤt5
+bɤt6
+bɤ̆j1
+bɤ̆j2
+bɤ̆j3
+bɤ̆j4
+bɤ̆j5
+bɤ̆j6
+bɤ̆k5
+bɤ̆k6
+bɤ̆m2
+bɤ̆m3
+bɤ̆m4
+bɤ̆m5
+bɤ̆m6
+bɤ̆n1
+bɤ̆n2
+bɤ̆n4
+bɤ̆n5
+bɤ̆n6
+bɤ̆p5
+bɤ̆p6
+bɤ̆t5
+bɤ̆t6
+bɤ̆w1
+bɤ̆w2
+bɤ̆w4
+bɤ̆w5
+bɤ̆w6
+bɤ̆ŋ1
+bɤ̆ŋ5
+bɯ5
+bɯ6
+bɯk5
+bɯk6
+bɯt5
+bɯt6
+bɯw1
+bɯw4
+bɯŋ1
+bɯŋ2
+bɯŋ4
+bɯŋ5
+bɯŋ6
+bɯɤ2
+bɯɤ3
+bɯɤ4
+bɯɤ5
+bɯɤ6
+bɯɤj1
+bɯɤj4
+bɯɤk5
+bɯɤm1
+bɯɤm5
+bɯɤn1
+bɯɤp5
+bɯɤw1
+bɯɤw5
+bɯɤŋ1
+bɯɤŋ5
+c1
+c4
+ca1
+ca2
+ca3
+ca4
+ca5
+ca6
+caj1
+caj2
+caj3
+caj4
+caj5
+cak5
+cak6
+cam2
+cam6
+can1
+can5
+can6
+cap6
+cat1
+cat5
+cat6
+ce1
+ce2
+ce5
+ce6
+cek5
+cek6
+cem1
+cem3
+cen6
+cet5
+ceŋ1
+ceŋ2
+ceŋ3
+ceŋ4
+ceŋ5
+ceŋ6
+ci1
+ci2
+ci4
+ci5
+ci6
+cie1
+cie2
+cie3
+cie4
+cie6
+ciek5
+ciem1
+ciem5
+cien1
+cien2
+cien5
+cien6
+ciep5
+ciet5
+ciew1
+ciew2
+ciew4
+ciew5
+cieŋ1
+cieŋ2
+cieŋ5
+cik1
+cik5
+cim1
+cim2
+cim5
+cin3
+cin4
+cin5
+cip5
+cit5
+cit6
+ciw1
+ciw5
+ciw6
+ciŋ1
+ciŋ2
+ciŋ3
+ciŋ4
+ciŋ5
+cn1
+co2
+co3
+co6
+coj2
+coj3
+coj4
+coj5
+coj6
+cok5
+com1
+com2
+com3
+com4
+con1
+con2
+con5
+con6
+cop5
+cop6
+cot5
+cot6
+coŋ1
+coŋ2
+coŋ4
+coŋ5
+cu1
+cu2
+cu4
+cu5
+cuk5
+cuk6
+cum1
+cum2
+cum3
+cum5
+cum6
+cun1
+cun2
+cun3
+cun4
+cuo1
+cuo2
+cuo5
+cuoj1
+cuoj2
+cuoj3
+cuoj5
+cuoj6
+cuok5
+cuok6
+cuom1
+cuon2
+cuot5
+cuot6
+cuoŋ1
+cuoŋ2
+cuoŋ6
+cup6
+cut5
+cut6
+cuŋ1
+cuŋ2
+cuŋ4
+cuŋ5
+cwa1
+cwa5
+cwaj1
+cwaj2
+cwaj3
+cwaj5
+cwaj6
+cwak5
+cwak6
+cwan5
+cwek6
+cweŋ5
+cweŋ6
+cwi1
+cwi2
+cwi3
+cwi5
+cwien1
+cwien2
+cwien4
+cwien5
+cwien6
+cwăt5
+cwɛ1
+cwɛ2
+cwɛ5
+cwɛ6
+cwɛn1
+cwɛn2
+cwɛt6
+cwɛ̆ŋ1
+cwɛ̆ŋ2
+cwɛ̆ŋ4
+cwɛ̆ŋ5
+cwɛ̆ŋ6
+cwɤ̆n4
+căj1
+căj2
+căj4
+căj5
+căj6
+căk5
+căk6
+căm1
+căm2
+căm5
+căm6
+căn1
+căn2
+căn3
+căn5
+căn6
+căp5
+căp6
+căt5
+căt6
+căw1
+căw2
+căw3
+căw4
+căw5
+căw6
+căŋ1
+căŋ2
+căŋ4
+căŋ6
+cɔ1
+cɔ2
+cɔ3
+cɔ4
+cɔ5
+cɔj1
+cɔj2
+cɔj4
+cɔj5
+cɔj6
+cɔm1
+cɔm2
+cɔm3
+cɔm4
+cɔn1
+cɔn4
+cɔn6
+cɔŋ2
+cɔ̆k5
+cɔ̆k6
+cɔ̆p5
+cɔ̆p6
+cɔ̆t5
+cɔ̆t6
+cɔ̆ŋ1
+cɔ̆ŋ2
+cɔ̆ŋ3
+cɔ̆ŋ4
+cɔ̆ŋ5
+cɛ1
+cɛ2
+cɛ3
+cɛ4
+cɛ5
+cɛm2
+cɛm5
+cɛn1
+cɛn2
+cɛn3
+cɛn5
+cɛn6
+cɛp5
+cɛt5
+cɛt6
+cɛw1
+cɛw2
+cɛw4
+cɛw5
+cɛw6
+cɛŋ1
+cɛŋ4
+cɛ̆k5
+cɛ̆k6
+cɛ̆ŋ1
+cɛ̆ŋ2
+cɛ̆ŋ5
+cɛ̆ŋ6
+cɤ1
+cɤ2
+cɤ4
+cɤ5
+cɤ6
+cɤj1
+cɤj5
+cɤm1
+cɤm2
+cɤm4
+cɤm5
+cɤn1
+cɤn2
+cɤn5
+cɤn6
+cɤp5
+cɤp6
+cɤt5
+cɤt6
+cɤ̆j1
+cɤ̆j2
+cɤ̆j5
+cɤ̆k6
+cɤ̆m1
+cɤ̆m2
+cɤ̆m3
+cɤ̆m4
+cɤ̆m5
+cɤ̆m6
+cɤ̆n1
+cɤ̆n2
+cɤ̆n4
+cɤ̆n5
+cɤ̆n6
+cɤ̆p5
+cɤ̆p6
+cɤ̆t5
+cɤ̆t6
+cɤ̆w1
+cɤ̆w2
+cɤ̆w3
+cɤ̆w4
+cɤ̆w5
+cɤ̆w6
+cɤ̆ŋ1
+cɯ1
+cɯ2
+cɯ3
+cɯ5
+cɯj4
+cɯk5
+cɯk6
+cɯn1
+cɯŋ1
+cɯŋ2
+cɯŋ3
+cɯŋ4
+cɯŋ5
+cɯŋ6
+cɯɤ1
+cɯɤ2
+cɯɤ3
+cɯɤ4
+cɯɤ5
+cɯɤk5
+cɯɤk6
+cɯɤm2
+cɯɤp6
+cɯɤŋ1
+cɯɤŋ2
+cɯɤŋ3
+cɯɤŋ4
+cɯɤŋ5
+d5
+da1
+da2
+da3
+da4
+da5
+daj1
+daj2
+daj3
+daj5
+daj6
+dak5
+dak6
+dam1
+dam2
+dam4
+dam5
+dam6
+dan1
+dan2
+dan4
+dan5
+dan6
+dap5
+dap6
+dat5
+dat6
+de1
+de2
+de3
+de4
+de5
+de6
+dek5
+dem1
+dem2
+dem5
+dem6
+den2
+den5
+dep6
+dew1
+dew2
+dew4
+deŋ1
+deŋ2
+deŋ3
+deŋ4
+di1
+di2
+di3
+die2
+die3
+die4
+die6
+diek5
+diem2
+diem4
+diem5
+diem6
+dien1
+dien2
+dien4
+dien5
+dien6
+diep6
+diew1
+diew2
+diew4
+diew5
+diew6
+dieŋ1
+dieŋ5
+dik5
+dik6
+din1
+dit1
+dit5
+dit6
+diw1
+diw2
+diw6
+diŋ1
+diŋ2
+diŋ3
+diŋ4
+diŋ5
+diŋ6
+dj1
+dk1
+do1
+do2
+do3
+do4
+do5
+do6
+doj1
+doj2
+doj3
+doj4
+doj5
+doj6
+dok5
+dok6
+dom1
+dom2
+dom5
+don1
+don2
+don5
+don6
+dop5
+dop6
+dot5
+dot6
+doŋ1
+doŋ2
+doŋ4
+doŋ5
+doŋ6
+dt1
+du1
+du2
+du4
+du5
+du6
+duk5
+duk6
+dum1
+dum2
+dum5
+dun1
+dun2
+dun6
+duo1
+duo2
+duo3
+duo5
+duoj1
+duoj4
+duoj5
+duok5
+duon2
+duon3
+duot6
+dup5
+dup6
+dut5
+dut6
+duŋ1
+duŋ2
+duŋ3
+duŋ4
+duŋ5
+duŋ6
+dw1
+dwa1
+dwa5
+dwa6
+dwaj2
+dwaj5
+dwak5
+dwan1
+dwan2
+dwan4
+dwan5
+dwan6
+dwat6
+dweŋ2
+dweŋ4
+dwi1
+dwi2
+dwi3
+dwi4
+dwɛ̆ŋ2
+dwɛ̆ŋ4
+dăj1
+dăj2
+dăj3
+dăj4
+dăj5
+dăk5
+dăk6
+dăm1
+dăm2
+dăm3
+dăm5
+dăm6
+dăn2
+dăn3
+dăn5
+dăn6
+dăp5
+dăt5
+dăt6
+dăw1
+dăw2
+dăw4
+dăw5
+dăw6
+dăŋ1
+dăŋ2
+dăŋ3
+dăŋ4
+dăŋ5
+dăŋ6
+dɔ1
+dɔ2
+dɔ3
+dɔ4
+dɔ5
+dɔ6
+dɔj2
+dɔj4
+dɔj5
+dɔj6
+dɔm1
+dɔm4
+dɔm5
+dɔn1
+dɔn2
+dɔn5
+dɔn6
+dɔ̆k6
+dɔ̆p1
+dɔ̆t1
+dɔ̆t5
+dɔ̆t6
+dɔ̆ŋ1
+dɔ̆ŋ2
+dɔ̆ŋ4
+dɔ̆ŋ5
+dɔ̆ŋ6
+dɛ1
+dɛ2
+dɛ3
+dɛ4
+dɛ5
+dɛk5
+dɛm1
+dɛm2
+dɛm5
+dɛn1
+dɛn2
+dɛn6
+dɛp6
+dɛt5
+dɛt6
+dɛw1
+dɛw2
+dɛw3
+dɛw5
+dɛ̆k5
+dɛ̆k6
+dɛ̆ŋ1
+dɛ̆ŋ2
+dɛ̆ŋ3
+dɛ̆ŋ4
+dɛ̆ŋ5
+dɤ1
+dɤ2
+dɤ3
+dɤ5
+dɤ6
+dɤj2
+dɤj5
+dɤj6
+dɤm1
+dɤm2
+dɤm4
+dɤn1
+dɤn2
+dɤn4
+dɤn5
+dɤp5
+dɤt5
+dɤt6
+dɤ̆j1
+dɤ̆j2
+dɤ̆j3
+dɤ̆j4
+dɤ̆j5
+dɤ̆j6
+dɤ̆m1
+dɤ̆m2
+dɤ̆m3
+dɤ̆m5
+dɤ̆m6
+dɤ̆n2
+dɤ̆n3
+dɤ̆n6
+dɤ̆p6
+dɤ̆t5
+dɤ̆t6
+dɤ̆w1
+dɤ̆w2
+dɤ̆w4
+dɤ̆w5
+dɤ̆w6
+dɤ̆ŋ5
+dɯ2
+dɯ4
+dɯ5
+dɯk5
+dɯk6
+dɯt5
+dɯŋ1
+dɯŋ2
+dɯŋ5
+dɯŋ6
+dɯɤ1
+dɯɤ5
+dɯɤj2
+dɯɤk5
+dɯɤk6
+dɯɤm6
+dɯɤn2
+dɯɤn3
+dɯɤŋ1
+dɯɤŋ2
+e1
+e2
+e5
+ek5
+ek6
+em1
+em5
+et1
+ew1
+eŋ2
+eŋ3
+f1
+fa1
+fa2
+fa4
+fa5
+faj1
+faj4
+faj5
+fak5
+fak6
+fam2
+fam6
+fan1
+fan2
+fan4
+fan5
+fan6
+fap5
+fat1
+fat5
+fat6
+fe1
+fe2
+fe5
+fe6
+fek5
+fen1
+fet5
+fet6
+few2
+few3
+feŋ2
+feŋ6
+fi1
+fi2
+fi4
+fi5
+fi6
+fie2
+fie5
+fie6
+fiem5
+fien1
+fien2
+fien5
+fien6
+fiet5
+fiet6
+fiew1
+fiew5
+fiew6
+fik5
+fik6
+fim1
+fim5
+fin1
+fit1
+fit5
+fiw1
+fiw6
+fiŋ1
+fiŋ2
+fiŋ3
+fiŋ4
+fiŋ5
+fj1
+fo1
+fo4
+fo5
+foj1
+foj4
+foj5
+fok5
+fom1
+fon1
+fon2
+fop5
+fot5
+foŋ1
+foŋ2
+foŋ3
+foŋ4
+foŋ6
+fu1
+fu2
+fu3
+fu4
+fu5
+fu6
+fuk5
+fuk6
+fun1
+fun2
+fun5
+fuo1
+fut5
+fut6
+fuŋ1
+fuŋ2
+fuŋ5
+fuŋ6
+fw1
+fwi1
+fwi4
+făj1
+făj4
+făk5
+făm1
+făn1
+făp5
+făt5
+făw1
+făw2
+făw5
+făŋ1
+făŋ4
+fɔ1
+fɔ2
+fɔ5
+fɔj1
+fɔj2
+fɔk5
+fɔn1
+fɔ̆k5
+fɔ̆t5
+fɔ̆t6
+fɔ̆ŋ1
+fɔ̆ŋ2
+fɔ̆ŋ4
+fɔ̆ŋ5
+fɛ1
+fɛ2
+fɛk5
+fɛn1
+fɛn2
+fɛp5
+fɛt5
+fɛw1
+fɛw2
+fɛŋ2
+fɛŋ5
+fɛ̆k5
+fɛ̆k6
+fɛ̆ŋ1
+fɛ̆ŋ2
+fɛ̆ŋ4
+fɛ̆ŋ6
+fɤ1
+fɤ2
+fɤ4
+fɤj1
+fɤj5
+fɤn1
+fɤn3
+fɤn4
+fɤn5
+fɤt5
+fɤ̆j1
+fɤ̆j4
+fɤ̆m2
+fɤ̆m4
+fɤ̆n1
+fɤ̆n2
+fɤ̆n3
+fɤ̆n5
+fɤ̆n6
+fɤ̆p5
+fɤ̆p6
+fɤ̆t5
+fɤ̆t6
+fɤ̆w3
+fɯk5
+fɯt5
+fɯŋ1
+fɯŋ2
+fɯɤ5
+fɯɤ6
+fɯɤk5
+fɯɤn3
+fɯɤn5
+fɯɤŋ1
+fɯɤŋ2
+fɯɤŋ5
+fɯɤŋ6
+h1
+h4
+ha1
+ha2
+ha4
+ha5
+ha6
+haj1
+haj2
+haj3
+haj4
+haj5
+haj6
+hak5
+hak6
+ham1
+ham2
+ham3
+ham5
+ham6
+han1
+han2
+han3
+han5
+han6
+hap5
+hap6
+hat5
+hat6
+he1
+he2
+he3
+he4
+he6
+hek5
+hek6
+hen1
+hen4
+hen5
+het5
+het6
+hew5
+heŋ1
+heŋ2
+heŋ4
+hi1
+hi2
+hi3
+hi4
+hi5
+hie1
+hiem2
+hiem4
+hiem5
+hien1
+hien2
+hien4
+hien5
+hien6
+hiep5
+hiep6
+hiet6
+hiew4
+hiew5
+hiew6
+hieŋ1
+hieŋ5
+hik1
+hik5
+hik6
+him1
+him3
+hin1
+hip5
+hit1
+hit5
+hiw1
+hiŋ2
+hiŋ3
+hiŋ4
+hj1
+ho1
+ho2
+ho3
+ho4
+ho5
+ho6
+hoj1
+hoj2
+hoj4
+hoj5
+hoj6
+hok5
+hok6
+hom1
+hom4
+hon1
+hon2
+hon3
+hon4
+hon6
+hop6
+hot5
+hot6
+hoŋ1
+hoŋ2
+hoŋ3
+hoŋ4
+hoŋ5
+ht1
+hu1
+hu2
+hu3
+hu4
+hu5
+hu6
+huk5
+huk6
+hum1
+hum2
+hum3
+hum5
+hum6
+hun1
+hun2
+hun4
+huo1
+huo2
+huot5
+huoŋ5
+hup5
+hup6
+hut5
+hut6
+huŋ1
+huŋ2
+huŋ5
+hw1
+hwa1
+hwa2
+hwa4
+hwa5
+hwa6
+hwaj1
+hwaj2
+hwaj4
+hwaj6
+hwak5
+hwan1
+hwan2
+hwan3
+hwan5
+hwan6
+hwat6
+hwe1
+hwe2
+hwe5
+hwe6
+hwek5
+hweŋ1
+hwi1
+hwi2
+hwi4
+hwi5
+hwi6
+hwien1
+hwien2
+hwien3
+hwien6
+hwiet5
+hwiet6
+hwik5
+hwik6
+hwit5
+hwiŋ1
+hwiŋ2
+hwăj1
+hwăj5
+hwăk5
+hwăk6
+hwăm5
+hwăn2
+hwăn4
+hwăt5
+hwăŋ1
+hwăŋ3
+hwɛ1
+hwɛ2
+hwɛ6
+hwɛn1
+hwɛn4
+hwɛt5
+hwɛ̆k6
+hwɛ̆ŋ1
+hwɛ̆ŋ2
+hwɛ̆ŋ3
+hwɛ̆ŋ4
+hwɛ̆ŋ5
+hwɛ̆ŋ6
+hwɤ1
+hwɤ̆n1
+hwɤ̆n5
+hăj1
+hăj3
+hăj5
+hăk5
+hăk6
+hăm1
+hăm2
+hăm4
+hăm6
+hăn2
+hăn4
+hăn5
+hăt5
+hăw1
+hăw2
+hăw3
+hăw4
+hăw5
+hăw6
+hăŋ1
+hăŋ2
+hăŋ3
+hăŋ5
+hɔ1
+hɔ2
+hɔ4
+hɔ5
+hɔ6
+hɔj1
+hɔj2
+hɔj4
+hɔj5
+hɔk5
+hɔm1
+hɔm2
+hɔm3
+hɔm4
+hɔm5
+hɔn1
+hɔn2
+hɔn4
+hɔ̆k1
+hɔ̆k5
+hɔ̆k6
+hɔ̆p5
+hɔ̆p6
+hɔ̆t5
+hɔ̆ŋ1
+hɔ̆ŋ2
+hɔ̆ŋ4
+hɔ̆ŋ5
+hɔ̆ŋ6
+hɛ1
+hɛ2
+hɛ5
+hɛ6
+hɛk1
+hɛk5
+hɛm1
+hɛm2
+hɛm3
+hɛm4
+hɛn1
+hɛn2
+hɛn4
+hɛn5
+hɛn6
+hɛp6
+hɛt5
+hɛw1
+hɛw2
+hɛw4
+hɛw5
+hɛ̆k5
+hɛ̆k6
+hɛ̆ŋ1
+hɛ̆ŋ2
+hɛ̆ŋ3
+hɛ̆ŋ4
+hɛ̆ŋ5
+hɛ̆ŋ6
+hɤ1
+hɤ2
+hɤ3
+hɤ4
+hɤ5
+hɤj1
+hɤj2
+hɤj3
+hɤj4
+hɤj6
+hɤm2
+hɤm5
+hɤm6
+hɤn1
+hɤn2
+hɤn4
+hɤn5
+hɤp5
+hɤp6
+hɤt5
+hɤt6
+hɤ̆j1
+hɤ̆j2
+hɤ̆j4
+hɤ̆j5
+hɤ̆m1
+hɤ̆m2
+hɤ̆m4
+hɤ̆m5
+hɤ̆m6
+hɤ̆n1
+hɤ̆n5
+hɤ̆n6
+hɤ̆p5
+hɤ̆p6
+hɤ̆t5
+hɤ̆w1
+hɤ̆w2
+hɤ̆w3
+hɤ̆w4
+hɤ̆w5
+hɤ̆w6
+hɤ̆ŋ3
+hɤ̆ŋ4
+hɯ1
+hɯ2
+hɯ3
+hɯ4
+hɯ5
+hɯ6
+hɯk5
+hɯk6
+hɯm2
+hɯw1
+hɯw3
+hɯŋ1
+hɯŋ2
+hɯŋ3
+hɯŋ4
+hɯŋ5
+hɯɤ5
+hɯɤk5
+hɯɤm1
+hɯɤm2
+hɯɤm6
+hɯɤn1
+hɯɤw1
+hɯɤŋ1
+hɯɤŋ2
+hɯɤŋ4
+hɯɤŋ5
+i1
+i2
+i3
+i4
+i5
+i6
+ie1
+ie4
+iek1
+iem4
+iem5
+ien1
+ien5
+iet5
+iew1
+iew4
+iew5
+ieŋ1
+ieŋ4
+ik1
+ik5
+ik6
+im1
+im4
+in1
+in2
+in4
+in5
+ip1
+it1
+it5
+it6
+iw1
+iw4
+iŋ1
+iŋ2
+j1
+k1
+ka1
+ka2
+ka4
+ka5
+ka6
+kaj1
+kaj2
+kaj3
+kaj4
+kaj5
+kak1
+kak5
+kak6
+kam1
+kam4
+kam5
+kam6
+kan1
+kan2
+kan4
+kan5
+kan6
+kap5
+kap6
+kat1
+kat5
+ke1
+ke2
+ke4
+ke5
+ke6
+kek5
+kek6
+kem2
+ken1
+ken2
+kep1
+kep5
+ket5
+kew1
+kew2
+kew5
+keŋ1
+keŋ2
+keŋ3
+keŋ6
+ki1
+ki2
+ki3
+ki4
+ki5
+ki6
+kie1
+kie2
+kiem1
+kiem2
+kiem4
+kiem5
+kiem6
+kien1
+kien2
+kien5
+kien6
+kiep5
+kiet1
+kiet5
+kiet6
+kiew1
+kiew2
+kiew4
+kiew5
+kiew6
+kieŋ1
+kieŋ2
+kieŋ3
+kieŋ4
+kieŋ5
+kik1
+kik5
+kik6
+kim1
+kim2
+kin1
+kin2
+kin5
+kip1
+kip5
+kip6
+kit1
+kit5
+kit6
+kiw3
+kiŋ1
+kiŋ2
+kiŋ4
+kiŋ5
+kj1
+kk1
+km1
+kn1
+ko1
+ko2
+ko3
+ko4
+ko5
+ko6
+koj1
+koj3
+koj4
+koj5
+koj6
+kok5
+kok6
+kom1
+kom2
+kom5
+kom6
+kon1
+kon2
+kon4
+kon5
+kon6
+kop5
+kop6
+kot1
+kot5
+kot6
+koŋ1
+koŋ2
+koŋ4
+koŋ5
+koŋ6
+kt1
+ku1
+ku2
+ku3
+ku4
+ku5
+ku6
+kuk5
+kuk6
+kum1
+kum2
+kum4
+kum5
+kum6
+kun1
+kun2
+kun3
+kun4
+kun5
+kuo1
+kuo4
+kuoj5
+kuoj6
+kuok5
+kuok6
+kuom3
+kuon2
+kuon5
+kuon6
+kuoŋ1
+kuoŋ2
+kuoŋ5
+kuoŋ6
+kup5
+kup6
+kut5
+kut6
+kuŋ1
+kuŋ2
+kuŋ3
+kuŋ4
+kuŋ5
+kuŋ6
+kw1
+kwa1
+kwa2
+kwa4
+kwa5
+kwa6
+kwaj1
+kwaj2
+kwaj4
+kwaj5
+kwaj6
+kwak5
+kwak6
+kwan1
+kwan2
+kwan4
+kwan5
+kwat1
+kwat5
+kwat6
+kwe1
+kwe5
+kwe6
+kwek6
+kwen1
+kwen6
+kwet5
+kwet6
+kwew2
+kweŋ2
+kwi1
+kwi2
+kwi3
+kwi4
+kwi5
+kwi6
+kwien1
+kwien2
+kwien4
+kwien5
+kwien6
+kwiet5
+kwiet6
+kwik5
+kwin1
+kwip6
+kwit5
+kwit6
+kwiw5
+kwiŋ2
+kwiŋ4
+kwiŋ5
+kwok5
+kwt1
+kwăj1
+kwăj2
+kwăj4
+kwăj5
+kwăj6
+kwăk5
+kwăk6
+kwăm1
+kwăm2
+kwăm5
+kwăm6
+kwăn1
+kwăn2
+kwăn5
+kwăn6
+kwăp5
+kwăp6
+kwăt5
+kwăt6
+kwăw2
+kwăw5
+kwăw6
+kwăŋ1
+kwăŋ4
+kwăŋ6
+kwɔ6
+kwɛ1
+kwɛ2
+kwɛ3
+kwɛ4
+kwɛ5
+kwɛn1
+kwɛn2
+kwɛn5
+kwɛt5
+kwɛt6
+kwɛw1
+kwɛw2
+kwɛw5
+kwɛw6
+kwɛ̆k5
+kwɛ̆k6
+kwɛ̆ŋ1
+kwɛ̆ŋ2
+kwɛ̆ŋ3
+kwɛ̆ŋ4
+kwɛ̆ŋ5
+kwɛ̆ŋ6
+kwɤ1
+kwɤ2
+kwɤ4
+kwɤ5
+kwɤ̆j1
+kwɤ̆j2
+kwɤ̆j3
+kwɤ̆j4
+kwɤ̆j5
+kwɤ̆j6
+kwɤ̆k5
+kwɤ̆n1
+kwɤ̆n2
+kwɤ̆n3
+kwɤ̆n4
+kwɤ̆n5
+kwɤ̆n6
+kwɤ̆t5
+kwɤ̆t6
+kwɤ̆ŋ2
+kwɤ̆ŋ4
+kăj1
+kăj2
+kăj5
+kăj6
+kăk5
+kăk6
+kăm1
+kăm2
+kăm5
+kăm6
+kăn1
+kăn2
+kăn4
+kăn5
+kăn6
+kăp5
+kăp6
+kăt5
+kăt6
+kăw1
+kăw2
+kăw4
+kăw5
+kăw6
+kăŋ1
+kăŋ4
+kɔ1
+kɔ2
+kɔ4
+kɔ5
+kɔ6
+kɔj1
+kɔj2
+kɔj3
+kɔj4
+kɔj5
+kɔk5
+kɔk6
+kɔm1
+kɔm2
+kɔm4
+kɔm5
+kɔm6
+kɔn1
+kɔn2
+kɔn4
+kɔn5
+kɔn6
+kɔ̆k5
+kɔ̆k6
+kɔ̆p5
+kɔ̆p6
+kɔ̆t1
+kɔ̆t5
+kɔ̆t6
+kɔ̆ŋ1
+kɔ̆ŋ2
+kɔ̆ŋ3
+kɔ̆ŋ5
+kɔ̆ŋ6
+kɛ1
+kɛ2
+kɛ3
+kɛ4
+kɛ5
+kɛ6
+kɛk5
+kɛm1
+kɛm2
+kɛm3
+kɛm5
+kɛn1
+kɛn2
+kɛn5
+kɛn6
+kɛp5
+kɛp6
+kɛt1
+kɛt5
+kɛt6
+kɛw1
+kɛw2
+kɛw3
+kɛw4
+kɛw5
+kɛw6
+kɛŋ1
+kɛŋ4
+kɛ̆k5
+kɛ̆k6
+kɛ̆ŋ1
+kɛ̆ŋ2
+kɛ̆ŋ4
+kɛ̆ŋ5
+kɛ̆ŋ6
+kɤ1
+kɤ2
+kɤ3
+kɤ5
+kɤj1
+kɤj2
+kɤj3
+kɤj4
+kɤm1
+kɤm3
+kɤm5
+kɤm6
+kɤn1
+kɤn3
+kɤn5
+kɤn6
+kɤp6
+kɤt5
+kɤt6
+kɤ̆j1
+kɤ̆j2
+kɤ̆j5
+kɤ̆j6
+kɤ̆k5
+kɤ̆m1
+kɤ̆m2
+kɤ̆m3
+kɤ̆m4
+kɤ̆m5
+kɤ̆n1
+kɤ̆n2
+kɤ̆n3
+kɤ̆n4
+kɤ̆n5
+kɤ̆n6
+kɤ̆p5
+kɤ̆p6
+kɤ̆t5
+kɤ̆t6
+kɤ̆w1
+kɤ̆w2
+kɤ̆w4
+kɤ̆w5
+kɤ̆w6
+kɤ̆ŋ1
+kɤ̆ŋ3
+kɯ1
+kɯ2
+kɯ3
+kɯ4
+kɯ5
+kɯ6
+kɯj4
+kɯk5
+kɯk6
+kɯt5
+kɯw1
+kɯw2
+kɯw3
+kɯw4
+kɯw5
+kɯw6
+kɯŋ1
+kɯŋ5
+kɯɤ1
+kɯɤ4
+kɯɤ5
+kɯɤ6
+kɯɤj2
+kɯɤj3
+kɯɤj5
+kɯɤk5
+kɯɤk6
+kɯɤm2
+kɯɤp5
+kɯɤŋ1
+kɯɤŋ2
+kɯɤŋ3
+l1
+l5
+la1
+la2
+la3
+la4
+la5
+la6
+laj1
+laj2
+laj3
+laj4
+laj5
+laj6
+lak5
+lak6
+lam1
+lam2
+lam3
+lam4
+lam6
+lan1
+lan2
+lan3
+lan5
+lan6
+lap5
+lap6
+lat1
+lat5
+lat6
+le1
+le2
+le3
+le4
+le6
+lek5
+lek6
+len1
+let5
+let6
+lew1
+lew2
+lew4
+lew5
+leŋ1
+leŋ2
+leŋ6
+li1
+li2
+li3
+li5
+li6
+lie1
+lie2
+lie6
+liek5
+liem1
+liem2
+liem3
+liem5
+liem6
+lien1
+lien2
+lien3
+lien5
+liep5
+liep6
+liet6
+liew1
+liew2
+liew3
+liew6
+lieŋ1
+lieŋ4
+lieŋ5
+lieŋ6
+lik1
+lik5
+lik6
+lim1
+lim2
+lim6
+lin1
+lip5
+lit1
+lit5
+liw1
+liw2
+liw4
+liw5
+liw6
+liŋ1
+liŋ2
+liŋ3
+liŋ4
+liŋ5
+liŋ6
+lj1
+lm1
+lo1
+lo2
+lo3
+lo4
+lo5
+lo6
+loj1
+loj2
+loj3
+loj5
+loj6
+lok5
+lok6
+lom1
+lom2
+lom4
+lom5
+lom6
+lon2
+lon4
+lon5
+lon6
+lop5
+lop6
+lot1
+lot5
+lot6
+loŋ1
+loŋ2
+loŋ4
+loŋ6
+lu1
+lu2
+lu3
+lu4
+lu5
+lu6
+luk5
+luk6
+lum1
+lum2
+lum3
+lum4
+lum5
+lum6
+lun2
+lun3
+lun4
+lun5
+lun6
+luo1
+luo2
+luo3
+luo5
+luo6
+luok5
+luok6
+luom1
+luom6
+luon1
+luon2
+luot5
+luoŋ1
+luoŋ2
+luoŋ3
+luoŋ5
+lup5
+lup6
+lut5
+lut6
+luŋ1
+luŋ2
+luŋ3
+luŋ4
+luŋ5
+luŋ6
+lw1
+lwa1
+lwa2
+lwa3
+lwa4
+lwa5
+lwaj2
+lwaj6
+lwak6
+lwan1
+lwan2
+lwan6
+lwat5
+lwat6
+lwi1
+lwi2
+lwi3
+lwi4
+lwi5
+lwi6
+lwie1
+lwien1
+lwien5
+lwien6
+lwik5
+lwin1
+lwiŋ5
+lwăj1
+lwăn1
+lwăt5
+lwăŋ1
+lwăŋ2
+lwɛ1
+lwɛ2
+lwɛ5
+lwɛn1
+lwɛt5
+lwɛt6
+lwɛ̆ŋ1
+lwɛ̆ŋ2
+lwɛ̆ŋ3
+lwɛ̆ŋ4
+lwɛ̆ŋ5
+lwɛ̆ŋ6
+lwɤ̆n1
+lwɤ̆n4
+lwɤ̆n5
+lwɤ̆n6
+lwɤ̆t6
+lăj1
+lăj4
+lăj5
+lăj6
+lăk5
+lăk6
+lăm1
+lăm2
+lăm4
+lăm5
+lăm6
+lăn1
+lăn2
+lăn4
+lăn6
+lăp5
+lăp6
+lăt5
+lăt6
+lăw1
+lăw2
+lăw3
+lăw4
+lăw5
+lăw6
+lăŋ1
+lăŋ2
+lăŋ3
+lăŋ4
+lăŋ5
+lăŋ6
+lɔ1
+lɔ2
+lɔ3
+lɔ5
+lɔ6
+lɔj1
+lɔj2
+lɔj3
+lɔj4
+lɔj5
+lɔj6
+lɔk1
+lɔm1
+lɔm2
+lɔm3
+lɔm4
+lɔm5
+lɔm6
+lɔn1
+lɔn2
+lɔn4
+lɔn6
+lɔŋ1
+lɔ̆k5
+lɔ̆k6
+lɔ̆p5
+lɔ̆p6
+lɔ̆t5
+lɔ̆t6
+lɔ̆ŋ1
+lɔ̆ŋ2
+lɔ̆ŋ3
+lɔ̆ŋ4
+lɔ̆ŋ5
+lɔ̆ŋ6
+lɛ1
+lɛ2
+lɛ3
+lɛ4
+lɛ5
+lɛ6
+lɛj1
+lɛk5
+lɛm1
+lɛm2
+lɛm4
+lɛm5
+lɛm6
+lɛn1
+lɛn2
+lɛn3
+lɛn4
+lɛn5
+lɛn6
+lɛp5
+lɛp6
+lɛt5
+lɛt6
+lɛw1
+lɛw2
+lɛw3
+lɛw4
+lɛw5
+lɛw6
+lɛŋ1
+lɛŋ4
+lɛŋ5
+lɛ̆k5
+lɛ̆k6
+lɛ̆ŋ1
+lɛ̆ŋ2
+lɛ̆ŋ3
+lɛ̆ŋ4
+lɛ̆ŋ5
+lɛ̆ŋ6
+lɤ1
+lɤ2
+lɤ3
+lɤ4
+lɤ5
+lɤ6
+lɤj1
+lɤj2
+lɤj3
+lɤj4
+lɤj5
+lɤj6
+lɤm2
+lɤm3
+lɤm4
+lɤm6
+lɤn1
+lɤn2
+lɤn4
+lɤn5
+lɤn6
+lɤp5
+lɤp6
+lɤt5
+lɤt6
+lɤ̆j1
+lɤ̆j2
+lɤ̆j3
+lɤ̆j4
+lɤ̆j5
+lɤ̆j6
+lɤ̆k5
+lɤ̆m1
+lɤ̆m2
+lɤ̆m3
+lɤ̆m4
+lɤ̆m5
+lɤ̆n1
+lɤ̆n2
+lɤ̆n3
+lɤ̆n4
+lɤ̆n5
+lɤ̆n6
+lɤ̆p5
+lɤ̆p6
+lɤ̆t5
+lɤ̆t6
+lɤ̆w1
+lɤ̆w2
+lɤ̆w4
+lɤ̆w6
+lɤ̆ŋ1
+lɯ1
+lɯ2
+lɯ3
+lɯ4
+lɯ6
+lɯk5
+lɯk6
+lɯt5
+lɯw1
+lɯw6
+lɯŋ1
+lɯŋ2
+lɯŋ3
+lɯŋ4
+lɯŋ6
+lɯɤ1
+lɯɤ2
+lɯɤ3
+lɯɤ4
+lɯɤ5
+lɯɤ6
+lɯɤj2
+lɯɤj3
+lɯɤj5
+lɯɤk6
+lɯɤm1
+lɯɤm2
+lɯɤm6
+lɯɤn1
+lɯɤn2
+lɯɤn6
+lɯɤt5
+lɯɤt6
+lɯɤŋ1
+lɯɤŋ2
+lɯɤŋ3
+lɯɤŋ5
+lɯɤŋ6
+m1
+ma1
+ma2
+ma3
+ma4
+ma5
+ma6
+maj1
+maj2
+maj3
+maj4
+maj5
+maj6
+mak5
+mak6
+mam5
+man1
+man2
+man3
+man6
+map6
+mat1
+mat5
+mat6
+me1
+me2
+me3
+me5
+me6
+mek5
+mem2
+men1
+men2
+men5
+met5
+met6
+mew5
+meŋ1
+meŋ6
+mi1
+mi2
+mi3
+mi4
+mi5
+mi6
+mie1
+mie4
+mie5
+mien1
+mien2
+mien3
+mien5
+mien6
+miet5
+miet6
+miew1
+miew2
+miew3
+miew5
+mieŋ4
+mieŋ5
+mieŋ6
+mik1
+mik5
+mik6
+mim3
+mim4
+mim5
+min1
+min2
+min6
+mip1
+mip5
+mit1
+mit5
+mit6
+miw5
+miŋ1
+miŋ2
+mj1
+mm1
+mn1
+mo1
+mo2
+mo3
+mo4
+mo5
+mo6
+moj1
+moj2
+moj3
+moj5
+moj6
+mok5
+mok6
+mom1
+mom2
+mon1
+mon2
+mot5
+mot6
+moŋ1
+moŋ2
+moŋ4
+moŋ5
+moŋ6
+mu1
+mu2
+mu3
+mu4
+mu5
+mu6
+muk5
+muk6
+mum1
+mum3
+mum4
+mum5
+mun1
+mun2
+mun4
+mun5
+mun6
+muo1
+muo2
+muo5
+muoj1
+muoj2
+muoj3
+muoj5
+muoj6
+muom3
+muon1
+muon5
+muon6
+muot5
+muoŋ1
+muoŋ2
+muoŋ3
+muoŋ5
+mup5
+mut1
+mut5
+mut6
+muŋ1
+muŋ2
+muŋ4
+mw1
+mwi1
+mwi2
+mwi3
+mwi4
+mwi5
+mwi6
+mwăj1
+mwɤ1
+măj1
+măj2
+măj4
+măj5
+măj6
+măk5
+măk6
+măm1
+măm5
+măn1
+măn2
+măn4
+măn5
+măn6
+măt5
+măt6
+măw1
+măw2
+măw3
+măw5
+măw6
+măŋ1
+măŋ5
+mɔ1
+mɔ2
+mɔ3
+mɔ4
+mɔ5
+mɔ6
+mɔj1
+mɔj2
+mɔj4
+mɔj5
+mɔj6
+mɔk5
+mɔm1
+mɔm2
+mɔm3
+mɔm4
+mɔm5
+mɔn1
+mɔn2
+mɔn5
+mɔn6
+mɔŋ1
+mɔ̆k5
+mɔ̆k6
+mɔ̆p5
+mɔ̆p6
+mɔ̆t5
+mɔ̆t6
+mɔ̆ŋ1
+mɔ̆ŋ2
+mɔ̆ŋ4
+mɔ̆ŋ5
+mɔ̆ŋ6
+mɛ1
+mɛ2
+mɛ3
+mɛ4
+mɛ5
+mɛ6
+mɛk5
+mɛm1
+mɛm2
+mɛm5
+mɛn1
+mɛn2
+mɛn5
+mɛp5
+mɛp6
+mɛt1
+mɛt5
+mɛt6
+mɛw1
+mɛw2
+mɛw5
+mɛw6
+mɛŋ2
+mɛ̆k5
+mɛ̆k6
+mɛ̆ŋ1
+mɛ̆ŋ2
+mɛ̆ŋ3
+mɛ̆ŋ4
+mɛ̆ŋ5
+mɛ̆ŋ6
+mɤ1
+mɤ2
+mɤ3
+mɤ4
+mɤ5
+mɤ6
+mɤj2
+mɤj5
+mɤm2
+mɤm5
+mɤn1
+mɤn4
+mɤn5
+mɤ̆j1
+mɤ̆j2
+mɤ̆j4
+mɤ̆j5
+mɤ̆j6
+mɤ̆m1
+mɤ̆m2
+mɤ̆m3
+mɤ̆m4
+mɤ̆m6
+mɤ̆n1
+mɤ̆n2
+mɤ̆n3
+mɤ̆n4
+mɤ̆n5
+mɤ̆n6
+mɤ̆p5
+mɤ̆p6
+mɤ̆t5
+mɤ̆t6
+mɤ̆w1
+mɤ̆w2
+mɤ̆w3
+mɤ̆w4
+mɤ̆w5
+mɤ̆w6
+mɯk5
+mɯk6
+mɯt5
+mɯw1
+mɯw5
+mɯŋ1
+mɯŋ2
+mɯŋ4
+mɯɤ1
+mɯɤ4
+mɯɤ5
+mɯɤ6
+mɯɤj1
+mɯɤj2
+mɯɤj4
+mɯɤk6
+mɯɤn5
+mɯɤn6
+mɯɤp5
+mɯɤt5
+mɯɤt6
+mɯɤw3
+mɯɤŋ1
+mɯɤŋ2
+n1
+na1
+na2
+na3
+na4
+na5
+na6
+naj1
+naj2
+naj4
+naj5
+naj6
+nak5
+nak6
+nam1
+nam5
+nam6
+nan1
+nan2
+nan4
+nan5
+nan6
+nap5
+nap6
+nat1
+nat5
+nat6
+ne1
+ne2
+ne4
+ne6
+nem1
+nem5
+nem6
+nen1
+nen2
+nen5
+nen6
+nep5
+net5
+new1
+new5
+neŋ1
+ni1
+ni2
+ni4
+nie1
+nie3
+niem1
+niem2
+niem6
+nien1
+niet5
+niet6
+niew1
+niew6
+nieŋ2
+nieŋ3
+nik1
+nik5
+nik6
+nin1
+nin5
+nip5
+nit1
+nit5
+nit6
+niw1
+niw5
+niw6
+niŋ1
+niŋ5
+niŋ6
+nj1
+nm1
+no1
+no3
+no4
+no6
+noj1
+noj2
+noj3
+noj4
+noj5
+noj6
+nok5
+nom1
+nom2
+nom6
+non1
+non6
+nop6
+not5
+not6
+noŋ1
+noŋ2
+noŋ3
+noŋ4
+noŋ5
+nt1
+nu1
+nu6
+nuk5
+nuk6
+num1
+num5
+nun2
+nuo1
+nuo4
+nuoj1
+nuoj5
+nuok6
+nuom5
+nuot5
+nuot6
+nuoŋ1
+nup5
+nut5
+nuŋ1
+nuŋ2
+nuŋ3
+nuŋ5
+nw1
+nwan3
+nwi1
+nwi2
+nwi5
+năj1
+năj2
+năj3
+năj4
+năj5
+năj6
+năk5
+năk6
+năm1
+năm2
+năm5
+năn1
+năn2
+năn5
+năn6
+năp5
+năw1
+năw2
+năw3
+năw5
+năw6
+năŋ1
+năŋ2
+năŋ5
+năŋ6
+nɔ1
+nɔ2
+nɔ3
+nɔ4
+nɔ5
+nɔ6
+nɔj1
+nɔj2
+nɔj5
+nɔm1
+nɔm2
+nɔm4
+nɔn1
+nɔn3
+nɔn5
+nɔn6
+nɔ̆k5
+nɔ̆k6
+nɔ̆p5
+nɔ̆t5
+nɔ̆t6
+nɔ̆ŋ1
+nɔ̆ŋ2
+nɔ̆ŋ5
+nɔ̆ŋ6
+nɛ1
+nɛ2
+nɛ4
+nɛ5
+nɛ6
+nɛm1
+nɛm5
+nɛn1
+nɛn5
+nɛp5
+nɛp6
+nɛt5
+nɛt6
+nɛw1
+nɛw2
+nɛw4
+nɛw5
+nɛ̆k5
+nɛ̆ŋ1
+nɛ̆ŋ2
+nɛ̆ŋ5
+nɛ̆ŋ6
+nɤ1
+nɤ3
+nɤ4
+nɤ5
+nɤ6
+nɤj1
+nɤj5
+nɤm1
+nɤm2
+nɤm3
+nɤn1
+nɤp5
+nɤp6
+nɤt5
+nɤ̆j1
+nɤ̆j2
+nɤ̆j3
+nɤ̆j4
+nɤ̆j5
+nɤ̆j6
+nɤ̆k5
+nɤ̆m2
+nɤ̆m5
+nɤ̆m6
+nɤ̆n2
+nɤ̆n3
+nɤ̆n5
+nɤ̆p5
+nɤ̆p6
+nɤ̆w1
+nɤ̆w3
+nɤ̆w5
+nɤ̆w6
+nɤ̆ŋ1
+nɤ̆ŋ3
+nɤ̆ŋ5
+nɤ̆ŋ6
+nɯ1
+nɯ3
+nɯ6
+nɯk5
+nɯk6
+nɯt1
+nɯt5
+nɯŋ6
+nɯɤ1
+nɯɤ3
+nɯɤ4
+nɯɤ5
+nɯɤk5
+nɯɤm2
+nɯɤp6
+nɯɤŋ1
+nɯɤŋ2
+nɯɤŋ5
+o1
+o2
+o4
+o5
+oj1
+oj4
+oj5
+ok1
+ok5
+ok6
+om1
+om2
+om5
+on1
+on2
+on4
+op5
+op6
+ot5
+oŋ1
+oŋ2
+oŋ4
+oŋ5
+s1
+sa1
+sa2
+sa3
+sa4
+sa5
+sa6
+saj2
+saj4
+saj5
+sak5
+sak6
+sam1
+sam2
+sam4
+sam5
+sam6
+san1
+san5
+sap1
+sap5
+sat1
+sat5
+se1
+se2
+se4
+se5
+se6
+sek5
+sek6
+sem2
+sen1
+sep5
+sep6
+set5
+set6
+sew1
+sew2
+seŋ1
+seŋ2
+seŋ4
+si1
+si2
+si4
+si5
+si6
+sie2
+sie4
+sie5
+siek5
+siem1
+siem4
+sien1
+siet1
+siet5
+siew1
+sieŋ1
+sieŋ2
+sieŋ4
+sik1
+sik5
+sim1
+sin1
+sin4
+sin6
+sip1
+sit1
+sit5
+sit6
+siw2
+siw4
+siw5
+siw6
+siŋ1
+siŋ2
+siŋ3
+siŋ4
+siŋ5
+sj1
+sn1
+so1
+so2
+so4
+so5
+soj1
+soj4
+soj5
+sok5
+sok6
+som1
+som2
+som4
+son1
+son2
+son5
+son6
+sop5
+sop6
+sot5
+soŋ1
+soŋ2
+soŋ4
+soŋ5
+su1
+su2
+su3
+su5
+su6
+suk5
+suk6
+sum1
+sum2
+sum5
+sun1
+suo1
+suoj1
+suom6
+suoŋ2
+suoŋ4
+suoŋ5
+sup5
+sup6
+sut5
+suŋ1
+suŋ2
+suŋ4
+suŋ5
+sw1
+swa1
+swa2
+swa3
+swa4
+swa5
+swaj1
+swaj2
+swaj4
+swak5
+swak6
+swam2
+swan1
+swan2
+swat5
+swat6
+swe1
+swe2
+swe4
+swek6
+sweŋ2
+swi1
+swi2
+swi5
+swi6
+swie1
+swien1
+swien5
+swiet5
+swit5
+swit6
+swăj1
+swăj5
+swăn1
+swăn4
+swăn5
+swɛ1
+swɛ2
+swɛ6
+swɛn1
+swɛn2
+swɛt5
+swɛt6
+swɛ̆k6
+swɛ̆ŋ1
+swɛ̆ŋ2
+swɛ̆ŋ4
+swɛ̆ŋ6
+swɤ̆n1
+swɤ̆n4
+swɤ̆t5
+săj1
+săj4
+săj5
+săk5
+săm1
+săm5
+săn5
+săp5
+săt5
+săw1
+săw2
+săw4
+săw5
+săw6
+săŋ1
+săŋ2
+săŋ3
+sɔ1
+sɔ4
+sɔ5
+sɔ6
+sɔj1
+sɔj5
+sɔk5
+sɔm1
+sɔm5
+sɔn1
+sɔn5
+sɔŋ1
+sɔ̆k5
+sɔ̆k6
+sɔ̆p6
+sɔ̆t5
+sɔ̆ŋ1
+sɔ̆ŋ3
+sɛ1
+sɛ2
+sɛ4
+sɛ5
+sɛk5
+sɛm1
+sɛn1
+sɛn2
+sɛn4
+sɛn5
+sɛp5
+sɛp6
+sɛt5
+sɛt6
+sɛw1
+sɛw2
+sɛw3
+sɛw4
+sɛw5
+sɛw6
+sɛŋ2
+sɛŋ4
+sɛ̆k5
+sɛ̆k6
+sɛ̆ŋ1
+sɛ̆ŋ2
+sɛ̆ŋ5
+sɤ1
+sɤ2
+sɤ3
+sɤ4
+sɤ5
+sɤj1
+sɤj4
+sɤj5
+sɤm1
+sɤm2
+sɤn1
+sɤt5
+sɤ̆j1
+sɤ̆j4
+sɤ̆k5
+sɤ̆m1
+sɤ̆m2
+sɤ̆m4
+sɤ̆n4
+sɤ̆p5
+sɤ̆p6
+sɤ̆w1
+sɤ̆w2
+sɤ̆w4
+sɤ̆w5
+sɯ2
+sɯ4
+sɯ5
+sɯ6
+sɯk5
+sɯk6
+sɯŋ1
+sɯŋ2
+sɯŋ4
+sɯŋ5
+sɯɤ1
+sɯɤ4
+sɯɤk5
+sɯɤk6
+sɯɤŋ1
+sɯɤŋ2
+sɯɤŋ4
+sɯɤŋ5
+t'a1
+t'a2
+t'a4
+t'a5
+t'aj1
+t'aj2
+t'aj3
+t'aj4
+t'aj5
+t'ak5
+t'ak6
+t'am1
+t'am4
+t'am5
+t'an1
+t'an4
+t'an5
+t'ap5
+t'ap6
+t'at5
+t'e1
+t'e2
+t'e4
+t'e5
+t'e6
+t'ek5
+t'em1
+t'em2
+t'en6
+t'ep5
+t'et5
+t'ew1
+t'ew2
+t'ew4
+t'eŋ1
+t'i1
+t'i2
+t'i3
+t'i4
+t'i5
+t'i6
+t'ie1
+t'ie2
+t'ie5
+t'iek5
+t'iem1
+t'iem4
+t'ien1
+t'ien2
+t'ien4
+t'ien5
+t'ien6
+t'iep5
+t'iep6
+t'iet5
+t'iet6
+t'iew1
+t'iew2
+t'iew4
+t'iew5
+t'iew6
+t'ieŋ1
+t'ieŋ2
+t'ik5
+t'ik6
+t'im5
+t'in1
+t'in2
+t'in5
+t'it5
+t'it6
+t'iw1
+t'iw2
+t'iw4
+t'iŋ1
+t'iŋ2
+t'iŋ4
+t'iŋ5
+t'iŋ6
+t'o1
+t'o2
+t'o4
+t'o5
+t'oj1
+t'oj4
+t'oj5
+t'ok5
+t'ok6
+t'om2
+t'on1
+t'on2
+t'on3
+t'on4
+t'on5
+t'on6
+t'op6
+t'ot5
+t'ot6
+t'oŋ1
+t'oŋ5
+t'u1
+t'u2
+t'u4
+t'u5
+t'u6
+t'uk5
+t'uk6
+t'um1
+t'um2
+t'um4
+t'un1
+t'uo1
+t'uo2
+t'uo4
+t'uok5
+t'uok6
+t'uom6
+t'uon1
+t'uon2
+t'uon3
+t'uon5
+t'uoŋ2
+t'uoŋ4
+t'up6
+t'ut5
+t'ut6
+t'uŋ1
+t'uŋ2
+t'uŋ3
+t'uŋ4
+t'uŋ5
+t'uŋ6
+t'wa1
+t'wa2
+t'wa3
+t'wa4
+t'wa5
+t'waj1
+t'waj4
+t'waj5
+t'waj6
+t'wan5
+t'wat5
+t'wat6
+t'we1
+t'we5
+t'wi1
+t'wi2
+t'wi4
+t'wi5
+t'wi6
+t'wien1
+t'wien2
+t'wiet5
+t'wăn1
+t'wăt5
+t'wăŋ5
+t'wɛ̆ŋ1
+t'wɛ̆ŋ4
+t'wɛ̆ŋ5
+t'wɤ4
+t'wɤ̆n2
+t'wɤ̆n3
+t'wɤ̆n6
+t'wɤ̆t6
+t'ăj1
+t'ăj2
+t'ăj4
+t'ăk5
+t'ăm1
+t'ăm4
+t'ăm5
+t'ăn1
+t'ăn2
+t'ăn5
+t'ăp5
+t'ăt5
+t'ăw1
+t'ăw2
+t'ăw4
+t'ăw5
+t'ăw6
+t'ăŋ1
+t'ăŋ2
+t'ăŋ4
+t'ăŋ5
+t'ăŋ6
+t'ɔ1
+t'ɔ2
+t'ɔ4
+t'ɔ5
+t'ɔ6
+t'ɔj1
+t'ɔj2
+t'ɔj4
+t'ɔj5
+t'ɔm1
+t'ɔm2
+t'ɔm3
+t'ɔm4
+t'ɔm5
+t'ɔn1
+t'ɔ̆k5
+t'ɔ̆k6
+t'ɔ̆p5
+t'ɔ̆t5
+t'ɔ̆t6
+t'ɔ̆ŋ1
+t'ɔ̆ŋ2
+t'ɔ̆ŋ3
+t'ɛ1
+t'ɛ2
+t'ɛ3
+t'ɛ4
+t'ɛ5
+t'ɛm2
+t'ɛn1
+t'ɛn2
+t'ɛn6
+t'ɛp5
+t'ɛt5
+t'ɛw1
+t'ɛw2
+t'ɛw4
+t'ɛw6
+t'ɛ̆k5
+t'ɛ̆k6
+t'ɛ̆ŋ1
+t'ɛ̆ŋ2
+t'ɛ̆ŋ4
+t'ɛ̆ŋ5
+t'ɛ̆ŋ6
+t'ɤ1
+t'ɤ2
+t'ɤ4
+t'ɤ5
+t'ɤ6
+t'ɤj1
+t'ɤj2
+t'ɤj5
+t'ɤm1
+t'ɤm5
+t'ɤn1
+t'ɤn2
+t'ɤt5
+t'ɤ̆j1
+t'ɤ̆j2
+t'ɤ̆j4
+t'ɤ̆j5
+t'ɤ̆m1
+t'ɤ̆m2
+t'ɤ̆m3
+t'ɤ̆m4
+t'ɤ̆m5
+t'ɤ̆m6
+t'ɤ̆n1
+t'ɤ̆n2
+t'ɤ̆n3
+t'ɤ̆n4
+t'ɤ̆n6
+t'ɤ̆p5
+t'ɤ̆p6
+t'ɤ̆t5
+t'ɤ̆t6
+t'ɤ̆w1
+t'ɤ̆w2
+t'ɤ̆w4
+t'ɤ̆w5
+t'ɯ1
+t'ɯ2
+t'ɯ4
+t'ɯ5
+t'ɯ6
+t'ɯk5
+t'ɯk6
+t'ɯŋ1
+t'ɯŋ2
+t'ɯŋ3
+t'ɯɤ1
+t'ɯɤ2
+t'ɯɤ4
+t'ɯɤj3
+t'ɯɤk5
+t'ɯɤk6
+t'ɯɤn2
+t'ɯɤn3
+t'ɯɤt5
+t'ɯɤt6
+t'ɯɤŋ1
+t'ɯɤŋ2
+t'ɯɤŋ4
+t'ɯɤŋ6
+t1
+ta1
+ta2
+ta3
+ta4
+ta5
+ta6
+taj1
+taj2
+taj3
+taj4
+taj5
+taj6
+tak5
+tak6
+tam1
+tam2
+tam5
+tam6
+tan1
+tan2
+tan4
+tan5
+tap5
+tap6
+tat5
+tat6
+te1
+te2
+te3
+te4
+te5
+te6
+tek5
+tem1
+ten1
+tep6
+tet5
+tew1
+tew5
+teŋ1
+teŋ2
+teŋ3
+teŋ4
+ti1
+ti2
+ti3
+ti4
+ti5
+ti6
+tie1
+tie4
+tie5
+tiek5
+tiek6
+tiem1
+tiem2
+tiem5
+tiem6
+tien1
+tien2
+tien3
+tien5
+tien6
+tiep5
+tiep6
+tiet5
+tiet6
+tiew1
+tiew2
+tiew3
+tiew4
+tiew5
+tieŋ1
+tieŋ5
+tik5
+tik6
+tim1
+tim2
+tim4
+tim5
+tin1
+tin3
+tin5
+tip1
+tip5
+tit1
+tit5
+tit6
+tiw1
+tiw3
+tiw5
+tiw6
+tiŋ1
+tiŋ2
+tiŋ3
+tiŋ4
+tiŋ5
+tiŋ6
+tj1
+tm1
+to1
+to2
+to4
+to5
+to6
+toj1
+toj2
+toj5
+toj6
+tok5
+tok6
+tom1
+ton1
+ton2
+ton4
+ton5
+top5
+tot1
+tot5
+tot6
+toŋ1
+toŋ2
+toŋ4
+toŋ5
+tp1
+tt1
+tu1
+tu2
+tu4
+tu5
+tu6
+tuk5
+tuk6
+tum1
+tum2
+tum3
+tum4
+tum5
+tum6
+tun1
+tun4
+tuo1
+tuo4
+tuo5
+tuoj2
+tuoj4
+tuok5
+tuok6
+tuon1
+tuon2
+tuon5
+tuot5
+tuot6
+tuoŋ1
+tuoŋ2
+tup5
+tut5
+tut6
+tuŋ1
+tuŋ2
+tuŋ5
+tuŋ6
+tw1
+twa1
+twa2
+twa4
+twa5
+twa6
+twaj2
+twaj5
+twaj6
+twak5
+twak6
+twan1
+twan2
+twan5
+twat5
+twe5
+twe6
+twek5
+twek6
+tweŋ2
+twi1
+twi2
+twi4
+twi5
+twi6
+twie1
+twien1
+twien2
+twien4
+twien5
+twiet5
+twiet6
+twin1
+twip5
+twit5
+tww1
+twăj5
+twɛ1
+twɛ2
+twɛ3
+twɛ4
+twɛ5
+twɛn1
+twɛn2
+twɛt5
+twɛt6
+twɛ̆ŋ1
+twɛ̆ŋ2
+twɛ̆ŋ5
+twɛ̆ŋ6
+twɤ̆n1
+twɤ̆n2
+twɤ̆n3
+twɤ̆n5
+twɤ̆t5
+tăj1
+tăj2
+tăj5
+tăk5
+tăk6
+tăm1
+tăm2
+tăm5
+tăn1
+tăn2
+tăn4
+tăn5
+tăn6
+tăp5
+tăt5
+tăw1
+tăw2
+tăw4
+tăw5
+tăw6
+tăŋ1
+tăŋ2
+tăŋ6
+tɔ1
+tɔ2
+tɔ4
+tɔ5
+tɔj1
+tɔj2
+tɔj4
+tɔj5
+tɔm1
+tɔm2
+tɔm3
+tɔm5
+tɔn1
+tɔn2
+tɔŋ1
+tɔŋ2
+tɔ̆k5
+tɔ̆k6
+tɔ̆p1
+tɔ̆p5
+tɔ̆p6
+tɔ̆t5
+tɔ̆t6
+tɔ̆ŋ1
+tɔ̆ŋ2
+tɔ̆ŋ4
+tɔ̆ŋ6
+tɛ1
+tɛ2
+tɛ3
+tɛ4
+tɛ5
+tɛk5
+tɛm1
+tɛm2
+tɛm5
+tɛn1
+tɛn3
+tɛp5
+tɛp6
+tɛt1
+tɛt5
+tɛt6
+tɛw1
+tɛw2
+tɛw4
+tɛw5
+tɛw6
+tɛŋ1
+tɛ̆k5
+tɛ̆k6
+tɛ̆ŋ1
+tɛ̆ŋ2
+tɛ̆ŋ4
+tɛ̆ŋ5
+tɛ̆ŋ6
+tɤ1
+tɤ2
+tɤ4
+tɤ5
+tɤ6
+tɤj1
+tɤj2
+tɤj5
+tɤm4
+tɤn1
+tɤn4
+tɤn5
+tɤn6
+tɤp5
+tɤp6
+tɤt1
+tɤ̆j1
+tɤ̆j2
+tɤ̆j4
+tɤ̆j5
+tɤ̆k5
+tɤ̆m1
+tɤ̆m2
+tɤ̆m4
+tɤ̆m5
+tɤ̆m6
+tɤ̆n1
+tɤ̆n2
+tɤ̆n4
+tɤ̆n5
+tɤ̆n6
+tɤ̆p5
+tɤ̆p6
+tɤ̆t5
+tɤ̆t6
+tɤ̆w1
+tɤ̆w2
+tɤ̆w4
+tɤ̆w5
+tɤ̆w6
+tɤ̆ŋ1
+tɤ̆ŋ2
+tɯ1
+tɯ2
+tɯ4
+tɯ5
+tɯ6
+tɯk5
+tɯw4
+tɯw6
+tɯŋ1
+tɯŋ2
+tɯŋ4
+tɯɤ1
+tɯɤ5
+tɯɤ6
+tɯɤj1
+tɯɤj4
+tɯɤj5
+tɯɤk5
+tɯɤk6
+tɯɤm1
+tɯɤp5
+tɯɤt5
+tɯɤt6
+tɯɤw2
+tɯɤŋ1
+tɯɤŋ2
+tɯɤŋ4
+tɯɤŋ5
+tɯɤŋ6
+u1
+u2
+u4
+u5
+u6
+uj1
+uk5
+uk6
+um1
+um2
+um5
+un1
+un2
+un4
+uo1
+uo2
+uo4
+uo5
+uo6
+uok5
+uom1
+uon1
+uon5
+uot6
+uoŋ4
+uoŋ5
+up5
+up6
+ut1
+ut5
+ut6
+uŋ1
+uŋ2
+uŋ4
+uŋ5
+v1
+va1
+va2
+va3
+va4
+va5
+va6
+vaj1
+vaj2
+vaj3
+vaj4
+vaj5
+vaj6
+vak1
+vak5
+vak6
+vam1
+vam2
+vam6
+van1
+van2
+van3
+van5
+van6
+vap5
+vap6
+vat5
+vat6
+ve1
+ve2
+ve5
+ve6
+vek5
+ven1
+ven2
+ven6
+vet5
+vet6
+vew1
+vew2
+vew5
+veŋ1
+veŋ4
+vi1
+vi2
+vi3
+vi4
+vi5
+vi6
+vie4
+vie5
+viek6
+viem1
+vien1
+vien2
+vien3
+vien4
+vien6
+viet5
+viet6
+vieŋ5
+vik5
+vim6
+vin1
+vin6
+vit5
+vit6
+viw5
+viŋ1
+viŋ3
+viŋ6
+vj1
+vk1
+vo1
+vo2
+vo3
+vo4
+vo5
+voj1
+voj5
+voj6
+vok5
+von1
+von2
+von5
+voŋ1
+voŋ2
+voŋ4
+voŋ5
+vt1
+vu1
+vu2
+vu3
+vu5
+vu6
+vuk5
+vuk6
+vum3
+vun1
+vun2
+vun6
+vuo1
+vuo2
+vuot5
+vuot6
+vuoŋ1
+vut1
+vut5
+vut6
+vuŋ1
+vuŋ2
+vuŋ3
+vuŋ6
+vw1
+vwan1
+vwi1
+vwi2
+văj1
+văj2
+văj4
+văj5
+văj6
+văk2
+văk5
+văk6
+văm2
+văn1
+văn2
+văn5
+văn6
+văt5
+văt6
+văw1
+văw2
+văw5
+văŋ1
+văŋ2
+văŋ4
+văŋ5
+vɔ1
+vɔ2
+vɔ3
+vɔ4
+vɔ5
+vɔ6
+vɔj1
+vɔj2
+vɔj5
+vɔj6
+vɔm2
+vɔn1
+vɔn2
+vɔn4
+vɔn5
+vɔ̆k5
+vɔ̆k6
+vɔ̆p6
+vɔ̆t5
+vɔ̆t6
+vɔ̆ŋ1
+vɔ̆ŋ2
+vɔ̆ŋ3
+vɔ̆ŋ4
+vɔ̆ŋ5
+vɔ̆ŋ6
+vɛ1
+vɛ2
+vɛ3
+vɛ4
+vɛ5
+vɛk5
+vɛk6
+vɛm6
+vɛn1
+vɛn4
+vɛn5
+vɛn6
+vɛp1
+vɛt5
+vɛt6
+vɛw1
+vɛw2
+vɛw4
+vɛw5
+vɛw6
+vɛ̆k5
+vɛ̆k6
+vɛ̆ŋ1
+vɛ̆ŋ2
+vɛ̆ŋ3
+vɛ̆ŋ4
+vɛ̆ŋ5
+vɛ̆ŋ6
+vɤ1
+vɤ2
+vɤ3
+vɤ4
+vɤ5
+vɤ6
+vɤj1
+vɤj2
+vɤj5
+vɤj6
+vɤn2
+vɤn4
+vɤt5
+vɤt6
+vɤ̆j1
+vɤ̆j2
+vɤ̆j3
+vɤ̆j4
+vɤ̆j5
+vɤ̆j6
+vɤ̆m1
+vɤ̆m6
+vɤ̆n1
+vɤ̆n2
+vɤ̆n3
+vɤ̆n4
+vɤ̆n5
+vɤ̆n6
+vɤ̆p5
+vɤ̆p6
+vɤ̆t5
+vɤ̆t6
+vɤ̆w2
+vɤ̆w4
+vɤ̆w5
+vɤ̆ŋ1
+vɤ̆ŋ2
+vɯk5
+vɯk6
+vɯt5
+vɯw1
+vɯŋ2
+vɯŋ3
+vɯŋ4
+vɯŋ6
+vɯɤ2
+vɯɤ3
+vɯɤ6
+vɯɤk6
+vɯɤn1
+vɯɤn2
+vɯɤn6
+vɯɤt6
+vɯɤŋ1
+vɯɤŋ4
+vɯɤŋ5
+vɯɤŋ6
+w1
+wa1
+wa2
+waj1
+waj2
+waj4
+waj5
+waj6
+wan1
+wan4
+wan5
+wap6
+wat5
+we4
+we5
+wi1
+wi4
+wi5
+wien1
+wien4
+wik6
+wiŋ2
+wăm1
+wăn2
+wăt5
+wăt6
+wăŋ4
+wɛ1
+wɛ4
+wɛ5
+wɛ6
+wɛ̆k5
+wɛ̆k6
+wɛ̆ŋ1
+wɛ̆ŋ2
+wɤ̆n4
+wɤ̆t5
+z1
+za1
+za2
+za3
+za4
+za5
+za6
+zaj1
+zaj2
+zaj3
+zaj4
+zaj5
+zaj6
+zak5
+zak6
+zam1
+zam2
+zam4
+zam5
+zam6
+zan1
+zan2
+zan3
+zan4
+zan5
+zan6
+zap5
+zap6
+zat5
+zat6
+ze1
+ze2
+ze3
+ze4
+ze5
+ze6
+zek5
+zek6
+zem5
+zen2
+zen6
+zet5
+zet6
+zew3
+zeŋ1
+zeŋ2
+zeŋ5
+zi1
+zi2
+zi3
+zi5
+zi6
+zie2
+zie3
+ziek5
+ziek6
+ziem1
+ziem2
+ziem3
+ziem6
+zien1
+zien3
+zien6
+ziep5
+ziep6
+ziet5
+ziet6
+ziew1
+ziew2
+ziew3
+ziew5
+ziew6
+zieŋ2
+zik5
+zik6
+zim1
+zim2
+zim5
+zin1
+zin3
+zip5
+zip6
+zit1
+zit6
+ziw2
+ziw5
+ziw6
+ziŋ1
+ziŋ3
+ziŋ5
+zj1
+zj2
+zj4
+zj5
+zk5
+zn1
+zn2
+zo1
+zo2
+zo3
+zoj1
+zoj2
+zoj3
+zoj4
+zoj5
+zoj6
+zok5
+zok6
+zom4
+zon1
+zon2
+zop6
+zot5
+zot6
+zoŋ1
+zoŋ2
+zoŋ5
+zoŋ6
+zp5
+zu1
+zu2
+zu3
+zu5
+zu6
+zuk6
+zum1
+zum2
+zum5
+zum6
+zun1
+zun2
+zun5
+zuo1
+zuo2
+zuo3
+zuo5
+zuo6
+zuoj1
+zuoj3
+zuoj5
+zuok5
+zuok6
+zup5
+zut5
+zuŋ1
+zuŋ2
+zuŋ3
+zuŋ5
+zuŋ6
+zw1
+zwa1
+zwa5
+zwa6
+zwaj3
+zwan3
+zwe6
+zweŋ2
+zwi1
+zwi2
+zwi3
+zwi4
+zwi5
+zwi6
+zwien1
+zwiet6
+zwɛ̆ŋ1
+zwɛ̆ŋ2
+zwɛ̆ŋ3
+zwɛ̆ŋ6
+zăj1
+zăj2
+zăj3
+zăj4
+zăj5
+zăj6
+zăk1
+zăk5
+zăk6
+zăm1
+zăm2
+zăm3
+zăm6
+zăn1
+zăn2
+zăn4
+zăn6
+zăt5
+zăt6
+zăw1
+zăw2
+zăw4
+zăw5
+zăw6
+zăŋ1
+zăŋ2
+zăŋ4
+zăŋ5
+zăŋ6
+zɔ1
+zɔ2
+zɔ4
+zɔ5
+zɔ6
+zɔj1
+zɔj2
+zɔj3
+zɔj4
+zɔj5
+zɔj6
+zɔm1
+zɔm2
+zɔm4
+zɔm5
+zɔn1
+zɔn2
+zɔn4
+zɔn6
+zɔ̆k5
+zɔ̆k6
+zɔ̆p6
+zɔ̆t6
+zɔ̆ŋ1
+zɔ̆ŋ2
+zɔ̆ŋ3
+zɔ̆ŋ4
+zɔ̆ŋ5
+zɔ̆ŋ6
+zɛ1
+zɛ2
+zɛ3
+zɛ4
+zɛ5
+zɛm2
+zɛm5
+zɛn1
+zɛn2
+zɛp5
+zɛp6
+zɛt6
+zɛw1
+zɛw4
+zɛw5
+zɛw6
+zɛ̆k5
+zɛ̆ŋ1
+zɛ̆ŋ2
+zɛ̆ŋ4
+zɛ̆ŋ5
+zɛ̆ŋ6
+zɤ1
+zɤ2
+zɤ3
+zɤ4
+zɤ5
+zɤ6
+zɤj1
+zɤj2
+zɤj5
+zɤm6
+zɤn1
+zɤn2
+zɤn3
+zɤn5
+zɤn6
+zɤp5
+zɤ̆j1
+zɤ̆j2
+zɤ̆j3
+zɤ̆j4
+zɤ̆j5
+zɤ̆j6
+zɤ̆k5
+zɤ̆m1
+zɤ̆m2
+zɤ̆m3
+zɤ̆m5
+zɤ̆m6
+zɤ̆n1
+zɤ̆n2
+zɤ̆n3
+zɤ̆n4
+zɤ̆n5
+zɤ̆n6
+zɤ̆p5
+zɤ̆p6
+zɤ̆t6
+zɤ̆w1
+zɤ̆w2
+zɤ̆w3
+zɤ̆w4
+zɤ̆w5
+zɤ̆w6
+zɤ̆ŋ1
+zɯ1
+zɯ2
+zɯ3
+zɯ5
+zɯ6
+zɯk5
+zɯk6
+zɯt5
+zɯt6
+zɯŋ1
+zɯŋ2
+zɯŋ4
+zɯŋ5
+zɯŋ6
+zɯɤ1
+zɯɤ2
+zɯɤ3
+zɯɤ5
+zɯɤ6
+zɯɤj5
+zɯɤj6
+zɯɤk6
+zɯɤn5
+zɯɤt6
+zɯɤŋ1
+zɯɤŋ2
+zɯɤŋ3
+zɯɤŋ5
+zɯɤŋ6
+ăj1
+ăj5
+ăm1
+ăm3
+ăn1
+ăp5
+ăt5
+ăw1
+ăw2
+ăw4
+ăw5
+ăŋ1
+ăŋ4
+ăŋ5
+ŋa1
+ŋa2
+ŋa3
+ŋa4
+ŋaj1
+ŋaj2
+ŋaj3
+ŋaj4
+ŋaj5
+ŋaj6
+ŋak5
+ŋak6
+ŋam2
+ŋan1
+ŋan2
+ŋan5
+ŋan6
+ŋap5
+ŋat5
+ŋat6
+ŋe1
+ŋe2
+ŋe3
+ŋe4
+ŋe6
+ŋek5
+ŋek6
+ŋen4
+ŋen6
+ŋet6
+ŋew1
+ŋew2
+ŋew3
+ŋew4
+ŋew6
+ŋeŋ1
+ŋeŋ3
+ŋeŋ4
+ŋi1
+ŋi2
+ŋi3
+ŋi4
+ŋi5
+ŋi6
+ŋie3
+ŋie5
+ŋiem1
+ŋiem3
+ŋiem6
+ŋien1
+ŋien2
+ŋien5
+ŋien6
+ŋiep6
+ŋiet6
+ŋieŋ1
+ŋik6
+ŋim4
+ŋin2
+ŋit6
+ŋiw1
+ŋiw4
+ŋiw6
+ŋiŋ1
+ŋiŋ3
+ŋiŋ4
+ŋo1
+ŋo2
+ŋo3
+ŋo4
+ŋo5
+ŋo6
+ŋoj1
+ŋoj2
+ŋok5
+ŋok6
+ŋom4
+ŋon1
+ŋon2
+ŋon4
+ŋon5
+ŋon6
+ŋop6
+ŋot5
+ŋot6
+ŋoŋ1
+ŋoŋ2
+ŋoŋ3
+ŋu1
+ŋu2
+ŋu3
+ŋu4
+ŋu6
+ŋuk5
+ŋuk6
+ŋum1
+ŋum4
+ŋum6
+ŋun2
+ŋun4
+ŋun5
+ŋuo6
+ŋuoj1
+ŋuoj6
+ŋuon2
+ŋup6
+ŋut5
+ŋut6
+ŋuŋ2
+ŋuŋ4
+ŋuŋ5
+ŋwa1
+ŋwa3
+ŋwaj1
+ŋwaj2
+ŋwaj4
+ŋwaj5
+ŋwaj6
+ŋwak5
+ŋwak6
+ŋwam6
+ŋwan1
+ŋwan3
+ŋwan6
+ŋwap5
+ŋwek5
+ŋwek6
+ŋwi1
+ŋwi2
+ŋwi4
+ŋwi6
+ŋwien1
+ŋwien2
+ŋwien6
+ŋwiet6
+ŋwit5
+ŋwiw4
+ŋwăj1
+ŋwăj4
+ŋwăj5
+ŋwăj6
+ŋwăk5
+ŋwăk6
+ŋwăn2
+ŋwăt5
+ŋwăt6
+ŋwăw1
+ŋwăw5
+ŋwăŋ2
+ŋwăŋ3
+ŋwɛ1
+ŋwɛ5
+ŋwɛn1
+ŋwɛn4
+ŋwɛt5
+ŋwɛw2
+ŋwɛw4
+ŋwɛw5
+ŋwɛw6
+ŋwɛ̆ŋ4
+ŋwɤ̆j1
+ŋwɤ̆j4
+ŋwɤ̆j6
+ŋăj1
+ŋăj2
+ŋăj5
+ŋăk5
+ŋăm1
+ŋăm5
+ŋăn1
+ŋăn2
+ŋăn5
+ŋăt5
+ŋăt6
+ŋăw1
+ŋăw2
+ŋăw3
+ŋăw5
+ŋăw6
+ŋăŋ3
+ŋăŋ4
+ŋɔ1
+ŋɔ2
+ŋɔ3
+ŋɔ4
+ŋɔ5
+ŋɔ6
+ŋɔj1
+ŋɔj2
+ŋɔj5
+ŋɔm2
+ŋɔm4
+ŋɔm5
+ŋɔn1
+ŋɔn4
+ŋɔn5
+ŋɔn6
+ŋɔ̆k5
+ŋɔ̆k6
+ŋɔ̆p5
+ŋɔ̆t5
+ŋɔ̆t6
+ŋɔ̆ŋ2
+ŋɔ̆ŋ3
+ŋɔ̆ŋ4
+ŋɔ̆ŋ5
+ŋɔ̆ŋ6
+ŋɛ1
+ŋɛ2
+ŋɛ5
+ŋɛ6
+ŋɛn1
+ŋɛn2
+ŋɛn3
+ŋɛn5
+ŋɛn6
+ŋɛt5
+ŋɛt6
+ŋɛw2
+ŋɛw3
+ŋɛw4
+ŋɛw6
+ŋɛ̆k5
+ŋɛ̆k6
+ŋɛ̆ŋ1
+ŋɛ̆ŋ2
+ŋɛ̆ŋ3
+ŋɛ̆ŋ4
+ŋɛ̆ŋ5
+ŋɛ̆ŋ6
+ŋɤ1
+ŋɤ2
+ŋɤ3
+ŋɤ5
+ŋɤ6
+ŋɤj1
+ŋɤj2
+ŋɤj6
+ŋɤm1
+ŋɤm2
+ŋɤm6
+ŋɤn5
+ŋɤp5
+ŋɤp6
+ŋɤt5
+ŋɤ̆j1
+ŋɤ̆j2
+ŋɤ̆j5
+ŋɤ̆j6
+ŋɤ̆k5
+ŋɤ̆m1
+ŋɤ̆m2
+ŋɤ̆m3
+ŋɤ̆m4
+ŋɤ̆m5
+ŋɤ̆m6
+ŋɤ̆n1
+ŋɤ̆n2
+ŋɤ̆n4
+ŋɤ̆n5
+ŋɤ̆p5
+ŋɤ̆p6
+ŋɤ̆t5
+ŋɤ̆t6
+ŋɤ̆w1
+ŋɤ̆w2
+ŋɤ̆w3
+ŋɤ̆w5
+ŋɤ̆w6
+ŋɤ̆ŋ4
+ŋɯ1
+ŋɯ2
+ŋɯ3
+ŋɯ5
+ŋɯ6
+ŋɯj4
+ŋɯk6
+ŋɯt5
+ŋɯw1
+ŋɯŋ1
+ŋɯŋ2
+ŋɯŋ4
+ŋɯɤ1
+ŋɯɤ2
+ŋɯɤ4
+ŋɯɤ5
+ŋɯɤ6
+ŋɯɤj1
+ŋɯɤj2
+ŋɯɤk5
+ŋɯɤk6
+ŋɯɤŋ2
+ŋɯɤŋ3
+ŋɯɤŋ4
+ŋɯɤŋ6
+ɔ1
+ɔ5
+ɔ6
+ɔj1
+ɔj2
+ɔj4
+ɔj5
+ɔk5
+ɔm1
+ɔm4
+ɔn1
+ɔn4
+ɔt1
+ɔ̆k5
+ɔ̆k6
+ɔ̆p1
+ɔ̆p5
+ɔ̆p6
+ɔ̆t1
+ɔ̆t5
+ɔ̆ŋ1
+ɔ̆ŋ2
+ɔ̆ŋ3
+ɔ̆ŋ4
+ɔ̆ŋ5
+ɛ1
+ɛ2
+ɛ5
+ɛ6
+ɛj1
+ɛk5
+ɛk6
+ɛm1
+ɛm5
+ɛn1
+ɛn4
+ɛn5
+ɛp1
+ɛp5
+ɛp6
+ɛt1
+ɛt5
+ɛt6
+ɛw1
+ɛw2
+ɛw3
+ɛw4
+ɛw5
+ɛw6
+ɛŋ1
+ɛ̆k1
+ɛ̆k5
+ɛ̆k6
+ɛ̆ŋ1
+ɛ̆ŋ4
+ɛ̆ŋ5
+ɣ1
+ɣa1
+ɣa2
+ɣa3
+ɣa4
+ɣa5
+ɣa6
+ɣaj1
+ɣaj2
+ɣaj3
+ɣaj5
+ɣaj6
+ɣak5
+ɣak6
+ɣam1
+ɣan1
+ɣan2
+ɣan5
+ɣan6
+ɣap5
+ɣat6
+ɣe1
+ɣe2
+ɣe5
+ɣek5
+ɣek6
+ɣet6
+ɣeŋ2
+ɣeŋ4
+ɣi1
+ɣi2
+ɣiek5
+ɣien2
+ɣieŋ1
+ɣik1
+ɣim1
+ɣim2
+ɣin1
+ɣit1
+ɣit6
+ɣiŋ5
+ɣj1
+ɣo1
+ɣo2
+ɣo3
+ɣo4
+ɣo6
+ɣoj2
+ɣoj5
+ɣoj6
+ɣok5
+ɣok6
+ɣom1
+ɣom2
+ɣom5
+ɣon1
+ɣop6
+ɣot6
+ɣoŋ1
+ɣoŋ2
+ɣp1
+ɣt1
+ɣu1
+ɣu2
+ɣu6
+ɣuk6
+ɣum1
+ɣun2
+ɣuo2
+ɣuok5
+ɣuok6
+ɣuon6
+ɣuot6
+ɣuoŋ2
+ɣut5
+ɣuŋ2
+ɣw1
+ɣwa5
+ɣwi2
+ɣwi3
+ɣwi6
+ɣăj1
+ɣăj2
+ɣăj3
+ɣăj4
+ɣăj5
+ɣăj6
+ɣăk6
+ɣăm1
+ɣăm2
+ɣăm5
+ɣăm6
+ɣăn2
+ɣăn5
+ɣăn6
+ɣăp5
+ɣăp6
+ɣăt5
+ɣăt6
+ɣăw1
+ɣăw2
+ɣăw5
+ɣăw6
+ɣăŋ1
+ɣăŋ3
+ɣăŋ5
+ɣăŋ6
+ɣɔ1
+ɣɔ2
+ɣɔ3
+ɣɔ6
+ɣɔj4
+ɣɔj5
+ɣɔj6
+ɣɔm1
+ɣɔn1
+ɣɔn2
+ɣɔn6
+ɣɔŋ2
+ɣɔ̆k5
+ɣɔ̆p5
+ɣɔ̆t5
+ɣɔ̆t6
+ɣɔ̆ŋ4
+ɣɔ̆ŋ6
+ɣɛ1
+ɣɛ2
+ɣɛ3
+ɣɛ4
+ɣɛ5
+ɣɛ6
+ɣɛm5
+ɣɛn1
+ɣɛn2
+ɣɛp5
+ɣɛt5
+ɣɛw6
+ɣɛ̆k6
+ɣɛ̆ŋ1
+ɣɛ̆ŋ2
+ɣɛ̆ŋ4
+ɣɛ̆ŋ5
+ɣɛ̆ŋ6
+ɣɤ1
+ɣɤ2
+ɣɤ3
+ɣɤ4
+ɣɤj4
+ɣɤj6
+ɣɤm2
+ɣɤm5
+ɣɤn2
+ɣɤn6
+ɣɤt6
+ɣɤ̆j1
+ɣɤ̆j2
+ɣɤ̆j3
+ɣɤ̆j4
+ɣɤ̆j5
+ɣɤ̆j6
+ɣɤ̆k5
+ɣɤ̆m2
+ɣɤ̆m3
+ɣɤ̆m4
+ɣɤ̆m5
+ɣɤ̆m6
+ɣɤ̆n1
+ɣɤ̆n2
+ɣɤ̆p5
+ɣɤ̆p6
+ɣɤ̆t6
+ɣɤ̆w1
+ɣɤ̆w2
+ɣɤ̆w3
+ɣɤ̆w5
+ɣɯ2
+ɣɯj4
+ɣɯŋ2
+ɣɯɤm1
+ɣɯɤm2
+ɣɯɤm6
+ɣɯɤŋ1
+ɣɯɤŋ3
+ɣɯɤŋ6
+ɤ1
+ɤ2
+ɤ4
+ɤ5
+ɤ6
+ɤj1
+ɤj5
+ɤm3
+ɤm5
+ɤn1
+ɤn4
+ɤn5
+ɤt5
+ɤt6
+ɤ̆j1
+ɤ̆j4
+ɤ̆j5
+ɤ̆m1
+ɤ̆m2
+ɤ̆m3
+ɤ̆m4
+ɤ̆m5
+ɤ̆m6
+ɤ̆n1
+ɤ̆n4
+ɤ̆n5
+ɤ̆p5
+ɤ̆p6
+ɤ̆t5
+ɤ̆w1
+ɤ̆w2
+ɤ̆w4
+ɤ̆w5
+ɤ̆w6
+ɯ1
+ɯ2
+ɯ4
+ɯ5
+ɯk5
+ɯk6
+ɯw1
+ɯŋ1
+ɯŋ2
+ɯŋ4
+ɯŋ5
+ɯɤ1
+ɯɤ5
+ɯɤ6
+ɯɤj1
+ɯɤk5
+ɯɤm1
+ɯɤm5
+ɯɤn1
+ɯɤn2
+ɯɤn3
+ɯɤp5
+ɯɤt5
+ɯɤŋ1
+ɲa1
+ɲa2
+ɲa3
+ɲa4
+ɲa5
+ɲaj1
+ɲaj2
+ɲaj3
+ɲaj4
+ɲaj5
+ɲaj6
+ɲak5
+ɲak6
+ɲam1
+ɲam2
+ɲam4
+ɲam5
+ɲan1
+ɲan2
+ɲan3
+ɲan4
+ɲan6
+ɲap5
+ɲap6
+ɲat5
+ɲat6
+ɲe3
+ɲe4
+ɲek5
+ɲek6
+ɲen6
+ɲew4
+ɲew5
+ɲeŋ1
+ɲi1
+ɲi2
+ɲi3
+ɲi4
+ɲi5
+ɲi6
+ɲie5
+ɲiek5
+ɲiem3
+ɲiem6
+ɲien1
+ɲien3
+ɲiep5
+ɲiet6
+ɲiew1
+ɲiew2
+ɲiew3
+ɲik5
+ɲim5
+ɲin2
+ɲin5
+ɲin6
+ɲip5
+ɲip6
+ɲit5
+ɲit6
+ɲiw4
+ɲiw5
+ɲiw6
+ɲiŋ1
+ɲiŋ4
+ɲiŋ5
+ɲo1
+ɲo4
+ɲo5
+ɲoj1
+ɲoj2
+ɲoj5
+ɲoj6
+ɲok5
+ɲom1
+ɲom2
+ɲom4
+ɲon1
+ɲon2
+ɲon4
+ɲon5
+ɲon6
+ɲot5
+ɲot6
+ɲoŋ1
+ɲoŋ2
+ɲoŋ6
+ɲu1
+ɲu3
+ɲu4
+ɲu5
+ɲu6
+ɲuk5
+ɲuk6
+ɲum1
+ɲum5
+ɲun1
+ɲun3
+ɲun4
+ɲun5
+ɲuo5
+ɲuo6
+ɲuok5
+ɲuom1
+ɲuom5
+ɲuom6
+ɲut5
+ɲut6
+ɲuŋ1
+ɲuŋ2
+ɲuŋ3
+ɲuŋ4
+ɲuŋ5
+ɲuŋ6
+ɲwa2
+ɲwaj1
+ɲwaj2
+ɲwam2
+ɲwe6
+ɲwi2
+ɲwi4
+ɲwi5
+ɲwi6
+ɲwien3
+ɲwăj1
+ɲwăj5
+ɲwɛ1
+ɲwɛ2
+ɲwɛn1
+ɲwɛn2
+ɲwɛn4
+ɲwɛt5
+ɲwɛt6
+ɲwɛ̆ŋ2
+ɲwɛ̆ŋ5
+ɲwɛ̆ŋ6
+ɲwɤ̆n2
+ɲwɤ̆n6
+ɲăj1
+ɲăj4
+ɲăj5
+ɲăj6
+ɲăk5
+ɲăm1
+ɲăm2
+ɲăm5
+ɲăm6
+ɲăn1
+ɲăn2
+ɲăn3
+ɲăn4
+ɲăn5
+ɲăn6
+ɲăp5
+ɲăt5
+ɲăt6
+ɲăw1
+ɲăw2
+ɲăw3
+ɲăw4
+ɲăw5
+ɲăw6
+ɲăŋ1
+ɲăŋ2
+ɲăŋ3
+ɲăŋ4
+ɲăŋ5
+ɲăŋ6
+ɲɔ1
+ɲɔ2
+ɲɔ4
+ɲɔ5
+ɲɔ6
+ɲɔj1
+ɲɔj5
+ɲɔm1
+ɲɔm2
+ɲɔm3
+ɲɔm4
+ɲɔm5
+ɲɔn1
+ɲɔn5
+ɲɔn6
+ɲɔ̆k5
+ɲɔ̆k6
+ɲɔ̆p5
+ɲɔ̆t5
+ɲɔ̆t6
+ɲɔ̆ŋ1
+ɲɔ̆ŋ2
+ɲɔ̆ŋ3
+ɲɔ̆ŋ4
+ɲɔ̆ŋ5
+ɲɛ1
+ɲɛ2
+ɲɛ3
+ɲɛ4
+ɲɛ5
+ɲɛ6
+ɲɛm1
+ɲɛm2
+ɲɛm4
+ɲɛm6
+ɲɛn1
+ɲɛn5
+ɲɛn6
+ɲɛp5
+ɲɛp6
+ɲɛt5
+ɲɛt6
+ɲɛw1
+ɲɛw2
+ɲɛw3
+ɲɛw5
+ɲɛw6
+ɲɛ̆k5
+ɲɛ̆ŋ1
+ɲɛ̆ŋ2
+ɲɛ̆ŋ3
+ɲɛ̆ŋ4
+ɲɛ̆ŋ5
+ɲɛ̆ŋ6
+ɲɤ1
+ɲɤ2
+ɲɤ3
+ɲɤ4
+ɲɤ5
+ɲɤ6
+ɲɤj1
+ɲɤj2
+ɲɤj4
+ɲɤm1
+ɲɤm2
+ɲɤm5
+ɲɤn1
+ɲɤn2
+ɲɤn3
+ɲɤn4
+ɲɤn5
+ɲɤp5
+ɲɤt5
+ɲɤt6
+ɲɤ̆j1
+ɲɤ̆j2
+ɲɤ̆j3
+ɲɤ̆j4
+ɲɤ̆j6
+ɲɤ̆k5
+ɲɤ̆m1
+ɲɤ̆m2
+ɲɤ̆m4
+ɲɤ̆m5
+ɲɤ̆m6
+ɲɤ̆n1
+ɲɤ̆n2
+ɲɤ̆n3
+ɲɤ̆n4
+ɲɤ̆n5
+ɲɤ̆n6
+ɲɤ̆p5
+ɲɤ̆p6
+ɲɤ̆t5
+ɲɤ̆t6
+ɲɤ̆w1
+ɲɤ̆w2
+ɲɤ̆w4
+ɲɤ̆w6
+ɲɤ̆ŋ1
+ɲɯ1
+ɲɯ2
+ɲɯ4
+ɲɯ5
+ɲɯ6
+ɲɯk5
+ɲɯt5
+ɲɯt6
+ɲɯŋ1
+ɲɯŋ3
+ɲɯɤ6
+ɲɯɤk6
+ɲɯɤn5
+ɲɯɤŋ1
+ɲɯɤŋ2
+ɲɯɤŋ3
+ɲɯɤŋ5
+ɲɯɤŋ6
+ʂ1
+ʂ5
+ʂ6
+ʂa1
+ʂa2
+ʂa3
+ʂa4
+ʂa5
+ʂa6
+ʂaj1
+ʂaj2
+ʂaj3
+ʂaj4
+ʂaj5
+ʂak5
+ʂak6
+ʂam1
+ʂam2
+ʂam5
+ʂam6
+ʂan1
+ʂan2
+ʂan4
+ʂan5
+ʂan6
+ʂap5
+ʂap6
+ʂat1
+ʂat5
+ʂat6
+ʂe1
+ʂe2
+ʂe4
+ʂe6
+ʂen1
+ʂen2
+ʂen5
+ʂep5
+ʂet6
+ʂew1
+ʂew2
+ʂew5
+ʂeŋ1
+ʂeŋ4
+ʂi1
+ʂi2
+ʂi3
+ʂi4
+ʂi6
+ʂie4
+ʂie6
+ʂiek5
+ʂiem4
+ʂiet5
+ʂiew1
+ʂieŋ1
+ʂik1
+ʂik5
+ʂim1
+ʂin1
+ʂit1
+ʂit5
+ʂit6
+ʂiw1
+ʂiŋ1
+ʂiŋ2
+ʂiŋ5
+ʂj1
+ʂn1
+ʂo1
+ʂo2
+ʂo3
+ʂo4
+ʂo5
+ʂo6
+ʂoj1
+ʂoj2
+ʂoj4
+ʂok5
+ʂon2
+ʂop5
+ʂop6
+ʂot5
+ʂot6
+ʂoŋ1
+ʂoŋ2
+ʂoŋ4
+ʂoŋ5
+ʂu1
+ʂu2
+ʂu5
+ʂu6
+ʂuk5
+ʂuk6
+ʂum1
+ʂum2
+ʂum6
+ʂun1
+ʂun5
+ʂun6
+ʂuo1
+ʂuo4
+ʂuo6
+ʂuoj5
+ʂuon1
+ʂuot5
+ʂuoŋ1
+ʂuoŋ2
+ʂup5
+ʂup6
+ʂut5
+ʂut6
+ʂuŋ1
+ʂuŋ2
+ʂuŋ3
+ʂuŋ4
+ʂuŋ5
+ʂw1
+ʂwa1
+ʂwaj2
+ʂwaj4
+ʂwaj5
+ʂwan2
+ʂwan5
+ʂwan6
+ʂwat5
+ʂwat6
+ʂwe1
+ʂwi1
+ʂwi2
+ʂwi4
+ʂwi5
+ʂwien3
+ʂwien4
+ʂwit5
+ʂwit6
+ʂwɛ̆ŋ4
+ʂwɛ̆ŋ6
+ʂwɤ̆t5
+ʂăj1
+ʂăj4
+ʂăk5
+ʂăk6
+ʂăm1
+ʂăm5
+ʂăm6
+ʂăn1
+ʂăn3
+ʂăn5
+ʂăp5
+ʂăt5
+ʂăt6
+ʂăw1
+ʂăw2
+ʂăw4
+ʂăw5
+ʂăw6
+ʂăŋ1
+ʂăŋ2
+ʂăŋ5
+ʂɔ1
+ʂɔ2
+ʂɔ4
+ʂɔ6
+ʂɔj1
+ʂɔj2
+ʂɔj3
+ʂɔj4
+ʂɔj5
+ʂɔk5
+ʂɔm1
+ʂɔm2
+ʂɔm6
+ʂɔn1
+ʂɔn2
+ʂɔn5
+ʂɔŋ1
+ʂɔ̆k5
+ʂɔ̆k6
+ʂɔ̆p1
+ʂɔ̆t5
+ʂɔ̆t6
+ʂɔ̆ŋ1
+ʂɔ̆ŋ2
+ʂɔ̆ŋ3
+ʂɔ̆ŋ5
+ʂɛ1
+ʂɛ2
+ʂɛ3
+ʂɛ4
+ʂɛ6
+ʂɛk5
+ʂɛm5
+ʂɛn1
+ʂɛn4
+ʂɛp1
+ʂɛt1
+ʂɛt5
+ʂɛw1
+ʂɛw2
+ʂɛw6
+ʂɛ̆k5
+ʂɛ̆k6
+ʂɛ̆ŋ1
+ʂɛ̆ŋ2
+ʂɛ̆ŋ4
+ʂɛ̆ŋ5
+ʂɤ1
+ʂɤ2
+ʂɤ3
+ʂɤ4
+ʂɤ5
+ʂɤ6
+ʂɤj4
+ʂɤj5
+ʂɤj6
+ʂɤm1
+ʂɤm2
+ʂɤm5
+ʂɤn1
+ʂɤn2
+ʂɤn4
+ʂɤn5
+ʂɤt5
+ʂɤ̆j1
+ʂɤ̆j2
+ʂɤ̆j4
+ʂɤ̆j5
+ʂɤ̆j6
+ʂɤ̆m1
+ʂɤ̆m2
+ʂɤ̆m3
+ʂɤ̆m4
+ʂɤ̆m5
+ʂɤ̆m6
+ʂɤ̆n1
+ʂɤ̆n2
+ʂɤ̆n4
+ʂɤ̆n5
+ʂɤ̆p5
+ʂɤ̆p6
+ʂɤ̆t5
+ʂɤ̆w1
+ʂɤ̆w2
+ʂɤ̆w5
+ʂɤ̆w6
+ʂɯ1
+ʂɯ4
+ʂɯ5
+ʂɯ6
+ʂɯk5
+ʂɯk6
+ʂɯt5
+ʂɯw1
+ʂɯw4
+ʂɯŋ1
+ʂɯŋ2
+ʂɯŋ3
+ʂɯŋ4
+ʂɯŋ6
+ʂɯɤ1
+ʂɯɤ3
+ʂɯɤ4
+ʂɯɤ5
+ʂɯɤj4
+ʂɯɤn2
+ʂɯɤt5
+ʂɯɤt6
+ʂɯɤŋ1
+ʂɯɤŋ5
+ʂɯɤŋ6
+ʈ1
+ʈa1
+ʈa2
+ʈa3
+ʈa4
+ʈa5
+ʈaj1
+ʈaj4
+ʈaj5
+ʈaj6
+ʈak5
+ʈak6
+ʈam2
+ʈam4
+ʈam5
+ʈam6
+ʈan1
+ʈan2
+ʈan5
+ʈap5
+ʈat1
+ʈat5
+ʈat6
+ʈe1
+ʈe2
+ʈe3
+ʈe6
+ʈek6
+ʈen1
+ʈen4
+ʈet5
+ʈet6
+ʈew1
+ʈew5
+ʈew6
+ʈeŋ5
+ʈi1
+ʈi2
+ʈi3
+ʈi5
+ʈi6
+ʈie4
+ʈie6
+ʈien2
+ʈien4
+ʈien6
+ʈiet5
+ʈiet6
+ʈiew2
+ʈiew6
+ʈieŋ1
+ʈieŋ2
+ʈik5
+ʈik6
+ʈit5
+ʈit6
+ʈiw2
+ʈiw3
+ʈiw5
+ʈiŋ1
+ʈiŋ2
+ʈiŋ3
+ʈiŋ6
+ʈo1
+ʈo2
+ʈo3
+ʈo4
+ʈo5
+ʈo6
+ʈoj1
+ʈoj2
+ʈoj3
+ʈoj4
+ʈoj5
+ʈoj6
+ʈok5
+ʈom6
+ʈon1
+ʈon5
+ʈon6
+ʈot5
+ʈoŋ1
+ʈoŋ2
+ʈoŋ4
+ʈoŋ5
+ʈoŋ6
+ʈt1
+ʈu1
+ʈu2
+ʈu4
+ʈu5
+ʈu6
+ʈuk5
+ʈuk6
+ʈum2
+ʈum5
+ʈum6
+ʈun2
+ʈuo6
+ʈuoŋ1
+ʈuoŋ2
+ʈut5
+ʈut6
+ʈuŋ1
+ʈuŋ2
+ʈuŋ3
+ʈuŋ5
+ʈuŋ6
+ʈw1
+ʈwi1
+ʈwi2
+ʈwi3
+ʈwi6
+ʈwien2
+ʈwien6
+ʈwɤ̆n1
+ʈwɤ̆t5
+ʈăj4
+ʈăk5
+ʈăk6
+ʈăm1
+ʈăm2
+ʈăm5
+ʈăn1
+ʈăn2
+ʈăn6
+ʈăt5
+ʈăw1
+ʈăw2
+ʈăw4
+ʈăw5
+ʈăw6
+ʈăŋ1
+ʈăŋ5
+ʈɔ1
+ʈɔ2
+ʈɔ4
+ʈɔ6
+ʈɔj2
+ʈɔj5
+ʈɔj6
+ʈɔm1
+ʈɔm2
+ʈɔm3
+ʈɔn1
+ʈɔn2
+ʈɔn6
+ʈɔ̆k5
+ʈɔ̆k6
+ʈɔ̆t1
+ʈɔ̆t5
+ʈɔ̆t6
+ʈɔ̆ŋ1
+ʈɔ̆ŋ2
+ʈɔ̆ŋ4
+ʈɔ̆ŋ5
+ʈɔ̆ŋ6
+ʈɛ1
+ʈɛ3
+ʈɛ4
+ʈɛ6
+ʈɛm2
+ʈɛn3
+ʈɛt1
+ʈɛt5
+ʈɛt6
+ʈɛw1
+ʈɛw2
+ʈɛw4
+ʈɛw5
+ʈɛw6
+ʈɛ̆k5
+ʈɛ̆k6
+ʈɛ̆ŋ1
+ʈɛ̆ŋ2
+ʈɛ̆ŋ4
+ʈɛ̆ŋ5
+ʈɛ̆ŋ6
+ʈɤ1
+ʈɤ2
+ʈɤ4
+ʈɤ5
+ʈɤ6
+ʈɤj1
+ʈɤj2
+ʈɤn1
+ʈɤn5
+ʈɤn6
+ʈɤt5
+ʈɤt6
+ʈɤ̆j1
+ʈɤ̆j2
+ʈɤ̆j4
+ʈɤ̆m1
+ʈɤ̆m2
+ʈɤ̆m3
+ʈɤ̆m4
+ʈɤ̆m6
+ʈɤ̆n1
+ʈɤ̆n2
+ʈɤ̆n5
+ʈɤ̆n6
+ʈɤ̆p5
+ʈɤ̆p6
+ʈɤ̆t6
+ʈɤ̆w1
+ʈɤ̆w2
+ʈɤ̆w4
+ʈɤ̆w5
+ʈɤ̆ŋ1
+ʈɯ2
+ʈɯ3
+ʈɯ5
+ʈɯ6
+ʈɯk6
+ʈɯw2
+ʈɯŋ1
+ʈɯŋ2
+ʈɯŋ4
+ʈɯŋ5
+ʈɯɤ1
+ʈɯɤk5
+ʈɯɤn2
+ʈɯɤt6
+ʈɯɤŋ1
+ʈɯɤŋ2
+ʈɯɤŋ3
+ʈɯɤŋ4
+ʈɯɤŋ5
+ʈɯɤŋ6
+ʐ1
+ʐa1
+ʐa2
+ʐa3
+ʐa4
+ʐa5
+ʐa6
+ʐaj1
+ʐaj2
+ʐaj3
+ʐaj4
+ʐaj5
+ʐak5
+ʐak6
+ʐam1
+ʐam5
+ʐam6
+ʐan1
+ʐan2
+ʐan5
+ʐan6
+ʐap1
+ʐap5
+ʐap6
+ʐat5
+ʐat6
+ʐe1
+ʐe2
+ʐe3
+ʐe4
+ʐe5
+ʐe6
+ʐek5
+ʐek6
+ʐem1
+ʐen1
+ʐen2
+ʐen5
+ʐen6
+ʐep6
+ʐet5
+ʐet6
+ʐew1
+ʐew2
+ʐew6
+ʐeŋ2
+ʐi1
+ʐi2
+ʐi3
+ʐi4
+ʐi5
+ʐi6
+ʐie1
+ʐie2
+ʐie4
+ʐie6
+ʐiem2
+ʐien1
+ʐiet5
+ʐiet6
+ʐiew1
+ʐiew3
+ʐiew5
+ʐieŋ1
+ʐieŋ2
+ʐik1
+ʐik5
+ʐik6
+ʐim1
+ʐin1
+ʐin3
+ʐin6
+ʐip6
+ʐit1
+ʐit5
+ʐit6
+ʐiw1
+ʐiw2
+ʐiw5
+ʐiŋ1
+ʐiŋ2
+ʐiŋ4
+ʐj1
+ʐo1
+ʐo2
+ʐo3
+ʐo4
+ʐo6
+ʐoj2
+ʐoj3
+ʐoj5
+ʐok5
+ʐok6
+ʐom1
+ʐom6
+ʐon4
+ʐon5
+ʐon6
+ʐop6
+ʐot5
+ʐoŋ1
+ʐoŋ2
+ʐoŋ3
+ʐoŋ5
+ʐoŋ6
+ʐu1
+ʐu2
+ʐu3
+ʐu4
+ʐu5
+ʐuk5
+ʐuk6
+ʐum1
+ʐum2
+ʐum5
+ʐum6
+ʐun1
+ʐun2
+ʐun4
+ʐun5
+ʐuo1
+ʐuo2
+ʐuo3
+ʐuo4
+ʐuo6
+ʐuoj2
+ʐuoj4
+ʐuoj5
+ʐuok5
+ʐuon1
+ʐuot5
+ʐuot6
+ʐuoŋ2
+ʐuoŋ3
+ʐuoŋ6
+ʐup5
+ʐup6
+ʐut5
+ʐut6
+ʐuŋ1
+ʐuŋ2
+ʐuŋ4
+ʐuŋ5
+ʐuŋ6
+ʐw1
+ʐwa1
+ʐwi1
+ʐwi4
+ʐwi6
+ʐwɛn1
+ʐăj1
+ʐăj2
+ʐăj3
+ʐăj4
+ʐăj5
+ʐăj6
+ʐăk5
+ʐăk6
+ʐăm1
+ʐăm2
+ʐăm5
+ʐăm6
+ʐăn1
+ʐăn2
+ʐăn5
+ʐăn6
+ʐăp5
+ʐăt5
+ʐăt6
+ʐăw1
+ʐăw2
+ʐăw3
+ʐăw4
+ʐăw5
+ʐăw6
+ʐăŋ1
+ʐăŋ2
+ʐăŋ6
+ʐɔ1
+ʐɔ2
+ʐɔ3
+ʐɔ4
+ʐɔ5
+ʐɔ6
+ʐɔj1
+ʐɔj2
+ʐɔj3
+ʐɔj4
+ʐɔj5
+ʐɔj6
+ʐɔk1
+ʐɔm1
+ʐɔm4
+ʐɔm5
+ʐɔn1
+ʐɔn2
+ʐɔn4
+ʐɔn5
+ʐɔ̆k5
+ʐɔ̆k6
+ʐɔ̆t1
+ʐɔ̆t5
+ʐɔ̆t6
+ʐɔ̆ŋ1
+ʐɔ̆ŋ2
+ʐɔ̆ŋ5
+ʐɛ1
+ʐɛ2
+ʐɛ3
+ʐɛ4
+ʐɛ5
+ʐɛm1
+ʐɛm2
+ʐɛn1
+ʐɛn2
+ʐɛn5
+ʐɛt1
+ʐɛt5
+ʐɛt6
+ʐɛw1
+ʐɛw4
+ʐɛw5
+ʐɛŋ4
+ʐɛ̆k5
+ʐɛ̆k6
+ʐɛ̆ŋ1
+ʐɛ̆ŋ2
+ʐɛ̆ŋ3
+ʐɛ̆ŋ4
+ʐɛ̆ŋ5
+ʐɛ̆ŋ6
+ʐɤ1
+ʐɤ2
+ʐɤ3
+ʐɤ4
+ʐɤ5
+ʐɤ6
+ʐɤj1
+ʐɤj2
+ʐɤj6
+ʐɤm1
+ʐɤm2
+ʐɤm4
+ʐɤm5
+ʐɤn1
+ʐɤn2
+ʐɤn3
+ʐɤn4
+ʐɤn6
+ʐɤp5
+ʐɤp6
+ʐɤt5
+ʐɤ̆j1
+ʐɤ̆j2
+ʐɤ̆j3
+ʐɤ̆j4
+ʐɤ̆m1
+ʐɤ̆m2
+ʐɤ̆m3
+ʐɤ̆m4
+ʐɤ̆m5
+ʐɤ̆m6
+ʐɤ̆n1
+ʐɤ̆n2
+ʐɤ̆n5
+ʐɤ̆n6
+ʐɤ̆p5
+ʐɤ̆p6
+ʐɤ̆t5
+ʐɤ̆t6
+ʐɤ̆w1
+ʐɤ̆w2
+ʐɯk5
+ʐɯk6
+ʐɯt5
+ʐɯŋ1
+ʐɯŋ2
+ʐɯŋ4
+ʐɯŋ6
+ʐɯɤ1
+ʐɯɤ3
+ʐɯɤ4
+ʐɯɤ5
+ʐɯɤ6
+ʐɯɤj1
+ʐɯɤj2
+ʐɯɤj3
+ʐɯɤj4
+ʐɯɤj5
+ʐɯɤj6
+ʐɯɤk5
+ʐɯɤm2
+ʐɯɤm5
+ʐɯɤn5
+ʐɯɤn6
+ʐɯɤt6
+ʐɯɤw6
+ʐɯɤŋ1
+ʐɯɤŋ2
+χa1
+χa2
+χa4
+χa5
+χaj1
+χaj4
+χaj5
+χak5
+χak6
+χam1
+χam4
+χam5
+χan1
+χan2
+χan4
+χan5
+χap5
+χap6
+χat5
+χe1
+χe2
+χe5
+χe6
+χew1
+χew2
+χeŋ1
+χeŋ2
+χeŋ3
+χeŋ4
+χeŋ6
+χi1
+χi2
+χi4
+χi5
+χie5
+χie6
+χiem1
+χiem5
+χien1
+χien2
+χien4
+χien5
+χiep5
+χiet5
+χiew1
+χiew5
+χieŋ1
+χieŋ3
+χieŋ6
+χik5
+χin1
+χin2
+χit5
+χit6
+χiw1
+χiw5
+χiŋ1
+χiŋ4
+χo1
+χo4
+χo5
+χoj1
+χoj5
+χok5
+χon1
+χon5
+χoŋ1
+χoŋ4
+χoŋ5
+χu1
+χu2
+χu4
+χu5
+χu6
+χuk5
+χuk6
+χum1
+χum5
+χuo1
+χuon1
+χuoŋ1
+χut6
+χuŋ1
+χuŋ2
+χuŋ4
+χuŋ5
+χuŋ6
+χwa1
+χwa4
+χwa5
+χwaj1
+χwaj4
+χwaj5
+χwak5
+χwan1
+χwan4
+χwan5
+χwat5
+χwe1
+χwek5
+χwi1
+χwi6
+χwie1
+χwien1
+χwien4
+χwien5
+χwiet5
+χwip5
+χwiw4
+χwiw6
+χwiŋ1
+χwiŋ2
+χwiŋ4
+χwăj5
+χwăm1
+χwăm2
+χwăm6
+χwăn1
+χwăn5
+χwăt5
+χwăŋ5
+χwɛ1
+χwɛ4
+χwɛ5
+χwɛn1
+χwɛt5
+χwɛw1
+χwɛw2
+χwɛw4
+χwɛ̆ŋ1
+χwɛ̆ŋ4
+χwɛ̆ŋ5
+χwɛ̆ŋ6
+χwɤ1
+χwɤ̆j1
+χwɤ̆j5
+χwɤ̆n1
+χwɤ̆n4
+χwɤ̆t5
+χwɤ̆ŋ1
+χăj1
+χăj4
+χăj5
+χăk5
+χăk6
+χăm1
+χăm4
+χăm5
+χăn1
+χăn2
+χăn4
+χăn5
+χăp5
+χăt5
+χăw1
+χăw4
+χăw5
+χăw6
+χăŋ1
+χăŋ2
+χăŋ4
+χăŋ5
+χɔ1
+χɔ2
+χɔ4
+χɔ5
+χɔj1
+χɔj4
+χɔj5
+χɔm1
+χɔm2
+χɔm5
+χɔm6
+χɔ̆k5
+χɔ̆ŋ2
+χɔ̆ŋ4
+χɛ1
+χɛ2
+χɛ3
+χɛ4
+χɛ5
+χɛk6
+χɛm1
+χɛn1
+χɛn2
+χɛn5
+χɛp5
+χɛt5
+χɛw1
+χɛw5
+χɛ̆k5
+χɛ̆k6
+χɛ̆ŋ1
+χɛ̆ŋ2
+χɛ̆ŋ4
+χɛ̆ŋ5
+χɛ̆ŋ6
+χɤ1
+χɤ2
+χɤ5
+χɤj1
+χɤj4
+χɤj5
+χɤp5
+χɤ̆j4
+χɤ̆k5
+χɤ̆m1
+χɤ̆m5
+χɤ̆n1
+χɤ̆n4
+χɤ̆n5
+χɤ̆p5
+χɤ̆p6
+χɤ̆t5
+χɤ̆t6
+χɤ̆w1
+χɤ̆w4
+χɤ̆w5
+χɯ1
+χɯ2
+χɯ4
+χɯ5
+χɯw5
+χɯŋ2
+χɯŋ5
+χɯŋ6
+χɯɤ5
+χɯɤj1
+χɯɤk5
+χɯɤn1
+χɯɤt5
+χɯɤt6
+χɯɤw5
+χɯɤŋ3
+χɯɤŋ4
