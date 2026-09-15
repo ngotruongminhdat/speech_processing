@@ -91,6 +91,11 @@ Totto-chan-Chương 1/
 
 ---
 
+## 📌 Quy định bổ sung từ GV (cập nhật 15/09)
+
+- **Footnote phải "chia riêng"** (trả lời trên nhóm lớp): không đọc chú thích chèn vào giữa câu. Trong DAISY 3: đánh dấu `<noteref>` tại vị trí tham chiếu + khối `<note>` riêng có audio clip riêng, để trình đọc cho phép bật/tắt phần chú thích. *Totto-chan có đúng 1 footnote* — `[1]` trong chương "Con Rocky biến mất" (nội dung chú thích nằm cuối sách, sau chữ HẾT).
+- **Mục lục EPUB bị thiếu**: NCX chỉ liệt kê 47 chương nhưng sách thực tế còn ~25 phần nữa (14 chương từ "Ngôi trường cũ đổ nát" đến "Sayonara, Sayonara", Lời kết, và 10 hồ sơ bạn học trường Tomoe). Khi làm trọn cuốn phải lấy đủ theo spine, không dựa vào mục lục EPUB. Tổng sách ≈ 5,5 giờ audio → dư chuẩn 4 giờ.
+
 ## ⚠️ 3 thỏa thuận cần chốt ngay tuần này
 
 | # | Giữa ai | Nội dung cần chốt |
