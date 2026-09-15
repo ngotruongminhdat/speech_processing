@@ -213,7 +213,6 @@ def gen():
 <div class="wrap" id="muc-luc">
   <div class="toc-head">
     <h2>Mục lục</h2>
-    <div class="toc-note">đã xây dựng <b>{built_n}/{len(units)}</b> phần · <b>{fmt(total_s)}</b> audio · bấm chương để nghe</div>
   </div>
   <div class="toc-card">
     <ol>
