@@ -61,6 +61,15 @@ def gen():
         {str(i): t for i, t in units if unit_status(i)[0]}, ensure_ascii=False
     )
 
+    # nút tải cả cuốn (nếu đã gộp bằng bundle_book.py)
+    bundle = ROOT / "build" / f"{META['book_slug']}-DAISY.zip"
+    if bundle.exists():
+        dl_all = (f'<a class="btn ghost" href="{bundle.name}" '
+                  f'download="{META["title"]} - Toàn bộ (DAISY).zip">'
+                  f'⬇ Tải cả cuốn · {bundle.stat().st_size / 1e6:.0f} MB</a>')
+    else:
+        dl_all = ""
+
     html = f"""<!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -383,6 +392,7 @@ def gen():
         <a class="btn primary" href="{listen_href}">▶&nbsp; Bắt đầu nghe</a>
         <a class="btn resume" id="resume" href="#" style="display:none"></a>
         <a class="btn ghost" href="#muc-luc">Mục lục</a>
+        {dl_all}
       </div>
     </div>
   </div>
