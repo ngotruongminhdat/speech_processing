@@ -132,11 +132,18 @@ def gen():
     to {{ opacity: 1; transform: none; }} }}
 
   /* dải thông tin xuất bản */
-  .factbar {{ position: relative; border-top: 1px solid rgba(255,248,238,.18); }}
-  .factbar-in {{ max-width: 860px; margin: 0 auto; padding: .85rem 1.4rem;
-    display: flex; flex-wrap: wrap; gap: .4rem 2.4rem;
-    font-family: system-ui, sans-serif; font-size: .74rem; opacity: .88; }}
-  .factbar b {{ font-weight: 600; }}
+  .factbar {{ position: relative; border-top: 1px solid rgba(255,248,238,.18);
+    background: rgba(0,0,0,.22); backdrop-filter: blur(4px); }}
+  .factbar-in {{ max-width: 860px; margin: 0 auto; padding: 1.05rem 1.4rem;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: .95rem 1.6rem; font-family: system-ui, sans-serif; }}
+  @media (max-width: 720px) {{ .factbar-in {{ grid-template-columns: repeat(2, 1fr); }} }}
+  @media (max-width: 440px) {{ .factbar-in {{ grid-template-columns: 1fr; }} }}
+  .fact {{ min-width: 0; }}
+  .fact i {{ display: block; font-style: normal; font-size: .62rem; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; opacity: .6; margin-bottom: .18rem; }}
+  .fact b {{ display: block; font-size: .82rem; font-weight: 600; line-height: 1.35;
+    overflow-wrap: break-word; }}
 
   /* ================= MỤC LỤC ================= */
   .wrap {{ max-width: 860px; margin: 0 auto; padding: 3rem 1.4rem 4rem; }}
@@ -202,13 +209,12 @@ def gen():
   </div>
   <div class="factbar">
     <div class="factbar-in">
-      <div>ISBN&nbsp;<b>{META['source']}</b></div>
-      <div><b>{META['publisher']}</b></div>
-      <div>Năm&nbsp;<b>{META['date']}</b></div>
-      <div>Ngôn ngữ&nbsp;<b>Tiếng Việt</b></div>
-      <div>Giọng đọc&nbsp;<b>{META.get('narrator', '')}</b></div>
-      <div>Định dạng&nbsp;<b>Sách nói DAISY 3 (MP3)</b></div>
-      <div>Thời lượng&nbsp;<b>🎧 {fmt(total_s)}</b></div>
+      <div class="fact"><i>ISBN</i><b>{META['source']}</b></div>
+      <div class="fact"><i>Nhà xuất bản</i><b>{META['publisher']}</b></div>
+      <div class="fact"><i>Năm · Ngôn ngữ</i><b>{META['date']} · Tiếng Việt</b></div>
+      <div class="fact"><i>Giọng đọc</i><b>{META.get('narrator', '')}</b></div>
+      <div class="fact"><i>Định dạng</i><b>Sách nói DAISY 3 (MP3)</b></div>
+      <div class="fact"><i>Thời lượng</i><b>🎧 {fmt(total_s)}</b></div>
     </div>
   </div>
 </section>
