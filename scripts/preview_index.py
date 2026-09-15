@@ -137,7 +137,7 @@ def gen():
     border-top: 1px solid rgba(255,248,238,.22); max-width: 420px; }}
   .metas div {{ display: flex; gap: 1rem; padding: .42rem 0; align-items: baseline;
     border-bottom: 1px solid rgba(255,248,238,.13); }}
-  .metas span {{ flex: 0 0 88px; font-size: .66rem; font-weight: 600;
+  .metas span {{ flex: 0 0 108px; font-size: .66rem; font-weight: 600;
     letter-spacing: .12em; text-transform: uppercase; opacity: .62; }}
   .metas b {{ font-weight: 500; opacity: .95; }}
 
@@ -202,10 +202,15 @@ def gen():
         <a class="btn ghost" href="#muc-luc">Mục lục</a>
       </div>
       <div class="metas">
+        <div><span>Tác giả</span><b>{META['creator']}</b></div>
         <div><span>ISBN</span><b>{META['source']}</b></div>
-        <div><span>Xuất bản</span><b>{META['publisher']} · {META['date']} · Tiếng Việt</b></div>
+        <div><span>Nhà xuất bản</span><b>{META['publisher']}</b></div>
+        <div><span>Năm xuất bản</span><b>{META['date']}</b></div>
+        <div><span>Ngôn ngữ</span><b>Tiếng Việt</b></div>
+        <div><span>Thể loại</span><b>{META['subject']}</b></div>
         <div><span>Giọng đọc</span><b>{META.get('narrator', '')}</b></div>
-        <div><span>Định dạng</span><b>Sách nói DAISY 3 (MP3) · 🎧 {fmt(total_s)}</b></div>
+        <div><span>Định dạng</span><b>Sách nói DAISY 3 (Audio MP3)</b></div>
+        <div><span>Thời lượng</span><b>🎧 {fmt(total_s)}</b></div>
       </div>
     </div>
   </div>
