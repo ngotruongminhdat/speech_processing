@@ -25,6 +25,7 @@ def gen(chapter_no: int):
     with open(ch / "timestamps.csv", encoding="utf-8") as f:
         clips = {r["id"]: r for r in csv.DictReader(f)}
     meta = json.loads((ROOT / "metadata" / "book_meta.json").read_text(encoding="utf-8"))
+    fontface = (ROOT / "scripts" / "_fontface_lora.css").read_text(encoding="utf-8").replace("__P__", "../")
     mp3 = f"chuong{chapter_no:02d}.mp3"
     total_s = max(float(c["clipEnd"]) for c in clips.values())
     mins, secs = divmod(int(total_s), 60)
@@ -97,6 +98,7 @@ def gen(chapter_no: int):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{meta['title']} — {header_label}: {data['title']}</title>
 <style>
+{fontface}
   :root {{
     --paper: #faf6ee; --paper-2: #f2ecdd; --ink: #2c2417; --ink-soft: #7d7259;
     --accent: #b8860b; --accent-soft: #f5e5b8; --hi: #ffedad; --hi-ring: #e5c25b;
@@ -113,7 +115,7 @@ def gen(chapter_no: int):
   html {{ scroll-behavior: smooth; }}
   body {{
     margin: 0; display: flex; background: var(--paper); color: var(--ink);
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
   }}
   /* ---- thanh tiến độ đọc ---- */
   #progress {{ position: fixed; top: 0; left: 0; height: 3px; width: 0;

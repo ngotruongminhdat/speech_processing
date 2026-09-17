@@ -70,6 +70,8 @@ def gen():
     else:
         dl_all = ""
 
+    fontface = (ROOT / "scripts" / "_fontface_lora.css").read_text(encoding="utf-8").replace("__P__", "")
+
     html = f"""<!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -77,6 +79,7 @@ def gen():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{META['title']} — {META['creator']}</title>
 <style>
+{fontface}
   :root {{
     --paper: #f7f1e5; --ink: #2b2214; --ink-soft: #85795e;
     --accent: #c1651f; --accent-2: #b8860b; --accent-soft: #f7e3c8;
@@ -93,7 +96,7 @@ def gen():
   * {{ box-sizing: border-box; }}
   html {{ scroll-behavior: smooth; }}
   body {{ margin: 0; background: var(--paper); color: var(--ink);
-    font-family: Georgia, 'Times New Roman', serif; }}
+    font-family: 'Lora', Georgia, 'Times New Roman', serif; }}
   ::selection {{ background: var(--accent-soft); }}
 
   /* ================= HERO ================= */
