@@ -191,8 +191,20 @@ def gen(chapter_no: int):
     text-decoration: none; white-space: nowrap; transition: background .18s ease; }}
   .pbtn:hover {{ background: var(--accent-soft); }}
   #speed {{ min-width: 3.1em; text-align: center; }}
-  .navb {{ font-size: 1rem; line-height: 1; padding: .42rem .62rem; }}
-  .navb.disabled {{ opacity: .35; cursor: default; pointer-events: none; }}
+  /* cụm điều khiển ⏮ ▶ ⏭ */
+  .transport {{ display: flex; align-items: center; gap: .3rem; }}
+  .transport .navb {{ border: none; background: transparent; box-shadow: none;
+    font-size: 1.2rem; line-height: 1; padding: .25rem .3rem; color: var(--ink); }}
+  .transport .navb:hover {{ background: var(--accent-soft); }}
+  .navb.disabled {{ opacity: .3; cursor: default; pointer-events: none; }}
+  .playpause {{ width: 46px; height: 46px; flex-shrink: 0; border-radius: 50%;
+    border: none; background: var(--accent); color: #fff8ee; font-size: 1.05rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow); transition: transform .15s ease, filter .15s ease; }}
+  .playpause:hover {{ transform: scale(1.06); filter: brightness(1.06); }}
+  .scrub {{ width: min(280px, 38vw); accent-color: var(--accent); cursor: pointer; }}
+  .time {{ font-family: system-ui, sans-serif; font-size: .72rem; color: var(--ink-soft);
+    min-width: 2.7em; text-align: center; font-variant-numeric: tabular-nums; }}
   @media (max-width: 940px) {{ nav {{ display: none; }} }}
 
   /* ---- gợi ý phím tắt ---- */
@@ -319,10 +331,16 @@ def gen(chapter_no: int):
 </main>
 <footer>
   <div class="player-card">
-    <div class="info"><b>{header_label}: {data['title']}</b><br>{mins}:{secs:02d} · bấm đoạn văn để nhảy tới</div>
-    {prev_btn}
-    <audio id="player" src="{mp3}" controls preload="auto"></audio>
-    {next_btn}
+    <div class="info"><b>{header_label}: {data['title']}</b><br>bấm đoạn văn để nhảy tới</div>
+    <div class="transport">
+      {prev_btn}
+      <button class="playpause" id="pp" aria-label="Phát / dừng (Space)">▶</button>
+      {next_btn}
+    </div>
+    <span class="time" id="tCur">0:00</span>
+    <input type="range" class="scrub" id="scrub" min="0" max="1000" value="0" step="1" aria-label="Thanh tua">
+    <span class="time" id="tDur">{mins}:{secs:02d}</span>
+    <audio id="player" src="{mp3}" preload="auto"></audio>
     <select class="pbtn" id="speed" title="Tốc độ đọc (phím ↑ / ↓)">
       <option value="0.5">0.5×</option>
       <option value="0.75">0.75×</option>
@@ -348,6 +366,16 @@ def gen(chapter_no: int):
   const PREV_HREF = "{prev_href}";
   const POS_KEY = 'ttc-pos-' + CH;
   const DONE_KEY = 'ttc-done';
+  const pp = document.getElementById('pp');
+  const scrub = document.getElementById('scrub');
+  const tCur = document.getElementById('tCur');
+  const tDur = document.getElementById('tDur');
+  const fmtT = s => {{ s = Math.floor(s || 0); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }};
+  pp.addEventListener('click', () => player.paused ? player.play() : player.pause());
+  player.addEventListener('play', () => pp.textContent = '⏸');
+  player.addEventListener('pause', () => pp.textContent = '▶');
+  player.addEventListener('loadedmetadata', () => tDur.textContent = fmtT(player.duration));
+  scrub.addEventListener('input', () => {{ if (player.duration) player.currentTime = scrub.value / 1000 * player.duration; }});
 
   function getDone() {{ try {{ return JSON.parse(localStorage.getItem(DONE_KEY)) || []; }} catch (e) {{ return []; }} }}
   function markDone() {{ const d = getDone(); if (!d.includes(CH)) {{ d.push(CH); localStorage.setItem(DONE_KEY, JSON.stringify(d)); }} }}
@@ -361,7 +389,8 @@ def gen(chapter_no: int):
   let curIdx = -1;
   player.addEventListener('timeupdate', () => {{
     const t = player.currentTime;
-    if (player.duration) bar.style.width = (t / player.duration * 100) + '%';
+    if (player.duration) {{ bar.style.width = (t / player.duration * 100) + '%'; scrub.value = t / player.duration * 1000; }}
+    tCur.textContent = fmtT(t);
     segs.forEach((el, i) => {{
       const on = t >= parseFloat(el.dataset.b) && t < parseFloat(el.dataset.e);
       if (on) curIdx = i;
@@ -399,6 +428,7 @@ def gen(chapter_no: int):
 
   // nghe hết -> đánh dấu đã xong + tự chuyển phần kế tiếp
   player.addEventListener('ended', () => {{
+    pp.textContent = '▶';
     markDone();
     localStorage.removeItem(POS_KEY);
     if (!NEXT_HREF) return;
