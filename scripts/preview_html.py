@@ -85,6 +85,11 @@ def gen(chapter_no: int):
             prev_href = f"../chapter_{j:02d}/preview.html?autoplay=1"
             break
 
+    prev_btn = (f'<a class="pbtn navb" href="{prev_href}" title="Phần trước (Shift+←)" aria-label="Phần trước">⏮</a>'
+                if prev_href else '<span class="pbtn navb disabled" title="Đây là phần đầu" aria-label="Không có phần trước">⏮</span>')
+    next_btn = (f'<a class="pbtn navb" href="{next_href}" title="Phần sau (Shift+→)" aria-label="Phần sau">⏭</a>'
+                if next_href else '<span class="pbtn navb disabled" title="Đây là phần cuối" aria-label="Không có phần sau">⏭</span>')
+
     html = f"""<!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -186,6 +191,8 @@ def gen(chapter_no: int):
     text-decoration: none; white-space: nowrap; transition: background .18s ease; }}
   .pbtn:hover {{ background: var(--accent-soft); }}
   #speed {{ min-width: 3.1em; text-align: center; }}
+  .navb {{ font-size: 1rem; line-height: 1; padding: .42rem .62rem; }}
+  .navb.disabled {{ opacity: .35; cursor: default; pointer-events: none; }}
   @media (max-width: 940px) {{ nav {{ display: none; }} }}
 
   /* ---- gợi ý phím tắt ---- */
@@ -313,7 +320,9 @@ def gen(chapter_no: int):
 <footer>
   <div class="player-card">
     <div class="info"><b>{header_label}: {data['title']}</b><br>{mins}:{secs:02d} · bấm đoạn văn để nhảy tới</div>
+    {prev_btn}
     <audio id="player" src="{mp3}" controls preload="auto"></audio>
+    {next_btn}
     <select class="pbtn" id="speed" title="Tốc độ đọc (phím ↑ / ↓)">
       <option value="0.5">0.5×</option>
       <option value="0.75">0.75×</option>

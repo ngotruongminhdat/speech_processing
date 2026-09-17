@@ -99,6 +99,8 @@
     text-decoration: none; white-space: nowrap; transition: background .18s ease; }
   .pbtn:hover { background: var(--accent-soft); }
   #speed { min-width: 3.1em; text-align: center; }
+  .navb { font-size: 1rem; line-height: 1; padding: .42rem .62rem; }
+  .navb.disabled { opacity: .35; cursor: default; pointer-events: none; }
   @media (max-width: 940px) { nav { display: none; } }
 
   /* ---- gợi ý phím tắt ---- */
@@ -317,7 +319,9 @@
 <footer>
   <div class="player-card">
     <div class="info"><b>Chương 10: Thức ăn của biển và của đất</b><br>5:12 · bấm đoạn văn để nhảy tới</div>
+    <a class="pbtn navb" href="../chapter_09/preview.html?autoplay=1" title="Phần trước (Shift+←)" aria-label="Phần trước">⏮</a>
     <audio id="player" src="chuong10.mp3" controls preload="auto"></audio>
+    <a class="pbtn navb" href="../chapter_59/preview.html?autoplay=1" title="Phần sau (Shift+→)" aria-label="Phần sau">⏭</a>
     <select class="pbtn" id="speed" title="Tốc độ đọc (phím ↑ / ↓)">
       <option value="0.5">0.5×</option>
       <option value="0.75">0.75×</option>

@@ -99,6 +99,8 @@
     text-decoration: none; white-space: nowrap; transition: background .18s ease; }
   .pbtn:hover { background: var(--accent-soft); }
   #speed { min-width: 3.1em; text-align: center; }
+  .navb { font-size: 1rem; line-height: 1; padding: .42rem .62rem; }
+  .navb.disabled { opacity: .35; cursor: default; pointer-events: none; }
   @media (max-width: 940px) { nav { display: none; } }
 
   /* ---- gợi ý phím tắt ---- */
@@ -371,7 +373,9 @@
 <footer>
   <div class="player-card">
     <div class="info"><b>Phần mở đầu: Lời của đại diện UNICEF (Quỹ nhi đồng Liên hiệp quốc) tại Việt Nam</b><br>32:49 · bấm đoạn văn để nhảy tới</div>
+    <span class="pbtn navb disabled" title="Đây là phần đầu" aria-label="Không có phần trước">⏮</span>
     <audio id="player" src="chuong00.mp3" controls preload="auto"></audio>
+    <a class="pbtn navb" href="../chapter_01/preview.html?autoplay=1" title="Phần sau (Shift+→)" aria-label="Phần sau">⏭</a>
     <select class="pbtn" id="speed" title="Tốc độ đọc (phím ↑ / ↓)">
       <option value="0.5">0.5×</option>
       <option value="0.75">0.75×</option>
