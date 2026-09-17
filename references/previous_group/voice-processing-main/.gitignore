@@ -1,7 +1,0 @@
-alignResult*
-output
-.vscode
-test_gpu.py
-.env
-*.pdf
-speech_to_text_1_18
