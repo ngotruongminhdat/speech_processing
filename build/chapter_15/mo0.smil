@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE smil PUBLIC "-//NISO//DTD dtbsmil 2005-2//EN" "http://www.daisy.org/z3986/2005/dtbsmil-2005-2.dtd">
+<smil xmlns="http://www.w3.org/2001/SMIL20/">
+  <head>
+    <meta name="dtb:uid" content="9786041194861-ch15"/>
+    <meta name="dtb:totalElapsedTime" content="0:00:00"/>
+    <meta name="dtb:generator" content="totto-chan daisy scripts"/>
+    <customAttributes>
+      <customTest defaultState="false" id="pagenum" override="visible"/>
+      <customTest defaultState="false" id="note" override="visible"/>
+      <customTest defaultState="false" id="noteref" override="visible"/>
+      <customTest defaultState="false" id="annotation" override="visible"/>
+      <customTest defaultState="false" id="linenum" override="visible"/>
+      <customTest defaultState="false" id="sidebar" override="visible"/>
+      <customTest defaultState="false" id="prodnote" override="visible"/>
+    </customAttributes>
+  </head>
+  <body>
+    <seq id="root-seq">
+      <seq id="seq_1" class="p">
+        <par id="sid_1" class="h1">
+          <text src="dtbook.xml#id_1"/>
+          <audio src="chuong15.mp3" clipBegin="0.000s" clipEnd="4.008s"/>
+        </par>
+      </seq>
+      <seq id="seq_2" class="p">
+        <par id="sid_2" class="sent">
+          <text src="dtbook.xml#id_2"/>
+          <audio src="chuong15.mp3" clipBegin="4.008s" clipEnd="13.512s"/>
+        </par>
+      </seq>
+      <seq id="seq_3" class="p">
+        <par id="sid_3" class="sent">
+          <text src="dtbook.xml#id_3"/>
+          <audio src="chuong15.mp3" clipBegin="13.512s" clipEnd="34.776s"/>
+        </par>
+      </seq>
+      <seq id="seq_4" class="p">
+        <par id="sid_4" class="sent">
+          <text src="dtbook.xml#id_4"/>
+          <audio src="chuong15.mp3" clipBegin="34.776s" clipEnd="55.584s"/>
+        </par>
+      </seq>
+      <seq id="seq_5" class="p">
+        <par id="sid_5" class="sent">
+          <text src="dtbook.xml#id_5"/>
+          <audio src="chuong15.mp3" clipBegin="55.584s" clipEnd="79.272s"/>
+        </par>
+      </seq>
+    </seq>
+  </body>
+</smil>
