@@ -105,11 +105,10 @@
     font-size: 1.2rem; line-height: 1; padding: .25rem .3rem; color: var(--ink); }
   .transport .navb:hover { background: var(--accent-soft); }
   .navb.disabled { opacity: .3; cursor: default; pointer-events: none; }
-  .playpause { width: 46px; height: 46px; flex-shrink: 0; border-radius: 50%;
-    border: none; background: var(--accent); color: #fff8ee; font-size: 1.05rem;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    box-shadow: var(--shadow); transition: transform .15s ease, filter .15s ease; }
-  .playpause:hover { transform: scale(1.06); filter: brightness(1.06); }
+  .playpause { flex-shrink: 0; border: none; background: transparent; color: var(--ink);
+    font-size: 1.35rem; line-height: 1; cursor: pointer; padding: .25rem .4rem;
+    border-radius: 8px; transition: background .15s ease; }
+  .playpause:hover { background: var(--accent-soft); }
   .scrub { width: min(280px, 38vw); accent-color: var(--accent); cursor: pointer; }
   .time { font-family: system-ui, sans-serif; font-size: .72rem; color: var(--ink-soft);
     min-width: 2.7em; text-align: center; font-variant-numeric: tabular-nums; }
