@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Totto-chan Bên Cửa Sổ — Chương 25: Bộ môn thể dục nghệ thuật</title>
+<style>
+@font-face{font-family:'Lora';font-style:italic;font-weight:400;font-display:swap;src:url(../fonts/lora-400-italic-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;}
+@font-face{font-family:'Lora';font-style:italic;font-weight:400;font-display:swap;src:url(../fonts/lora-400-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family:'Lora';font-style:italic;font-weight:400;font-display:swap;src:url(../fonts/lora-400-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Lora';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/lora-400-normal-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;}
+@font-face{font-family:'Lora';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/lora-400-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family:'Lora';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/lora-400-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Lora';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/lora-600-normal-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;}
+@font-face{font-family:'Lora';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/lora-600-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family:'Lora';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/lora-600-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
+  :root {
+    --paper: #faf6ee; --paper-2: #f2ecdd; --ink: #2c2417; --ink-soft: #7d7259;
+    --accent: #b8860b; --accent-soft: #f5e5b8; --hi: #ffedad; --hi-ring: #e5c25b;
+    --card: #fffdf8; --line: #e3d9c2; --shadow: 0 10px 30px rgba(90, 70, 20, .12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191613; --paper-2: #141210; --ink: #e8e0cf; --ink-soft: #9a8f77;
+      --accent: #d4a531; --accent-soft: #3a2f14; --hi: #4a3a10; --hi-ring: #8a6d1d;
+      --card: #211d18; --line: #38321f; --shadow: 0 10px 30px rgba(0, 0, 0, .5);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; display: flex; background: var(--paper); color: var(--ink);
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+  }
+  /* ---- thanh tiến độ đọc ---- */
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--accent), #e0b64f); z-index: 20; transition: width .3s linear; }
+
+  /* ---- sidebar mục lục ---- */
+  nav {
+    width: 300px; min-width: 240px; height: 100vh; position: sticky; top: 0; overflow-y: auto;
+    background: var(--paper-2); border-right: 1px solid var(--line); padding: 1.6rem 1rem 7rem;
+  }
+  nav .brand { padding: 0 .4rem 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+  nav .brand b { display: block; font-size: 1.02rem; line-height: 1.35; }
+  nav .brand i { color: var(--ink-soft); font-size: .84rem; }
+  nav h2 { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 .5rem .4rem; font-family: system-ui, sans-serif; }
+  nav ol { list-style: none; margin: 0; padding: 0; font-size: .88rem; }
+  nav li a, nav li span {
+    display: flex; gap: .55rem; align-items: baseline; padding: .34rem .55rem;
+    border-radius: 8px; text-decoration: none; color: var(--ink); line-height: 1.4;
+  }
+  nav li em { font-style: normal; font-family: system-ui, sans-serif; font-size: .7rem;
+    color: var(--ink-soft); min-width: 1.4em; }
+  nav li a:hover { background: var(--accent-soft); }
+  nav li.current > span { background: var(--accent); color: #fff8e6; font-weight: bold;
+    box-shadow: var(--shadow); }
+  nav li.current em { color: #fff3cf; }
+  nav li.missing { opacity: .38; }
+
+  /* ---- trang sách ---- */
+  main { flex: 1; display: flex; justify-content: center; padding: 2.2rem 1.2rem 9rem; }
+  .page {
+    max-width: 700px; width: 100%; background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; box-shadow: var(--shadow); padding: 3rem clamp(1.4rem, 5vw, 3.4rem) 3.4rem;
+  }
+  .kicker { font-family: system-ui, sans-serif; font-size: .72rem; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); text-align: center; }
+  h1.chapter { text-align: center; font-size: 2rem; margin: .4rem 0 .2rem; font-weight: normal;
+    cursor: pointer; }
+  h1.chapter:hover { color: var(--accent); }
+  .byline { text-align: center; color: var(--ink-soft); font-size: .88rem; font-style: italic; }
+  .flourish { display: flex; align-items: center; gap: .9rem; margin: 1.4rem auto 2rem;
+    max-width: 420px; color: var(--accent); }
+  .flourish::before, .flourish::after { content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent)); }
+  .flourish::after { background: linear-gradient(90deg, var(--accent), transparent); }
+  .flourish i { font-style: normal; font-size: .95rem; transform: rotate(45deg); line-height: 1; }
+  .seg { font-size: 1.05rem; line-height: 1.95; margin: 0 0 1.05em; padding: .1rem .45rem;
+    border-radius: 8px; cursor: pointer; transition: background .25s, box-shadow .25s; }
+  .seg:hover { background: var(--accent-soft); }
+  .seg.active { background: var(--hi); box-shadow: 0 0 0 2px var(--hi-ring); }
+  .dropcap::first-letter { float: left; font-size: 3.4em; line-height: .82; padding: .04em .12em 0 0;
+    color: var(--accent); font-weight: bold; }
+  .endmark { text-align: center; color: var(--ink-soft); margin-top: 2.2rem; font-size: 1.1rem; }
+  .footnote { font-size: .88rem; color: var(--ink-soft); border-left: 3px solid var(--accent);
+    background: var(--accent-soft); margin-top: 2rem; }
+  sup.noteref a { color: var(--accent); text-decoration: none; font-weight: bold; }
+
+  /* ---- thanh audio ---- */
+  footer {
+    position: fixed; bottom: 1.1rem; left: 0; right: 0; display: flex; justify-content: center;
+    pointer-events: none; z-index: 10;
+  }
+  .player-card {
+    pointer-events: auto; display: flex; align-items: center; gap: .9rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    box-shadow: var(--shadow); padding: .55rem 1.1rem .55rem .8rem; max-width: 94vw;
+  }
+  .player-card .info { font-family: system-ui, sans-serif; font-size: .74rem; color: var(--ink-soft);
+    white-space: nowrap; line-height: 1.35; }
+  .player-card .info b { color: var(--ink); font-size: .8rem; }
+  audio { width: min(360px, 46vw); height: 38px; }
+  .pbtn { pointer-events: auto; cursor: pointer; font-family: system-ui, sans-serif;
+    font-size: .74rem; font-weight: 600; color: var(--ink); background: var(--card);
+    border: 1px solid var(--line); border-radius: 999px; padding: .42rem .7rem;
+    text-decoration: none; white-space: nowrap; transition: background .18s ease; }
+  .pbtn:hover { background: var(--accent-soft); }
+  #speed { min-width: 3.1em; text-align: center; }
+  /* cụm điều khiển ⏮ ▶ ⏭ */
+  .transport { display: flex; align-items: center; gap: .3rem; }
+  .transport .navb { border: none; background: transparent; box-shadow: none;
+    font-size: 1.2rem; line-height: 1; padding: .25rem .3rem; color: var(--ink); }
+  .transport .navb:hover { background: var(--accent-soft); }
+  .navb.disabled { opacity: .3; cursor: default; pointer-events: none; }
+  .playpause { flex-shrink: 0; border: none; background: transparent; color: var(--ink);
+    font-size: 1.35rem; line-height: 1; cursor: pointer; padding: .25rem .4rem;
+    border-radius: 8px; transition: background .15s ease; }
+  .playpause:hover { background: var(--accent-soft); }
+  .scrub { width: min(280px, 38vw); accent-color: var(--accent); cursor: pointer; }
+  .time { font-family: system-ui, sans-serif; font-size: .72rem; color: var(--ink-soft);
+    min-width: 2.7em; text-align: center; font-variant-numeric: tabular-nums; }
+  @media (max-width: 940px) { nav { display: none; } }
+
+  /* ---- gợi ý phím tắt ---- */
+  .keyhint { position: fixed; bottom: 1.15rem; left: 1.1rem; z-index: 9;
+    font-family: system-ui, sans-serif; font-size: .68rem; color: var(--ink-soft);
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: .5rem .7rem; box-shadow: var(--shadow); max-width: 210px; line-height: 1.7; }
+  .keyhint b { color: var(--ink); background: var(--paper-2); border: 1px solid var(--line);
+    border-radius: 4px; padding: 0 .32em; font-family: ui-monospace, monospace; font-size: .92em; }
+  @media (max-width: 940px) { .keyhint { display: none; } }
+
+  /* ---- nút về trang bìa ---- */
+  .home-btn { position: fixed; top: .9rem; right: .9rem; z-index: 15;
+    display: inline-flex; align-items: center; gap: .45rem; text-decoration: none;
+    font-family: system-ui, sans-serif; font-size: .8rem; font-weight: 600;
+    color: var(--ink); background: var(--card); border: 1px solid var(--line);
+    border-radius: 999px; padding: .5rem 1rem; box-shadow: var(--shadow);
+    transition: transform .18s ease, background .18s ease; }
+  .home-btn:hover { transform: translateY(-2px); background: var(--accent-soft); }
+
+  /* ---- nút + bảng cài đặt đọc ---- */
+  .set-btn { position: fixed; top: .9rem; right: 9.2rem; z-index: 15;
+    display: inline-flex; align-items: center; gap: .4rem; cursor: pointer;
+    font-family: system-ui, sans-serif; font-size: .8rem; font-weight: 600;
+    color: var(--ink); background: var(--card); border: 1px solid var(--line);
+    border-radius: 999px; padding: .5rem 1rem; box-shadow: var(--shadow);
+    transition: transform .18s ease, background .18s ease; }
+  .set-btn:hover { transform: translateY(-2px); background: var(--accent-soft); }
+  .set-panel { position: fixed; top: 3.4rem; right: .9rem; z-index: 16; width: 270px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    box-shadow: var(--shadow); padding: 1rem 1.1rem 1.15rem;
+    font-family: system-ui, sans-serif; display: none; }
+  .set-panel.open { display: block; }
+  .set-panel h3 { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-soft); margin: .9rem 0 .45rem; }
+  .set-panel h3:first-child { margin-top: 0; }
+  .set-row { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .set-row button { flex: 1; min-width: 3rem; cursor: pointer; font-family: inherit;
+    font-size: .8rem; color: var(--ink); background: var(--paper-2);
+    border: 1px solid var(--line); border-radius: 8px; padding: .42rem .3rem;
+    transition: background .15s ease; }
+  .set-row button:hover { background: var(--accent-soft); }
+  .set-row button[aria-pressed="true"] { background: var(--accent); color: #fff8e6;
+    border-color: var(--accent); }
+
+  /* cỡ chữ đọc */
+  .page { --rsize: 1; }
+  .seg { font-size: calc(1.05rem * var(--rsize)); }
+  h1.chapter { font-size: calc(2rem * var(--rsize)); }
+  /* chế độ font dễ đọc */
+  body.legible .seg { font-family: system-ui, "Segoe UI", sans-serif;
+    letter-spacing: .02em; word-spacing: .14em; line-height: 2.15; text-align: left; }
+  body.legible .dropcap::first-letter { float: none; font-size: 1em; color: inherit;
+    padding: 0; font-weight: inherit; }
+
+  /* chủ đề tương phản */
+  :root.theme-dark { --paper: #191613; --paper-2: #141210; --ink: #e8e0cf; --ink-soft: #9a8f77;
+    --accent: #d4a531; --accent-soft: #3a2f14; --hi: #4a3a10; --hi-ring: #8a6d1d;
+    --card: #211d18; --line: #38321f; --shadow: 0 10px 30px rgba(0,0,0,.5); }
+  :root.theme-paper { --paper: #faf6ee; --paper-2: #f2ecdd; --ink: #2c2417; --ink-soft: #7d7259;
+    --accent: #b8860b; --accent-soft: #f5e5b8; --hi: #ffedad; --hi-ring: #e5c25b;
+    --card: #fffdf8; --line: #e3d9c2; --shadow: 0 10px 30px rgba(90,70,20,.12); }
+  :root.theme-contrast { --paper: #000; --paper-2: #111; --ink: #ffe100; --ink-soft: #d9c200;
+    --accent: #ffe100; --accent-soft: #333; --hi: #ffe100; --hi-ring: #fff;
+    --card: #0a0a0a; --line: #ffe100; --shadow: none; }
+  :root.theme-contrast .seg.active { color: #000; }
+
+  .sleep-info { font-size: .72rem; color: var(--ink-soft); margin-top: .5rem; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<a class="home-btn" href="../index.html" title="Về trang bìa">📖 Trang bìa</a>
+<button class="set-btn" id="setBtn" aria-expanded="false" title="Cài đặt đọc">⚙ Cài đặt</button>
+<div class="set-panel" id="setPanel" role="dialog" aria-label="Cài đặt đọc">
+  <h3>Cỡ chữ</h3>
+  <div class="set-row" id="sizeRow">
+    <button data-size="0.9">A−</button>
+    <button data-size="1" aria-pressed="true">A</button>
+    <button data-size="1.2">A+</button>
+    <button data-size="1.45">A++</button>
+  </div>
+  <h3>Nền &amp; tương phản</h3>
+  <div class="set-row" id="themeRow">
+    <button data-theme="paper" aria-pressed="true">Giấy</button>
+    <button data-theme="dark">Tối</button>
+    <button data-theme="contrast">Tương phản cao</button>
+  </div>
+  <h3>Kiểu chữ</h3>
+  <div class="set-row" id="legRow">
+    <button data-leg="0" aria-pressed="true">Mặc định</button>
+    <button data-leg="1">Dễ đọc</button>
+  </div>
+  <h3>Hẹn giờ tắt</h3>
+  <div class="set-row" id="sleepRow">
+    <button data-sleep="0" aria-pressed="true">Tắt</button>
+    <button data-sleep="15">15′</button>
+    <button data-sleep="30">30′</button>
+    <button data-sleep="60">60′</button>
+  </div>
+  <div class="sleep-info" id="sleepInfo"></div>
+</div>
+<nav>
+  <div class="brand">
+    <a href="../index.html" style="text-decoration:none;color:inherit">
+      <b>Totto-chan Bên Cửa Sổ</b>
+      <i>Tetsuko Kuroyanagi</i>
+    </a>
+  </div>
+  <h2>Mục lục</h2>
+  <ol>
+    <li><a href="../chapter_00/preview.html?autoplay=1"><em>★</em>Phần mở đầu</a></li>
+    <li><a href="../chapter_01/preview.html?autoplay=1"><em>01</em>Nhà ga</a></li>
+    <li><a href="../chapter_02/preview.html?autoplay=1"><em>02</em>Cô bé bên cửa sổ</a></li>
+    <li><a href="../chapter_03/preview.html?autoplay=1"><em>03</em>Trường mới</a></li>
+    <li><a href="../chapter_04/preview.html?autoplay=1"><em>04</em>Con thích trường này</a></li>
+    <li><a href="../chapter_05/preview.html?autoplay=1"><em>05</em>Thầy hiệu trưởng</a></li>
+    <li><a href="../chapter_06/preview.html?autoplay=1"><em>06</em>Giờ ăn trưa</a></li>
+    <li><a href="../chapter_07/preview.html?autoplay=1"><em>07</em>Totto-chan bắt đầu đi học</a></li>
+    <li><a href="../chapter_08/preview.html?autoplay=1"><em>08</em>Lớp học trên con tàu</a></li>
+    <li><a href="../chapter_09/preview.html?autoplay=1"><em>09</em>Bài học ở trường Tomoe</a></li>
+    <li><a href="../chapter_10/preview.html?autoplay=1"><em>10</em>Thức ăn của biển và của đất</a></li>
+    <li><a href="../chapter_11/preview.html?autoplay=1"><em>11</em>“Nhai cho kỹ”</a></li>
+    <li><a href="../chapter_12/preview.html?autoplay=1"><em>12</em>Cuộc dạo chơi ở trường</a></li>
+    <li><a href="../chapter_13/preview.html?autoplay=1"><em>13</em>Bài hát của trường</a></li>
+    <li><a href="../chapter_14/preview.html?autoplay=1"><em>14</em>Dọn đi cho sạch sẽ</a></li>
+    <li><a href="../chapter_15/preview.html?autoplay=1"><em>15</em>Tên của Totto-chan</a></li>
+    <li><a href="../chapter_16/preview.html?autoplay=1"><em>16</em>Các diễn viên hài kịch của đài phát thanh</a></li>
+    <li><a href="../chapter_17/preview.html?autoplay=1"><em>17</em>Một toa xe khác lại tới</a></li>
+    <li><a href="../chapter_18/preview.html?autoplay=1"><em>18</em>Bể bơi</a></li>
+    <li><a href="../chapter_19/preview.html?autoplay=1"><em>19</em>Phiếu báo điểm</a></li>
+    <li><a href="../chapter_20/preview.html?autoplay=1"><em>20</em>Kỳ nghỉ hè bắt đầu</a></li>
+    <li><a href="../chapter_21/preview.html?autoplay=1"><em>21</em>Một cuộc phiêu lưu mạo hiểm</a></li>
+    <li><a href="../chapter_22/preview.html?autoplay=1"><em>22</em>Thử thách lòng dũng cảm</a></li>
+    <li><a href="../chapter_23/preview.html?autoplay=1"><em>23</em>Phòng diễn tập</a></li>
+    <li><a href="../chapter_24/preview.html?autoplay=1"><em>24</em>Chuyến đi suối nước nóng</a></li>
+    <li class="current"><span><em>25</em>Bộ môn thể dục nghệ thuật</span></li>
+    <li><a href="../chapter_26/preview.html?autoplay=1"><em>26</em>Thứ con thích nhất</a></li>
+    <li><a href="../chapter_27/preview.html?autoplay=1"><em>27</em>Quần áo xoàng xĩnh nhất</a></li>
+    <li><a href="../chapter_28/preview.html?autoplay=1"><em>28</em>Takahashi</a></li>
+    <li class="missing"><span><em>29</em>Cẩn thận trước khi nhảy</span></li>
+    <li class="missing"><span><em>30</em>Và rồi ờ... ờ...</span></li>
+    <li><a href="../chapter_31/preview.html?autoplay=1"><em>31</em>Chúng con chỉ đùa thôi</a></li>
+    <li class="missing"><span><em>32</em>Ngày thể thao</span></li>
+    <li class="missing"><span><em>33</em>Nhà thơ Isa</span></li>
+    <li class="missing"><span><em>34</em>Rất huyền bí</span></li>
+    <li><a href="../chapter_35/preview.html?autoplay=1"><em>35</em>Nói bằng tay</a></li>
+    <li class="missing"><span><em>36</em>Bốn mươi bảy Ronin</span></li>
+    <li class="missing"><span><em>37</em>Masow-chan</span></li>
+    <li class="missing"><span><em>38</em>Bím đuôi sam</span></li>
+    <li><a href="../chapter_39/preview.html?autoplay=1"><em>39</em>Xin cám ơn</a></li>
+    <li class="missing"><span><em>40</em>Toa xe thư viện</span></li>
+    <li class="missing"><span><em>41</em>Cái đuôi</span></li>
+    <li class="missing"><span><em>42</em>Năm thứ hai của em ở Tomoe</span></li>
+    <li class="missing"><span><em>43</em>Hồ thiên nga</span></li>
+    <li class="missing"><span><em>44</em>Thầy giáo nông nghiệp</span></li>
+    <li class="missing"><span><em>45</em>Bếp dã chiến</span></li>
+    <li class="missing"><span><em>46</em>Em thật là một cô bé ngoan</span></li>
+    <li class="missing"><span><em>47</em>Cô dâu</span></li>
+    <li class="missing"><span><em>48</em>Ngôi trường cũ đổ nát</span></li>
+    <li class="missing"><span><em>49</em>Dải băng buộc tóc</span></li>
+    <li class="missing"><span><em>50</em>Đi thăm thương binh</span></li>
+    <li class="missing"><span><em>51</em>Vỏ cây đoán sức khỏe</span></li>
+    <li class="missing"><span><em>52</em>Em bé nói tiếng Anh</span></li>
+    <li class="missing"><span><em>53</em>Kịch nghiệp dư</span></li>
+    <li class="missing"><span><em>54</em>Phấn viết</span></li>
+    <li class="missing"><span><em>55</em>Yasuaki-chan đã mất</span></li>
+    <li class="missing"><span><em>56</em>Người tình báo</span></li>
+    <li class="missing"><span><em>57</em>Cây đàn violon của bố</span></li>
+    <li class="missing"><span><em>58</em>Lời hứa</span></li>
+    <li><a href="../chapter_59/preview.html?autoplay=1"><em>59</em>Con Rocky biến mất</a></li>
+    <li class="missing"><span><em>60</em>Bữa tiệc trà</span></li>
+    <li class="missing"><span><em>61</em>Sayonara, Sayonara (Tạm biệt)</span></li>
+    <li><a href="../chapter_62/preview.html?autoplay=1"><em>✦</em>Phần kết</a></li>
+  </ol>
+</nav>
+<main>
+  <article class="page">
+    <div class="kicker">Chương 25</div>
+    <h1 class="chapter seg" data-b="0.000" data-e="4.296">Bộ môn thể dục nghệ thuật</h1>
+    <div class="byline">Totto-chan Bên Cửa Sổ · Tetsuko Kuroyanagi</div>
+    <div class="flourish"><i>◆</i></div>
+    <p class="seg dropcap" data-b="4.296" data-e="19.944">Sau kỳ nghỉ hè, học kỳ hai bắt đầu vì ở Nhật năm học bắt đầu vào tháng tư. Ngoài các bạn cùng lớp, Totto-chan còn làm quen với các bạn trai gái lớn hơn nhờ các cuộc sinh hoạt trong dịp nghỉ hè. Và em càng yêu trường Tomoe Gakuen hơn.</p>
+    <p class="seg" data-b="19.944" data-e="58.512">Ngoài việc các lớp học ở đây không giống lớp học ở các trường bình thường khác, trường Tomoe còn giành nhiều thời gian hơn cho việc học âm nhạc. Có tất cả các loại bài học âm nhạc, kể cả một tiết “thể dục nghệ thuật” hàng ngày. Môn “thể dục nghệ thuật” là sáng kiến của một giáo sư và nhà soạn nhạc Thụy Sỹ tên là Emile Jaques Dalcroze. Người ta biết đến những nghiên cứu của ông vào khoảng năm 1904. Phương pháp của ông được nhanh chóng chấp nhận ở châu Âu, châu Mỹ. Những cơ quan nghiên cứu, đào tạo mọc lên khắp nơi. Dưới đây là câu chuyện về môn thể dục nghệ thuật của Dalcroze đã đươc đưa vào chương trình học ở trường Tomoe như thế nào.</p>
+    <p class="seg" data-b="58.512" data-e="90.696">Trước khi mở trường Tomoe Gakuen, thầy hiệu trưởng Sobaku Kobayashi, đã sang châu Âu để tìm hiểu trẻ em nước ngoài được giáo dục như thế nào. Ông đi thăm nhiều trường tiểu học và tiếp xúc với nhiều nhà giáo dục. Ở Paris, ông gặp ông Dalcroze, một nhà soạn nhạc giỏi, đồng thời là một nhà giáo dục. Dalcroze đã để tâm suy nghĩ nhiều năm về việc dạy trẻ em nghe và cảm thụ âm nhạc bằng tâm hồn chứ không phải chỉ bằng tai; để các em cảm thấy rằng âm nhạc là một cái gì đó sống động chứ không phải buồn bã vô hồn, để khơi dậy tính nhạy cảm của trẻ.</p>
+    <p class="seg" data-b="90.696" data-e="134.688">Về sau, trong khi quan sát các em nhảy và đi lại tung tăng, ông nảy ra sáng kiến tạo ra những bài tập nhịp điệu, mà ông gọi là “thể dục nghệ thuật”. Ông Kobayashi theo học trường Dalcroze ở Paris hơn một năm và nghiên cứu thật kỹ lưỡng phương pháp này. Nhiều người Nhật Bản đã chịu ảnh hưởng của Dalcroze. Nhà soạn nhạc Koscak Yamada; người khởi xướng khoa múa hiện đại ở Nhật Bản, Baku Ishii; nghệ sĩ Kabuki Ichikawa Sadanji II; người tiên phong của nền kịch nói hiện đại Kaoru Osannai; diễn viên múa Michio Ito. Tất cả những người này đều cảm thấy những bài dạy của Dalcroze là nền tảng của nhiều bộ môn trong nghệ thuật. Nhưng Sosaku Kobayashi là người đầu tiên áp dụng nó vào nền giáo dục tiểu học ở Nhật Bản.</p>
+    <p class="seg" data-b="134.688" data-e="139.392">Nếu bạn hỏi ông “Thể dục nghệ thuật” là gì, ông sẽ trả lời:</p>
+    <p class="seg" data-b="139.392" data-e="158.784">- Đấy là một môn thể thao làm cho bộ máy cơ thể hoàn thiện hơn; một môn thể thao dạy cho trí óc điều khiển và chế ngự thân thể; một môn thể thao khiến đầu óc và thân thể hiểu được nhịp điệu. Rèn luyện thể dục nghệ thuật làm cho nhân cách phát triển hài hòa; có một nhân cách phát triển hài hòa thì đẹp, khỏe, thích hợp và tuân thủ các quy luật của thiên nhiên.</p>
+    <p class="seg" data-b="158.784" data-e="215.640">Các buổi học của Totto-chan đều bắt đầu bằng việc rèn luyện cho thân thể hiểu được nhịp điệu. Thầy hiệu trưởng thường đánh piano trên sân khấu nhỏ trong phòng họp và các học sinh, dù đứng ở đâu đều bắt đầu đi theo nhịp nhạc. Các em có thể đi theo kiểu nào cũng được miễn là không được xô đẩy, do đó các em có xu hướng đi theo đường vòng tròn. Nếu các em thấy nhạc là điệu nhịp hai, các em thường vung tay lên xuống, như một nhạc trưởng, trong khi đi. Còn về chân, các em không giẫm mạnh, nhưng không có nghĩa là đi bằng đầu ngón chân như trong ba-lê. Người ta dạy các em đi thật thoải mái, y như thể kéo lê ngón chân vậy. Điều quan trọng là phải tự nhiên, nên các em có thể đi theo kiểu nào các em cho là hợp nhất. Nếu chuyển sang nhịp ba, các em vung tay theo cho đúng và điều chỉnh bước đi theo nhịp hoặc đi nhanh hơn hay chậm hơn theo yêu cầu. Các em phải học cách giơ tay lên và hạ tay xuống cho hợp với nhịp sau. Nhịp bốn thì khá đơn giản:</p>
+    <p class="seg" data-b="215.640" data-e="219.168">- Xuống, xung quanh, ra hai bên và lên.</p>
+    <p class="seg" data-b="219.168" data-e="221.640">Nhưng khi là nhịp năm thì:</p>
+    <p class="seg" data-b="221.640" data-e="226.152">- Xuống, xung quanh, ra phía trước, ra hai bên và lên.</p>
+    <p class="seg" data-b="226.152" data-e="229.872">Trong khi đó, đối với nhịp sáu, cánh tay:</p>
+    <p class="seg" data-b="229.872" data-e="235.440">- Xuống, xung quanh, ra phía trước, lại xung quanh, sang hai bên và lên.</p>
+    <p class="seg" data-b="235.440" data-e="238.344">Do đón khi đổi nhịp là khá khó.</p>
+    <p class="seg" data-b="238.344" data-e="242.256">Điều còn khó hơn nữa là khi thầy hiệu trưởng nói to:</p>
+    <p class="seg" data-b="242.256" data-e="247.848">- Dù tôi có đổi nhịp trên đàn piano, các em hãy đợi khi nào tôi bảo đổi hãy đổi.</p>
+    <p class="seg" data-b="247.848" data-e="254.784">Giả thử các em đang đi theo nhịp hai và nhạc chuyển sang nhịp ba, các em phải tiếp tục đi theo nhịp hai trong khi nghe nhịp ba.</p>
+    <p class="seg" data-b="254.784" data-e="260.520">Như vậy là rất khó, nhưng thầy hiệu trưởng nói là để rèn luyện khả năng tập trung của các em.</p>
+    <p class="seg" data-b="260.520" data-e="262.824">Cuối cùng ông nói to:</p>
+    <p class="seg" data-b="262.824" data-e="265.752">- Bây giờ các em có thể chuyển được!</p>
+    <p class="seg" data-b="265.752" data-e="295.368">Thật là nhẹ nhõm cả người, các em chuyển ngay sang nhịp ba. Nhưng làm được vậy các em phải phản ứng hết sức nhanh. Trong thời gian cần thiết để ý thức kịp bỏ nhịp hai và điều khiển các cơ bắp cho phù hợp với nhịp ba thì nhạc có thể bất thình lình chuyển sang nhịp năm. Lúc đầu, chân tay các em khua lung tung và thường thấy có tiếng đề nghị: “Thầy ơi! Đợi chúng em với!”, nhưng dần dà, do tập luyện, các động tác đó trở nên vui, thậm chí các em còn cải biên và rất thích thú.</p>
+    <p class="seg" data-b="295.368" data-e="308.952">Thường thường, mỗi em chuyển động chân tay một cách riêng rẽ, nhưng thỉnh thoảng có từng cặp cùng phối hợp động tác, cầm tay nhau khi là nhịp hai, hoặc khi các em thường tập bước đi nhưng nhắm mắt. Điều cấm kỵ duy nhất là không được nói chuyện.</p>
+    <p class="seg" data-b="308.952" data-e="324.696">Thỉnh thoảng khi có cuộc họp của Hội cha mẹ học sinh và giáo viên, các bà mẹ thường ghé nhìn qua cửa sổ. Theo dõi từng em một, lúc giơ chân tay một cách nhẹ nhàng thoải mái, lúc nhảy qua lại một cách hớn hở, khớp với nhịp điệu của bài nhạc, ai cũng thấy vui vui.</p>
+    <p class="seg" data-b="324.696" data-e="337.464">Do đó, mục đích của môn thể dục nghệ thuật trước hết là để rèn luyện trí óc và cơ thể có ý thức về nhịp điệu, nhờ đó đạt đến sự hài hòa giữa trí óc và cơ thể, và cuối cùng khơi dậy trí tưởng tượng, đẩy mạnh tính sáng tạo.</p>
+    <p class="seg" data-b="337.464" data-e="343.440">Hôm Totto-chan đến trường lần đầu tiên, Totto-chan nhìn thấy tên trường trên cổng và hỏi mẹ:</p>
+    <p class="seg" data-b="343.440" data-e="346.896">- Mẹ ơi, Tomoe nghĩa là gì hả mẹ?</p>
+    <p class="seg" data-b="346.896" data-e="363.192">“Tomoe” là một ký hiệu có hình dấu phẩy và thầy hiệu trưởng đã chọn cho trường mình cái biểu tượng truyền thống gồm hai “Tomoe” - một đen một trắng kết vào nhau thành một vòng tròn hoàn hảo. Điều này tượng trưng cho mục đích của ông đối với trẻ em: cơ thể và trí tuệ cùng phát triển tuyệt đối hài hòa.</p>
+    <p class="seg" data-b="363.192" data-e="374.616">Thầy hiệu trưởng đã đưa môn thể dục nghệ thuật vào chương trình ở trường vì ông cảm thấy nhất định môn này sẽ mang lại kết quả tốt và giúp cho nhân cách của các em phát triển một cách tự nhiên, không chịu ảnh hưởng quá nhiều của người lớn.</p>
+    <p class="seg" data-b="374.616" data-e="386.568">Thầy hiệu trưởng phàn nàn về nền giáo dục đương thời quá nhấn mạnh vào chữ viết, như vậy sẽ làm teo sự cảm nhận thiên nhiên qua giác quan và sáng tạo bản năng của trẻ đối với tiếng nói hãy còn non nớt của Chúa, đó là cảm hứng.</p>
+    <p class="seg" data-b="386.568" data-e="389.232">Chính nhà thơ Basho đã viết:</p>
+    <p class="seg" data-b="389.232" data-e="392.400">Hãy nghe! Một con ếch</p>
+    <p class="seg" data-b="392.400" data-e="394.752">nhảy vào sự yên tĩnh</p>
+    <p class="seg" data-b="394.752" data-e="397.008">của một mặt hồ cổ.</p>
+    <p class="seg" data-b="397.008" data-e="412.488">Ấy vậy mà đã có biết bao nhiêu người, hẳn đã phải thấy hiện tượng một con ếch nhảy vào mặt hồ. Trải qua bao nhiêu thời đại, trên khắp thế giới, Watt và Newton không thể là những người duy nhất để ý đến hơi nước thoát ra từ một ấm nước đang sôi và nhận xét một quả táo rơi.</p>
+    <p class="seg" data-b="412.488" data-e="427.536">Có mắt, nhưng không nhìn thấy vẻ đẹp; có tai, nhưng không nghe được âm nhạc; có óc, nhưng không nhận ra chân lý; có trái tim, nhưng không bao giờ rung động, và do đó không bao giờ rực cháy. Thầy hiệu trưởng nói đó là những điều đáng sợ.</p>
+    <p class="seg" data-b="427.536" data-e="437.160">Còn Totto-chan, trong khi chạy nhảy chân không, như Isadora Duncan, em vô cùng sung sướng và hầu như không ngờ rằng đấy lại là một phần của sinh hoạt nhà trường!</p>
+    <div class="endmark">✦ &nbsp; Hết chương 25 &nbsp; ✦</div>
+  </article>
+</main>
+<footer>
+  <div class="player-card">
+    <div class="info"><b>Chương 25: Bộ môn thể dục nghệ thuật</b><br>bấm đoạn văn để nhảy tới</div>
+    <div class="transport">
+      <a class="pbtn navb" href="../chapter_24/preview.html?autoplay=1" title="Phần trước (Shift+←)" aria-label="Phần trước">⏮</a>
+      <button class="playpause" id="pp" aria-label="Phát / dừng (Space)">▶</button>
+      <a class="pbtn navb" href="../chapter_26/preview.html?autoplay=1" title="Phần sau (Shift+→)" aria-label="Phần sau">⏭</a>
+    </div>
+    <span class="time" id="tCur">0:00</span>
+    <input type="range" class="scrub" id="scrub" min="0" max="1000" value="0" step="1" aria-label="Thanh tua">
+    <span class="time" id="tDur">7:17</span>
+    <audio id="player" src="chuong25.mp3" preload="auto"></audio>
+    <select class="pbtn" id="speed" title="Tốc độ đọc (phím ↑ / ↓)">
+      <option value="0.5">0.5×</option>
+      <option value="0.75">0.75×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.25">1.25×</option>
+      <option value="1.5">1.5×</option>
+      <option value="2">2×</option>
+    </select>
+    <a class="pbtn" id="dl" href="daisy.zip" download="Totto-chan Bên Cửa Sổ - Chương 25.zip" title="Tải bản DAISY (.zip) mở bằng Thorium / EasyReader">⬇ DAISY</a>
+  </div>
+</footer>
+<div class="keyhint">
+  <b>Space</b> phát/dừng · <b>←</b><b>→</b> đoạn · <b>↑</b><b>↓</b> tốc độ<br>
+  <b>Shift</b>+<b>→</b> phần sau · <b>Shift</b>+<b>←</b> phần trước
+</div>
+<script>
+  const CH = 25;
+  const player = document.getElementById('player');
+  const bar = document.getElementById('progress');
+  const segs = [...document.querySelectorAll('.seg')];
+  const NEXT_HREF = "../chapter_26/preview.html?autoplay=1";
+  const NEXT_TITLE = "Thứ con thích nhất";
+  const PREV_HREF = "../chapter_24/preview.html?autoplay=1";
+  const POS_KEY = 'ttc-pos-' + CH;
+  const DONE_KEY = 'ttc-done';
+  const pp = document.getElementById('pp');
+  const scrub = document.getElementById('scrub');
+  const tCur = document.getElementById('tCur');
+  const tDur = document.getElementById('tDur');
+  const fmtT = s => { s = Math.floor(s || 0); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+  pp.addEventListener('click', () => player.paused ? player.play() : player.pause());
+  player.addEventListener('play', () => pp.textContent = '⏸');
+  player.addEventListener('pause', () => pp.textContent = '▶');
+  player.addEventListener('loadedmetadata', () => tDur.textContent = fmtT(player.duration));
+  scrub.addEventListener('input', () => { if (player.duration) player.currentTime = scrub.value / 1000 * player.duration; });
+
+  function getDone() { try { return JSON.parse(localStorage.getItem(DONE_KEY)) || []; } catch (e) { return []; } }
+  function markDone() { const d = getDone(); if (!d.includes(CH)) { d.push(CH); localStorage.setItem(DONE_KEY, JSON.stringify(d)); } }
+
+  segs.forEach(el => el.addEventListener('click', () => {
+    player.currentTime = parseFloat(el.dataset.b) + 0.01;
+    player.play();
+  }));
+
+  // đoạn đang đọc hiện tại (dùng cho phím ← →)
+  let curIdx = -1;
+  player.addEventListener('timeupdate', () => {
+    const t = player.currentTime;
+    if (player.duration) { bar.style.width = (t / player.duration * 100) + '%'; scrub.value = t / player.duration * 1000; }
+    tCur.textContent = fmtT(t);
+    segs.forEach((el, i) => {
+      const on = t >= parseFloat(el.dataset.b) && t < parseFloat(el.dataset.e);
+      if (on) curIdx = i;
+      el.classList.toggle('active', on);
+      if (on && el.dataset.scrolled !== el.dataset.b) {
+        el.dataset.scrolled = el.dataset.b;
+        el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    });
+    // lưu vị trí đang nghe (resume) — mỗi ~3s
+    if (Math.floor(t) % 3 === 0) { localStorage.setItem(POS_KEY, t); localStorage.setItem('ttc-last', CH); }
+  });
+
+  function jumpSeg(delta) {
+    let i = Math.min(Math.max(curIdx + delta, 0), segs.length - 1);
+    player.currentTime = parseFloat(segs[i].dataset.b) + 0.01;
+    player.play();
+  }
+
+  // ---- tốc độ đọc ----
+  const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+  const speedSel = document.getElementById('speed');
+  let si = 2;
+  const savedRate = parseFloat(localStorage.getItem('ttc-rate'));
+  if (savedRate && speeds.includes(savedRate)) si = speeds.indexOf(savedRate);
+  function applyRate() { player.playbackRate = speeds[si]; speedSel.value = String(speeds[si]); localStorage.setItem('ttc-rate', speeds[si]); }
+  applyRate();
+  speedSel.addEventListener('change', () => { si = speeds.indexOf(parseFloat(speedSel.value)); applyRate(); });
+
+  // ---- resume: khôi phục vị trí đang nghe ----
+  const savedPos = parseFloat(localStorage.getItem(POS_KEY));
+  player.addEventListener('loadedmetadata', () => {
+    if (savedPos > 1 && savedPos < player.duration - 2) player.currentTime = savedPos;
+  });
+
+  // nghe hết -> đánh dấu đã xong + tự chuyển phần kế tiếp
+  player.addEventListener('ended', () => {
+    pp.textContent = '▶';
+    markDone();
+    localStorage.removeItem(POS_KEY);
+    if (!NEXT_HREF) return;
+    const toast = document.createElement('div');
+    toast.textContent = '▶ Tiếp theo: ' + NEXT_TITLE + ' …';
+    toast.style.cssText = 'position:fixed;bottom:5.2rem;left:50%;transform:translateX(-50%);' +
+      'background:var(--accent);color:#fff8e6;font-family:system-ui,sans-serif;font-size:.85rem;' +
+      'padding:.6rem 1.3rem;border-radius:999px;box-shadow:var(--shadow);z-index:30';
+    document.body.appendChild(toast);
+    setTimeout(() => { location.href = NEXT_HREF; }, 2000);
+  });
+
+  // ---- phím tắt ---- (dùng pha capture để không bị thanh audio nuốt phím)
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    const next = () => { if (NEXT_HREF) location.href = NEXT_HREF; };
+    const prev = () => { if (PREV_HREF) location.href = PREV_HREF; };
+    switch (e.key) {
+      case ' ': case 'k': e.preventDefault(); player.paused ? player.play() : player.pause(); break;
+      case 'ArrowRight': e.preventDefault(); e.shiftKey ? next() : jumpSeg(1); break;
+      case 'ArrowLeft': e.preventDefault(); e.shiftKey ? prev() : jumpSeg(-1); break;
+      case 'ArrowUp': e.preventDefault(); si = Math.min(si + 1, speeds.length - 1); applyRate(); break;
+      case 'ArrowDown': e.preventDefault(); si = Math.max(si - 1, 0); applyRate(); break;
+      case ']': e.preventDefault(); next(); break;
+      case '[': e.preventDefault(); prev(); break;
+    }
+  }, true);
+
+  // ---- bảng cài đặt đọc ----
+  const setBtn = document.getElementById('setBtn');
+  const setPanel = document.getElementById('setPanel');
+  setBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = setPanel.classList.toggle('open');
+    setBtn.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', (e) => {
+    if (!setPanel.contains(e.target) && e.target !== setBtn) setPanel.classList.remove('open');
+  });
+  function press(row, el) { row.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b === el)); }
+
+  // cỡ chữ
+  const sizeRow = document.getElementById('sizeRow');
+  const page = document.querySelector('.page');
+  function applySize(v, el) { page.style.setProperty('--rsize', v); localStorage.setItem('ttc-size', v); if (el) press(sizeRow, el); }
+  sizeRow.querySelectorAll('button').forEach(b => b.addEventListener('click', () => applySize(b.dataset.size, b)));
+  const savedSize = localStorage.getItem('ttc-size');
+  if (savedSize) applySize(savedSize, [...sizeRow.children].find(b => b.dataset.size === savedSize));
+
+  // chủ đề
+  const themeRow = document.getElementById('themeRow');
+  function applyTheme(t, el) {
+    document.documentElement.classList.remove('theme-paper', 'theme-dark', 'theme-contrast');
+    document.documentElement.classList.add('theme-' + t);
+    localStorage.setItem('ttc-theme', t); if (el) press(themeRow, el);
+  }
+  themeRow.querySelectorAll('button').forEach(b => b.addEventListener('click', () => applyTheme(b.dataset.theme, b)));
+  const savedTheme = localStorage.getItem('ttc-theme');
+  if (savedTheme) applyTheme(savedTheme, [...themeRow.children].find(b => b.dataset.theme === savedTheme));
+  else themeRow.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+
+  // font dễ đọc
+  const legRow = document.getElementById('legRow');
+  function applyLeg(v, el) { document.body.classList.toggle('legible', v === '1'); localStorage.setItem('ttc-leg', v); if (el) press(legRow, el); }
+  legRow.querySelectorAll('button').forEach(b => b.addEventListener('click', () => applyLeg(b.dataset.leg, b)));
+  const savedLeg = localStorage.getItem('ttc-leg');
+  if (savedLeg) applyLeg(savedLeg, [...legRow.children].find(b => b.dataset.leg === savedLeg));
+
+  // hẹn giờ tắt (không lưu qua lần tải)
+  const sleepRow = document.getElementById('sleepRow');
+  const sleepInfo = document.getElementById('sleepInfo');
+  let sleepTimer = null, sleepAt = 0, sleepTick = null;
+  function applySleep(min, el) {
+    if (sleepTimer) clearTimeout(sleepTimer);
+    if (sleepTick) clearInterval(sleepTick);
+    press(sleepRow, el);
+    if (min === '0') { sleepInfo.textContent = ''; return; }
+    sleepAt = Date.now() + min * 60000;
+    sleepTimer = setTimeout(() => { player.pause(); sleepInfo.textContent = '⏸ Đã tắt theo hẹn giờ.'; }, min * 60000);
+    const upd = () => { const s = Math.max(0, Math.round((sleepAt - Date.now()) / 1000));
+      sleepInfo.textContent = '⏱ Còn ' + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+    upd(); sleepTick = setInterval(upd, 1000);
+  }
+  sleepRow.querySelectorAll('button').forEach(b => b.addEventListener('click', () => applySleep(b.dataset.sleep, b)));
+
+  // autoplay khi đến từ trang bìa (?autoplay=1): chờ 1s rồi tự phát
+  if (new URLSearchParams(location.search).get('autoplay') === '1') {
+    setTimeout(() => {
+      player.play().catch(() => {
+        document.querySelector('.player-card').animate(
+          [{ boxShadow: '0 0 0 0 rgba(184,134,11,.65)' },
+           { boxShadow: '0 0 0 14px rgba(184,134,11,0)' }],
+          { duration: 900, iterations: 4 });
+      });
+    }, 1000);
+  }
+</script>
+</body>
+</html>

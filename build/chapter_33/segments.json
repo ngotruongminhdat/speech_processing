@@ -1,0 +1,167 @@
+{
+  "chapter": 33,
+  "label": "Chương 33",
+  "title": "Nhà thơ Isa",
+  "segments": [
+    {
+      "id": "id_1",
+      "type": "h1",
+      "text": "Nhà thơ Isa"
+    },
+    {
+      "id": "id_2",
+      "type": "p",
+      "text": "Các em học sinh thích gọi thầy hiệu trưởng là “Isa Kobayashi”. Thậm chí, các em còn làm những câu thơ trìu mến về ông như thế này:"
+    },
+    {
+      "id": "id_3",
+      "type": "p",
+      "text": "Isa Kobayashi!"
+    },
+    {
+      "id": "id_4",
+      "type": "p",
+      "text": "Isa, người lãnh đạo của chúng em"
+    },
+    {
+      "id": "id_5",
+      "type": "p",
+      "text": "Người có vầng trán cao vời vợi!"
+    },
+    {
+      "id": "id_6",
+      "type": "p",
+      "text": "Đó là vì họ của thầy hiệu trưởng là Kobayashi lại trùng với nhà thơ nổi tiếng thế kỷ 19: Isa Kobayashi. Thầy hiệu trưởng rất thích những bài thơ ba câu của ông. Thầy hay trích thơ của Isa đến mức các em cảm thấy Isa Kobayashi cũng là người bạn gần gũi của các em như thầy hiệu trưởng Kobayashi."
+    },
+    {
+      "id": "id_7",
+      "type": "p",
+      "text": "Thầy thích thơ của Isa vì nó chân thật và đề cập đến những vấn đề bình thường của cuộc sống. Vào thời điểm phải có đến hàng ngàn nhà thơ làm thơ thể loại này, Isa đã tạo ra một thế giới riêng của mình không ai bắt chước được. Thầy hiệu trưởng khâm phục những câu thơ của ông với tất cả vẻ mộc mạc hầu như trẻ thơ của chúng. Cho nên, hễ có dịp, ông thường dạy các học sinh những câu thơ của Isa và các em học đã thuộc lòng. Ví dụ:"
+    },
+    {
+      "id": "id_8",
+      "type": "p",
+      "text": "Này chú Ếch gầy gò"
+    },
+    {
+      "id": "id_9",
+      "type": "p",
+      "text": "Đừng có đầu hàng"
+    },
+    {
+      "id": "id_10",
+      "type": "p",
+      "text": "Đã có Isa đứng cạnh đây."
+    },
+    {
+      "id": "id_11",
+      "type": "p",
+      "text": "Hỡi các chú Sẻ con!"
+    },
+    {
+      "id": "id_12",
+      "type": "p",
+      "text": "Nhường đường, nhường đường!"
+    },
+    {
+      "id": "id_13",
+      "type": "p",
+      "text": "Cho chàng Tuấn mã dũng cảm."
+    },
+    {
+      "id": "id_14",
+      "type": "p",
+      "text": "Chớ giết con Ruồi"
+    },
+    {
+      "id": "id_15",
+      "type": "p",
+      "text": "Xoa tay, xoa chân"
+    },
+    {
+      "id": "id_16",
+      "type": "p",
+      "text": "Cúi xin tha chết!"
+    },
+    {
+      "id": "id_17",
+      "type": "p",
+      "text": "Một lần, thầy ngẫu hứng phổ nhạc cho một bài thơ và tất cả học sinh đều hát:"
+    },
+    {
+      "id": "id_18",
+      "type": "p",
+      "text": "Sosaku Kobayashi"
+    },
+    {
+      "id": "id_19",
+      "type": "p",
+      "text": "Lại đây chơi với em"
+    },
+    {
+      "id": "id_20",
+      "type": "p",
+      "text": "Các chú Sẻ côi xinh xinh"
+    },
+    {
+      "id": "id_21",
+      "type": "p",
+      "text": "Không còn mẹ nữa rồi!"
+    },
+    {
+      "id": "id_22",
+      "type": "p",
+      "text": "Thỉnh thoảng thầy cũng lên lớp giảng về loại thơ này mặc dù không có trong chương trình chính khóa."
+    },
+    {
+      "id": "id_23",
+      "type": "p",
+      "text": "Bài thơ ba câu đầu tiên của Totto-chan mô tả nhân vật chuyện vui em ưa thích: Norakuro, một con chó đen bị lạc, vào quân đội làm lính trơn và dần dần được thăng quan tiến chức, mặc dù phải trả qua đời lính ba chìm bảy nổi. Bài thơ được đăng trong một tạp chí quen biết của học sinh nam:"
+    },
+    {
+      "id": "id_24",
+      "type": "p",
+      "text": "Chó Đen bị lạc, lên đường"
+    },
+    {
+      "id": "id_25",
+      "type": "p",
+      "text": "đi châu Âu, và bây giờ"
+    },
+    {
+      "id": "id_26",
+      "type": "p",
+      "text": "đã được phục viên."
+    },
+    {
+      "id": "id_27",
+      "type": "p",
+      "text": "- Các em gắng làm một bài haiku trong sáng, chân thật về một điều gì các em suy nghĩ."
+    },
+    {
+      "id": "id_28",
+      "type": "p",
+      "text": "Kể ra bài của Totto-chan không thể được coi là một bài haiku theo đúng nghĩa của nó. Nhưng nó thật sự chứng tỏ điều gì đã đem lại ấn tượng sâu sắc trong em vào những ngày đó. Thơ haiku của em không thật đúng với thể thơ 5, 7, 5 âm tiết. Bài của em lại 5, 7, 7. Thế nhưng có một bài của Isa về những chú sẻ con thì lại 5, 8, 7; do vậy Totto-chan cho rằng bài thơ của em cũng được."
+    },
+    {
+      "id": "id_29",
+      "type": "p",
+      "text": "Trong khi đi chơi đến đền Kuhonbutsu, hay khi trời mưa, không chơi ngoài trời được, phải ở trong phòng họp, Isa Kobayashi của trường Tomoe thường giảng cho các học sinh về thơ haiku. Ông cũng thường làm thơ haiku để minh họa cho những suy nghĩ của ông về cuộc sống và thiên nhiên."
+    },
+    {
+      "id": "id_30",
+      "type": "p",
+      "text": "Tuyết tan -"
+    },
+    {
+      "id": "id_31",
+      "type": "p",
+      "text": "và bỗng nhiên cả làng"
+    },
+    {
+      "id": "id_32",
+      "type": "p",
+      "text": "đầy những trẻ em!"
+    }
+  ]
+}
