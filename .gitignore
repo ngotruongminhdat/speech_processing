@@ -1,0 +1,9 @@
+_old_llm_project/
+.venv/
+__pycache__/
+*.pyc
+runs/
+.DS_Store
+demo/outputs/
+*.wav
+*.mp3
