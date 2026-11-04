@@ -21,19 +21,19 @@ Stage 0 ──► Stage 1 (Lit review) ─────────────�
 
 ---
 
-## Stage 1 — Tổng quan tài liệu (30%) · ~1.5 tuần
+## Stage 1 — Tổng quan tài liệu (30%) · ~1.5 tuần  ✅ bản nháp xong 04/11/2026
 
 **Mục tiêu:** 6 bài tóm tắt + 1 bảng so sánh + 1 phần "trong nước".
 
 | Bước | Việc | Đầu ra |
 |---|---|---|
-| 1.1 | Đọc survey Vietnamese DAR (bài 8) để nắm bức tranh OCR tiếng Việt | `notes/08_survey.md` (ghi chú ngắn) |
-| 1.2 | Đọc và tóm tắt 3 bài TTS: PhoAudiobook, F5-TTS, MobileSpeech | `notes/01..03_*.md` theo khung 7 mục |
-| 1.3 | Đọc và tóm tắt 2 bài OCR tiếng Việt: ViTextVQA, ViOCRVQA | `notes/04..05_*.md` |
-| 1.4 | Đọc và tóm tắt @BENCH (trợ năng) | `notes/06_*.md` |
-| 1.5 | Khảo sát giải pháp trong nước: VLSP TTS, FPT.AI, Viettel, Zalo TTS, VietOCR, app hiện có (Be My Eyes, Envision, Seeing AI – hỗ trợ tiếng Việt tới đâu) | `notes/10_vietnam_landscape.md` |
-| 1.6 | Bảng so sánh chéo: bài toán / phương pháp / dữ liệu / metric / ưu / nhược / dùng được gì | `notes/20_comparison.md` |
-| 1.7 | Rút ra **khoảng trống nghiên cứu** → câu chuyện cho báo cáo | mục cuối `20_comparison.md` |
+| ✅ 1.1 | Đọc survey Vietnamese DAR (bài 8) để nắm bức tranh OCR tiếng Việt | `notes/08_survey.md` (ghi chú ngắn) |
+| ✅ 1.2 | Đọc và tóm tắt 3 bài TTS: PhoAudiobook, F5-TTS, MobileSpeech | `notes/01..03_*.md` theo khung 7 mục |
+| ✅ 1.3 | Đọc và tóm tắt 2 bài OCR tiếng Việt: ViTextVQA, ViOCRVQA | `notes/04..05_*.md` |
+| ✅ 1.4 | Đọc và tóm tắt @BENCH (trợ năng) | `notes/06_*.md` |
+| ✅ 1.5 | Khảo sát giải pháp trong nước: VLSP TTS, FPT.AI, Viettel, Zalo TTS, VietOCR, app hiện có (Be My Eyes, Envision, Seeing AI – hỗ trợ tiếng Việt tới đâu) | `notes/10_vietnam_landscape.md` |
+| ✅ 1.6 | Bảng so sánh chéo: bài toán / phương pháp / dữ liệu / metric / ưu / nhược / dùng được gì | `notes/20_comparison.md` |
+| ✅ 1.7 | Rút ra **khoảng trống nghiên cứu** → câu chuyện cho báo cáo | mục cuối `20_comparison.md` |
 
 **Tiêu chí xong:** mỗi bài có đủ 7 mục, mục "liên hệ với đề tài" viết cụ thể (dùng mô hình nào, dữ liệu nào, ý tưởng UI nào).
 
@@ -47,9 +47,9 @@ Stage 0 ──► Stage 1 (Lit review) ─────────────�
 |---|---|---|
 | 2.1 | Cài môi trường vào `.venv`: paddleocr (CPU), paddlepaddle, pillow, opencv, fastapi, soundfile | `demo/requirements.txt` |
 | 2.2 | Tạo tập test 20–30 ảnh trang sách tiếng Việt: chụp điện thoại (thẳng, nghiêng, thiếu sáng) + render từ PDF sách miễn phí | `demo/data/pages/` + `gt/*.txt` ground truth |
-| 2.3 | OCR baseline: PP-OCRv5 vs VietOCR; đo CER/WER, thời gian/trang | `demo/ocr_eval.py`, `demo/outputs/ocr_results.csv` |
+| 2.3 | OCR baseline: Tesseract vie vs PaddleOCR det + VietOCR rec vs PaddleOCR det + PP-OCRv5 rec (kiểm tra từ điển PP-OCRv5 có dấu tiếng Việt không); đo CER/WER, thời gian/trang | `demo/ocr_eval.py`, `demo/outputs/ocr_results.csv` |
 | 2.4 | Chuẩn hóa văn bản: số, ngày, viết tắt, ngắt câu (VietNormalizer hoặc tự viết rule) | `demo/normalize.py` |
-| 2.5 | TTS: (a) F5-TTS checkpoint tiếng Việt chạy CPU, (b) API FPT.AI/Viettel; đo RTF, nghe thử 10 câu | `demo/tts_eval.py` |
+| 2.5 | TTS: (a) VieNeu-TTS chạy CPU, (b) F5-TTS checkpoint tiếng Việt (zalopay/hynt), (c) API FPT.AI; đo RTF, nghe thử 10 câu | `demo/tts_eval.py` |
 | 2.6 | Script end-to-end `demo/run_pipeline.py image.jpg → out.wav` | notebook `demo/demo.ipynb` để trình chiếu |
 
 **Tiêu chí xong:** 1 lệnh chạy ra audio; bảng CER/WER + RTF cho ≥2 OCR và ≥2 TTS.

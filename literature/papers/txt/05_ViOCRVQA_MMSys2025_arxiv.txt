@@ -1,0 +1,1680 @@
+                                           ViOCRVQA: Novel Benchmark Dataset and
+                                         Vision Reader for Visual Question Answering by
+                                            Understanding Vietnamese Text in Images
+
+                                               Huy Quang Pham1,2 , Thang Kien-Bao Nguyen1,2 ,
+                                         Quan Van Nguyen1,2 , Dan Quang Tran1,2 , Nghia Hieu Nguyen1,2 ,
+                                                Kiet Van Nguyen1,2*, Ngan Luu-Thuy Nguyen1,2
+arXiv:2404.18397v1 [cs.CV] 29 Apr 2024
+
+
+
+
+                                             1
+                                                 Faculty of Information Science and Engineering, University of
+                                                     Information Technology, Ho Chi Minh City, Vietnam.
+                                                 2
+                                                   Vietnam National University, Ho Chi Minh City, Vietnam.
+
+
+                                               *Corresponding author(s). E-mail(s): kietnv@uit.edu.vn;
+                                                    Contributing authors: 21522163@gm.uit.edu.vn;
+                                                  21521432@gm.uit.edu.vn; 21521333@gm.uit.edu.vn;
+                                          21521917@gm.uit.edu.vn; nghiangh@uit.edu.vn; ngannlt@uit.edu.vn;
+
+
+                                                                             Abstract
+                                          Optical Character Recognition - Visual Question Answering (OCR-VQA) is the
+                                          task of answering text information contained in images that have just been sig-
+                                          nificantly developed in the English language in recent years. However, there are
+                                          limited studies of this task in low-resource languages such as Vietnamese. To this
+                                          end, we introduce a novel dataset, ViOCRVQA (Vietnamese Optical Character
+                                          Recognition - Visual Question Answering dataset), consisting of 28,000+ im-
+                                          ages and 120,000+ question-answer pairs. In this dataset, all the images contain
+                                          text and questions about the information relevant to the text in the images. We
+                                          deploy ideas from state-of-the-art methods proposed for English to conduct ex-
+                                          periments on our dataset, revealing the challenges and difficulties inherent in a
+                                          Vietnamese dataset. Furthermore, we introduce a novel approach, called Vision-
+                                          Reader, which achieved 0.4116 in EM and 0.6990 in the F1-score on the test
+                                          set. Through the results, we found that the OCR system plays a very important
+                                          role in VQA models on the ViOCRVQA dataset. In addition, the objects in the
+                                          image also play a role in improving model performance. We open access to our
+                                          dataset at link for further research in OCR-VQA task in Vietnamese.
+
+                                          Keywords: OCR-VQA, Visual Question Answering, VQA dataset, OCR
+
+
+
+                                                                                  1
+1 Introduction
+In recent years, substantial advancements in technology have significantly boosted
+the productivity of machines, especially in Artificial Intelligence (AI). The elegant
+combination of Natural Language Processing (NLP) and Computer Vision (CV) has
+created innovative solutions for many fields. Researchers are increasingly concen-
+trating on developing multimodal models, expanding the ability to understand and
+respond to questions related to both images and language. This task is not only
+important in the field of research but also widely applied in everyday life as it resem-
+bles the characteristic of human learning: jointly learning from various modalities of
+information.
+    In multimodal learning, studies of VQA in English have grown exponentially over
+the last five years [1–4] while there is a limited number of works for VQA in low-
+resource languages [5–7], especially in Vietnamese. Despite several recent studies in
+Vietnamese, its potential remains immense, given that Vietnamese is a rich language
+that conveys textual meaning. First work on VQA in Vietnamese research starts with
+the publication of the ViVQA dataset [8], then gradually novel datasets were con-
+structed and published such as OpenViVQA [9], UIT-EVJVQA [10], and ViCLEVR
+[11]. One of the latest studies in Vietnamese vision language research is the work of
+Nguyen et al. [9], which has identified a new task for the VQA task, known as open-
+ended VQA, in which answers are in open-ended form. With this new form of VQA
+task, previous methods can not perform effectively on the OpenViVQA dataset [9].
+Moreover, Nguyen et al. [9] requires deep learning methods that have the ability to in-
+tegrate scene texts in images along with objects to give comprehensive answers. Such
+a task is challenged by the complicated open-ended form of answers as well as the po-
+tential prunes of using an external Optical Character Recognition (OCR) system for
+scene text detection and recognition. Recognizing the unique challenges posed by the
+OCR-VQA task, we observed that no Vietnamese dataset is currently robust enough
+to address these issues effectively.
+    We constructed a novel dataset in the Vietnamese language and called
+ViOCRVQA (Vietnamese Optical Character Recognition - Visual Question
+Answering dataset), which aims at enhancing the ability of solving the OCR-VQA
+task for Vietnamese. The ViOCRVQA dataset contains 28,282 images and 123,781
+questions relevant to images with answers. To our best knowledge, this dataset is the
+largest for studying VQA in Vietnamese. Questions related to title, author, publisher,
+etc. Moreover, we adopted the semi-automatic question-answer generation process to
+save human annotation time and enrich the dataset with diverse question patterns.
+    The ViOCRVQA dataset is a high-quality resource for conducting experiments on
+the ability of the VQA model to understand textual information in the image through
+the exploration of recent methods in this field. We also conducted a thorough study of
+the salient features of the dataset and found that objects have a significant influence
+on the displayed text content. From these insights, we developed a new approach to
+the ViOCRVQA dataset, which we call VisionReader, based on combining objects
+and text.
+    Our main contributions include the following:
+
+
+
+                                           2
+  • Constructed the first high-quality large-scale dataset for OCR-VQA task in
+    Vietnamese, focusing on images containing text, especially book covers.
+  • Providing information on how to design the experiments as well as evaluating
+    the results of VQA models using multiple SOTA methods on the ViOCRVQA
+    dataset.
+  • Developed a new method superior to SOTA methods that are capable of
+    understanding the relationships between objects and text contained in images.
+  • Proved the importance of the OCR system in the OCR-VQA task, and the rela-
+    tionship of the object and text in the image makes VQA models generate answers
+    more accurate.
+
+
+
+
+  Q1 : Cuốn sách này có tên là gì ?        Q1 : Cuốn sách này do nhà phát hành          Q1 : Ai là người dịch cuốn sách này ?    Q1 : Cuốn sách này có tên là gì ?
+  (What is the name of this book?)         nào xuất bản ?                               (Who is the translator of this book ?)   (What is the name of this book?)
+  A1: Vì sao khủng long biến mất           (Who is the publisher of this book?)         A1 : Nguyễn Tuấn Việt                    A1: Giỏ trái cây
+  Q2 : Ai là người dịch cuốn sách này ?    A1: Nhà xuất bản Dân Trí                     Q2 : Cuốn sách này do nhà phát hành      Q2 :Ai là tác giả của cuốn sách này ?
+  (Who is the translator of this book ?)   Q2 : Ai là tác giả của cuốn sách này ?       nào xuất bản ?                           (Who is the author of this book ?)
+  A2 : Thu Nga                             (Who is the author of this book ?)           (Who is the publisher of this book?)     A2 : Liêu Hà Trinh
+                                           A2 : Joeri Van Den Bergh & Mattias           A2: Nhà xuất bản Trẻ
+                                            Behrer
+
+                         Figure 1: Several examples from the ViOCRVQA dataset.
+
+
+    The structure of our article designed as follows: In Section 2, we present a literature
+review of studies in VQA. Detailed descriptions of the ViOCRVQA dataset construc-
+tion and the method to evaluate the quality of the annotation process are provided in
+Section 3. Section 4 introduces our proposed method for evaluating the ViOCRVQA
+dataset. Section 5 outlines the evaluation metrics. Section 6 analyzes the main results
+of the baseline model and our proposed method. Leveraging these results, we deeply
+analyze the several impacts of VQA models on our dataset in Section 7. Finally, in
+Section 8, we suggest future research to address outstanding issues in this dataset.
+
+2 Related Work
+2.1 Well-known Visual Question Answering Datasets
+The explosion of the VQA task occurred when Antol et al. [1] released the VQA
+v1 dataset, with images primarily sourced from the MS COCO [12] dataset. The
+introduction of the VQA v1 dataset led to the proposal of numerous methods [13–15]
+for evaluation on this dataset. Later on, Teney et al. [16] identified a limitation of the
+VQA v1 dataset where answers could be transformed into a classification task instead
+of generating actual answers. To address this flaw, Goyal et al. [2] introduced the
+
+
+                                                                                    3
+VQA v2 dataset by presenting questions with varied answers across different images,
+thereby equalizing the frequency of answers for specific types of questions.
+    Traditional VQA methods have struggled to effectively handle questions that re-
+quire reading and inference based on text present in images [3]. To this end, they
+introduced the TextVQA dataset, where questions are required to utilize text ap-
+pearing within the image. To tackle this, they introduced the LoRRA model, which
+integrates Optical Character Recognition (OCR) to extract and incorporate text from
+images as answers. Besides that, the ST-VQA [4] dataset was created to address
+the complexity of interpreting and answering questions related to textual content in
+images. This dataset includes question-answer pairs constructed to require an under-
+standing of the text in images for accurate answers. The goal of this endeavor is to
+improve model performance in scenarios where understanding scene text is crucial.
+    In addition, the OCR-VQA-200k dataset [17] is a focused dataset for the OCR-
+VQA task in the English language. The dataset is impressive with more than 200,000
+images and more than 1 million question-answer pairs. The images of the dataset are
+mainly book covers, the questions are related to the information on the book covers.
+However, there are still not many studies related to this dataset.
+    Not only limited to those VQA datasets, the task has become a hot topic in
+the global research community, leading to the introduction of numerous other VQA
+datasets such as DocVQA [18], OpenCQA [19], VisualMRC [20], InfographicVQA [21],
+providing additional resources for research and the development of methods based on
+various types of images such as document images, graph images, infographic images,
+etc.
+
+2.2 Visual Question Answering Datasets in Vietnamese
+The ViVQA dataset [8], marking the early dataset tailored for the VQA task in
+Vietnamese. The ViVQA dataset is a scaled-down version of the COCO-QA dataset,
+crafted through semi-automated methods. It comprises 10,328 images and 15,000+
+questions, with both the questions and answers characterized by their simplicity.
+    Nguyen et al. [10] introduced multilingual VQA by releasing the EVJVQA dataset,
+designed for exploring multilingual VQA challenges tailored to the cultural nuances
+of a specific country. This dataset comprises over 33,000 question-answer pairs in
+three languages, including Vietnamese, English, and Japanese, which are associated
+with approximately 5,000 images captured in Vietnam. Notably, the EVJVQA dataset
+serves as the designated benchmark for the VQA shared task held at the 9th Workshop
+on Vietnamese Language and Speech Processing.
+    After that, realizing the limitations of the ViVQA dataset, Nguyen et al. [9] intro-
+duced the OpenViVQA dataset, the first large-scale handcraft annotation dataset for
+the VQA task in Vietnamese. This dataset contains over 11,000+ images relevant to
+more than 37,000+ question-answer pairs. Notably, the answers are not confined to
+predefined categories, allowing for open-ended responses in various forms of natural
+language such as words, phrases, or sentences. This departure from answer selection or
+answer classification in existing VQA datasets adds a new dimension to the challenges
+and possibilities in the realm of VQA research.
+
+
+
+                                           4
+    Tran et al. [11] introduced the ViCLEVR dataset, an emerging collection for evalu-
+ating various visual reasoning capabilities in Vietnamese while mitigating biases. The
+dataset comprises more than 26,000 images and 30,000 question-answer pairs, each
+question annotated to specify the type of reasoning involved.
+    We provide a relative comparison of the OCR-ViVQA dataset with common VQA
+datasets in English and Vietnamese. Details statistics are listed in Table 1.
+
+
+         Table 1: Comparisons VQA datasets in English and Vietnamese.
+  Dataset                 Language     Images       Questions     Answers
+  VQA v2 [2]               English      204,721       1,105,904  11,059,040
+  TextVQA [3]                            28,408          45,336     453,360
+  ST-VQA [4]                             23,038          31,791       31,791
+  DocVQA [18]                            12,767         50, 000     50, 000
+  OCR-VQA-200k [17]                     207,572       1,002,146   1,002,146
+  InfographicVQA [21]                    5, 485          30,035       30,035
+  VisualMRC [20]                         10,197          30,562       30,562
+  OpenCQA [19]                            9,285               -            -
+  VizWiz [22]                            32,842         265,420     265,420
+  OK-VQA [23]                            14,031          14,055       14,055
+  GQA [24]                              113,018     22,669,678   22,669,678
+  Visual Genome [25]                    108,077       1,773,258   1,773,258
+  CLEVR [26]                            100,000         999,968     999,968
+  UIT-EVJVQA [10]        Multilingual     4,879          33,790       33,790
+  MCVQA [27]                                  -         369,861     369,861
+  ViVQA [8]              Vietnamese      10,328          15,000       15,000
+  OpenViVQA [9]                          11,199          37,914       37,914
+  ViCLEVR [11]                           26,000          30,000       30,000
+  ViOCRVQA (ours)                       28,282         123,781     123,781
+
+
+
+2.3 Visual Question Answering Methods
+The VQA task, despite numerous advanced methods, remains a challenging task for
+both the computer vision (CV) and natural language processing (NLP) communities.
+Given an image and a question in natural language format as input, a VQA model
+needs to infer the answer based on the image features and linguistic characteristics.
+    One of the first studies to lay the groundwork for VQA was contributed by Si-
+monyan and Zisserman [28], who employed the VGG architecture to extract features
+from images into smaller image patches. Subsequently, these extracted features are
+fed into a GRU to process the words in the question, by traversing these images on
+a per-pixel basis, akin to a snake. Based on this basis, there are a series of other no-
+table studies such as VIS+LSTM [29], LSTM Q+I [30], ABC-CNN [31], Full-CNN
+[32], LSTM-Att [33], Word + Region [34], Attr-CNN+LSTM [35], etc. has brought
+significant progress in solving VQA task.
+
+
+
+                                           5
+    Since the advent of BERT [36] in encoder transformer style, the continuous de-
+velopment of language models has made the use of traditional RNNs and LSTMs in
+question processing less common. Their limitations, such as the ability to handle com-
+plex contexts and a deep understanding of question meaning, have pushed research
+on VQA models toward the application of BERT. Subsequent VQA models often
+use BERT, which has demonstrated a good ability to capture the semantic context
+of questions. Several notable works in this field include ViLBERT [37], VisualBERT
+[38], LXMERT [39], VL-BERT [40], UNITER [41], OSCAR [42], etc. These models
+not only solve the problems of traditional models but also open up new potentials in
+combining visual and textual information more effectively.
+    Recent studies have shown the effectiveness of applying Transformer language
+models in encoder-decoder style. As in the case of T5 [43], this model yields impressive
+results which is capable of generating answers when the VQA task is no longer as
+simple as the classification task before. New research has focused on the application
+of T5 and incredible progress has been made in this area. Studies such as LaTr [44],
+PreSTU [45], VL-T5 [46], SaL [47] are typical examples of the success of this approach.
+These studies have greatly contributed to improving the performance of VQA models.
+    Additionally, when chatGPT was born, it led to an explosion in the race to develop
+large language models (LLMs) with billions of parameters or more. Studies leveraged
+LLMs such as BLIP-2 [48], Flamingo [49], Flava [50], mPLUG [51], Palm [52], Palm
+2 [53], etc. which provide incredible performance. However, it should be noted that
+their implementation requires a large amount of computational resources, which is an
+important barrier to many researchers.
+
+3 Dataset Creation
+The ViOCRVQA dataset is constructed by a semi-automatic method (Figure 2). In
+particular, we collected images of book covers from online book-selling websites. On
+this website, books are displayed with their covers and metadata. We collect their
+cover images and metadata, then classify information in the metadata into defined
+categories. Detailed procedures are described as follows.
+
+3.1 Collecting images and information
+In the OCR-VQA task, the main goal is to focus on extracting information from im-
+ages containing text, especially from book covers. The reason we choose book covers
+is because they often contain important information such as title, author, publisher,
+information about the translator, and more. To collect images, we organized crawl-
+ing images from online bookstores in Vietnam. We only choose images that contain
+Vietnamese text to ensure the scope of our research.
+
+3.2 Data Cleaning
+To initiate the information processing of the books, we commenced by removing punc-
+tuation marks and extraneous details that are not presented on the book covers, such
+
+
+
+                                           6
+                                  Remove duplicated
+                                      images
+                                                                                      Training set
+
+
+
+
+                                                                         Evaluation   Development set
+  Book selling
+   websites
+
+                                                                                      Test set
+                                  Filtering out noisy
+                                       infomation
+
+
+
+
+                                                            Template
+
+
+
+
+                                                            Annotators
+
+                 Figure 2: The construction process of the ViOCRVQA dataset.
+
+
+as “tặng kèm” (“bonus”), “tái bản 2024” (“reprinted 2024”) and other irrelevant infor-
+mation. The decision to eliminate punctuation marks was made due to our observation
+that the information collected contained a significant number of errors in punctuation
+usage, resulting in data inconsistency compared to the actual information in the book.
+For example, how the slash is dropped in the title from the metadata differs from how
+it is on the cover. Throughout the data collection process, we encountered challenges
+in detecting that the information we gathered contained numerous errors in punctu-
+ation usage compared to the actual details in the books. This inconsistency posed
+challenges to the uniformity of the data, influencing the ability to accurately automate
+the labeling process. Therefore, the decision to remove all punctuation marks from
+the dataset is necessary to ensure high quality and consistency in our data processing
+endeavors.
+
+3.3 Creating question templates
+We hired ten native Vietnamese speakers, each person was required to annotate at
+least 30 questions, divided equally into specific fields. These fields include author,
+book title, publisher, translator, and genres that appear on the book cover. Through
+the process of careful ideation and compilation, each annotator came up with creative
+and diverse questions, aiming to make the question set not only rich in content but
+also attractive to the reader. For example, one of the questions about the author
+could be “cuốn sách này do nhà xuất bản nào chịu trách nhiệm phát hành?” (“which
+publisher is responsible for publishing this book?”) instead of “tên nhà xuất bản?”
+(“name of publisher?”).
+    We collected more than 60 unique questions, which are created by annotators for
+each field, in other word we got a total of 300 rich and diverse questions. Then, we
+randomly selected these questions and combined them with information from cor-
+responding books on each field. The questions in our dataset are divided into five
+categories:
+
+
+                                                        7
+  • Author: Questions relate to the author of the book.
+  • Title: Questions relate to the title of the book.
+  • Publisher: Questions relate to the publisher of the book.
+  • Translator: Questions relate to the translator of the book.
+  • Genre: Questions relate to the genre of the book.
+
+3.4 Statistics
+
+
+                    Table 2: Statistic           information   of   the
+                    ViOCRVQA dataset.
+                                   Train      Dev      Test    Total
+                     Images        19,798     4,243    4,241   28,282
+                     Questions     86,592    18,587   18,601   123,781
+                     Answers       86,592    18,587   18,601   123,781
+
+
+    The ViOCRVQA dataset includes 28,282 images, accompanied by 123,781
+questions-answers pairs. About 30% of the total images and the entire questions, along
+with their corresponding answers, were selected to form the validation set and test
+set. Each partition accounts for about 15% of the total images, and the remaining
+images are retained for the training set. A random selection of images for the test
+and validation sets was performed using a uniform distribution. Table 2 presents the
+size of the training, development, and test sets, including the number of images and
+corresponding question-answer pairs.
+
+
+                       Table 3: Distribution of questions and
+                       answers among aspects of questions.
+                         #    Aspect        Questions    Answers
+                         1    Author         27,881       27,881
+                         2    Title          28,283       28,283
+                         3    Publisher      28,283       28,283
+                         4    Translator     11,051       11,051
+                         5    Genre          28,283       28,283
+
+
+    As depicted in Table 3, in the Vietnamese context, it clearly shows that the number
+of questions of the translator is comparatively lower than the other four question types.
+    In addition, Table 4 shows the diversity and richness of the ViOCRVQA dataset.
+With 12,371 authors, 26,713 different titles, and nearly 200 publishers. Especially,
+the number of 3,713 different translators, highlighting the linguistic diversity when
+converting to Vietnamese. The average length of questions and answers is 9.64 and
+7.52, respectively. These are important numbers, hinting at the detail and complexity
+of the information in the dataset. Each photo in the dataset contains, on average,
+4.37 questions and related answers, demonstrating a high level of interaction between
+images and language.
+
+
+                                             8
+                    Table 4: Composition of ViOCRVQA
+                    dataset in brief.
+                      Unique author                           12,371
+                      Unique title                            26,713
+                      Unique publisher                           176
+                      Unique translator                        3,713
+                      Unique genre                                32
+                      Average question length (in words)        9.64
+                      Average answer length (in words)          7.52
+                      Average number of questions per image     4.37
+
+
+3.5 Dataset Comparison
+
+
+
+
+             Figure 3: Distribution ViOCRVQA and OCR-VQA-200K
+
+
+    To get an overview of our dataset and another dataset in the same domain in a
+resource-rich language like English, we compared distribution length with the famous
+OCR-VQA dataset. Figure 3 shows that although the number of images is not too
+large, it provides a large number of question-answer pairs, demonstrating the effective
+utilization of information obtained from the images.
+    Both the OCR-VQA-200K [17] and ViOCRVQA datasets have different distribu-
+tion lengths. However, our dataset is superior in terms of question and answer length
+diversity. This diversity can be attributed to the involvement of 10 Vietnamese anno-
+tators who created a total of 300 unique questions, deeply infused with the nuances of
+Vietnamese linguistic and cultural essence. This effort has endowed the dataset with
+a richer representation, accurately reflecting the linguistic diversity inherent within
+the Vietnamese community.
+
+3.6 Linguistic Level
+The Linguistic Complexity Specification (LCS) methodology, as presented by Nguyen
+et al. [9], evaluates sentence complexity by analyzing statistical interactions among
+tokens and utilizing dependency parsing to frame semantic structures. In table 5,
+compare the LCS of ViOCRVQA and other VQA datasets.
+
+
+
+                                            9
+Table 5: Linguistic comparison on questions and answers among VQA datasets. Note
+that these results were obtained on train-dev sets.
+                                                  Word               Dependency              Height
+            Dataset           Language
+                                           min.   mean.   max.   min. mean. max.      min.   mean. max.
+            VQA v2 [2]          English     2       6.2    23     2     6.3     26     1      3.3   14
+            TextVQA [3]         English     2       7.1    33     2     7.5      39    1      3.9   21
+            OCR-VQA [17]        English     4       6.5     9     4     6.5      10    2       3.6   6
+ Question
+            ViVQA [8]         Vietnamese    3       9.5    24     2     7.3     23     2      5.5   14
+            OpenViVQA [9]     Vietnamese    3      10.1    32     2     7.8      27    2      5.2   16
+            ViCLEVR [11]      Vietnamese    3     18.57    45     5    16.77     40    2      3.88  10
+            ViOCRVQA (ours)   Vietnamese    5      9.6     22     4     7.3     17     1      1.0   3
+            VQA v2 [2]          English     1       1.2    18     0     2.8     44     1      1.0   11
+            TextVQA [3]         English     1       1.6    85     0     1.5     103    1      1.3   40
+            OCR-VQA [17]        English     1       3.3    74     0     2.8     100    1      1.8   38
+ Answer
+            ViVQA [8]         Vietnamese    1       1.8     4     0     0.5       3    1       1.5   3
+            OpenViVQA [9]     Vietnamese    1       6.9    54     0     4.8     52     1      4.0   22
+            ViCLEVR [11]      Vietnamese    -        -      -     -      -        -    -        -    -
+            ViOCRVQA (ours)   Vietnamese    1      7.5     55     0     4.9     49     1      1.1   5
+
+
+
+   The Linguistic Level Specification (LLS) method [9] classifies text into categories
+such as words, phrases, or sentences based on dependency parsing. By implementing
+LLS, we can discern the prevalent linguistic level of sentences that humans typically
+choose in answer to questions, underscoring the inherent natural diversity of human
+answers.
+
+
+            Table 6: Linguistic level comparison among VQA datasets. Note
+            that these results were obtained on train-dev sets.
+                   Dataset           Language            word       phrase      sentence
+             VQA v2[2]                 English         5,884,207    651,128        45,775
+             OCR-VQA [17]              English             3,287    302,497        15,010
+             Text-VQA[3]               English            28,317     35,964         4,947
+             ViVQA [8]               Vietnamese            3,276      6,321             0
+             OpenViVQA [9]           Vietnamese            1,067     21,022        12,289
+             ViOCRVQA (ours)         Vietnamese           2,884     96,612         5,683
+
+
+
+    Table 6 shows that a significant proportion, exceeding 90%, of the answers in the
+ViOCRVQA dataset were comprised of phrases. This finding aligns closely with obser-
+vations from the ViOCRVQA dataset, where a substantial majority of responses also
+constituted phrases. This prevalence of phrase-centric answers underscores a common
+trend in our dataset.
+    Comparatively, the proportion of phrase-centric answers in other datasets is no-
+tably lower. For instance, in the Text-VQA dataset, only 55% of answers are identified
+as phrases, while in the ViVQA dataset, this figure stood at 66%. Even in the
+openViVQA dataset, which answers questions in free-form format, the prevalence of
+phrase-centric answers was only at 70%. This difference may stem from the unique
+characteristics and nuances of each dataset such as question type, answer format,
+and data collection method. Understanding these differences is critical to develop-
+ing robust models capable of effectively handling the wide variety of responses in our
+ViOCRVQA dataset.
+
+
+                                                  10
+3.7 Human Evaluation
+
+
+                       Table 7: Results of human evaluation
+                       according to different fields.
+                         Field        EM (%)   F1-score (%)
+                         Author        92.09       93.32
+                         Title         88.98       92.20
+                         Publisher     91.01       93.83
+                         Translator    89.09       91.70
+                         Type          88.48       89.29
+                         Average       89.93       92.07
+
+
+    For semi-automatic generated VQA datasets, one important aspect to consider is
+the evaluation of dataset quality, specifically assessing whether the assigned answers
+truly correspond to the text appearing in the images. To conduct this evaluation,
+we invited five native Vietnamese speakers from our city. For each type of question,
+we randomly sampled 100 question-answer pairs from our dataset and then removed
+the answers. Participants then independently wrote their own answers based on the
+question content and the text appearing in the images, which were then compared to
+our automatically annotated answers.
+    To evaluate the quality of semi-automatic generated answers compared to expert-
+provided answers, we use F1-score and Exact Match metrics which are mentioned
+in Section 5. After receiving results from the invited annotators, we proceed with
+the evaluation and obtain detailed results as described in Table 7. The results show
+that the information we obtained through automatic labeling is consistent with the
+information manually labeled by humans. This is evidenced by the EM and F1-score
+reaching very high.
+
+4 Methodology
+We assume that the object plays an important role in determining what information
+is on the book cover. Therefore, we propose VisionReader centers around the im-
+plementation of transformer-based encoder-decoder approach. Following the previous
+studies in text-based VQA task, we deployed to evaluate methods having ViT5 [54]
+and BARTpho [55] as encoder-decoder module (see Figure 4). ViT5, based on the
+T5 [43] architecture, and BARTPho, a variant of the BART [56] architecture, have
+both been trained on a large of Vietnamese text data. These models stand out as
+the preeminent and potent pre-trained language models for the Vietnamese language,
+ensuring the efficacy and robustness of our proposed method.
+    In our VisionReader, we employed VinVL [57] to capture object features and Swin-
+TextSpotter [58] to obtain OCR features. In addition to these, we utilized ViT [59]
+for the grid features extraction process. For text information, we leveraged the token
+embedding layer of the language model for processing. The resulting textual features,
+grid features, object features, and OCR features were concatenated together to form
+the input for the encoder-decoder module. Integrating object and OCR features in
+
+
+                                         11
+                                                                      Object Features
+
+
+
+
+                                           VinVL
+
+
+
+
+                                                                                              Encoder
+                                                                      OCR Features
+
+
+
+
+                                          SwinText
+                                           Spotter
+                                                                                                                <bos>
+
+
+
+
+                                                                       Grid Features          Decoder
+
+
+
+                                                                             `
+
+                                                                             `
+                                          ViT
+                                                                                        <bos>Thích Nhất Hạnh<cos>
+
+
+
+
+                                                   Textual Features
+
+
+Ai là tác giả của tựa sách này ?
+                                                     Embedding
+ (who is the author of this book ?)
+
+
+                                      Figure 4: Overview of VisionReader structure.
+
+
+our VisionReader has brought a significant improvement in the ability to understand
+and process information from questions and images in OCR-VQA task. The results
+in Section 6 show that our proposed method brings significant progress.
+
+4.1 Multimodal Features Embedding
+Object features: For each given image, the VinVL model processes the image to
+extract region object features, resulting in a set R = {r1 , r2 , ..., rk }, where each ri
+is a 2048-dimensional vector corresponding to an object in the image. To standard-
+ize
+h minthe bounding box coordinates         of the objects, each bounding box bi is defined as
+         yimin xmax   yimax
+                            i
+  xi
+    w  ,   h  , i
+                 w  ,   h     , with x i and  yi denoting the coordinates, and w and h repre-
+senting the width and height of the image, respectively. The set of normalized object
+bounding boxes is denoted as Bobj = {b1 , b2 , ..., bk }, where each bi is a 4-dimensional
+vector.
+     The final object features, Vobj , are computed by combining the region object fea-
+tures (R′ ) with their respective normalized bounding boxes (Bobj     ′            ′
+                                                                         ). Here, Bobj and R′
+are obtained by applying a linear layer to Bobj to project it to the dimension of the
+language model in Rd . Therefore, this formula as:
+
+                                                                 Vobj = R′ + Bobj
+                                                                              ′
+                                                                                                                (1)
+
+
+
+
+                                                                            12
+    OCR features: We employed the SwinTextSpotter model, designed to proficiently
+handle the Vietnamese language in optical character recognition (OCR) task. Employ-
+ing this model on each image, we acquired detection features D = {d1 , d2 , ..., dm } and
+recognition features Z = {z1 , z2 , ..., zm }, where di and zi ∈ R256 . These features are
+associated with a collection of OCR texts corresponding to their respective bounding
+boxes. To maintain consistency with object bounding boxes, we normalized the OCR
+bounding boxes, denoted as Bocr = {o1 , o2 , ..., om }, where each oi is a 4-dimensional
+vector.
+    The composite OCR features are defined as the concatenation of the normalized
+detection features and recognition features, each augmented with their corresponding
+bounding box features. Mathematically, this is expressed as:
+
+                           Socr = Concat(D′ + Bocr   ′
+                                                       , Z ′ + Bocr
+                                                                ′
+                                                                    )                   (2)
+              ′   ′        ′
+    where D , Z , and Bocr are obtained by applying linear layers to project them to
+the dimension of the language model in Rd .
+    Textual features: The question and the OCR text are embedded through the
+token embedding layer of the language model. This process yields textual features
+denoted as T = {t1 , t2 , . . . , tn }, where ti ∈ Rd and 1 ≤ len(T ) ≤ L. In this context,
+ti ∈ Rd signifies the embedding of the ith word in the input text, L represents the
+length of the input text, and d stands for the dimensionality of the language model.
+    Grid features: We chose to use ViT as an important part of our approach be-
+cause it offers many important advantages. ViT has been proven effective in image
+processing as well as grid features extraction. With its attention mechanism, ViT is
+capable of capturing both global and local information in the image, thereby increas-
+ing flexibility in identifying important features and helping to improve the ability to
+understand the picture of our proposed method. Using ViT by freezing it and project-
+ing the last hidden state vector to the dimension of the language model, we obtain
+the grid features denoted as V .
+    Therefore, the input embedding fed into the encoder-decoder module is:
+
+                            Input = Concat(T, V, Vobj , Socr )                      (3)
+   where T is textual features, V is grid features extract by ViT, Vobj is VinVL region
+object features, Socr is SwinTextSpotter OCR features. The Concat(·) stands for the
+concatenating function.
+
+4.2 Encoder-Decoder Module
+In the OCR-VQA task, we employed the transformer encoder-decoder architecture,
+which is used in ViT5 [54] and BARTPho [55] for the encoder-decoder module of
+VisionReader. The encoder receives the input features and then passes them to the
+decoder to generate the output sentence. In the decoder, attention mechanisms are
+employed, directing focus to both the output of the encoder and the input of the
+decoder.
+   Multi-Head Attention:
+
+               MHAtt(Q, K, V ) = Concat(head1 , head2 , ..., headh ) · W O             (4)
+
+
+                                            13
+                  where headi = Attention(Q · WiQ , K · WiK , V · WiV )
+   Encoder:
+                      EnOut = LayerNorm(MHAtt(X, X, X) + X)                              (5)
+
+                 EnOut = LayerNorm(FeedForward(EnOut) + EnOut)
+   Decoder:
+                      DeOut = LayerNorm(MHAtt(Y, Y, Y ) + Y )                            (6)
+
+           DeOut = LayerNorm(MHAtt(DeOut, EnOut, EnOut) + DeOut)
+
+                 DeOut = LayerNorm(FeedForward(DeOut) + DeOut)
+   In these equations, Q, K , and V denote the query, key, and value matrices re-
+spectively. WiQ , WiK , WiV , and W O are learnable weight matrices specific to each
+attention head i. X represents the input features, Y represents the target output se-
+quence. The function Concat(·) is concatenating function, and Attention(·) computes
+the attention mechanism. LayerNorm(·) represents layer normalization.
+
+5 Evaluation Metrics
+On the ViOCRVQA dataset, answers are exactly OCR tokens in images. The VQA
+methods must give exact answers to the given questions as the task definition of the
+ViOCRVQA dataset. To this end, we use Exact Match and F1-score to evaluate
+approaches on our dataset. Note that previous studies of VQA in English only use
+EM as a metric.
+
+5.1 Exact Match
+Exact Match (EM) requires ground-truth answers and the predicted answers must be
+exactly the same. In particular, let GA = {ga1 , ga2 , ..., gan } the set of all ground truth
+answers, P A = {pa1 , pa2 , ..., pan } the set of all respective predicted answers, EM is
+determined by:
+                                                   n
+                                                1X
+                            EM (gai , pai ) =         δ(gai , pai )                      (7)
+                                                n i=1
+   where n ∈ N is the total number of answers, δ is the Kronecker function with
+δ(x, y) = 1 ⇔ x = y and δ(x, y) = 0 otherwise.
+
+5.2 F1-score
+F1-score is the harmonic mean of Precision and Recall. On our dataset, we define the
+Precision and Recall at the token level. Given a sentence, its tokens are determined
+by splitting it by space.
+    Let GA and P A defined as above, for any gai ∈ GA and pai ∈ P A, gai ∩ pai is
+the set of mutual tokens whose size is defined as |gai ∩ pai |. The Precision and Recall
+at the token level is defined as:
+
+                                             14
+                               |gai ∩ pai |        |gai ∩ pai |
+                           Pi =             ; Ri =                                  (8)
+                                  |pai |              |gai |
+   The F1-score at the token level is then defined as:
+                                         Pi × Ri
+                                     F1i =                                          (9)
+                                         Pi + Ri
+   and the overall F1-score on the dataset is defined as:
+                                                     n
+                                                  1X
+                                  F1-score =            F 1i                       (10)
+                                                  n i=1
+
+
+6 Experiments and Results
+6.1 Baseline Models
+There are numerous effective methods have emerged globally for addressing VQA
+task. Among them, to match the ViOCRVQA dataset, we choose LoRRA, LaTr,
+PreSTU, and BLIP-2 according to the historical development of VQA methods and
+use them as baselines to perform experiments. Note that, these baselines were orig-
+inally designed to support English, but we have adapted them to Vietnamese while
+still retaining their essence. Origin Latr and PreSTU were pre-trained on massive doc-
+ument images, scene text images, etc., and they demonstrated excellent performance
+in fine-tuning downstream tasks. However, Vietnamese is a low-resource language, so
+we can only fine-tune LaTr and PreSTU on the VQA task without doing pre-training,
+which requires a lot of computing resources and data.
+     LoRRA: Short for “Look, Read, Reason and Answer” [3], this method uses a
+deep learning network to learn to combine information from various sources, including
+image and text features. This model has three main parts: VQA component helps
+reason about the answer based on the image. The Reading component helps the model
+read the text appearing in the image. The Answer module helps predict from an
+answer space or pointer to text read by the Reading component.
+     LaTr: “Layout-Aware Transformer” [44] based on the encoder-decoder transformer
+architecture (T5) [43] to build and includes three main blocks. The initial module
+focuses on a Language Model trained for document layouts with only text and layout
+details. The second module uses spatial embedding to embed scene text tokens and
+their positional information (OCR tokens bounding box). After pre-training, for the
+downstream task, the ViT [59] model is utilized to extract visual features. Finally, all
+these embedding features generated from these three modalities are used as input for
+the pre-trained transformer. The encoder then learns a representation that aligns the
+information from these modalities. This learned representation is later utilized by a
+decoder to analyze and generate an output, typically an answer.
+     PreSTU: “Pre-Training for Scene-Text Understanding” [45] stands out from other
+models in tackling a common task by incorporating a unique approach. To ensure
+that models grasp spatial information in scene text and standardize the target output
+sequence during training, [45] arranged OCR texts by their positions, sequentially
+
+
+                                             15
+from the top left to the bottom right. They then concatenated the sorted texts using a
+T5 separator </s>. Afterward, they randomly split the OCR texts into two segments:
+the first part is used as additional input, and the second part is used as the target.
+They then conduct pre-training on a huge amount of scene text image data. Finally,
+a pre-trained model that can “understand scene text” is fine-tuned for downstream
+tasks such as VQA, image captioning, etc.
+    BLIP-2: Li et al. [48] proposed a new novel approach to training vision-language
+model named “Bootstrapping Language-Image Pre-training with Frozen Image En-
+coders and Large Language Models”. This approach uses CLIP [60] and freezes it like
+an image encoder which takes an image as input and extracts visual features. Then
+Querying Transformer (Q-Former), which is a lightweight transformer model, was
+trained to close the gap between the image encoder and the Large Language Model.
+This approach allows BLIP-2 to achieve competitive performance on vision-language
+tasks while requiring significantly less training compared to training everything from
+scratch.
+
+6.2 Experimental Configuration
+All baseline models and our proposed methods were trained and fine-tuned using the
+Adam optimization [61]. We utilized an A100-GPU setup with 80GB of memory to
+train models, taking 10 hours on average for each method. We set the learning rate
+to 3e-05, dropout is set at 0.2, batch size is 32, and the training process is terminated
+after 5 epochs of not finding any growth in EM.
+
+6.3 Main Results
+Due to the nature of book genres often not being readily available on book covers and
+must synthesize information from the remaining fields. Therefore, we chose to omit
+them from the primary scope of OCR-VQA models discussed in this section. This
+decision enhances the efficiency of these models in addressing their core task.
+
+
+          Table 8: Results of our proposed methods and baselines test set.
+  Model                                  Model Size       EM (%)        F1-score (%)
+  LoRRA                                        26M         10.30            21.54
+  BLIP-2                                       1.4B        21.45            55.23
+  LaTr                                        331M         30.80            60.97
+  PreSTU                                      312M         33.86            66.25
+  VisionReaderwithBARTpho (ours)             220M          31.56            64.54
+  VisionReaderwithViT5 (ours)                315M          41.16            69.90
+
+
+   Table 8 shows that LoRRA, a pioneering VQA text-based approach, attained an
+EM of 10.30 and an F1-score of 21.54. While LoRRA can handle this dataset as a multi-
+label classification task, it still has many limitations that cause poor performance
+when the answer becomes free-from format in questions about book titles.
+
+
+
+                                           16
+    BLIP-2, a model boasting an impressive 1.4 billion parameters, showcased its
+prowess with an Exact Match (EM) score of 21.45 and an F1-score of 55.23. This per-
+formance, while commendable, was unexpectedly surpassed by LaTr, a model with
+a significantly smaller parameter count of just 331 million. LaTr achieved an EM of
+30.80 and an F1-score of 60.97.
+    Even more intriguing was the performance of PeSTU, which, with a slightly smaller
+size than LaTr, managed to outperform all its predecessors with an EM of 33.86 and
+an F1-score of 66.25. This achievement serves as a poignant reminder that the path
+to optimizing machine learning models is multifaceted, involving more than just the
+accumulation of parameters.
+    One of our contributions is the VisionReaderwithViT5 , a model boasting 315 million
+parameters. Despite its relatively modest size, it has achieved the highest scores to
+date in both EM and F1-score metrics, with scores of 41.16 and 69.90, respectively, in
+the test set. This achievement underscores the effectiveness and potential of this our
+proposed method in tackling complex task like OCR-VQA.
+    Moreover, VisionReaderwithBARTpho , equipped with only 220 million parameters,
+has established unprecedented benchmarks by surpassing all state-of-the-art baselines
+except PreSTU. VisionReaderwithBARTpho demonstrates its remarkable performance
+when it achieved an EM of 31.56 and an F1-score of 64.54. This shows the efficacy of
+this proposed method in the OCR-VQA task while using fewer parameters.
+
+6.4 Results Book Genres
+In this section, we conducted individual experiments exclusively focusing on train-
+ing the model using only the book genre field. The objective is to see behavior in
+synthesizing information from other fields on book covers in predicting genres.
+
+
+             Table 9: Results of book genres on ViOCRVQA dataset.
+       Model                                  EM (%)    F1-score (%)
+       LoRRA                                     8.42        19.83
+       BLIP-2                                   37.89        47.83
+       PreSTU                                   51.17        61.96
+       LaTr                                     45.92        53.94
+       VisionReaderwithBARTpho (ours)           47.78        56.53
+       VisionReaderwithViT5 (ours)             57.24        64.41
+
+
+    From the genre prediction results in Table 9, the VisionReaderwithViT5 model
+achieved the best performance in the task of predicting book genre with an
+EM accuracy score of 57.24. PreSTU ranked second with an EM of 51.17, while
+VisionReaderwithBARTpho ranked third with an EM of 47.78. These results underscore
+the effectiveness of our proposed method in synthesizing information across various
+fields to enhance genre prediction accuracy on book covers.
+
+
+
+
+                                          17
+7 Result Analysis
+7.1 Detail Results
+To give an in-depth analysis of how baselines and our proposed methods achieved
+their performance on the ViOCRVQA dataset, we categorized the answers given by
+these models into four aspects relevant to the information their respective questions
+inquiry: title, author, publisher, and translator. Detailed results are shown in Table
+10.
+
+
+Table 10: Detail results of baseline models and proposed method on different fields.
+                                           Title                     Author                   Publisher                 Translator
+ Model                            EM (%)     F1-score (%)   EM (%)      F1-score (%)   EM (%)     F1-score (%)   EM (%)     F1-score (%)
+ LoRRA                              3.58         20.67       11.88          21.47       17.85         21.74        9.42          23.08
+ BLIP-2                             3.49         51.40       22.89          52.34       48.76         77.34       20.56          49.34
+ PreSTU                             9.58         63.09       25.39          48.14       53.30         79.23       21.53          44.46
+ LaTr                               4.90         52.18       28.19          51.20       61.60         84.03       24.98          49.45
+ VisionReaderwithBARTpho (ours)     7.55         59.59       31.50          57.20       57.31         81.90       27.36          51.61
+ VisionReaderwithViT5 (ours)       13.42         64.34       44.19         64.29        65.73         85.71       41.58         58.09
+
+
+
+
+    Title: Table 10 demonstrates that providing answers to questions in the book title
+becomes more complex than in other fields, especially as the model shows the lowest
+performance in EM. The main reason for this phenomenon is that titles often include
+complex text structures and use many different typefaces. This diversity makes it
+more difficult for models to accurately extract and understand information from titles
+(see Figure 5). This poses a significant challenge in providing answers to questions
+related to book titles.
+    Publisher: In Table 10, the results show that the field related to publishers yielded
+the highest EM and F1-score. Given the relatively limited number of publishers, which
+stands at 176, answering questions about publishers appears to be more straightfor-
+ward than other fields. Moreover, publishers’ names are often prominently displayed
+and clearly identified on the back cover of books, facilitating easier recognition (see
+Figure 6). This prominence underscores the potential of publisher-related information
+in enhancing model performance.
+    Author and Translator: On book covers, the author and translator are usu-
+ally placed next to each other, with the author’s name often printed larger than the
+translator’s name (see Figure 7). This small difference in representation between the
+author’s name and the translator’s name facilitates the model in identifying and pro-
+viding more accurate answers. This is clearly illustrated in Table 10, where the results
+for the author field are generally higher than for the translator field.
+
+
+
+
+                                                                 18
+    Q : Cuốn sách này có tên là gì ?        Q : Cuốn sách này có tên là gì ?      Q : Cuốn sách này có tên là gì ?           Q : Cuốn sách này có tên là gì ?
+    (What is the name of this book?)        (What is the name of this book?)      (What is the name of this book?)           (What is the name of this book?)
+    A: Nước Đức trong lòng bàn tay          A: Thuốc nam dùng trong gia đình      A: Đừng để tiền làm rối đời ta             A: Hãy sống cuộc đời như bạn muốn
+
+
+Figure 5: Several examples of question-answer pairs related to title, title with unusual
+fonts, and messy arrangements.
+
+
+
+
+    Q : Ai là người phát hành cuốn           Q : Ai là người phát hành cuốn        Q : Ai là người phát hành cuốn        Q : Ai là người phát hành cuốn
+    sách này ?                               sách này ?                            sách này ?                            sách này ?
+    (What is the publisher of this book?)    (What is the publisher of this book?) (What is the publisher of this book?) (What is the publisher of this book?)
+    A: Nhà xuất bản mỹ thuật                 A: Nhà xuất bản mỹ thuật              A: Nhà xuất bản đại học quốc gia      A: Nhà xuất bản kim đồng
+                                                                                    hà nội
+
+
+Figure 6: Several examples of question-answer pairs are related to the publisher, the
+publisher’s name is often placed at the bottom of the book cover.
+
+
+
+
+    Q : Ai là người tác giả của cuốn         Q : Ai là người tác giả của cuốn       Q : Ai là người người dịch của cuốn       Q : Ai là người người dịch của cuốn
+    sách này ?                               sách này ?                             sách này ?                                sách này ?
+    (What is the author of this book?)       (What is the author of this book?)     (What is the translator of this book?)    (What is the translator of this book?)
+    A: MayeMusk                              A: Jim Rohn                            A: Thanh Huyền                            A: Hương Giang
+
+
+
+
+Figure 7: Several examples of question-answer pairs are related to the author and
+translator, the author and translator is often placed near each other.
+
+
+
+                                                                                  19
+7.2 Impact of OCR System Performance
+We evaluated the performance of the OCR system SwinTextSpotter [58] to assess
+its impact on the efficiency of various models. To accomplish this, we segmented the
+test data based on the proportion of text successfully identified by the OCR system
+relative to the total amount of text in the answer. These segments included text with
+successful recognition rates of 25%, 50%, 75%, and 100% of the total text in answer.
+
+
+
+
+Figure 8: EM and F1-score with the percentage of text in the answer detected by
+the OCR system
+
+
+    The performance of both baseline and our models in Figure 8 follows a consistent
+trend: initially dipping slightly as the answer token ratio in OCR text ranges from 25%
+to 50%, then gradually increasing. Notably, there is a significant boost in performance
+when the token ratio hits 100%. Despite differences in models, all show similar F1-score
+patterns, indicating that as more text is detected by the OCR system, performance
+improves. This underscores the crucial role of OCR text in providing context and
+supporting data for accurate predictions by the VQA model.
+    This highlights a significant observation that even when all answer tokens are ac-
+curately identified by OCR system, the performance metrics for EM and F1-score only
+reach moderately acceptable levels, remaining below 55.00% and 80.00%, respectively.
+This underscores the notable challenge encountered by VQA models when dealing
+with the ViOCRVQA dataset.
+
+7.3 Is Object Necessary for OCR Visual Question Answering?
+As mentioned before in Section 4, we assumed that information about the object plays
+an important role in defining the question to determine which answer is reasonable. To
+prove this, we conducted specific experiments on our proposed methods by removing
+object features.
+    Table 11 illustrates a discernible downward trend in the efficacy of our proposed
+methods across various domains is observable upon the removal of object features,
+with the exception of the publisher field. Moreover, it is worth noting that while there
+was a slight increase in the score for the publisher field, it was not significant. Thus, if
+the aim is to boost the performance of the model in general, it becomes evident that
+
+
+
+                                            20
+Table 11: Performance when removing the object feature in our proposed methods. △
+denotes the increase (↑) and decrease (↓) in the performance of our method compared
+to using object features.
+                                      Title                       Author                      Publisher                   Translator
+         Model             EM (%)       F1-score (%)    EM (%)       F1-score (%)     EM (%)      F1-score (%)    EM (%)      F1-score (%)
+ VisionReaderwithBARTpho     4.95            47.72       25.08           47.99         58.56          83.08         20.4           42.14
+           △                ↓ 2.60          ↓ 11.87      ↓ 6.42         ↓ 9.21         ↑ 1.25         ↑ 1.18       ↓ 6.96          ↓ 9.47
+  VisionReaderwithViT5       6.81            48.63       31.43           53.14         68.28          87.17        26.17           46.04
+           △                ↓ 6.61          ↓ 15.71     ↓ 12.76        ↓ 11.15         ↑ 2.55         ↑ 1.46      ↓ 15.41         ↓ 12.05
+
+
+
+the object plays a crucial role. Its inclusion not only enhances question understanding
+but also enriches the context necessary for the model to generate accurate answers.
+
+7.4 How Does OCR Contribute to Understanding Vietnamese
+    Text in Images?
+By conducting experiments on removing OCR, we sought to shed light on the signifi-
+cance of OCR and its direct impact on the overall performance of OCR-VQA models in
+our ViOCRVQA dataset. Moreover, this analysis serves to emphasize the importance
+of OCR as a means to enhance the efficacy of OCR-VQA task.
+
+
+Table 12: Performance when removing the OCR in our proposed method. △ denotes
+the increase (↑) and decrease (↓) in the performance of our method compared to the
+use of the OCR feature and OCR text.
+                                     Title                        Author                       Publisher                  Translator
+         Model             EM (%)      F1-score (%)    F1-score (%)    F1-score (%)    EM (%)      F1-score (%)   EM (%)      F1-score (%)
+ VisionReaderwithBARTpho      0.5           17.72         13.09           17.28         28.68          62.15       12.23           10.14
+           △                ↓ 7.05         ↓ 41.87       ↓ 18.41         ↓ 29.92       ↓ 28.63        ↓ 19.75     ↓ 15.13         ↓ 36.37
+  VisionReaderwithViT5       0.70           19.29         16.54           20.22         38.20          73.20       10.23           15.24
+           △               ↓ 12.72         ↓ 45.05       ↓ 27.65         ↓ 44.07       ↓ 27.53        ↓ 12.51     ↓ 31.35         ↓ 42.85
+
+
+
+
+    As depicted in Table 12, the lack of OCR results in significantly reduced perfor-
+mance for both VisionReaderwithViT5 and VisionReaderwithBARTpho . When not using
+OCR, the score drops very seriously, especially in the title field, the EM drops close
+to the lower border and the F1-score drops by two-thirds. This shows the importance
+of OCR in the OCR-VQA task. It can be said that improving and ensuring OCR per-
+formance is one of the best ways to increase and ensure performance in OCR-VQA
+task.
+
+7.5 How Do Answer and Question Lengths Affect Model
+    Performance?
+We divided questions and answers based on their length in the number of tokens
+followed in the study of Nguyen et al. [9]. The details of the test set based on different
+groups of lengths are in Table 13. Classification is done as follows:
+   • Short question (and short answer): These are questions and answers shorter than
+     6 tokens.
+   • Medium question (and medium answer): This group includes questions and
+     answers from 6 to 10 tokens.
+
+                                                                   21
+            Table 13: Group of answer and question length in test set.
+            Group       Length (n)    Answer Samples   Question Samples
+            Short             n≤5              12637              12531
+            Medium       5 < n ≤ 10             4392               4894
+            Long        10 < n ≤ 15             1215               1131
+            Very long        n > 15              357                 43
+
+
+  • Long question (and long answer): Questions and answers in this group from 11
+    to 15 tokens.
+  • Very long question (and very long answer): This group contains questions and
+    answers from 16 tokens and longer.
+
+
+
+
+             Figure 9: The results of models based on answer length.
+
+
+    The illustration from Figure 9 demonstrates the performance of the model for
+different answer lengths. The results indicate that the length of the answer plays a
+crucial role in affecting the performance of models. For the EM metric, short answers
+are ideal for the model, as the EM decreases rapidly with increasing answer length. In
+addition to that, for the F1-score, the performance of the models remains consistently
+good across a range of answer lengths but struggles to achieve good results with very
+long answers.
+
+
+
+
+            Figure 10: The results of models based on question length.
+
+
+   The performance illustration of the model with question length in Figure 10 indi-
+cates that both overly short and long questions do not yield high F1-score and EM.
+
+
+                                          22
+With overly short questions, there is not sufficient information provided for the model
+to produce high-quality results. Similarly, overly very long questions result in diluted
+input information, making it unclear what information needs to be extracted, hence
+leading to lower scores. Questions of medium to long length, however, yield positive
+results.
+
+7.6 How large a dataset is enough?
+To better understand how data size affects model performance, we conducted a se-
+ries of experiments in which the model was trained with different percentages of the
+dataset: 25%, 50%, 75%, and 100%.
+    Through these experiments, we observe a clear positive trend: model performance
+increases steadily with the size of the dataset. Specifically, when increasing from 25%
+to 50%, then 75%, and finally to 100% of the training dataset, we observe a continuous
+improvement in performance.
+
+
+
+
+  Figure 11: The EM results of models based on the percentage of training data
+
+
+    As the number of training data increases, Figure 11 and Figure 12 illustrate a
+corresponding improvement in the results achieved. The results showed a significant
+increase from 25% to 50%, followed by a more modest increase from 50% to 75%. In
+particular, the increase becomes very small from 75% to 100%. As the data stream
+continues to increase, VQA models gradually reach a saturation point. The larger
+ViOCRVQA dataset can indeed enhance the results of models but not significantly,
+instead, let to improve the model to enhance performance.
+    Data is often considered the deciding factor in improving the performance of ma-
+chine learning models. In general, increasing the size of training data can yield a
+significant improvement in performance, but beyond a certain threshold, this im-
+provement may no longer be significant. In this context, the ViOCRVQA dataset has
+
+
+                                          23
+Figure 12: The F1-score results of models based on the percentage of training data
+
+
+demonstrated that it provides a sufficiently rich amount of data to effectively train
+models.
+
+8 Conclusion and Future Work
+In this article, we presented the ViOCRVQA dataset, which includes 28,282 images
+and 123,781 question-answer pairs. This dataset will be publicly shared with the
+research community, especially with the Vietnamese research community, and will be-
+come the largest dataset serving the task of VQA in Vietnamese. In addition, we also
+analyzed, explored, and conducted experiments on state-of-the-art (SOTA) models
+and discovered their limitations when applied to the ViOCRVQA dataset. Further-
+more, we developed the VisionReader, which is optimized to solve OCR-VQA task in
+Vietnamese. Our proposed methods proved to be superior to current SOTA models,
+opening up new and more effective approaches for the research community in this
+field.
+    Through our experiments, we discovered the undeniable importance of optical
+character recognition (OCR) systems in the OCR-VQA task. Although this task
+mainly focuses on extracting textual information from images, we have demonstrated
+that the relationship between objects in images and textual information is intimate.
+Our proposed model achieved significant performance improvement by using informa-
+tion about objects in images. This discovery opens up a new approach to enhance the
+quality and accuracy of other OCR-VQA models in the future.
+    For future work, we will leverage large vision models such as visualGPT [62] vi-
+sionLLM [63] and large language models such as GPT-3 [64], LLaMA [65], etc. to
+enhance the performance of the OCR-VQA model. Thanks to their ability to represent
+features well, these models will help us better understand the relationship between
+text and images. Besides, we also propose to conduct experiments with different OCR
+systems such as FOTS [66], Mask Textspoter [67], etc. to compare and evaluate their
+
+
+                                         24
+performance. Another potential approach is to combine OCR with VQA models to
+make them multitasking models, where one model can simultaneously recognize text
+and answer questions about images. Finally, we would also want to conduct further
+research on the possibility of applying reinforcement learning techniques to improve
+the quality of the OCR-VQA model on the ViOCRVQA dataset.
+
+Acknowledgements
+This research is funded by Vietnam National University HoChiMinh City (VNU-
+HCM) under the grant number DS2024-26-01.
+
+Author Contributions Statement
+Huy Quang Pham: Conceptualization; Formal analysis; Investigation; Method-
+ology; Validation; Visualization; Writing - review & editing. Thang Kien-Bao
+Nguyen: Conceptualization; Data curation; Formal analysis; Investigation; Valida-
+tion; Visualization; Writing - original draft. Quan Van Nguyen: Conceptualization;
+Data curation; Investigation; Methodology; Writing - original draft. Dan Quang
+Tran: Conceptualization; Data curation; Investigation; Methodology; Writing - orig-
+inal draft. Nghia Hieu Nguyen: Conceptualization; Data curation; Investigation;
+Methodology; Writing - original draft. Kiet Van Nguyen: Conceptualization; Formal
+analysis; Investigation; Methodology; Validation; Supervision; Writing - review & edit-
+ing. Ngan Luu-Thuy Nguyen: Conceptualization; Formal analysis; Investigation;
+Methodology; Validation; Supervision; Writing - review & editing.
+
+Declarations
+Conflict of interest The authors declare that they have no conflict of interest.
+
+Data Availability
+Data will be made available on reasonable request.
+
+Appendix
+Several understanding about the dataset ViOCRVQA
+
+
+
+
+                                          25
+Figure 1: Question word cloud.
+
+
+
+
+Figure 2: Answer word cloud.
+
+
+
+
+             26
+            Table 1: The proportion of books based on genre.
+                             Type                                 Count    Ratio (%)
+Lịch sử - Địa lý - Tôn Giáo (History - Geography - Religion)         701        2.48
+Tâm lý - Kĩ năng Sống (Psychology - Life Skills)                   2,834       10.02
+Hề hước (Comic)                                                    2,089        7.39
+Giáo khoa - Tham khảo (Textbook - Reference)                       4,323       15.29
+Văn học (Literature)                                               3,603       12.74
+Kinh Tế (Economics)                                                1,039        3.67
+Nữ công gia chánh (Housewife)                                        246        0.87
+Khoa học kỹ thuật (Science Technology)                               770        2.72
+Sách học Ngoại Ngữ (Foreign Language Learning Books)               1,462        5.17
+Thiếu Nhi (Children)                                               8,882       31.41
+Âm nhạc - Mỹ thuật - Thời trang (Music - Art - Fashion)               68        0.24
+Giáo trình (Curriculum)                                               23        0.08
+Nuôi dạy con (Raise up child)                                        561        1.98
+Từ điển (Dictionary)                                                 155        0.55
+Tiểu sử - Hồi ký (Biography - Memoirs)                               301        1.06
+Chính trị - Pháp lý - Triết Học (Politics - Legal - Philosophy)      377        1.33
+Khác (Other)                                                         846        2.99
+
+
+
+
+                                         27
+Example Results of Models
+
+
+
+
+    Q: Tên cuốn sách này là gì ?        Q: Tựa đề chính xác của cuốn sách          Q: Tên cuốn sách này là gì ?         Q: Cuốn sách này được đặt tên
+    (What is the name of this book ?)   này là gì ?                                (What is the name of this book ?)    làm sao?
+    GT: nhật ký cá sấu                  (What is the name of this book ?)          GT: một cuộc sống trí huệ            (What is the name of this book ?)
+    Lorra: nhà xuất bản giáo dục việt   GT: giúp bé làm chủ cảm xúc bé vy          Lorra: kim khánh                     GT: vui học cùng curo biết tuốt ký
+    nam                                 tập tô màu                                 Blip-2: tâm lý học phật giáo tập 1   ức của curo
+    Blip-2: sâu sấu tán ca              Lorra: giúp bé làm chủ cảm xúc khi         Latr: tâm lý học về sự thiện hóa     Lorra: series
+    Latr: nhật ký tiểu thuyết           làm việc ở nhà                             PreSTU : một cuộc sống huệ hóa       Blip-2: cùng học khoa học vui
+    PreSTU : nhật ký ca sâu sấu         Blip-2: giúp bé làm chủ cảm xúc khi        bản thân                             cùng chú khỉ
+    VR-BARTpho (ours) : nhật ký tán     làm việc ở nhà                             VR-BARTpho (ours) : tâm lý học       Latr: khoa học thật vui cùng curo
+    sấu                                 Latr: bé học làm chủ cảm xúc               về sự phật giáo                      biết tuốt về khoa học
+    VR- ViT5 (ours) : bút ký sâu bọ     PreSTU : giúp bé làm chủ cảm xúc           VR- ViT5 (ours) : tâm lý học về      PreSTU : vui học cùng curo biết
+                                        học vụ ở nhà trẻ                           một cuộc đời thiện nguyện            tuốt ký ức của curo học khoa học
+                                        VR-BARTpho (ours) : giúp bé làm                                                 thật vui
+                                        chủ cảm xúc                                                                     VR-BARTpho (ours) : vui học
+                                        VR- ViT5 (ours) : giúp bé làm chủ                                               cùng curo biết tuốt ký ức 3
+                                        cảm xúc chủ động                                                                VR- ViT5 (ours) : vui cùng học
+                                                                                                                        môn khoa học thật vui cùng curo!
+
+
+
+
+Figure 3: Examples results of models where book titles have unusual fonts. (Note:
+VR-BARTpho is VisionReaderwithBARTpho , VR-ViT5 is VisionReaderwithViT5 )
+
+
+
+
+    Q: Tên cuốn sách này là gì ?        Q: Tựa đề chính xác của cuốn sách      Q: Tên cuốn sách này là gì ?             Q: Cuốn sách này được đặt tên
+    (What is the name of this book ?)   này là gì ?                            (What is the name of this book ?)        làm sao?
+    GT: tham thiền                      (What is the name of this book ?)      GT: chiến lược của kẻ thắng              (What is the name of this book ?)
+    Lorra: series                       GT: không có bà mẹ nào hoàn hảo        Lorra: tô màu , luyện chữ                GT: mẹ là bác sĩ
+    Blip-2: thiền nơi thiền tập         Lorra: nhà xuất bản kim đồng           Blip-2: những bài học kinh doanh         Lorra: kiến thức khoa học tự
+    Latr: thích thiền                   Blip-2: làm thế nào để có một đứa      từ nhật bản                              nhiên
+    PreSTU : thiền nơi công sở          trẻ hoàn hảo                           Latr: những bài học kinh doanh từ        Blip-2: mẹ là mẹ
+    VR-BARTpho (ours) : thiền           Latr: làm thế nào để cha mẹ hoàn       chiến lược kinh doanh                    Latr: bác sĩ là mẹ là mẹ
+    thượng                              hảo!                                   PreSTU : chiến thắng của người           PreSTU : mẹ là bác sĩ
+    VR-ViT5 (ours) : thiền nơi êm ấm    PreSTU :bà mẹ hoàn hảo bà mẹ           nhật 31 bài học kinh doanh từ            VR-BARTpho (ours) : mẹ là bác
+                                        không hoàn hảo!                        những nhà đại tài                        sĩ
+                                        VR-BARTpho (ours) : cha mẹ không       VR-BARTpho (ours) : 31 bài học           VR-ViT5 (ours) : mẹ là bác sĩ tâm
+                                        còn niềm tin                           tài chính chiến lược của nhà kinh        lý
+                                        VR-ViT5 (ours) : cha mẹ hoàn hảo       doanh
+                                        làm cách nào để con có niềm tin        VR-ViT5 (ours) : những bài học
+                                        hoàn hảo                               kinh doanh từ những nhà chiến
+                                                                               lược tài chính chiến lược của
+                                                                               hiroki t
+
+
+
+
+Figure 4: Examples results of models in title field. (Note: VR-BARTpho is
+VisionReaderwithBARTpho , VR-ViT5 is VisionReaderwithViT5 )
+
+
+
+
+                                                                              28
+   Q: Tác giả cuốn sách này là ai?       Q: Ai đã tạo nên cuốn sách này ?           Q: Ai đã phát triển ý tưởng cho       Q:Cuốn sách này do ai viết
+   (What is the author of this book ?)   (What is the author of this book ?)        cuốn sách này ?                       (What is the author of this book ?)
+   GT:shigeta saito                      GT: trúc dĩ                                (What is the author of this book ?)   GT: shu chong wen hua
+   Lorra: nhiều tác giả                  Lorra: ưu ưu thử                           GT: cécile jugla , jack guich         Lorra: kim thánh
+   Blip-2: kusumi saito shigeta          Blip-2: lý trúc trúc                       Lorra: nhiều tác giả                  Blip-2: wen chong
+   Latr: kusumi shigeta                  Latr: lý di trúc                           Blip-2: jugia guich                   Latr: shu wu
+   PreSTU : dan shigeta                  PreSTU : khương lệ bình                    Latr: cécile guichard                 PreSTU : shu chong wen hua
+   VR-BARTpho (ours) : saito             VR-BARTpho (ours) : lý trúc                PreSTU : cécile jugia, jugia guich    VR-BARTpho (ours) : shu chong
+   kusumi                                VR- ViT5 (ours) : hồ sơ tuyệt mật          VR-BARTpho (ours) : cécile guich      wen hua
+   VR- ViT5 (ours) : dan shigeta                                                    VR- ViT5 (ours) : cécile jugia        VR- ViT5 (ours) : shu chong wen
+                                                                                    quhn, jécile guich                    hua
+
+
+
+
+Figure 5: Examples results of models in author field (Note: VR-BARTpho is
+VisionReaderwithBARTpho , VR-ViT5 is VisionReaderwithViT5 )
+
+
+
+
+    Q: Ai là người dịch cuốn sách này     Q: Người nào đã thực hiện dịch             Q: Ai là người dịch cuốn sách này      Q: Người nào đã dịch cuốn sách
+    ?                                     cuốn sách này ?                            ?                                      này ?
+    (Who is the translator of this        (Who is the translator of this             (Who is the translator of this         (Who is the translator of this
+    book?)                                book?)                                     book?)                                 book?)
+    GT:thùy dương                         GT:khánh huyền                             GT:lê thị thu ngọc                     GT: phương thúy
+    Lorra: thùy dương                     Lorra: lục bích                            Lorra: lục bích                        Lorra: phạm nhàn
+    Blip-2: mai mai                       Blip-2: khánh trang                        Blip-2: thu ngọc                       Blip-2: phương thúy
+    Latr: thùy dương                      Latr: khánh huyền                          Latr: lê thị thu ngọc                  Latr: thúy phương
+    PreSTU :nguyễn đức vịnh               PreSTU : khánh huyền                       PreSTU : lê thị thu trang              PreSTU : thúy
+    VR-BARTpho (ours) : thùy dương        VR-BARTpho (ours) : khánh                  VR-BARTpho (ours) : ngọc linh          VR-BARTpho (ours) : phương
+    VR- ViT5 (ours) : thùy dương          huyền                                      VR- ViT5 (ours): lê thị ngọc diệp      thúy
+                                          VR- ViT5 (ours): khánh huyền                                                      VR- ViT5 (ours): phương thúy
+
+
+
+
+Figure 6: Examples results of models in translator field. (Note: VR-BARTpho is
+VisionReaderwithBARTpho , VR-ViT5 is VisionReaderwithViT5 )
+
+
+
+
+                                                                               29
+   Q: Nhà in nào đã in ra bản sách      Q: Nhà in nào đã in ra bản sách        Q: Nhà in nào đã giới thiệu cuốn   Q:Cuốn sách này do nhà xuất
+   này ?                                này ?                                  sách này lên thị trường?           bản nào chịu trách nhiệm phát
+   (Who is the publisher of this        (Who is the publisher of this          (Who is the publisher of this      hành?
+   book?)                               book?)                                 book?)                             (Who is the publisher of this
+   GT:nhà xuất bản trẻ                  GT:nhà xuất bản đồng nai               GT:nhà xuất bản kim đồng           book?)
+   Lorra: nhà xuất bản thế giới         Lorra: nhà xuất bản kim đồng           Lorra: nhà xuất bản kim đồng       GT:nhà xuất bản đại học quốc gia
+   Blip-2: nhà xuất bản hà nội          Blip-2: nhà xuất bản đồng nai          Blip-2: nhà xuất bản kim đồng      thành phố hồ chí minh
+   Latr: nhà xuất bản thế giới          Latr: nhà xuất bản đồng nai            Latr: nhà xuất bản kim đồng        Lorra: nhà xuất bản đại học quốc
+   PreSTU : nhà xuất bản thế giới       PreSTU : nhà xuất bản đồng nai         PreSTU : nhà xuất bản kim đồng     gia hà nội
+   VR-BARTpho (ours) : nhà xuất         VR-BARTpho(ours) : nhà xuất            VR-BARTpho (ours) : nhà xuất       Blip-2: nhà xuất bản đại học quốc
+   bản trẻ                              bản đồng nai                           bản kim đồng                       gia hà nội
+   VR- ViT5 (ours) : nhà xuất bản trẻ   VR- ViT5 (ours) : nhà xuất bản         VR- ViT5 (ours) : nhà xuất bản     Latr: nhà xuất bản đại học quốc
+                                        đồng nai                               kim đồng                           gia hà nội
+                                                                                                                  PreSTU : nhà xuất bản đại học
+                                                                                                                  quốc gia hà nội
+                                                                                                                  VR-BARTphoours) : nhà xuất bản
+                                                                                                                  đồng nai
+                                                                                                                  VR- ViT5(ours) : nhà xuất bản đại
+                                                                                                                  học quốc gia tp hồ chí minh
+
+
+
+
+Figure 7: Examples results of models in publisher field. (Note: VR-BARTpho is
+VisionReaderwithBARTpho , VR-ViT5 is VisionReaderwithViT5 )
+
+
+
+
+                                                                          30
+References
+ [1] Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C.L., Parikh,
+     D.: Vqa: Visual question answering. In: Proceedings of the IEEE International
+     Conference on Computer Vision, pp. 2425–2433 (2015)
+
+ [2] Goyal, Y., Khot, T., Summers-Stay, D., Batra, D., Parikh, D.: Making the v in
+     vqa matter: Elevating the role of image understanding in visual question answer-
+     ing. In: Proceedings of the IEEE Conference on Computer Vision and Pattern
+     Recognition, pp. 6904–6913 (2017)
+
+ [3] Singh, A., Natarajan, V., Shah, M., Jiang, Y., Chen, X., Batra, D., Parikh,
+     D., Rohrbach, M.: Towards vqa models that can read. In: Proceedings of the
+     IEEE/CVF Conference on Computer Vision and Pattern Recognition, pp. 8317–
+     8326 (2019)
+
+ [4] Biten, A.F., Tito, R., Mafla, A., Gomez, L., Rusinol, M., Valveny, E., Jawahar,
+     C., Karatzas, D.: Scene text visual question answering. In: Proceedings of the
+     IEEE/CVF International Conference on Computer Vision, pp. 4291–4301 (2019)
+
+ [5] Kamel, S.M., Hassan, S.I., Elrefaei, L.: Vaqa: Visual arabic question answering.
+     Arabian Journal for Science and engineering 48(8), 10803–10823 (2023)
+
+ [6] Kim, M., Song, S., Lee, Y., Jang, H., Lim, K.: Bok-vqa: Bilingual outside
+     knowledge-based visual question answering via graph representation pretraining.
+     arXiv preprint arXiv:2401.06443 (2024)
+
+ [7] Shimizu, N., Rong, N., Miyazaki, T.: Visual question answering dataset for bilin-
+     gual image understanding: A study of cross-lingual transfer using attention maps.
+     In: Bender, E.M., Derczynski, L., Isabelle, P. (eds.) Proceedings of the 27th Inter-
+     national Conference on Computational Linguistics, pp. 1918–1928. Association
+     for Computational Linguistics, Santa Fe, New Mexico, USA (2018)
+
+ [8] Tran, K.Q., Nguyen, A.T., Le, A.T.-H., Van Nguyen, K.: Vivqa: Vietnamese
+     visual question answering. In: Proceedings of the 35th Pacific Asia Conference
+     on Language, Information and Computation, pp. 683–691 (2021)
+
+ [9] Nguyen, N.H., Vo, D.T., Van Nguyen, K., Nguyen, N.L.-T.: Openvivqa: Task,
+     dataset, and multimodal fusion models for visual question answering in viet-
+     namese. Information Fusion 100, 101868 (2023)
+
+[10] Nguyen, N.L.-T., Nguyen, N.H., Vo, D.T., Tran, K.Q., Van Nguyen, K.: Evjvqa
+     challenge: Multilingual visual question answering. Journal of Computer Science
+     and Cybernetics, 237–258 (2023)
+
+[11] Tran, K.V., Phan, H.P., Van Nguyen, K., Nguyen, N.L.T.: Viclevr: A visual rea-
+     soning dataset and hybrid multimodal fusion model for visual question answering
+
+
+                                           31
+    in vietnamese. arXiv preprint arXiv:2310.18046 (2023)
+
+[12] Lin, T.-Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollár, P.,
+     Zitnick, C.L.: Microsoft coco: Common objects in context. In: Computer Vision–
+     ECCV 2014: 13th European Conference, Zurich, Switzerland, September 6-12,
+     2014, Proceedings, Part V 13, pp. 740–755 (2014). Springer
+
+[13] Kazemi, V., Elqursh, A.: Show, ask, attend, and answer: A strong baseline for
+     visual question answering. arXiv preprint arXiv:1704.03162 (2017)
+
+[14] Lu, J., Yang, J., Batra, D., Parikh, D.: Hierarchical question-image co-attention
+     for visual question answering. Advances in neural information processing systems
+     29 (2016)
+
+[15] Kim, J.-H., Lee, S.-W., Kwak, D., Heo, M.-O., Kim, J., Ha, J.-W., Zhang, B.-
+     T.: Multimodal residual learning for visual qa. Advances in neural information
+     processing systems 29 (2016)
+
+[16] Teney, D., Anderson, P., He, X., Van Den Hengel, A.: Tips and tricks for visual
+     question answering: Learnings from the 2017 challenge. In: Proceedings of the
+     IEEE Conference on Computer Vision and Pattern Recognition, pp. 4223–4232
+     (2018)
+
+[17] Mishra, A., Shekhar, S., Singh, A.K., Chakraborty, A.: Ocr-vqa: Visual ques-
+     tion answering by reading text in images. In: 2019 International Conference on
+     Document Analysis and Recognition (ICDAR), pp. 947–952 (2019). IEEE
+
+[18] Mathew, M., Karatzas, D., Jawahar, C.: Docvqa: A dataset for vqa on document
+     images. In: Proceedings of the IEEE/CVF Winter Conference on Applications of
+     Computer Vision, pp. 2200–2209 (2021)
+
+[19] Kantharaj, S., Do, X.L., Leong, R.T., Tan, J.Q., Hoque, E., Joty, S.: Opencqa:
+     Open-ended question answering with charts. In: Proceedings of the 2022 Con-
+     ference on Empirical Methods in Natural Language Processing, pp. 11817–11837
+     (2022)
+
+[20] Tanaka, R., Nishida, K., Yoshida, S.: Visualmrc: Machine reading comprehen-
+     sion on document images. In: Proceedings of the AAAI Conference on Artificial
+     Intelligence, vol. 35, pp. 13878–13888 (2021)
+
+[21] Mathew, M., Bagal, V., Tito, R., Karatzas, D., Valveny, E., Jawahar, C.:
+     Infographicvqa. In: Proceedings of the IEEE/CVF Winter Conference on Appli-
+     cations of Computer Vision, pp. 1697–1706 (2022)
+
+[22] Gurari, D., Li, Q., Stangl, A.J., Guo, A., Lin, C., Grauman, K., Luo, J.,
+     Bigham, J.P.: Vizwiz grand challenge: Answering visual questions from blind peo-
+     ple. In: Proceedings of the IEEE Conference on Computer Vision and Pattern
+
+
+                                          32
+    Recognition, pp. 3608–3617 (2018)
+
+[23] Marino, K., Rastegari, M., Farhadi, A., Mottaghi, R.: Ok-vqa: A visual ques-
+     tion answering benchmark requiring external knowledge. In: Proceedings of
+     the IEEE/cvf Conference on Computer Vision and Pattern Recognition, pp.
+     3195–3204 (2019)
+
+[24] Hudson, D.A., Manning, C.D.: Gqa: A new dataset for real-world visual reason-
+     ing and compositional question answering. In: Proceedings of the IEEE/CVF
+     Conference on Computer Vision and Pattern Recognition, pp. 6700–6709 (2019)
+
+[25] Krishna, R., Zhu, Y., Groth, O., Johnson, J., Hata, K., Kravitz, J., Chen, S.,
+     Kalantidis, Y., Li, L.-J., Shamma, D.A., et al.: Visual genome: Connecting lan-
+     guage and vision using crowdsourced dense image annotations. International
+     journal of computer vision 123, 32–73 (2017)
+
+[26] Johnson, J., Hariharan, B., Van Der Maaten, L., Fei-Fei, L., Lawrence Zitnick,
+     C., Girshick, R.: Clevr: A diagnostic dataset for compositional language and ele-
+     mentary visual reasoning. In: Proceedings of the IEEE Conference on Computer
+     Vision and Pattern Recognition, pp. 2901–2910 (2017)
+
+[27] Hasegawa, R., Thawonmas, R., Tanabe, J., Yu, L.: Minecraft video aesthetics
+     quality assessment model. In: Proceedings of the 13th International Conference
+     on Advances in Information Technology, pp. 1–5 (2023)
+
+[28] Simonyan, K., Zisserman, A.: Very deep convolutional networks for large-scale
+     image recognition. In: 3rd International Conference on Learning Representations
+     (ICLR 2015) (2015). Computational and Biological Learning Society
+
+[29] Strobelt, H., Gehrmann, S., Pfister, H., Rush, A.M.: Lstmvis: A tool for visual
+     analysis of hidden state dynamics in recurrent neural networks. IEEE transactions
+     on visualization and computer graphics 24(1), 667–676 (2017)
+
+[30] Chen, S.Y.-C., Yoo, S., Fang, Y.-L.L.: Quantum long short-term memory. In:
+     ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and
+     Signal Processing (ICASSP), pp. 8622–8626 (2022). IEEE
+
+[31] Chen, K., Wang, J., Chen, L.-C., Gao, H., Xu, W., Nevatia, R.: Abc-cnn: An
+     attention based convolutional neural network for visual question answering. arXiv
+     preprint arXiv:1511.05960 (2015)
+
+[32] Ma, L., Lu, Z., Li, H.: Learning to answer questions from image using convo-
+     lutional neural network. In: Proceedings of the AAAI Conference on Artificial
+     Intelligence, vol. 30 (2016)
+
+[33] Zhu, Y., Groth, O., Bernstein, M., Fei-Fei, L.: Visual7w: Grounded question
+     answering in images. In: Proceedings of the IEEE Conference on Computer Vision
+
+
+                                         33
+    and Pattern Recognition, pp. 4995–5004 (2016)
+
+[34] Shih, K.J., Singh, S., Hoiem, D.: Where to look: Focus regions for visual question
+     answering. In: Proceedings of the IEEE Conference on Computer Vision and
+     Pattern Recognition, pp. 4613–4621 (2016)
+
+[35] Wu, Q., Shen, C., Wang, P., Dick, A., Van Den Hengel, A.: Image caption-
+     ing and visual question answering based on attributes and external knowledge.
+     IEEE transactions on pattern analysis and machine intelligence 40(6), 1367–1381
+     (2017)
+
+[36] Kenton, J.D.M.-W.C., Toutanova, L.K.: Bert: Pre-training of deep bidirectional
+     transformers for language understanding. In: Proceedings of NAACL-HLT, pp.
+     4171–4186 (2019)
+
+[37] Lu, J., Batra, D., Parikh, D., Lee, S.: Vilbert: Pretraining task-agnostic vi-
+     siolinguistic representations for vision-and-language tasks. Advances in neural
+     information processing systems 32 (2019)
+
+[38] Li, L.H., Yatskar, M., Yin, D., Hsieh, C.-J., Chang, K.-W.: Visualbert: A simple
+     and performant baseline for vision and language. arXiv preprint arXiv:1908.03557
+     (2019)
+
+[39] Tan, H., Bansal, M.: Lxmert: Learning cross-modality encoder representations
+     from transformers. In: Proceedings of the 2019 Conference on Empirical Methods
+     in Natural Language Processing and the 9th International Joint Conference on
+     Natural Language Processing (EMNLP-IJCNLP), pp. 5100–5111 (2019)
+
+[40] Su, W., Zhu, X., Cao, Y., Li, B., Lu, L., Wei, F., Dai, J.: Vl-bert: Pre-training of
+     generic visual-linguistic representations. In: International Conference on Learning
+     Representations (2019)
+
+[41] Chen, Y.-C., Li, L., Yu, L., El Kholy, A., Ahmed, F., Gan, Z., Cheng, Y., Liu, J.:
+     Uniter: Universal image-text representation learning. In: European Conference
+     on Computer Vision, pp. 104–120 (2020). Springer
+
+[42] Li, X., Yin, X., Li, C., Zhang, P., Hu, X., Zhang, L., Wang, L., Hu, H.,
+     Dong, L., Wei, F., et al.: Oscar: Object-semantics aligned pre-training for vision-
+     language tasks. In: Computer Vision–ECCV 2020: 16th European Conference,
+     Glasgow, UK, August 23–28, 2020, Proceedings, Part XXX 16, pp. 121–137
+     (2020). Springer
+
+[43] Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y.,
+     Li, W., Liu, P.J.: Exploring the limits of transfer learning with a unified text-to-
+     text transformer. The Journal of Machine Learning Research 21(1), 5485–5551
+     (2020)
+
+
+
+                                           34
+[44] Biten, A.F., Litman, R., Xie, Y., Appalaraju, S., Manmatha, R.: Latr: Layout-
+     aware transformer for scene-text vqa. In: Proceedings of the IEEE/CVF
+     Conference on Computer Vision and Pattern Recognition, pp. 16548–16558
+     (2022)
+
+[45] Kil, J., Changpinyo, S., Chen, X., Hu, H., Goodman, S., Chao, W.-L., Sori-
+     cut, R.: Prestu: Pre-training for scene-text understanding. In: Proceedings of
+     the IEEE/CVF International Conference on Computer Vision, pp. 15270–15280
+     (2023)
+
+[46] Cho, J., Lei, J., Tan, H., Bansal, M.: Unifying vision-and-language tasks via text
+     generation. In: International Conference on Machine Learning, pp. 1931–1942
+     (2021). PMLR
+
+[47] Fang, C., Li, J., Li, L., Ma, C., Hu, D.: Separate and locate: Rethink the
+     text in text-based visual question answering. In: Proceedings of the 31st ACM
+     International Conference on Multimedia, pp. 4378–4388 (2023)
+
+[48] Li, J., Li, D., Savarese, S., Hoi, S.: Blip-2: Bootstrapping language-image pre-
+     training with frozen image encoders and large language models. In: International
+     Conference on Machine Learning, pp. 19730–19742 (2023). PMLR
+
+[49] Alayrac, J.-B., Donahue, J., Luc, P., Miech, A., Barr, I., Hasson, Y., Lenc, K.,
+     Mensch, A., Millican, K., Reynolds, M., et al.: Flamingo: a visual language model
+     for few-shot learning. Advances in Neural Information Processing Systems 35,
+     23716–23736 (2022)
+
+[50] Singh, A., Hu, R., Goswami, V., Couairon, G., Galuba, W., Rohrbach, M., Kiela,
+     D.: Flava: A foundational language and vision alignment model. In: Proceedings
+     of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pp.
+     15638–15650 (2022)
+
+[51] Li, C., Xu, H., Tian, J., Wang, W., Yan, M., Bi, B., Ye, J., Chen, H., Xu, G., Cao,
+     Z., et al.: mplug: Effective and efficient vision-language learning by cross-modal
+     skip-connections. In: Proceedings of the 2022 Conference on Empirical Methods
+     in Natural Language Processing, pp. 7241–7259 (2022)
+
+[52] Maronga, B., Banzhaf, S., Burmeister, C., Esch, T., Forkel, R., Fröhlich, D., Fuka,
+     V., Gehrke, K.F., Geletič, J., Giersch, S., et al.: Overview of the palm model
+     system 6.0. Geoscientific Model Development 13(3), 1335–1372 (2020)
+
+[53] Anil, R., Dai, A.M., Firat, O., Johnson, M., Lepikhin, D., Passos, A., Shakeri, S.,
+     Taropa, E., Bailey, P., Chen, Z., et al.: Palm 2 technical report. arXiv preprint
+     arXiv:2305.10403 (2023)
+
+[54] Phan, L., Tran, H., Nguyen, H., Trinh, T.H.: Vit5: Pretrained text-to-text
+
+
+
+                                           35
+    transformer for vietnamese language generation. In: Proceedings of the 2022 Con-
+    ference of the North American Chapter of the Association for Computational
+    Linguistics: Human Language Technologies: Student Research Workshop, pp.
+    136–142 (2022)
+
+[55] Tran, N.L., Le, D.M., Nguyen, D.Q.: BARTpho: Pre-trained Sequence-to-
+     Sequence Models for Vietnamese. In: Proceedings of the 23rd Annual Conference
+     of the International Speech Communication Association (2022)
+
+[56] Lewis, M., Liu, Y., Goyal, N., Ghazvininejad, M., Mohamed, A., Levy, O., Stoy-
+     anov, V., Zettlemoyer, L.: Bart: Denoising sequence-to-sequence pre-training for
+     natural language generation, translation, and comprehension. In: Proceedings of
+     the 58th Annual Meeting of the Association for Computational Linguistics (2020).
+     Association for Computational Linguistics
+
+[57] Zhang, P., Li, X., Hu, X., Yang, J., Zhang, L., Wang, L., Choi, Y., Gao, J.: Vinvl:
+     Revisiting visual representations in vision-language models. In: Proceedings of
+     the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pp.
+     5579–5588 (2021)
+
+[58] Huang, M., Liu, Y., Peng, Z., Liu, C., Lin, D., Zhu, S., Yuan, N., Ding, K., Jin, L.:
+     Swintextspotter: Scene text spotting via better synergy between text detection
+     and text recognition. In: Proceedings of the IEEE/CVF Conference on Computer
+     Vision and Pattern Recognition, pp. 4593–4603 (2022)
+
+[59] Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner,
+     T., Dehghani, M., Minderer, M., Heigold, G., Gelly, S., et al.: An image is
+     worth 16x16 words: Transformers for image recognition at scale. In: International
+     Conference on Learning Representations (2020)
+
+[60] Radford, A., Kim, J.W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry,
+     G., Askell, A., Mishkin, P., Clark, J., et al.: Learning transferable visual mod-
+     els from natural language supervision. In: International Conference on Machine
+     Learning, pp. 8748–8763 (2021). PMLR
+
+[61] Kingma, D., Ba, J.: Adam: A method for stochastic optimization. In: Interna-
+     tional Conference on Learning Representations (ICLR) (2015)
+
+[62] Chen, J., Guo, H., Yi, K., Li, B., Elhoseiny, M.: Visualgpt: Data-efficient adap-
+     tation of pretrained language models for image captioning. In: Proceedings of
+     the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pp.
+     18030–18040 (2022)
+
+[63] Wang, W., Chen, Z., Chen, X., Wu, J., Zhu, X., Zeng, G., Luo, P., Lu, T., Zhou,
+     J., Qiao, Y., et al.: Visionllm: Large language model is also an open-ended decoder
+     for vision-centric tasks. Advances in Neural Information Processing Systems 36
+     (2024)
+
+
+                                           36
+[64] Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J.D., Dhariwal, P.,
+     Neelakantan, A., Shyam, P., Sastry, G., Askell, A., et al.: Language models
+     are few-shot learners. Advances in neural information processing systems 33,
+     1877–1901 (2020)
+
+[65] Touvron, H., Lavril, T., Izacard, G., Martinet, X., Lachaux, M.-A., Lacroix, T.,
+     Rozière, B., Goyal, N., Hambro, E., Azhar, F., et al.: Llama: Open and efficient
+     foundation language models. arXiv preprint arXiv:2302.13971 (2023)
+
+[66] Liu, X., Liang, D., Yan, S., Chen, D., Qiao, Y., Yan, J.: Fots: Fast oriented
+     text spotting with a unified network. In: Proceedings of the IEEE Conference on
+     Computer Vision and Pattern Recognition, pp. 5676–5685 (2018)
+
+[67] Lyu, P., Liao, M., Yao, C., Wu, W., Bai, X.: Mask textspotter: An end-to-end
+     trainable neural network for spotting text with arbitrary shapes. In: Proceedings
+     of the European Conference on Computer Vision (ECCV), pp. 67–83 (2018)
+
+
+
+
+                                         37
+

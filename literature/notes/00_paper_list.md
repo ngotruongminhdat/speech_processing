@@ -20,3 +20,14 @@
 5. Ưu điểm
 6. Nhược điểm / hạn chế
 7. Liên hệ với đề tài (dùng được gì cho app đọc sách)
+
+## Trạng thái (04/11/2026)
+
+| File | Nội dung | Trạng thái |
+|---|---|---|
+| `01`–`07_*.md` | Tóm tắt 7 bài theo khung 8 mục | ✅ Nháp xong, đã đối chiếu số liệu bài 01 |
+| `08_Survey_VietnameseDAR.md` | Ghi chú survey (7 mục) | ✅ |
+| `10_vietnam_landscape.md` | Giải pháp trong nước, API, mã nguồn mở, app hiện có | ✅ |
+| `20_comparison.md` | Bảng so sánh chéo, đồng thuận/mâu thuẫn, khoảng trống, quyết định cho Stage 2 | ✅ |
+
+Việc còn lại trước khi đưa vào báo cáo: đọc lại từng note, cắt bớt cho vừa 1 trang/bài, kiểm tra link HuggingFace/GitHub còn sống.

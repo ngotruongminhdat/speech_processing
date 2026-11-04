@@ -1,0 +1,686 @@
+                              This WACV paper is the Open Access version, provided by the Computer Vision Foundation.
+                                           Except for this watermark, it is identical to the accepted version;
+                                     the final published version of the proceedings is available on IEEE Xplore.
+
+
+
+
+         @B ENCH: Benchmarking Vision-Language Models for Human-centered
+                              Assistive Technology
+
+               Xin Jiang1,2,∗ , Junwei Zheng1,∗ , Ruiping Liu1 , Jiahang Li1 , Jiaming Zhang1,† ,
+                                    Sven Matthiesen1 , Rainer Stiefelhagen1
+                                           1                                               2
+                                               Karlsruhe Institute of Technology,              Li Auto Inc.
+
+
+                                                          Query                                                        Downstream applica�ons
+                                                                                                 @Bench                   (Obstacle Avoidance)
+
+
+
+
+                                                                                @Model
+                                                  PS: “What is the panoramic                                             There is a counter two
+              Smart glasses                      segmenta�on of this image?”                                            meters ahead on the left.
+
+                      Input image                DE: “What is the depth                                                   (Simple Navigation)
+                                                 es�ma�on of this image?”                                               There is a door 3 meters
+                                                                                                                          ahead on the right.
+
+                                                Decoder                                                                    (Text Recognition)
+                                                                                                                        A sign with "Exit" on the
+                                                                                                                                 right.
+                                                 OCR: “What is the text on
+                                                this image?”
+                                                                                                                          (Scene Understanding)
+ More other
+
+
+
+
+                                                                                               OCR: Exit.
+ assistance
+
+
+
+
+                                                                                                                       This is a room with a table
+                                                 IC: “What does the image                                                      and chairs.
+                                                 describe?”                                    IC: A room with table
+                                                                                               and chairs.                (Object Recognition)
+                                                 VQA: “Is here a dining                                                   6 chairs, 2 tables, 1
+                                                room?”                                         VQA: Yes                 counter and 1 painting in
+                                                                                                                            the dining room.
+
+
+Figure 1. Overview of our Assistive Technology Model (@M ODEL) and Benchmark (@B ENCH). @M ODEL can perform vision-
+language tasks all at once, including: Panoptic Segmentation, Depth Estimation, Image Captioning, Optical Character Recognition and
+Visual Question Answering. All tasks of @B ENCH are selected by People with Visual Impairments (PVIs) to evaluate VLMs for AT.
+
+                              Abstract                                            1. Introduction
+
+    As Vision-Language Models (VLMs) advance, human-                                 Assistive Technologies (ATs) for People with Visual
+centered Assistive Technologies (ATs) for helping People                          Impairments (PVIs) have witnessed significant advance-
+with Visual Impairments (PVIs) are evolving into general-                         ments in recent years where computer vision and natu-
+ists, capable of performing multiple tasks simultaneously.                        ral language processing play an important role. Previous
+However, benchmarking VLMs for ATs remains under-                                 works [1, 8, 9, 45] focus on providing PVIs with specific
+explored. To bridge this gap, we first create a novel AT                          and limited functionalities, such as navigation [1], obsta-
+benchmark (@B ENCH). Guided by a pre-design user study                            cle avoidance [45], image captioning [9], etc. However,
+with PVIs, our benchmark includes the five most crucial                           existing methods face challenges in efficiently processing
+vision-language tasks: Panoptic Segmentation, Depth Esti-                         multiple tasks simultaneously. Specifically, existing ap-
+mation, Optical Character Recognition (OCR), Image Cap-                           proaches struggle to accurately interpret complex scenes,
+tioning, and Visual Question Answering (VQA). Besides,                            which is essential to meet the needs of PVIs. Additionally,
+we propose a novel AT model (@M ODEL) that addresses                              they often provide less contextually relevant information for
+all tasks simultaneously and can be expanded to more as-                          scene description. Recently, the generalist Vision-Language
+sistive functions for helping PVIs. Our framework exhibits                        Models (VLMs) [24, 42, 52] have been proposed and shown
+outstanding performance across tasks by integrating multi-                        great potential in multi-tasking and revolutionizing the next-
+modal information, and it offers PVIs a more comprehen-                           generation assistive systems. Regarding Vision-Language
+sive assistance. Extensive experiments prove the effective-                       (VL) tasks, these models benefit from the dividend in both
+ness and generalizability of our framework.                                       computer vision and natural language processing domains,
+    ∗ Equal contribution.                                                         facilitating collaboration between visual and language tasks
+    † Corresponding author (e-mail: jiaming.zhang@kit.edu).                       for a more comprehensive understanding of the surrounding
+    All codes will be made publicly available at ATBench.                         environment. Nonetheless, benchmarking VLMs for ATs is
+
+
+
+                                                                               3934
+still under-explored. The previous Large Language Mod-                   mance compared with state-of-the-art methods.
+els (LLMs) and Large Vision-Language Models (LVLMs)                  (4) One Suit of Weights for All Tasks. Benefiting from
+benchmarks [23, 49] have limitation in two aspects. Firstly,             multi-task training, our model is capable of concur-
+while the benchmarks focus on language-specific and cross-               rently executing all tasks with a unified set of weights,
+modal tasks, they seldom address pure vision-specific tasks,             resulting in a significant reduction in the number of pa-
+which are crucial in the context of visual impairments. Sec-             rameters and computational cost.
+ondly, these benchmarks tend to prioritize general applica-
+bility over the specific needs of individuals with visual im-       2. Related Work
+pairments. Therefore, we raise the research question: Are
+VLMs ready for empowering assistive technology for help-            2.1. Assistive Technologies for the Blind
+ing People with Visual Impairments (PVIs)?                             A common goal in ATs is to develop artificial intelli-
+    To answer this question, we propose a new VL-based AT           gent systems via vision-language algorithms to help PVIs.
+benchmark (@B ENCH) as a platform for evaluating VLMs               VizWiz, introduced by Bigham et al. in 2010 [3], presents
+for visually impaired assistance. To involve the target group       the first multi-task datasets and artificial intelligence chal-
+in shaping the benchmark, we conduct a number of ques-              lenges originating from PVIs. These include over 10 tasks,
+tionnaires via a human-in-the-loop process with seven par-          such as VQA [8], image captioning [9], object detec-
+ticipants who are blind or have low vision, so as to under-         tion [33] and object classification [2], etc. It covers various
+stand the practical demands of PVIs. Based on the feed-             scenes in the daily life of PVIs and provides valuable data
+back of the user study, we introduce five tasks ranked by           for the research of ATs. Other task-specific datasets [37,46]
+blind users according to the level of interest, frequency of        focus on the recognition of obstacles and tactile paving, fur-
+usage, and level of importance. As presented in Fig. 1,             ther contributing to this field. Based on the PVIs-oriented
+the most assistance-related tasks include: Panoptic Seg-            and general datasets, most work used visual model to ad-
+mentation (PS), Depth Estimation (DE), Optical Charac-              dress the daily challenges encountered by PVIs. For ex-
+ter Recognition (OCR), Image Captioning (IC), and Visual            ample, previous works [1, 7, 22, 39, 45, 48] employ visual
+Question Answering (VQA). Beyond the range of tasks, per-           tasks such as detection, segmentation and depth estimation
+formance and efficiency stand as crucial considerations in          to accomplish avoidance, navigation, privacy protection,
+AT for PVIs. Therefore, we introduce an evaluation frame-           etc. Some other works have focused on language-modal
+work for assessing the trade-off between efficiency and per-        or cross-modal tasks, such as OCR [25, 30], image caption-
+formance in generalist VLMs.                                        ing [9], and VQA [8]. Compared to these existing methods,
+    With this benchmark in place, we propose a novel AT             we conduct a human-in-the-loop study to design a unified
+model (@M ODEL) that use task-specific prompt to com-               multi-modal benchmark for evaluating VLMs for ATs.
+bine these 5 uni-modal or cross-modal tasks and realize the
+paradigm of multi-task training. Thanks to this, @M ODEL            2.2. Generalist Vision-Language Models
+can use one suit of parameters to implement multiple tasks.            Generalist VLMs have witnessed remarkable advance-
+It is crucial to significantly reduce the number of parame-         ments, driven by breakthroughs in deep learning tech-
+ters, and it will be possible to deploy one model and one           niques [31,42,52]. Developing a generalist model for multi-
+suit of weights on the portable device for PVIs.                    ple tasks poses unique challenges due to the heterogeneous
+    To summarize, we present the following contributions:           inputs and outputs, including RGB images, depth maps,
+ (1) Human-in-the-loop User Study. As a part of PVIs-               binary masks, bounding boxes, language, etc. Previous
+      specific design, it is necessary to investigate the needs     methods MetaLM [10] and PaLI [4] use language models
+      of the target group. We conduct a participatory user          as general-purpose interfaces to various foundation mod-
+      study for the sake of understanding the most related          els. GLIPv2 [44] unifies both localization and VL under-
+      tasks, enabling a user-driven design.                         standing tasks as grounded vision-language tasks. OFA [42]
+ (2) Vision-Language Benchmark for Assistive Technol-               and Unified-IO [24] introduce a Seq2Seq framework for the
+      ogy. We release a new benchmark with five represen-           unification of I/O, architectures, tasks, and modalities. X-
+      tative VL tasks close to the daily life of PVIs. Other        Decoder [52] can predict pixel-level segmentation and lan-
+      complex functionalities can be derived from these             guage tokens through a generalized decoding model. Uni-
+      tasks, such as obstacle avoidance. We further evalu-          Perceiver v2 [20] formulates different tasks as a unified
+      ate the efficiency-performance trade-off on @B ENCH.          maximum likelihood estimation problem without any task-
+ (3) Generalist Vision-Language Model for Assistive                 specific fine-tuning. However, these methods are either un-
+      Technology. We propose a new end-to-end baseline              able to perform multi-task training, or they focus too much
+      @M ODEL for addressing multiple tasks in @B ENCH              on language-modal tasks or cross-modal tasks, while ignor-
+      all at once. The model achieves competitive perfor-           ing vision-modal tasks that are important for PVIs, such as
+
+
+
+                                                                  3935
+segmentation [47] and depth estimation [21]. Therefore,              functions and related usage scenarios to the participants.
+we propose a new method that can comprehensively con-                Then, they were asked to rate each function based on 3 cri-
+sider and balance multiple assistance-related uni-modal and          teria: (1) level of interest, (2) frequency of usage, and (3)
+cross-modal tasks, and can use one suit of weights for all           importance in their daily life from 1 (lowest) to 5 (highest).
+tasks.                                                               In addition, each function has and can be performed by us-
+                                                                     ing a corresponding uni-modal or cross-modal task.
+2.3. Benchmarks for Vision-Language Models
+                                                                     Quantitative Result. Each participant rated each function
+   To evaluate vision-language systems, Zhou et al. [51]             from 1 to 5 based on these three criteria. After collecting
+propose a multi-task multi-dimension benchmark for Vision            the scores of each participant, we averaged the scores of
+Language Pretraining (VLP) models. Su et al. [36] intro-             the 7 participants to represent the score of the function, and
+duce the GEM benchmark, a multi-modal benchmark that                 finally used the total score of the 3 criteria as the score of
+focuses on both image-language tasks and video-language              each function. And we use the total score as a basis to select
+tasks. Recently, many LVLMs benchmarks [23, 49] have                 relevant functions and tasks. The ratings were then aggre-
+emerged to more comprehensively evaluate the fine-grained            gated and summarized, as illustrated in Table 1. Functions
+capabilities of models. However, a vision-language bench-            5 and 3 have the highest scores. PVIs think text recogni-
+mark for ATs and PVIs is lacking in the literature. To bridge        tion and object recognition are the most important in their
+this gap, we introduce @B ENCH , a benchmark that in-                daily life. Function 7 has the lowest score and has a large
+cludes realistic multi-modal tasks closely relevant to the           gap with other functions. At the same time, functions 1,
+daily lives of PVIs. Therefore, @B ENCH is designed to               2, 4, 6, and 8 have similar scores. Therefore, we did not
+serve as a fundamental benchmark for evaluating VLMs in              consider the tasks corresponding to function 7 in the bench-
+the realm of ATs.                                                    mark, and retained the tasks related to all the remaining
+                                                                     functions. According to the study, the selected functions
+3. @B ENCH: Assistive Technology Benchmark                           are: panoptic segmentation, depth estimation, OCR, image
+                                                                     captioning and VQA.
+   @B ENCH is a pioneering multi-modal benchmark tai-
+lored specifically for the domain of Assistive Technology            3.2. Assistive Tasks
+(AT). The primary target of @B ENCH is to establish a com-
+prehensive and standardized evaluation platform for vision-              Guided by the user study, @B ENCH contains 5 tasks that
+language models in the context of helping PVIs.                      are extremely relevant to the daily lives of PVIs. We give
+   In this section, we introduce the detail of the user study        an overview of all tasks and the corresponding datasets in
+(Sec. 3.1), which helps us identify important tasks that             Table 2, and describe the details as follows:
+are closely related to PVIs. We then provide an overview             Panoptic Segmentation. It is the task that combines both
+(Sec. 3.2) of the tasks, datasets and metrics encompassed            semantic segmentation and instance segmentation, aiming
+within the @B ENCH framework. Subsequently, we intro-                to simultaneously recognize all object instances in an image
+duce the vital dimension for assessing the performance of            and segment them by category, helping blind people per-
+VLMs for ATs: efficiency-performance trade-off (Sec. 3.3).           ceive the surroundings more accurately. We opt to ADE20K
+                                                                     [50], which contains more than 27K images spanning 365
+3.1. User-centered Study                                             different scenes with totally 150 semantic categories, in-
+Organization. To build the AT benchmark, we conducted                cluding indoor, outdoor, urban, rural, etc., basically cov-
+a pre-study with 2 accessibility experts to develop a reason-        ering almost all daily life scenes and common objects of
+able questionnaire. Based on their suggestions and multiple          PVIs. And we use Panoptic Quality (PQ) [18] to measure
+discussions, we further organized a user-centered study with         the performance.
+7 participants who are blind or have low vision. The goal            Depth Estimation. It is the task of measuring the distance
+was to identify which vision-language tasks are beneficial           of each pixel relative to the user’s camera. According to
+for the target group and meet their requirements.                    user study, the majority of PVIs spend most of their time in-
+Questionnaire. To enhance the rationale of our benchmark             doors. Therefore, we choose NYU v2 [27], which includes
+design, we conducted a questionnaire session with the par-           indoor scenes. We evaluate with the RMSE metric.
+ticipants. In this questionnaire, we presented 8 functions           Optical Character Recognition. It is the conversion of
+relevant to the daily lives of PVIs in Table 1: (1) obsta-           images of typed, handwritten or printed text into machine-
+cle avoidance, (2) indoor distance estimation, (3) object            encoded text. We know text recognition is the most impor-
+recognition, (4) object location, (5) text recognition, (6) sur-     tant function for the PVIs from user study, so we select two
+roundings understanding, (7) scene recognition and (8) vi-           widely-used, large synthetic datasets for training: MJSynth
+sual Q&A for surroundings. At the begining of the user               (MJ) [12] and SynthText (ST) [12]. We evaluate recogni-
+study, we first explained the specific concepts of different         tion accuracy on 6 datasets, covering various text scenar-
+
+
+
+                                                                   3936
+                                                                        Level of Interest   Frequency of Usage       Importance
+        Function                          Related Task                                                                                 Total
+                                                                        1 (low)– 5 (high)    1 (low) – 5 (high)   1 (low) – 5 (high)
+ 1      Obstacle Avoidance                Panoptic Segmentation               3.00                 2.71                 2.43           08.14
+ 2      Indoor Distance Estimation        Depth Estimation                    3.14                 2.43                 2.43           08.00
+ 3      Object Recognition                Panoptic Segmentation               3.86                 3.71                 4.00           11.57
+ 4      Object Location                   Panoptic Segmentation               3.29                 3.14                 3.29           09.72
+ 5      Text Recognition                  OCR                                 4.57                 4.43                 4.43           13.43
+ 6      Surroundings Understanding        Image Captioning                    3.43                 2.86                 2.71           09.00
+ 7      Scene Recognition                 Scene Recognition                   2.14                 1.71                 1.86           05.71
+ 8      Visual Q&A                        Visual Question Answering           3.57                 3.43                 3.43           10.43
+
+Table 1. Quantitative result of the user study. Potential functions can be achieved via related tasks, which are listed in the questionnaires
+for the user study. Note: all scores are averages across 7 participants.
+
+
+ Task    Dataset           #Train       #Val    #Test    Metric             use the publicly released VizWiz VQA evaluation scripts in
+                                                                            @B ENCH.
+ PS      ADE20K            25,574       2,000   2,000    PQ
+ DE      NYU v2            24,230       654     654      RMSE               3.3. Efficiency-Performance Trade-off
+ OCR     MJ, ST, 6 OCR     15,895,356   7,507   7,507    Accuracy
+                                                                               In designing models for assistive systems, an optimal
+ IC      VizWiz Cap        23,431       7,750   8,000    BLEU-1/CIDEr       balance between efficiency and performance is essential.
+ VQA     VizWiz VQA        20,523       4,319   8,000    Accuracy           Normally, the performance of VLMs can be easily mea-
+ P
+         @B ENCH           15,989,114   22230   26161
+                                                                            sured by task-specific metrics. For efficiency, there are few
+                                                                            common choices: the number of parameters, FLOPs and in-
+Table 2. Statistic of pre-selected tasks and datasets in                    ference time. To compare with previous methods, we eval-
+@B ENCH. Note that some datasets do not have a test subset, so              uate efficiency through the number of parameters.
+use val subset for evaluation. The 6 OCR datasets are IC13, IC15,              In sum, @B ENCH is designed specifically for multi-
+IIIT5K, SVT, SVTP and CUTE.                                                 modal, multi-task scenarios and tailored to assistive systems
+                                                                            for PVIs. All tasks are closely tied to the needs of PVIs
+                                                                            community. @B ENCH not only prioritizes performance but
+ios: ICDAR 2013 (IC13) [15], ICDAR 2015 (IC15) [14],                        also places emphasis on efficiency-performance trade-off.
+IIIT5K-Words (IIIT5K) [26], Street View Text (SVT) [41],                    We aspire for this benchmark to serve as a cornerstone for
+Street View Text-Perspective (SVTP) [29], and CUTE80                        researchers within PVIs assistance community, encouraging
+(CUTE) [34].                                                                exploration of multi-modal models’ applications in ATs.
+Image Captioning. It is a challenging task that involves
+generating human-like and coherent natural language de-                     4. @M ODEL: Assistive Technology Model
+scriptions for images. The task is to comprehend visual                         Based on X-Decoder, we propose @M ODEL, the first
+content and express in natural language that is descrip-                    generalist model to support all these assistance-related
+tive and contextually relevant, which allows PVIs to have                   vision-language tasks. As show in Fig. 2, the overall model
+an overall understanding of their surroundings. To better                   is built on top of a image encoder for extracting image fea-
+align with the daily experiences of PVIs, we opted for the                  tures, two text encoders that share parameters for extracting
+VizWiz Cap [9], collected from the perspective of PVIs. We                  text features, and a transformer decoder with generic latent
+use BLEU-1 [28] and CIDEr [38] as evaluation metrics.                       queries and textual queries. @M ODEL has two types of
+Visual Question Answering. It requires the model to take                    output: (1) pixel-level output for dense prediction, such as
+as input an image and a free-form, open-ended, natural                      panoptic segmentation and dense estimation and (2) token-
+language question. It produces or selects a natural lan-                    level output for a diverse set of language-related vision
+guage answer as output [51]. In our work, we found that                     tasks, such VQA, image captioning and OCR.
+PVIs expressed significant interest in this task. By pos-                   Unified Multi-task Architecture. X-Decoder [52] in-
+ing questions, they can experience and comprehend the                       cludes only two tasks in @B ENCH, panoptic segmentation
+unseen world around them, providing them with a novel                       and image captioning. To include token-level output like
+and enriching experience. We select VizWiz VQA [8] and                      VQA or OCR, X-Decoder requires a specific head for each
+
+
+
+                                                                         3937
+                                                         Token-level Outputs                                                 PS      DE        OCR             IC        VQA
+
+                                                                                                      Method               ADE-150 NYU-V2 6 Datasets avg VizWiz Cap VizWiz VQA #Params
+                                                 Pixel-level
+Task-Prompt      Text Encoder                     Outputs
+                                                                                                                             PQ     RMSE ↓    Acc(%)    B@1 CIDEr       Acc(%)
+
+                                                                 Decoder                              Unified-IO (S)†         –      0.649       –       ⋆          ⋆    42.4    71M
+                                                                                                                       †
+                                                                                                      Unified-IO (B)          –      0.469       –       ⋆          ⋆    45.8    241M
+                Image Encoder
+                                                Latent Queries
+                                                                                                      Unified-IO (L)†         –      0.402       –       ⋆          ⋆    47.7    776M
+                                                                       Text Encoder
+                                                                                                                      †
+                                                                                                      X-Decoder (T)          41.6     –          –       ⋆          ⋆     –      164M
+                                                                       Text / Label
+                                                                                                            †
+                                                                                                      GIT                     –       –          –       ⋆      113.1    68.0    0.7B
+
+Figure 2. Overall architecture of @M ODEL. We propose task-                                           PaLI†                   –       –          –       ⋆      117.2    67.5    3.0B
+
+based prompts to unify inputs and perform different tasks all at                                      Ours                   38.5    0.425     80.1     61.0    52.5     53.7    62M
+once.
+                                                                                                      Table 3. Comparison of multi-task training @M ODEL and
+Multi-head for Multi-task                       Multi-prompt for Multi-task                           other generalist models. We report the multi-task training results
+ (0.2M params each)                                                                                   without any pre-training and task-specific fine-tuning. Note: GIT
+   Task A             Task B           Task C                       Multi-task                        and PaLI are LVLMs. “⋆” denotes the model has the capability for
+    Head               Head             Head                         Head
+                                                                                                      the task but does not have number reported. “–” means the model
+                                                                                                      does not have the ability for the specific task. “†” means the model
+                                                                                                      uses pre-trained weights for training. (B@1 = BLEU-1)
+               Multi-task Model                                  Multi-task Model
+                (Params: 62M)                                     (Params: 62M)
+
+                                                                                                      cabulary space and model’s prediction vocabulary space.
+                      A B C     multi-task                           A B C
+                                                                                 multi-task           For example, the dataset of captioning contains a rich vo-
+                                 input                                            input               cabulary that is comparable to the vocabulary that can be
+                                                                     p1 p2 p3
+
+                                                                                                      predicted by the model. But for OCR, we have some ob-
+   Task A             Task B          Task C       Task A            Task B             Task C
+   Dataset            Dataset         Dataset      Prompt            Prompt             Prompt
+                                                                                                      servations: (1) In the English OCR datasets in @B ENCH,
+                                                                                (10K params each)     an image usually contains only one pure text. (2) The texts
+                                                                                                      basically use 26 English letters and 10 numbers. (3) If each
+Figure 3. Paradigms of multi-task methods. Our @M ODEL                                                text is divided by a single character, the length is basically
+incorporates task-specific prompts that effectively unify tasks all                                   less than 15. When we use the default subword-based to-
+at once and with almost no additional parameters.                                                     kenizer and complete vocabulary, we found that the train-
+                                                                                                      ing effect is unsatisfactory. Subword-based tokenizer with
+                                                                                                      a large vocabulary that can provide semantic information
+task. This paradigm (in Fig 3) will make the structure of
+                                                                                                      is not effective enough for OCR. The model only needs to
+the entire model very bloated, which is a major drawback
+                                                                                                      recognize the text but not the representations of the text. A
+for portable assistance systems. In contrast, we use task-
+                                                                                                      character-based tokenizer can bring a much smaller vocab-
+specific prompt to build a unified input paradigm “image
+                                                                                                      ulary and relieve this mismatch. More details locate in the
++ prompt” as shown in Fig. 3. Compared with multi-head
+                                                                                                      supplementary material. The respective experiment is pre-
+output, the benefits are three-fold: (1) Unifying input forms
+                                                                                                      sented in Sec. 5.5.
+for different tasks. For example, it can unify the inputs of
+VQA (image and question text) and segmentation (image)                                                5. Experiments
+in the manner of “image + prompt”. (2) Enabling the model
+to distinguish different tasks, extract corresponding features                                           This section provides experimental results and analyses
+in early phase. (3) Reducing the number of parameters. We                                             to demonstrate the effectiveness of our proposed model. Im-
+design a corresponding prompt shown in Fig. 1 for each                                                plementation details are in the supplementary material.
+task. For VQA, we use its own questions directly as the
+                                                                                                      5.1. Comparison with Existing Generalist Models
+prompt. In Sec. 5.5, we analyze the performance and effi-
+ciency advantages of such a design.                                                                      In Table 3, we compare the performances of @M ODEL
+Character-based Tokenizer with Limited Vocabulary                                                     and some other generalist models on the tasks in @B ENCH.
+for OCR. In the text encoders of @M ODEL, we use pre-                                                 @M ODEL is the first generalist model to support assistance-
+trained CLIP [31] subword-based tokenizer with a vocabu-                                              related vision-language tasks and can achieve superior re-
+lary containing approximately 50,000 subwords as default.                                             sults. However, (1) most generalist models only include a
+But during language-related tasks training, we need to con-                                           few specific tasks and do not include all tasks in @B ENCH,
+sider a problem, there is a mismatch between dataset’s vo-                                            especially OCR task. And (2) most generalist models only
+
+
+
+                                                                                                    3938
+    Panoptic Segmentaion      Depth Estimation                   OCR                                 Image Captioning                              VQA
+                                                                          Box   Text                                            Q: how many people are in this image?
+                                                                                       a car is parked in front of two people
+                                                                           1  quality                                           A: two
+                                                                           2    with
+                                                                           3 08sessed
+                                                                           4 since1895
+                                                                           5    star
+                                                                           6   uperb
+                                                                           7   superb
+                                                                          Box   Text   a dining room with a table and a big     Q: is that a picture on the left?
+                                                                           1   cognac picture                                   A: yes
+                                                                           2  jacquet
+
+
+
+
+                                                                          Box     Text                                          Q: what is this?
+                                                                                           a black car next to the wall
+                                                                           1       21                                           A: car
+                                                      2
+
+
+                                                                           2       23
+                                                  1
+
+
+
+
+   Figure 4. Examples of multi-task training results on 5 tasks. Given one image as input our @M ODEL can output all predictions.
+
+
+report fine-tuned results and few methods report their results
+on assistance-related datasets. Therefore, we only compare
+a few related methods. Since generalist models aim to pro-
+cess different tasks with shared architecture and parame-
+ters, some generalist models only report results with task-
+specific fine-tuning, e.g., X-Decoder, GIT [40] and PaLI,
+this fine-tuning will lose the general modeling ability, so we
+report the numbers without any task-specific adaptation in
+the manner of multi-task training. Nonetheless, with similar
+number of parameters, @M ODEL can outperform Unified-
+IO (S) in depth estimation and VQA by 0.224 and 11.3%,
+respectively, and even better than the Unified-IO (B). On
+other tasks, since many methods are pre-trained, fine-tuned,
+and have a larger number of parameters, there is still a cer-
+tain gap between @M ODEL and these methods. The visu-                  Figure 5. Single-task and multi-task training performance (rel-
+alization of some multi-task training results is presented in          ative) against the specialized SoTA models on different tasks
+Fig. 4.
+
+5.2. Comparison with Specialized SoTA Models                           the single-task SoTA model on multiple tasks. For ex-
+                                                                       ample, @M ODEL outperforms the MaskFormer (+4.5%)
+   Due to the scarcity of existing VLMs capable of en-                 and gets comparable results with pre-trained models, such
+compassing all five tasks of our @B ENCH, to compre-                   as Mask2Former and kMaX-DeepLab. Even for highly
+hensively showcase the effectiveness of our model, we                  competitive OCR tasks, @M ODEL can outperform non-
+compare our multi-task model with previous single-task                 pretrained SoTA models, ASTER and SEED, by 3.3% and
+SoTA models in Table 4. The representative works for                   1.7%, respectively. These results show that our @M ODEL
+each task are: MaskFormer [6], Mask2Former [5] and                     significantly bridges the performance gap between general-
+kMaX-DeepLab [43] for panoptic segmentation; BTS [19],                 ist models and strong baselines.
+DPT [32] and GLP [17] for depth estimation; ASTER [35],
+SEED [30] and MaskOCR [25] for OCR; VizWiz Cap,                        5.3. Multi-task Training v.s. Single-task Training
+AoANet [11] for captioning, VizWiz VQA, S-VQA [16]
+and CS-VQA [13] for VQA. Note that all these spe-                         As depicted in Fig. 5, @M ODEL performs less effec-
+cialized methods are tailored for their respective specific            tively in segmentation, depth estimation, and OCR under
+tasks, while @M ODEL is proposed to cover all these tasks.             multi-task training, while demonstrating superior perfor-
+@M ODEL can achieve, and in some cases, even surpass                   mance in captioning and VQA. We analyze that due to the
+
+
+
+                                                                  3939
+                       PS                    DE                                      OCR                                           IC                       VQA
+
+Method               ADE-150 Method        NYU-V2 Method           IC13 IC15 SVT IIIT5K SVTP CUTE avg Method                VizWiz Cap Method            VizWiz VQA
+
+                       PQ                  RMSE↓                                    Acc (%)                                 B@1 CIDEr                     Acc (%)
+
+MaskFormer† (45M)     34.7   GLP† (62M)     0.344   ASTER          91.8 76.1 89.5   93.4      78.5   79.5 86.7 VizWiz Cap † 62.1    48.2    VizWiz VQA      47.5
+             †                      †
+Mask2Former (44M)     39.7   DPT* (123M)    0.357   SEED           92.8 80.0 89.6   93.8      81.4   83.6 88.3 AoANet       65.9    59.7    S-VQA           51.6
+                 †              †                            †
+kMaX-DeepLab (57M)    41.5   BTS (47M)      0.392   MaskOCR (97M) 98.1 87.3 94.7    95.8      89.9   89.2 93.1 –             –          –   CS-VQA          53.2
+
+Ours (62M)            39.2   Ours (62M)     0.386   Ours (62M)     97.1 84.4 92.6   90.3      88.7   93.1 90.0 Ours (62M)   60.0    45.1    Ours (62M)      49.1
+
+
+Table 4. Comparison of single-task training @M ODEL and specialized SoTA models. Note: “model (#params)” donates the number
+of parameters of the model. DPT* is trained with an extra dataset.
+
+
+huge OCR datasets, it is difficult to balance various tasks                    ing the models with a multi-output head paradigm compat-
+during multi-task training, resulting in a decline in OCR                      ible with more tasks. Therefore, for generalist models, the
+performance. For captioning and VQA, these two tasks are                       prompt-based training paradigm is more promising.
+related to the scene understanding, they can promote each                      Different Tokenizers and Vocabularies for OCR. As
+other during joint training. Furthermore, panoptic segmen-                     shown in Table 6, utilizing a character-based tokenizer can
+tation can increase the scene perception ability. See Ap-                      lead to a performance improvement of 4.3%, and incor-
+pendix. for more analysis.                                                     porating a limited vocabulary can further enhance perfor-
+                                                                               mance by 3.3%. OCR solely recognizes image information,
+5.4. Efficiency-Performance Trade-off                                          while captioning and VQA require processing and logical
+   @M ODEL exhibits a favorable balance between effi-                          reasoning of image information to obtain reasonable an-
+ciency and performance. As demonstrated in Table 3,                            swers. Therefore, when integrating tasks at different gran-
+@M ODEL and the small version of Unified-IO have a                             ularities, such as “relatively simple” OCR and “more com-
+similar number of parameters, yet @M ODEL outperforms                          plex” captioning into one model, it is suggested to carefully
+Unified-IO (S) in all tasks they have in common, and sur-                      select different tokenizers and vocabularies to achieve the
+pass the basic version of Unified-IO. In Table 4, with al-                     best performance on each task.
+most the same number of parameters, the performance
+of @M ODEL is better than many single-task SoTA mod-                           6. Discussion
+els without pre-training. This further demonstrates that                       Qualitative Analysis of User Study. Guided by the
+@M ODEL can achieve the SoTA level on multiple tasks                           human-in-the-loop user study, we create the benchmark
+with fewer parameters, which is crucial for ATs with lim-                      @B ENCH. Score potential functions from multiple per-
+ited computational capacity.                                                   spectives to ensure the selected functions and tasks are rea-
+                                                                               sonable and important to PVIs. The five tasks in @B ENCH
+5.5. Ablation Study
+                                                                               are closely related to these functions and are one of the
+    To dive deep into the model design and to investigate the                  ways to achieve these functions. Furthermore, based on
+effect of the proposed method, we conduct ablation studies                     these tasks implemented by @M ODEL, we are prepared to
+of the task-specific prompt, the tokenizer and vocabularies.                   carry out further assistive function development in the fu-
+From Task-specific Prompt to Unified Input. As shown                           ture, such as indoor obstacle avoidance, text recognition,
+in Table 5, the “image + prompt” training paradigm is                          common objects detection, initial understanding of unfamil-
+demonstrated to be more concise and compatible with a                          iar scenes, etc.
+wider range of tasks, outperforming multi-output heads                             Additionally, we analyze the comments given by the
+training across all tasks. While there isn’t a significant dif-                blind user and list a few. About OCR, “Usability by com-
+ference in the number of parameters between the two ap-                        pletely blind people would be very important to me. Ex-
+proaches, one potential advantage of prompt-based training                     isting systems of this type have difficulty selecting the right
+is its ability to use prompts to differentiate between various                 target. Text recognition on a document in front of me or on
+tasks during training earlier. This enables the model to ex-                   packaging in my hand is also very possible with a smart-
+tract distinct features for each task, leading to varied and                   phone. However, if the function is able to read door signs,
+improved results. During multi-output head training, mod-                      hanging posters or street signs that are not within direct
+els extract mixed features, and only the final output head                     reach, that would be an extremely useful function.”. Ac-
+is used to decode corresponding features for different tasks.                  cording to the scores in the questionnaire and comments,
+Besides, advanced output heads should be added when mak-                       PVIs attach great importance to text recognition, especially
+
+
+
+                                                                           3940
+                                           PS           DE                             OCR                                 IC             VQA
+
+Method                         Type     ADE-150 NYU-V2 IC13 IC15 SVT IIIT5K SVTP CUTE avg                           VizWiz Cap         VizWiz VQA #Params
+
+                                           PQ       RMSE ↓                           Acc (%)                        B@1 CIDEr           Acc (%)
+
+X-Decoder (our impl.)       original      37.7           –        –      –    –        –        –      –      –     57.8        46.8       –        62M
+
+X-Decoder (our impl.)    multi-head       38.1          0.432    89.6   68.3 80.5     84.4     73.0   77.1   79.4   59.5        50.0       –        63M
+
+Ours                    task-prompt       38.5          0.425    90.2   68.7 81.1     84.9     73.8   77.8   80.1   61.0        52.5      53.7      62M
+
+
+Table 5. Ablation study of task-specific prompt in @M ODEL. “our impl.” means our implement based on the original paper, “multi-head”
+means we add multiple output heads (a 3-layer MLP for each task) to the original model to achieve different tasks on @B ENCH.
+
+
+
+Tokenizer     Vocabulary       IC13 IC15 SVT IIIT5K SVTP CUTE Avg.                  ployment. Going back to the user study, we came up with
+                                                                                    the idea for work precisely because we understood the dif-
+sub    ch   complete limited                     Acc (%)                            ficulties that PVIs encounter in daily life. Existing assistive
+                                                                                    systems generally can only implement one or a few func-
+✓              ✓                95.1 73.5 90.1   82.2     84.5   81.6 82.4
+                                                                                    tions. A future work is to implement a multi-functional as-
+       ✓       ✓                95.8 80.0 90.0   87.5     85.0   90.0 86.7          sistive system based on @M ODEL. More discussions locate
+                                                                                    in the supplementary material.
+       ✓                ✓       97.1 84.4 92.6   90.3     88.7   93.1 90.0
+
+
+Table 6. Ablation study of tokenizer and vocabulary for task
+text recognition. “sub” and “ch” denote subword-based and                           7. Conclusion
+character-based, respectively.
+                                                                                       In this work, we introduce @B ENCH, a multi-modal,
+                                                                                    multi-task, multi-dimension benchmark for the evaluation
+in some special scenarios. Therefore, unlike other general-                         of generalist VLMs that can empower assistive technology
+ist models that ignore OCR task, @B ENCH contains OCR                               and help PVIs. Based on the human-in-the-loop user study
+task and introduce multiple OCR datasets, covering various                          with the target group, our @B ENCH not only considers 5
+text scenarios. About object recognition, “This is a func-                          practical tasks closely related to the daily lives of PVIs, but
+tion I would definitely expect!”, “It would be important, on                        also takes into account the efficiency guideline for VLMs.
+the one hand, to have a high level of reliability of recogni-                       Furthermore, we present a unified and multi-task @M ODEL
+tion and, on the other hand, to be able to determine, even                          to address the multiple vision-language tasks. Thanks to the
+for completely blind people, that the correct object is be-                         unified task-specific prompt design, our model can use one
+ing recognized.”. By introducing multi-category ADE20K                              suit of parameters to address all 5 tasks and achieve com-
+and combining panoptic segmentation, @M ODEL can rec-                               petitive results. Extensive experiments and qualitative anal-
+ognize a large number of stuffs and things, compared with                           ysis prove the effectiveness of the proposed @B ENCH and
+detection, semantic segmentation. At the same time, the                             @M ODEL in helping PVIs. We hope this work can pro-
+more categories of objects are recognized, the accuracy of                          vide inspiration for the design of next-generation assistive
+recognition will increase and the recognition will be more                          systems for helping PVIs.
+reliable. In sum, these positive comments and great sugges-
+tions inspire our work and provide guidance for future work                         Acknowledgment. This work was supported in part by
+of exploring VLMs for assistive technology.                                         the Ministry of Science, Research and the Arts of Baden-
+Future Directions. The extensive quantitative and qual-                             Wurttemberg (MWK) through the Cooperative Graduate
+itative results have demonstrated the strong effectiveness                          School Accessibility through AI-based Assistive Technol-
+and efficiency of our @M ODEL for a variety of assistance-                          ogy (KATE) under Grant BW6-03, in part by the Federal
+related tasks at different granularities. Upon the current,                         Ministry of Education and Research (BMBF) through a fel-
+we see two directions worth future explorations: (1) Pre-                           lowship within the IFI program of the German Academic
+training. Currently, we did not perform pre-training and                            Exchange Service (DAAD), and in part by Future Mobility
+@M ODEL can reach a level close to the pre-trained SoTA.                            Grants from InnovationCampus Future Mobility (ICM). We
+We believe that after pre-training, @M ODEL can achieve                             thank HoreKA@KIT, HAICORE@KIT, and bwHPC super-
+higher performance. (2) Functions development and de-                               computer partitions.
+
+
+
+                                                                              3941
+References                                                              [15] Dimosthenis Karatzas, Faisal Shafait, Seiichi Uchida,
+                                                                             Masakazu Iwamura, Lluis Gomez i Bigorda, Sergi Robles
+ [1] Aitor Aladren, Gonzalo López-Nicolás, Luis Puig, and                  Mestre, Joan Mas, David Fernandez Mota, Jon Almazan Al-
+     Josechu J Guerrero. Navigation assistance for the visually              mazan, and Lluis Pere De Las Heras. Icdar 2013 robust read-
+     impaired using rgb-d sensor with range expansion. IEEE                  ing competition. In 2013 12th international conference on
+     Systems Journal, 2014. 1, 2                                             document analysis and recognition. IEEE, 2013. 4
+ [2] Reza Akbarian Bafghi and Danna Gurari. A new dataset
+                                                                        [16] Vahid Kazemi and Ali Elqursh. Show, ask, attend, and an-
+     based on images taken by blind people for testing the ro-
+                                                                             swer: A strong baseline for visual question answering. arXiv
+     bustness of image classification models trained for imagenet
+                                                                             preprint arXiv:1704.03162, 2017. 6
+     categories. In CVPR, 2023. 2
+                                                                        [17] Doyeon Kim, Woonghyun Ka, Pyungwhan Ahn, Donggyu
+ [3] Jeffrey P Bigham, Chandrika Jayant, Hanjie Ji, Greg Lit-
+                                                                             Joo, Sehwan Chun, and Junmo Kim. Global-local path net-
+     tle, Andrew Miller, Robert C Miller, Robin Miller, Aubrey
+                                                                             works for monocular depth estimation with vertical cutdepth.
+     Tatarowicz, Brandyn White, Samual White, et al. Vizwiz:
+                                                                             arXiv preprint arXiv:2201.07436, 2022. 6
+     nearly real-time answers to visual questions. In UIST, 2010.
+                                                                        [18] Alexander Kirillov, Kaiming He, Ross Girshick, Carsten
+     2
+                                                                             Rother, and Piotr Dollár. Panoptic segmentation. In CVPR,
+ [4] Xi Chen, Xiao Wang, Soravit Changpinyo, AJ Piergiovanni,
+                                                                             2019. 3
+     Piotr Padlewski, Daniel Salz, Sebastian Goodman, Adam
+     Grycner, Basil Mustafa, Lucas Beyer, et al. Pali: A jointly-       [19] Jin Han Lee, Myung-Kyu Han, Dong Wook Ko, and
+     scaled multilingual language-image model. arXiv preprint                Il Hong Suh. From big to small: Multi-scale local planar
+     arXiv:2209.06794, 2022. 2                                               guidance for monocular depth estimation. arXiv preprint
+                                                                             arXiv:1907.10326, 2019. 6
+ [5] Bowen Cheng, Ishan Misra, Alexander G Schwing, Alexan-
+     der Kirillov, and Rohit Girdhar. Masked-attention mask             [20] Hao Li, Jinguo Zhu, Xiaohu Jiang, Xizhou Zhu, Hongsheng
+     transformer for universal image segmentation. In CVPR,                  Li, Chun Yuan, Xiaohua Wang, Yu Qiao, Xiaogang Wang,
+     2022. 6                                                                 Wenhai Wang, et al. Uni-perceiver v2: A generalist model
+ [6] Bowen Cheng, Alex Schwing, and Alexander Kirillov. Per-                 for large-scale vision and vision-language tasks. In CVPR,
+     pixel classification is not all you need for semantic segmen-           2023. 2
+     tation. NeurIPS, 2021. 6                                           [21] Zhenyu Li, Xuyang Wang, Xianming Liu, and Junjun Jiang.
+ [7] Danna Gurari, Qing Li, Chi Lin, Yinan Zhao, Anhong Guo,                 Binsformer: Revisiting adaptive bins for monocular depth
+     Abigale Stangl, and Jeffrey P Bigham. Vizwiz-priv: A                    estimation. IEEE Transactions on Image Processing, 2024.
+     dataset for recognizing the presence and purpose of pri-                3
+     vate visual information in images taken by blind people. In        [22] Ruiping Liu, Jiaming Zhang, Kunyu Peng, Junwei Zheng,
+     CVPR, 2019. 2                                                           Ke Cao, Yufan Chen, Kailun Yang, and Rainer Stiefelhagen.
+ [8] Danna Gurari, Qing Li, Abigale J Stangl, Anhong Guo, Chi                Open scene understanding: Grounded situation recognition
+     Lin, Kristen Grauman, Jiebo Luo, and Jeffrey P Bigham.                  meets segment anything for helping people with visual im-
+     Vizwiz grand challenge: Answering visual questions from                 pairments. In Proceedings of the IEEE/CVF International
+     blind people. In CVPR, 2018. 1, 2, 4                                    Conference on Computer Vision, pages 1857–1867, 2023. 2
+ [9] Danna Gurari, Yinan Zhao, Meng Zhang, and Nilavra Bhat-            [23] Yuan Liu, Haodong Duan, Yuanhan Zhang, Bo Li, Songyang
+     tacharya. Captioning images taken by people who are blind.              Zhang, Wangbo Zhao, Yike Yuan, Jiaqi Wang, Conghui He,
+     In ECCV. Springer, 2020. 1, 2, 4                                        Ziwei Liu, et al. Mmbench: Is your multi-modal model an
+[10] Yaru Hao, Haoyu Song, Li Dong, Shaohan Huang, Zewen                     all-around player? arXiv preprint arXiv:2307.06281, 2023.
+     Chi, Wenhui Wang, Shuming Ma, and Furu Wei. Lan-                        2, 3
+     guage models are general-purpose interfaces. arXiv preprint        [24] Jiasen Lu, Christopher Clark, Rowan Zellers, Roozbeh Mot-
+     arXiv:2206.06336, 2022. 2                                               taghi, and Aniruddha Kembhavi. Unified-io: A unified
+[11] Lun Huang, Wenmin Wang, Jie Chen, and Xiao-Yong Wei.                    model for vision, language, and multi-modal tasks. arXiv
+     Attention on attention for image captioning. In ICCV, 2019.             preprint arXiv:2206.08916, 2022. 1, 2
+     6                                                                  [25] Pengyuan Lyu, Chengquan Zhang, Shanshan Liu, Meina
+[12] Max Jaderberg, Karen Simonyan, Andrea Vedaldi, and An-                  Qiao, Yangliu Xu, Liang Wu, Kun Yao, Junyu Han, Er-
+     drew Zisserman. Synthetic data and artificial neural net-               rui Ding, and Jingdong Wang. Maskocr: text recognition
+     works for natural scene text recognition. arXiv preprint                with masked encoder-decoder pretraining. arXiv preprint
+     arXiv:1406.2227, 2014. 3                                                arXiv:2206.00311, 2022. 2, 6
+[13] Rachana Jayaram, Shreya Maheshwari, Hemanth C, Sathvik             [26] Anand Mishra, Karteek Alahari, and CV Jawahar. Scene text
+     N Jois, and Dr. Mamatha H.R. Cross-attention with self-                 recognition using higher order language priors. In BMVC.
+     attention for vizwiz vqa. In CVPR, 2021. 6                              BMVA, 2012. 4
+[14] Dimosthenis Karatzas, Lluis Gomez-Bigorda, Anguelos                [27] Pushmeet Kohli Nathan Silberman, Derek Hoiem and Rob
+     Nicolaou, Suman Ghosh, Andrew Bagdanov, Masakazu Iwa-                   Fergus. Indoor segmentation and support inference from
+     mura, Jiri Matas, Lukas Neumann, Vijay Ramaseshan Chan-                 rgbd images. In ECCV, 2012. 3
+     drasekhar, Shijian Lu, et al. Icdar 2015 competition on robust     [28] Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing
+     reading. In ICDAR. IEEE, 2015. 4                                        Zhu. Bleu: a method for automatic evaluation of machine
+
+
+
+
+                                                                      3942
+     translation. In Proceedings of the 40th annual meeting of the     [44] Haotian Zhang, Pengchuan Zhang, Xiaowei Hu, Yen-Chun
+     Association for Computational Linguistics, 2002. 4                     Chen, Liunian Li, Xiyang Dai, Lijuan Wang, Lu Yuan, Jenq-
+[29] Trung Quy Phan, Palaiahnakote Shivakumara, Shangxuan                   Neng Hwang, and Jianfeng Gao. Glipv2: Unifying local-
+     Tian, and Chew Lim Tan. Recognizing text with perspec-                 ization and vision-language understanding. NeurIPS, 2022.
+     tive distortion in natural scenes. In ICCV, 2013. 4                    2
+[30] Zhi Qiao, Yu Zhou, Dongbao Yang, Yucan Zhou, and Weip-            [45] Jiaming Zhang, Kailun Yang, Angela Constantinescu, Kunyu
+     ing Wang. Seed: Semantics enhanced encoder-decoder                     Peng, Karin Müller, and Rainer Stiefelhagen. Trans4trans:
+     framework for scene text recognition. In CVPR, 2020. 2,                Efficient transformer for transparent object segmentation to
+     6                                                                      help visually impaired people navigate in the real world. In
+[31] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya                     ICCV, 2021. 1, 2
+     Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry,             [46] Xingli Zhang, Lei Liang, Shenglu Zhao, and Zhihui Wang.
+     Amanda Askell, Pamela Mishkin, Jack Clark, et al. Learn-               Grfb-unet: A new multi-scale attention network with group
+     ing transferable visual models from natural language super-            receptive field block for tactile paving segmentation. Expert
+     vision. In ICML. PMLR, 2021. 2, 5                                      Systems with Applications, 2023. 2
+[32] René Ranftl, Alexey Bochkovskiy, and Vladlen Koltun. Vi-         [47] Junwei Zheng, Ruiping Liu, Yufan Chen, Kunyu Peng,
+     sion transformers for dense prediction. In ICCV, 2021. 6               Chengzhi Wu, Kailun Yang, Jiaming Zhang, and Rainer
+[33] Jarek Reynolds, Chandra Kanth Nagesh, and Danna Gurari.                Stiefelhagen. Open panoramic segmentation. In European
+     Salient object detection for images taken by people with vi-           Conference on Computer Vision, pages 164–182. Springer,
+     sion impairments. arXiv preprint arXiv:2301.05323, 2023.               2025. 3
+     2                                                                 [48] Junwei Zheng, Jiaming Zhang, Kailun Yang, Kunyu Peng,
+[34] Anhar Risnumawan, Palaiahankote Shivakumara, Chee Seng                 and Rainer Stiefelhagen. Materobot: Material recognition
+     Chan, and Chew Lim Tan. A robust arbitrary text detection              in wearable robotics for people with visual impairments. In
+     system for natural scene images. Expert Systems with Appli-            2024 IEEE International Conference on Robotics and Au-
+     cations, 2014. 4                                                       tomation (ICRA), pages 2303–2309. IEEE, 2024. 2
+[35] Baoguang Shi, Mingkun Yang, Xinggang Wang, Pengyuan               [49] Wanjun Zhong, Ruixiang Cui, Yiduo Guo, Yaobo Liang,
+     Lyu, Cong Yao, and Xiang Bai. Aster: An attentional scene              Shuai Lu, Yanlin Wang, Amin Saied, Weizhu Chen, and Nan
+     text recognizer with flexible rectification. TPAMI, 2018. 6            Duan. Agieval: A human-centric benchmark for evaluating
+[36] Lin Su, Nan Duan, Edward Cui, Lei Ji, Chenfei Wu,                      foundation models. arXiv preprint arXiv:2304.06364, 2023.
+     Huaishao Luo, Yongfei Liu, Ming Zhong, Taroon Bharti, and              2, 3
+     Arun Sacheti. Gem: A general evaluation benchmark for             [50] Bolei Zhou, Hang Zhao, Xavier Puig, Tete Xiao, Sanja Fi-
+     multimodal tasks. arXiv preprint arXiv:2106.09889, 2021. 3             dler, Adela Barriuso, and Antonio Torralba. Semantic under-
+[37] Wu Tang, De-er Liu, Xiaoli Zhao, Zenghui Chen, and Chen                standing of scenes through the ade20k dataset. International
+     Zhao. A dataset for the recognition of obstacles on blind              Journal of Computer Vision, 2019. 3
+     sidewalk. Universal Access in the Information Society, 2023.      [51] Wangchunshu Zhou, Yan Zeng, Shizhe Diao, and Xinsong
+     2                                                                      Zhang. Vlue: A multi-task benchmark for evaluating vision-
+[38] Ramakrishna Vedantam, C Lawrence Zitnick, and Devi                     language models. arXiv preprint arXiv:2205.15237, 2022.
+     Parikh. Cider: Consensus-based image description evalua-               3, 4
+     tion. In CVPR, 2015. 4
+                                                                       [52] Xueyan Zou, Zi-Yi Dou, Jianwei Yang, Zhe Gan, Linjie Li,
+[39] Hsueh-Cheng Wang, Robert K Katzschmann, Santani Teng,
+                                                                            Chunyuan Li, Xiyang Dai, Harkirat Behl, Jianfeng Wang,
+     Brandon Araki, Laura Giarré, and Daniela Rus. Enabling
+                                                                            Lu Yuan, et al. Generalized decoding for pixel, image, and
+     independent navigation for visually impaired people through
+                                                                            language. In CVPR, 2023. 1, 2, 4
+     a wearable vision-based feedback system. In ICRA. IEEE,
+     2017. 2
+[40] Jianfeng Wang, Zhengyuan Yang, Xiaowei Hu, Linjie Li,
+     Kevin Lin, Zhe Gan, Zicheng Liu, Ce Liu, and Lijuan Wang.
+     Git: A generative image-to-text transformer for vision and
+     language. arXiv preprint arXiv:2205.14100, 2022. 6
+[41] Kai Wang, Boris Babenko, and Serge Belongie. End-to-end
+     scene text recognition. In ICCV. IEEE, 2011. 4
+[42] Peng Wang, An Yang, Rui Men, Junyang Lin, Shuai Bai,
+     Zhikang Li, Jianxin Ma, Chang Zhou, Jingren Zhou, and
+     Hongxia Yang. Ofa: Unifying architectures, tasks, and
+     modalities through a simple sequence-to-sequence learning
+     framework. In ICML. PMLR, 2022. 1, 2
+[43] Qihang Yu, Huiyu Wang, Siyuan Qiao, Maxwell Collins,
+     Yukun Zhu, Hartwig Adam, Alan Yuille, and Liang-Chieh
+     Chen. k-means mask transformer. In ECCV. Springer, 2022.
+     6
+
+
+
+
+                                                                     3943
+
