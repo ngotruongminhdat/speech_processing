@@ -271,6 +271,13 @@ async def main():
                   "giọng nam Thiện Minh" in await page.inner_text("#live"), await page.inner_text("#live"))
             check("nút giọng nam ở trạng thái đang chọn",
                   await page.get_attribute('#optVoice button[data-v="nam"]', "aria-pressed") == "true")
+            tbox = await page.locator("#toast").bounding_box()
+            check("đổi giọng có thông báo nhìn thấy được, hiện cả khi hộp Cài đặt đang mở",
+                  await page.locator("#toast").is_visible() and tbox and tbox["height"] > 10
+                  and await page.evaluate("document.querySelector('#toast').matches(':popover-open')")
+                  and "giọng nam Thiện Minh" in await page.inner_text("#toast"), await page.inner_text("#toast"))
+            check("trang đọc ghi rõ giọng đang phát",
+                  "giọng nam Thiện Minh" in await page.inner_text("#readerByline"), await page.inner_text("#readerByline"))
             await page.keyboard.press("Escape")
 
             await page.evaluate(f"{AUDIO}.currentTime = {{}}".format("%.2f" % (nam[20][0] + 0.4)))
@@ -294,15 +301,32 @@ async def main():
 
         # Phần chưa có giọng đang chọn: phát giọng khác đang có và nói rõ.
         partial = next(((b, u) for b in cat["books"] for u in b.get("units", [])
-                        if u["ready"] and "nam" not in u["voices"] and any(v["id"] == "nam" for v in b["voices"])), None)
+                        if u["ready"] and "nam" not in u["voices"]), None)
         if partial:
             pb, pu = partial
+            print(f"Phần chưa có giọng đang chọn: {pb['title']}")
             await page.evaluate("localStorage.setItem('sn:voice', JSON.stringify('nam'))")
             await page.goto(BASE + f"#/r/{pb['slug']}/{pu['no']}")
             await page.reload(wait_until="load")
             await page.wait_for_function(f"Number.isFinite({AUDIO}.duration)", timeout=20000)
             check("phần chưa có giọng nam thì phát giọng khác và báo bằng lời",
-                  "chưa có giọng nam" in await page.inner_text("#live"), await page.inner_text("#live"))
+                  "chưa có giọng nam Thiện Minh" in await page.inner_text("#live"), await page.inner_text("#live"))
+            check("thông báo đó cũng hiện ra cho người nhìn màn hình",
+                  await page.locator("#toast").is_visible()
+                  and "chưa có giọng nam Thiện Minh" in await page.inner_text("#toast"), await page.inner_text("#toast"))
+            byline = await page.inner_text("#readerByline")
+            check("trang đọc ghi rõ đang phát giọng nào", "giọng" in byline and "Thiện Minh" not in byline, byline)
+            await page.evaluate(f"{AUDIO}.pause()")
+            await page.click("#openSettings")
+            check("hộp Cài đặt giải thích vì sao chưa đổi được giọng",
+                  "chưa có giọng nam Thiện Minh" in await page.inner_text("#voiceInfo"), await page.inner_text("#voiceInfo"))
+            await page.click('#optVoice button[data-v="nu"]')
+            await page.wait_for_timeout(200)
+            want_nu = "nu" in pu["voices"]
+            note = await page.inner_text("#voiceInfo")
+            check("chọn lại giọng khác thì ghi chú cập nhật theo",
+                  (note == "") if want_nu else ("chưa có giọng nữ Ngọc Linh" in note), note or "(trống)")
+            await page.keyboard.press("Escape")
             await page.evaluate(f"{AUDIO}.pause()")
         await page.evaluate("localStorage.removeItem('sn:voice')")
 

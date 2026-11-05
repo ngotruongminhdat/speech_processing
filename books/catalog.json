@@ -35,7 +35,18 @@
       "date": "1942",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
-      "voices": {},
+      "voices": {
+        "nu": {
+          "narrator": "Ngọc Linh, giọng nữ (VieNeu-TTS v3 Turbo, giọng tổng hợp mã nguồn mở)",
+          "units": 1,
+          "duration": 589.09
+        },
+        "nam": {
+          "narrator": "Thiện Minh, giọng nam (VieNeu-TTS v3 Turbo, giọng tổng hợp mã nguồn mở)",
+          "units": 1,
+          "duration": 552.54
+        }
+      },
       "sourceURL": "https://vi.wikisource.org/wiki/D%C6%B0%E1%BB%9Bi_b%C3%B3ng_ho%C3%A0ng_lan",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 516.317,
@@ -96,7 +107,18 @@
       "date": "1938",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
-      "voices": {},
+      "voices": {
+        "nu": {
+          "narrator": "Ngọc Linh, giọng nữ (VieNeu-TTS v3 Turbo, giọng tổng hợp mã nguồn mở)",
+          "units": 1,
+          "duration": 775.33
+        },
+        "nam": {
+          "narrator": "Thiện Minh, giọng nam (VieNeu-TTS v3 Turbo, giọng tổng hợp mã nguồn mở)",
+          "units": 1,
+          "duration": 723.71
+        }
+      },
       "sourceURL": "https://vi.wikisource.org/wiki/Hai_%C4%91%E1%BB%A9a_tr%E1%BA%BB",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 693.133,

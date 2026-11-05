@@ -18,6 +18,8 @@
      dùng, không thông báo theo từng câu để khỏi nói đè lên giọng đọc sách. -->
 <div id="live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="progress" aria-hidden="true"></div>
+<!-- Bản nhìn thấy được của các thông báo, cho người còn nhìn được màn hình. -->
+<div id="toast" popover="manual" aria-hidden="true"></div>
 
 <!-- ============ THƯ VIỆN ============ -->
 <div id="view-library" class="view">
@@ -130,6 +132,7 @@
       <button type="button" data-v="nu">Giọng nữ Ngọc Linh</button>
       <button type="button" data-v="nam">Giọng nam Thiện Minh</button>
     </div>
+    <div class="sleep-info" id="voiceInfo"></div>
     <h3 id="l-size">Cỡ chữ</h3>
     <div class="set-row" id="optSize" role="group" aria-labelledby="l-size">
       <button type="button" data-v="0.9" aria-label="Chữ nhỏ">A−</button>
