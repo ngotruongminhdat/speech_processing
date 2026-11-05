@@ -286,7 +286,7 @@
    "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 10023.486,
+   "duration": 10128.851,
    "voices": [
     {
      "id": "nu",
@@ -594,13 +594,18 @@
      "no": 16,
      "label": "Tắt đèn",
      "title": "Chương 16",
-     "duration": 305.343,
+     "duration": 344.78,
      "ready": true,
      "voices": {
-      "piper": {
-       "data": "books/tat-den/piper/16.json",
-       "audio": "books/tat-den/piper/16.mp3",
-       "duration": 305.343
+      "nu": {
+       "data": "books/tat-den/nu/16.json",
+       "audio": "books/tat-den/nu/16.mp3",
+       "duration": 344.78
+      },
+      "nam": {
+       "data": "books/tat-den/nam/16.json",
+       "audio": "books/tat-den/nam/16.mp3",
+       "duration": 321.14
       }
      }
     },
@@ -608,13 +613,18 @@
      "no": 17,
      "label": "Tắt đèn",
      "title": "Chương 17",
-     "duration": 228.792,
+     "duration": 252.11,
      "ready": true,
      "voices": {
-      "piper": {
-       "data": "books/tat-den/piper/17.json",
-       "audio": "books/tat-den/piper/17.mp3",
-       "duration": 228.792
+      "nu": {
+       "data": "books/tat-den/nu/17.json",
+       "audio": "books/tat-den/nu/17.mp3",
+       "duration": 252.11
+      },
+      "nam": {
+       "data": "books/tat-den/nam/17.json",
+       "audio": "books/tat-den/nam/17.mp3",
+       "duration": 237.31
       }
      }
     },
@@ -622,13 +632,18 @@
      "no": 18,
      "label": "Tắt đèn",
      "title": "Chương 18",
-     "duration": 334.51,
+     "duration": 377.12,
      "ready": true,
      "voices": {
-      "piper": {
-       "data": "books/tat-den/piper/18.json",
-       "audio": "books/tat-den/piper/18.mp3",
-       "duration": 334.51
+      "nu": {
+       "data": "books/tat-den/nu/18.json",
+       "audio": "books/tat-den/nu/18.mp3",
+       "duration": 377.12
+      },
+      "nam": {
+       "data": "books/tat-den/nam/18.json",
+       "audio": "books/tat-den/nam/18.mp3",
+       "duration": 351.52
       }
      }
     },
@@ -762,15 +777,15 @@
    "daisy": {
     "nu": {
      "url": "books/tat-den/tat-den-daisy-nu.zip",
-     "size": "31 MB"
+     "size": "36 MB"
     },
     "nam": {
      "url": "books/tat-den/tat-den-daisy-nam.zip",
-     "size": "28 MB"
+     "size": "33 MB"
     },
     "piper": {
      "url": "books/tat-den/tat-den-daisy-piper.zip",
-     "size": "21 MB"
+     "size": "16 MB"
     }
    }
   },
