@@ -49,15 +49,20 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Chuyến về thăm bà của Thanh, và những rung động trong trẻo dưới bóng cây hoàng lan.",
    "date": "1942",
-   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
    "sourceURL": "https://vi.wikisource.org/wiki/D%C6%B0%E1%BB%9Bi_b%C3%B3ng_ho%C3%A0ng_lan",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 516.317,
+   "duration": 589.09,
    "voices": [
     {
-     "id": "piper",
-     "label": "Giọng dự phòng",
-     "name": "Piper"
+     "id": "nu",
+     "label": "Giọng nữ",
+     "name": "Ngọc Linh"
+    },
+    {
+     "id": "nam",
+     "label": "Giọng nam",
+     "name": "Thiện Minh"
     }
    ],
    "units": [
@@ -65,20 +70,29 @@
      "no": 1,
      "label": "Dưới bóng hoàng lan",
      "title": "Dưới bóng hoàng lan",
-     "duration": 516.317,
+     "duration": 589.09,
      "ready": true,
      "voices": {
-      "piper": {
-       "data": "books/duoi-bong-hoang-lan/piper/01.json",
-       "audio": "books/duoi-bong-hoang-lan/piper/01.mp3",
-       "duration": 516.317
+      "nu": {
+       "data": "books/duoi-bong-hoang-lan/nu/01.json",
+       "audio": "books/duoi-bong-hoang-lan/nu/01.mp3",
+       "duration": 589.09
+      },
+      "nam": {
+       "data": "books/duoi-bong-hoang-lan/nam/01.json",
+       "audio": "books/duoi-bong-hoang-lan/nam/01.mp3",
+       "duration": 552.54
       }
      }
     }
    ],
    "daisy": {
-    "piper": {
-     "url": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy-piper.zip",
+    "nu": {
+     "url": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy-nu.zip",
+     "size": "2.9 MB"
+    },
+    "nam": {
+     "url": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy-nam.zip",
      "size": "2.7 MB"
     }
    }
