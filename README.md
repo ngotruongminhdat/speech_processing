@@ -1,24 +1,71 @@
-# Ứng dụng đọc sách tiếng Việt cho người khiếm thị trên thiết bị di động
+# Sách Nói — ứng dụng đọc sách tiếng Việt cho người khiếm thị
 
-Đồ án cuối kỳ môn Xử lý tiếng nói (branch `final_project`).
+Đồ án cuối kỳ môn Xử lý tiếng nói (branch `final_project`), kế thừa đồ án giữa kỳ (branch `mid_term_project`, sách nói DAISY của Totto-chan).
+
+**Dùng thử:** https://ngotruongminhdat.github.io/speech_processing/
+
+Thư viện sách nói theo chuẩn DAISY 3, nghe trên trình duyệt điện thoại: văn bản tô sáng theo từng câu, nút lớn, đọc được bằng trình đọc màn hình, điều khiển từ màn hình khóa, nhớ chỗ đang nghe, lưu sách để nghe khi mất mạng.
+
+## Dòng dữ liệu
+
+```
+Wikisource (phạm vi công cộng)
+   │  import_wikisource.py        văn bản sạch, mỗi đoạn một id
+   ▼
+books/<slug>/build/chapter_NN/segments.json + dtbook.xml
+   │  tts_chapter_piper.py        giọng đọc Piper chạy trên CPU, mốc đoạn + mốc câu
+   │  gen_smil.py, gen_opf_ncx.py DAISY 3: SMIL, OPF, NCX
+   │  validate_daisy.py           kiểm tra chéo
+   ▼
+build_site.py ──► site/ ──► deploy_site.py ──► GitHub Pages (branch gh-pages)
+```
 
 ## Cấu trúc
 
-| Thư mục | Nội dung | Rubric |
+| Thư mục | Nội dung | Mục chấm điểm |
 |---|---|---|
-| `literature/papers/` | PDF các bài báo (Q1/Q2, CORE A/A*) | 30% |
-| `literature/notes/` | Tóm tắt, phân tích ưu/nhược từng bài | 30% |
-| `demo/` | Pipeline OCR → chuẩn hóa → TTS chạy bằng code mở | 20% |
-| `app/` | Ứng dụng di động (client) + backend FastAPI | 30% |
-| `report/` | Báo cáo cuối kỳ, slide, số liệu đánh giá | 20% |
+| `literature/` | PDF và ghi chú 8 bài báo, khảo sát trong nước, bảng so sánh | Tổng quan 30% |
+| `demo/` | Đo tốc độ TTS trên CPU và độ rõ qua ASR | Demo 20% |
+| `pipeline/scripts/` | Nhập sách, TTS, sinh DAISY, lắp trang web, deploy | Demo 20% |
+| `app/web/` | Ứng dụng web: thư viện, trang bìa, trình phát | App 30% |
+| `app/tests/` | 46 kiểm thử đầu-cuối bằng Chromium, máy chủ thử | App 30% |
+| `books/` | Metadata từng cuốn, danh mục, căn cứ bản quyền | – |
+| `report/` | So sánh TTS, nhật ký quyết định, bảng số liệu | Phân tích 20% |
 
-## Pipeline
+Audio, mô hình và trang đã lắp (`books/*/build/`, `models/`, `site/`) không nằm trong git; dựng lại bằng các lệnh dưới đây.
 
+## Chạy
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install piper-tts lameenc numpy mutagen edge-tts          # dựng sách
+.venv/bin/pip install playwright faster-whisper jiwer pillow            # kiểm thử và đo đạc
+
+# giọng đọc: tải vi_VN-vais1000-medium.onnx và .onnx.json từ
+# https://huggingface.co/rhasspy/piper-voices/tree/main/vi/vi_VN/vais1000/medium vào models/piper/
+
+# thêm một cuốn sách thuộc phạm vi công cộng rồi dựng
+python3 pipeline/scripts/import_wikisource.py --slug lao-hac --author "Nam Cao" --year 1943 "Lão Hạc"
+.venv/bin/python pipeline/scripts/build_book.py lao-hac
+
+# thử trên máy (máy chủ này hỗ trợ HTTP Range, cần để tua audio)
+python3 pipeline/scripts/build_site.py
+python3 app/tests/serve.py 8931 &
+.venv/bin/python app/tests/e2e.py http://127.0.0.1:8931/
+
+# deploy: chạy lại mỗi khi xong thêm một chương hay một cuốn
+python3 pipeline/scripts/deploy_site.py
 ```
-Ảnh trang sách (camera) → OCR tiếng Việt → Chuẩn hóa văn bản → TTS tiếng Việt → Phát audio + điều khiển trợ năng
-```
 
-## Môi trường
+## Phần kế thừa và phần làm mới
 
-- Python 3.12, `.venv/` ở thư mục gốc
-- Máy dev: CPU 16 nhân, 62 GB RAM, GPU AMD Vega tích hợp (không có CUDA) → ưu tiên mô hình chạy CPU hoặc API
+| | Giữa kỳ | Cuối kỳ |
+|---|---|---|
+| Sách | 1 cuốn (Totto-chan) | Thư viện, thêm sách bằng 2 lệnh |
+| Giọng đọc | edge-tts, dịch vụ ngoài | Piper chạy trên CPU, nhanh gấp 27–40 lần thời gian thực |
+| Đồng bộ | Mức đoạn | Mức câu |
+| Trình phát | Trang HTML sinh sẵn cho từng chương, thanh phát tràn trên điện thoại | Một ứng dụng, thiết kế cho điện thoại và trình đọc màn hình |
+| Ngoại tuyến | Không | Lưu sách trên máy, cài lên màn hình chính |
+| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 46 kiểm thử giao diện trên trình duyệt thật |
+
+Script sinh DAISY (`gen_smil.py`, `gen_opf_ncx.py`, `validate_daisy.py`, `extract_chapter.py`) và ngôn ngữ thiết kế giao diện lấy từ giữa kỳ. Xem `report/decisions.md` cho lý do của từng quyết định và `PLAN.md` cho việc còn lại.

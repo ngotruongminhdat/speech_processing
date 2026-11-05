@@ -132,7 +132,7 @@
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
       "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-      "duration": 3464.71,
+      "duration": 6240.635,
       "units": [
         {
           "no": 1,
@@ -214,6 +214,87 @@
           "segments": 37,
           "path": "tat-den/build/chapter_09",
           "audio": "chuong09.mp3"
+        },
+        {
+          "no": 10,
+          "label": "Tắt đèn",
+          "title": "Chương 10",
+          "duration": 310.763,
+          "segments": 47,
+          "path": "tat-den/build/chapter_10",
+          "audio": "chuong10.mp3"
+        },
+        {
+          "no": 11,
+          "label": "Tắt đèn",
+          "title": "Chương 11",
+          "duration": 371.318,
+          "segments": 44,
+          "path": "tat-den/build/chapter_11",
+          "audio": "chuong11.mp3"
+        },
+        {
+          "no": 12,
+          "label": "Tắt đèn",
+          "title": "Chương 12",
+          "duration": 214.344,
+          "segments": 38,
+          "path": "tat-den/build/chapter_12",
+          "audio": "chuong12.mp3"
+        },
+        {
+          "no": 13,
+          "label": "Tắt đèn",
+          "title": "Chương 13",
+          "duration": 263.188,
+          "segments": 51,
+          "path": "tat-den/build/chapter_13",
+          "audio": "chuong13.mp3"
+        },
+        {
+          "no": 14,
+          "label": "Tắt đèn",
+          "title": "Chương 14",
+          "duration": 390.355,
+          "segments": 62,
+          "path": "tat-den/build/chapter_14",
+          "audio": "chuong14.mp3"
+        },
+        {
+          "no": 15,
+          "label": "Tắt đèn",
+          "title": "Chương 15",
+          "duration": 357.312,
+          "segments": 46,
+          "path": "tat-den/build/chapter_15",
+          "audio": "chuong15.mp3"
+        },
+        {
+          "no": 16,
+          "label": "Tắt đèn",
+          "title": "Chương 16",
+          "duration": 305.343,
+          "segments": 30,
+          "path": "tat-den/build/chapter_16",
+          "audio": "chuong16.mp3"
+        },
+        {
+          "no": 17,
+          "label": "Tắt đèn",
+          "title": "Chương 17",
+          "duration": 228.792,
+          "segments": 36,
+          "path": "tat-den/build/chapter_17",
+          "audio": "chuong17.mp3"
+        },
+        {
+          "no": 18,
+          "label": "Tắt đèn",
+          "title": "Chương 18",
+          "duration": 334.51,
+          "segments": 49,
+          "path": "tat-den/build/chapter_18",
+          "audio": "chuong18.mp3"
         }
       ]
     }
