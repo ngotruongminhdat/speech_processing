@@ -375,7 +375,11 @@ async function openReader(book, unitNo, keep = null) {
   else if (notice) announce(notice);
   setMediaSession();
   if (keep ? keep.play : store.get('autoplay', '1') === '1') {
-    audio.play().catch(() => announce(`${notice ? notice + ' ' : ''}Nhấn nút Phát để bắt đầu nghe.`));
+    // Chỉ nhắc nhấn Phát khi trình duyệt chặn tự phát. Lệnh phát bị ngắt vì người nghe đã rời
+    // trang đọc hoặc đã mở phần khác (AbortError) thì không nói gì, kẻo đè lên thông báo đang hiện.
+    audio.play().catch((e) => {
+      if (e?.name === 'NotAllowedError' && token === R.token) announce(`${notice ? notice + ' ' : ''}Nhấn nút Phát để bắt đầu nghe.`);
+    });
   }
 }
 
