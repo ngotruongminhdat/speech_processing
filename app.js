@@ -352,9 +352,9 @@ async function openReader(book, unitNo, keep = null) {
 
   // người nghe chọn một giọng mà phần này chưa có: nói rõ đang phát giọng nào
   const want = prefVoice();
-  if (!keep && vid !== want) {
-    announce(`${pickable(book).some((v) => v.id === want) ? 'Phần' : 'Cuốn'} này chưa có ${voiceText(voiceInfo(book, want))}, đang phát ${voiceText(voiceInfo(book, vid))}.`);
-  }
+  const notice = !keep && vid !== want
+    ? `${pickable(book).some((v) => v.id === want) ? 'Phần' : 'Cuốn'} này chưa có ${voiceText(voiceInfo(book, want))}, đang phát ${voiceText(voiceInfo(book, vid))}.`
+    : '';
   refreshVoiceNote();
 
   // tiếp tục từ vị trí cũ nếu đang nghe dở chính phần này. Mốc thời gian của mỗi
@@ -369,9 +369,13 @@ async function openReader(book, unitNo, keep = null) {
     const t = (pos.v ?? vid) === vid ? pos.t : (R.sents[pos.s]?.b ?? 0);
     if (t > 2 && t < dur - 3) R.pendingSeek = t;
   }
+  // nếu sắp có câu "Nghe tiếp từ…" thì gộp ghi chú về giọng vào đó, để câu sau không đè mất câu trước
+  R.seekNote = '';
+  if (notice && R.pendingSeek != null && !R.quietSeek) R.seekNote = notice + ' ';
+  else if (notice) announce(notice);
   setMediaSession();
   if (keep ? keep.play : store.get('autoplay', '1') === '1') {
-    audio.play().catch(() => announce('Nhấn nút Phát để bắt đầu nghe.'));
+    audio.play().catch(() => announce(`${notice ? notice + ' ' : ''}Nhấn nút Phát để bắt đầu nghe.`));
   }
 }
 
@@ -514,8 +518,8 @@ function setPlayUi(playing) {
 audio.addEventListener('loadedmetadata', () => {
   if (R.pendingSeek != null) {
     audio.currentTime = R.pendingSeek;
-    if (!R.quietSeek) announce(`Nghe tiếp từ ${spoken(R.pendingSeek)}.`);
-    R.pendingSeek = null; R.quietSeek = false;
+    if (!R.quietSeek) announce(`${R.seekNote || ''}Nghe tiếp từ ${spoken(R.pendingSeek)}.`);
+    R.pendingSeek = null; R.quietSeek = false; R.seekNote = '';
   }
   tick();
 });
