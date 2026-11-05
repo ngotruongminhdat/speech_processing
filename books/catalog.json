@@ -120,6 +120,102 @@
           "audio": "chuong01.mp3"
         }
       ]
+    },
+    {
+      "slug": "tat-den",
+      "title": "Tắt đèn",
+      "creator": "Ngô Tất Tố",
+      "subject": "Văn học & Tiểu thuyết",
+      "description": "Tiểu thuyết hiện thực về chị Dậu và gia đình nông dân nghèo trong mùa sưu thuế ở làng Đông Xá, một trong những tác phẩm tiêu biểu của văn học Việt Nam trước 1945.",
+      "date": "1936",
+      "language": "vi",
+      "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
+      "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+      "duration": 3464.71,
+      "units": [
+        {
+          "no": 1,
+          "label": "Tắt đèn",
+          "title": "Chương 1",
+          "duration": 379.962,
+          "segments": 43,
+          "path": "tat-den/build/chapter_01",
+          "audio": "chuong01.mp3"
+        },
+        {
+          "no": 2,
+          "label": "Tắt đèn",
+          "title": "Chương 2",
+          "duration": 357.32,
+          "segments": 60,
+          "path": "tat-den/build/chapter_02",
+          "audio": "chuong02.mp3"
+        },
+        {
+          "no": 3,
+          "label": "Tắt đèn",
+          "title": "Chương 3",
+          "duration": 386.966,
+          "segments": 51,
+          "path": "tat-den/build/chapter_03",
+          "audio": "chuong03.mp3"
+        },
+        {
+          "no": 4,
+          "label": "Tắt đèn",
+          "title": "Chương 4",
+          "duration": 435.998,
+          "segments": 75,
+          "path": "tat-den/build/chapter_04",
+          "audio": "chuong04.mp3"
+        },
+        {
+          "no": 5,
+          "label": "Tắt đèn",
+          "title": "Chương 5",
+          "duration": 564.581,
+          "segments": 85,
+          "path": "tat-den/build/chapter_05",
+          "audio": "chuong05.mp3"
+        },
+        {
+          "no": 6,
+          "label": "Tắt đèn",
+          "title": "Chương 6",
+          "duration": 417.354,
+          "segments": 66,
+          "path": "tat-den/build/chapter_06",
+          "audio": "chuong06.mp3"
+        },
+        {
+          "no": 7,
+          "label": "Tắt đèn",
+          "title": "Chương 7",
+          "duration": 397.527,
+          "segments": 71,
+          "path": "tat-den/build/chapter_07",
+          "audio": "chuong07.mp3"
+        },
+        {
+          "no": 8,
+          "label": "Tắt đèn",
+          "title": "Chương 8",
+          "duration": 366.599,
+          "segments": 63,
+          "path": "tat-den/build/chapter_08",
+          "audio": "chuong08.mp3"
+        },
+        {
+          "no": 9,
+          "label": "Tắt đèn",
+          "title": "Chương 9",
+          "duration": 158.403,
+          "segments": 37,
+          "path": "tat-den/build/chapter_09",
+          "audio": "chuong09.mp3"
+        }
+      ]
     }
   ]
 }

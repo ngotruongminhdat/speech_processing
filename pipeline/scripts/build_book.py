@@ -12,6 +12,7 @@ Usage:
   .venv/bin/python pipeline/scripts/build_book.py lao-hac
   .venv/bin/python pipeline/scripts/build_book.py lao-hac --engine edge
   .venv/bin/python pipeline/scripts/build_book.py lao-hac --skip-tts
+  .venv/bin/python pipeline/scripts/build_book.py tat-den --only 1-9      # dựng dần từng đợt
 """
 import argparse
 import json
@@ -33,6 +34,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("slug")
     ap.add_argument("--skip-tts", action="store_true")
+    ap.add_argument("--only", metavar="A-B", help="chỉ dựng các phần từ A đến B, ví dụ 1-9 (để deploy dần)")
     ap.add_argument("--engine", choices=["piper", "edge"], default="piper")
     ap.add_argument("--voice", help="mặc định: vi_VN-vais1000-medium (piper) / vi-VN-HoaiMyNeural (edge)")
     a = ap.parse_args()
@@ -44,6 +46,9 @@ if __name__ == "__main__":
                    if (p / "segments.json").exists())
     if not units:
         sys.exit(f"Không có đơn vị nào trong {book_root / 'build'} — chạy import_wikisource.py trước.")
+    if a.only:
+        lo, _, hi = a.only.partition("-")
+        units = [n for n in units if int(lo) <= n <= int(hi or lo)]
 
     env = {**os.environ, "DAISY_BOOK_ROOT": str(book_root)}
     for no in units:

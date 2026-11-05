@@ -196,6 +196,41 @@ async def main():
             check(f"{route}: mọi nút và liên kết đều có tên, đúng một tiêu đề chính", not unnamed and h1 == 1,
                   f"thiếu tên: {unnamed}" if unnamed else f"h1={h1}")
 
+        # Sách nhiều phần (nếu thư viện có): mục lục, phần chưa có audio, tự sang phần sau.
+        cat = await page.evaluate("fetch('catalog.json').then(r => r.json())")
+        multi = next((b for b in cat["books"] if len(b.get("units", [])) > 1), None)
+        if multi:
+            print(f"Sách nhiều phần: {multi['title']}")
+            ms, units = multi["slug"], multi["units"]
+            ready = [u for u in units if u["ready"]]
+            todo = [u for u in units if not u["ready"]]
+            await page.goto(BASE + f"#/b/{ms}")
+            await page.wait_for_selector(".toc-card li")
+            check("mục lục liệt kê đủ mọi phần", await page.locator(".toc-card li").count() == len(units), f"{len(units)} phần")
+            check("phần chưa có audio hiện là đang chuẩn bị, không bấm được",
+                  await page.locator(".toc-card li.todo").count() == len(todo)
+                  and await page.locator(".toc-card li.todo a").count() == 0, f"{len(todo)} phần chờ")
+            if len(ready) >= 2:
+                a, b = ready[0], ready[1]
+                await page.evaluate("localStorage.setItem('sn:rate', '1')")
+                await page.goto(BASE + f"#/r/{ms}/{a['no']}")
+                # chờ đúng audio của phần này nạp xong (audio của trang trước có thể còn đó)
+                await page.wait_for_function(
+                    f"{AUDIO}.currentSrc.endsWith('{a['audio']}') && Number.isFinite({AUDIO}.duration)", timeout=20000)
+                check("trang đọc hiện đúng tên phần", await page.inner_text("#h-reader") == a["title"])
+                await page.evaluate(f"{AUDIO}.currentTime = {AUDIO}.duration - 1.0; {AUDIO}.play()")
+                await page.wait_for_function(f"location.hash.endsWith('/{b['no']}')", timeout=15000)
+                await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentTime > 0.3", timeout=20000)
+                check("nghe hết một phần thì tự sang phần sau và phát tiếp",
+                      await page.inner_text("#h-reader") == b["title"])
+                seen = await page.evaluate(f"JSON.parse(localStorage.getItem('sn:seen:{ms}') || '[]')")
+                check("phần vừa nghe xong được đánh dấu đã nghe", a["no"] in seen)
+                await page.locator("#h-reader").focus()
+                await page.keyboard.press("BracketLeft")
+                await page.wait_for_function(f"location.hash.endsWith('/{a['no']}')", timeout=5000)
+                check("phím [ quay về phần trước", True)
+                await page.evaluate(f"{AUDIO}.pause()")
+
         print("Lưu ngoại tuyến")
         await page.goto(BASE + f"#/b/{SLUG}")
         await page.wait_for_selector("#saveBtn")

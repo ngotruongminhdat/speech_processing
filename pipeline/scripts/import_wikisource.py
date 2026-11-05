@@ -21,7 +21,9 @@ import json
 import os
 import re
 import sys
+import time
 import unicodedata
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -37,8 +39,19 @@ def fetch_page(title: str) -> dict:
         "page": title, "prop": "wikitext|categories", "redirects": 1,
     })
     req = urllib.request.Request(f"{API}?{qs}", headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        data = json.loads(r.read().decode("utf-8"))
+    # Tải thong thả: nghỉ giữa các yêu cầu, và nếu bị giới hạn tần suất (429) thì chờ rồi thử lại.
+    for attempt in range(6):
+        time.sleep(1.5)
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                data = json.loads(r.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as e:
+            if e.code != 429 or attempt == 5:
+                raise
+            wait = int(e.headers.get("Retry-After") or 0) or 10 * (attempt + 1)
+            print(f"   … Wikisource yêu cầu chậm lại, chờ {wait}s", flush=True)
+            time.sleep(wait)
     if "error" in data:
         sys.exit(f"❌ Wikisource: {title!r}: {data['error'].get('info')}")
     return data["parse"]
@@ -62,8 +75,14 @@ def template_body(wikitext: str, name: str):
     return wikitext[m.end(): i - 2]
 
 
+# Template chỉ để trình bày nhưng CÓ mang chữ của tác phẩm, ví dụ {{drop cap|B}}ắt đầu.
+TEXT_TEMPLATES = r"drop cap|dropcap|dc|drop initial|sc|smallcaps|larger|x-larger|smaller|giữa|center|rộng|u"
+
+
 def strip_templates(text: str) -> str:
-    """Bỏ mọi {{...}} còn lại (đầu đề, nhãn bản quyền, chú thích nguồn)."""
+    """Giữ chữ trong các template trình bày, rồi bỏ mọi {{...}} còn lại
+    (đầu đề, nhãn bản quyền, chú thích nguồn)."""
+    text = re.sub(r"\{\{\s*(?:" + TEXT_TEMPLATES + r")\s*\|([^{}|]*)\}\}", r"\1", text, flags=re.I)
     prev = None
     while prev != text:
         prev = text
@@ -108,6 +127,17 @@ def to_paragraphs(wikitext: str):
     return out
 
 
+def roman(text: str) -> int:
+    """Giá trị của số La Mã, hoặc 0 nếu không phải số La Mã."""
+    if not re.fullmatch(r"M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})", text) or not text:
+        return 0
+    vals = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+    total = 0
+    for ch, nxt in zip(text, text[1:] + " "):
+        total += -vals[ch] if nxt in vals and vals[nxt] > vals[ch] else vals[ch]
+    return total
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("pages", nargs="+", help="tên trang Wikisource, mỗi trang là một đơn vị")
@@ -121,11 +151,22 @@ def main():
     a = ap.parse_args()
 
     # Tải và kiểm tra nhãn bản quyền của mọi trang trước khi ghi bất cứ thứ gì ra đĩa.
-    parsed_pages = []
+    parsed_pages, root_ok = [], {}
+
+    def tagged(parsed) -> bool:
+        return any(c["category"].startswith("PVCC") for c in parsed.get("categories", []))
+
     for page in a.pages:
         parsed = fetch_page(page)
-        cats = [c["category"] for c in parsed.get("categories", [])]
-        if not any(c.startswith("PVCC") for c in cats) and not a.allow_untagged:
+        ok = tagged(parsed)
+        if not ok and "/" in page:
+            # Trang con (từng chương) thường không gắn nhãn riêng: nhãn nằm ở trang gốc của tác phẩm.
+            root = page.split("/", 1)[0]
+            if root not in root_ok:
+                root_ok[root] = tagged(fetch_page(root))
+            ok = root_ok[root]
+        if not ok and not a.allow_untagged:
+            cats = [c["category"] for c in parsed.get("categories", [])]
             sys.exit(f"❌ {page!r} không có nhãn phạm vi công cộng (PVCC). Thể loại: {cats}")
         parsed_pages.append(parsed)
 
@@ -160,8 +201,14 @@ def main():
     single = len(a.pages) == 1
     for unit_no, (page, parsed) in enumerate(zip(a.pages, parsed_pages), start=1):
         paras = to_paragraphs(parsed["wikitext"])
-        unit_title = title if single else page.split("/")[-1]
-        label = unit_title if single else f"Chương {unit_no}"
+        tail = page.split("/")[-1]
+        if single:
+            unit_title = label = title
+        elif roman(tail):
+            # Số La Mã mà để nguyên thì TTS đọc thành chữ cái; đổi sang số thường.
+            unit_title, label = f"Chương {roman(tail)}", title
+        else:
+            unit_title, label = tail, f"Chương {unit_no}"
 
         segments = [{"id": "id_1", "type": "h1", "text": unit_title}]
         for kind, text in paras:
