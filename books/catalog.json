@@ -193,8 +193,13 @@
       "voices": {
         "nu": {
           "narrator": "Ngọc Linh, giọng nữ (VieNeu-TTS v3 Turbo, giọng tổng hợp mã nguồn mở)",
-          "units": 1,
-          "duration": 425.37
+          "units": 27,
+          "duration": 10547.4
+        },
+        "nam": {
+          "narrator": "Thiện Minh, giọng nam (VieNeu-TTS v3 Turbo, giọng tổng hợp mã nguồn mở)",
+          "units": 27,
+          "duration": 9851.81
         }
       },
       "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
