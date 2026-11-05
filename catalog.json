@@ -136,7 +136,7 @@
    "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 6240.635,
+   "duration": 9291.226,
    "units": [
     {
      "no": 1,
@@ -304,68 +304,86 @@
      "no": 19,
      "label": "Tắt đèn",
      "title": "Chương 19",
-     "duration": 0,
-     "ready": false
+     "duration": 340.814,
+     "ready": true,
+     "data": "books/tat-den/19.json",
+     "audio": "books/tat-den/19.mp3"
     },
     {
      "no": 20,
      "label": "Tắt đèn",
      "title": "Chương 20",
-     "duration": 0,
-     "ready": false
+     "duration": 418.452,
+     "ready": true,
+     "data": "books/tat-den/20.json",
+     "audio": "books/tat-den/20.mp3"
     },
     {
      "no": 21,
      "label": "Tắt đèn",
      "title": "Chương 21",
-     "duration": 0,
-     "ready": false
+     "duration": 402.739,
+     "ready": true,
+     "data": "books/tat-den/21.json",
+     "audio": "books/tat-den/21.mp3"
     },
     {
      "no": 22,
      "label": "Tắt đèn",
      "title": "Chương 22",
-     "duration": 0,
-     "ready": false
+     "duration": 393.315,
+     "ready": true,
+     "data": "books/tat-den/22.json",
+     "audio": "books/tat-den/22.mp3"
     },
     {
      "no": 23,
      "label": "Tắt đèn",
      "title": "Chương 23",
-     "duration": 0,
-     "ready": false
+     "duration": 286.943,
+     "ready": true,
+     "data": "books/tat-den/23.json",
+     "audio": "books/tat-den/23.mp3"
     },
     {
      "no": 24,
      "label": "Tắt đèn",
      "title": "Chương 24",
-     "duration": 0,
-     "ready": false
+     "duration": 325.203,
+     "ready": true,
+     "data": "books/tat-den/24.json",
+     "audio": "books/tat-den/24.mp3"
     },
     {
      "no": 25,
      "label": "Tắt đèn",
      "title": "Chương 25",
-     "duration": 0,
-     "ready": false
+     "duration": 275.136,
+     "ready": true,
+     "data": "books/tat-den/25.json",
+     "audio": "books/tat-den/25.mp3"
     },
     {
      "no": 26,
      "label": "Tắt đèn",
      "title": "Chương 26",
-     "duration": 0,
-     "ready": false
+     "duration": 389.846,
+     "ready": true,
+     "data": "books/tat-den/26.json",
+     "audio": "books/tat-den/26.mp3"
     },
     {
      "no": 27,
      "label": "Tắt đèn",
      "title": "Chương 27",
-     "duration": 0,
-     "ready": false
+     "duration": 218.143,
+     "ready": true,
+     "data": "books/tat-den/27.json",
+     "audio": "books/tat-den/27.mp3"
     }
    ],
    "daisy": "books/tat-den/tat-den-daisy.zip",
-   "daisySize": "33 MB"
+   "daisySize": "49 MB"
   },
   {
    "slug": "totto-chan",
