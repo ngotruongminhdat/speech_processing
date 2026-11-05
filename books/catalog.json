@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "books": [
+    {
+      "slug": "lao-hac",
+      "title": "Lão Hạc",
+      "creator": "Nam Cao",
+      "subject": "Văn học & Tiểu thuyết",
+      "description": "Truyện ngắn hiện thực về lão Hạc, một lão nông nghèo, cô độc, thà chết chứ không tiêu vào mảnh vườn để dành cho con trai.",
+      "date": "1943",
+      "language": "vi",
+      "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "sourceURL": "https://vi.wikisource.org/wiki/L%C3%A3o_H%E1%BA%A1c",
+      "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+      "duration": 905.097,
+      "units": [
+        {
+          "no": 1,
+          "label": "Lão Hạc",
+          "title": "Lão Hạc",
+          "duration": 905.097,
+          "segments": 77,
+          "path": "lao-hac/build/chapter_01",
+          "audio": "chuong01.mp3"
+        }
+      ]
+    }
+  ]
+}

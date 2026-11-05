@@ -4,7 +4,10 @@ __pycache__/
 *.pyc
 runs/
 .DS_Store
-demo/outputs/
 *.wav
 *.mp3
 literature/papers/txt/
+books/*/build/
+books/*/dist/
+demo/outputs/
+models/
