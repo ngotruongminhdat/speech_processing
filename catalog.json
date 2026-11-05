@@ -214,15 +214,20 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Truyện ngắn hiện thực về lão Hạc, một lão nông nghèo, cô độc, thà chết chứ không tiêu vào mảnh vườn để dành cho con trai.",
    "date": "1943",
-   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
    "sourceURL": "https://vi.wikisource.org/wiki/L%C3%A3o_H%E1%BA%A1c",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 905.097,
+   "duration": 1032.51,
    "voices": [
     {
-     "id": "piper",
-     "label": "Giọng dự phòng",
-     "name": "Piper"
+     "id": "nu",
+     "label": "Giọng nữ",
+     "name": "Ngọc Linh"
+    },
+    {
+     "id": "nam",
+     "label": "Giọng nam",
+     "name": "Thiện Minh"
     }
    ],
    "units": [
@@ -230,21 +235,30 @@
      "no": 1,
      "label": "Lão Hạc",
      "title": "Lão Hạc",
-     "duration": 905.097,
+     "duration": 1032.51,
      "ready": true,
      "voices": {
-      "piper": {
-       "data": "books/lao-hac/piper/01.json",
-       "audio": "books/lao-hac/piper/01.mp3",
-       "duration": 905.097
+      "nu": {
+       "data": "books/lao-hac/nu/01.json",
+       "audio": "books/lao-hac/nu/01.mp3",
+       "duration": 1032.51
+      },
+      "nam": {
+       "data": "books/lao-hac/nam/01.json",
+       "audio": "books/lao-hac/nam/01.mp3",
+       "duration": 967.15
       }
      }
     }
    ],
    "daisy": {
-    "piper": {
-     "url": "books/lao-hac/lao-hac-daisy-piper.zip",
-     "size": "4.9 MB"
+    "nu": {
+     "url": "books/lao-hac/lao-hac-daisy-nu.zip",
+     "size": "5.2 MB"
+    },
+    "nam": {
+     "url": "books/lao-hac/lao-hac-daisy-nam.zip",
+     "size": "4.8 MB"
     }
    }
   },
