@@ -8,6 +8,7 @@ Chạy trên bản đã lắp trong site/ và đang được phục vụ qua HTT
 """
 import asyncio
 import glob
+import json
 import os
 import sys
 
@@ -16,6 +17,15 @@ from playwright.async_api import async_playwright
 BASE = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8931/"
 SLUG = "lao-hac"
 results = []
+
+
+async def spoken_live(page, want, timeout=3000):
+    """Nội dung vùng thông báo, sau khi chờ câu mong đợi xuất hiện (vùng này được xoá rồi ghi lại sau 60 ms)."""
+    try:
+        await page.wait_for_function("w => document.querySelector('#live').textContent.includes(w)", arg=want, timeout=timeout)
+    except Exception:
+        pass
+    return await page.inner_text("#live")
 
 
 def check(name, cond, detail=""):
@@ -103,7 +113,11 @@ async def main():
             ok += 1 if (i > 0 and sents[i][0] - 0.05 <= s["t"] < (sents[i + 1][0] if i + 1 < len(sents) else 1e9)) else 0
         check("câu tô sáng khớp mốc thời gian ở 5 vị trí thử", ok == tried, f"{ok}/{tried}")
 
-        await page.evaluate(f"{AUDIO}.currentTime = 30")
+        # Thử ở giữa hai câu dài liền nhau, để lúc đọc trạng thái không rơi đúng ranh giới câu
+        # (mốc câu khác nhau theo giọng, một mốc thời gian cố định có thể nằm sát ranh giới).
+        k = next(i for i in range(5, len(sents) - 2)
+                 if sents[i][1] - sents[i][0] > 4 and sents[i + 1][1] - sents[i + 1][0] > 4.5)
+        await page.evaluate(f"{AUDIO}.currentTime = {sents[k][0] + 0.8:.2f}")
         await page.wait_for_timeout(300)
         before = await page.evaluate(STATE)
         await page.click("#next")
@@ -234,6 +248,22 @@ async def main():
                 await page.keyboard.press("BracketLeft")
                 await page.wait_for_function(f"location.hash.endsWith('/{a['no']}')", timeout=5000)
                 check("phím [ quay về phần trước", True)
+                await page.wait_for_function(
+                    f"/\\/{a['no']:02d}\\.mp3$/.test({AUDIO}.currentSrc) && Number.isFinite({AUDIO}.duration)", timeout=20000)
+                half = min(a["duration"], b["duration"]) / 2
+                await page.evaluate(f"{AUDIO}.currentTime = {half:.1f}; {AUDIO}.play()")
+                await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentTime > {half:.1f} + 0.3", timeout=20000)
+                await page.locator("#h-reader").focus()
+                await page.keyboard.press("BracketRight")
+                await page.wait_for_function(
+                    f"/\\/{b['no']:02d}\\.mp3$/.test({AUDIO}.currentSrc) && !{AUDIO}.paused && {AUDIO}.currentTime > 0.2", timeout=20000)
+                await page.wait_for_timeout(300)
+                t = await page.evaluate(f"{AUDIO}.currentTime")
+                said = await page.inner_text("#live")
+                check("đang nghe giữa phần mà sang phần sau thì phần sau bắt đầu từ đầu",
+                      t < 8 and "Nghe tiếp từ" not in said, f"t={t:.1f}, {said or '(không thông báo)'}")
+                pos = await page.evaluate(f"JSON.parse(localStorage.getItem('sn:pos:{ms}'))")
+                check("vị trí đã lưu là của phần đang nghe", pos["unit"] == b["no"] and pos["t"] < 8, json.dumps(pos))
                 await page.evaluate(f"{AUDIO}.pause()")
 
         # Chọn giọng đọc: cần một cuốn đã có cả giọng nữ và giọng nam cho phần đầu.
@@ -259,8 +289,12 @@ async def main():
             check("mặc định phát giọng nữ", True)
             nam = await page.evaluate(
                 f"fetch('{u0['voices']['nam']['data']}').then(r=>r.json()).then(d=>d.paras.flatMap(p=>p.s.map(x=>[x[0],x[1]])))")
-            await page.locator(".s").nth(11).scroll_into_view_if_needed()
-            await page.locator(".s").nth(11).click()          # câu số 12
+            nu = await page.evaluate(
+                f"fetch('{u0['voices']['nu']['data']}').then(r=>r.json()).then(d=>d.paras.flatMap(p=>p.s.map(x=>[x[0],x[1]])))")
+            # một câu dài ở cả hai giọng, để lúc bấm đổi giọng vẫn còn trong câu đó dù máy đang chậm
+            K = next(i for i in range(5, len(nu) - 2) if nu[i][1] - nu[i][0] > 6 and nam[i][1] - nam[i][0] > 5)
+            await page.locator(".s").nth(K - 1).scroll_into_view_if_needed()
+            await page.locator(".s").nth(K - 1).click()       # câu số K (câu số 0 là tiêu đề)
             await page.wait_for_timeout(500)
             await page.click("#openSettings")
             await page.click('#optVoice button[data-v="nam"]')
@@ -268,10 +302,10 @@ async def main():
             await page.wait_for_timeout(300)
             s = await page.evaluate(STATE)
             check("đổi sang giọng nam giữa chừng thì nghe tiếp đúng câu đang nghe",
-                  s["on"] == 12 and nam[12][0] - 0.05 <= s["t"] < nam[13][0], f"câu {s['on']}, t={s['t']:.2f}")
+                  s["on"] == K and nam[K][0] - 0.05 <= s["t"] < nam[K + 1][0], f"câu {s['on']} (mong đợi {K}), t={s['t']:.2f}")
             check("đổi giọng không làm dừng phát", not s["paused"])
-            check("đổi giọng được thông báo bằng lời",
-                  "giọng nam Thiện Minh" in await page.inner_text("#live"), await page.inner_text("#live"))
+            said = await spoken_live(page, "giọng nam Thiện Minh")
+            check("đổi giọng được thông báo bằng lời", "giọng nam Thiện Minh" in said, said)
             check("nút giọng nam ở trạng thái đang chọn",
                   await page.get_attribute('#optVoice button[data-v="nam"]', "aria-pressed") == "true")
             tbox = await page.locator("#toast").bounding_box()
@@ -294,6 +328,38 @@ async def main():
             check("vị trí lưu ở giọng nam, mở lại bằng giọng nữ vẫn về đúng câu", s["on"] == 20, f"câu {s['on']}")
             await page.evaluate(f"{AUDIO}.pause()")
 
+            print("Đổi giọng khi audio mới còn đang nạp")
+
+            async def slow(route):
+                await asyncio.sleep(1.5)
+                try:
+                    await route.continue_()
+                except Exception:
+                    pass          # yêu cầu đã bị huỷ vì người nghe đổi sang giọng khác
+
+            await page.evaluate(f"localStorage.removeItem('sn:pos:{vs}')")
+            await page.reload(wait_until="load")
+            await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentSrc.includes('/nu/') && {AUDIO}.currentTime > 0.2", timeout=20000)
+            await page.locator(".s").nth(K - 1).scroll_into_view_if_needed()
+            await page.locator(".s").nth(K - 1).click()
+            await page.wait_for_timeout(600)
+            await page.route("**/nam/*.mp3", slow)
+            await page.click("#openSettings")
+            await page.click('#optVoice button[data-v="nam"]')
+            await page.wait_for_timeout(400)                    # audio giọng nam chưa về tới
+            pos = await page.evaluate(f"JSON.parse(localStorage.getItem('sn:pos:{vs}'))")
+            check("giọng mới chưa nạp xong thì vị trí đã lưu vẫn đúng câu đang nghe",
+                  pos and pos.get("s") == K and (nu if pos.get("v") == "nu" else nam)[K][0] - 0.2 <= pos["t"] < (nu if pos.get("v") == "nu" else nam)[K + 1][0],
+                  json.dumps(pos))
+            await page.click('#optVoice button[data-v="nu"]')   # đổi lại ngay, khi giọng nam chưa nạp xong
+            await page.wait_for_function(f"{AUDIO}.currentSrc.includes('/nu/') && !{AUDIO}.paused && {AUDIO}.currentTime > 1", timeout=20000)
+            await page.wait_for_timeout(300)
+            s = await page.evaluate(STATE)
+            check("đổi giọng qua lại thật nhanh vẫn giữ đúng câu đang nghe", s["on"] == K, f"câu {s['on']} (mong đợi {K}), t={s['t']:.2f}")
+            await page.keyboard.press("Escape")
+            await page.unroute("**/nam/*.mp3")
+            await page.evaluate(f"{AUDIO}.pause()")
+
             await page.goto(BASE + f"#/b/{vs}")
             await page.wait_for_selector(".voice-pick button")
             await page.click('.voice-pick button[data-v="nam"]')
@@ -313,8 +379,8 @@ async def main():
             await page.goto(BASE + f"#/r/{pb['slug']}/{pu['no']}")
             await page.reload(wait_until="load")
             await page.wait_for_function(f"Number.isFinite({AUDIO}.duration)", timeout=20000)
-            check("phần chưa có giọng nam thì phát giọng khác và báo bằng lời",
-                  "chưa có giọng nam Thiện Minh" in await page.inner_text("#live"), await page.inner_text("#live"))
+            said = await spoken_live(page, "chưa có giọng nam Thiện Minh")
+            check("phần chưa có giọng nam thì phát giọng khác và báo bằng lời", "chưa có giọng nam Thiện Minh" in said, said)
             check("thông báo đó cũng hiện ra cho người nhìn màn hình",
                   await page.locator("#toast").is_visible()
                   and "chưa có giọng nam Thiện Minh" in await page.inner_text("#toast"), await page.inner_text("#toast"))
@@ -346,6 +412,24 @@ async def main():
                   "chưa có giọng nam Thiện Minh" in live and "Nghe tiếp từ" in live, live)
             await page.evaluate(f"{AUDIO}.pause()")
         await page.evaluate("localStorage.removeItem('sn:voice')")
+
+        # Lệnh phát bị ngắt (rời trang đọc, mở phần khác) không được hiện lời nhắc nhấn Phát;
+        # chỉ khi trình duyệt chặn tự phát mới nhắc.
+        print("Lời nhắc nhấn Phát")
+        for err, expect in (("AbortError", False), ("NotAllowedError", True)):
+            await page.goto(BASE + "#/")
+            await page.wait_for_function("document.body.dataset.view !== 'reader'")
+            await page.evaluate("document.querySelector('#live').textContent = ''")
+            await page.evaluate(f"""(() => {{ const a = {AUDIO}; const real = a.play;
+                a.play = () => {{ a.play = real; return Promise.reject(new DOMException('thử', '{err}')); }}; }})()""")
+            await page.goto(BASE + f"#/r/{SLUG}/1")
+            await page.wait_for_function(f"{AUDIO}.currentSrc.includes('{SLUG}') && Number.isFinite({AUDIO}.duration)", timeout=20000)
+            await page.wait_for_timeout(400)
+            said = await spoken_live(page, "Nhấn nút Phát", 1500 if expect else 300)
+            check("trình duyệt chặn tự phát thì nhắc nhấn nút Phát" if expect
+                  else "lệnh phát bị ngắt giữa chừng thì không hiện lời nhắc nhấn Phát",
+                  ("Nhấn nút Phát" in said) == expect, said or "(trống)")
+            await page.evaluate(f"{AUDIO}.pause()")
 
         print("Lưu ngoại tuyến")
         await page.goto(BASE + f"#/b/{SLUG}")
