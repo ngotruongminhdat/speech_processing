@@ -58,7 +58,13 @@ function voiceOf(unit, want = prefVoice()) {
   if (v[want]) return want;
   return VOICE_ORDER.find((k) => v[k]) ?? Object.keys(v)[0] ?? null;
 }
-const voiceInfo = (book, id) => (book.voices || []).find((v) => v.id === id) || { id, label: 'Giọng đọc', name: '' };
+const allVoices = () => {
+  const seen = new Map();
+  for (const b of catalog?.books || []) for (const v of b.voices || []) if (!seen.has(v.id)) seen.set(v.id, v);
+  return [...seen.values()];
+};
+const voiceInfo = (book, id) => (book?.voices || []).find((v) => v.id === id)
+  || allVoices().find((v) => v.id === id) || { id, label: 'Giọng đọc', name: '' };
 const voiceText = (v) => `${v.label.toLowerCase()} ${v.name}`.trim();
 const pickable = (book) => (book.voices || []).filter((v) => v.id !== 'piper');
 // giọng thực tế của cả cuốn: giọng đang chọn nếu cuốn này có, không thì giọng đầu tiên có
@@ -87,11 +93,22 @@ const HUES = [14, 205, 285, 40, 170, 335, 100, 240];
 function hue(slug) { const i = catalog ? catalog.books.findIndex((b) => b.slug === slug) : 0; return HUES[(i < 0 ? 0 : i) % HUES.length]; }
 
 let liveTimer;
-function announce(msg) {
+let toastTimer;
+function toast(msg) {
+  const el = $('#toast');
+  el.textContent = msg;
+  // popover nằm ở lớp trên cùng nên hiện được cả khi hộp Cài đặt đang mở
+  el.classList.add('show');
+  try { if (el.matches(':popover-open')) el.hidePopover(); el.showPopover(); } catch { /* trình duyệt cũ: vẫn hiện nhờ lớp show */ }
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { try { el.hidePopover(); } catch { /* không hỗ trợ popover */ } el.classList.remove('show'); }, 4500);
+}
+function announce(msg, visible = true) {
   const el = $('#live');
   el.textContent = '';
   clearTimeout(liveTimer);
   liveTimer = setTimeout(() => { el.textContent = msg; }, 60);
+  if (visible) toast(msg);
 }
 
 function cover(book) {
@@ -153,7 +170,7 @@ function filterLibrary(tell = true) {
       ${b.external ? '<span class="badge">Bản giữa kỳ</span>' : ''}</span></a></li>`;
   }).join('');
   $('#noResult').hidden = books.length > 0;
-  if (tell) announce(books.length ? `${books.length} cuốn khớp.` : 'Không tìm thấy sách nào khớp.');
+  if (tell) announce(books.length ? `${books.length} cuốn khớp.` : 'Không tìm thấy sách nào khớp.', false);
 }
 
 // ================= TRANG BÌA =================
@@ -203,7 +220,7 @@ async function renderBook(book) {
       ${voices.length > 1 ? `<div class="voice-pick" role="group" aria-labelledby="l-bvoice">
         <span id="l-bvoice">Giọng đọc</span>
         ${voices.map((v) => `<button type="button" data-v="${esc(v.id)}" aria-pressed="${v.id === bv}">${esc(v.label)} · ${esc(v.name)}</button>`).join('')}
-      </div>` : ''}
+      </div>` : `<p class="voice-note">Giọng nữ và giọng nam đang được chuẩn bị cho cuốn này. Hiện phát ${esc(voiceText(voiceInfo(book, bv)))}.</p>`}
     </div>`;
 
   $('#bookToc').innerHTML = units.length > 1 ? `
@@ -285,7 +302,8 @@ async function openReader(book, unitNo, keep = null) {
   const many = book.units.length > 1;
   $('#readerKicker').textContent = many ? unit.label : book.subject;
   $('#h-reader').textContent = unit.title;
-  $('#readerByline').textContent = many ? `${book.title} · ${book.creator}` : book.creator;
+  $('#readerByline').textContent = (many ? `${book.title} · ${book.creator}` : book.creator)
+    + (vid ? ` · ${voiceText(voiceInfo(book, vid))}` : '');
   $('#playerTitle').textContent = many ? `${unit.label}: ${unit.title}` : unit.title;
   $('#coverBtn').href = `#/b/${book.slug}`;
   $('#tocBrand').href = `#/b/${book.slug}`;
@@ -334,9 +352,10 @@ async function openReader(book, unitNo, keep = null) {
 
   // người nghe chọn một giọng mà phần này chưa có: nói rõ đang phát giọng nào
   const want = prefVoice();
-  if (!keep && vid !== want && pickable(book).some((v) => v.id === want)) {
-    announce(`Phần này chưa có ${voiceText(voiceInfo(book, want))}, đang phát ${voiceText(voiceInfo(book, vid))}.`);
+  if (!keep && vid !== want) {
+    announce(`${pickable(book).some((v) => v.id === want) ? 'Phần' : 'Cuốn'} này chưa có ${voiceText(voiceInfo(book, want))}, đang phát ${voiceText(voiceInfo(book, vid))}.`);
   }
+  refreshVoiceNote();
 
   // tiếp tục từ vị trí cũ nếu đang nghe dở chính phần này. Mốc thời gian của mỗi
   // giọng khác nhau, nên khi vị trí được lưu ở giọng khác thì quay về đầu câu đã lưu.
@@ -356,6 +375,16 @@ async function openReader(book, unitNo, keep = null) {
   }
 }
 
+// Dòng ghi chú trong hộp Cài đặt: giọng đã chọn có đang thực sự được phát không.
+function refreshVoiceNote() {
+  const note = $('#voiceInfo');
+  const want = prefVoice();
+  const inReader = document.body.dataset.view === 'reader' && R.book && R.unit && R.voice;
+  note.textContent = inReader && R.voice !== want
+    ? `Phần đang nghe chưa có ${voiceText(voiceInfo(R.book, want))}, nên vẫn phát ${voiceText(voiceInfo(R.book, R.voice))}. Giọng mới đang được chuẩn bị.`
+    : '';
+}
+
 // Đổi giọng: áp dụng cho cả thư viện. Nếu đang ở trang đọc thì nạp lại phần đang
 // nghe bằng giọng mới và tiếp tục đúng câu đang nghe.
 function setVoice(vid, tell = true) {
@@ -366,7 +395,7 @@ function setVoice(vid, tell = true) {
   let msg = `Đã chọn ${known ? voiceText(known) : 'giọng đọc'}.`;
   if (view === 'reader' && R.book && R.unit && R.unit.ready !== false) {
     const now = voiceOf(R.unit);
-    if (now !== vid) msg = `Phần này chưa có ${voiceText(voiceInfo(R.book, vid))}, vẫn phát ${voiceText(voiceInfo(R.book, now))}.`;
+    if (now !== vid) msg = `${pickable(R.book).some((v) => v.id === vid) ? 'Phần' : 'Cuốn'} này chưa có ${voiceText(voiceInfo(R.book, vid))}, vẫn phát ${voiceText(voiceInfo(R.book, now))}.`;
     if (now !== R.voice) {
       const sent = R.sents.length ? sentAt(audio.currentTime) : 0;
       openReader(R.book, R.unit.no, { sent, play: !audio.paused });
@@ -375,6 +404,7 @@ function setVoice(vid, tell = true) {
     const book = findBook(decodeURIComponent((location.hash.split('/')[2]) || ''));
     if (book) renderBook(book);
   }
+  refreshVoiceNote();
   if (tell) announce(msg);
 }
 
@@ -619,7 +649,7 @@ setSleep(0, false);
 setVoice(prefVoice(), false);
 $('#optVoice').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setVoice(b.dataset.v); });
 $('#optSleep').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setSleep(Number(b.dataset.v)); });
-$('#openSettings').addEventListener('click', () => $('#settings').showModal());
+$('#openSettings').addEventListener('click', () => { refreshVoiceNote(); $('#settings').showModal(); });
 $('#settings').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });  // chạm ra ngoài để đóng
 
 // ================= ĐỊNH TUYẾN =================
