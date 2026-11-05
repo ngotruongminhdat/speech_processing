@@ -39,7 +39,10 @@ STATE = f"""(() => {{ const a = {AUDIO}; const on = document.querySelector('.s.o
 async def main():
     async with async_playwright() as p:
         browser = await p.chromium.launch(executable_path=chromium_path(),
-                                          args=["--autoplay-policy=no-user-gesture-required"])
+                                          args=["--autoplay-policy=no-user-gesture-required",
+                                                # đầu ra âm thanh giả: không phát ra loa, và đồng hồ phát không
+                                                # bị khựng khi thiết bị âm thanh thật của máy đang bận
+                                                "--disable-audio-output"])
         ctx = await browser.new_context(viewport={"width": 390, "height": 844}, locale="vi-VN",
                                         service_workers="block")
         page = await ctx.new_page()
@@ -306,6 +309,7 @@ async def main():
             pb, pu = partial
             print(f"Phần chưa có giọng đang chọn: {pb['title']}")
             await page.evaluate("localStorage.setItem('sn:voice', JSON.stringify('nam'))")
+            await page.evaluate(f"localStorage.removeItem('sn:pos:{pb['slug']}')")
             await page.goto(BASE + f"#/r/{pb['slug']}/{pu['no']}")
             await page.reload(wait_until="load")
             await page.wait_for_function(f"Number.isFinite({AUDIO}.duration)", timeout=20000)
@@ -327,6 +331,19 @@ async def main():
             check("chọn lại giọng khác thì ghi chú cập nhật theo",
                   (note == "") if want_nu else ("chưa có giọng nữ Ngọc Linh" in note), note or "(trống)")
             await page.keyboard.press("Escape")
+            # đang nghe dở: câu "Nghe tiếp từ…" không được đè mất ghi chú về giọng
+            await page.evaluate("localStorage.setItem('sn:voice', JSON.stringify('nam'))")
+            await page.evaluate(f"{AUDIO}.currentTime = 65")
+            await page.wait_for_timeout(300)
+            await page.evaluate(f"{AUDIO}.pause()")
+            await page.goto(BASE + "#/")
+            await page.wait_for_selector("#resume a")
+            await page.goto(BASE + f"#/r/{pb['slug']}/{pu['no']}")
+            await page.wait_for_function(f"{AUDIO}.currentTime > 60", timeout=20000)
+            await page.wait_for_timeout(300)
+            live = await page.inner_text("#live")
+            check("mở lại cuốn nghe dở: báo cả giọng đang phát lẫn vị trí nghe tiếp",
+                  "chưa có giọng nam Thiện Minh" in live and "Nghe tiếp từ" in live, live)
             await page.evaluate(f"{AUDIO}.pause()")
         await page.evaluate("localStorage.removeItem('sn:voice')")
 
