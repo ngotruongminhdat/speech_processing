@@ -10,6 +10,7 @@
       "date": "1943",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "voices": {},
       "sourceURL": "https://vi.wikisource.org/wiki/C%C3%B4_h%C3%A0ng_x%C3%A9n",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 1196.022,
@@ -34,6 +35,7 @@
       "date": "1942",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "voices": {},
       "sourceURL": "https://vi.wikisource.org/wiki/D%C6%B0%E1%BB%9Bi_b%C3%B3ng_ho%C3%A0ng_lan",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 516.317,
@@ -58,6 +60,18 @@
       "date": "1937",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "voices": {
+        "nu": {
+          "narrator": "Ngọc Linh, giọng nữ (VieNeu-TTS v3 Turbo, giọng tổng hợp mã nguồn mở)",
+          "units": 1,
+          "duration": 545.17
+        },
+        "nam": {
+          "narrator": "Thiện Minh, giọng nam (VieNeu-TTS v3 Turbo, giọng tổng hợp mã nguồn mở)",
+          "units": 1,
+          "duration": 515.8
+        }
+      },
       "sourceURL": "https://vi.wikisource.org/wiki/Gi%C3%B3_l%E1%BA%A1nh_%C4%91%E1%BA%A7u_m%C3%B9a",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 488.727,
@@ -82,6 +96,7 @@
       "date": "1938",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "voices": {},
       "sourceURL": "https://vi.wikisource.org/wiki/Hai_%C4%91%E1%BB%A9a_tr%E1%BA%BB",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 693.133,
@@ -106,6 +121,7 @@
       "date": "1943",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "voices": {},
       "sourceURL": "https://vi.wikisource.org/wiki/L%C3%A3o_H%E1%BA%A1c",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 905.097,
@@ -130,6 +146,7 @@
       "date": "1936",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "voices": {},
       "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 9291.226,

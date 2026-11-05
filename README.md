@@ -13,9 +13,13 @@ Wikisource (phạm vi công cộng)
    │  import_wikisource.py        văn bản sạch, mỗi đoạn một id
    ▼
 books/<slug>/build/chapter_NN/segments.json + dtbook.xml
-   │  tts_chapter_piper.py        giọng đọc Piper chạy trên CPU, mốc đoạn + mốc câu
+   │  tts_chapter_vieneu.py       hai giọng cho người nghe chọn: nữ Ngọc Linh, nam Thiện Minh
+   │  tts_chapter_piper.py        giọng Piper, rất nhanh, làm giọng dự phòng
    │  gen_smil.py, gen_opf_ncx.py DAISY 3: SMIL, OPF, NCX
    │  validate_daisy.py           kiểm tra chéo
+   ▼
+books/<slug>/voices/<nu|nam>/     mỗi giọng một bản DAISY đầy đủ, có mốc đoạn + mốc câu
+   │
    ▼
 build_site.py ──► site/ ──► deploy_site.py ──► GitHub Pages (branch gh-pages)
 ```
@@ -25,20 +29,20 @@ build_site.py ──► site/ ──► deploy_site.py ──► GitHub Pages (b
 | Thư mục | Nội dung | Mục chấm điểm |
 |---|---|---|
 | `literature/` | PDF và ghi chú 8 bài báo, khảo sát trong nước, bảng so sánh | Tổng quan 30% |
-| `demo/` | Đo tốc độ TTS trên CPU và độ rõ qua ASR | Demo 20% |
+| `demo/` | Đo tốc độ TTS trên CPU và độ rõ qua ASR, trang nghe thử so sánh giọng | Demo 20% |
 | `pipeline/scripts/` | Nhập sách, TTS, sinh DAISY, lắp trang web, deploy | Demo 20% |
 | `app/web/` | Ứng dụng web: thư viện, trang bìa, trình phát | App 30% |
 | `app/tests/` | 46 kiểm thử đầu-cuối bằng Chromium, máy chủ thử | App 30% |
 | `books/` | Metadata từng cuốn, danh mục, căn cứ bản quyền | – |
 | `report/` | So sánh TTS, nhật ký quyết định, bảng số liệu | Phân tích 20% |
 
-Audio, mô hình và trang đã lắp (`books/*/build/`, `models/`, `site/`) không nằm trong git; dựng lại bằng các lệnh dưới đây.
+Audio, mô hình và trang đã lắp (`books/*/build/`, `books/*/voices/`, `models/`, `site/`) không nằm trong git; dựng lại bằng các lệnh dưới đây.
 
 ## Chạy
 
 ```bash
 python3 -m venv .venv
-.venv/bin/pip install piper-tts lameenc numpy mutagen edge-tts          # dựng sách
+.venv/bin/pip install piper-tts vieneu lameenc numpy mutagen edge-tts   # dựng sách
 .venv/bin/pip install playwright faster-whisper jiwer pillow            # kiểm thử và đo đạc
 
 # giọng đọc: tải vi_VN-vais1000-medium.onnx và .onnx.json từ
@@ -46,7 +50,9 @@ python3 -m venv .venv
 
 # thêm một cuốn sách thuộc phạm vi công cộng rồi dựng
 python3 pipeline/scripts/import_wikisource.py --slug lao-hac --author "Nam Cao" --year 1943 "Lão Hạc"
-.venv/bin/python pipeline/scripts/build_book.py lao-hac
+.venv/bin/python pipeline/scripts/build_book.py lao-hac                 # bản Piper, vài chục giây
+.venv/bin/python pipeline/scripts/build_voices.py lao-hac               # giọng nữ + giọng nam (VieNeu-TTS), chậm hơn nhiều;
+                                                                        # mô hình tự tải vào models/vieneu/ ở lần chạy đầu
 
 # thử trên máy (máy chủ này hỗ trợ HTTP Range, cần để tua audio)
 python3 pipeline/scripts/build_site.py
@@ -62,7 +68,7 @@ python3 pipeline/scripts/deploy_site.py
 | | Giữa kỳ | Cuối kỳ |
 |---|---|---|
 | Sách | 1 cuốn (Totto-chan) | Thư viện, thêm sách bằng 2 lệnh |
-| Giọng đọc | edge-tts, dịch vụ ngoài | Piper chạy trên CPU, nhanh gấp 27–40 lần thời gian thực |
+| Giọng đọc | edge-tts, dịch vụ ngoài | Chạy trên CPU của máy mình; người nghe chọn giọng nữ hoặc giọng nam (VieNeu-TTS), đổi giọng giữa chừng vẫn nghe tiếp đúng câu |
 | Đồng bộ | Mức đoạn | Mức câu |
 | Trình phát | Trang HTML sinh sẵn cho từng chương, thanh phát tràn trên điện thoại | Một ứng dụng, thiết kế cho điện thoại và trình đọc màn hình |
 | Ngoại tuyến | Không | Lưu sách trên máy, cài lên màn hình chính |

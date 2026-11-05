@@ -9,9 +9,12 @@ Usage: python pipeline/scripts/build_catalog.py
 """
 import csv
 import json
+import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from voices import VOICES, narrator  # noqa: E402
 BOOKS = REPO / "books"
 
 
@@ -43,6 +46,13 @@ def main():
         units = [u for u in map(unit_entry, sorted((root / "build").glob("chapter_*"))) if u]
         if not units:
             continue
+        # các giọng cho người nghe chọn: mỗi giọng một bản DAISY ở voices/<id>/
+        voices = {}
+        for vid in VOICES:
+            vunits = [u for u in map(unit_entry, sorted((root / "voices" / vid / "build").glob("chapter_*"))) if u]
+            if vunits:
+                voices[vid] = {"narrator": narrator(vid), "units": len(vunits),
+                               "duration": round(sum(u["duration"] for u in vunits), 3)}
         books.append({
             "slug": meta["book_slug"],
             "title": meta["title"],
@@ -52,6 +62,7 @@ def main():
             "date": meta["date"],
             "language": meta["language"],
             "narrator": meta.get("narrator", ""),
+            "voices": voices,
             "sourceURL": meta.get("sourceURL", ""),
             "note": meta.get("note", ""),
             "duration": round(sum(u["duration"] for u in units), 3),

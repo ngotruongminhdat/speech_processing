@@ -46,6 +46,7 @@ async def main():
         errors = []
         page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
         page.on("pageerror", lambda e: errors.append("PAGEERROR " + str(e)))
+        page.on("response", lambda r: errors.append(f"HTTP {r.status} {r.url}") if r.status >= 400 else None)
 
         print("Thư viện")
         await page.goto(BASE, wait_until="networkidle")
@@ -74,7 +75,7 @@ async def main():
         check("focus chuyển vào tiêu đề màn hình mới",
               await page.evaluate("document.activeElement && document.activeElement.id") == "h-book")
         check("có bảng thông tin và nút tải DAISY",
-              await page.locator(".metas div").count() >= 6 and await page.locator('a[href$="-daisy.zip"]').count() == 1)
+              await page.locator(".metas div").count() >= 6 and await page.locator('.cta a[href*="-daisy-"]').count() == 1)
 
         print("Trang đọc và đồng bộ câu")
         await page.click(".cta .btn.primary")
@@ -85,7 +86,8 @@ async def main():
         check("đúng một câu được tô sáng", s["nOn"] == 1, f"câu số {s['on']}")
         check("nút phát đổi nhãn thành Tạm dừng", await page.get_attribute("#play", "aria-label") == "Tạm dừng")
 
-        sents = await page.evaluate(f"fetch('books/{SLUG}/01.json').then(r=>r.json()).then(d=>d.paras.flatMap(p=>p.s.map(x=>[x[0],x[1]])))")
+        # dữ liệu mốc câu của đúng giọng đang phát (đường dẫn audio và dữ liệu chỉ khác đuôi file)
+        sents = await page.evaluate(f"fetch({AUDIO}.currentSrc.replace(/\\.mp3$/, '.json')).then(r=>r.json()).then(d=>d.paras.flatMap(p=>p.s.map(x=>[x[0],x[1]])))")
         # mốc câu trong dữ liệu khớp với câu đang tô sáng tại nhiều thời điểm
         ok, tried = 0, 0
         for target in (10.0, 95.5, 300.2, 611.0, 880.0):
@@ -216,7 +218,7 @@ async def main():
                 await page.goto(BASE + f"#/r/{ms}/{a['no']}")
                 # chờ đúng audio của phần này nạp xong (audio của trang trước có thể còn đó)
                 await page.wait_for_function(
-                    f"{AUDIO}.currentSrc.endsWith('{a['audio']}') && Number.isFinite({AUDIO}.duration)", timeout=20000)
+                    f"/\\/{ms}\\/[^/]+\\/{a['no']:02d}\\.mp3$/.test({AUDIO}.currentSrc) && Number.isFinite({AUDIO}.duration)", timeout=20000)
                 check("trang đọc hiện đúng tên phần", await page.inner_text("#h-reader") == a["title"])
                 await page.evaluate(f"{AUDIO}.currentTime = {AUDIO}.duration - 1.0; {AUDIO}.play()")
                 await page.wait_for_function(f"location.hash.endsWith('/{b['no']}')", timeout=15000)
@@ -230,6 +232,79 @@ async def main():
                 await page.wait_for_function(f"location.hash.endsWith('/{a['no']}')", timeout=5000)
                 check("phím [ quay về phần trước", True)
                 await page.evaluate(f"{AUDIO}.pause()")
+
+        # Chọn giọng đọc: cần một cuốn đã có cả giọng nữ và giọng nam cho phần đầu.
+        both = next((b for b in cat["books"] if b.get("units")
+                     and {"nu", "nam"} <= set(b["units"][0].get("voices", {}))), None)
+        if both:
+            print(f"Chọn giọng đọc: {both['title']}")
+            vs, u0 = both["slug"], both["units"][0]
+            await page.evaluate("localStorage.removeItem('sn:voice'); localStorage.setItem('sn:rate', '1')")
+            await page.evaluate(f"localStorage.removeItem('sn:pos:{vs}')")
+            await page.goto(BASE + f"#/b/{vs}")
+            await page.reload(wait_until="networkidle")
+            await page.wait_for_selector(".voice-pick button")
+            pressed = await page.locator(".voice-pick button").evaluate_all(
+                "els => els.map(e => [e.dataset.v, e.getAttribute('aria-pressed'), e.innerText.trim()])")
+            check("trang bìa có hai lựa chọn giọng, mặc định giọng nữ",
+                  [x[:2] for x in pressed] == [["nu", "true"], ["nam", "false"]], str(pressed))
+            check("nút tải DAISY đi theo giọng đang chọn",
+                  (await page.get_attribute('.cta a[href*="-daisy-"]', "href")).endswith("-daisy-nu.zip"))
+
+            await page.click(".cta .btn.primary")
+            await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentSrc.includes('/nu/')", timeout=20000)
+            check("mặc định phát giọng nữ", True)
+            nam = await page.evaluate(
+                f"fetch('{u0['voices']['nam']['data']}').then(r=>r.json()).then(d=>d.paras.flatMap(p=>p.s.map(x=>[x[0],x[1]])))")
+            await page.locator(".s").nth(11).scroll_into_view_if_needed()
+            await page.locator(".s").nth(11).click()          # câu số 12
+            await page.wait_for_timeout(500)
+            await page.click("#openSettings")
+            await page.click('#optVoice button[data-v="nam"]')
+            await page.wait_for_function(f"{AUDIO}.currentSrc.includes('/nam/') && {AUDIO}.currentTime > 1", timeout=20000)
+            await page.wait_for_timeout(300)
+            s = await page.evaluate(STATE)
+            check("đổi sang giọng nam giữa chừng thì nghe tiếp đúng câu đang nghe",
+                  s["on"] == 12 and nam[12][0] - 0.05 <= s["t"] < nam[13][0], f"câu {s['on']}, t={s['t']:.2f}")
+            check("đổi giọng không làm dừng phát", not s["paused"])
+            check("đổi giọng được thông báo bằng lời",
+                  "giọng nam Thiện Minh" in await page.inner_text("#live"), await page.inner_text("#live"))
+            check("nút giọng nam ở trạng thái đang chọn",
+                  await page.get_attribute('#optVoice button[data-v="nam"]', "aria-pressed") == "true")
+            await page.keyboard.press("Escape")
+
+            await page.evaluate(f"{AUDIO}.currentTime = {{}}".format("%.2f" % (nam[20][0] + 0.4)))
+            await page.wait_for_timeout(300)
+            await page.evaluate(f"{AUDIO}.pause()")
+            await page.evaluate("localStorage.setItem('sn:voice', JSON.stringify('nu'))")
+            await page.reload(wait_until="load")
+            await page.wait_for_function(f"{AUDIO}.currentSrc.includes('/nu/') && {AUDIO}.currentTime > 1", timeout=20000)
+            await page.wait_for_timeout(300)
+            s = await page.evaluate(STATE)
+            check("vị trí lưu ở giọng nam, mở lại bằng giọng nữ vẫn về đúng câu", s["on"] == 20, f"câu {s['on']}")
+            await page.evaluate(f"{AUDIO}.pause()")
+
+            await page.goto(BASE + f"#/b/{vs}")
+            await page.wait_for_selector(".voice-pick button")
+            await page.click('.voice-pick button[data-v="nam"]')
+            await page.wait_for_function(
+                "document.querySelector('.voice-pick button[data-v=\"nam\"]').getAttribute('aria-pressed') === 'true'")
+            check("chọn giọng ngay trên trang bìa, nút tải DAISY đổi theo",
+                  (await page.get_attribute('.cta a[href*="-daisy-"]', "href")).endswith("-daisy-nam.zip"))
+
+        # Phần chưa có giọng đang chọn: phát giọng khác đang có và nói rõ.
+        partial = next(((b, u) for b in cat["books"] for u in b.get("units", [])
+                        if u["ready"] and "nam" not in u["voices"] and any(v["id"] == "nam" for v in b["voices"])), None)
+        if partial:
+            pb, pu = partial
+            await page.evaluate("localStorage.setItem('sn:voice', JSON.stringify('nam'))")
+            await page.goto(BASE + f"#/r/{pb['slug']}/{pu['no']}")
+            await page.reload(wait_until="load")
+            await page.wait_for_function(f"Number.isFinite({AUDIO}.duration)", timeout=20000)
+            check("phần chưa có giọng nam thì phát giọng khác và báo bằng lời",
+                  "chưa có giọng nam" in await page.inner_text("#live"), await page.inner_text("#live"))
+            await page.evaluate(f"{AUDIO}.pause()")
+        await page.evaluate("localStorage.removeItem('sn:voice')")
 
         print("Lưu ngoại tuyến")
         await page.goto(BASE + f"#/b/{SLUG}")

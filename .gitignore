@@ -13,3 +13,4 @@ demo/outputs/
 models/
 site/
 .deploy/
+books/*/voices/

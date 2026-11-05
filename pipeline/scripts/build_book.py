@@ -17,12 +17,15 @@ Usage:
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parent
 REPO = SCRIPTS.parent.parent
+sys.path.insert(0, str(SCRIPTS))
+from voices import VOICES, narrator  # noqa: E402
 
 
 def run(script, env, *args):
@@ -36,14 +39,29 @@ if __name__ == "__main__":
     ap.add_argument("--skip-tts", action="store_true")
     ap.add_argument("--only", metavar="A-B", help="chỉ dựng các phần từ A đến B, ví dụ 1-9 (để deploy dần)")
     ap.add_argument("--engine", choices=["piper", "edge"], default="piper")
+    ap.add_argument("--voice-id", choices=list(VOICES),
+                    help="dựng một giọng cho người nghe chọn (nu / nam) vào books/<slug>/voices/<id>/")
+    ap.add_argument("--verify", action="store_true", help="(giọng VieNeu) ASR nghe lại từng câu, sinh lại câu lệch")
     ap.add_argument("--voice", help="mặc định: vi_VN-vais1000-medium (piper) / vi-VN-HoaiMyNeural (edge)")
     a = ap.parse_args()
     tts_script = "tts_chapter_piper.py" if a.engine == "piper" else "tts_chapter.py"
     voice = a.voice or ("vi_VN-vais1000-medium" if a.engine == "piper" else "vi-VN-HoaiMyNeural")
+    tts_args = ["--voice", voice]
 
-    book_root = REPO / "books" / a.slug
-    units = sorted(int(p.name.split("_")[1]) for p in (book_root / "build").glob("chapter_*")
+    src_root = book_root = REPO / "books" / a.slug
+    units = sorted(int(p.name.split("_")[1]) for p in (src_root / "build").glob("chapter_*")
                    if (p / "segments.json").exists())
+    if a.voice_id:
+        # mỗi giọng là một bản DAISY riêng: chép văn bản nguồn sang thư mục của giọng đó
+        spec = VOICES[a.voice_id]
+        tts_script, voice = "tts_chapter_vieneu.py", spec["voice"]
+        tts_args = ["--voice", voice] + (["--verify"] if a.verify else [])
+        book_root = src_root / "voices" / a.voice_id
+        (book_root / "metadata").mkdir(parents=True, exist_ok=True)
+        meta = json.loads((src_root / "metadata" / "book_meta.json").read_text(encoding="utf-8"))
+        meta["narrator"] = narrator(a.voice_id)
+        (book_root / "metadata" / "book_meta.json").write_text(
+            json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
     if not units:
         sys.exit(f"Không có đơn vị nào trong {book_root / 'build'} — chạy import_wikisource.py trước.")
     if a.only:
@@ -52,12 +70,17 @@ if __name__ == "__main__":
 
     env = {**os.environ, "DAISY_BOOK_ROOT": str(book_root)}
     for no in units:
+        if a.voice_id:
+            ch = book_root / "build" / f"chapter_{no:02d}"
+            ch.mkdir(parents=True, exist_ok=True)
+            for name in ("segments.json", "dtbook.xml"):
+                shutil.copyfile(src_root / "build" / ch.name / name, ch / name)
         if not a.skip_tts:
-            run(tts_script, env, no, "--voice", voice)
+            run(tts_script, env, no, *tts_args)
         run("gen_smil.py", env, no)
         run("gen_opf_ncx.py", env, no)
         run("validate_daisy.py", env, no)
-    if not a.skip_tts:
+    if not a.skip_tts and not a.voice_id:
         # ghi lại giọng đọc thật sự đã dùng để app hiển thị đúng
         meta_file = book_root / "metadata" / "book_meta.json"
         meta = json.loads(meta_file.read_text(encoding="utf-8"))

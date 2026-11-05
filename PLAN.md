@@ -32,7 +32,9 @@ Ràng buộc máy dev: không có CUDA → mọi mô hình phải chạy đượ
 
 - [x] Chạy lại pipeline giữa kỳ, tổng quát hóa cho nhiều sách (`pipeline/scripts/`)
 - [x] So sánh TTS trên cùng 22 đoạn của "Lão Hạc": tốc độ trên CPU và độ rõ qua ASR (`report/tts_comparison.md`)
-- [ ] Thêm 1–2 engine vào bảng so sánh: VieNeu-TTS, F5-TTS tiếng Việt
+- [x] Thêm VieNeu-TTS v3 Turbo vào bảng so sánh (4 giọng): WER 4,2–5,4%, ngang Hoài My; tốc độ đọc và tỉ lệ khoảng lặng
+- [x] Trang nghe thử so sánh giọng (`demo/make_listen_page.py`, đã deploy ở `/nghe-thu/`)
+- [ ] F5-TTS tiếng Việt (cần GPU)
 - [ ] Nghe thử có chấm điểm (MOS) với 5–10 người
 
 ## Stage 3 — Ứng dụng chạy được (30%) · bản đầu ✅ đã deploy
@@ -41,7 +43,8 @@ Ràng buộc máy dev: không có CUDA → mọi mô hình phải chạy đượ
 - [x] Trợ năng: nhãn cho mọi nút, vùng thông báo, focus theo màn hình, phím tắt, nền tương phản cao, cỡ chữ
 - [x] Di động: thanh phát hai hàng nút lớn, điều khiển ở màn hình khóa (Media Session), cài lên màn hình chính (PWA)
 - [x] Nhớ vị trí từng cuốn, nghe tiếp, hẹn giờ tắt, lưu sách nghe ngoại tuyến
-- [x] 46 kiểm thử đầu-cuối bằng Chromium (`app/tests/e2e.py`)
+- [x] **Chọn giọng đọc nữ hoặc nam** (Ngọc Linh, Thiện Minh): trên trang bìa và trong Cài đặt; đổi giọng giữa chừng vẫn nghe tiếp đúng câu; phần chưa có giọng đang chọn thì phát giọng khác và báo bằng lời
+- [x] 55 kiểm thử đầu-cuối bằng Chromium (`app/tests/e2e.py`)
 - [x] Deploy dần từng chương, từng cuốn (`pipeline/scripts/deploy_site.py`)
 - [ ] **Thử với TalkBack và VoiceOver trên điện thoại thật** — kiểm thử tự động không thay được bước này
 - [ ] Thử với người dùng khiếm thị (hoặc bịt mắt), ghi lại số thao tác và thời gian tới khi nghe được
@@ -49,7 +52,10 @@ Ràng buộc máy dev: không có CUDA → mọi mô hình phải chạy đượ
 
 ## Stage 4 — Phân tích sâu và cải tiến (20%)
 
-Giải pháp được chọn để phân tích: **TTS VITS/Piper cho sách nói tiếng Việt**. Đã có số liệu nền (nhanh gấp 27–40 lần thời gian thực trên CPU, WER 10,0% so với 5,3% của edge-tts). Các hướng cải tiến, xếp theo giá trị trên công sức:
+Giải pháp được chọn để phân tích: **TTS chạy cục bộ cho sách nói tiếng Việt**. Mạch phân tích đã có: Piper (VITS) là mốc nền, nhanh gấp 27–40 lần thời gian thực nhưng WER 10,0% và gần như không ngắt nghỉ; người nghe thử chê ngữ điệu; cải tiến là chuyển sang VieNeu-TTS (WER 5,1–5,4%, ngắt nghỉ tự nhiên hơn) với cái giá chậm hơn 20–40 lần và nguy cơ đọc sót. Số liệu ở `report/tts_comparison.md`. Việc còn lại, xếp theo giá trị trên công sức:
+
+- [x] Chuyển sang VieNeu-TTS, hai giọng; lưới an toàn bắt câu đọc sót theo nhịp đọc
+- [ ] **Đo tỉ lệ đọc sót của VieNeu-TTS** trên cả một cuốn bằng ASR (`--verify`), so trước và sau khi có lưới an toàn
 
 - [ ] **Chuẩn hóa văn bản trước TTS**: số, ngày tháng, số La Mã, viết tắt, từ nước ngoài. Đo WER trước và sau trên các câu có số.
 - [ ] **Ngắt nghỉ theo dấu câu và hội thoại**: hiện câu thoại ngắn ("Vâng!") chỉ dài 0,2 giây. Thử thêm khoảng lặng, đo lại.
@@ -70,7 +76,8 @@ Giải pháp được chọn để phân tích: **TTS VITS/Piper cho sách nói 
 ```bash
 # thêm một cuốn sách thuộc phạm vi công cộng
 python3 pipeline/scripts/import_wikisource.py --slug <slug> --author "<tác giả>" --year <năm> "<tên trang Wikisource>"
-.venv/bin/python pipeline/scripts/build_book.py <slug> [--only 1-9]
+.venv/bin/python pipeline/scripts/build_book.py <slug> [--only 1-9]      # bản Piper (giọng dự phòng)
+.venv/bin/python pipeline/scripts/build_voices.py <slug> --deploy        # giọng nữ + nam, deploy sau mỗi 3 phần
 
 # deploy (chạy lại mỗi khi xong thêm chương hoặc sách)
 python3 pipeline/scripts/deploy_site.py
