@@ -1,5 +1,5 @@
 {
- "version": 1,
+ "version": 2,
  "books": [
   {
    "slug": "co-hang-xen",
@@ -12,6 +12,13 @@
    "sourceURL": "https://vi.wikisource.org/wiki/C%C3%B4_h%C3%A0ng_x%C3%A9n",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
    "duration": 1196.022,
+   "voices": [
+    {
+     "id": "piper",
+     "label": "Giọng dự phòng",
+     "name": "Piper"
+    }
+   ],
    "units": [
     {
      "no": 1,
@@ -19,12 +26,21 @@
      "title": "Cô hàng xén",
      "duration": 1196.022,
      "ready": true,
-     "data": "books/co-hang-xen/01.json",
-     "audio": "books/co-hang-xen/01.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/co-hang-xen/piper/01.json",
+       "audio": "books/co-hang-xen/piper/01.mp3",
+       "duration": 1196.022
+      }
+     }
     }
    ],
-   "daisy": "books/co-hang-xen/co-hang-xen-daisy.zip",
-   "daisySize": "6.5 MB"
+   "daisy": {
+    "piper": {
+     "url": "books/co-hang-xen/co-hang-xen-daisy-piper.zip",
+     "size": "6.5 MB"
+    }
+   }
   },
   {
    "slug": "duoi-bong-hoang-lan",
@@ -37,6 +53,13 @@
    "sourceURL": "https://vi.wikisource.org/wiki/D%C6%B0%E1%BB%9Bi_b%C3%B3ng_ho%C3%A0ng_lan",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
    "duration": 516.317,
+   "voices": [
+    {
+     "id": "piper",
+     "label": "Giọng dự phòng",
+     "name": "Piper"
+    }
+   ],
    "units": [
     {
      "no": 1,
@@ -44,12 +67,21 @@
      "title": "Dưới bóng hoàng lan",
      "duration": 516.317,
      "ready": true,
-     "data": "books/duoi-bong-hoang-lan/01.json",
-     "audio": "books/duoi-bong-hoang-lan/01.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/duoi-bong-hoang-lan/piper/01.json",
+       "audio": "books/duoi-bong-hoang-lan/piper/01.mp3",
+       "duration": 516.317
+      }
+     }
     }
    ],
-   "daisy": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy.zip",
-   "daisySize": "2.7 MB"
+   "daisy": {
+    "piper": {
+     "url": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy-piper.zip",
+     "size": "2.7 MB"
+    }
+   }
   },
   {
    "slug": "gio-lanh-dau-mua",
@@ -58,23 +90,53 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Lòng nhân ái của hai chị em Sơn và Lan trong buổi sáng gió lạnh đầu mùa đông.",
    "date": "1937",
-   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
    "sourceURL": "https://vi.wikisource.org/wiki/Gi%C3%B3_l%E1%BA%A1nh_%C4%91%E1%BA%A7u_m%C3%B9a",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 488.727,
+   "duration": 545.17,
+   "voices": [
+    {
+     "id": "nu",
+     "label": "Giọng nữ",
+     "name": "Ngọc Linh"
+    },
+    {
+     "id": "nam",
+     "label": "Giọng nam",
+     "name": "Thiện Minh"
+    }
+   ],
    "units": [
     {
      "no": 1,
      "label": "Gió lạnh đầu mùa",
      "title": "Gió lạnh đầu mùa",
-     "duration": 488.727,
+     "duration": 545.17,
      "ready": true,
-     "data": "books/gio-lanh-dau-mua/01.json",
-     "audio": "books/gio-lanh-dau-mua/01.mp3"
+     "voices": {
+      "nu": {
+       "data": "books/gio-lanh-dau-mua/nu/01.json",
+       "audio": "books/gio-lanh-dau-mua/nu/01.mp3",
+       "duration": 545.17
+      },
+      "nam": {
+       "data": "books/gio-lanh-dau-mua/nam/01.json",
+       "audio": "books/gio-lanh-dau-mua/nam/01.mp3",
+       "duration": 515.8
+      }
+     }
     }
    ],
-   "daisy": "books/gio-lanh-dau-mua/gio-lanh-dau-mua-daisy.zip",
-   "daisySize": "2.6 MB"
+   "daisy": {
+    "nu": {
+     "url": "books/gio-lanh-dau-mua/gio-lanh-dau-mua-daisy-nu.zip",
+     "size": "2.7 MB"
+    },
+    "nam": {
+     "url": "books/gio-lanh-dau-mua/gio-lanh-dau-mua-daisy-nam.zip",
+     "size": "2.6 MB"
+    }
+   }
   },
   {
    "slug": "hai-dua-tre",
@@ -87,6 +149,13 @@
    "sourceURL": "https://vi.wikisource.org/wiki/Hai_%C4%91%E1%BB%A9a_tr%E1%BA%BB",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
    "duration": 693.133,
+   "voices": [
+    {
+     "id": "piper",
+     "label": "Giọng dự phòng",
+     "name": "Piper"
+    }
+   ],
    "units": [
     {
      "no": 1,
@@ -94,12 +163,21 @@
      "title": "Hai đứa trẻ",
      "duration": 693.133,
      "ready": true,
-     "data": "books/hai-dua-tre/01.json",
-     "audio": "books/hai-dua-tre/01.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/hai-dua-tre/piper/01.json",
+       "audio": "books/hai-dua-tre/piper/01.mp3",
+       "duration": 693.133
+      }
+     }
     }
    ],
-   "daisy": "books/hai-dua-tre/hai-dua-tre-daisy.zip",
-   "daisySize": "3.8 MB"
+   "daisy": {
+    "piper": {
+     "url": "books/hai-dua-tre/hai-dua-tre-daisy-piper.zip",
+     "size": "3.8 MB"
+    }
+   }
   },
   {
    "slug": "lao-hac",
@@ -112,6 +190,13 @@
    "sourceURL": "https://vi.wikisource.org/wiki/L%C3%A3o_H%E1%BA%A1c",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
    "duration": 905.097,
+   "voices": [
+    {
+     "id": "piper",
+     "label": "Giọng dự phòng",
+     "name": "Piper"
+    }
+   ],
    "units": [
     {
      "no": 1,
@@ -119,12 +204,21 @@
      "title": "Lão Hạc",
      "duration": 905.097,
      "ready": true,
-     "data": "books/lao-hac/01.json",
-     "audio": "books/lao-hac/01.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/lao-hac/piper/01.json",
+       "audio": "books/lao-hac/piper/01.mp3",
+       "duration": 905.097
+      }
+     }
     }
    ],
-   "daisy": "books/lao-hac/lao-hac-daisy.zip",
-   "daisySize": "4.9 MB"
+   "daisy": {
+    "piper": {
+     "url": "books/lao-hac/lao-hac-daisy-piper.zip",
+     "size": "4.9 MB"
+    }
+   }
   },
   {
    "slug": "tat-den",
@@ -137,6 +231,13 @@
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
    "duration": 9291.226,
+   "voices": [
+    {
+     "id": "piper",
+     "label": "Giọng dự phòng",
+     "name": "Piper"
+    }
+   ],
    "units": [
     {
      "no": 1,
@@ -144,8 +245,13 @@
      "title": "Chương 1",
      "duration": 379.962,
      "ready": true,
-     "data": "books/tat-den/01.json",
-     "audio": "books/tat-den/01.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/01.json",
+       "audio": "books/tat-den/piper/01.mp3",
+       "duration": 379.962
+      }
+     }
     },
     {
      "no": 2,
@@ -153,8 +259,13 @@
      "title": "Chương 2",
      "duration": 357.32,
      "ready": true,
-     "data": "books/tat-den/02.json",
-     "audio": "books/tat-den/02.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/02.json",
+       "audio": "books/tat-den/piper/02.mp3",
+       "duration": 357.32
+      }
+     }
     },
     {
      "no": 3,
@@ -162,8 +273,13 @@
      "title": "Chương 3",
      "duration": 386.966,
      "ready": true,
-     "data": "books/tat-den/03.json",
-     "audio": "books/tat-den/03.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/03.json",
+       "audio": "books/tat-den/piper/03.mp3",
+       "duration": 386.966
+      }
+     }
     },
     {
      "no": 4,
@@ -171,8 +287,13 @@
      "title": "Chương 4",
      "duration": 435.998,
      "ready": true,
-     "data": "books/tat-den/04.json",
-     "audio": "books/tat-den/04.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/04.json",
+       "audio": "books/tat-den/piper/04.mp3",
+       "duration": 435.998
+      }
+     }
     },
     {
      "no": 5,
@@ -180,8 +301,13 @@
      "title": "Chương 5",
      "duration": 564.581,
      "ready": true,
-     "data": "books/tat-den/05.json",
-     "audio": "books/tat-den/05.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/05.json",
+       "audio": "books/tat-den/piper/05.mp3",
+       "duration": 564.581
+      }
+     }
     },
     {
      "no": 6,
@@ -189,8 +315,13 @@
      "title": "Chương 6",
      "duration": 417.354,
      "ready": true,
-     "data": "books/tat-den/06.json",
-     "audio": "books/tat-den/06.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/06.json",
+       "audio": "books/tat-den/piper/06.mp3",
+       "duration": 417.354
+      }
+     }
     },
     {
      "no": 7,
@@ -198,8 +329,13 @@
      "title": "Chương 7",
      "duration": 397.527,
      "ready": true,
-     "data": "books/tat-den/07.json",
-     "audio": "books/tat-den/07.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/07.json",
+       "audio": "books/tat-den/piper/07.mp3",
+       "duration": 397.527
+      }
+     }
     },
     {
      "no": 8,
@@ -207,8 +343,13 @@
      "title": "Chương 8",
      "duration": 366.599,
      "ready": true,
-     "data": "books/tat-den/08.json",
-     "audio": "books/tat-den/08.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/08.json",
+       "audio": "books/tat-den/piper/08.mp3",
+       "duration": 366.599
+      }
+     }
     },
     {
      "no": 9,
@@ -216,8 +357,13 @@
      "title": "Chương 9",
      "duration": 158.403,
      "ready": true,
-     "data": "books/tat-den/09.json",
-     "audio": "books/tat-den/09.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/09.json",
+       "audio": "books/tat-den/piper/09.mp3",
+       "duration": 158.403
+      }
+     }
     },
     {
      "no": 10,
@@ -225,8 +371,13 @@
      "title": "Chương 10",
      "duration": 310.763,
      "ready": true,
-     "data": "books/tat-den/10.json",
-     "audio": "books/tat-den/10.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/10.json",
+       "audio": "books/tat-den/piper/10.mp3",
+       "duration": 310.763
+      }
+     }
     },
     {
      "no": 11,
@@ -234,8 +385,13 @@
      "title": "Chương 11",
      "duration": 371.318,
      "ready": true,
-     "data": "books/tat-den/11.json",
-     "audio": "books/tat-den/11.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/11.json",
+       "audio": "books/tat-den/piper/11.mp3",
+       "duration": 371.318
+      }
+     }
     },
     {
      "no": 12,
@@ -243,8 +399,13 @@
      "title": "Chương 12",
      "duration": 214.344,
      "ready": true,
-     "data": "books/tat-den/12.json",
-     "audio": "books/tat-den/12.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/12.json",
+       "audio": "books/tat-den/piper/12.mp3",
+       "duration": 214.344
+      }
+     }
     },
     {
      "no": 13,
@@ -252,8 +413,13 @@
      "title": "Chương 13",
      "duration": 263.188,
      "ready": true,
-     "data": "books/tat-den/13.json",
-     "audio": "books/tat-den/13.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/13.json",
+       "audio": "books/tat-den/piper/13.mp3",
+       "duration": 263.188
+      }
+     }
     },
     {
      "no": 14,
@@ -261,8 +427,13 @@
      "title": "Chương 14",
      "duration": 390.355,
      "ready": true,
-     "data": "books/tat-den/14.json",
-     "audio": "books/tat-den/14.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/14.json",
+       "audio": "books/tat-den/piper/14.mp3",
+       "duration": 390.355
+      }
+     }
     },
     {
      "no": 15,
@@ -270,8 +441,13 @@
      "title": "Chương 15",
      "duration": 357.312,
      "ready": true,
-     "data": "books/tat-den/15.json",
-     "audio": "books/tat-den/15.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/15.json",
+       "audio": "books/tat-den/piper/15.mp3",
+       "duration": 357.312
+      }
+     }
     },
     {
      "no": 16,
@@ -279,8 +455,13 @@
      "title": "Chương 16",
      "duration": 305.343,
      "ready": true,
-     "data": "books/tat-den/16.json",
-     "audio": "books/tat-den/16.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/16.json",
+       "audio": "books/tat-den/piper/16.mp3",
+       "duration": 305.343
+      }
+     }
     },
     {
      "no": 17,
@@ -288,8 +469,13 @@
      "title": "Chương 17",
      "duration": 228.792,
      "ready": true,
-     "data": "books/tat-den/17.json",
-     "audio": "books/tat-den/17.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/17.json",
+       "audio": "books/tat-den/piper/17.mp3",
+       "duration": 228.792
+      }
+     }
     },
     {
      "no": 18,
@@ -297,8 +483,13 @@
      "title": "Chương 18",
      "duration": 334.51,
      "ready": true,
-     "data": "books/tat-den/18.json",
-     "audio": "books/tat-den/18.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/18.json",
+       "audio": "books/tat-den/piper/18.mp3",
+       "duration": 334.51
+      }
+     }
     },
     {
      "no": 19,
@@ -306,8 +497,13 @@
      "title": "Chương 19",
      "duration": 340.814,
      "ready": true,
-     "data": "books/tat-den/19.json",
-     "audio": "books/tat-den/19.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/19.json",
+       "audio": "books/tat-den/piper/19.mp3",
+       "duration": 340.814
+      }
+     }
     },
     {
      "no": 20,
@@ -315,8 +511,13 @@
      "title": "Chương 20",
      "duration": 418.452,
      "ready": true,
-     "data": "books/tat-den/20.json",
-     "audio": "books/tat-den/20.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/20.json",
+       "audio": "books/tat-den/piper/20.mp3",
+       "duration": 418.452
+      }
+     }
     },
     {
      "no": 21,
@@ -324,8 +525,13 @@
      "title": "Chương 21",
      "duration": 402.739,
      "ready": true,
-     "data": "books/tat-den/21.json",
-     "audio": "books/tat-den/21.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/21.json",
+       "audio": "books/tat-den/piper/21.mp3",
+       "duration": 402.739
+      }
+     }
     },
     {
      "no": 22,
@@ -333,8 +539,13 @@
      "title": "Chương 22",
      "duration": 393.315,
      "ready": true,
-     "data": "books/tat-den/22.json",
-     "audio": "books/tat-den/22.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/22.json",
+       "audio": "books/tat-den/piper/22.mp3",
+       "duration": 393.315
+      }
+     }
     },
     {
      "no": 23,
@@ -342,8 +553,13 @@
      "title": "Chương 23",
      "duration": 286.943,
      "ready": true,
-     "data": "books/tat-den/23.json",
-     "audio": "books/tat-den/23.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/23.json",
+       "audio": "books/tat-den/piper/23.mp3",
+       "duration": 286.943
+      }
+     }
     },
     {
      "no": 24,
@@ -351,8 +567,13 @@
      "title": "Chương 24",
      "duration": 325.203,
      "ready": true,
-     "data": "books/tat-den/24.json",
-     "audio": "books/tat-den/24.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/24.json",
+       "audio": "books/tat-den/piper/24.mp3",
+       "duration": 325.203
+      }
+     }
     },
     {
      "no": 25,
@@ -360,8 +581,13 @@
      "title": "Chương 25",
      "duration": 275.136,
      "ready": true,
-     "data": "books/tat-den/25.json",
-     "audio": "books/tat-den/25.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/25.json",
+       "audio": "books/tat-den/piper/25.mp3",
+       "duration": 275.136
+      }
+     }
     },
     {
      "no": 26,
@@ -369,8 +595,13 @@
      "title": "Chương 26",
      "duration": 389.846,
      "ready": true,
-     "data": "books/tat-den/26.json",
-     "audio": "books/tat-den/26.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/26.json",
+       "audio": "books/tat-den/piper/26.mp3",
+       "duration": 389.846
+      }
+     }
     },
     {
      "no": 27,
@@ -378,12 +609,21 @@
      "title": "Chương 27",
      "duration": 218.143,
      "ready": true,
-     "data": "books/tat-den/27.json",
-     "audio": "books/tat-den/27.mp3"
+     "voices": {
+      "piper": {
+       "data": "books/tat-den/piper/27.json",
+       "audio": "books/tat-den/piper/27.mp3",
+       "duration": 218.143
+      }
+     }
     }
    ],
-   "daisy": "books/tat-den/tat-den-daisy.zip",
-   "daisySize": "49 MB"
+   "daisy": {
+    "piper": {
+     "url": "books/tat-den/tat-den-daisy-piper.zip",
+     "size": "49 MB"
+    }
+   }
   },
   {
    "slug": "totto-chan",

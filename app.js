@@ -46,7 +46,27 @@ const idb = {
   put(key, value) { return this.tx('readwrite', (s) => s.put(value, key)); },
   del(key) { return this.tx('readwrite', (s) => s.delete(key)); },
 };
-const unitKey = (slug, no) => `${slug}:${no}`;
+const unitKey = (slug, no, vid) => `${slug}:${no}:${vid}`;
+
+// ---------- giọng đọc ----------
+// Mỗi phần có thể có nhiều bản audio (giọng nữ, giọng nam). Người nghe chọn một
+// giọng cho cả thư viện; phần nào chưa có giọng đó thì dùng giọng khác đang có.
+const VOICE_ORDER = ['nu', 'nam', 'piper'];
+const prefVoice = () => String(store.get('voice', 'nu'));
+function voiceOf(unit, want = prefVoice()) {
+  const v = unit?.voices || {};
+  if (v[want]) return want;
+  return VOICE_ORDER.find((k) => v[k]) ?? Object.keys(v)[0] ?? null;
+}
+const voiceInfo = (book, id) => (book.voices || []).find((v) => v.id === id) || { id, label: 'Giọng đọc', name: '' };
+const voiceText = (v) => `${v.label.toLowerCase()} ${v.name}`.trim();
+const pickable = (book) => (book.voices || []).filter((v) => v.id !== 'piper');
+// giọng thực tế của cả cuốn: giọng đang chọn nếu cuốn này có, không thì giọng đầu tiên có
+function bookVoice(book) {
+  const ids = (book.voices || []).map((v) => v.id);
+  return ids.includes(prefVoice()) ? prefVoice() : VOICE_ORDER.find((k) => ids.includes(k)) ?? ids[0] ?? null;
+}
+const unitDuration = (u, vid = voiceOf(u)) => u.voices?.[vid]?.duration ?? u.duration ?? 0;
 
 // ---------- tiện ích hiển thị ----------
 function clock(sec) {
@@ -150,6 +170,9 @@ async function renderBook(book) {
   bg.classList.toggle('img', !!book.cover);
   if (book.cover) bg.style.setProperty('--cover', `url('${book.cover}')`);
 
+  const bv = bookVoice(book);
+  const daisy = book.daisy?.[bv];
+  const voices = pickable(book);
   const metas = [
     ['Tác giả', esc(book.creator)],
     ['Năm sáng tác', esc(book.date)],
@@ -175,8 +198,12 @@ async function renderBook(book) {
         ${startUnit != null ? `<a class="btn primary" href="#/r/${book.slug}/${startUnit}"><span aria-hidden="true">▶</span> ${started ? 'Nghe tiếp' : 'Bắt đầu nghe'}</a>` : '<span class="btn ghost">Đang chuẩn bị audio</span>'}
         ${units.length > 1 ? '<a class="btn ghost" href="#muc-luc" id="tocJump">Mục lục</a>' : ''}
         <button class="btn ghost" id="saveBtn" type="button"></button>
-        ${book.daisy ? `<a class="btn ghost" href="${esc(book.daisy)}" download><span aria-hidden="true">⬇</span> Tải DAISY · ${book.daisySize}</a>` : ''}
+        ${daisy ? `<a class="btn ghost" href="${esc(daisy.url)}" download aria-label="Tải bản DAISY, ${esc(voiceText(voiceInfo(book, bv)))}, ${esc(daisy.size)}"><span aria-hidden="true">⬇</span> Tải DAISY · ${daisy.size}</a>` : ''}
       </div>
+      ${voices.length > 1 ? `<div class="voice-pick" role="group" aria-labelledby="l-bvoice">
+        <span id="l-bvoice">Giọng đọc</span>
+        ${voices.map((v) => `<button type="button" data-v="${esc(v.id)}" aria-pressed="${v.id === bv}">${esc(v.label)} · ${esc(v.name)}</button>`).join('')}
+      </div>` : ''}
     </div>`;
 
   $('#bookToc').innerHTML = units.length > 1 ? `
@@ -195,6 +222,7 @@ async function renderBook(book) {
   $('#bookFoot').innerHTML = `<span class="mark" aria-hidden="true">◆</span><br>
     ${esc(book.title)} · ${esc(book.creator)}<br>Sách dựng theo chuẩn DAISY 3 · giọng đọc tổng hợp`;
 
+  $('.voice-pick')?.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setVoice(b.dataset.v); });
   $('#tocJump')?.addEventListener('click', (e) => { e.preventDefault(); $('#muc-luc').scrollIntoView({ behavior: 'smooth' }); });
   await refreshSaveBtn(book);
 }
@@ -202,7 +230,7 @@ async function renderBook(book) {
 async function isSaved(book) {
   const ready = readyUnits(book);
   if (!ready.length) return false;
-  for (const u of ready) if (!(await idb.get(unitKey(book.slug, u.no)))) return false;
+  for (const u of ready) if (!(await idb.get(unitKey(book.slug, u.no, voiceOf(u))))) return false;
   return true;
 }
 async function refreshSaveBtn(book) {
@@ -214,7 +242,7 @@ async function refreshSaveBtn(book) {
   btn.onclick = async () => {
     const ready = readyUnits(book);
     if (saved) {
-      for (const u of ready) await idb.del(unitKey(book.slug, u.no));
+      for (const u of ready) await idb.del(unitKey(book.slug, u.no, voiceOf(u)));
       announce('Đã xoá bản lưu trên máy.');
       return refreshSaveBtn(book);
     }
@@ -223,12 +251,12 @@ async function refreshSaveBtn(book) {
       await navigator.storage?.persist?.();
       for (let i = 0; i < ready.length; i++) {
         btn.textContent = `Đang lưu ${i + 1}/${ready.length}…`;
-        const u = ready[i];
+        const u = ready[i], vid = voiceOf(u), src = u.voices[vid];
         const [data, blob] = await Promise.all([
-          fetch(u.data).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }),
-          fetch(u.audio).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); }),
+          fetch(src.data).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }),
+          fetch(src.audio).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); }),
         ]);
-        await idb.put(unitKey(book.slug, u.no), { data, blob });
+        await idb.put(unitKey(book.slug, u.no, vid), { data, blob });
       }
       announce(`Đã lưu ${book.title} để nghe ngoại tuyến.`);
     } catch {
@@ -240,16 +268,18 @@ async function refreshSaveBtn(book) {
 
 // ================= TRANG ĐỌC =================
 const audio = $('#audio');
-const R = { book: null, unit: null, sents: [], cur: -1, objectUrl: null, token: 0, userScrollAt: 0, pendingSeek: null };
+const R = { book: null, unit: null, voice: null, sents: [], cur: -1, objectUrl: null, token: 0, userScrollAt: 0, pendingSeek: null, quietSeek: false };
 
-async function openReader(book, unitNo) {
+// keep: { sent, play } khi đổi giọng giữa chừng — giữ nguyên câu đang nghe và trạng thái phát
+async function openReader(book, unitNo, keep = null) {
   const token = ++R.token;
   const unit = book.units.find((u) => u.no === unitNo);
+  const vid = voiceOf(unit);
   const status = $('#readerStatus');
   audio.pause();
   $('#text').innerHTML = '';
   status.hidden = true;
-  R.book = book; R.unit = unit; R.sents = []; R.cur = -1;
+  R.book = book; R.unit = unit; R.voice = vid; R.sents = []; R.cur = -1;
 
   // tiêu đề, mục lục, nút quay lại
   const many = book.units.length > 1;
@@ -266,8 +296,9 @@ async function openReader(book, unitNo) {
     ? `<li class="todo"><span class="row"><em>${pad2(u.no)}</em>${esc(u.title)}</span></li>`
     : `<li><a href="#/r/${book.slug}/${u.no}" ${u.no === unitNo ? 'aria-current="page"' : ''}><em>${pad2(u.no)}</em>${esc(u.title)}</a></li>`).join('') : '';
   const dl = $('#dl');
-  dl.hidden = !book.daisy;
-  if (book.daisy) { dl.href = book.daisy; dl.setAttribute('aria-label', `Tải bản DAISY của ${book.title}`); }
+  const daisy = book.daisy?.[vid] || book.daisy?.[bookVoice(book)];
+  dl.hidden = !daisy;
+  if (daisy) { dl.href = daisy.url; dl.setAttribute('aria-label', `Tải bản DAISY của ${book.title}`); }
 
   if (!unit || unit.ready === false) {
     status.hidden = false; status.textContent = 'Phần này đang được chuẩn bị audio.';
@@ -276,16 +307,16 @@ async function openReader(book, unitNo) {
 
   // dữ liệu: ưu tiên bản đã lưu trên máy
   let data, src;
-  const saved = await idb.get(unitKey(book.slug, unitNo));
+  const saved = await idb.get(unitKey(book.slug, unitNo, vid));
   if (token !== R.token) return;
   if (R.objectUrl) { URL.revokeObjectURL(R.objectUrl); R.objectUrl = null; }
   if (saved) {
     data = saved.data; R.objectUrl = URL.createObjectURL(saved.blob); src = R.objectUrl;
   } else {
     try {
-      const res = await fetch(unit.data);
+      const res = await fetch(unit.voices[vid].data);
       if (!res.ok) throw new Error(res.status);
-      data = await res.json(); src = unit.audio;
+      data = await res.json(); src = unit.voices[vid].audio;
     } catch {
       if (token !== R.token) return;
       status.hidden = false;
@@ -301,13 +332,50 @@ async function openReader(book, unitNo) {
   audio.playbackRate = Number(store.get('rate', 1));
   $('#speed').value = String(audio.playbackRate);
 
-  // tiếp tục từ vị trí cũ nếu đang nghe dở chính phần này
+  // người nghe chọn một giọng mà phần này chưa có: nói rõ đang phát giọng nào
+  const want = prefVoice();
+  if (!keep && vid !== want && pickable(book).some((v) => v.id === want)) {
+    announce(`Phần này chưa có ${voiceText(voiceInfo(book, want))}, đang phát ${voiceText(voiceInfo(book, vid))}.`);
+  }
+
+  // tiếp tục từ vị trí cũ nếu đang nghe dở chính phần này. Mốc thời gian của mỗi
+  // giọng khác nhau, nên khi vị trí được lưu ở giọng khác thì quay về đầu câu đã lưu.
   const pos = getPos(book.slug);
-  R.pendingSeek = pos && pos.unit === unitNo && pos.t > 2 && pos.t < unit.duration - 3 ? pos.t : null;
+  const dur = unitDuration(unit, vid);
+  R.pendingSeek = null; R.quietSeek = false;
+  if (keep) {
+    const i = Math.max(0, Math.min(R.sents.length - 1, keep.sent));
+    R.pendingSeek = R.sents[i]?.b ?? 0; R.quietSeek = true;
+  } else if (pos && pos.unit === unitNo) {
+    const t = (pos.v ?? vid) === vid ? pos.t : (R.sents[pos.s]?.b ?? 0);
+    if (t > 2 && t < dur - 3) R.pendingSeek = t;
+  }
   setMediaSession();
-  if (store.get('autoplay', '1') === '1') {
+  if (keep ? keep.play : store.get('autoplay', '1') === '1') {
     audio.play().catch(() => announce('Nhấn nút Phát để bắt đầu nghe.'));
   }
+}
+
+// Đổi giọng: áp dụng cho cả thư viện. Nếu đang ở trang đọc thì nạp lại phần đang
+// nghe bằng giọng mới và tiếp tục đúng câu đang nghe.
+function setVoice(vid, tell = true) {
+  store.set('voice', vid);
+  $$('#optVoice button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === vid)));
+  const view = document.body.dataset.view;
+  const known = catalog?.books.flatMap((b) => b.voices || []).find((v) => v.id === vid);
+  let msg = `Đã chọn ${known ? voiceText(known) : 'giọng đọc'}.`;
+  if (view === 'reader' && R.book && R.unit && R.unit.ready !== false) {
+    const now = voiceOf(R.unit);
+    if (now !== vid) msg = `Phần này chưa có ${voiceText(voiceInfo(R.book, vid))}, vẫn phát ${voiceText(voiceInfo(R.book, now))}.`;
+    if (now !== R.voice) {
+      const sent = R.sents.length ? sentAt(audio.currentTime) : 0;
+      openReader(R.book, R.unit.no, { sent, play: !audio.paused });
+    }
+  } else if (view === 'book') {
+    const book = findBook(decodeURIComponent((location.hash.split('/')[2]) || ''));
+    if (book) renderBook(book);
+  }
+  if (tell) announce(msg);
 }
 
 function renderText(data) {
@@ -388,7 +456,10 @@ function gotoUnit(dir) {
 
 function savePos() {
   if (!R.book || !R.unit || !audio.duration) return;
-  store.set('pos:' + R.book.slug, { unit: R.unit.no, t: Math.round(audio.currentTime * 10) / 10, at: Date.now() });
+  store.set('pos:' + R.book.slug, {
+    unit: R.unit.no, t: Math.round(audio.currentTime * 10) / 10, at: Date.now(),
+    s: R.sents.length ? sentAt(audio.currentTime) : 0, v: R.voice,   // câu và giọng, để đổi giọng vẫn nghe tiếp đúng chỗ
+  });
 }
 
 function tick() {
@@ -413,8 +484,8 @@ function setPlayUi(playing) {
 audio.addEventListener('loadedmetadata', () => {
   if (R.pendingSeek != null) {
     audio.currentTime = R.pendingSeek;
-    announce(`Nghe tiếp từ ${spoken(R.pendingSeek)}.`);
-    R.pendingSeek = null;
+    if (!R.quietSeek) announce(`Nghe tiếp từ ${spoken(R.pendingSeek)}.`);
+    R.pendingSeek = null; R.quietSeek = false;
   }
   tick();
 });
@@ -438,7 +509,7 @@ audio.addEventListener('ended', () => {
     store.set('pos:' + book.slug, { unit: next.no, t: 0, at: Date.now() });
     location.hash = `#/r/${book.slug}/${next.no}`;
   } else {
-    store.set('pos:' + book.slug, { unit: unit.no, t: unit.duration, at: Date.now() });
+    store.set('pos:' + book.slug, { unit: unit.no, t: unitDuration(unit, R.voice), at: Date.now() });
     announce(`Đã nghe hết ${book.title}.`);
   }
 });
@@ -495,7 +566,7 @@ function setMediaSession() {
   const many = R.book.units.length > 1;
   navigator.mediaSession.metadata = new MediaMetadata({
     title: many ? `${R.unit.label}: ${R.unit.title}` : R.book.title,
-    artist: R.book.creator,
+    artist: `${R.book.creator} · ${voiceText(voiceInfo(R.book, R.voice))}`,
     album: R.book.title,
     artwork: [{ src: new URL('icons/icon-512.png', location.href).href, sizes: '512x512', type: 'image/png' }],
   });
@@ -545,6 +616,8 @@ function setSleep(min, tell = true) {
   if (tell) announce(min ? `Sẽ tự dừng sau ${min} phút.` : 'Đã tắt hẹn giờ.');
 }
 setSleep(0, false);
+setVoice(prefVoice(), false);
+$('#optVoice').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setVoice(b.dataset.v); });
 $('#optSleep').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setSleep(Number(b.dataset.v)); });
 $('#openSettings').addEventListener('click', () => $('#settings').showModal());
 $('#settings').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });  // chạm ra ngoài để đóng
