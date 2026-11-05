@@ -283,15 +283,20 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Tiểu thuyết hiện thực về chị Dậu và gia đình nông dân nghèo trong mùa sưu thuế ở làng Đông Xá, một trong những tác phẩm tiêu biểu của văn học Việt Nam trước 1945.",
    "date": "1936",
-   "narrator": "Ngọc Linh (giọng nữ)",
+   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 9336.634,
+   "duration": 9426.878,
    "voices": [
     {
      "id": "nu",
      "label": "Giọng nữ",
      "name": "Ngọc Linh"
+    },
+    {
+     "id": "nam",
+     "label": "Giọng nam",
+     "name": "Thiện Minh"
     },
     {
      "id": "piper",
@@ -312,10 +317,10 @@
        "audio": "books/tat-den/nu/01.mp3",
        "duration": 425.37
       },
-      "piper": {
-       "data": "books/tat-den/piper/01.json",
-       "audio": "books/tat-den/piper/01.mp3",
-       "duration": 379.962
+      "nam": {
+       "data": "books/tat-den/nam/01.json",
+       "audio": "books/tat-den/nam/01.mp3",
+       "duration": 395.59
       }
      }
     },
@@ -323,13 +328,18 @@
      "no": 2,
      "label": "Tắt đèn",
      "title": "Chương 2",
-     "duration": 357.32,
+     "duration": 407.29,
      "ready": true,
      "voices": {
-      "piper": {
-       "data": "books/tat-den/piper/02.json",
-       "audio": "books/tat-den/piper/02.mp3",
-       "duration": 357.32
+      "nu": {
+       "data": "books/tat-den/nu/02.json",
+       "audio": "books/tat-den/nu/02.mp3",
+       "duration": 407.29
+      },
+      "nam": {
+       "data": "books/tat-den/nam/02.json",
+       "audio": "books/tat-den/nam/02.mp3",
+       "duration": 380.17
       }
      }
     },
@@ -337,13 +347,18 @@
      "no": 3,
      "label": "Tắt đèn",
      "title": "Chương 3",
-     "duration": 386.966,
+     "duration": 427.24,
      "ready": true,
      "voices": {
-      "piper": {
-       "data": "books/tat-den/piper/03.json",
-       "audio": "books/tat-den/piper/03.mp3",
-       "duration": 386.966
+      "nu": {
+       "data": "books/tat-den/nu/03.json",
+       "audio": "books/tat-den/nu/03.mp3",
+       "duration": 427.24
+      },
+      "nam": {
+       "data": "books/tat-den/nam/03.json",
+       "audio": "books/tat-den/nam/03.mp3",
+       "duration": 402.22
       }
      }
     },
@@ -687,11 +702,15 @@
    "daisy": {
     "nu": {
      "url": "books/tat-den/tat-den-daisy-nu.zip",
-     "size": "2.2 MB"
+     "size": "6.5 MB"
+    },
+    "nam": {
+     "url": "books/tat-den/tat-den-daisy-nam.zip",
+     "size": "6.0 MB"
     },
     "piper": {
      "url": "books/tat-den/tat-den-daisy-piper.zip",
-     "size": "49 MB"
+     "size": "43 MB"
     }
    }
   },
