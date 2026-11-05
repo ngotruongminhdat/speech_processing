@@ -127,6 +127,229 @@
    "daisySize": "4.9 MB"
   },
   {
+   "slug": "tat-den",
+   "title": "Tắt đèn",
+   "creator": "Ngô Tất Tố",
+   "subject": "Văn học & Tiểu thuyết",
+   "description": "Tiểu thuyết hiện thực về chị Dậu và gia đình nông dân nghèo trong mùa sưu thuế ở làng Đông Xá, một trong những tác phẩm tiêu biểu của văn học Việt Nam trước 1945.",
+   "date": "1936",
+   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 3464.71,
+   "units": [
+    {
+     "no": 1,
+     "label": "Tắt đèn",
+     "title": "Chương 1",
+     "duration": 379.962,
+     "ready": true,
+     "data": "books/tat-den/01.json",
+     "audio": "books/tat-den/01.mp3"
+    },
+    {
+     "no": 2,
+     "label": "Tắt đèn",
+     "title": "Chương 2",
+     "duration": 357.32,
+     "ready": true,
+     "data": "books/tat-den/02.json",
+     "audio": "books/tat-den/02.mp3"
+    },
+    {
+     "no": 3,
+     "label": "Tắt đèn",
+     "title": "Chương 3",
+     "duration": 386.966,
+     "ready": true,
+     "data": "books/tat-den/03.json",
+     "audio": "books/tat-den/03.mp3"
+    },
+    {
+     "no": 4,
+     "label": "Tắt đèn",
+     "title": "Chương 4",
+     "duration": 435.998,
+     "ready": true,
+     "data": "books/tat-den/04.json",
+     "audio": "books/tat-den/04.mp3"
+    },
+    {
+     "no": 5,
+     "label": "Tắt đèn",
+     "title": "Chương 5",
+     "duration": 564.581,
+     "ready": true,
+     "data": "books/tat-den/05.json",
+     "audio": "books/tat-den/05.mp3"
+    },
+    {
+     "no": 6,
+     "label": "Tắt đèn",
+     "title": "Chương 6",
+     "duration": 417.354,
+     "ready": true,
+     "data": "books/tat-den/06.json",
+     "audio": "books/tat-den/06.mp3"
+    },
+    {
+     "no": 7,
+     "label": "Tắt đèn",
+     "title": "Chương 7",
+     "duration": 397.527,
+     "ready": true,
+     "data": "books/tat-den/07.json",
+     "audio": "books/tat-den/07.mp3"
+    },
+    {
+     "no": 8,
+     "label": "Tắt đèn",
+     "title": "Chương 8",
+     "duration": 366.599,
+     "ready": true,
+     "data": "books/tat-den/08.json",
+     "audio": "books/tat-den/08.mp3"
+    },
+    {
+     "no": 9,
+     "label": "Tắt đèn",
+     "title": "Chương 9",
+     "duration": 158.403,
+     "ready": true,
+     "data": "books/tat-den/09.json",
+     "audio": "books/tat-den/09.mp3"
+    },
+    {
+     "no": 10,
+     "label": "Tắt đèn",
+     "title": "Chương 10",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 11,
+     "label": "Tắt đèn",
+     "title": "Chương 11",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 12,
+     "label": "Tắt đèn",
+     "title": "Chương 12",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 13,
+     "label": "Tắt đèn",
+     "title": "Chương 13",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 14,
+     "label": "Tắt đèn",
+     "title": "Chương 14",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 15,
+     "label": "Tắt đèn",
+     "title": "Chương 15",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 16,
+     "label": "Tắt đèn",
+     "title": "Chương 16",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 17,
+     "label": "Tắt đèn",
+     "title": "Chương 17",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 18,
+     "label": "Tắt đèn",
+     "title": "Chương 18",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 19,
+     "label": "Tắt đèn",
+     "title": "Chương 19",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 20,
+     "label": "Tắt đèn",
+     "title": "Chương 20",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 21,
+     "label": "Tắt đèn",
+     "title": "Chương 21",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 22,
+     "label": "Tắt đèn",
+     "title": "Chương 22",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 23,
+     "label": "Tắt đèn",
+     "title": "Chương 23",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 24,
+     "label": "Tắt đèn",
+     "title": "Chương 24",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 25,
+     "label": "Tắt đèn",
+     "title": "Chương 25",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 26,
+     "label": "Tắt đèn",
+     "title": "Chương 26",
+     "duration": 0,
+     "ready": false
+    },
+    {
+     "no": 27,
+     "label": "Tắt đèn",
+     "title": "Chương 27",
+     "duration": 0,
+     "ready": false
+    }
+   ],
+   "daisy": "books/tat-den/tat-den-daisy.zip",
+   "daisySize": "18 MB"
+  },
+  {
    "slug": "totto-chan",
    "title": "Totto-chan Bên Cửa Sổ",
    "creator": "Tetsuko Kuroyanagi",
