@@ -8,15 +8,20 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Cuộc đời tảo tần, lặng lẽ hy sinh của Tâm, một cô gái bán hàng xén ở làng quê Bắc Bộ.",
    "date": "1943",
-   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
    "sourceURL": "https://vi.wikisource.org/wiki/C%C3%B4_h%C3%A0ng_x%C3%A9n",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 1196.022,
+   "duration": 1351.73,
    "voices": [
     {
-     "id": "piper",
-     "label": "Giọng dự phòng",
-     "name": "Piper"
+     "id": "nu",
+     "label": "Giọng nữ",
+     "name": "Ngọc Linh"
+    },
+    {
+     "id": "nam",
+     "label": "Giọng nam",
+     "name": "Thiện Minh"
     }
    ],
    "units": [
@@ -24,20 +29,29 @@
      "no": 1,
      "label": "Cô hàng xén",
      "title": "Cô hàng xén",
-     "duration": 1196.022,
+     "duration": 1351.73,
      "ready": true,
      "voices": {
-      "piper": {
-       "data": "books/co-hang-xen/piper/01.json",
-       "audio": "books/co-hang-xen/piper/01.mp3",
-       "duration": 1196.022
+      "nu": {
+       "data": "books/co-hang-xen/nu/01.json",
+       "audio": "books/co-hang-xen/nu/01.mp3",
+       "duration": 1351.73
+      },
+      "nam": {
+       "data": "books/co-hang-xen/nam/01.json",
+       "audio": "books/co-hang-xen/nam/01.mp3",
+       "duration": 1272.21
       }
      }
     }
    ],
    "daisy": {
-    "piper": {
-     "url": "books/co-hang-xen/co-hang-xen-daisy-piper.zip",
+    "nu": {
+     "url": "books/co-hang-xen/co-hang-xen-daisy-nu.zip",
+     "size": "7.0 MB"
+    },
+    "nam": {
+     "url": "books/co-hang-xen/co-hang-xen-daisy-nam.zip",
      "size": "6.5 MB"
     }
    }
