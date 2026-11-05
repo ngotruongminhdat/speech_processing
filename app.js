@@ -285,10 +285,17 @@ async function refreshSaveBtn(book) {
 
 // ================= TRANG ĐỌC =================
 const audio = $('#audio');
-const R = { book: null, unit: null, voice: null, sents: [], cur: -1, objectUrl: null, token: 0, userScrollAt: 0, pendingSeek: null, quietSeek: false };
+const R = { book: null, unit: null, voice: null, sents: [], cur: -1, objectUrl: null, token: 0, userScrollAt: 0, pendingSeek: null, quietSeek: false,
+  ready: false,     // audio của đúng phần và giọng đang mở đã nạp xong; trước đó đồng hồ audio chưa có nghĩa
+  keep: null, srcToken: 0 };
 
 // keep: { sent, play } khi đổi giọng giữa chừng — giữ nguyên câu đang nghe và trạng thái phát
 async function openReader(book, unitNo, keep = null) {
+  // Ghi vị trí của phần đang nghe trước khi chuyển. Từ đây tới khi audio mới nạp xong thì không ghi nữa:
+  // lúc đó đồng hồ vẫn là của audio cũ, ghi vào sẽ gắn nhầm thời điểm cũ cho phần hoặc giọng mới
+  // (phần sau bị nhảy tới giữa chừng, đổi giọng rồi mở lại thì lạc chỗ).
+  if (!audio.ended) savePos();
+  R.ready = false; R.keep = keep;
   const token = ++R.token;
   const unit = book.units.find((u) => u.no === unitNo);
   const vid = voiceOf(unit);
@@ -346,7 +353,7 @@ async function openReader(book, unitNo, keep = null) {
   if (token !== R.token) return;
 
   renderText(data);
-  audio.src = src;
+  audio.src = src; R.srcToken = token;
   audio.playbackRate = Number(store.get('rate', 1));
   $('#speed').value = String(audio.playbackRate);
 
@@ -405,8 +412,9 @@ function setVoice(vid, tell = true) {
     const now = voiceOf(R.unit);
     if (now !== vid) msg = `${pickable(R.book).some((v) => v.id === vid) ? 'Phần' : 'Cuốn'} này chưa có ${voiceText(voiceInfo(R.book, vid))}, vẫn phát ${voiceText(voiceInfo(R.book, now))}.`;
     if (now !== R.voice) {
-      const sent = R.sents.length ? sentAt(audio.currentTime) : 0;
-      openReader(R.book, R.unit.no, { sent, play: !audio.paused });
+      // audio còn đang nạp dở (vừa mở, hoặc vừa đổi giọng) thì dùng lại đích của lần mở đang chờ
+      const keep = R.ready ? { sent: R.sents.length ? sentAt(audio.currentTime) : 0, play: !audio.paused } : R.keep;
+      openReader(R.book, R.unit.no, keep);
     }
   } else if (view === 'book') {
     const book = findBook(decodeURIComponent((location.hash.split('/')[2]) || ''));
@@ -471,6 +479,8 @@ function highlight(i) {
 function seekSent(i, play = true) {
   if (!R.sents.length) return;
   i = Math.max(0, Math.min(R.sents.length - 1, i));
+  // audio còn đang nạp: ghi lại đích, nạp xong sẽ nhảy tới đó
+  if (!R.ready) { R.pendingSeek = R.sents[i].b; R.quietSeek = true; R.keep = { sent: i, play }; highlight(i); return; }
   audio.currentTime = R.sents[i].b + 0.001;
   R.userScrollAt = 0;
   highlight(i);
@@ -493,7 +503,7 @@ function gotoUnit(dir) {
 }
 
 function savePos() {
-  if (!R.book || !R.unit || !audio.duration) return;
+  if (!R.ready || !R.book || !R.unit || !audio.duration) return;
   store.set('pos:' + R.book.slug, {
     unit: R.unit.no, t: Math.round(audio.currentTime * 10) / 10, at: Date.now(),
     s: R.sents.length ? sentAt(audio.currentTime) : 0, v: R.voice,   // câu và giọng, để đổi giọng vẫn nghe tiếp đúng chỗ
@@ -525,6 +535,8 @@ audio.addEventListener('loadedmetadata', () => {
     if (!R.quietSeek) announce(`${R.seekNote || ''}Nghe tiếp từ ${spoken(R.pendingSeek)}.`);
     R.pendingSeek = null; R.quietSeek = false; R.seekNote = '';
   }
+  // audio vừa nạp đúng là của lần mở mới nhất thì từ đây mới được ghi vị trí
+  if (R.srcToken === R.token) R.ready = true;
   tick();
 });
 audio.addEventListener('play', () => { setPlayUi(true); cancelAnimationFrame(raf); loop(); });

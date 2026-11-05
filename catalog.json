@@ -283,11 +283,16 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Tiểu thuyết hiện thực về chị Dậu và gia đình nông dân nghèo trong mùa sưu thuế ở làng Đông Xá, một trong những tác phẩm tiêu biểu của văn học Việt Nam trước 1945.",
    "date": "1936",
-   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "narrator": "Ngọc Linh (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 9291.226,
+   "duration": 9336.634,
    "voices": [
+    {
+     "id": "nu",
+     "label": "Giọng nữ",
+     "name": "Ngọc Linh"
+    },
     {
      "id": "piper",
      "label": "Giọng dự phòng",
@@ -299,9 +304,14 @@
      "no": 1,
      "label": "Tắt đèn",
      "title": "Chương 1",
-     "duration": 379.962,
+     "duration": 425.37,
      "ready": true,
      "voices": {
+      "nu": {
+       "data": "books/tat-den/nu/01.json",
+       "audio": "books/tat-den/nu/01.mp3",
+       "duration": 425.37
+      },
       "piper": {
        "data": "books/tat-den/piper/01.json",
        "audio": "books/tat-den/piper/01.mp3",
@@ -675,6 +685,10 @@
     }
    ],
    "daisy": {
+    "nu": {
+     "url": "books/tat-den/tat-den-daisy-nu.zip",
+     "size": "2.2 MB"
+    },
     "piper": {
      "url": "books/tat-den/tat-den-daisy-piper.zip",
      "size": "49 MB"
