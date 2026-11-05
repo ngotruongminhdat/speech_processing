@@ -2,6 +2,102 @@
   "version": 1,
   "books": [
     {
+      "slug": "co-hang-xen",
+      "title": "Cô hàng xén",
+      "creator": "Thạch Lam",
+      "subject": "Văn học & Tiểu thuyết",
+      "description": "Cuộc đời tảo tần, lặng lẽ hy sinh của Tâm, một cô gái bán hàng xén ở làng quê Bắc Bộ.",
+      "date": "1943",
+      "language": "vi",
+      "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "sourceURL": "https://vi.wikisource.org/wiki/C%C3%B4_h%C3%A0ng_x%C3%A9n",
+      "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+      "duration": 1196.022,
+      "units": [
+        {
+          "no": 1,
+          "label": "Cô hàng xén",
+          "title": "Cô hàng xén",
+          "duration": 1196.022,
+          "segments": 121,
+          "path": "co-hang-xen/build/chapter_01",
+          "audio": "chuong01.mp3"
+        }
+      ]
+    },
+    {
+      "slug": "duoi-bong-hoang-lan",
+      "title": "Dưới bóng hoàng lan",
+      "creator": "Thạch Lam",
+      "subject": "Văn học & Tiểu thuyết",
+      "description": "Chuyến về thăm bà của Thanh, và những rung động trong trẻo dưới bóng cây hoàng lan.",
+      "date": "1942",
+      "language": "vi",
+      "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "sourceURL": "https://vi.wikisource.org/wiki/D%C6%B0%E1%BB%9Bi_b%C3%B3ng_ho%C3%A0ng_lan",
+      "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+      "duration": 516.317,
+      "units": [
+        {
+          "no": 1,
+          "label": "Dưới bóng hoàng lan",
+          "title": "Dưới bóng hoàng lan",
+          "duration": 516.317,
+          "segments": 73,
+          "path": "duoi-bong-hoang-lan/build/chapter_01",
+          "audio": "chuong01.mp3"
+        }
+      ]
+    },
+    {
+      "slug": "gio-lanh-dau-mua",
+      "title": "Gió lạnh đầu mùa",
+      "creator": "Thạch Lam",
+      "subject": "Văn học & Tiểu thuyết",
+      "description": "Lòng nhân ái của hai chị em Sơn và Lan trong buổi sáng gió lạnh đầu mùa đông.",
+      "date": "1937",
+      "language": "vi",
+      "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "sourceURL": "https://vi.wikisource.org/wiki/Gi%C3%B3_l%E1%BA%A1nh_%C4%91%E1%BA%A7u_m%C3%B9a",
+      "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+      "duration": 488.727,
+      "units": [
+        {
+          "no": 1,
+          "label": "Gió lạnh đầu mùa",
+          "title": "Gió lạnh đầu mùa",
+          "duration": 488.727,
+          "segments": 78,
+          "path": "gio-lanh-dau-mua/build/chapter_01",
+          "audio": "chuong01.mp3"
+        }
+      ]
+    },
+    {
+      "slug": "hai-dua-tre",
+      "title": "Hai đứa trẻ",
+      "creator": "Thạch Lam",
+      "subject": "Văn học & Tiểu thuyết",
+      "description": "Hai chị em Liên và An nơi phố huyện nghèo, đêm đêm thức đợi chuyến tàu từ Hà Nội đi qua.",
+      "date": "1938",
+      "language": "vi",
+      "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+      "sourceURL": "https://vi.wikisource.org/wiki/Hai_%C4%91%E1%BB%A9a_tr%E1%BA%BB",
+      "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+      "duration": 693.133,
+      "units": [
+        {
+          "no": 1,
+          "label": "Hai đứa trẻ",
+          "title": "Hai đứa trẻ",
+          "duration": 693.133,
+          "segments": 64,
+          "path": "hai-dua-tre/build/chapter_01",
+          "audio": "chuong01.mp3"
+        }
+      ]
+    },
+    {
       "slug": "lao-hac",
       "title": "Lão Hạc",
       "creator": "Nam Cao",

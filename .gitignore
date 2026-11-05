@@ -11,3 +11,5 @@ books/*/build/
 books/*/dist/
 demo/outputs/
 models/
+site/
+.deploy/

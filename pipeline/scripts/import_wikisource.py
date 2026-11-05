@@ -76,7 +76,7 @@ def clean_inline(text: str) -> str:
     text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
     text = re.sub(r"<br\s*/?>", "\n", text)
     text = re.sub(r"</?(poem|center|small|big|div|span|section)[^>]*>", "", text)
-    text = re.sub(r"\[\[(?:Thể loại|Category|Tập tin|File|Hình):[^\]]*\]\]", "", text)
+    text = re.sub(r"\[\[\s*(?:Thể loại|Category|Tập tin|File|Hình)\s*:[^\]]*\]\]", "", text)
     text = re.sub(r"\[\[[^\]|]*\|([^\]]*)\]\]", r"\1", text)   # [[đích|nhãn]] -> nhãn
     text = re.sub(r"\[\[([^\]]*)\]\]", r"\1", text)            # [[đích]] -> đích
     text = re.sub(r"\[https?://\S+\s+([^\]]*)\]", r"\1", text)
@@ -120,6 +120,15 @@ def main():
     ap.add_argument("--allow-untagged", action="store_true", help="nhập cả trang không có nhãn PVCC")
     a = ap.parse_args()
 
+    # Tải và kiểm tra nhãn bản quyền của mọi trang trước khi ghi bất cứ thứ gì ra đĩa.
+    parsed_pages = []
+    for page in a.pages:
+        parsed = fetch_page(page)
+        cats = [c["category"] for c in parsed.get("categories", [])]
+        if not any(c.startswith("PVCC") for c in cats) and not a.allow_untagged:
+            sys.exit(f"❌ {page!r} không có nhãn phạm vi công cộng (PVCC). Thể loại: {cats}")
+        parsed_pages.append(parsed)
+
     book_root = REPO / "books" / a.slug
     title = a.title or a.pages[0]
     meta = {
@@ -149,11 +158,7 @@ def main():
     from extract_chapter import write_dtbook
 
     single = len(a.pages) == 1
-    for unit_no, page in enumerate(a.pages, start=1):
-        parsed = fetch_page(page)
-        cats = [c["category"] for c in parsed.get("categories", [])]
-        if not any(c.startswith("PVCC") for c in cats) and not a.allow_untagged:
-            sys.exit(f"❌ {page!r} không có nhãn phạm vi công cộng (PVCC). Thể loại: {cats}")
+    for unit_no, (page, parsed) in enumerate(zip(a.pages, parsed_pages), start=1):
         paras = to_paragraphs(parsed["wikitext"])
         unit_title = title if single else page.split("/")[-1]
         label = unit_title if single else f"Chương {unit_no}"
