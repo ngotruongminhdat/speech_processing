@@ -1,0 +1,140 @@
+{
+ "version": 1,
+ "books": [
+  {
+   "slug": "co-hang-xen",
+   "title": "Cô hàng xén",
+   "creator": "Thạch Lam",
+   "subject": "Văn học & Tiểu thuyết",
+   "description": "Cuộc đời tảo tần, lặng lẽ hy sinh của Tâm, một cô gái bán hàng xén ở làng quê Bắc Bộ.",
+   "date": "1943",
+   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "sourceURL": "https://vi.wikisource.org/wiki/C%C3%B4_h%C3%A0ng_x%C3%A9n",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 1196.022,
+   "units": [
+    {
+     "no": 1,
+     "label": "Cô hàng xén",
+     "title": "Cô hàng xén",
+     "duration": 1196.022,
+     "ready": true,
+     "data": "books/co-hang-xen/01.json",
+     "audio": "books/co-hang-xen/01.mp3"
+    }
+   ],
+   "daisy": "books/co-hang-xen/co-hang-xen-daisy.zip",
+   "daisySize": "6.5 MB"
+  },
+  {
+   "slug": "duoi-bong-hoang-lan",
+   "title": "Dưới bóng hoàng lan",
+   "creator": "Thạch Lam",
+   "subject": "Văn học & Tiểu thuyết",
+   "description": "Chuyến về thăm bà của Thanh, và những rung động trong trẻo dưới bóng cây hoàng lan.",
+   "date": "1942",
+   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "sourceURL": "https://vi.wikisource.org/wiki/D%C6%B0%E1%BB%9Bi_b%C3%B3ng_ho%C3%A0ng_lan",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 516.317,
+   "units": [
+    {
+     "no": 1,
+     "label": "Dưới bóng hoàng lan",
+     "title": "Dưới bóng hoàng lan",
+     "duration": 516.317,
+     "ready": true,
+     "data": "books/duoi-bong-hoang-lan/01.json",
+     "audio": "books/duoi-bong-hoang-lan/01.mp3"
+    }
+   ],
+   "daisy": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy.zip",
+   "daisySize": "2.7 MB"
+  },
+  {
+   "slug": "gio-lanh-dau-mua",
+   "title": "Gió lạnh đầu mùa",
+   "creator": "Thạch Lam",
+   "subject": "Văn học & Tiểu thuyết",
+   "description": "Lòng nhân ái của hai chị em Sơn và Lan trong buổi sáng gió lạnh đầu mùa đông.",
+   "date": "1937",
+   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "sourceURL": "https://vi.wikisource.org/wiki/Gi%C3%B3_l%E1%BA%A1nh_%C4%91%E1%BA%A7u_m%C3%B9a",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 488.727,
+   "units": [
+    {
+     "no": 1,
+     "label": "Gió lạnh đầu mùa",
+     "title": "Gió lạnh đầu mùa",
+     "duration": 488.727,
+     "ready": true,
+     "data": "books/gio-lanh-dau-mua/01.json",
+     "audio": "books/gio-lanh-dau-mua/01.mp3"
+    }
+   ],
+   "daisy": "books/gio-lanh-dau-mua/gio-lanh-dau-mua-daisy.zip",
+   "daisySize": "2.6 MB"
+  },
+  {
+   "slug": "hai-dua-tre",
+   "title": "Hai đứa trẻ",
+   "creator": "Thạch Lam",
+   "subject": "Văn học & Tiểu thuyết",
+   "description": "Hai chị em Liên và An nơi phố huyện nghèo, đêm đêm thức đợi chuyến tàu từ Hà Nội đi qua.",
+   "date": "1938",
+   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "sourceURL": "https://vi.wikisource.org/wiki/Hai_%C4%91%E1%BB%A9a_tr%E1%BA%BB",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 693.133,
+   "units": [
+    {
+     "no": 1,
+     "label": "Hai đứa trẻ",
+     "title": "Hai đứa trẻ",
+     "duration": 693.133,
+     "ready": true,
+     "data": "books/hai-dua-tre/01.json",
+     "audio": "books/hai-dua-tre/01.mp3"
+    }
+   ],
+   "daisy": "books/hai-dua-tre/hai-dua-tre-daisy.zip",
+   "daisySize": "3.8 MB"
+  },
+  {
+   "slug": "lao-hac",
+   "title": "Lão Hạc",
+   "creator": "Nam Cao",
+   "subject": "Văn học & Tiểu thuyết",
+   "description": "Truyện ngắn hiện thực về lão Hạc, một lão nông nghèo, cô độc, thà chết chứ không tiêu vào mảnh vườn để dành cho con trai.",
+   "date": "1943",
+   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "sourceURL": "https://vi.wikisource.org/wiki/L%C3%A3o_H%E1%BA%A1c",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 905.097,
+   "units": [
+    {
+     "no": 1,
+     "label": "Lão Hạc",
+     "title": "Lão Hạc",
+     "duration": 905.097,
+     "ready": true,
+     "data": "books/lao-hac/01.json",
+     "audio": "books/lao-hac/01.mp3"
+    }
+   ],
+   "daisy": "books/lao-hac/lao-hac-daisy.zip",
+   "daisySize": "4.9 MB"
+  },
+  {
+   "slug": "totto-chan",
+   "title": "Totto-chan Bên Cửa Sổ",
+   "creator": "Tetsuko Kuroyanagi",
+   "subject": "Trẻ em & Thiếu nhi",
+   "duration": 18701,
+   "unitCount": 63,
+   "external": "build/index.html",
+   "cover": "build/cover.jpg"
+  }
+ ]
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sách Nói — Thư viện sách nói tiếng Việt</title>
+<meta name="description" content="Thư viện sách nói DAISY tiếng Việt cho người khiếm thị: nghe sách, theo dõi từng câu, điều khiển không cần nhìn màn hình.">
+<meta name="theme-color" content="#3a2114">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body data-view="library">
+<a class="skip" id="skip" href="#">Bỏ qua, tới nội dung chính</a>
+
+<!-- Vùng thông báo cho trình đọc màn hình: chỉ dùng ngay sau thao tác của người
+     dùng, không thông báo theo từng câu để khỏi nói đè lên giọng đọc sách. -->
+<div id="live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ============ THƯ VIỆN ============ -->
+<div id="view-library" class="view">
+  <header class="hero lib">
+    <div class="lib-in">
+      <p class="kicker">Thư viện sách nói DAISY</p>
+      <h1 id="h-library" tabindex="-1">Sách Nói</h1>
+      <p class="author">Sách nói tiếng Việt cho người khiếm thị</p>
+      <div class="divider" aria-hidden="true"><i>■</i></div>
+      <p class="desc" id="librarySummary"></p>
+      <div class="cta" id="resume" hidden></div>
+      <div class="search">
+        <label for="q">Tìm sách theo tên hoặc tác giả</label>
+        <input id="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="Ví dụ: Thạch Lam">
+      </div>
+    </div>
+  </header>
+  <main class="shelf-wrap">
+    <h2 class="sr-only">Danh sách sách</h2>
+    <ul id="bookList" class="shelf"></ul>
+    <p id="noResult" class="empty" hidden>Không tìm thấy sách nào khớp.</p>
+  </main>
+  <footer class="foot on-dark">
+    <span class="mark" aria-hidden="true">◆</span><br>
+    Đồ án môn Xử lý tiếng nói · sách dựng theo chuẩn DAISY 3<br>
+    Văn bản thuộc phạm vi công cộng lấy từ Wikisource tiếng Việt
+  </footer>
+</div>
+
+<!-- ============ TRANG BÌA MỘT CUỐN ============ -->
+<div id="view-book" class="view" hidden>
+  <header class="hero">
+    <div class="bg" id="bookBg"></div><div class="tint"></div>
+    <a class="pill-btn top-left" href="#/"><span aria-hidden="true">‹</span> Thư viện</a>
+    <div class="hero-in" id="bookHero"></div>
+  </header>
+  <main class="wrap" id="bookToc"></main>
+  <footer class="foot" id="bookFoot"></footer>
+</div>
+
+<!-- ============ TRANG ĐỌC ============ -->
+<div id="view-reader" class="view reader" hidden>
+  <nav id="toc" aria-label="Mục lục" hidden>
+    <div class="brand">
+      <a id="tocBrand" href="#/"><b></b><i></i></a>
+    </div>
+    <h2>Mục lục</h2>
+    <ol id="tocList"></ol>
+  </nav>
+
+  <main class="read-main">
+    <article class="page">
+      <div class="kicker" id="readerKicker"></div>
+      <h1 class="chapter" id="h-reader" tabindex="-1"></h1>
+      <div class="byline" id="readerByline"></div>
+      <div class="flourish" aria-hidden="true"><i>◆</i></div>
+      <div id="text" aria-label="Nội dung. Chạm vào một câu để nghe từ câu đó."></div>
+      <p id="readerStatus" class="empty" hidden></p>
+      <div class="endmark" aria-hidden="true">◆ ◆ ◆</div>
+    </article>
+  </main>
+
+  <div class="top-pills">
+    <button class="pill-btn" id="openSettings" type="button" aria-haspopup="dialog"><span aria-hidden="true">⚙</span> Cài đặt</button>
+    <a class="pill-btn" id="coverBtn" href="#/"><span aria-hidden="true">📖</span> Trang bìa</a>
+  </div>
+
+  <!-- Thanh phát nổi ở đáy. Trên điện thoại xếp thành hai hàng, nút lớn. -->
+  <div class="player-dock">
+    <div class="player-card" role="region" aria-label="Điều khiển phát">
+      <div class="info"><b id="playerTitle"></b><br><span>chạm vào câu để nghe từ đó</span></div>
+      <div class="transport">
+        <button class="navb" id="prev" type="button" aria-label="Câu trước"><span aria-hidden="true">⏮</span></button>
+        <button class="playpause" id="play" type="button" aria-label="Phát"><span aria-hidden="true" id="playIcon">▶</span></button>
+        <button class="navb" id="next" type="button" aria-label="Câu sau"><span aria-hidden="true">⏭</span></button>
+      </div>
+      <div class="scrubber">
+        <span class="time" id="tCur" aria-hidden="true">0:00</span>
+        <input type="range" class="scrub" id="scrub" min="0" max="1000" value="0" step="1" aria-label="Vị trí trong phần đang nghe">
+        <span class="time" id="tDur" aria-hidden="true">0:00</span>
+      </div>
+      <div class="extras">
+        <label class="sr-only" for="speed">Tốc độ đọc</label>
+        <select class="pbtn" id="speed">
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="1.75">1.75×</option>
+          <option value="2">2×</option>
+        </select>
+        <a class="pbtn" id="dl" href="#" download><span aria-hidden="true">⬇</span><span class="lbl"> DAISY</span></a>
+      </div>
+      <audio id="audio" preload="metadata"></audio>
+    </div>
+  </div>
+
+  <div class="keyhint" aria-hidden="true">
+    <b>Space</b> phát/dừng · <b>←</b><b>→</b> câu · <b>↑</b><b>↓</b> tốc độ<br>
+    <b>Shift</b>+<b>→</b> phần sau · <b>Shift</b>+<b>←</b> phần trước
+  </div>
+</div>
+
+<!-- ============ CÀI ĐẶT ĐỌC ============ -->
+<dialog id="settings" class="set-panel" aria-labelledby="h-settings">
+  <form method="dialog">
+    <h2 id="h-settings" class="sr-only">Cài đặt đọc</h2>
+    <h3 id="l-size">Cỡ chữ</h3>
+    <div class="set-row" id="optSize" role="group" aria-labelledby="l-size">
+      <button type="button" data-v="0.9" aria-label="Chữ nhỏ">A−</button>
+      <button type="button" data-v="1" aria-label="Chữ vừa">A</button>
+      <button type="button" data-v="1.2" aria-label="Chữ lớn">A+</button>
+      <button type="button" data-v="1.45" aria-label="Chữ rất lớn">A++</button>
+    </div>
+    <h3 id="l-theme">Nền &amp; tương phản</h3>
+    <div class="set-row" id="optTheme" role="group" aria-labelledby="l-theme">
+      <button type="button" data-v="paper">Giấy</button>
+      <button type="button" data-v="dark">Tối</button>
+      <button type="button" data-v="contrast">Tương phản cao</button>
+    </div>
+    <h3 id="l-leg">Kiểu chữ</h3>
+    <div class="set-row" id="optLeg" role="group" aria-labelledby="l-leg">
+      <button type="button" data-v="0">Mặc định</button>
+      <button type="button" data-v="1">Dễ đọc</button>
+    </div>
+    <h3 id="l-sleep">Hẹn giờ tắt</h3>
+    <div class="set-row" id="optSleep" role="group" aria-labelledby="l-sleep">
+      <button type="button" data-v="0">Tắt</button>
+      <button type="button" data-v="15" aria-label="15 phút">15′</button>
+      <button type="button" data-v="30" aria-label="30 phút">30′</button>
+      <button type="button" data-v="60" aria-label="60 phút">60′</button>
+    </div>
+    <div class="sleep-info" id="sleepInfo"></div>
+    <h3 id="l-auto">Khi mở một phần</h3>
+    <div class="set-row" id="optAuto" role="group" aria-labelledby="l-auto">
+      <button type="button" data-v="1">Tự phát ngay</button>
+      <button type="button" data-v="0">Chờ nhấn Phát</button>
+    </div>
+    <button class="set-close" value="close">Xong</button>
+  </form>
+</dialog>
+
+<noscript><p class="empty">Ứng dụng cần bật JavaScript để phát sách.</p></noscript>
+<script type="module" src="app.js"></script>
+</body>
+</html>

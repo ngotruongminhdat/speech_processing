@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE package PUBLIC "+//ISBN 0-9673008-1-9//DTD OEB 1.2 Package//EN" "http://openebook.org/dtds/oeb-1.2/oebpkg12.dtd">
+<package xmlns="http://openebook.org/namespaces/oeb-package/1.0/" unique-identifier="uid">
+  <metadata>
+    <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oebpackage="http://openebook.org/namespaces/oeb-package/1.0/">
+      <dc:Format>ANSI/NISO Z39.86-2005</dc:Format>
+      <dc:Title>Totto-chan Bên Cửa Sổ - Chương 36: Bốn mươi bảy Ronin</dc:Title>
+      <dc:Creator>Tetsuko Kuroyanagi</dc:Creator>
+      <dc:Subject>Trẻ em &amp; Thiếu nhi</dc:Subject>
+      <dc:Description>Hồi ký tuổi thơ của cô bé Totto-chan - một đứa trẻ hiếu động bị cho là "khác thường" và bị đuổi khỏi trường công lập. Cô được nhận vào trường Tomoe - nơi các lớp học diễn ra trong những toa tàu cũ - do thầy hiệu trưởng Kobayashi sáng lập. Tại đây, Totto-chan được tự do khám phá, học theo cách riêng và dần nhận ra giá trị của bản thân. Câu chuyện là bức thư tình gửi đến tuổi thơ, sự giáo dục nhân văn và lòng bao dung.</dc:Description>
+      <dc:Publisher>NXB Văn Học - Nhã Nam</dc:Publisher>
+      <dc:Date>2011</dc:Date>
+      <dc:Source>9786041194861</dc:Source>
+      <dc:Language>vi</dc:Language>
+      <dc:Identifier id="uid">9786041194861-ch36</dc:Identifier>
+    </dc-metadata>
+    <x-metadata>
+      <meta name="dtb:multimediaType" content="audioFullText"/>
+      <meta name="dtb:multimediaContent" content="audio,text"/>
+      <meta name="dtb:totalTime" content="0:04:56"/>
+      <meta name="dtb:audioFormat" content="MP3"/>
+      <meta name="note" content=""/>
+      <meta name="collector" content="Lê Thị Tường Vy, Ngô Trương Minh Đạt, Nguyễn Thạch Hà Anh, Nguyễn Đình Lộc"/>
+      <meta name="sourceURL" content="https://nhanam.vn/tottochan-ben-cua-so"/>
+    </x-metadata>
+  </metadata>
+  <manifest>
+    <item href="book.opf" id="opf" media-type="text/xml"/>
+    <item href="dtbook.xml" id="dtbook" media-type="application/x-dtbook+xml"/>
+    <item href="mo0.smil" id="mo0" media-type="application/smil"/>
+    <item href="chuong36.mp3" id="audio1" media-type="audio/mpeg"/>
+    <item href="navigation.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+    <item href="resources.res" id="resource" media-type="application/x-dtbresource+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="mo0"/>
+  </spine>
+</package>
