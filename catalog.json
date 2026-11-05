@@ -159,15 +159,20 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Hai chị em Liên và An nơi phố huyện nghèo, đêm đêm thức đợi chuyến tàu từ Hà Nội đi qua.",
    "date": "1938",
-   "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
+   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
    "sourceURL": "https://vi.wikisource.org/wiki/Hai_%C4%91%E1%BB%A9a_tr%E1%BA%BB",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 693.133,
+   "duration": 775.33,
    "voices": [
     {
-     "id": "piper",
-     "label": "Giọng dự phòng",
-     "name": "Piper"
+     "id": "nu",
+     "label": "Giọng nữ",
+     "name": "Ngọc Linh"
+    },
+    {
+     "id": "nam",
+     "label": "Giọng nam",
+     "name": "Thiện Minh"
     }
    ],
    "units": [
@@ -175,20 +180,29 @@
      "no": 1,
      "label": "Hai đứa trẻ",
      "title": "Hai đứa trẻ",
-     "duration": 693.133,
+     "duration": 775.33,
      "ready": true,
      "voices": {
-      "piper": {
-       "data": "books/hai-dua-tre/piper/01.json",
-       "audio": "books/hai-dua-tre/piper/01.mp3",
-       "duration": 693.133
+      "nu": {
+       "data": "books/hai-dua-tre/nu/01.json",
+       "audio": "books/hai-dua-tre/nu/01.mp3",
+       "duration": 775.33
+      },
+      "nam": {
+       "data": "books/hai-dua-tre/nam/01.json",
+       "audio": "books/hai-dua-tre/nam/01.mp3",
+       "duration": 723.71
       }
      }
     }
    ],
    "daisy": {
-    "piper": {
-     "url": "books/hai-dua-tre/hai-dua-tre-daisy-piper.zip",
+    "nu": {
+     "url": "books/hai-dua-tre/hai-dua-tre-daisy-nu.zip",
+     "size": "4.1 MB"
+    },
+    "nam": {
+     "url": "books/hai-dua-tre/hai-dua-tre-daisy-nam.zip",
      "size": "3.8 MB"
     }
    }
