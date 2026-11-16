@@ -216,7 +216,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 10840.93,
+   "duration": 10898.54,
    "voices": [
     {
      "id": "hm",
@@ -361,13 +361,13 @@
      "no": 10,
      "label": "Tắt đèn",
      "title": "Chương 10",
-     "duration": 352.84,
+     "duration": 390.24,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/10.json",
-       "audio": "books/tat-den/nu/10.mp3",
-       "duration": 352.84
+      "hm": {
+       "data": "books/tat-den/hm/10.json",
+       "audio": "books/tat-den/hm/10.mp3",
+       "duration": 390.24
       }
      }
     },
@@ -389,13 +389,13 @@
      "no": 12,
      "label": "Tắt đèn",
      "title": "Chương 12",
-     "duration": 242.59,
+     "duration": 262.8,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/12.json",
-       "audio": "books/tat-den/nu/12.mp3",
-       "duration": 242.59
+      "hm": {
+       "data": "books/tat-den/hm/12.json",
+       "audio": "books/tat-den/hm/12.mp3",
+       "duration": 262.8
       }
      }
     },
@@ -613,11 +613,11 @@
    "daisy": {
     "hm": {
      "url": "books/tat-den/tat-den-daisy-hm.zip",
-     "size": "22 MB"
+     "size": "26 MB"
     },
     "nu": {
      "url": "books/tat-den/tat-den-daisy-nu.zip",
-     "size": "36 MB"
+     "size": "33 MB"
     }
    }
   },
