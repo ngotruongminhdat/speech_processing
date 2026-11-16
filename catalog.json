@@ -173,16 +173,15 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Truyện ngắn hiện thực về lão Hạc, một lão nông nghèo, cô độc, thà chết chứ không tiêu vào mảnh vườn để dành cho con trai.",
    "date": "1943",
-   "narrator": "Ngọc Linh (giọng nữ)",
+   "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/L%C3%A3o_H%E1%BA%A1c",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 1032.51,
+   "duration": 1185.99,
    "voices": [
     {
-     "id": "nu",
+     "id": "hm",
      "label": "Giọng nữ",
-     "name": "Ngọc Linh",
-     "fallback": true
+     "name": "Hoài My"
     }
    ],
    "units": [
@@ -190,21 +189,21 @@
      "no": 1,
      "label": "Lão Hạc",
      "title": "Lão Hạc",
-     "duration": 1032.51,
+     "duration": 1185.99,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/lao-hac/nu/01.json",
-       "audio": "books/lao-hac/nu/01.mp3",
-       "duration": 1032.51
+      "hm": {
+       "data": "books/lao-hac/hm/01.json",
+       "audio": "books/lao-hac/hm/01.mp3",
+       "duration": 1185.99
       }
      }
     }
    ],
    "daisy": {
-    "nu": {
-     "url": "books/lao-hac/lao-hac-daisy-nu.zip",
-     "size": "5.2 MB"
+    "hm": {
+     "url": "books/lao-hac/lao-hac-daisy-hm.zip",
+     "size": "7.3 MB"
     }
    }
   },
