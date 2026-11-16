@@ -266,7 +266,8 @@ async def main():
                 check("vị trí đã lưu là của phần đang nghe", pos["unit"] == b["no"] and pos["t"] < 8, json.dumps(pos))
                 await page.evaluate(f"{AUDIO}.pause()")
 
-        # Chọn giọng đọc: cần một cuốn đã có cả giọng nữ và giọng nam cho phần đầu.
+        # Chọn giọng đọc: chỉ chạy khi thư viện có cả hai giọng VieNeu nu và nam (voices.py). Từ 16/11/2026
+        # thư viện dùng một giọng Hoài My nên khối này tự bỏ qua; giữ lại cho lúc thêm giọng thứ hai.
         both = next((b for b in cat["books"] if b.get("units")
                      and {"nu", "nam"} <= set(b["units"][0].get("voices", {}))), None)
         if both:
@@ -369,36 +370,39 @@ async def main():
                   (await page.get_attribute('.cta a[href*="-daisy-"]', "href")).endswith("-daisy-nam.zip"))
 
         # Phần chưa có giọng đang chọn: phát giọng khác đang có và nói rõ.
+        # Các giọng chính của thư viện (không tính giọng dự phòng). Thư viện một giọng thì không có gì để chọn.
+        prim = list({v["id"]: v for b in cat["books"] for v in b.get("voices", [])
+                     if not v.get("fallback") and v["id"] != "piper"}.values())
+        P = prim[0] if prim else None
+        p_txt = f"{P['label'].lower()} {P['name']}" if P else ""
         partial = next(((b, u) for b in cat["books"] for u in b.get("units", [])
-                        if u["ready"] and "nam" not in u["voices"]), None)
+                        if P and u["ready"] and P["id"] not in u["voices"]), None)
         if partial:
             pb, pu = partial
-            print(f"Phần chưa có giọng đang chọn: {pb['title']}")
-            await page.evaluate("localStorage.setItem('sn:voice', JSON.stringify('nam'))")
+            print(f"Phần chưa có giọng chính: {pb['title']}")
+            await page.evaluate(f"localStorage.setItem('sn:voice', JSON.stringify('{P['id']}'))")
             await page.evaluate(f"localStorage.removeItem('sn:pos:{pb['slug']}')")
-            await page.goto(BASE + f"#/r/{pb['slug']}/{pu['no']}")
+            await page.goto(BASE + f"#/b/{pb['slug']}")
             await page.reload(wait_until="load")
+            await page.wait_for_selector("#h-book")
+            if not any(P["id"] in u["voices"] for u in pb["units"]):
+                note = await page.inner_text(".voice-note")
+                check("trang bìa ghi rõ giọng chính đang được chuẩn bị", P["name"] in note and "đang được chuẩn bị" in note, note)
+            await page.goto(BASE + f"#/r/{pb['slug']}/{pu['no']}")
             await page.wait_for_function(f"Number.isFinite({AUDIO}.duration)", timeout=20000)
-            said = await spoken_live(page, "chưa có giọng nam Thiện Minh")
-            check("phần chưa có giọng nam thì phát giọng khác và báo bằng lời", "chưa có giọng nam Thiện Minh" in said, said)
+            said = await spoken_live(page, f"chưa có {p_txt}")
+            check("phần chưa có giọng chính thì phát giọng khác và báo bằng lời", f"chưa có {p_txt}" in said, said)
             check("thông báo đó cũng hiện ra cho người nhìn màn hình",
                   await page.locator("#toast").is_visible()
-                  and "chưa có giọng nam Thiện Minh" in await page.inner_text("#toast"), await page.inner_text("#toast"))
+                  and f"chưa có {p_txt}" in await page.inner_text("#toast"), await page.inner_text("#toast"))
             byline = await page.inner_text("#readerByline")
-            check("trang đọc ghi rõ đang phát giọng nào", "giọng" in byline and "Thiện Minh" not in byline, byline)
+            check("trang đọc ghi rõ đang phát giọng nào", "giọng" in byline and P["name"] not in byline, byline)
             await page.evaluate(f"{AUDIO}.pause()")
             await page.click("#openSettings")
-            check("hộp Cài đặt giải thích vì sao chưa đổi được giọng",
-                  "chưa có giọng nam Thiện Minh" in await page.inner_text("#voiceInfo"), await page.inner_text("#voiceInfo"))
-            await page.click('#optVoice button[data-v="nu"]')
-            await page.wait_for_timeout(200)
-            want_nu = "nu" in pu["voices"]
-            note = await page.inner_text("#voiceInfo")
-            check("chọn lại giọng khác thì ghi chú cập nhật theo",
-                  (note == "") if want_nu else ("chưa có giọng nữ Ngọc Linh" in note), note or "(trống)")
+            check("hộp Cài đặt giải thích vì sao chưa nghe được giọng chính",
+                  f"chưa có {p_txt}" in await page.inner_text("#voiceInfo"), await page.inner_text("#voiceInfo"))
             await page.keyboard.press("Escape")
             # đang nghe dở: câu "Nghe tiếp từ…" không được đè mất ghi chú về giọng
-            await page.evaluate("localStorage.setItem('sn:voice', JSON.stringify('nam'))")
             await page.evaluate(f"{AUDIO}.currentTime = 65")
             await page.wait_for_timeout(300)
             await page.evaluate(f"{AUDIO}.pause()")
@@ -409,8 +413,24 @@ async def main():
             await page.wait_for_timeout(300)
             live = await page.inner_text("#live")
             check("mở lại cuốn nghe dở: báo cả giọng đang phát lẫn vị trí nghe tiếp",
-                  "chưa có giọng nam Thiện Minh" in live and "Nghe tiếp từ" in live, live)
+                  f"chưa có {p_txt}" in live and "Nghe tiếp từ" in live, live)
             await page.evaluate(f"{AUDIO}.pause()")
+        done = next((b for b in cat["books"] if P and b.get("units") and all(P["id"] in u["voices"] for u in b["units"])), None)
+        if done:
+            await page.goto(BASE + f"#/b/{done['slug']}")
+            await page.wait_for_selector("#h-book")
+            check("cuốn đã đủ giọng chính thì trang bìa không còn ghi chú hay nút chọn giọng (khi chỉ có một giọng)",
+                  len(prim) > 1 or (await page.locator(".voice-note").count() == 0 and await page.locator(".voice-pick").count() == 0))
+            await page.click(".cta .btn.primary")
+            await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentSrc.includes('/{P['id']}/')", timeout=20000)
+            byline = await page.inner_text("#readerByline")
+            check("cuốn đã có giọng chính thì phát đúng giọng đó", P["name"] in byline, byline)
+            await page.evaluate(f"{AUDIO}.pause()")
+            if len(prim) < 2:
+                await page.click("#openSettings")
+                check("thư viện một giọng thì hộp Cài đặt không hiện mục chọn giọng",
+                      not await page.locator("#optVoice").is_visible() and not await page.locator("#l-voice").is_visible())
+                await page.keyboard.press("Escape")
         await page.evaluate("localStorage.removeItem('sn:voice')")
 
         # Lệnh phát bị ngắt (rời trang đọc, mở phần khác) không được hiện lời nhắc nhấn Phát;

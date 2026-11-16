@@ -47,6 +47,12 @@ Trang nghe thử dùng để chọn giọng: `demo/make_listen_page.py`, bản �
 - **Lỗi khi nạp mô hình với onnxruntime mới.** onnxruntime 1.31 từ chối đọc trọng số ngoài qua liên kết tượng trưng trong bộ nhớ đệm Hugging Face. `pipeline/scripts/_vieneu_local.py` tải mô hình thành file thật vào `models/vieneu/`.
 - Mô hình 454 MB cộng bộ mã hóa âm thanh 87 MB, so với 63 MB của Piper. Giấy phép Apache 2.0.
 
+### 1.3. Quay lại Hoài My (bổ sung 16/11/2026)
+
+Sau khi nghe cả thư viện bằng hai giọng VieNeu, người dùng vẫn chọn Hoài My vì ngữ điệu. Các số đo ở bảng trên không phản bác lựa chọn này: Hoài My có WER ngang VieNeu và là giọng duy nhất dành khoảng một phần ba thời gian cho khoảng lặng. Lý do từng bỏ edge-tts (mục 3) là tính sẵn sàng, không phải chất lượng. Ngày 16/11 dịch vụ trả lời bình thường: 8/8 câu thử, tốc độ dựng khoảng 0,65–0,95 lần thời gian thực khi đọc cả đoạn.
+
+Cách dựng mới (`tts_chapter_edge.py`) đọc cả đoạn văn một lần và lấy mốc câu từ mốc từng từ mà dịch vụ trả về, nên giữ được đồng bộ mức câu của bản cuối kỳ. Cái giá: bước dựng phụ thuộc một dịch vụ không cam kết. Hai bản VieNeu được giữ lại làm đường lùi.
+
 ## 2. Vì sao giọng `25hours_single-low` không dùng được
 
 Bảng ký hiệu âm vị của mô hình này **không có các ký hiệu thanh điệu**. Bộ chuyển văn bản thành âm vị (espeak-ng) biểu diễn thanh điệu tiếng Việt bằng chữ số đứng sau âm tiết, ví dụ `lˈaː5w hˈaː6c`. Khi đưa vào mô hình, 806 trên 8.068 âm vị của văn bản thử (10,0%) bị bỏ vì không có trong bảng, và toàn bộ số bị bỏ là ký hiệu thanh điệu. Kết quả là giọng đọc mất dấu thanh, WER lên 38%.

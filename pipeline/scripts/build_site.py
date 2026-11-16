@@ -4,7 +4,7 @@
   site/
   ├── index.html, app.css, app.js, sw.js, ...   <- chép từ app/web/
   ├── catalog.json                               <- danh mục thư viện
-  └── books/<slug>/<giọng>/NN.json, NN.mp3    <- mỗi giọng đọc một thư mục (nu, nam, piper)
+  └── books/<slug>/<giọng>/NN.json, NN.mp3    <- mỗi giọng đọc một thư mục (hm; dự phòng nu, piper)
       books/<slug>/<slug>-daisy-<giọng>.zip
 
 Mỗi cuốn có thể có nhiều giọng đọc (voices.py), mỗi giọng là một bản DAISY riêng ở
@@ -30,7 +30,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from voices import FALLBACK, VOICES  # noqa: E402
+from voices import FALLBACKS, VOICES  # noqa: E402
 BOOKS, WEB, SITE = REPO / "books", REPO / "app" / "web", REPO / "site"
 DAISY_FILES = ["dtbook.xml", "mo0.smil", "book.opf", "navigation.ncx", "resources.res"]
 
@@ -106,7 +106,8 @@ def main(legacy_totto: bool):
         shutil.copytree(listen, SITE / "nghe-thu")
 
     voice_info = {vid: {"id": vid, "label": v["label"], "name": v["name"]} for vid, v in VOICES.items()}
-    voice_info[FALLBACK["id"]] = FALLBACK
+    for fb in FALLBACKS:
+        voice_info[fb["id"]] = {"id": fb["id"], "label": fb["label"], "name": fb["name"], "fallback": True}
     books = []
     for meta_file in sorted(BOOKS.glob("*/metadata/book_meta.json")):
         meta = json.loads(meta_file.read_text(encoding="utf-8"))
@@ -126,20 +127,23 @@ def main(legacy_totto: bool):
                 if built:
                     voices[vid] = built
                     daisy_dirs.setdefault(vid, []).append(vdir)
-            if len(voices) < len(VOICES):   # chưa đủ giọng mới: kèm bản Piper cũ làm dự phòng
-                built = build_unit(d, out_dir / FALLBACK["id"], slug, FALLBACK["id"])
-                if built:
-                    voices[FALLBACK["id"]] = built
-                    daisy_dirs.setdefault(FALLBACK["id"], []).append(d)
+            if not voices:   # chưa có giọng chính: kèm giọng dự phòng đầu tiên đang có
+                for fb in FALLBACKS:
+                    fdir = root / fb["dir"] / "build" / d.name if fb["dir"] else d
+                    built = build_unit(fdir, out_dir / fb["id"], slug, fb["id"]) if (fdir / "segments.json").exists() else None
+                    if built:
+                        voices[fb["id"]] = built
+                        daisy_dirs.setdefault(fb["id"], []).append(fdir)
+                        break
             first = next(iter(voices.values()), None)
             units.append({"no": seg["chapter"], "label": seg["label"], "title": seg["title"],
                           "duration": first["duration"] if first else 0, "ready": bool(voices), "voices": voices})
         present = [vid for vid in voice_info if any(vid in u["voices"] for u in units)]
-        chosen = [vid for vid in present if vid != FALLBACK["id"]] or present
+        chosen = [vid for vid in present if not voice_info[vid].get("fallback")] or present
         book = {
             "slug": slug, "title": meta["title"], "creator": meta["creator"], "subject": meta["subject"],
             "description": meta["description"], "date": meta["date"],
-            "narrator": (meta.get("narrator", "") if chosen == [FALLBACK["id"]] else
+            "narrator": (meta.get("narrator", "") if chosen == ["piper"] else
                          ", ".join(f"{voice_info[v]['name']} ({voice_info[v]['label'].lower()})" for v in chosen)),
             "sourceURL": meta.get("sourceURL", ""), "note": meta.get("note", ""),
             "duration": round(sum(u["duration"] for u in units), 3),

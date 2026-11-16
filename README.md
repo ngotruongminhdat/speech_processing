@@ -13,7 +13,8 @@ Wikisource (phạm vi công cộng)
    │  import_wikisource.py        văn bản sạch, mỗi đoạn một id
    ▼
 books/<slug>/build/chapter_NN/segments.json + dtbook.xml
-   │  tts_chapter_vieneu.py       hai giọng cho người nghe chọn: nữ Ngọc Linh, nam Thiện Minh
+   │  tts_chapter_edge.py         giọng chính của thư viện: Hoài My (Microsoft, qua edge-tts), mốc câu từ WordBoundary
+   │  tts_chapter_vieneu.py       hai giọng VieNeu-TTS chạy trên máy (Ngọc Linh, Thiện Minh), nay là giọng dự phòng
    │  tts_chapter_piper.py        giọng Piper, rất nhanh, làm giọng dự phòng
    │  gen_smil.py, gen_opf_ncx.py DAISY 3: SMIL, OPF, NCX
    │  validate_daisy.py           kiểm tra chéo
@@ -51,7 +52,7 @@ python3 -m venv .venv
 # thêm một cuốn sách thuộc phạm vi công cộng rồi dựng
 python3 pipeline/scripts/import_wikisource.py --slug lao-hac --author "Nam Cao" --year 1943 "Lão Hạc"
 .venv/bin/python pipeline/scripts/build_book.py lao-hac                 # bản Piper, vài chục giây
-.venv/bin/python pipeline/scripts/build_voices.py lao-hac               # giọng nữ + giọng nam (VieNeu-TTS), chậm hơn nhiều;
+.venv/bin/python pipeline/scripts/build_voices.py lao-hac               # giọng chính Hoài My (edge-tts, cần mạng); chạy lại để làm tiếp phần bị lỗi
                                                                         # mô hình tự tải vào models/vieneu/ ở lần chạy đầu
 
 # thử trên máy (máy chủ này hỗ trợ HTTP Range, cần để tua audio)
@@ -68,7 +69,7 @@ python3 pipeline/scripts/deploy_site.py
 | | Giữa kỳ | Cuối kỳ |
 |---|---|---|
 | Sách | 1 cuốn (Totto-chan) | Thư viện, thêm sách bằng 2 lệnh |
-| Giọng đọc | edge-tts, dịch vụ ngoài | Chạy trên CPU của máy mình; người nghe chọn giọng nữ hoặc giọng nam (VieNeu-TTS), đổi giọng giữa chừng vẫn nghe tiếp đúng câu |
+| Giọng đọc | edge-tts, dịch vụ ngoài, đọc từng đoạn | Vẫn giọng Hoài My (edge-tts) sau khi đã thử và đo Piper, VieNeu-TTS chạy trên máy; ứng dụng hỗ trợ nhiều giọng, phần chưa có giọng chính thì phát giọng dự phòng và nói rõ |
 | Đồng bộ | Mức đoạn | Mức câu |
 | Trình phát | Trang HTML sinh sẵn cho từng chương, thanh phát tràn trên điện thoại | Một ứng dụng, thiết kế cho điện thoại và trình đọc màn hình |
 | Ngoại tuyến | Không | Lưu sách trên máy, cài lên màn hình chính |

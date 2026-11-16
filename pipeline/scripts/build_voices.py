@@ -52,6 +52,7 @@ if __name__ == "__main__":
     slugs = a.slugs or sorted((p.parent.parent.name for p in (REPO / "books").glob("*/metadata/book_meta.json")),
                               key=text_size)
     t0 = time.time()
+    failed = []
     for slug in slugs:
         units = units_of(slug)
         for i in range(0, len(units), a.batch):
@@ -62,10 +63,17 @@ if __name__ == "__main__":
                     if done(slug, vid, no):
                         continue
                     cmd = [sys.executable, str(SCRIPTS / "build_book.py"), slug, "--voice-id", vid, "--only", str(no)]
-                    subprocess.run(cmd + (["--verify"] if a.verify else []), check=True)
+                    r = subprocess.run(cmd + (["--verify"] if a.verify else []))
+                    if r.returncode:   # dịch vụ ngoài có thể từ chối một lúc: ghi lại, làm tiếp phần khác
+                        failed.append(f"{slug}/{vid}/{no}")
+                        print(f"   !!! lỗi khi dựng {slug} giọng {vid} phần {no} (mã {r.returncode}), bỏ qua, làm tiếp", flush=True)
+                        continue
                     built = True
             print(f"\n##### {slug} phần {group[0]}–{group[-1]}: đủ giọng {', '.join(a.voices)} "
                   f"| đã chạy {(time.time() - t0) / 60:.0f} phút #####", flush=True)
             if built and (a.deploy or (a.deploy_when and a.deploy_when.exists())):
                 subprocess.run([sys.executable, str(SCRIPTS / "deploy_site.py")], check=False)
     print(f"\n🎉 Xong mọi giọng cho: {', '.join(slugs)} | {(time.time() - t0) / 60:.0f} phút")
+    if failed:
+        print(f"!!! {len(failed)} phần chưa dựng được, chạy lại lệnh này để làm tiếp: {', '.join(failed)}")
+        sys.exit(1)

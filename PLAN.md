@@ -55,6 +55,7 @@ Ràng buộc máy dev: không có CUDA → mọi mô hình phải chạy đượ
 Giải pháp được chọn để phân tích: **TTS chạy cục bộ cho sách nói tiếng Việt**. Mạch phân tích đã có: Piper (VITS) là mốc nền, nhanh gấp 27–40 lần thời gian thực nhưng WER 10,0% và gần như không ngắt nghỉ; người nghe thử chê ngữ điệu; cải tiến là chuyển sang VieNeu-TTS (WER 5,1–5,4%, ngắt nghỉ tự nhiên hơn) với cái giá chậm hơn 20–40 lần và nguy cơ đọc sót. Số liệu ở `report/tts_comparison.md`. Việc còn lại, xếp theo giá trị trên công sức:
 
 - [x] Chuyển sang VieNeu-TTS, hai giọng; lưới an toàn bắt câu đọc sót theo nhịp đọc
+- [x] 16/11: người dùng chọn quay về giọng Hoài My (edge-tts) cho cả thư viện; VieNeu giữ làm giọng dự phòng và làm đối chứng trong phân tích
 - [ ] **Đo tỉ lệ đọc sót của VieNeu-TTS** trên cả một cuốn bằng ASR (`--verify`), so trước và sau khi có lưới an toàn
 
 - [ ] **Chuẩn hóa văn bản trước TTS**: số, ngày tháng, số La Mã, viết tắt, từ nước ngoài. Đo WER trước và sau trên các câu có số.

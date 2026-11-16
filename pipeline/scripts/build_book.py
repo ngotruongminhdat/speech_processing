@@ -25,7 +25,7 @@ from pathlib import Path
 SCRIPTS = Path(__file__).resolve().parent
 REPO = SCRIPTS.parent.parent
 sys.path.insert(0, str(SCRIPTS))
-from voices import VOICES, narrator  # noqa: E402
+from voices import TTS_SCRIPT, VOICES, narrator  # noqa: E402
 
 
 def run(script, env, *args):
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     ap.add_argument("--only", metavar="A-B", help="chỉ dựng các phần từ A đến B, ví dụ 1-9 (để deploy dần)")
     ap.add_argument("--engine", choices=["piper", "edge"], default="piper")
     ap.add_argument("--voice-id", choices=list(VOICES),
-                    help="dựng một giọng cho người nghe chọn (nu / nam) vào books/<slug>/voices/<id>/")
+                    help="dựng một giọng của thư viện (voices.py) vào books/<slug>/voices/<id>/")
     ap.add_argument("--verify", action="store_true", help="(giọng VieNeu) ASR nghe lại từng câu, sinh lại câu lệch")
     ap.add_argument("--voice", help="mặc định: vi_VN-vais1000-medium (piper) / vi-VN-HoaiMyNeural (edge)")
     a = ap.parse_args()
@@ -54,8 +54,8 @@ if __name__ == "__main__":
     if a.voice_id:
         # mỗi giọng là một bản DAISY riêng: chép văn bản nguồn sang thư mục của giọng đó
         spec = VOICES[a.voice_id]
-        tts_script, voice = "tts_chapter_vieneu.py", spec["voice"]
-        tts_args = ["--voice", voice] + (["--verify"] if a.verify else [])
+        tts_script, voice = TTS_SCRIPT[spec["engine"]], spec["voice"]
+        tts_args = ["--voice", voice] + (["--verify"] if a.verify and spec["engine"] == "vieneu" else [])
         book_root = src_root / "voices" / a.voice_id
         (book_root / "metadata").mkdir(parents=True, exist_ok=True)
         meta = json.loads((src_root / "metadata" / "book_meta.json").read_text(encoding="utf-8"))
