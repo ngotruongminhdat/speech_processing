@@ -49,24 +49,34 @@ const idb = {
 const unitKey = (slug, no, vid) => `${slug}:${no}:${vid}`;
 
 // ---------- giọng đọc ----------
-// Mỗi phần có thể có nhiều bản audio (giọng nữ, giọng nam). Người nghe chọn một
-// giọng cho cả thư viện; phần nào chưa có giọng đó thì dùng giọng khác đang có.
-const VOICE_ORDER = ['nu', 'nam', 'piper'];
-const prefVoice = () => String(store.get('voice', 'nu'));
-function voiceOf(unit, want = prefVoice()) {
-  const v = unit?.voices || {};
-  if (v[want]) return want;
-  return VOICE_ORDER.find((k) => v[k]) ?? Object.keys(v)[0] ?? null;
-}
+// Mỗi phần có thể có nhiều bản audio. Thư viện có một hay nhiều giọng chính (catalog
+// voices không có cờ fallback); người nghe chọn một giọng cho cả thư viện; phần nào
+// chưa có giọng đó thì tạm dùng giọng khác đang có (giọng dự phòng).
+const VOICE_ORDER = ['hm', 'nu', 'nam', 'piper'];
+const DEFAULT_VOICE = 'hm';
 const allVoices = () => {
   const seen = new Map();
   for (const b of catalog?.books || []) for (const v of b.voices || []) if (!seen.has(v.id)) seen.set(v.id, v);
   return [...seen.values()];
 };
+const isPrimary = (v) => !v.fallback && v.id !== 'piper';
+const primaryVoices = () => allVoices().filter(isPrimary);
+// giọng đã chọn; nếu thư viện không còn giọng đó (đổi bộ giọng) thì về giọng chính đầu tiên
+function prefVoice() {
+  const v = String(store.get('voice', DEFAULT_VOICE));
+  const prim = primaryVoices();
+  return !prim.length || prim.some((p) => p.id === v) ? v : prim[0].id;
+}
+function voiceOf(unit, want = prefVoice()) {
+  const v = unit?.voices || {};
+  if (v[want]) return want;
+  return VOICE_ORDER.find((k) => v[k]) ?? Object.keys(v)[0] ?? null;
+}
 const voiceInfo = (book, id) => (book?.voices || []).find((v) => v.id === id)
   || allVoices().find((v) => v.id === id) || { id, label: 'Giọng đọc', name: '' };
 const voiceText = (v) => `${v.label.toLowerCase()} ${v.name}`.trim();
-const pickable = (book) => (book.voices || []).filter((v) => v.id !== 'piper');
+const voiceTitle = (v) => `${v.label} ${v.name}`.trim();
+const pickable = (book) => (book.voices || []).filter(isPrimary);
 // giọng thực tế của cả cuốn: giọng đang chọn nếu cuốn này có, không thì giọng đầu tiên có
 function bookVoice(book) {
   const ids = (book.voices || []).map((v) => v.id);
@@ -220,7 +230,9 @@ async function renderBook(book) {
       ${voices.length > 1 ? `<div class="voice-pick" role="group" aria-labelledby="l-bvoice">
         <span id="l-bvoice">Giọng đọc</span>
         ${voices.map((v) => `<button type="button" data-v="${esc(v.id)}" aria-pressed="${v.id === bv}">${esc(v.label)} · ${esc(v.name)}</button>`).join('')}
-      </div>` : `<p class="voice-note">Giọng nữ và giọng nam đang được chuẩn bị cho cuốn này. Hiện phát ${esc(voiceText(voiceInfo(book, bv)))}.</p>`}
+      </div>` : (bv && voiceInfo(book, bv).fallback && primaryVoices().length
+        ? `<p class="voice-note">${esc(voiceTitle(primaryVoices()[0]))} đang được chuẩn bị cho cuốn này. Hiện phát ${esc(voiceText(voiceInfo(book, bv)))}.</p>`
+        : '')}
     </div>`;
 
   $('#bookToc').innerHTML = units.length > 1 ? `
@@ -388,6 +400,15 @@ async function openReader(book, unitNo, keep = null) {
       if (e?.name === 'NotAllowedError' && token === R.token) announce(`${notice ? notice + ' ' : ''}Nhấn nút Phát để bắt đầu nghe.`);
     });
   }
+}
+
+// Nút chọn giọng trong hộp Cài đặt, theo các giọng chính có trong danh mục.
+function renderVoiceOptions() {
+  const prim = primaryVoices();
+  const want = prefVoice();
+  $('#optVoice').innerHTML = prim.map((v) =>
+    `<button type="button" data-v="${esc(v.id)}" aria-pressed="${v.id === want}">${esc(voiceTitle(v))}</button>`).join('');
+  $('#l-voice').hidden = $('#optVoice').hidden = prim.length < 2;
 }
 
 // Dòng ghi chú trong hộp Cài đặt: giọng đã chọn có đang thực sự được phát không.
@@ -715,6 +736,7 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) saveP
     const res = await fetch('catalog.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error(res.status);
     catalog = await res.json();
+    renderVoiceOptions();
   } catch {
     $('#librarySummary').textContent = 'Không tải được danh mục sách. Hãy kiểm tra kết nối mạng rồi tải lại trang.';
     return;

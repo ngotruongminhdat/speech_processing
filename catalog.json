@@ -8,7 +8,7 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Cuộc đời tảo tần, lặng lẽ hy sinh của Tâm, một cô gái bán hàng xén ở làng quê Bắc Bộ.",
    "date": "1943",
-   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
+   "narrator": "Ngọc Linh (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/C%C3%B4_h%C3%A0ng_x%C3%A9n",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
    "duration": 1351.73,
@@ -16,12 +16,8 @@
     {
      "id": "nu",
      "label": "Giọng nữ",
-     "name": "Ngọc Linh"
-    },
-    {
-     "id": "nam",
-     "label": "Giọng nam",
-     "name": "Thiện Minh"
+     "name": "Ngọc Linh",
+     "fallback": true
     }
    ],
    "units": [
@@ -36,11 +32,6 @@
        "data": "books/co-hang-xen/nu/01.json",
        "audio": "books/co-hang-xen/nu/01.mp3",
        "duration": 1351.73
-      },
-      "nam": {
-       "data": "books/co-hang-xen/nam/01.json",
-       "audio": "books/co-hang-xen/nam/01.mp3",
-       "duration": 1272.21
       }
      }
     }
@@ -49,10 +40,6 @@
     "nu": {
      "url": "books/co-hang-xen/co-hang-xen-daisy-nu.zip",
      "size": "7.0 MB"
-    },
-    "nam": {
-     "url": "books/co-hang-xen/co-hang-xen-daisy-nam.zip",
-     "size": "6.5 MB"
     }
    }
   },
@@ -63,7 +50,7 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Chuyến về thăm bà của Thanh, và những rung động trong trẻo dưới bóng cây hoàng lan.",
    "date": "1942",
-   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
+   "narrator": "Ngọc Linh (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/D%C6%B0%E1%BB%9Bi_b%C3%B3ng_ho%C3%A0ng_lan",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
    "duration": 589.09,
@@ -71,12 +58,8 @@
     {
      "id": "nu",
      "label": "Giọng nữ",
-     "name": "Ngọc Linh"
-    },
-    {
-     "id": "nam",
-     "label": "Giọng nam",
-     "name": "Thiện Minh"
+     "name": "Ngọc Linh",
+     "fallback": true
     }
    ],
    "units": [
@@ -91,11 +74,6 @@
        "data": "books/duoi-bong-hoang-lan/nu/01.json",
        "audio": "books/duoi-bong-hoang-lan/nu/01.mp3",
        "duration": 589.09
-      },
-      "nam": {
-       "data": "books/duoi-bong-hoang-lan/nam/01.json",
-       "audio": "books/duoi-bong-hoang-lan/nam/01.mp3",
-       "duration": 552.54
       }
      }
     }
@@ -104,10 +82,6 @@
     "nu": {
      "url": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy-nu.zip",
      "size": "2.9 MB"
-    },
-    "nam": {
-     "url": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy-nam.zip",
-     "size": "2.7 MB"
     }
    }
   },
@@ -118,20 +92,15 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Lòng nhân ái của hai chị em Sơn và Lan trong buổi sáng gió lạnh đầu mùa đông.",
    "date": "1937",
-   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
+   "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Gi%C3%B3_l%E1%BA%A1nh_%C4%91%E1%BA%A7u_m%C3%B9a",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 545.17,
+   "duration": 600.7,
    "voices": [
     {
-     "id": "nu",
+     "id": "hm",
      "label": "Giọng nữ",
-     "name": "Ngọc Linh"
-    },
-    {
-     "id": "nam",
-     "label": "Giọng nam",
-     "name": "Thiện Minh"
+     "name": "Hoài My"
     }
    ],
    "units": [
@@ -139,30 +108,21 @@
      "no": 1,
      "label": "Gió lạnh đầu mùa",
      "title": "Gió lạnh đầu mùa",
-     "duration": 545.17,
+     "duration": 600.7,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/gio-lanh-dau-mua/nu/01.json",
-       "audio": "books/gio-lanh-dau-mua/nu/01.mp3",
-       "duration": 545.17
-      },
-      "nam": {
-       "data": "books/gio-lanh-dau-mua/nam/01.json",
-       "audio": "books/gio-lanh-dau-mua/nam/01.mp3",
-       "duration": 515.8
+      "hm": {
+       "data": "books/gio-lanh-dau-mua/hm/01.json",
+       "audio": "books/gio-lanh-dau-mua/hm/01.mp3",
+       "duration": 600.7
       }
      }
     }
    ],
    "daisy": {
-    "nu": {
-     "url": "books/gio-lanh-dau-mua/gio-lanh-dau-mua-daisy-nu.zip",
-     "size": "2.7 MB"
-    },
-    "nam": {
-     "url": "books/gio-lanh-dau-mua/gio-lanh-dau-mua-daisy-nam.zip",
-     "size": "2.6 MB"
+    "hm": {
+     "url": "books/gio-lanh-dau-mua/gio-lanh-dau-mua-daisy-hm.zip",
+     "size": "3.7 MB"
     }
    }
   },
@@ -173,7 +133,7 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Hai chị em Liên và An nơi phố huyện nghèo, đêm đêm thức đợi chuyến tàu từ Hà Nội đi qua.",
    "date": "1938",
-   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
+   "narrator": "Ngọc Linh (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Hai_%C4%91%E1%BB%A9a_tr%E1%BA%BB",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
    "duration": 775.33,
@@ -181,12 +141,8 @@
     {
      "id": "nu",
      "label": "Giọng nữ",
-     "name": "Ngọc Linh"
-    },
-    {
-     "id": "nam",
-     "label": "Giọng nam",
-     "name": "Thiện Minh"
+     "name": "Ngọc Linh",
+     "fallback": true
     }
    ],
    "units": [
@@ -201,11 +157,6 @@
        "data": "books/hai-dua-tre/nu/01.json",
        "audio": "books/hai-dua-tre/nu/01.mp3",
        "duration": 775.33
-      },
-      "nam": {
-       "data": "books/hai-dua-tre/nam/01.json",
-       "audio": "books/hai-dua-tre/nam/01.mp3",
-       "duration": 723.71
       }
      }
     }
@@ -214,10 +165,6 @@
     "nu": {
      "url": "books/hai-dua-tre/hai-dua-tre-daisy-nu.zip",
      "size": "4.1 MB"
-    },
-    "nam": {
-     "url": "books/hai-dua-tre/hai-dua-tre-daisy-nam.zip",
-     "size": "3.8 MB"
     }
    }
   },
@@ -228,7 +175,7 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Truyện ngắn hiện thực về lão Hạc, một lão nông nghèo, cô độc, thà chết chứ không tiêu vào mảnh vườn để dành cho con trai.",
    "date": "1943",
-   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
+   "narrator": "Ngọc Linh (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/L%C3%A3o_H%E1%BA%A1c",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
    "duration": 1032.51,
@@ -236,12 +183,8 @@
     {
      "id": "nu",
      "label": "Giọng nữ",
-     "name": "Ngọc Linh"
-    },
-    {
-     "id": "nam",
-     "label": "Giọng nam",
-     "name": "Thiện Minh"
+     "name": "Ngọc Linh",
+     "fallback": true
     }
    ],
    "units": [
@@ -256,11 +199,6 @@
        "data": "books/lao-hac/nu/01.json",
        "audio": "books/lao-hac/nu/01.mp3",
        "duration": 1032.51
-      },
-      "nam": {
-       "data": "books/lao-hac/nam/01.json",
-       "audio": "books/lao-hac/nam/01.mp3",
-       "duration": 967.15
       }
      }
     }
@@ -269,10 +207,6 @@
     "nu": {
      "url": "books/lao-hac/lao-hac-daisy-nu.zip",
      "size": "5.2 MB"
-    },
-    "nam": {
-     "url": "books/lao-hac/lao-hac-daisy-nam.zip",
-     "size": "4.8 MB"
     }
    }
   },
@@ -283,7 +217,7 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Tiểu thuyết hiện thực về chị Dậu và gia đình nông dân nghèo trong mùa sưu thuế ở làng Đông Xá, một trong những tác phẩm tiêu biểu của văn học Việt Nam trước 1945.",
    "date": "1936",
-   "narrator": "Ngọc Linh (giọng nữ), Thiện Minh (giọng nam)",
+   "narrator": "Ngọc Linh (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
    "duration": 10547.4,
@@ -291,12 +225,8 @@
     {
      "id": "nu",
      "label": "Giọng nữ",
-     "name": "Ngọc Linh"
-    },
-    {
-     "id": "nam",
-     "label": "Giọng nam",
-     "name": "Thiện Minh"
+     "name": "Ngọc Linh",
+     "fallback": true
     }
    ],
    "units": [
@@ -311,11 +241,6 @@
        "data": "books/tat-den/nu/01.json",
        "audio": "books/tat-den/nu/01.mp3",
        "duration": 425.37
-      },
-      "nam": {
-       "data": "books/tat-den/nam/01.json",
-       "audio": "books/tat-den/nam/01.mp3",
-       "duration": 395.59
       }
      }
     },
@@ -330,11 +255,6 @@
        "data": "books/tat-den/nu/02.json",
        "audio": "books/tat-den/nu/02.mp3",
        "duration": 407.29
-      },
-      "nam": {
-       "data": "books/tat-den/nam/02.json",
-       "audio": "books/tat-den/nam/02.mp3",
-       "duration": 380.17
       }
      }
     },
@@ -349,11 +269,6 @@
        "data": "books/tat-den/nu/03.json",
        "audio": "books/tat-den/nu/03.mp3",
        "duration": 427.24
-      },
-      "nam": {
-       "data": "books/tat-den/nam/03.json",
-       "audio": "books/tat-den/nam/03.mp3",
-       "duration": 402.22
       }
      }
     },
@@ -368,11 +283,6 @@
        "data": "books/tat-den/nu/04.json",
        "audio": "books/tat-den/nu/04.mp3",
        "duration": 504.5
-      },
-      "nam": {
-       "data": "books/tat-den/nam/04.json",
-       "audio": "books/tat-den/nam/04.mp3",
-       "duration": 470.38
       }
      }
     },
@@ -387,11 +297,6 @@
        "data": "books/tat-den/nu/05.json",
        "audio": "books/tat-den/nu/05.mp3",
        "duration": 633.57
-      },
-      "nam": {
-       "data": "books/tat-den/nam/05.json",
-       "audio": "books/tat-den/nam/05.mp3",
-       "duration": 596.35
       }
      }
     },
@@ -406,11 +311,6 @@
        "data": "books/tat-den/nu/06.json",
        "audio": "books/tat-den/nu/06.mp3",
        "duration": 480.3
-      },
-      "nam": {
-       "data": "books/tat-den/nam/06.json",
-       "audio": "books/tat-den/nam/06.mp3",
-       "duration": 448.32
       }
      }
     },
@@ -425,11 +325,6 @@
        "data": "books/tat-den/nu/07.json",
        "audio": "books/tat-den/nu/07.mp3",
        "duration": 454.27
-      },
-      "nam": {
-       "data": "books/tat-den/nam/07.json",
-       "audio": "books/tat-den/nam/07.mp3",
-       "duration": 422.6
       }
      }
     },
@@ -444,11 +339,6 @@
        "data": "books/tat-den/nu/08.json",
        "audio": "books/tat-den/nu/08.mp3",
        "duration": 425.8
-      },
-      "nam": {
-       "data": "books/tat-den/nam/08.json",
-       "audio": "books/tat-den/nam/08.mp3",
-       "duration": 397.32
       }
      }
     },
@@ -463,11 +353,6 @@
        "data": "books/tat-den/nu/09.json",
        "audio": "books/tat-den/nu/09.mp3",
        "duration": 186.41
-      },
-      "nam": {
-       "data": "books/tat-den/nam/09.json",
-       "audio": "books/tat-den/nam/09.mp3",
-       "duration": 173.85
       }
      }
     },
@@ -482,11 +367,6 @@
        "data": "books/tat-den/nu/10.json",
        "audio": "books/tat-den/nu/10.mp3",
        "duration": 352.84
-      },
-      "nam": {
-       "data": "books/tat-den/nam/10.json",
-       "audio": "books/tat-den/nam/10.mp3",
-       "duration": 330.01
       }
      }
     },
@@ -501,11 +381,6 @@
        "data": "books/tat-den/nu/11.json",
        "audio": "books/tat-den/nu/11.mp3",
        "duration": 420.07
-      },
-      "nam": {
-       "data": "books/tat-den/nam/11.json",
-       "audio": "books/tat-den/nam/11.mp3",
-       "duration": 390.02
       }
      }
     },
@@ -520,11 +395,6 @@
        "data": "books/tat-den/nu/12.json",
        "audio": "books/tat-den/nu/12.mp3",
        "duration": 242.59
-      },
-      "nam": {
-       "data": "books/tat-den/nam/12.json",
-       "audio": "books/tat-den/nam/12.mp3",
-       "duration": 224.73
       }
      }
     },
@@ -539,11 +409,6 @@
        "data": "books/tat-den/nu/13.json",
        "audio": "books/tat-den/nu/13.mp3",
        "duration": 298.25
-      },
-      "nam": {
-       "data": "books/tat-den/nam/13.json",
-       "audio": "books/tat-den/nam/13.mp3",
-       "duration": 280.54
       }
      }
     },
@@ -558,11 +423,6 @@
        "data": "books/tat-den/nu/14.json",
        "audio": "books/tat-den/nu/14.mp3",
        "duration": 439.66
-      },
-      "nam": {
-       "data": "books/tat-den/nam/14.json",
-       "audio": "books/tat-den/nam/14.mp3",
-       "duration": 409.13
       }
      }
     },
@@ -577,11 +437,6 @@
        "data": "books/tat-den/nu/15.json",
        "audio": "books/tat-den/nu/15.mp3",
        "duration": 406.09
-      },
-      "nam": {
-       "data": "books/tat-den/nam/15.json",
-       "audio": "books/tat-den/nam/15.mp3",
-       "duration": 377.66
       }
      }
     },
@@ -596,11 +451,6 @@
        "data": "books/tat-den/nu/16.json",
        "audio": "books/tat-den/nu/16.mp3",
        "duration": 344.78
-      },
-      "nam": {
-       "data": "books/tat-den/nam/16.json",
-       "audio": "books/tat-den/nam/16.mp3",
-       "duration": 321.14
       }
      }
     },
@@ -615,11 +465,6 @@
        "data": "books/tat-den/nu/17.json",
        "audio": "books/tat-den/nu/17.mp3",
        "duration": 252.11
-      },
-      "nam": {
-       "data": "books/tat-den/nam/17.json",
-       "audio": "books/tat-den/nam/17.mp3",
-       "duration": 237.31
       }
      }
     },
@@ -634,11 +479,6 @@
        "data": "books/tat-den/nu/18.json",
        "audio": "books/tat-den/nu/18.mp3",
        "duration": 377.12
-      },
-      "nam": {
-       "data": "books/tat-den/nam/18.json",
-       "audio": "books/tat-den/nam/18.mp3",
-       "duration": 351.52
       }
      }
     },
@@ -653,11 +493,6 @@
        "data": "books/tat-den/nu/19.json",
        "audio": "books/tat-den/nu/19.mp3",
        "duration": 384.77
-      },
-      "nam": {
-       "data": "books/tat-den/nam/19.json",
-       "audio": "books/tat-den/nam/19.mp3",
-       "duration": 357.22
       }
      }
     },
@@ -672,11 +507,6 @@
        "data": "books/tat-den/nu/20.json",
        "audio": "books/tat-den/nu/20.mp3",
        "duration": 475.12
-      },
-      "nam": {
-       "data": "books/tat-den/nam/20.json",
-       "audio": "books/tat-den/nam/20.mp3",
-       "duration": 447.04
       }
      }
     },
@@ -691,11 +521,6 @@
        "data": "books/tat-den/nu/21.json",
        "audio": "books/tat-den/nu/21.mp3",
        "duration": 458.09
-      },
-      "nam": {
-       "data": "books/tat-den/nam/21.json",
-       "audio": "books/tat-den/nam/21.mp3",
-       "duration": 428.92
       }
      }
     },
@@ -710,11 +535,6 @@
        "data": "books/tat-den/nu/22.json",
        "audio": "books/tat-den/nu/22.mp3",
        "duration": 446.84
-      },
-      "nam": {
-       "data": "books/tat-den/nam/22.json",
-       "audio": "books/tat-den/nam/22.mp3",
-       "duration": 417.18
       }
      }
     },
@@ -729,11 +549,6 @@
        "data": "books/tat-den/nu/23.json",
        "audio": "books/tat-den/nu/23.mp3",
        "duration": 325.14
-      },
-      "nam": {
-       "data": "books/tat-den/nam/23.json",
-       "audio": "books/tat-den/nam/23.mp3",
-       "duration": 303.65
       }
      }
     },
@@ -748,11 +563,6 @@
        "data": "books/tat-den/nu/24.json",
        "audio": "books/tat-den/nu/24.mp3",
        "duration": 374.31
-      },
-      "nam": {
-       "data": "books/tat-den/nam/24.json",
-       "audio": "books/tat-den/nam/24.mp3",
-       "duration": 351.34
       }
      }
     },
@@ -767,11 +577,6 @@
        "data": "books/tat-den/nu/25.json",
        "audio": "books/tat-den/nu/25.mp3",
        "duration": 319.65
-      },
-      "nam": {
-       "data": "books/tat-den/nam/25.json",
-       "audio": "books/tat-den/nam/25.mp3",
-       "duration": 295.31
       }
      }
     },
@@ -786,11 +591,6 @@
        "data": "books/tat-den/nu/26.json",
        "audio": "books/tat-den/nu/26.mp3",
        "duration": 439.35
-      },
-      "nam": {
-       "data": "books/tat-den/nam/26.json",
-       "audio": "books/tat-den/nam/26.mp3",
-       "duration": 410.84
       }
      }
     },
@@ -805,11 +605,6 @@
        "data": "books/tat-den/nu/27.json",
        "audio": "books/tat-den/nu/27.mp3",
        "duration": 245.87
-      },
-      "nam": {
-       "data": "books/tat-den/nam/27.json",
-       "audio": "books/tat-den/nam/27.mp3",
-       "duration": 231.45
       }
      }
     }
@@ -818,10 +613,6 @@
     "nu": {
      "url": "books/tat-den/tat-den-daisy-nu.zip",
      "size": "53 MB"
-    },
-    "nam": {
-     "url": "books/tat-den/tat-den-daisy-nam.zip",
-     "size": "48 MB"
     }
    }
   },
