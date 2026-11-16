@@ -216,7 +216,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 11446.97,
+   "duration": 11486.5,
    "voices": [
     {
      "id": "hm",
@@ -557,13 +557,13 @@
      "no": 24,
      "label": "Tắt đèn",
      "title": "Chương 24",
-     "duration": 374.31,
+     "duration": 413.84,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/24.json",
-       "audio": "books/tat-den/nu/24.mp3",
-       "duration": 374.31
+      "hm": {
+       "data": "books/tat-den/hm/24.json",
+       "audio": "books/tat-den/hm/24.mp3",
+       "duration": 413.84
       }
      }
     },
@@ -613,11 +613,11 @@
    "daisy": {
     "hm": {
      "url": "books/tat-den/tat-den-daisy-hm.zip",
-     "size": "65 MB"
+     "size": "68 MB"
     },
     "nu": {
      "url": "books/tat-den/tat-den-daisy-nu.zip",
-     "size": "4.0 MB"
+     "size": "2.2 MB"
     }
    }
   },
