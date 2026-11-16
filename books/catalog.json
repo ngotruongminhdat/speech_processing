@@ -10,7 +10,13 @@
       "date": "1943",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
-      "voices": {},
+      "voices": {
+        "hm": {
+          "narrator": "Hoài My, giọng nữ (Microsoft Neural TTS, qua edge-tts)",
+          "units": 1,
+          "duration": 1492.11
+        }
+      },
       "sourceURL": "https://vi.wikisource.org/wiki/C%C3%B4_h%C3%A0ng_x%C3%A9n",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 1196.022,
@@ -35,7 +41,13 @@
       "date": "1942",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
-      "voices": {},
+      "voices": {
+        "hm": {
+          "narrator": "Hoài My, giọng nữ (Microsoft Neural TTS, qua edge-tts)",
+          "units": 1,
+          "duration": 661.63
+        }
+      },
       "sourceURL": "https://vi.wikisource.org/wiki/D%C6%B0%E1%BB%9Bi_b%C3%B3ng_ho%C3%A0ng_lan",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 516.317,
@@ -91,7 +103,13 @@
       "date": "1938",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
-      "voices": {},
+      "voices": {
+        "hm": {
+          "narrator": "Hoài My, giọng nữ (Microsoft Neural TTS, qua edge-tts)",
+          "units": 1,
+          "duration": 826.0
+        }
+      },
       "sourceURL": "https://vi.wikisource.org/wiki/Hai_%C4%91%E1%BB%A9a_tr%E1%BA%BB",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 693.133,
@@ -116,7 +134,13 @@
       "date": "1943",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
-      "voices": {},
+      "voices": {
+        "hm": {
+          "narrator": "Hoài My, giọng nữ (Microsoft Neural TTS, qua edge-tts)",
+          "units": 1,
+          "duration": 1185.99
+        }
+      },
       "sourceURL": "https://vi.wikisource.org/wiki/L%C3%A3o_H%E1%BA%A1c",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 905.097,
@@ -141,7 +165,13 @@
       "date": "1936",
       "language": "vi",
       "narrator": "Piper vi_VN-vais1000-medium (giọng tổng hợp mã nguồn mở)",
-      "voices": {},
+      "voices": {
+        "hm": {
+          "narrator": "Hoài My, giọng nữ (Microsoft Neural TTS, qua edge-tts)",
+          "units": 27,
+          "duration": 11512.06
+        }
+      },
       "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
       "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
       "duration": 9291.226,

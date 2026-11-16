@@ -41,7 +41,9 @@ BITRATE_KBPS = 64    # nén lại một lần nữa nên để cao hơn 48 kbps 
 PARA_PAUSE = 0.80    # nghỉ sau mỗi đoạn văn (giây); nghỉ giữa câu trong đoạn do giọng đọc tự quyết
 HEAD_PAUSE = 1.00    # nghỉ sau tiêu đề
 EDGE_PAD = 0.06      # khoảng lặng giữ lại ở hai đầu mỗi đoạn sau khi cắt
-RETRIES = 24
+RETRIES = 60
+FETCH_TIMEOUT = 120  # giây cho một đoạn văn, kể cả lúc chờ máy chủ
+TRUNC_RETRIES = 8    # sau ngần này lần vẫn thiếu từ thì chấp nhận (cách tách từ hai bên khác nhau)
 GAP = 0.3            # giãn nhịp giữa hai yêu cầu, tránh bị bóp tần suất
 TOKEN = re.compile(r"\w+")
 
@@ -74,19 +76,30 @@ async def fetch(text: str, voice: str):
     for attempt in range(RETRIES):
         try:
             audio, words = bytearray(), []
-            async for ch in edge_tts.Communicate(text, voice, boundary="WordBoundary").stream():
-                if ch["type"] == "audio":
-                    audio += ch["data"]
-                elif ch["type"] == "WordBoundary":
-                    words.append([ch["offset"] / 1e7, ch["duration"] / 1e7, ch["text"]])
+
+            async def pull():
+                async for ch in edge_tts.Communicate(text, voice, boundary="WordBoundary").stream():
+                    if ch["type"] == "audio":
+                        audio.extend(ch["data"])
+                    elif ch["type"] == "WordBoundary":
+                        words.append([ch["offset"] / 1e7, ch["duration"] / 1e7, ch["text"]])
+
+            # có lần kết nối treo im lặng hơn 30 phút dù thư viện đã đặt hạn đọc: chặn trên toàn bộ
+            await asyncio.wait_for(pull(), FETCH_TIMEOUT)
             if not audio:
                 raise RuntimeError("không nhận được audio")
+            # dịch vụ đôi khi trả audio cụt, thiếu vài từ cuối (3 đoạn trong Tắt đèn):
+            # số từ nhận về phải bằng số từ gửi đi, không thì coi như lỗi và tải lại
+            sent = len(TOKEN.findall(text))
+            got = sum(len(TOKEN.findall(w[2])) for w in words)
+            if got < sent and attempt < TRUNC_RETRIES:
+                raise RuntimeError(f"audio cụt: nhận {got}/{sent} từ")
             return bytes(audio), words
         except Exception as e:      # dịch vụ chập chờn theo từng kết nối: thử lại dày, nghỉ ngắn
             if attempt == RETRIES - 1:
                 raise
             print(f"   ! lần {attempt + 1}: {type(e).__name__}: {str(e)[:80]} — thử lại", flush=True)
-            await asyncio.sleep(min(10, 2 + attempt))
+            await asyncio.sleep(min(30, 2 + attempt))  # bị bóp theo đợt vài phút: chờ dài dần
 
 
 def sentence_spans(text: str, words, total: float):
