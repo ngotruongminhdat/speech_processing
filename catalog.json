@@ -50,16 +50,15 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Chuyến về thăm bà của Thanh, và những rung động trong trẻo dưới bóng cây hoàng lan.",
    "date": "1942",
-   "narrator": "Ngọc Linh (giọng nữ)",
+   "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/D%C6%B0%E1%BB%9Bi_b%C3%B3ng_ho%C3%A0ng_lan",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 589.09,
+   "duration": 661.63,
    "voices": [
     {
-     "id": "nu",
+     "id": "hm",
      "label": "Giọng nữ",
-     "name": "Ngọc Linh",
-     "fallback": true
+     "name": "Hoài My"
     }
    ],
    "units": [
@@ -67,21 +66,21 @@
      "no": 1,
      "label": "Dưới bóng hoàng lan",
      "title": "Dưới bóng hoàng lan",
-     "duration": 589.09,
+     "duration": 661.63,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/duoi-bong-hoang-lan/nu/01.json",
-       "audio": "books/duoi-bong-hoang-lan/nu/01.mp3",
-       "duration": 589.09
+      "hm": {
+       "data": "books/duoi-bong-hoang-lan/hm/01.json",
+       "audio": "books/duoi-bong-hoang-lan/hm/01.mp3",
+       "duration": 661.63
       }
      }
     }
    ],
    "daisy": {
-    "nu": {
-     "url": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy-nu.zip",
-     "size": "2.9 MB"
+    "hm": {
+     "url": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy-hm.zip",
+     "size": "4.0 MB"
     }
    }
   },
