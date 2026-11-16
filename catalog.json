@@ -216,7 +216,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 11264.8,
+   "duration": 11301.57,
    "voices": [
     {
      "id": "hm",
@@ -375,13 +375,13 @@
      "no": 11,
      "label": "Tắt đèn",
      "title": "Chương 11",
-     "duration": 420.07,
+     "duration": 456.84,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/11.json",
-       "audio": "books/tat-den/nu/11.mp3",
-       "duration": 420.07
+      "hm": {
+       "data": "books/tat-den/hm/11.json",
+       "audio": "books/tat-den/hm/11.mp3",
+       "duration": 456.84
       }
      }
     },
@@ -613,11 +613,11 @@
    "daisy": {
     "hm": {
      "url": "books/tat-den/tat-den-daisy-hm.zip",
-     "size": "53 MB"
+     "size": "56 MB"
     },
     "nu": {
      "url": "books/tat-den/tat-den-daisy-nu.zip",
-     "size": "13 MB"
+     "size": "11 MB"
     }
    }
   },
