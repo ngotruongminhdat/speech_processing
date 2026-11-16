@@ -216,7 +216,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 10898.54,
+   "duration": 10971.14,
    "voices": [
     {
      "id": "hm",
@@ -445,13 +445,13 @@
      "no": 16,
      "label": "Tắt đèn",
      "title": "Chương 16",
-     "duration": 344.78,
+     "duration": 381.58,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/16.json",
-       "audio": "books/tat-den/nu/16.mp3",
-       "duration": 344.78
+      "hm": {
+       "data": "books/tat-den/hm/16.json",
+       "audio": "books/tat-den/hm/16.mp3",
+       "duration": 381.58
       }
      }
     },
@@ -473,13 +473,13 @@
      "no": 18,
      "label": "Tắt đèn",
      "title": "Chương 18",
-     "duration": 377.12,
+     "duration": 412.92,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/18.json",
-       "audio": "books/tat-den/nu/18.mp3",
-       "duration": 377.12
+      "hm": {
+       "data": "books/tat-den/hm/18.json",
+       "audio": "books/tat-den/hm/18.mp3",
+       "duration": 412.92
       }
      }
     },
@@ -613,11 +613,11 @@
    "daisy": {
     "hm": {
      "url": "books/tat-den/tat-den-daisy-hm.zip",
-     "size": "26 MB"
+     "size": "31 MB"
     },
     "nu": {
      "url": "books/tat-den/tat-den-daisy-nu.zip",
-     "size": "33 MB"
+     "size": "29 MB"
     }
    }
   },
