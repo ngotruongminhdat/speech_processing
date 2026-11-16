@@ -132,16 +132,15 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Hai chị em Liên và An nơi phố huyện nghèo, đêm đêm thức đợi chuyến tàu từ Hà Nội đi qua.",
    "date": "1938",
-   "narrator": "Ngọc Linh (giọng nữ)",
+   "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Hai_%C4%91%E1%BB%A9a_tr%E1%BA%BB",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 775.33,
+   "duration": 826.0,
    "voices": [
     {
-     "id": "nu",
+     "id": "hm",
      "label": "Giọng nữ",
-     "name": "Ngọc Linh",
-     "fallback": true
+     "name": "Hoài My"
     }
    ],
    "units": [
@@ -149,21 +148,21 @@
      "no": 1,
      "label": "Hai đứa trẻ",
      "title": "Hai đứa trẻ",
-     "duration": 775.33,
+     "duration": 826.0,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/hai-dua-tre/nu/01.json",
-       "audio": "books/hai-dua-tre/nu/01.mp3",
-       "duration": 775.33
+      "hm": {
+       "data": "books/hai-dua-tre/hm/01.json",
+       "audio": "books/hai-dua-tre/hm/01.mp3",
+       "duration": 826.0
       }
      }
     }
    ],
    "daisy": {
-    "nu": {
-     "url": "books/hai-dua-tre/hai-dua-tre-daisy-nu.zip",
-     "size": "4.1 MB"
+    "hm": {
+     "url": "books/hai-dua-tre/hai-dua-tre-daisy-hm.zip",
+     "size": "5.3 MB"
     }
    }
   },
