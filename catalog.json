@@ -8,16 +8,15 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Cuộc đời tảo tần, lặng lẽ hy sinh của Tâm, một cô gái bán hàng xén ở làng quê Bắc Bộ.",
    "date": "1943",
-   "narrator": "Ngọc Linh (giọng nữ)",
+   "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/C%C3%B4_h%C3%A0ng_x%C3%A9n",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 1351.73,
+   "duration": 1492.11,
    "voices": [
     {
-     "id": "nu",
+     "id": "hm",
      "label": "Giọng nữ",
-     "name": "Ngọc Linh",
-     "fallback": true
+     "name": "Hoài My"
     }
    ],
    "units": [
@@ -25,21 +24,21 @@
      "no": 1,
      "label": "Cô hàng xén",
      "title": "Cô hàng xén",
-     "duration": 1351.73,
+     "duration": 1492.11,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/co-hang-xen/nu/01.json",
-       "audio": "books/co-hang-xen/nu/01.mp3",
-       "duration": 1351.73
+      "hm": {
+       "data": "books/co-hang-xen/hm/01.json",
+       "audio": "books/co-hang-xen/hm/01.mp3",
+       "duration": 1492.11
       }
      }
     }
    ],
    "daisy": {
-    "nu": {
-     "url": "books/co-hang-xen/co-hang-xen-daisy-nu.zip",
-     "size": "7.0 MB"
+    "hm": {
+     "url": "books/co-hang-xen/co-hang-xen-daisy-hm.zip",
+     "size": "9.4 MB"
     }
    }
   },
