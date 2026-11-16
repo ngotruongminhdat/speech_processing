@@ -216,7 +216,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 11301.57,
+   "duration": 11414.87,
    "voices": [
     {
      "id": "hm",
@@ -403,13 +403,13 @@
      "no": 13,
      "label": "Tắt đèn",
      "title": "Chương 13",
-     "duration": 298.25,
+     "duration": 326.21,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/13.json",
-       "audio": "books/tat-den/nu/13.mp3",
-       "duration": 298.25
+      "hm": {
+       "data": "books/tat-den/hm/13.json",
+       "audio": "books/tat-den/hm/13.mp3",
+       "duration": 326.21
       }
      }
     },
@@ -417,13 +417,13 @@
      "no": 14,
      "label": "Tắt đèn",
      "title": "Chương 14",
-     "duration": 439.66,
+     "duration": 477.57,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/14.json",
-       "audio": "books/tat-den/nu/14.mp3",
-       "duration": 439.66
+      "hm": {
+       "data": "books/tat-den/hm/14.json",
+       "audio": "books/tat-den/hm/14.mp3",
+       "duration": 477.57
       }
      }
     },
@@ -431,13 +431,13 @@
      "no": 15,
      "label": "Tắt đèn",
      "title": "Chương 15",
-     "duration": 406.09,
+     "duration": 453.52,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/15.json",
-       "audio": "books/tat-den/nu/15.mp3",
-       "duration": 406.09
+      "hm": {
+       "data": "books/tat-den/hm/15.json",
+       "audio": "books/tat-den/hm/15.mp3",
+       "duration": 453.52
       }
      }
     },
@@ -613,11 +613,11 @@
    "daisy": {
     "hm": {
      "url": "books/tat-den/tat-den-daisy-hm.zip",
-     "size": "56 MB"
+     "size": "64 MB"
     },
     "nu": {
      "url": "books/tat-den/tat-den-daisy-nu.zip",
-     "size": "11 MB"
+     "size": "5.0 MB"
     }
    }
   },
