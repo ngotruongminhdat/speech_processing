@@ -216,7 +216,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 10626.13,
+   "duration": 10788.57,
    "voices": [
     {
      "id": "hm",
@@ -277,13 +277,13 @@
      "no": 4,
      "label": "Tắt đèn",
      "title": "Chương 4",
-     "duration": 504.5,
+     "duration": 556.46,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/04.json",
-       "audio": "books/tat-den/nu/04.mp3",
-       "duration": 504.5
+      "hm": {
+       "data": "books/tat-den/hm/04.json",
+       "audio": "books/tat-den/hm/04.mp3",
+       "duration": 556.46
       }
      }
     },
@@ -291,13 +291,13 @@
      "no": 5,
      "label": "Tắt đèn",
      "title": "Chương 5",
-     "duration": 633.57,
+     "duration": 689.26,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/05.json",
-       "audio": "books/tat-den/nu/05.mp3",
-       "duration": 633.57
+      "hm": {
+       "data": "books/tat-den/hm/05.json",
+       "audio": "books/tat-den/hm/05.mp3",
+       "duration": 689.26
       }
      }
     },
@@ -305,13 +305,13 @@
      "no": 6,
      "label": "Tắt đèn",
      "title": "Chương 6",
-     "duration": 480.3,
+     "duration": 535.09,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/06.json",
-       "audio": "books/tat-den/nu/06.mp3",
-       "duration": 480.3
+      "hm": {
+       "data": "books/tat-den/hm/06.json",
+       "audio": "books/tat-den/hm/06.mp3",
+       "duration": 535.09
       }
      }
     },
@@ -613,11 +613,11 @@
    "daisy": {
     "hm": {
      "url": "books/tat-den/tat-den-daisy-hm.zip",
-     "size": "8.5 MB"
+     "size": "19 MB"
     },
     "nu": {
      "url": "books/tat-den/tat-den-daisy-nu.zip",
-     "size": "46 MB"
+     "size": "38 MB"
     }
    }
   },
