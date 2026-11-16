@@ -216,18 +216,12 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 11486.5,
+   "duration": 11512.06,
    "voices": [
     {
      "id": "hm",
      "label": "Giọng nữ",
      "name": "Hoài My"
-    },
-    {
-     "id": "nu",
-     "label": "Giọng nữ",
-     "name": "Ngọc Linh",
-     "fallback": true
     }
    ],
    "units": [
@@ -585,13 +579,13 @@
      "no": 26,
      "label": "Tắt đèn",
      "title": "Chương 26",
-     "duration": 439.35,
+     "duration": 464.91,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/26.json",
-       "audio": "books/tat-den/nu/26.mp3",
-       "duration": 439.35
+      "hm": {
+       "data": "books/tat-den/hm/26.json",
+       "audio": "books/tat-den/hm/26.mp3",
+       "duration": 464.91
       }
      }
     },
@@ -613,11 +607,7 @@
    "daisy": {
     "hm": {
      "url": "books/tat-den/tat-den-daisy-hm.zip",
-     "size": "68 MB"
-    },
-    "nu": {
-     "url": "books/tat-den/tat-den-daisy-nu.zip",
-     "size": "2.2 MB"
+     "size": "71 MB"
     }
    }
   },
