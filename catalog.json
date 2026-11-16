@@ -213,11 +213,16 @@
    "subject": "Văn học & Tiểu thuyết",
    "description": "Tiểu thuyết hiện thực về chị Dậu và gia đình nông dân nghèo trong mùa sưu thuế ở làng Đông Xá, một trong những tác phẩm tiêu biểu của văn học Việt Nam trước 1945.",
    "date": "1936",
-   "narrator": "Ngọc Linh (giọng nữ)",
+   "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/T%E1%BA%AFt_%C4%91%C3%A8n/I",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 10547.4,
+   "duration": 10626.13,
    "voices": [
+    {
+     "id": "hm",
+     "label": "Giọng nữ",
+     "name": "Hoài My"
+    },
     {
      "id": "nu",
      "label": "Giọng nữ",
@@ -230,13 +235,13 @@
      "no": 1,
      "label": "Tắt đèn",
      "title": "Chương 1",
-     "duration": 425.37,
+     "duration": 452.16,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/01.json",
-       "audio": "books/tat-den/nu/01.mp3",
-       "duration": 425.37
+      "hm": {
+       "data": "books/tat-den/hm/01.json",
+       "audio": "books/tat-den/hm/01.mp3",
+       "duration": 452.16
       }
      }
     },
@@ -244,13 +249,13 @@
      "no": 2,
      "label": "Tắt đèn",
      "title": "Chương 2",
-     "duration": 407.29,
+     "duration": 439.34,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/02.json",
-       "audio": "books/tat-den/nu/02.mp3",
-       "duration": 407.29
+      "hm": {
+       "data": "books/tat-den/hm/02.json",
+       "audio": "books/tat-den/hm/02.mp3",
+       "duration": 439.34
       }
      }
     },
@@ -258,13 +263,13 @@
      "no": 3,
      "label": "Tắt đèn",
      "title": "Chương 3",
-     "duration": 427.24,
+     "duration": 447.13,
      "ready": true,
      "voices": {
-      "nu": {
-       "data": "books/tat-den/nu/03.json",
-       "audio": "books/tat-den/nu/03.mp3",
-       "duration": 427.24
+      "hm": {
+       "data": "books/tat-den/hm/03.json",
+       "audio": "books/tat-den/hm/03.mp3",
+       "duration": 447.13
       }
      }
     },
@@ -606,9 +611,13 @@
     }
    ],
    "daisy": {
+    "hm": {
+     "url": "books/tat-den/tat-den-daisy-hm.zip",
+     "size": "8.5 MB"
+    },
     "nu": {
      "url": "books/tat-den/tat-den-daisy-nu.zip",
-     "size": "53 MB"
+     "size": "46 MB"
     }
    }
   },
