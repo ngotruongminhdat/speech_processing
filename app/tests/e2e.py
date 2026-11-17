@@ -55,6 +55,11 @@ async def main():
                                                 "--disable-audio-output"])
         ctx = await browser.new_context(viewport={"width": 390, "height": 844}, locale="vi-VN",
                                         service_workers="block")
+        # Nhận dạng giọng nói giả: "nghe" được đúng một câu rồi dừng, để thử nút tìm bằng giọng nói.
+        await ctx.add_init_script("""window.webkitSpeechRecognition = window.SpeechRecognition = class {
+          start() { setTimeout(() => { this.onstart && this.onstart();
+            setTimeout(() => { this.onresult && this.onresult({ results: [[{ transcript: 'Thạch Lam.' }]] }); this.onend && this.onend(); }, 150); }, 20); }
+          abort() { this.onend && this.onend(); } };""")
         page = await ctx.new_page()
         errors = []
         page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
@@ -181,6 +186,107 @@ async def main():
         box = await page.locator("#play").bounding_box()
         check("nút phát đủ lớn để chạm (từ 60px)", box["width"] >= 60 and box["height"] >= 60,
               f"{box['width']:.0f}x{box['height']:.0f}")
+
+        print("Dùng với trình đọc màn hình")
+        order = await page.evaluate("""() => { const f = (a, b) => !!(document.querySelector(a).compareDocumentPosition(document.querySelector(b)) & 4);
+          return [f('#openSettings', '#h-reader'), f('#h-reader', '#play'), f('#play', '#text')]; }""")
+        check("thứ tự đọc: Cài đặt, tên phần, nút điều khiển, rồi mới tới nội dung", all(order), str(order))
+
+        para_of = "i => { const e = document.querySelector(`.s[data-i='${i}']`); return e ? [...document.querySelectorAll('#text .seg')].indexOf(e.parentElement) : -1; }"
+        before = await page.evaluate(STATE)
+        await page.select_option("#step", "para")
+        lbl = await spoken_live(page, "đoạn trước")
+        check("đổi bước nhảy thì báo bằng lời và đổi tên hai nút",
+              "đoạn trước" in lbl and await page.get_attribute("#next", "aria-label") == "Đoạn sau", lbl)
+        await page.click("#next")
+        await page.wait_for_timeout(300)
+        after = await page.evaluate(STATE)
+        pb, pa = await page.evaluate(para_of, before["on"]), await page.evaluate(para_of, after["on"])
+        first = await page.evaluate("i => document.querySelector(`.s[data-i='${i}']`).previousElementSibling === null", after["on"])
+        check("bước nhảy Đoạn: nút tới nhảy sang đầu đoạn văn kế tiếp", pa == pb + 1 and first, f"đoạn {pb} -> {pa}")
+
+        await page.select_option("#step", "time")
+        t0 = (await page.evaluate(STATE))["t"]
+        await page.click("#next")
+        await page.wait_for_timeout(200)
+        t1 = (await page.evaluate(STATE))["t"]
+        check("bước nhảy 30 giây: nút tới nhảy 30 giây", 29.5 < t1 - t0 < 32, f"{t0:.1f} -> {t1:.1f}")
+        await page.keyboard.press("j")
+        await page.wait_for_timeout(200)
+        t2 = (await page.evaluate(STATE))["t"]
+        check("phím J lùi 30 giây", 28 < t1 - t2 < 30.5, f"{t1:.1f} -> {t2:.1f}")
+
+        await page.select_option("#step", "sent")
+        await page.evaluate(f"{AUDIO}.pause()")
+        await page.wait_for_timeout(200)
+        await page.click("#next")
+        await page.wait_for_function("document.querySelector('.s.on') && document.querySelector('#live').textContent === document.querySelector('.s.on').textContent", timeout=3000)
+        said = await page.inner_text("#live")
+        check("đang tạm dừng mà nhảy câu thì đọc câu đó lên", said == await page.inner_text(".s.on") and len(said) > 3, said[:60])
+        s = await page.evaluate(STATE)
+        check("nhảy câu khi tạm dừng thì vẫn tạm dừng", s["paused"])
+
+        await page.click("#where")
+        w = await spoken_live(page, "Tốc độ")
+        check("nút Đang ở đâu đọc tên sách, thời điểm, thời gian còn lại và tốc độ",
+              all(x in w for x in ("Lão Hạc", "Đang tạm dừng ở", "còn", "Tốc độ")), w)
+
+        await page.select_option("#speed", "3")
+        check("tốc độ lên được 3 lần", (await page.evaluate(STATE))["rate"] == 3)
+        await page.select_option("#speed", "1.5")
+
+        marked = (await page.evaluate(STATE))["on"]
+        await page.click("#mark")
+        m = await spoken_live(page, "Đã đánh dấu")
+        check("nút Đánh dấu ghi nhớ câu đang nghe và báo bằng lời",
+              "Đã đánh dấu" in m and await page.get_attribute("#mark", "aria-pressed") == "true", m)
+        await page.goto(BASE + "#/b/lao-hac")
+        await page.wait_for_selector(".marks a")
+        check("trang bìa liệt kê dấu trang", await page.locator(".marks a").count() == 1, (await page.inner_text(".marks a"))[:70])
+        await page.evaluate(f"{AUDIO}.currentTime = 0")
+        await page.click(".marks a")
+        await page.wait_for_function(f"{AUDIO}.readyState > 0 && document.querySelector('.s.on')", timeout=20000)
+        await page.wait_for_timeout(400)
+        s = await page.evaluate(STATE)
+        check("mở dấu trang thì nghe từ đúng câu đã đánh dấu", s["on"] in (marked, marked + 1) and "/s" not in page.url,
+              f"câu {s['on']}, đánh dấu ở câu {marked}, {page.url.split('#')[1]}")
+        await page.goto(BASE + "#/b/lao-hac")
+        await page.wait_for_selector(".marks button")
+        await page.click(".marks button")
+        await page.wait_for_timeout(200)
+        check("xoá được dấu trang", await page.locator(".marks a").count() == 0 and await page.is_hidden("#bookMarks"))
+
+        await page.keyboard.press("?")
+        await page.wait_for_timeout(200)
+        focus = await page.evaluate("document.activeElement.id")
+        check("phím ? mở hướng dẫn sử dụng và đưa focus vào tiêu đề", await page.evaluate("document.querySelector('#help').open") and focus == "h-help", focus)
+        await page.keyboard.press("Escape")
+        check("phím Esc đóng hướng dẫn", not await page.evaluate("document.querySelector('#help').open"))
+
+        await page.goto(BASE + "#/")
+        await page.wait_for_selector("#bookList li")
+        await page.click("#voiceSearch")
+        v = await spoken_live(page, "Bạn nói")
+        n = await page.locator("#bookList li").count()
+        check("tìm sách bằng giọng nói: điền điều nghe được và đọc số kết quả",
+              await page.input_value("#q") == "Thạch Lam" and f"Bạn nói: Thạch Lam. {n} cuốn khớp." in v and 0 < n < 6, v)
+        await page.fill("#q", "")
+
+        await page.goto(BASE + "#/r/tat-den/1")
+        await page.wait_for_function(f"{AUDIO}.readyState > 0 && {AUDIO}.duration > 0", timeout=20000)
+        await page.click("#openSettings")
+        await page.click("#optSleep button[data-v='-1']")
+        await page.keyboard.press("Escape")
+        await page.evaluate(f"{AUDIO}.currentTime = {AUDIO}.duration - 1; {AUDIO}.play()")
+        await page.wait_for_function("location.hash.endsWith('/tat-den/2')", timeout=20000)
+        h = await spoken_live(page, "tạm dừng theo hẹn giờ", 8000)
+        await page.wait_for_timeout(800)
+        s = await page.evaluate(STATE)
+        check("hẹn giờ Hết phần: mở phần sau nhưng không tự phát, có báo bằng lời", s["paused"] and "tạm dừng theo hẹn giờ" in h, h)
+        await page.evaluate("localStorage.removeItem('sn:pos:tat-den'); localStorage.removeItem('sn:seen:tat-den')")
+
+        await page.goto(BASE + "#/r/lao-hac/1")
+        await page.wait_for_function(f"{AUDIO}.readyState > 0 && {AUDIO}.duration > 100 && !{AUDIO}.paused", timeout=20000)
 
         print("Nhớ vị trí")
         await page.evaluate(f"{AUDIO}.currentTime = 200")

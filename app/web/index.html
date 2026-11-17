@@ -33,8 +33,12 @@
       <div class="cta" id="resume" hidden></div>
       <div class="search">
         <label for="q">Tìm sách theo tên hoặc tác giả</label>
-        <input id="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="Ví dụ: Thạch Lam">
+        <div class="search-row">
+          <input id="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="Ví dụ: Thạch Lam">
+          <button class="mic" id="voiceSearch" type="button" aria-label="Tìm sách bằng giọng nói" hidden><span aria-hidden="true">🎤</span></button>
+        </div>
       </div>
+      <div class="cta"><button class="btn ghost" type="button" data-help>Hướng dẫn sử dụng</button></div>
     </div>
   </header>
   <main class="shelf-wrap">
@@ -70,26 +74,22 @@
     <ol id="tocList"></ol>
   </nav>
 
+  <div class="top-pills">
+    <button class="pill-btn" id="openSettings" type="button" aria-haspopup="dialog"><span aria-hidden="true">⚙</span> Cài đặt</button>
+    <button class="pill-btn" type="button" data-help aria-haspopup="dialog"><span aria-hidden="true">?</span> Hướng dẫn</button>
+    <a class="pill-btn" id="coverBtn" href="#/"><span aria-hidden="true">📖</span> Trang bìa</a>
+  </div>
+
   <main class="read-main">
     <article class="page">
       <div class="kicker" id="readerKicker"></div>
       <h1 class="chapter" id="h-reader" tabindex="-1"></h1>
       <div class="byline" id="readerByline"></div>
       <div class="flourish" aria-hidden="true"><i>◆</i></div>
-      <div id="text" aria-label="Nội dung. Chạm vào một câu để nghe từ câu đó."></div>
-      <p id="readerStatus" class="empty" hidden></p>
-      <div class="endmark" aria-hidden="true">◆ ◆ ◆</div>
-    </article>
-  </main>
-
-  <div class="top-pills">
-    <button class="pill-btn" id="openSettings" type="button" aria-haspopup="dialog"><span aria-hidden="true">⚙</span> Cài đặt</button>
-    <a class="pill-btn" id="coverBtn" href="#/"><span aria-hidden="true">📖</span> Trang bìa</a>
-  </div>
-
   <!-- Thanh phát nổi ở đáy. Trên điện thoại xếp thành hai hàng, nút lớn. -->
   <div class="player-dock">
     <div class="player-card" role="region" aria-label="Điều khiển phát">
+      <h2 class="sr-only">Điều khiển phát</h2>
       <div class="info"><b id="playerTitle"></b><br><span>chạm vào câu để nghe từ đó</span></div>
       <div class="transport">
         <button class="navb" id="prev" type="button" aria-label="Câu trước"><span aria-hidden="true">⏮</span></button>
@@ -102,6 +102,13 @@
         <span class="time" id="tDur" aria-hidden="true">0:00</span>
       </div>
       <div class="extras">
+        <label class="sr-only" for="step">Bước nhảy của hai nút lùi và tới</label>
+        <select class="pbtn" id="step">
+          <option value="sent">Câu</option>
+          <option value="para">Đoạn</option>
+          <option value="time">30 giây</option>
+          <option value="unit">Phần</option>
+        </select>
         <label class="sr-only" for="speed">Tốc độ đọc</label>
         <select class="pbtn" id="speed">
           <option value="0.75">0.75×</option>
@@ -110,16 +117,27 @@
           <option value="1.5">1.5×</option>
           <option value="1.75">1.75×</option>
           <option value="2">2×</option>
+          <option value="2.5">2.5×</option>
+          <option value="3">3×</option>
         </select>
+        <button class="pbtn" id="where" type="button"><span aria-hidden="true">📍</span><span class="lbl"> Đang ở đâu</span></button>
+        <button class="pbtn" id="mark" type="button" aria-pressed="false"><span aria-hidden="true">🔖</span><span class="lbl"> Đánh dấu</span></button>
         <a class="pbtn" id="dl" href="#" download><span aria-hidden="true">⬇</span><span class="lbl"> DAISY</span></a>
       </div>
       <audio id="audio" preload="metadata"></audio>
     </div>
   </div>
 
+      <h2 class="sr-only" id="h-text">Nội dung</h2>
+      <div id="text"></div>
+      <p id="readerStatus" class="empty" hidden></p>
+      <div class="endmark" aria-hidden="true">◆ ◆ ◆</div>
+    </article>
+  </main>
+
   <div class="keyhint" aria-hidden="true">
-    <b>Space</b> phát/dừng · <b>←</b><b>→</b> câu · <b>↑</b><b>↓</b> tốc độ<br>
-    <b>Shift</b>+<b>→</b> phần sau · <b>Shift</b>+<b>←</b> phần trước
+    <b>Space</b> phát/dừng · <b>←</b><b>→</b> lùi/tới · <b>↑</b><b>↓</b> tốc độ<br>
+    <b>J</b><b>L</b> 30 giây · <b>I</b> đang ở đâu · <b>M</b> đánh dấu · <b>?</b> hướng dẫn
   </div>
 </div>
 
@@ -155,6 +173,7 @@
       <button type="button" data-v="15" aria-label="15 phút">15′</button>
       <button type="button" data-v="30" aria-label="30 phút">30′</button>
       <button type="button" data-v="60" aria-label="60 phút">60′</button>
+      <button type="button" data-v="-1" aria-label="Khi hết phần đang nghe">Hết phần</button>
     </div>
     <div class="sleep-info" id="sleepInfo"></div>
     <h3 id="l-auto">Khi mở một phần</h3>
@@ -163,6 +182,40 @@
       <button type="button" data-v="0">Chờ nhấn Phát</button>
     </div>
     <button class="set-close" value="close">Xong</button>
+  </form>
+</dialog>
+
+<!-- ============ HƯỚNG DẪN ============ -->
+<dialog id="help" class="set-panel help-panel" aria-labelledby="h-help">
+  <form method="dialog">
+    <h2 id="h-help" tabindex="-1">Hướng dẫn sử dụng</h2>
+    <p>Sách Nói là thư viện sách nói tiếng Việt, dùng được với TalkBack trên Android và VoiceOver trên iPhone.</p>
+    <h3>Chọn sách</h3>
+    <ul>
+      <li>Ở Thư viện, gõ tên sách hoặc tác giả vào ô tìm, hoặc nhấn nút Tìm sách bằng giọng nói rồi đọc tên sách.</li>
+      <li>Chọn một cuốn để mở trang bìa, rồi chọn Bắt đầu nghe hoặc Nghe tiếp. Ứng dụng tự nhớ chỗ bạn đang nghe dở.</li>
+      <li>Nút Lưu để nghe ngoại tuyến tải cả cuốn về máy, sau đó nghe được khi không có mạng.</li>
+    </ul>
+    <h3>Khi đang nghe</h3>
+    <ul>
+      <li>Ngay sau tên phần là các nút điều khiển: Lùi, Phát hoặc Tạm dừng, Tới.</li>
+      <li>Ô Bước nhảy chọn hai nút Lùi và Tới nhảy theo câu, theo đoạn văn, theo 30 giây hay theo phần.</li>
+      <li>Khi đang tạm dừng, mỗi lần nhấn Lùi hoặc Tới theo câu, ứng dụng đọc câu đó lên. Dùng cách này để nghe lại từng câu.</li>
+      <li>Ô Tốc độ đọc chỉnh từ 0,75 đến 3 lần.</li>
+      <li>Nút Đang ở đâu đọc tên sách, tên phần, thời điểm đang nghe và tốc độ.</li>
+      <li>Nút Đánh dấu ghi nhớ câu đang nghe. Các dấu trang nằm ở trang bìa của cuốn sách.</li>
+      <li>Trong Cài đặt có hẹn giờ tắt, cỡ chữ, nền tương phản cao và kiểu chữ dễ đọc.</li>
+      <li>Khi khoá màn hình hoặc dùng tai nghe, các nút phát, dừng, lùi và tới trên màn hình khoá và trên tai nghe vẫn điều khiển được sách.</li>
+    </ul>
+    <h3>Phím tắt trên máy tính</h3>
+    <ul>
+      <li>Phím cách: phát hoặc tạm dừng.</li>
+      <li>Mũi tên trái và phải: lùi và tới theo bước nhảy đã chọn. Page Up và Page Down: đoạn trước và đoạn sau.</li>
+      <li>J và L: lùi và tới 30 giây. Dấu ngoặc vuông mở và đóng: phần trước và phần sau.</li>
+      <li>Mũi tên lên và xuống: tăng và giảm tốc độ.</li>
+      <li>I: đang ở đâu. M: đánh dấu. Dấu hỏi: mở hướng dẫn này.</li>
+    </ul>
+    <button class="set-close" value="close">Đóng hướng dẫn</button>
   </form>
 </dialog>
 
