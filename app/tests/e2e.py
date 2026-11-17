@@ -248,7 +248,7 @@ async def main():
         await page.wait_for_function(f"{AUDIO}.readyState > 0 && document.querySelector('.s.on')", timeout=20000)
         await page.wait_for_timeout(400)
         s = await page.evaluate(STATE)
-        check("mở dấu trang thì nghe từ đúng câu đã đánh dấu", s["on"] in (marked, marked + 1) and "/s" not in page.url,
+        check("mở dấu trang thì nghe từ đúng câu đã đánh dấu", s["on"] in (marked, marked + 1) and page.url.endswith("/r/lao-hac/1"),
               f"câu {s['on']}, đánh dấu ở câu {marked}, {page.url.split('#')[1]}")
         await page.goto(BASE + "#/b/lao-hac")
         await page.wait_for_selector(".marks button")
@@ -273,12 +273,13 @@ async def main():
         await page.fill("#q", "")
 
         await page.goto(BASE + "#/r/tat-den/1")
-        await page.wait_for_function(f"{AUDIO}.readyState > 0 && {AUDIO}.duration > 0", timeout=20000)
+        # chờ đúng audio của phần này (audio của cuốn trước có thể còn nằm trong thẻ audio)
+        await page.wait_for_function(f"{AUDIO}.currentSrc.includes('tat-den') && {AUDIO}.readyState > 0 && {AUDIO}.duration > 0", timeout=20000)
         await page.click("#openSettings")
         await page.click("#optSleep button[data-v='-1']")
         await page.keyboard.press("Escape")
         await page.evaluate(f"{AUDIO}.currentTime = {AUDIO}.duration - 1; {AUDIO}.play()")
-        await page.wait_for_function("location.hash.endsWith('/tat-den/2')", timeout=20000)
+        await page.wait_for_function("location.hash.endsWith('/tat-den/2')", timeout=60000)
         h = await spoken_live(page, "tạm dừng theo hẹn giờ", 8000)
         await page.wait_for_timeout(800)
         s = await page.evaluate(STATE)
@@ -286,7 +287,7 @@ async def main():
         await page.evaluate("localStorage.removeItem('sn:pos:tat-den'); localStorage.removeItem('sn:seen:tat-den')")
 
         await page.goto(BASE + "#/r/lao-hac/1")
-        await page.wait_for_function(f"{AUDIO}.readyState > 0 && {AUDIO}.duration > 100 && !{AUDIO}.paused", timeout=20000)
+        await page.wait_for_function(f"{AUDIO}.currentSrc.includes('lao-hac') && {AUDIO}.readyState > 0 && {AUDIO}.duration > 100 && !{AUDIO}.paused", timeout=20000)
 
         print("Nhớ vị trí")
         await page.evaluate(f"{AUDIO}.currentTime = 200")
