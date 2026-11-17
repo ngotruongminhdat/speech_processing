@@ -186,6 +186,15 @@ async def main():
         check("thanh phát nằm gọn trong màn hình 390px", card["x"] >= 0 and card["x"] + card["width"] <= 390.5 and kids <= 390.5,
               f"mép phải thẻ {card['x'] + card['width']:.0f}px, phần tử xa nhất {kids:.0f}px")
         box = await page.locator("#play").bounding_box()
+        await page.set_viewport_size({"width": 320, "height": 640})
+        await page.wait_for_timeout(200)
+        sizes = await page.evaluate("""() => ['#prev', '#play', '#next', '#step', '#speed', '#where', '#mark', '#undo'].map((q) => {
+          const r = document.querySelector(q).getBoundingClientRect(); return [q, Math.round(r.width), Math.round(r.height), Math.round(r.right)]; })""")
+        play = next(x for x in sizes if x[0] == "#play")
+        check("màn hình 320px: mọi nút trên thanh phát từ 44px, nút Phát vẫn tròn, không tràn",
+              all(w >= 44 and h >= 44 and r <= 320 for _, w, h, r in sizes) and play[1] == play[2], str(sizes))
+        await page.set_viewport_size({"width": 390, "height": 844})
+        await page.wait_for_timeout(200)
         check("nút phát đủ lớn để chạm (từ 60px)", box["width"] >= 60 and box["height"] >= 60,
               f"{box['width']:.0f}x{box['height']:.0f}")
 
@@ -334,6 +343,9 @@ async def main():
         await page.click("#mark")
         await spoken_live(page, "Đã đánh dấu")
         check("đánh dấu có tiếng báo hiệu", (await page.evaluate("window.snCues.at(-1)")) == "mark")
+        gap = await page.evaluate("""() => { const t = document.querySelector('#toast').getBoundingClientRect();
+          return Math.min(...[...document.querySelectorAll('.top-pills > *')].map((e) => t.top - e.getBoundingClientRect().bottom)); }""")
+        check("thông báo nổi không che các nút Cài đặt, Hướng dẫn, Trang bìa", gap >= 0, f"cách {gap:.0f}px")
         await page.goto(BASE + "#/b/lao-hac")
         await page.wait_for_selector(".marks button[data-act='rec']")
         await page.click(".marks button[data-act='rec']")

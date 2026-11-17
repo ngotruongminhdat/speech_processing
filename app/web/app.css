@@ -94,6 +94,8 @@ body:not([data-view="reader"]) #progress{display:none}
 #toast{position:fixed;inset:auto;top:.45rem;left:50%;transform:translateX(-50%);margin:0;border:0;z-index:70;
   width:max-content;max-width:min(92vw,30rem);padding:.5rem 1rem;border-radius:14px;text-align:center;
   background:#2b1d14;color:#fff8ee;font:600 .88rem/1.45 var(--ui);box-shadow:0 8px 28px rgba(0,0,0,.35);pointer-events:none;overflow:visible}
+/* ở trang đọc và trang bìa, thông báo nằm dưới hàng nút trên cùng để không che nút */
+body[data-view="reader"] #toast,body[data-view="book"] #toast{top:4.2rem}
 #toast{display:none}
 #toast.show{display:block}
 .voice-note{font-family:var(--ui);font-size:.84rem;opacity:.85;margin:1.1rem 0 0}
@@ -338,8 +340,9 @@ dialog.set-panel::backdrop{background:rgba(0,0,0,.28)}
   .top-pills{top:.6rem;right:.6rem}
 }
 @media (max-width:350px){
-  .transport{gap:0}
-  .transport button{width:42px;flex:0 0 42px}
+  .player-card{padding-left:.5rem;padding-right:.5rem}
+  .transport{gap:2px}
+  .transport button{width:44px;flex:0 0 44px}
   .transport .playpause{width:58px;height:58px;flex:0 0 58px;font-size:1.8rem}
 }
 @media (prefers-reduced-motion:reduce){
