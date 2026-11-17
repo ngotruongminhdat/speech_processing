@@ -52,9 +52,11 @@ async def main():
                                           args=["--autoplay-policy=no-user-gesture-required",
                                                 # đầu ra âm thanh giả: không phát ra loa, và đồng hồ phát không
                                                 # bị khựng khi thiết bị âm thanh thật của máy đang bận
-                                                "--disable-audio-output"])
+                                                "--disable-audio-output",
+                                                # micro giả, để thử ghi âm ghi chú cho dấu trang
+                                                "--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"])
         ctx = await browser.new_context(viewport={"width": 390, "height": 844}, locale="vi-VN",
-                                        service_workers="block")
+                                        service_workers="block", permissions=["microphone"])
         # Nhận dạng giọng nói giả: "nghe" được đúng một câu rồi dừng, để thử nút tìm bằng giọng nói.
         await ctx.add_init_script("""window.webkitSpeechRecognition = window.SpeechRecognition = class {
           start() { setTimeout(() => { this.onstart && this.onstart();
@@ -251,8 +253,8 @@ async def main():
         check("mở dấu trang thì nghe từ đúng câu đã đánh dấu", s["on"] in (marked, marked + 1) and page.url.endswith("/r/lao-hac/1"),
               f"câu {s['on']}, đánh dấu ở câu {marked}, {page.url.split('#')[1]}")
         await page.goto(BASE + "#/b/lao-hac")
-        await page.wait_for_selector(".marks button")
-        await page.click(".marks button")
+        await page.wait_for_selector(".marks button[data-act='del']")
+        await page.click(".marks button[data-act='del']")
         await page.wait_for_timeout(200)
         check("xoá được dấu trang", await page.locator(".marks a").count() == 0 and await page.is_hidden("#bookMarks"))
 
@@ -262,6 +264,102 @@ async def main():
         check("phím ? mở hướng dẫn sử dụng và đưa focus vào tiêu đề", await page.evaluate("document.querySelector('#help').open") and focus == "h-help", focus)
         await page.keyboard.press("Escape")
         check("phím Esc đóng hướng dẫn", not await page.evaluate("document.querySelector('#help').open"))
+
+        print("Quay lại, tiếng báo hiệu, tốc độ từng cuốn, màu tô câu, ghi chú bằng giọng nói")
+        ready = lambda slug: f"{AUDIO}.currentSrc.includes('{slug}') && {AUDIO}.readyState > 0 && {AUDIO}.duration > 0"
+        await page.goto(BASE + "#/r/lao-hac/1")
+        await page.wait_for_function(ready("lao-hac") + f" && !{AUDIO}.paused", timeout=20000)
+        await page.evaluate(f"{AUDIO}.currentTime = 100")
+        await page.wait_for_timeout(300)
+        await page.select_option("#step", "time")
+        t0 = (await page.evaluate(STATE))["t"]
+        await page.click("#next")
+        await page.wait_for_timeout(200)
+        t1 = (await page.evaluate(STATE))["t"]
+        await page.click("#undo")
+        u = await spoken_live(page, "Đã quay lại")
+        t2 = (await page.evaluate(STATE))["t"]
+        check("nút Quay lại đưa về chỗ trước cú nhảy", t1 - t0 > 29 and abs(t2 - t0) < 1.5 and "Đã quay lại" in u
+              and await page.get_attribute("#undo", "aria-disabled") == "true", f"{t0:.1f} -> {t1:.1f} -> {t2:.1f}; {u}")
+        cues = await page.evaluate("window.snCues.slice()")
+        check("quay lại có tiếng báo hiệu", cues and cues[-1] == "undo", str(cues[-4:]))
+        await page.select_option("#step", "sent")
+
+        await page.keyboard.press("[")
+        lim = await spoken_live(page, "Đây là phần đầu")
+        check("tới giới hạn thì có tiếng báo và lời báo", "Đây là phần đầu" in lim and (await page.evaluate("window.snCues.at(-1)")) == "limit", lim)
+        await page.click("#openSettings")
+        await page.click("#optCue button[data-v='0']")
+        off = await spoken_live(page, "Tiếng báo hiệu")
+        await page.keyboard.press("Escape")
+        n0 = await page.evaluate("window.snCues.length")
+        await page.keyboard.press("[")
+        await page.wait_for_timeout(200)
+        check("tắt tiếng báo hiệu trong Cài đặt thì không còn tiếng báo", await page.evaluate("window.snCues.length") == n0 and "Tắt" in off, off)
+        await page.click("#openSettings")
+        await page.click("#optCue button[data-v='1']")
+
+        await page.click("#optHl button[data-v='line']")
+        await page.keyboard.press("Escape")
+        await page.wait_for_selector(".s.on")
+        await page.wait_for_timeout(500)          # chờ hiệu ứng chuyển màu nền kết thúc
+        bg, deco = await page.evaluate("(() => { const c = getComputedStyle(document.querySelector('.s.on')); return [c.backgroundColor, c.textDecorationLine]; })()")
+        check("chọn Gạch chân thì câu đang đọc được gạch chân thay cho tô nền", bg == "rgba(0, 0, 0, 0)" and "underline" in deco, f"{bg}, {deco}")
+        await page.click("#openSettings")
+        await page.click("#optHl button[data-v='default']")
+        await page.keyboard.press("Escape")
+
+        # tốc độ riêng từng cuốn: Lão Hạc đang ở 1,5 lần; chỉnh Tắt đèn lên 2 lần
+        await page.goto(BASE + "#/r/tat-den/1")
+        await page.wait_for_function(ready("tat-den"), timeout=20000)
+        await page.select_option("#speed", "2")
+        await page.keyboard.press("]")
+        await page.wait_for_function("location.hash.endsWith('/tat-den/2')", timeout=20000)
+        await page.wait_for_function(ready("tat-den") + " && document.querySelector('#h-reader').textContent.length > 0", timeout=20000)
+        await page.wait_for_timeout(600)
+        await page.keyboard.press("z")
+        await page.wait_for_timeout(1200)
+        check("Quay lại sau khi nhảy sang phần khác thì về phần cũ", page.url.endswith("/tat-den/1"), page.url.split("#")[1])
+        await page.goto(BASE + "#/r/lao-hac/1")
+        await page.wait_for_function(ready("lao-hac"), timeout=20000)
+        r1 = (await page.evaluate(STATE))["rate"]
+        await page.goto(BASE + "#/r/tat-den/1")
+        await page.wait_for_function(ready("tat-den"), timeout=20000)
+        r2 = (await page.evaluate(STATE))["rate"]
+        check("tốc độ nhớ riêng từng cuốn", r1 == 1.5 and r2 == 2, f"Lão Hạc {r1}, Tắt đèn {r2}")
+        await page.evaluate("localStorage.removeItem('sn:rate:tat-den'); localStorage.setItem('sn:rate', '1.5'); localStorage.removeItem('sn:pos:tat-den')")
+
+        await page.goto(BASE + "#/r/lao-hac/1")
+        await page.wait_for_function(ready("lao-hac") + " && document.querySelector('.s.on')", timeout=20000)
+        await page.click("#mark")
+        await spoken_live(page, "Đã đánh dấu")
+        check("đánh dấu có tiếng báo hiệu", (await page.evaluate("window.snCues.at(-1)")) == "mark")
+        await page.goto(BASE + "#/b/lao-hac")
+        await page.wait_for_selector(".marks button[data-act='rec']")
+        await page.click(".marks button[data-act='rec']")
+        rec = await spoken_live(page, "Đang ghi âm")
+        await page.wait_for_timeout(1500)
+        await page.click(".marks button[data-act='rec']")
+        saved = await spoken_live(page, "Đã lưu ghi chú", 8000)
+        has_play = await page.locator(".marks button[data-act='play']").count()
+        label = await page.get_attribute(".marks a", "aria-label") or ""
+        check("ghi âm được ghi chú bằng giọng nói cho dấu trang", "Đang ghi âm" in rec and "Đã lưu ghi chú" in saved and has_play == 1
+              and "có ghi chú bằng giọng nói" in label, f"{saved} | {label[:60]}")
+        size = await page.evaluate("""() => new Promise((res) => { const r = indexedDB.open('sach-noi', 1);
+          r.onsuccess = () => { const q = r.result.transaction('units').objectStore('units').getAllKeys();
+            q.onsuccess = async () => { const k = q.result.find((x) => String(x).startsWith('note:lao-hac'));
+              if (!k) return res(0); const g = r.result.transaction('units').objectStore('units').get(k); g.onsuccess = () => res(g.result.blob.size); }; }; })""")
+        check("ghi chú được lưu trên máy dưới dạng âm thanh", size > 200, f"{size} byte")
+        await page.click(".marks button[data-act='play']")
+        await page.wait_for_timeout(300)
+        check("nghe lại được ghi chú", (await page.inner_text(".marks button[data-act='play']")) == "Dừng nghe")
+        await page.click(".marks button[data-act='play']")
+        await page.click(".marks button[data-act='del']")
+        await page.wait_for_timeout(300)
+        left = await page.evaluate("""() => new Promise((res) => { const r = indexedDB.open('sach-noi', 1);
+          r.onsuccess = () => { const q = r.result.transaction('units').objectStore('units').getAllKeys();
+            q.onsuccess = () => res(q.result.filter((x) => String(x).startsWith('note:')).length); }; })""")
+        check("xoá dấu trang thì xoá luôn ghi chú", left == 0 and await page.locator(".marks a").count() == 0, f"còn {left} ghi chú")
 
         await page.goto(BASE + "#/")
         await page.wait_for_selector("#bookList li")

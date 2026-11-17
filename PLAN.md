@@ -48,7 +48,7 @@ Ràng buộc máy dev: không có CUDA → mọi mô hình phải chạy đượ
 - [x] Deploy dần từng chương, từng cuốn (`pipeline/scripts/deploy_site.py`)
 - [ ] **Thử với TalkBack và VoiceOver trên điện thoại thật** — kiểm thử tự động không thay được bước này
 - [ ] Thử với người dùng khiếm thị (hoặc bịt mắt), ghi lại số thao tác và thời gian tới khi nghe được
-- [x] 17/11: đối chiếu với BARD Mobile, Legimus, Voice Dream, Victor Reader Stream: bước nhảy câu/đoạn/30 giây/phần, đánh dấu trang, Đang ở đâu, hướng dẫn, tìm bằng giọng nói, tốc độ tới 3 lần, hẹn giờ hết phần (70 kiểm thử)
+- [x] 17/11: đối chiếu với BARD Mobile, Legimus, Voice Dream, Victor Reader Stream: bước nhảy câu/đoạn/30 giây/phần, đánh dấu trang, Đang ở đâu, hướng dẫn, tìm bằng giọng nói, tốc độ tới 3 lần, hẹn giờ hết phần, ghi chú bằng giọng nói, tiếng báo hiệu, nút Quay lại, màu tô câu, tốc độ riêng từng cuốn (82 kiểm thử)
 
 ## Stage 4 — Phân tích sâu và cải tiến (20%)
 

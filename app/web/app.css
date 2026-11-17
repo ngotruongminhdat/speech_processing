@@ -224,6 +224,12 @@ h2.seg{font-size:calc(1.3rem * var(--rsize));font-weight:600;line-height:1.4;mar
 .s:hover{background:var(--accent-soft)}
 .s.on{background:var(--hi);box-shadow:0 0 0 2px var(--hi-ring)}
 :root.theme-contrast .s.on{color:#000}
+/* màu tô câu đang đọc do người dùng chọn (mặc định: vàng theo nền) */
+:root.hl-blue .s.on{background:#cfe6ff;box-shadow:0 0 0 2px #5f9fe6;color:#0b1c33}
+:root.hl-green .s.on{background:#d3f2c8;box-shadow:0 0 0 2px #62b34a;color:#10260a}
+:root.hl-line .s.on{background:transparent;box-shadow:none;color:inherit;text-decoration:underline;text-decoration-thickness:.14em;text-underline-offset:.24em}
+:root.hl-none .s.on{background:transparent;box-shadow:none;color:inherit}
+:root.hl-line .seg.cur,:root.hl-none .seg.cur{background:transparent}
 .dropcap::first-letter{float:left;font-size:3.4em;line-height:.82;padding:.04em .12em 0 0;color:var(--accent);font-weight:bold}
 .endmark{text-align:center;color:var(--ink-soft);margin-top:2.2rem;font-size:.8rem;letter-spacing:.5em}
 .footnote{font-size:.9em;color:var(--ink-soft);border-left:3px solid var(--accent);background:var(--accent-soft);margin-top:2rem}
@@ -262,7 +268,10 @@ body.legible .dropcap::first-letter{float:none;font-size:1em;color:inherit;paddi
 .mic[aria-pressed="true"]{background:var(--hero-accent);color:#1a0d05}
 #mark[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
 .marks{list-style:none;margin:0;padding:0}
-.marks li{display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--line)}
+.marks li{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .5rem;border-bottom:1px solid var(--line);padding-bottom:.5rem}
+.marks a{flex:1 1 100%}
+.marks button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+#undo[aria-disabled="true"]{opacity:.5}
 .marks li:last-child{border-bottom:0}
 .marks a{flex:1;min-height:48px;display:flex;flex-direction:column;justify-content:center;padding:.55rem .45rem;text-decoration:none;color:var(--ink)}
 .marks a b{font:700 .78rem var(--ui);color:var(--accent)}
@@ -318,11 +327,12 @@ dialog.set-panel::backdrop{background:rgba(0,0,0,.28)}
   .extras{display:contents}
   #speed{grid-column:10/13;grid-row:2;min-height:48px;width:100%;min-width:0;padding:.42rem .3rem}
   #step{grid-column:1/4;grid-row:2;min-height:48px;width:100%;min-width:0;padding:.42rem .3rem}
-  #where{grid-column:1/6;grid-row:3;min-height:48px;min-width:0;justify-content:center}
-  #mark{grid-column:6/10;grid-row:3;min-height:48px;min-width:0;justify-content:center}
+  #where{grid-column:1/6;grid-row:3;min-height:48px;min-width:0;justify-content:center;padding-inline:.3rem}
+  #mark{grid-column:6/10;grid-row:3;min-height:48px;min-width:0;justify-content:center;padding-inline:.3rem}
+  #undo{grid-column:10/13;grid-row:3;min-height:48px;min-width:0;justify-content:center;padding-inline:.3rem}
   .read-main{padding-bottom:17rem}
   /* nút tải DAISY chỉ còn biểu tượng cho vừa màn hình hẹp; tên nút vẫn có trong aria-label */
-  #dl{grid-column:10/13;grid-row:3;min-height:48px;min-width:0;justify-content:center}
+  #dl{display:none}
   .time{min-width:2.6em}
   .top-pills{top:.6rem;right:.6rem}
 }

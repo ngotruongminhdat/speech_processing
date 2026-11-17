@@ -122,6 +122,7 @@
         </select>
         <button class="pbtn" id="where" type="button"><span aria-hidden="true">📍</span><span class="lbl"> Đang ở đâu</span></button>
         <button class="pbtn" id="mark" type="button" aria-pressed="false"><span aria-hidden="true">🔖</span><span class="lbl"> Đánh dấu</span></button>
+        <button class="pbtn" id="undo" type="button" aria-disabled="true"><span aria-hidden="true">↩</span><span class="lbl"> Quay lại</span></button>
         <a class="pbtn" id="dl" href="#" download><span aria-hidden="true">⬇</span><span class="lbl"> DAISY</span></a>
       </div>
       <audio id="audio" preload="metadata"></audio>
@@ -137,7 +138,7 @@
 
   <div class="keyhint" aria-hidden="true">
     <b>Space</b> phát/dừng · <b>←</b><b>→</b> lùi/tới · <b>↑</b><b>↓</b> tốc độ<br>
-    <b>J</b><b>L</b> 30 giây · <b>I</b> đang ở đâu · <b>M</b> đánh dấu · <b>?</b> hướng dẫn
+    <b>J</b><b>L</b> 30 giây · <b>I</b> đang ở đâu · <b>M</b> đánh dấu · <b>Z</b> quay lại · <b>?</b> hướng dẫn
   </div>
 </div>
 
@@ -162,6 +163,14 @@
       <button type="button" data-v="dark">Tối</button>
       <button type="button" data-v="contrast">Tương phản cao</button>
     </div>
+    <h3 id="l-hl">Tô câu đang đọc</h3>
+    <div class="set-row" id="optHl" role="group" aria-labelledby="l-hl">
+      <button type="button" data-v="default">Vàng</button>
+      <button type="button" data-v="blue">Xanh lam</button>
+      <button type="button" data-v="green">Xanh lá</button>
+      <button type="button" data-v="line">Gạch chân</button>
+      <button type="button" data-v="none">Không tô</button>
+    </div>
     <h3 id="l-leg">Kiểu chữ</h3>
     <div class="set-row" id="optLeg" role="group" aria-labelledby="l-leg">
       <button type="button" data-v="0">Mặc định</button>
@@ -176,6 +185,11 @@
       <button type="button" data-v="-1" aria-label="Khi hết phần đang nghe">Hết phần</button>
     </div>
     <div class="sleep-info" id="sleepInfo"></div>
+    <h3 id="l-cue">Tiếng báo hiệu</h3>
+    <div class="set-row" id="optCue" role="group" aria-labelledby="l-cue">
+      <button type="button" data-v="1">Bật</button>
+      <button type="button" data-v="0">Tắt</button>
+    </div>
     <h3 id="l-auto">Khi mở một phần</h3>
     <div class="set-row" id="optAuto" role="group" aria-labelledby="l-auto">
       <button type="button" data-v="1">Tự phát ngay</button>
@@ -203,7 +217,10 @@
       <li>Khi đang tạm dừng, mỗi lần nhấn Lùi hoặc Tới theo câu, ứng dụng đọc câu đó lên. Dùng cách này để nghe lại từng câu.</li>
       <li>Ô Tốc độ đọc chỉnh từ 0,75 đến 3 lần.</li>
       <li>Nút Đang ở đâu đọc tên sách, tên phần, thời điểm đang nghe và tốc độ.</li>
-      <li>Nút Đánh dấu ghi nhớ câu đang nghe. Các dấu trang nằm ở trang bìa của cuốn sách.</li>
+      <li>Nút Đánh dấu ghi nhớ câu đang nghe. Các dấu trang nằm ở trang bìa của cuốn sách. Ở đó, mỗi dấu trang có nút Ghi âm ghi chú để bạn tự nói một lời ghi chú dài tối đa 60 giây, rồi nghe lại bằng nút Nghe ghi chú.</li>
+      <li>Nút Quay lại đưa bạn về chỗ đang nghe trước cú nhảy gần nhất, dùng khi lỡ nhảy nhầm.</li>
+      <li>Tốc độ đọc được nhớ riêng cho từng cuốn sách.</li>
+      <li>Ứng dụng phát một tiếng báo ngắn khi hết phần, khi tới giới hạn và khi đánh dấu. Tắt được trong Cài đặt.</li>
       <li>Trong Cài đặt có hẹn giờ tắt, cỡ chữ, nền tương phản cao và kiểu chữ dễ đọc.</li>
       <li>Khi khoá màn hình hoặc dùng tai nghe, các nút phát, dừng, lùi và tới trên màn hình khoá và trên tai nghe vẫn điều khiển được sách.</li>
     </ul>
@@ -213,7 +230,7 @@
       <li>Mũi tên trái và phải: lùi và tới theo bước nhảy đã chọn. Page Up và Page Down: đoạn trước và đoạn sau.</li>
       <li>J và L: lùi và tới 30 giây. Dấu ngoặc vuông mở và đóng: phần trước và phần sau.</li>
       <li>Mũi tên lên và xuống: tăng và giảm tốc độ.</li>
-      <li>I: đang ở đâu. M: đánh dấu. Dấu hỏi: mở hướng dẫn này.</li>
+      <li>I: đang ở đâu. M: đánh dấu. Z: quay lại chỗ trước cú nhảy. Dấu hỏi: mở hướng dẫn này.</li>
     </ul>
     <button class="set-close" value="close">Đóng hướng dẫn</button>
   </form>

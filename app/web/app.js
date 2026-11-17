@@ -121,6 +121,37 @@ function announce(msg, visible = true) {
   if (visible) toast(msg);
 }
 
+// ---------- tiếng báo hiệu ----------
+// Tiếng ngắn cho người không nhìn màn hình: hết phần, tới giới hạn, đánh dấu, hết giờ hẹn.
+const CUES = {
+  limit: [[196, 0, 0.09], [196, 0.13, 0.09]],          // hai tiếng trầm: không đi tiếp được
+  end: [[660, 0, 0.12], [494, 0.14, 0.18]],            // đi xuống: hết phần
+  done: [[523, 0, 0.12], [659, 0.13, 0.12], [784, 0.26, 0.22]],   // đi lên: hết sách
+  mark: [[880, 0, 0.08]],                              // một tiếng cao: đã đánh dấu
+  undo: [[494, 0, 0.08], [660, 0.1, 0.1]],
+  sleep: [[440, 0, 0.25]],
+};
+let cueCtx = null;
+const cueLog = (window.snCues = []);      // để kiểm thử xem tiếng nào đã phát
+function cue(kind) {
+  if (store.get('cue', '1') !== '1' || !CUES[kind]) return;
+  cueLog.push(kind);
+  try {
+    cueCtx = cueCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (cueCtx.state === 'suspended') cueCtx.resume();
+    const t0 = cueCtx.currentTime + 0.02;
+    for (const [freq, at, len] of CUES[kind]) {
+      const osc = cueCtx.createOscillator(), gain = cueCtx.createGain();
+      osc.type = 'sine'; osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, t0 + at);
+      gain.gain.exponentialRampToValueAtTime(0.22, t0 + at + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + at + len);
+      osc.connect(gain).connect(cueCtx.destination);
+      osc.start(t0 + at); osc.stop(t0 + at + len + 0.02);
+    }
+  } catch { /* không có Web Audio: bỏ qua */ }
+}
+
 function cover(book) {
   const face = book.cover
     ? `<img src="${esc(book.cover)}" alt="">`
@@ -249,7 +280,7 @@ async function renderBook(book) {
     }).join('')}</ol></div>` : '';
   $('#bookToc').hidden = units.length <= 1;
 
-  renderMarks(book);
+  await renderMarks(book);
 
   $('#bookFoot').innerHTML = `<span class="mark" aria-hidden="true">◆</span><br>
     ${esc(book.title)} · ${esc(book.creator)}<br>Sách dựng theo chuẩn DAISY 3 · giọng đọc tổng hợp`;
@@ -306,25 +337,75 @@ const markTitle = (book, m) => {
   const u = book.units.find((x) => x.no === m.unit);
   return `${book.units.length > 1 && u ? u.label + ', ' : ''}${spoken(m.t)}`;
 };
-function renderMarks(book) {
+const noteKey = (slug, m) => `note:${slug}:${m.unit}:${m.s}`;
+const canRecord = () => !!(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
+const NOTE_MAX = 60;                 // giây
+let noteRec = null, notePlayer = null;
+async function renderMarks(book) {
   let box = $('#bookMarks');
   if (!box) { box = document.createElement('section'); box.id = 'bookMarks'; $('#bookToc').before(box); }
   const marks = getMarks(book.slug);
+  const has = await Promise.all(marks.map((m) => idb.get(noteKey(book.slug, m)).then((n) => !!n)));
   box.className = 'wrap';
   box.hidden = !marks.length;
   box.innerHTML = marks.length ? `
     <div class="toc-head"><h2 id="h-marks" tabindex="-1">Dấu trang</h2><span class="toc-note"><b>${marks.length}</b> chỗ đã đánh dấu</span></div>
-    <div class="toc-card"><ul class="marks">${marks.map((m, i) => `
-      <li><a href="#/r/${book.slug}/${m.unit}/s${m.s}"><b>${esc(markTitle(book, m))}</b><span>${esc(m.text)}</span></a>
-      <button type="button" data-i="${i}" aria-label="Xoá dấu trang ${esc(markTitle(book, m))}">Xoá</button></li>`).join('')}</ul></div>` : '';
-  box.onclick = (e) => {
-    const b = e.target.closest('button[data-i]');
+    <div class="toc-card"><ul class="marks">${marks.map((m, i) => {
+      const t = esc(markTitle(book, m));
+      return `
+      <li><a href="#/r/${book.slug}/${m.unit}/s${m.s}" aria-label="${t}${has[i] ? ', có ghi chú bằng giọng nói' : ''}: ${esc(m.text)}"><b>${t}${has[i] ? ' · có ghi chú' : ''}</b><span>${esc(m.text)}</span></a>
+      ${has[i] ? `<button type="button" data-act="play" data-i="${i}" aria-label="Nghe ghi chú của dấu trang ${t}">Nghe ghi chú</button>` : ''}
+      ${canRecord() ? `<button type="button" data-act="rec" data-i="${i}" aria-pressed="false" aria-label="${has[i] ? 'Ghi âm lại ghi chú' : 'Ghi âm ghi chú'} cho dấu trang ${t}">${has[i] ? 'Ghi âm lại' : 'Ghi âm ghi chú'}</button>` : ''}
+      <button type="button" data-act="del" data-i="${i}" aria-label="Xoá dấu trang ${t}">Xoá</button></li>`;
+    }).join('')}</ul></div>` : '';
+  box.onclick = async (e) => {
+    const b = e.target.closest('button[data-act]');
     if (!b) return;
-    const left = getMarks(book.slug).filter((_, i) => i !== Number(b.dataset.i));
-    store.set('marks:' + book.slug, left);
-    renderMarks(book);
-    announce('Đã xoá dấu trang.');
-    (left.length ? $('#h-marks') : $('#h-book'))?.focus();
+    const i = Number(b.dataset.i), m = getMarks(book.slug)[i];
+    if (!m) return;
+    const key = noteKey(book.slug, m);
+    if (b.dataset.act === 'del') {
+      store.set('marks:' + book.slug, getMarks(book.slug).filter((_, k) => k !== i));
+      await idb.del(key).catch(() => {});
+      await renderMarks(book);
+      announce('Đã xoá dấu trang.');
+      (getMarks(book.slug).length ? $('#h-marks') : $('#h-book'))?.focus();
+    } else if (b.dataset.act === 'play') {
+      if (notePlayer) { notePlayer.pause(); notePlayer = null; b.textContent = 'Nghe ghi chú'; return; }
+      const n = await idb.get(key);
+      if (!n) return;
+      const url = URL.createObjectURL(n.blob);
+      notePlayer = new Audio(url);
+      const stop = () => { URL.revokeObjectURL(url); notePlayer = null; if (b.isConnected) b.textContent = 'Nghe ghi chú'; };
+      notePlayer.onended = stop; notePlayer.onerror = stop;
+      b.textContent = 'Dừng nghe';
+      notePlayer.play().catch(stop);
+    } else if (b.dataset.act === 'rec') {
+      if (noteRec) { noteRec.stop(); return; }
+      let stream;
+      try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
+      catch { announce('Chưa được phép dùng micro. Hãy cho phép trong cài đặt trình duyệt rồi thử lại.'); return; }
+      const chunks = [];
+      const rec = new MediaRecorder(stream);
+      const timer = setTimeout(() => rec.state === 'recording' && rec.stop(), NOTE_MAX * 1000);
+      rec.ondataavailable = (ev) => { if (ev.data.size) chunks.push(ev.data); };
+      rec.onstop = async () => {
+        clearTimeout(timer);
+        stream.getTracks().forEach((t) => t.stop());
+        noteRec = null;
+        const blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
+        if (!blob.size) { announce('Không ghi được âm thanh. Hãy thử lại.'); return renderMarks(book); }
+        await idb.put(key, { blob, at: Date.now() });
+        await renderMarks(book);
+        announce('Đã lưu ghi chú bằng giọng nói.');
+        $(`#bookMarks button[data-act="play"][data-i="${i}"]`)?.focus();
+      };
+      noteRec = rec;
+      rec.start();
+      b.setAttribute('aria-pressed', 'true');
+      b.textContent = 'Dừng ghi âm';
+      announce(`Đang ghi âm, tối đa ${NOTE_MAX} giây. Nhấn nút lần nữa để dừng.`);
+    }
   };
 }
 function markIndex() {
@@ -342,12 +423,14 @@ function toggleMark() {
   const marks = getMarks(R.book.slug);
   const at = markIndex();
   if (at >= 0) {
+    idb.del(noteKey(R.book.slug, marks[at])).catch(() => {});
     marks.splice(at, 1);
     announce('Đã bỏ dấu trang ở câu này.');
   } else {
     const i = sentAt(audio.currentTime);
     const m = { unit: R.unit.no, s: i, t: Math.round(R.sents[i].b), text: sentText(i).slice(0, 140), at: Date.now() };
     marks.push(m);
+    cue('mark');
     marks.sort((a, b) => a.unit - b.unit || a.s - b.s);
     announce(`Đã đánh dấu: ${markTitle(R.book, m)}. Xem các dấu trang ở trang bìa.`);
   }
@@ -389,6 +472,7 @@ async function openReader(book, unitNo, keep = null) {
   audio.pause();
   $('#text').innerHTML = '';
   status.hidden = true;
+  if (R.undo && R.undo.slug !== book.slug) { R.undo = null; $('#undo').setAttribute('aria-disabled', 'true'); }
   R.book = book; R.unit = unit; R.voice = vid; R.sents = []; R.cur = -1;
 
   // tiêu đề, mục lục, nút quay lại
@@ -440,7 +524,8 @@ async function openReader(book, unitNo, keep = null) {
 
   renderText(data);
   audio.src = src; R.srcToken = token;
-  audio.playbackRate = Number(store.get('rate', 1));
+  // tốc độ nhớ riêng từng cuốn; cuốn chưa chỉnh lần nào thì theo tốc độ dùng gần nhất
+  audio.playbackRate = Number(store.get('rate:' + book.slug, store.get('rate', 1)));
   $('#speed').value = String(audio.playbackRate);
 
   // người nghe chọn một giọng mà phần này chưa có: nói rõ đang phát giọng nào
@@ -586,12 +671,39 @@ function seekSent(i, play = true) {
 }
 function stepSent(dir) {
   if (!R.sents.length) return;
+  noteJump();
   const i = sentAt(audio.currentTime);
   // lùi: nếu đã nghe hơn 1,5 giây của câu thì quay về đầu chính câu đó
   const j = dir < 0 && audio.currentTime - R.sents[i].b > 1.5 ? i : Math.max(0, Math.min(R.sents.length - 1, i + dir));
   seekSent(j, !audio.paused);
   tellSent(j);
 }
+// Ghi lại chỗ đang nghe trước mỗi cú nhảy, để nút Quay lại đưa về đúng chỗ đó khi lỡ nhảy nhầm.
+function noteJump() {
+  if (!R.ready || !R.book || !R.unit) return;
+  R.undo = { slug: R.book.slug, unit: R.unit.no, t: audio.currentTime, s: R.sents.length ? sentAt(audio.currentTime) : 0 };
+  $('#undo').setAttribute('aria-disabled', 'false');
+}
+function undoJump() {
+  const u = R.undo;
+  if (!u || !R.book || u.slug !== R.book.slug) { cue('limit'); return announce('Chưa có cú nhảy nào để quay lại.'); }
+  R.undo = null;
+  $('#undo').setAttribute('aria-disabled', 'true');
+  cue('undo');
+  if (u.unit !== R.unit.no) {
+    const play = !audio.paused;
+    history.replaceState(null, '', `#/r/${R.book.slug}/${u.unit}`);
+    document.title = `${R.book.title} · Sách Nói`;
+    openReader(R.book, u.unit, { sent: u.s, play });
+    return announce('Đã quay lại phần trước cú nhảy.');
+  }
+  if (!R.ready) return;
+  audio.currentTime = u.t;
+  R.userScrollAt = 0;
+  tick();
+  announce(`Đã quay lại ${spoken(u.t)}.`);
+}
+
 const sentText = (i) => (R.sents[i]?.el.classList.contains('s') ? R.sents[i].el.textContent : $('#h-reader').textContent);
 // Đang tạm dừng mà nhảy thì không có tiếng nào phát ra: đọc câu vừa tới để người nghe biết mình ở đâu,
 // và cũng là cách nghe lại từng câu bằng trình đọc màn hình.
@@ -599,6 +711,7 @@ function tellSent(i) { if (audio.paused && R.sents[i]) announce(sentText(i), fal
 const paraOf = (i) => R.sents[i]?.para || R.sents[i]?.el;
 function stepPara(dir) {
   if (!R.sents.length) return;
+  noteJump();
   const i = sentAt(audio.currentTime);
   let first = i;
   while (first > 0 && paraOf(first - 1) === paraOf(i)) first--;
@@ -606,7 +719,7 @@ function stepPara(dir) {
   if (dir > 0) {
     j = i;
     while (j < R.sents.length && paraOf(j) === paraOf(i)) j++;
-    if (j >= R.sents.length) return announce('Đây là đoạn cuối của phần này.');
+    if (j >= R.sents.length) { cue('limit'); return announce('Đây là đoạn cuối của phần này.'); }
   } else if (audio.currentTime - R.sents[first].b > 1.5 || first === 0) {
     j = first;                                  // về đầu đoạn đang nghe
   } else {
@@ -619,6 +732,7 @@ function stepPara(dir) {
 const TIME_STEP = 30;
 function stepTime(dir) {
   if (!R.ready) return;
+  noteJump();
   const d = audio.duration || 0;
   audio.currentTime = Math.max(0, Math.min(Math.max(0, d - 0.5), audio.currentTime + dir * TIME_STEP));
   R.userScrollAt = 0;
@@ -647,8 +761,8 @@ function gotoUnit(dir) {
   const ready = readyUnits(R.book);
   const idx = ready.findIndex((u) => u.no === R.unit?.no);
   const target = ready[idx + dir];
-  if (target) location.hash = `#/r/${R.book.slug}/${target.no}`;
-  else announce(dir > 0 ? 'Đây là phần cuối.' : 'Đây là phần đầu.');
+  if (target) { noteJump(); location.hash = `#/r/${R.book.slug}/${target.no}`; }
+  else { cue('limit'); announce(dir > 0 ? 'Đây là phần cuối.' : 'Đây là phần đầu.'); }
 }
 
 function savePos() {
@@ -708,12 +822,14 @@ audio.addEventListener('ended', () => {
   const ready = readyUnits(book);
   const next = ready[ready.findIndex((u) => u.no === unit.no) + 1];
   if (next) {
+    cue('end');
     if (sleepAtEnd) { R.holdNext = true; setSleep(0, false); }
     store.set('pos:' + book.slug, { unit: next.no, t: 0, at: Date.now() });
     location.hash = `#/r/${book.slug}/${next.no}`;
   } else {
     store.set('pos:' + book.slug, { unit: unit.no, t: unitDuration(unit, R.voice), at: Date.now() });
     if (sleepAtEnd) setSleep(0, false);
+    cue('done');
     announce(`Đã nghe hết ${book.title}.`);
   }
 });
@@ -725,9 +841,13 @@ $('#next').addEventListener('click', () => stepNav(1));
 $('#step').addEventListener('change', (e) => setStep(e.target.value));
 $('#where').addEventListener('click', whereAmI);
 $('#mark').addEventListener('click', toggleMark);
+$('#undo').addEventListener('click', undoJump);
 setStep(stepKind(), false);
+let scrubAt = 0;
 $('#scrub').addEventListener('input', (e) => {
   const d = audio.duration || 0;
+  if (Date.now() - scrubAt > 1500) noteJump();     // một lần kéo là một cú nhảy
+  scrubAt = Date.now();
   if (d) { audio.currentTime = (e.target.value / 1000) * d; R.userScrollAt = 0; tick(); }
 });
 $('#speed').addEventListener('change', (e) => setRate(Number(e.target.value)));
@@ -735,16 +855,19 @@ function setRate(rate) {
   audio.playbackRate = rate;
   $('#speed').value = String(rate);
   store.set('rate', rate);
+  if (R.book) store.set('rate:' + R.book.slug, rate);
   announce(`Tốc độ ${String(rate).replace('.', ' phẩy ')} lần.`);
 }
 function nudgeRate(dir) {
   const opts = $$('#speed option').map((o) => Number(o.value));
-  const i = Math.max(0, Math.min(opts.length - 1, opts.indexOf(audio.playbackRate) + dir));
+  const at = opts.indexOf(audio.playbackRate) + dir;
+  if (at < 0 || at >= opts.length) { cue('limit'); return announce(dir > 0 ? 'Đây là tốc độ nhanh nhất.' : 'Đây là tốc độ chậm nhất.'); }
+  const i = at;
   setRate(opts[i]);
 }
 $('#text').addEventListener('click', (e) => {
   const span = e.target.closest('.s');
-  if (span) seekSent(Number(span.dataset.i));
+  if (span) { noteJump(); seekSent(Number(span.dataset.i)); }
 });
 $('#h-reader').addEventListener('click', () => { if (R.sents.length) seekSent(0); });
 for (const ev of ['wheel', 'touchmove']) addEventListener(ev, () => { R.userScrollAt = Date.now(); }, { passive: true });
@@ -765,6 +888,7 @@ addEventListener('keydown', (e) => {
     l: () => stepTime(1),
     i: () => whereAmI(),
     m: () => toggleMark(),
+    z: () => undoJump(),
     ArrowUp: () => nudgeRate(1),
     ArrowDown: () => nudgeRate(-1),
     ']': () => gotoUnit(1),
@@ -805,13 +929,21 @@ const prefs = {
   },
   legible: { el: '#optLeg', def: '0', apply: (v) => document.body.classList.toggle('legible', v === '1') },
   autoplay: { el: '#optAuto', def: '1', apply: () => {} },
+  cue: { el: '#optCue', def: '1', name: 'Tiếng báo hiệu', apply: () => {} },
+  hl: {
+    el: '#optHl', def: 'default', name: 'Tô câu đang đọc',
+    apply: (v) => { const c = document.documentElement.classList; c.remove('hl-blue', 'hl-green', 'hl-line', 'hl-none'); if (v !== 'default') c.add('hl-' + v); },
+  },
 };
 for (const [key, p] of Object.entries(prefs)) {
   const setPref = (v, tell) => {
     store.set(key, v);
     p.apply(v);
     $$(`${p.el} button`).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
-    if (tell) announce(`Đã chọn ${$(`${p.el} button[data-v="${v}"]`).textContent.trim()}.`);
+    if (tell) {
+      const pick = $(`${p.el} button[data-v="${v}"]`).textContent.trim();
+      announce(p.name ? `${p.name}: ${pick}.` : `Đã chọn ${pick}.`);
+    }
   };
   setPref(String(store.get(key, p.def)), false);
   $(p.el).addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setPref(b.dataset.v, true); });
@@ -835,7 +967,7 @@ function setSleep(min, tell = true) {
   show();
   if (min) {
     sleepTick = setInterval(show, 30000);
-    sleepTimer = setTimeout(() => { audio.pause(); setSleep(0, false); announce('Đã hết giờ hẹn, tạm dừng.'); }, min * 60000);
+    sleepTimer = setTimeout(() => { audio.pause(); setSleep(0, false); cue('sleep'); announce('Đã hết giờ hẹn, tạm dừng.'); }, min * 60000);
   }
   if (tell) announce(min ? `Sẽ tự dừng sau ${min} phút.` : 'Đã tắt hẹn giờ.');
 }
