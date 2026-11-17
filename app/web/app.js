@@ -333,10 +333,12 @@ async function refreshSaveBtn(book) {
 // ================= TRANG ĐỌC =================
 const audio = $('#audio');
 // ---------- dấu trang ----------
+// Tên một phần để đọc lên. Nhãn của phần có khi chính là tên sách (Tắt đèn: "Chương 3"), khi đó chỉ đọc tiêu đề.
+const unitName = (book, u) => (u.label && u.label !== book.title && u.label !== u.title ? `${u.label}: ${u.title}` : u.title);
 const getMarks = (slug) => store.get('marks:' + slug, []);
 const markTitle = (book, m) => {
   const u = book.units.find((x) => x.no === m.unit);
-  return `${book.units.length > 1 && u ? u.label + ', ' : ''}${spoken(m.t)}`;
+  return `${book.units.length > 1 && u ? unitName(book, u) + ', ' : ''}${spoken(m.t)}`;
 };
 const noteKey = (slug, m) => `note:${slug}:${m.unit}:${m.s}`;
 const canRecord = () => !!(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
@@ -446,7 +448,7 @@ function whereAmI() {
   const ready = readyUnits(R.book);
   const d = audio.duration || unitDuration(R.unit, R.voice) || 0;
   const parts = [
-    many ? `${R.book.title}, ${R.unit.label}: ${R.unit.title}, phần ${ready.findIndex((u) => u.no === R.unit.no) + 1} trên ${ready.length}` : `${R.book.title} của ${R.book.creator}`,
+    many ? `${R.book.title}, ${unitName(R.book, R.unit)}, phần ${ready.findIndex((u) => u.no === R.unit.no) + 1} trên ${ready.length}` : `${R.book.title} của ${R.book.creator}`,
     `${audio.paused ? 'Đang tạm dừng ở' : 'Đang nghe tới'} ${spoken(audio.currentTime)} trên ${spoken(d)}, còn ${spoken(Math.max(0, d - audio.currentTime))}`,
     `Tốc độ ${String(audio.playbackRate).replace('.', ' phẩy ')} lần`,
   ];
