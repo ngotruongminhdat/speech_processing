@@ -254,6 +254,25 @@ body.legible .dropcap::first-letter{float:none;font-size:1em;color:inherit;paddi
   border:1px solid var(--line);border-radius:10px;padding:.5rem .7rem;box-shadow:var(--shadow);max-width:210px}
 .keyhint b{color:var(--ink);background:var(--paper-2);border:1px solid var(--line);border-radius:4px;padding:0 .32em;font-family:ui-monospace,monospace;font-size:.92em}
 
+.search-row{display:flex;gap:.5rem;align-items:center}
+.search+.cta{margin-top:.9rem}
+.search-row input{flex:1;min-width:0}
+.mic{flex:0 0 52px;width:52px;height:52px;border-radius:50%;cursor:pointer;font-size:1.25rem;color:var(--hero-ink);
+  background:rgba(255,248,238,.12);border:1px solid rgba(255,248,238,.45)}
+.mic[aria-pressed="true"]{background:var(--hero-accent);color:#1a0d05}
+#mark[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.marks{list-style:none;margin:0;padding:0}
+.marks li{display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--line)}
+.marks li:last-child{border-bottom:0}
+.marks a{flex:1;min-height:48px;display:flex;flex-direction:column;justify-content:center;padding:.55rem .45rem;text-decoration:none;color:var(--ink)}
+.marks a b{font:700 .78rem var(--ui);color:var(--accent)}
+.marks a span{font-size:.95rem;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.marks button{flex:0 0 auto;min-width:48px;min-height:48px;cursor:pointer;font:600 .78rem var(--ui);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:0 .8rem}
+dialog.help-panel{margin:auto;width:min(560px,calc(100vw - 1.6rem));max-height:calc(100vh - 2rem);overflow-y:auto;font-size:.95rem;line-height:1.6}
+.help-panel h2{font:700 1.15rem var(--ui);margin:0 0 .6rem}
+.help-panel ul{margin:.2rem 0 0;padding-left:1.15rem}
+.help-panel li{margin:.3rem 0}
+
 /* ---- bảng cài đặt ---- */
 dialog.set-panel{margin:3.6rem .9rem auto auto;width:min(300px,calc(100vw - 1.8rem));background:var(--card);color:var(--ink);border:1px solid var(--line);
   border-radius:14px;box-shadow:var(--shadow);padding:1rem 1.1rem 1.15rem;font-family:var(--ui)}
@@ -285,22 +304,25 @@ dialog.set-panel::backdrop{background:rgba(0,0,0,.28)}
   /* thanh phát hai hàng: tua ở trên, nút lớn ở dưới — sửa lỗi tràn của bản giữa kỳ */
   .player-dock{bottom:0;padding:0}
   .player-card{width:100%;max-width:none;border-radius:20px 20px 0 0;border-bottom:0;display:grid;
-    grid-template-columns:auto 1fr auto;grid-template-areas:"scrub scrub scrub" "speed transport dl";
-    gap:.1rem .5rem;padding:.5rem .9rem calc(.6rem + env(safe-area-inset-bottom))}
+    grid-template-columns:repeat(12,minmax(0,1fr));
+    gap:.3rem .25rem;padding:.5rem .9rem calc(.6rem + env(safe-area-inset-bottom))}
   .player-card .info{display:none}
-  .scrubber{grid-area:scrub}
+  .scrubber{grid-column:1/-1}
   .scrub{width:auto}
   .player-card{min-width:0}
-  .transport{grid-area:transport;justify-content:center;gap:.5rem}
-  .transport button{width:56px;height:56px}
+  .transport{grid-column:4/10;grid-row:2;justify-content:center;gap:.15rem}
+  .transport button{width:52px;height:52px}
   .transport .navb{font-size:1.7rem}
-  .transport .playpause{width:72px;height:72px;font-size:2.1rem;background:var(--accent);color:var(--on-accent)}
+  .transport .playpause{width:68px;height:68px;font-size:2.1rem;background:var(--accent);color:var(--on-accent)}
   .transport .playpause:hover{background:var(--accent)}
   .extras{display:contents}
-  #speed{grid-area:speed;min-height:48px;width:4.9rem;min-width:0;padding:.42rem .5rem}
+  #speed{grid-column:10/13;grid-row:2;min-height:48px;width:100%;min-width:0;padding:.42rem .3rem}
+  #step{grid-column:1/4;grid-row:2;min-height:48px;width:100%;min-width:0;padding:.42rem .3rem}
+  #where{grid-column:1/6;grid-row:3;min-height:48px;min-width:0;justify-content:center}
+  #mark{grid-column:6/10;grid-row:3;min-height:48px;min-width:0;justify-content:center}
+  .read-main{padding-bottom:17rem}
   /* nút tải DAISY chỉ còn biểu tượng cho vừa màn hình hẹp; tên nút vẫn có trong aria-label */
-  #dl{grid-area:dl;min-height:48px;min-width:48px;justify-content:center}
-  #dl .lbl{display:none}
+  #dl{grid-column:10/13;grid-row:3;min-height:48px;min-width:0;justify-content:center}
   .time{min-width:2.6em}
   .top-pills{top:.6rem;right:.6rem}
 }

@@ -2,7 +2,7 @@
 // Một trang duy nhất, ba màn hình theo địa chỉ sau dấu #:
 //   #/                  thư viện
 //   #/b/<slug>          trang bìa một cuốn
-//   #/r/<slug>/<phần>   trang đọc
+//   #/r/<slug>/<phần>   trang đọc (thêm /s<số câu> để mở đúng một câu, dùng cho dấu trang)
 // Dữ liệu: catalog.json và books/<slug>/<NN>.json do pipeline/scripts/build_site.py sinh ra.
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -181,6 +181,7 @@ function filterLibrary(tell = true) {
   }).join('');
   $('#noResult').hidden = books.length > 0;
   if (tell) announce(books.length ? `${books.length} cuốn khớp.` : 'Không tìm thấy sách nào khớp.', false);
+  return books.length;
 }
 
 // ================= TRANG BÌA =================
@@ -248,6 +249,8 @@ async function renderBook(book) {
     }).join('')}</ol></div>` : '';
   $('#bookToc').hidden = units.length <= 1;
 
+  renderMarks(book);
+
   $('#bookFoot').innerHTML = `<span class="mark" aria-hidden="true">◆</span><br>
     ${esc(book.title)} · ${esc(book.creator)}<br>Sách dựng theo chuẩn DAISY 3 · giọng đọc tổng hợp`;
 
@@ -297,6 +300,77 @@ async function refreshSaveBtn(book) {
 
 // ================= TRANG ĐỌC =================
 const audio = $('#audio');
+// ---------- dấu trang ----------
+const getMarks = (slug) => store.get('marks:' + slug, []);
+const markTitle = (book, m) => {
+  const u = book.units.find((x) => x.no === m.unit);
+  return `${book.units.length > 1 && u ? u.label + ', ' : ''}${spoken(m.t)}`;
+};
+function renderMarks(book) {
+  let box = $('#bookMarks');
+  if (!box) { box = document.createElement('section'); box.id = 'bookMarks'; $('#bookToc').before(box); }
+  const marks = getMarks(book.slug);
+  box.className = 'wrap';
+  box.hidden = !marks.length;
+  box.innerHTML = marks.length ? `
+    <div class="toc-head"><h2 id="h-marks" tabindex="-1">Dấu trang</h2><span class="toc-note"><b>${marks.length}</b> chỗ đã đánh dấu</span></div>
+    <div class="toc-card"><ul class="marks">${marks.map((m, i) => `
+      <li><a href="#/r/${book.slug}/${m.unit}/s${m.s}"><b>${esc(markTitle(book, m))}</b><span>${esc(m.text)}</span></a>
+      <button type="button" data-i="${i}" aria-label="Xoá dấu trang ${esc(markTitle(book, m))}">Xoá</button></li>`).join('')}</ul></div>` : '';
+  box.onclick = (e) => {
+    const b = e.target.closest('button[data-i]');
+    if (!b) return;
+    const left = getMarks(book.slug).filter((_, i) => i !== Number(b.dataset.i));
+    store.set('marks:' + book.slug, left);
+    renderMarks(book);
+    announce('Đã xoá dấu trang.');
+    (left.length ? $('#h-marks') : $('#h-book'))?.focus();
+  };
+}
+function markIndex() {
+  if (!R.book || !R.unit || !R.sents.length) return -1;
+  const i = sentAt(audio.currentTime);
+  return getMarks(R.book.slug).findIndex((m) => m.unit === R.unit.no && m.s === i);
+}
+function refreshMarkBtn() {
+  const on = markIndex() >= 0;
+  const b = $('#mark');
+  if (b.getAttribute('aria-pressed') !== String(on)) b.setAttribute('aria-pressed', String(on));
+}
+function toggleMark() {
+  if (!R.book || !R.unit || !R.sents.length || !R.ready) return;
+  const marks = getMarks(R.book.slug);
+  const at = markIndex();
+  if (at >= 0) {
+    marks.splice(at, 1);
+    announce('Đã bỏ dấu trang ở câu này.');
+  } else {
+    const i = sentAt(audio.currentTime);
+    const m = { unit: R.unit.no, s: i, t: Math.round(R.sents[i].b), text: sentText(i).slice(0, 140), at: Date.now() };
+    marks.push(m);
+    marks.sort((a, b) => a.unit - b.unit || a.s - b.s);
+    announce(`Đã đánh dấu: ${markTitle(R.book, m)}. Xem các dấu trang ở trang bìa.`);
+  }
+  store.set('marks:' + R.book.slug, marks);
+  refreshMarkBtn();
+}
+
+// Trả lời câu hỏi "đang ở đâu": sách, phần, thời điểm, tốc độ, hẹn giờ.
+function whereAmI() {
+  if (!R.book || !R.unit) return;
+  const many = R.book.units.length > 1;
+  const ready = readyUnits(R.book);
+  const d = audio.duration || unitDuration(R.unit, R.voice) || 0;
+  const parts = [
+    many ? `${R.book.title}, ${R.unit.label}: ${R.unit.title}, phần ${ready.findIndex((u) => u.no === R.unit.no) + 1} trên ${ready.length}` : `${R.book.title} của ${R.book.creator}`,
+    `${audio.paused ? 'Đang tạm dừng ở' : 'Đang nghe tới'} ${spoken(audio.currentTime)} trên ${spoken(d)}, còn ${spoken(Math.max(0, d - audio.currentTime))}`,
+    `Tốc độ ${String(audio.playbackRate).replace('.', ' phẩy ')} lần`,
+  ];
+  if (sleepAtEnd) parts.push('Sẽ tự dừng khi hết phần này');
+  else if (sleepEnd) parts.push(`Sẽ tự dừng sau ${Math.max(1, Math.ceil((sleepEnd - Date.now()) / 60000))} phút nữa`);
+  announce(parts.join('. ') + '.');
+}
+
 const R = { book: null, unit: null, voice: null, sents: [], cur: -1, objectUrl: null, token: 0, userScrollAt: 0, pendingSeek: null, quietSeek: false,
   ready: false,     // audio của đúng phần và giọng đang mở đã nạp xong; trước đó đồng hồ audio chưa có nghĩa
   keep: null, srcToken: 0 };
@@ -393,7 +467,10 @@ async function openReader(book, unitNo, keep = null) {
   if (notice && R.pendingSeek != null && !R.quietSeek) R.seekNote = notice + ' ';
   else if (notice) announce(notice);
   setMediaSession();
-  if (keep ? keep.play : store.get('autoplay', '1') === '1') {
+  refreshMarkBtn();
+  const held = R.holdNext; R.holdNext = false;
+  if (held) announce('Đã hết phần, tạm dừng theo hẹn giờ. Nhấn Phát để nghe phần tiếp theo.');
+  else if (keep ? keep.play : store.get('autoplay', '1') === '1') {
     // Chỉ nhắc nhấn Phát khi trình duyệt chặn tự phát. Lệnh phát bị ngắt vì người nghe đã rời
     // trang đọc hoặc đã mở phần khác (AbortError) thì không nói gì, kẻo đè lên thông báo đang hiện.
     audio.play().catch((e) => {
@@ -511,9 +588,60 @@ function stepSent(dir) {
   if (!R.sents.length) return;
   const i = sentAt(audio.currentTime);
   // lùi: nếu đã nghe hơn 1,5 giây của câu thì quay về đầu chính câu đó
-  if (dir < 0 && audio.currentTime - R.sents[i].b > 1.5) return seekSent(i, !audio.paused);
-  seekSent(i + dir, !audio.paused);
+  const j = dir < 0 && audio.currentTime - R.sents[i].b > 1.5 ? i : Math.max(0, Math.min(R.sents.length - 1, i + dir));
+  seekSent(j, !audio.paused);
+  tellSent(j);
 }
+const sentText = (i) => (R.sents[i]?.el.classList.contains('s') ? R.sents[i].el.textContent : $('#h-reader').textContent);
+// Đang tạm dừng mà nhảy thì không có tiếng nào phát ra: đọc câu vừa tới để người nghe biết mình ở đâu,
+// và cũng là cách nghe lại từng câu bằng trình đọc màn hình.
+function tellSent(i) { if (audio.paused && R.sents[i]) announce(sentText(i), false); }
+const paraOf = (i) => R.sents[i]?.para || R.sents[i]?.el;
+function stepPara(dir) {
+  if (!R.sents.length) return;
+  const i = sentAt(audio.currentTime);
+  let first = i;
+  while (first > 0 && paraOf(first - 1) === paraOf(i)) first--;
+  let j;
+  if (dir > 0) {
+    j = i;
+    while (j < R.sents.length && paraOf(j) === paraOf(i)) j++;
+    if (j >= R.sents.length) return announce('Đây là đoạn cuối của phần này.');
+  } else if (audio.currentTime - R.sents[first].b > 1.5 || first === 0) {
+    j = first;                                  // về đầu đoạn đang nghe
+  } else {
+    j = first - 1;
+    while (j > 0 && paraOf(j - 1) === paraOf(first - 1)) j--;
+  }
+  seekSent(j, !audio.paused);
+  tellSent(j);
+}
+const TIME_STEP = 30;
+function stepTime(dir) {
+  if (!R.ready) return;
+  const d = audio.duration || 0;
+  audio.currentTime = Math.max(0, Math.min(Math.max(0, d - 0.5), audio.currentTime + dir * TIME_STEP));
+  R.userScrollAt = 0;
+  tick();
+  if (audio.paused) announce(`${spoken(audio.currentTime)}.`, false);
+}
+const STEPS = {
+  sent: { prev: 'Câu trước', next: 'Câu sau', go: (d) => stepSent(d) },
+  para: { prev: 'Đoạn trước', next: 'Đoạn sau', go: (d) => stepPara(d) },
+  time: { prev: `Lùi ${TIME_STEP} giây`, next: `Tới ${TIME_STEP} giây`, go: (d) => stepTime(d) },
+  unit: { prev: 'Phần trước', next: 'Phần sau', go: (d) => gotoUnit(d) },
+};
+const stepKind = () => (STEPS[store.get('step', 'sent')] ? store.get('step', 'sent') : 'sent');
+function setStep(kind, tell = true) {
+  if (!STEPS[kind]) kind = 'sent';
+  store.set('step', kind);
+  $('#step').value = kind;
+  $('#prev').setAttribute('aria-label', STEPS[kind].prev);
+  $('#next').setAttribute('aria-label', STEPS[kind].next);
+  if (tell) announce(`Hai nút lùi và tới bây giờ là ${STEPS[kind].prev.toLowerCase()} và ${STEPS[kind].next.toLowerCase()}.`);
+}
+const stepNav = (dir) => STEPS[stepKind()].go(dir);
+
 function gotoUnit(dir) {
   if (!R.book) return;
   const ready = readyUnits(R.book);
@@ -538,7 +666,10 @@ function tick() {
   $('#tDur').textContent = clock(d);
   const scrub = $('#scrub');
   if (!scrub.matches(':active')) scrub.value = d ? Math.round((t / d) * 1000) : 0;
-  scrub.setAttribute('aria-valuetext', `${spoken(t)} trên ${spoken(d)}`);
+  // chỉ đổi khi nội dung đổi, để trình đọc màn hình không bị gọi liên tục
+  const vt = `${spoken(t)} trên ${spoken(d)}`;
+  if (scrub.getAttribute('aria-valuetext') !== vt) scrub.setAttribute('aria-valuetext', vt);
+  refreshMarkBtn();
   $('#progress').style.width = d ? `${(t / d) * 100}%` : '0';
 }
 let raf;
@@ -577,18 +708,24 @@ audio.addEventListener('ended', () => {
   const ready = readyUnits(book);
   const next = ready[ready.findIndex((u) => u.no === unit.no) + 1];
   if (next) {
+    if (sleepAtEnd) { R.holdNext = true; setSleep(0, false); }
     store.set('pos:' + book.slug, { unit: next.no, t: 0, at: Date.now() });
     location.hash = `#/r/${book.slug}/${next.no}`;
   } else {
     store.set('pos:' + book.slug, { unit: unit.no, t: unitDuration(unit, R.voice), at: Date.now() });
+    if (sleepAtEnd) setSleep(0, false);
     announce(`Đã nghe hết ${book.title}.`);
   }
 });
 
 // ---------- điều khiển ----------
 $('#play').addEventListener('click', () => (audio.paused ? audio.play().catch(() => {}) : audio.pause()));
-$('#prev').addEventListener('click', () => stepSent(-1));
-$('#next').addEventListener('click', () => stepSent(1));
+$('#prev').addEventListener('click', () => stepNav(-1));
+$('#next').addEventListener('click', () => stepNav(1));
+$('#step').addEventListener('change', (e) => setStep(e.target.value));
+$('#where').addEventListener('click', whereAmI);
+$('#mark').addEventListener('click', toggleMark);
+setStep(stepKind(), false);
 $('#scrub').addEventListener('input', (e) => {
   const d = audio.duration || 0;
   if (d) { audio.currentTime = (e.target.value / 1000) * d; R.userScrollAt = 0; tick(); }
@@ -613,18 +750,26 @@ $('#h-reader').addEventListener('click', () => { if (R.sents.length) seekSent(0)
 for (const ev of ['wheel', 'touchmove']) addEventListener(ev, () => { R.userScrollAt = Date.now(); }, { passive: true });
 
 addEventListener('keydown', (e) => {
-  if (document.body.dataset.view !== 'reader' || $('#settings').open) return;
+  if ($('#settings').open || $('#help').open) return;
   if (e.target.matches('input, select, textarea') || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === '?') { e.preventDefault(); return openHelp(); }
+  if (document.body.dataset.view !== 'reader') return;
   const act = {
     ' ': () => (audio.paused ? audio.play().catch(() => {}) : audio.pause()),
     k: () => (audio.paused ? audio.play().catch(() => {}) : audio.pause()),
-    ArrowRight: () => (e.shiftKey ? gotoUnit(1) : stepSent(1)),
-    ArrowLeft: () => (e.shiftKey ? gotoUnit(-1) : stepSent(-1)),
+    ArrowRight: () => (e.shiftKey ? gotoUnit(1) : stepNav(1)),
+    ArrowLeft: () => (e.shiftKey ? gotoUnit(-1) : stepNav(-1)),
+    PageDown: () => stepPara(1),
+    PageUp: () => stepPara(-1),
+    j: () => stepTime(-1),
+    l: () => stepTime(1),
+    i: () => whereAmI(),
+    m: () => toggleMark(),
     ArrowUp: () => nudgeRate(1),
     ArrowDown: () => nudgeRate(-1),
     ']': () => gotoUnit(1),
     '[': () => gotoUnit(-1),
-  }[e.key];
+  }[e.key.length === 1 ? e.key.toLowerCase() : e.key];
   // phím cách trên một nút/liên kết đang được focus phải giữ hành vi mặc định
   if (!act || (e.key === ' ' && e.target.matches('button, a, summary'))) return;
   e.preventDefault();
@@ -644,8 +789,8 @@ function setMediaSession() {
   const set = (name, fn) => { try { navigator.mediaSession.setActionHandler(name, fn); } catch { /* không hỗ trợ */ } };
   set('play', () => audio.play());
   set('pause', () => audio.pause());
-  set('previoustrack', () => stepSent(-1));
-  set('nexttrack', () => stepSent(1));
+  set('previoustrack', () => stepNav(-1));
+  set('nexttrack', () => stepNav(1));
   set('seekbackward', (d) => { audio.currentTime = Math.max(0, audio.currentTime - (d.seekOffset || 10)); });
   set('seekforward', (d) => { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + (d.seekOffset || 10)); });
   set('seekto', (d) => { if (d.seekTime != null) audio.currentTime = d.seekTime; });
@@ -672,9 +817,17 @@ for (const [key, p] of Object.entries(prefs)) {
   $(p.el).addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setPref(b.dataset.v, true); });
 }
 
-let sleepTimer, sleepEnd = 0, sleepTick;
+let sleepTimer, sleepEnd = 0, sleepTick, sleepAtEnd = false;
 function setSleep(min, tell = true) {
   clearTimeout(sleepTimer); clearInterval(sleepTick);
+  sleepAtEnd = min < 0;                       // -1: dừng khi hết phần đang nghe
+  if (sleepAtEnd) {
+    sleepEnd = 0;
+    $$('#optSleep button').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.v) === -1)));
+    $('#sleepInfo').textContent = 'Tự dừng khi hết phần đang nghe.';
+    if (tell) announce('Sẽ tự dừng khi hết phần đang nghe.');
+    return;
+  }
   sleepEnd = min ? Date.now() + min * 60000 : 0;
   $$('#optSleep button').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.v) === min)));
   const info = $('#sleepInfo');
@@ -693,6 +846,40 @@ $('#optSleep').addEventListener('click', (e) => { const b = e.target.closest('bu
 $('#openSettings').addEventListener('click', () => { refreshVoiceNote(); $('#settings').showModal(); });
 $('#settings').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });  // chạm ra ngoài để đóng
 
+function openHelp() { if (!$('#help').open) { $('#help').showModal(); $('#h-help').focus(); } }
+for (const b of $$('[data-help]')) b.addEventListener('click', openHelp);
+$('#help').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+
+// Tìm sách bằng giọng nói (Web Speech API; có trên Chrome Android và Safari). Không có thì ẩn nút.
+const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (SpeechRec) {
+  const mic = $('#voiceSearch');
+  mic.hidden = false;
+  let rec = null;
+  mic.addEventListener('click', () => {
+    if (rec) { rec.abort(); return; }
+    rec = new SpeechRec();
+    rec.lang = 'vi-VN'; rec.interimResults = false; rec.maxAlternatives = 1;
+    let heard = false;
+    rec.onstart = () => { mic.setAttribute('aria-pressed', 'true'); announce('Đang nghe. Hãy đọc tên sách hoặc tên tác giả.'); };
+    rec.onresult = (e) => {
+      heard = true;
+      const said = e.results[0][0].transcript.replace(/[.?!]+$/, '').trim();
+      $('#q').value = said;
+      const n = filterLibrary(false);
+      announce(n ? `Bạn nói: ${said}. ${n} cuốn khớp.` : `Bạn nói: ${said}. Không tìm thấy sách nào khớp.`);
+    };
+    rec.onerror = (e) => {
+      heard = true;
+      announce(e.error === 'not-allowed' || e.error === 'service-not-allowed'
+        ? 'Chưa được phép dùng micro. Hãy cho phép trong cài đặt trình duyệt, hoặc gõ tên sách.'
+        : 'Không nghe rõ. Hãy nhấn nút và nói lại.');
+    };
+    rec.onend = () => { mic.setAttribute('aria-pressed', 'false'); if (!heard) announce('Không nghe thấy gì. Hãy nhấn nút và nói lại.'); rec = null; };
+    try { rec.start(); } catch { rec = null; }
+  });
+}
+
 // ================= ĐỊNH TUYẾN =================
 function show(view, title, heading) {
   for (const v of ['library', 'book', 'reader']) $(`#view-${v}`).hidden = v !== view;
@@ -704,7 +891,7 @@ function show(view, title, heading) {
 }
 
 async function route() {
-  const [, kind, slug, unitStr] = (location.hash || '#/').split('/');
+  const [, kind, slug, unitStr, sentStr] = (location.hash || '#/').split('/');
   const book = slug ? findBook(decodeURIComponent(slug)) : null;
   if (kind !== 'r') { savePos(); audio.pause(); R.token++; }
 
@@ -715,7 +902,10 @@ async function route() {
   if (kind === 'r' && book && !book.external) {
     const no = Number(unitStr) || readyUnits(book)[0]?.no;
     show('reader', `${book.title} · Sách Nói`, $('#h-reader'));
-    return openReader(book, no);
+    // dấu trang: mở đúng câu đã đánh dấu, rồi bỏ đuôi /s… để tải lại trang không nhảy về dấu trang nữa
+    const m = /^s(\d+)$/.exec(sentStr || '');
+    if (m) history.replaceState(null, '', `#/r/${book.slug}/${no}`);
+    return openReader(book, no, m ? { sent: Number(m[1]), play: store.get('autoplay', '1') === '1' } : null);
   }
   renderLibrary();
   show('library', 'Sách Nói — Thư viện sách nói tiếng Việt', $('#h-library'));
