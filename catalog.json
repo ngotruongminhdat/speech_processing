@@ -40,6 +40,11 @@
      "url": "books/co-hang-xen/co-hang-xen-daisy-hm.zip",
      "size": "9.4 MB"
     }
+   },
+   "cover": "books/co-hang-xen/cover.jpg",
+   "coverCredit": {
+    "text": "Léon Busy, Archives de la Planète (Musée Albert-Kahn) · CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Une_marchande_de_l%C3%A9gumes_-_A6654.jpg"
    }
   },
   {
@@ -81,6 +86,11 @@
      "url": "books/duoi-bong-hoang-lan/duoi-bong-hoang-lan-daisy-hm.zip",
      "size": "4.0 MB"
     }
+   },
+   "cover": "books/duoi-bong-hoang-lan/cover.jpg",
+   "coverCredit": {
+    "text": "Francisco Manuel Blanco, Flora de Filipinas, 1880–1883 · Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Cananga_odorata_Blanco1.221-cropped.jpg"
    }
   },
   {
@@ -122,6 +132,11 @@
      "url": "books/gio-lanh-dau-mua/gio-lanh-dau-mua-daisy-hm.zip",
      "size": "3.7 MB"
     }
+   },
+   "cover": "books/gio-lanh-dau-mua/cover.jpg",
+   "coverCredit": {
+    "text": "Léon Busy, 1914–1915, Archives de la Planète (Musée Albert-Kahn) · CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Un_enfant_assis_au_pied_d%27un_arbre_aux_abords_d%27un_village_-_A5243.jpg"
    }
   },
   {
@@ -163,6 +178,11 @@
      "url": "books/hai-dua-tre/hai-dua-tre-daisy-hm.zip",
      "size": "5.3 MB"
     }
+   },
+   "cover": "books/hai-dua-tre/cover.jpg",
+   "coverCredit": {
+    "text": "Léon Busy, 1915, Archives de la Planète (Musée Albert-Kahn) · CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Deux_enfants_assis_devant_une_statue_repr%C3%A9sentant_un_%C3%A9l%C3%A9phant,_%C3%A0_l%27entr%C3%A9e_du_temple_du_village_de_Vinh-thuy_-_A6620.jpg"
    }
   },
   {
@@ -204,6 +224,11 @@
      "url": "books/lao-hac/lao-hac-daisy-hm.zip",
      "size": "7.3 MB"
     }
+   },
+   "cover": "books/lao-hac/cover.jpg",
+   "coverCredit": {
+    "text": "Léon Busy, 1915, Archives de la Planète (Musée Albert-Kahn) · CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Un_homme_%C3%A2g%C3%A9_fumant_sa_pipe_%C3%A0_eau_-_A5537.jpg"
    }
   },
   {
@@ -609,6 +634,11 @@
      "url": "books/tat-den/tat-den-daisy-hm.zip",
      "size": "71 MB"
     }
+   },
+   "cover": "books/tat-den/cover.jpg",
+   "coverCredit": {
+    "text": "Bìa lần in đầu, nhà Mai Lĩnh, 1939 (bản quét của Thư viện Quốc gia Pháp) · Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Tat_den.pdf"
    }
   },
   {
