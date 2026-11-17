@@ -149,6 +149,15 @@ def main(legacy_totto: bool):
             "duration": round(sum(u["duration"] for u in units), 3),
             "voices": [voice_info[v] for v in present], "units": units, "daisy": {},
         }
+        # bìa sách (make_covers.py) và nguồn ảnh bìa
+        cover = meta_file.parent / "cover.jpg"
+        if cover.exists():
+            shutil.copyfile(cover, out_dir / "cover.jpg")
+            book["cover"] = f"books/{slug}/cover.jpg"
+            src = meta_file.parent / "cover_source.json"
+            if src.exists():
+                c = json.loads(src.read_text(encoding="utf-8"))
+                book["coverCredit"] = {"text": f"{c['credit']} · {c['license']}", "url": c["page"]}
         for vid, dirs in daisy_dirs.items():
             zip_path = out_dir / f"{slug}-daisy-{vid}.zip"
             write_daisy_zip(zip_path, dirs, single=len(ch_dirs) == 1)

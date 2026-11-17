@@ -154,7 +154,7 @@ function cue(kind) {
 
 function cover(book) {
   const face = book.cover
-    ? `<img src="${esc(book.cover)}" alt="">`
+    ? `<img src="${esc(book.cover)}" alt="" loading="lazy" decoding="async">`
     : `<span class="gen"><span class="frame"><b>${esc(book.title)}</b><i>■</i><small>${esc(book.creator)}</small></span></span>`;
   return `<span class="book3d" style="--hue:${hue(book.slug)}" aria-hidden="true"><span class="vol"><span class="face">${face}</span><span class="pages"></span></span></span>`;
 }
@@ -242,6 +242,7 @@ async function renderBook(book) {
     ['Thời lượng', `${clock(book.duration)} <span class="sr-only">(${spoken(book.duration)})</span>`],
     ['Nguồn văn bản', book.sourceURL ? `<a href="${esc(book.sourceURL)}" rel="noopener">Wikisource tiếng Việt</a>` : ''],
     ['Bản quyền', esc(book.note)],
+    ['Ảnh bìa', book.coverCredit ? `<a href="${esc(book.coverCredit.url)}" rel="noopener">${esc(book.coverCredit.text)}</a>, qua Wikimedia Commons` : ''],
   ].filter(([, v]) => v);
 
   $('#bookHero').innerHTML = `
@@ -908,7 +909,14 @@ function setMediaSession() {
     title: many ? `${R.unit.label}: ${R.unit.title}` : R.book.title,
     artist: `${R.book.creator} · ${voiceText(voiceInfo(R.book, R.voice))}`,
     album: R.book.title,
-    artwork: [{ src: new URL('icons/icon-512.png', location.href).href, sizes: '512x512', type: 'image/png' }],
+    // Bìa sách hiện ở màn hình khoá. Mất mạng thì chỉ dùng ảnh mà service worker đã giữ sẵn
+    // (biểu tượng ứng dụng), không có service worker thì bỏ ảnh để khỏi tải hỏng.
+    artwork: navigator.onLine
+      ? [R.book.cover
+        ? { src: new URL(R.book.cover, location.href).href, sizes: '888x1200', type: 'image/jpeg' }
+        : { src: new URL('icons/icon-512.png', location.href).href, sizes: '512x512', type: 'image/png' }]
+      : (navigator.serviceWorker?.controller
+        ? [{ src: new URL('icons/icon-512.png', location.href).href, sizes: '512x512', type: 'image/png' }] : []),
   });
   const set = (name, fn) => { try { navigator.mediaSession.setActionHandler(name, fn); } catch { /* không hỗ trợ */ } };
   set('play', () => audio.play());
