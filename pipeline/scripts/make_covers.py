@@ -34,6 +34,9 @@ BOOKS = {
     "chi-pheo": dict(crop=(.02, .015, .98, .955), focus=(.5, .3), style="scan"),
     "ha-noi-bam-sau-pho-phuong": dict(title="Hà Nội băm sáu\nphố phường", author="Thạch Lam", crop=(.07, .05, .97, .94), focus=(.45, .5), band="bottom", style="photo"),
     "viet-nam-su-luoc-1": dict(crop=(.02, .02, .98, .98), focus=(.5, .4), style="scan"),
+    "chinh-phu-ngam": dict(title="Chinh phụ ngâm", author="Đặng Trần Côn · Đoàn Thị Điểm", crop=(0, 0, 1, 1), focus=(.5, .3), band="bottom", style="plate"),
+    "tho-han-mac-tu": dict(title="Thơ Hàn Mặc Tử", author="Hàn Mặc Tử", crop=(.03, .03, .93, .9), focus=(.5, .5), band="bottom", style="photo"),
+    "viet-nam-phong-tuc-1": dict(crop=(.02, .01, .98, .99), focus=(.5, .4), style="scan"),
 }
 
 

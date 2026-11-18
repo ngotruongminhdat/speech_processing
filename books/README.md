@@ -54,6 +54,11 @@ Lấy từ danh sách tài liệu DAISY của lớp những tựa vừa thuộc 
 | Truyền kỳ mạn lục | Truyện truyền kỳ | Nguyễn Dữ, thế kỷ 16; Ngô Văn Triện dịch, mất 1947 | 20 trang ghép từ bản quét | lấy chữ từ HTML (`ws_html.py`), bỏ dòng chữ Hán và chú thích |
 | Việt Nam sử lược (thượng cổ và Bắc thuộc) | Lịch sử | Trần Trọng Kim, 1953 | bản quét, quyển I | chỉ lời tựa và hai phần đầu vì giới hạn 1 GB của GitHub Pages |
 | Chí Phèo | Truyện ngắn | Nam Cao, 1951 | bản quét tập Đôi lứa xứng đôi, 1941 | |
+| Chinh phụ ngâm | Ngâm khúc | Đặng Trần Côn, thế kỷ 18; bản diễn Nôm tương truyền của Đoàn Thị Điểm, 1748 | một trang song ngữ Nôm và quốc ngữ | `--verse 100`: 4 phần; lấy cột quốc ngữ; chỗ có dị bản (`{{khác}}`) giữ chữ của bản trên trang |
+| Thơ Hàn Mặc Tử | Thơ | Hàn Mặc Tử, 1940 | bản quét tập thơ in năm 1942, 4 trang con | `--poem-titles`: tên bài thơ thành đề mục; không nhập bài tựa (của người khác viết) |
+| Việt Nam phong tục: phong tục trong gia tộc | Khảo cứu | Phan Kế Bính, 1921 | bản quét, thiên thứ nhất | chỉ 8 mục đầu vì giới hạn 1 GB |
+
+Ba cuốn cuối thêm sau, ngoài danh sách của lớp, để có thêm ngâm khúc, thơ mới và khảo cứu. Phóng sự Cơm thầy cơm cô (Vũ Trọng Phụng) không có văn bản trên Wikisource.
 
 Sách dài mới thêm có `"no_zip": true` trong `book_meta.json`: không sinh file zip DAISY tải về, vì zip lặp lại toàn bộ audio.
 

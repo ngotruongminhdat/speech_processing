@@ -140,7 +140,11 @@ def verse_units(wikitext: str, per_unit: int, per_para: int = 4):
     """Truyện thơ dài nằm trong một thẻ <poem>: chia thành các phần per_unit câu, mỗi đoạn
     per_para câu. Không thêm bớt chữ nào; số câu ở lề ({{số|n}}) bị bỏ.
     -> [(tên phần, [(type, text)])]"""
-    body = wikitext[wikitext.index("<poem>") + 6: wikitext.index("</poem>")]
+    # Trang song ngữ (Chinh phụ ngâm: cột chữ Nôm, cột quốc ngữ) có nhiều thẻ <poem>: lấy thẻ ít chữ Hán Nôm nhất.
+    poems = re.findall(r"<poem>(.*?)</poem>", wikitext, flags=re.S)
+    body = min(poems, key=lambda t: len(re.findall(r"[\u2e80-\u9fff\U00020000-\U0010ffff]", t)) / max(1, len(t)))
+    # {{khác|chữ trong bản này|dị bản}}: giữ chữ của bản đang nhập
+    body = re.sub(r"\{\{khác\|([^|{}]*)\|[^{}]*\}\}", r"\1", body)
     lines = [unicodedata.normalize("NFC", re.sub(r"\s+", " ", clean_inline(strip_templates(ln))).strip())
              for ln in body.split("\n")]
     lines = [ln for ln in lines if ln]
@@ -208,6 +212,8 @@ def main():
                     help="truyện thơ một trang: chia thành các phần N câu (ví dụ 250)")
     ap.add_argument("--header-titles", action="store_true",
                     help="tên đơn vị lấy từ tham số 'phần' ở đầu đề của trang")
+    ap.add_argument("--poem-titles", action="store_true",
+                    help="tập thơ: dòng in hoa ngắn là tên bài thơ, giữ lại làm đề mục")
     ap.add_argument("--titles", type=Path, help="file văn bản, mỗi dòng là tên một đơn vị (ghi đè tên lấy từ trang)")
     ap.add_argument("--unit-word", default="Chương", help="cách gọi một đơn vị: Chương, Phần, Truyện, Bài")
     a = ap.parse_args()
@@ -278,8 +284,12 @@ def main():
                 page = page.rsplit("/", 1)[0] + "/" + part.replace("/", " ")
                 # các dòng in hoa ở đầu trang (PHẦN I, CHƯƠNG I, tên chương) lặp lại tên đơn vị
                 while len(paras) > 1 and (same_title(paras[0][1], part) or
-                                          (len(paras[0][1]) < 80 and paras[0][1] == paras[0][1].upper())):
+                                          (not a.poem_titles and len(paras[0][1]) < 80
+                                           and paras[0][1] == paras[0][1].upper())):
                     paras = paras[1:]
+            if a.poem_titles:   # tập thơ: dòng in hoa ngắn là tên bài, thành đề mục để nhảy theo bài
+                paras = [("h1", t.title()) if k == "p" and len(t) < 60 and t == t.upper() and re.search(r"\w", t)
+                         else (k, t) for k, t in paras]
             if names:
                 page = page.rsplit("/", 1)[0] + "/" + names[len(todo)].replace("/", " ")
             todo.append((page, paras))
