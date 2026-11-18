@@ -195,7 +195,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/H%C3%A0_N%E1%BB%99i_b%C4%83m_s%C3%A1u_ph%E1%BB%91_ph%C6%B0%E1%BB%9Dng/L%E1%BB%9Di_t%E1%BB%B1a",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 3685.1,
+   "duration": 4375.18,
    "voices": [
     {
      "id": "hm",
@@ -418,25 +418,43 @@
      "no": 16,
      "label": "Bài 16",
      "title": "Vài thứ chuyên môn nữa",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 377.44,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/16.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/16.mp3",
+       "duration": 377.44
+      }
+     }
     },
     {
      "no": 17,
      "label": "Bài 17",
      "title": "Những chốn ăn chơi",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 167.38,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/17.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/17.mp3",
+       "duration": 167.38
+      }
+     }
     },
     {
      "no": 18,
      "label": "Bài 18",
      "title": "Chợ mát ban đêm",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 145.26,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/18.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/18.mp3",
+       "duration": 145.26
+      }
+     }
     },
     {
      "no": 19,
