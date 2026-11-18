@@ -1700,7 +1700,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Vi%E1%BB%87t_Nam_phong_t%E1%BB%A5c/I.1",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 583.47,
+   "duration": 1745.92,
    "voices": [
     {
      "id": "hm",
@@ -1727,41 +1727,71 @@
      "no": 2,
      "label": "Mục 2",
      "title": "Anh chị em",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 290.5,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-phong-tuc-1/hm/02.json",
+       "audio": "books/viet-nam-phong-tuc-1/hm/02.mp3",
+       "duration": 290.5
+      }
+     }
     },
     {
      "no": 3,
      "label": "Mục 3",
      "title": "Thân thuộc",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 299.61,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-phong-tuc-1/hm/03.json",
+       "audio": "books/viet-nam-phong-tuc-1/hm/03.mp3",
+       "duration": 299.61
+      }
+     }
     },
     {
      "no": 4,
      "label": "Mục 4",
      "title": "Phụng sự tổ tôn",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 336.66,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-phong-tuc-1/hm/04.json",
+       "audio": "books/viet-nam-phong-tuc-1/hm/04.mp3",
+       "duration": 336.66
+      }
+     }
     },
     {
      "no": 5,
      "label": "Mục 5",
      "title": "Đạo làm con",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 183.43,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-phong-tuc-1/hm/05.json",
+       "audio": "books/viet-nam-phong-tuc-1/hm/05.mp3",
+       "duration": 183.43
+      }
+     }
     },
     {
      "no": 6,
      "label": "Mục 6",
      "title": "Thượng thọ",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 52.25,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-phong-tuc-1/hm/06.json",
+       "audio": "books/viet-nam-phong-tuc-1/hm/06.mp3",
+       "duration": 52.25
+      }
+     }
     },
     {
      "no": 7,
@@ -1785,6 +1815,147 @@
    "coverCredit": {
     "text": "Bìa Việt Nam phong tục, bản in năm 1973 của nhà sách Khai Trí · Public domain",
     "url": "https://commons.wikimedia.org/wiki/File%3AViet_Nam_phong_tuc.pdf"
+   }
+  },
+  {
+   "slug": "viet-nam-su-luoc-1",
+   "title": "Việt Nam sử lược: thượng cổ và Bắc thuộc",
+   "creator": "Trần Trọng Kim",
+   "subject": "Lịch sử",
+   "description": "Cuốn thông sử Việt Nam đầu tiên viết bằng chữ quốc ngữ. Bản này gồm lời tựa và hai phần đầu của quyển 1: thời thượng cổ từ họ Hồng Bàng đến nhà Triệu, và hơn một nghìn năm Bắc thuộc.",
+   "date": "1920",
+   "narrator": "Hoài My (giọng nữ)",
+   "sourceURL": "https://vi.wikisource.org/wiki/Vi%E1%BB%87t_Nam_s%E1%BB%AD_l%C6%B0%E1%BB%A3c/Quy%E1%BB%83n_I/T%E1%BB%B1a",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 1551.59,
+   "voices": [
+    {
+     "id": "hm",
+     "label": "Giọng nữ",
+     "name": "Hoài My"
+    }
+   ],
+   "units": [
+    {
+     "no": 1,
+     "label": "Mục 1",
+     "title": "Tựa",
+     "duration": 576.76,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/01.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/01.mp3",
+       "duration": 576.76
+      }
+     }
+    },
+    {
+     "no": 2,
+     "label": "Mục 2",
+     "title": "Nước Việt Nam",
+     "duration": 513.34,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/02.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/02.mp3",
+       "duration": 513.34
+      }
+     }
+    },
+    {
+     "no": 3,
+     "label": "Mục 3",
+     "title": "Thượng cổ thời đại, chương 1: Họ Hồng Bàng",
+     "duration": 461.49,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/03.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/03.mp3",
+       "duration": 461.49
+      }
+     }
+    },
+    {
+     "no": 4,
+     "label": "Mục 4",
+     "title": "Thượng cổ thời đại, chương 2: Nhà Thục",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 5,
+     "label": "Mục 5",
+     "title": "Thượng cổ thời đại, chương 3: Xã hội nước Tàu",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 6,
+     "label": "Mục 6",
+     "title": "Thượng cổ thời đại, chương 4: Nhà Triệu",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 7,
+     "label": "Mục 7",
+     "title": "Bắc thuộc thời đại, chương 1: Bắc Thuộc lần thứ nhất",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 8,
+     "label": "Mục 8",
+     "title": "Bắc thuộc thời đại, chương 2: Trưng Vương",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 9,
+     "label": "Mục 9",
+     "title": "Bắc thuộc thời đại, chương 3: Bắc Thuộc lần thứ hai",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 10,
+     "label": "Mục 10",
+     "title": "Bắc thuộc thời đại, chương 4: Nhà Tiền Lý",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 11,
+     "label": "Mục 11",
+     "title": "Bắc thuộc thời đại, chương 5: Bắc Thuộc lần thứ ba",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 12,
+     "label": "Mục 12",
+     "title": "Bắc thuộc thời đại, chương 6: Kết quả của thời đại Bắc Thuộc",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    }
+   ],
+   "daisy": {},
+   "cover": "books/viet-nam-su-luoc-1/cover.jpg",
+   "coverCredit": {
+    "text": "Bìa bản in lần thứ tư, nhà Tân Việt, Hà Nội, 1951 · Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File%3AViet_Nam_Su_Luoc_1.djvu"
    }
   },
   {
