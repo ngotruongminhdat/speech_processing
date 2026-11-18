@@ -11,7 +11,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Ch%C3%AD_Ph%C3%A8o",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 3395.55,
+   "duration": 3395.43,
    "voices": [
     {
      "id": "hm",
@@ -24,13 +24,13 @@
      "no": 1,
      "label": "Chí Phèo",
      "title": "Chí Phèo",
-     "duration": 3395.55,
+     "duration": 3395.43,
      "ready": true,
      "voices": {
       "hm": {
        "data": "books/chi-pheo/hm/01.json",
        "audio": "books/chi-pheo/hm/01.mp3",
-       "duration": 3395.55
+       "duration": 3395.43
       }
      }
     }
@@ -596,6 +596,211 @@
    "coverCredit": {
     "text": "Léon Busy, 1915, Archives de la Planète (Musée Albert-Kahn) · CC0",
     "url": "https://commons.wikimedia.org/wiki/File:Un_homme_%C3%A2g%C3%A9_fumant_sa_pipe_%C3%A0_eau_-_A5537.jpg"
+   }
+  },
+  {
+   "slug": "truyen-ky-man-luc",
+   "title": "Truyền kỳ mạn lục",
+   "creator": "Nguyễn Dữ (Ngô Văn Triện dịch)",
+   "subject": "Truyện truyền kỳ",
+   "description": "Hai mươi truyện lạ thế kỷ 16 về thần tiên, ma quái và những con người cứng cỏi giữa thời loạn, trong đó có Chuyện người con gái Nam Xương. Bản dịch của Trúc Khê Ngô Văn Triện.",
+   "date": "1943",
+   "narrator": "Hoài My (giọng nữ)",
+   "sourceURL": "https://vi.wikisource.org/wiki/Truy%E1%BB%81n_k%E1%BB%B3_m%E1%BA%A1n_l%E1%BB%A5c/1",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 2172.1,
+   "voices": [
+    {
+     "id": "hm",
+     "label": "Giọng nữ",
+     "name": "Hoài My"
+    }
+   ],
+   "units": [
+    {
+     "no": 1,
+     "label": "Truyện 1",
+     "title": "Câu chuyện ở đền Hạng-vương",
+     "duration": 625.78,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/01.json",
+       "audio": "books/truyen-ky-man-luc/hm/01.mp3",
+       "duration": 625.78
+      }
+     }
+    },
+    {
+     "no": 2,
+     "label": "Truyện 2",
+     "title": "Chuyện người nghĩa-phụ ở Khoái-châu",
+     "duration": 845.55,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/02.json",
+       "audio": "books/truyen-ky-man-luc/hm/02.mp3",
+       "duration": 845.55
+      }
+     }
+    },
+    {
+     "no": 3,
+     "label": "Truyện 3",
+     "title": "Chuyện cây gạo",
+     "duration": 700.77,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/03.json",
+       "audio": "books/truyen-ky-man-luc/hm/03.mp3",
+       "duration": 700.77
+      }
+     }
+    },
+    {
+     "no": 4,
+     "label": "Truyện 4",
+     "title": "Chuyện gã Trà-đồng giáng-sinh",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 5,
+     "label": "Truyện 5",
+     "title": "Chuyện kỳ-ngộ ở trại Tây",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 6,
+     "label": "Truyện 6",
+     "title": "Chuyện đối-tụng ở Long-cung",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 7,
+     "label": "Truyện 7",
+     "title": "Chuyện nghiệp-oan của Đào-thị",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 8,
+     "label": "Truyện 8",
+     "title": "Chuyện chức phán-sự ở đền Tản-viên",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 9,
+     "label": "Truyện 9",
+     "title": "Chuyện Từ-Thức lấy vợ tiên",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 10,
+     "label": "Truyện 10",
+     "title": "Chuyện Phạm Tử-Hư lên chơi thiên-tào",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 11,
+     "label": "Truyện 11",
+     "title": "Chuyện yêu-quái ở Xương-giang",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 12,
+     "label": "Truyện 12",
+     "title": "Câu chuyện đối-đáp của người tiều-phu núi Na",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 13,
+     "label": "Truyện 13",
+     "title": "Chuyện cái chùa hoang ở huyện Đông-trào",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 14,
+     "label": "Truyện 14",
+     "title": "Chuyện nàng Túy-Tiêu",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 15,
+     "label": "Truyện 15",
+     "title": "Chuyện bữa tiệc đêm ở Đà-giang",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 16,
+     "label": "Truyện 16",
+     "title": "Chuyện người con gái Nam-xương",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 17,
+     "label": "Truyện 17",
+     "title": "Chuyện Lý tướng-quân",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 18,
+     "label": "Truyện 18",
+     "title": "Chuyện Lệ-nương",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 19,
+     "label": "Truyện 19",
+     "title": "Cuộc nói chuyện thơ ở Kim-hoa",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 20,
+     "label": "Truyện 20",
+     "title": "Chuyện tướng Dạ-xoa",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    }
+   ],
+   "daisy": {},
+   "cover": "books/truyen-ky-man-luc/cover.jpg",
+   "coverCredit": {
+    "text": "Bìa bản dịch của Trúc Khê Ngô Văn Triện, nhà Tân Việt, 1952 (bản quét của Thư viện Quốc gia Việt Nam) · Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File%3ATruyen_ky_man_luc_NVT.pdf"
    }
   },
   {
