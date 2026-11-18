@@ -1839,7 +1839,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Vi%E1%BB%87t_Nam_s%E1%BB%AD_l%C6%B0%E1%BB%A3c/Quy%E1%BB%83n_I/T%E1%BB%B1a",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 4233.99,
+   "duration": 6466.59,
    "voices": [
     {
      "id": "hm",
@@ -1978,25 +1978,43 @@
      "no": 10,
      "label": "Mục 10",
      "title": "Bắc thuộc thời đại, chương 4: Nhà Tiền Lý",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 317.22,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/10.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/10.mp3",
+       "duration": 317.22
+      }
+     }
     },
     {
      "no": 11,
      "label": "Mục 11",
      "title": "Bắc thuộc thời đại, chương 5: Bắc Thuộc lần thứ ba",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 1107.66,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/11.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/11.mp3",
+       "duration": 1107.66
+      }
+     }
     },
     {
      "no": 12,
      "label": "Mục 12",
      "title": "Bắc thuộc thời đại, chương 6: Kết quả của thời đại Bắc Thuộc",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 807.72,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/12.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/12.mp3",
+       "duration": 807.72
+      }
+     }
     }
    ],
    "daisy": {},
