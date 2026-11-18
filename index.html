@@ -32,11 +32,13 @@
       <p class="desc" id="librarySummary"></p>
       <div class="cta" id="resume" hidden></div>
       <div class="search">
-        <label for="q">Tìm sách theo tên hoặc tác giả</label>
+        <label for="q">Tìm sách theo tên, tác giả hoặc thể loại</label>
         <div class="search-row">
           <input id="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="Ví dụ: Thạch Lam">
           <button class="mic" id="voiceSearch" type="button" aria-label="Tìm sách bằng giọng nói" hidden><span aria-hidden="true">🎤</span></button>
         </div>
+        <label for="genre" class="genre-label">Thể loại</label>
+        <select id="genre"><option value="">Tất cả thể loại</option></select>
       </div>
       <div class="cta"><button class="btn ghost" type="button" data-help>Hướng dẫn sử dụng</button></div>
     </div>

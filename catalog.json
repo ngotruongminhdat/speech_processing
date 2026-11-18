@@ -5,7 +5,7 @@
    "slug": "co-hang-xen",
    "title": "Cô hàng xén",
    "creator": "Thạch Lam",
-   "subject": "Văn học & Tiểu thuyết",
+   "subject": "Truyện ngắn",
    "description": "Cuộc đời tảo tần, lặng lẽ hy sinh của Tâm, một cô gái bán hàng xén ở làng quê Bắc Bộ.",
    "date": "1943",
    "narrator": "Hoài My (giọng nữ)",
@@ -51,7 +51,7 @@
    "slug": "duoi-bong-hoang-lan",
    "title": "Dưới bóng hoàng lan",
    "creator": "Thạch Lam",
-   "subject": "Văn học & Tiểu thuyết",
+   "subject": "Truyện ngắn",
    "description": "Chuyến về thăm bà của Thanh, và những rung động trong trẻo dưới bóng cây hoàng lan.",
    "date": "1942",
    "narrator": "Hoài My (giọng nữ)",
@@ -97,7 +97,7 @@
    "slug": "gio-lanh-dau-mua",
    "title": "Gió lạnh đầu mùa",
    "creator": "Thạch Lam",
-   "subject": "Văn học & Tiểu thuyết",
+   "subject": "Truyện ngắn",
    "description": "Lòng nhân ái của hai chị em Sơn và Lan trong buổi sáng gió lạnh đầu mùa đông.",
    "date": "1937",
    "narrator": "Hoài My (giọng nữ)",
@@ -143,7 +143,7 @@
    "slug": "hai-dua-tre",
    "title": "Hai đứa trẻ",
    "creator": "Thạch Lam",
-   "subject": "Văn học & Tiểu thuyết",
+   "subject": "Truyện ngắn",
    "description": "Hai chị em Liên và An nơi phố huyện nghèo, đêm đêm thức đợi chuyến tàu từ Hà Nội đi qua.",
    "date": "1938",
    "narrator": "Hoài My (giọng nữ)",
@@ -189,7 +189,7 @@
    "slug": "lao-hac",
    "title": "Lão Hạc",
    "creator": "Nam Cao",
-   "subject": "Văn học & Tiểu thuyết",
+   "subject": "Truyện ngắn",
    "description": "Truyện ngắn hiện thực về lão Hạc, một lão nông nghèo, cô độc, thà chết chứ không tiêu vào mảnh vườn để dành cho con trai.",
    "date": "1943",
    "narrator": "Hoài My (giọng nữ)",
@@ -232,10 +232,159 @@
    }
   },
   {
+   "slug": "truyen-kieu",
+   "title": "Truyện Kiều",
+   "creator": "Nguyễn Du",
+   "subject": "Thơ",
+   "description": "Truyện thơ lục bát 3254 câu kể mười lăm năm lưu lạc của Thúy Kiều, kiệt tác của văn học cổ điển Việt Nam.",
+   "date": "1820",
+   "narrator": "Hoài My (giọng nữ)",
+   "sourceURL": "https://vi.wikisource.org/wiki/Truy%E1%BB%87n_Ki%E1%BB%81u",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 1693.88,
+   "voices": [
+    {
+     "id": "hm",
+     "label": "Giọng nữ",
+     "name": "Hoài My"
+    }
+   ],
+   "units": [
+    {
+     "no": 1,
+     "label": "Phần 1",
+     "title": "Từ câu 1 đến câu 250",
+     "duration": 571.74,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-kieu/hm/01.json",
+       "audio": "books/truyen-kieu/hm/01.mp3",
+       "duration": 571.74
+      }
+     }
+    },
+    {
+     "no": 2,
+     "label": "Phần 2",
+     "title": "Từ câu 251 đến câu 500",
+     "duration": 550.94,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-kieu/hm/02.json",
+       "audio": "books/truyen-kieu/hm/02.mp3",
+       "duration": 550.94
+      }
+     }
+    },
+    {
+     "no": 3,
+     "label": "Phần 3",
+     "title": "Từ câu 501 đến câu 750",
+     "duration": 571.2,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-kieu/hm/03.json",
+       "audio": "books/truyen-kieu/hm/03.mp3",
+       "duration": 571.2
+      }
+     }
+    },
+    {
+     "no": 4,
+     "label": "Phần 4",
+     "title": "Từ câu 751 đến câu 1000",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 5,
+     "label": "Phần 5",
+     "title": "Từ câu 1001 đến câu 1250",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 6,
+     "label": "Phần 6",
+     "title": "Từ câu 1251 đến câu 1500",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 7,
+     "label": "Phần 7",
+     "title": "Từ câu 1501 đến câu 1750",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 8,
+     "label": "Phần 8",
+     "title": "Từ câu 1751 đến câu 2000",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 9,
+     "label": "Phần 9",
+     "title": "Từ câu 2001 đến câu 2250",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 10,
+     "label": "Phần 10",
+     "title": "Từ câu 2251 đến câu 2500",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 11,
+     "label": "Phần 11",
+     "title": "Từ câu 2501 đến câu 2750",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 12,
+     "label": "Phần 12",
+     "title": "Từ câu 2751 đến câu 3000",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 13,
+     "label": "Phần 13",
+     "title": "Từ câu 3001 đến câu 3254",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    }
+   ],
+   "daisy": {},
+   "cover": "books/truyen-kieu/cover.jpg",
+   "coverCredit": {
+    "text": "Bìa sau cuốn Thúy Kiều truyện tường chú của Chiêm Vân Thị, bản in năm 1967 · Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File%3AThuykieuTruyen.jpg"
+   }
+  },
+  {
    "slug": "tat-den",
    "title": "Tắt đèn",
    "creator": "Ngô Tất Tố",
-   "subject": "Văn học & Tiểu thuyết",
+   "subject": "Tiểu thuyết",
    "description": "Tiểu thuyết hiện thực về chị Dậu và gia đình nông dân nghèo trong mùa sưu thuế ở làng Đông Xá, một trong những tác phẩm tiêu biểu của văn học Việt Nam trước 1945.",
    "date": "1936",
    "narrator": "Hoài My (giọng nữ)",
