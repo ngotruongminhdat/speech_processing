@@ -195,7 +195,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/H%C3%A0_N%E1%BB%99i_b%C4%83m_s%C3%A1u_ph%E1%BB%91_ph%C6%B0%E1%BB%9Dng/L%E1%BB%9Di_t%E1%BB%B1a",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 3173.79,
+   "duration": 3685.1,
    "voices": [
     {
      "id": "hm",
@@ -376,25 +376,43 @@
      "no": 13,
      "label": "Bài 13",
      "title": "Bánh khảo, kẹo lạc",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 136.78,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/13.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/13.mp3",
+       "duration": 136.78
+      }
+     }
     },
     {
      "no": 14,
      "label": "Bài 14",
      "title": "Một thứ quà của lúa non: cốm",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 222.33,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/14.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/14.mp3",
+       "duration": 222.33
+      }
+     }
     },
     {
      "no": 15,
      "label": "Bài 15",
      "title": "Quà ... tức là người",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 152.2,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/15.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/15.mp3",
+       "duration": 152.2
+      }
+     }
     },
     {
      "no": 16,
