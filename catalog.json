@@ -241,7 +241,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Truy%E1%BB%87n_Ki%E1%BB%81u",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 3420.2,
+   "duration": 5121.68,
    "voices": [
     {
      "id": "hm",
@@ -338,25 +338,43 @@
      "no": 7,
      "label": "Phần 7",
      "title": "Từ câu 1501 đến câu 1750",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 559.07,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-kieu/hm/07.json",
+       "audio": "books/truyen-kieu/hm/07.mp3",
+       "duration": 559.07
+      }
+     }
     },
     {
      "no": 8,
      "label": "Phần 8",
      "title": "Từ câu 1751 đến câu 2000",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 571.23,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-kieu/hm/08.json",
+       "audio": "books/truyen-kieu/hm/08.mp3",
+       "duration": 571.23
+      }
+     }
     },
     {
      "no": 9,
      "label": "Phần 9",
      "title": "Từ câu 2001 đến câu 2250",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 571.18,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-kieu/hm/09.json",
+       "audio": "books/truyen-kieu/hm/09.mp3",
+       "duration": 571.18
+      }
+     }
     },
     {
      "no": 10,
