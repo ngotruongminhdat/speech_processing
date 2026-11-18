@@ -43,6 +43,7 @@ HEAD_PAUSE = 1.00    # nghỉ sau tiêu đề
 EDGE_PAD = 0.06      # khoảng lặng giữ lại ở hai đầu mỗi đoạn sau khi cắt
 RETRIES = 60
 FETCH_TIMEOUT = 120  # giây cho một đoạn văn, kể cả lúc chờ máy chủ
+SPLIT_AFTER = 10    # hỏng ngần này lần liên tiếp thì chia đôi đoạn văn theo câu
 TRUNC_RETRIES = 8    # sau ngần này lần vẫn thiếu từ thì chấp nhận (cách tách từ hai bên khác nhau)
 GAP = 0.3            # giãn nhịp giữa hai yêu cầu, tránh bị bóp tần suất
 PARALLEL = int(os.environ.get("EDGE_PARALLEL", "8"))   # số đoạn tải cùng lúc
@@ -97,6 +98,16 @@ async def fetch(text: str, voice: str):
                 raise RuntimeError(f"audio cụt: nhận {got}/{sent} từ")
             return bytes(audio), words
         except Exception as e:      # dịch vụ chập chờn theo từng kết nối: thử lại dày, nghỉ ngắn
+            sentences = split_sentences(text)
+            if attempt >= SPLIT_AFTER - 1 and len(sentences) > 1:
+                # Đoạn rất dài (hơn 2000 ký tự trong Chí Phèo) hỏng liên tục dù từng câu thì qua:
+                # chia đôi theo câu, tải từng nửa rồi ghép lại, mốc từ của nửa sau cộng thêm độ dài nửa đầu.
+                print(f"   ! hỏng {attempt + 1} lần, chia đôi đoạn {len(text)} ký tự", flush=True)
+                half = len(sentences) // 2
+                a1, w1 = await fetch(" ".join(sentences[:half]), voice)
+                a2, w2 = await fetch(" ".join(sentences[half:]), voice)
+                shift = len(decode_mp3(a1)) / RATE
+                return a1 + a2, w1 + [[w[0] + shift, w[1], w[2]] for w in w2]
             if attempt == RETRIES - 1:
                 raise
             print(f"   ! lần {attempt + 1}: {type(e).__name__}: {str(e)[:80]} — thử lại", flush=True)
