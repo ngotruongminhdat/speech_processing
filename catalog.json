@@ -2,6 +2,77 @@
  "version": 2,
  "books": [
   {
+   "slug": "chinh-phu-ngam",
+   "title": "Chinh phụ ngâm",
+   "creator": "Đặng Trần Côn (Đoàn Thị Điểm dịch)",
+   "subject": "Ngâm khúc",
+   "description": "Khúc ngâm của người vợ có chồng ra trận, nguyên tác chữ Hán của Đặng Trần Côn, bản diễn Nôm song thất lục bát tương truyền của Đoàn Thị Điểm.",
+   "date": "1741",
+   "narrator": "Hoài My (giọng nữ)",
+   "sourceURL": "https://vi.wikisource.org/wiki/Chinh_ph%E1%BB%A5_ng%C3%A2m_%28%C4%90o%C3%A0n_Th%E1%BB%8B_%C4%90i%E1%BB%83m_d%E1%BB%8Bch%29",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 463.82,
+   "voices": [
+    {
+     "id": "hm",
+     "label": "Giọng nữ",
+     "name": "Hoài My"
+    }
+   ],
+   "units": [
+    {
+     "no": 1,
+     "label": "Phần 1",
+     "title": "Từ câu 1 đến câu 100",
+     "duration": 228.99,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/chinh-phu-ngam/hm/01.json",
+       "audio": "books/chinh-phu-ngam/hm/01.mp3",
+       "duration": 228.99
+      }
+     }
+    },
+    {
+     "no": 2,
+     "label": "Phần 2",
+     "title": "Từ câu 101 đến câu 200",
+     "duration": 234.83,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/chinh-phu-ngam/hm/02.json",
+       "audio": "books/chinh-phu-ngam/hm/02.mp3",
+       "duration": 234.83
+      }
+     }
+    },
+    {
+     "no": 3,
+     "label": "Phần 3",
+     "title": "Từ câu 201 đến câu 300",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 4,
+     "label": "Phần 4",
+     "title": "Từ câu 301 đến câu 412",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    }
+   ],
+   "daisy": {},
+   "cover": "books/chinh-phu-ngam/cover.jpg",
+   "coverCredit": {
+    "text": "Tám câu đầu Chinh phụ ngâm viết bằng chữ Nôm, ảnh của Lachy70 · CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File%3AChinh_ph%E1%BB%A5_ng%C3%A2m.png"
+   }
+  },
+  {
    "slug": "chi-pheo",
    "title": "Chí Phèo",
    "creator": "Nam Cao",
@@ -608,7 +679,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Truy%E1%BB%81n_k%E1%BB%B3_m%E1%BA%A1n_l%E1%BB%A5c/1",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 7454.01,
+   "duration": 9419.79,
    "voices": [
     {
      "id": "hm",
@@ -747,25 +818,43 @@
      "no": 10,
      "label": "Truyện 10",
      "title": "Chuyện Phạm Tử-Hư lên chơi thiên-tào",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 574.5,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/10.json",
+       "audio": "books/truyen-ky-man-luc/hm/10.mp3",
+       "duration": 574.5
+      }
+     }
     },
     {
      "no": 11,
      "label": "Truyện 11",
      "title": "Chuyện yêu-quái ở Xương-giang",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 621.18,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/11.json",
+       "audio": "books/truyen-ky-man-luc/hm/11.mp3",
+       "duration": 621.18
+      }
+     }
     },
     {
      "no": 12,
      "label": "Truyện 12",
      "title": "Câu chuyện đối-đáp của người tiều-phu núi Na",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 770.1,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/12.json",
+       "audio": "books/truyen-ky-man-luc/hm/12.mp3",
+       "duration": 770.1
+      }
+     }
     },
     {
      "no": 13,
