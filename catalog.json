@@ -691,7 +691,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Th%C6%A1_H%C3%A0n_M%E1%BA%B7c_T%E1%BB%AD/Th%C6%A1_%C4%90%C6%B0%E1%BB%9Dng_lu%E1%BA%ADt",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 22.82,
+   "duration": 1353.0,
    "voices": [
     {
      "id": "hm",
@@ -718,17 +718,29 @@
      "no": 2,
      "label": "Phần 2",
      "title": "Gái quê",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 66.76,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/tho-han-mac-tu/hm/02.json",
+       "audio": "books/tho-han-mac-tu/hm/02.mp3",
+       "duration": 66.76
+      }
+     }
     },
     {
      "no": 3,
      "label": "Phần 3",
      "title": "Đau thương",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 1263.42,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/tho-han-mac-tu/hm/03.json",
+       "audio": "books/tho-han-mac-tu/hm/03.mp3",
+       "duration": 1263.42
+      }
+     }
     },
     {
      "no": 4,
@@ -756,7 +768,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Truy%E1%BB%81n_k%E1%BB%B3_m%E1%BA%A1n_l%E1%BB%A5c/1",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 11305.54,
+   "duration": 13459.08,
    "voices": [
     {
      "id": "hm",
@@ -979,25 +991,43 @@
      "no": 16,
      "label": "Truyện 16",
      "title": "Chuyện người con gái Nam-xương",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 635.26,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/16.json",
+       "audio": "books/truyen-ky-man-luc/hm/16.mp3",
+       "duration": 635.26
+      }
+     }
     },
     {
      "no": 17,
      "label": "Truyện 17",
      "title": "Chuyện Lý tướng-quân",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 695.13,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/17.json",
+       "audio": "books/truyen-ky-man-luc/hm/17.mp3",
+       "duration": 695.13
+      }
+     }
     },
     {
      "no": 18,
      "label": "Truyện 18",
      "title": "Chuyện Lệ-nương",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 823.15,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/18.json",
+       "audio": "books/truyen-ky-man-luc/hm/18.mp3",
+       "duration": 823.15
+      }
+     }
     },
     {
      "no": 19,
