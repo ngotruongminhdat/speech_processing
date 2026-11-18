@@ -608,7 +608,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Truy%E1%BB%81n_k%E1%BB%B3_m%E1%BA%A1n_l%E1%BB%A5c/1",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 2172.1,
+   "duration": 4914.67,
    "voices": [
     {
      "id": "hm",
@@ -663,25 +663,43 @@
      "no": 4,
      "label": "Truyện 4",
      "title": "Chuyện gã Trà-đồng giáng-sinh",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 832.1,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/04.json",
+       "audio": "books/truyen-ky-man-luc/hm/04.mp3",
+       "duration": 832.1
+      }
+     }
     },
     {
      "no": 5,
      "label": "Truyện 5",
      "title": "Chuyện kỳ-ngộ ở trại Tây",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 1093.02,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/05.json",
+       "audio": "books/truyen-ky-man-luc/hm/05.mp3",
+       "duration": 1093.02
+      }
+     }
     },
     {
      "no": 6,
      "label": "Truyện 6",
      "title": "Chuyện đối-tụng ở Long-cung",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 817.45,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/06.json",
+       "audio": "books/truyen-ky-man-luc/hm/06.mp3",
+       "duration": 817.45
+      }
+     }
     },
     {
      "no": 7,
