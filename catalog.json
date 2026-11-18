@@ -2,6 +2,52 @@
  "version": 2,
  "books": [
   {
+   "slug": "chi-pheo",
+   "title": "Chí Phèo",
+   "creator": "Nam Cao",
+   "subject": "Truyện ngắn",
+   "description": "Từ một anh canh điền hiền lành, Chí Phèo bị đẩy thành con quỷ dữ của làng Vũ Đại, rồi khát khao được làm người lương thiện.",
+   "date": "1941",
+   "narrator": "Hoài My (giọng nữ)",
+   "sourceURL": "https://vi.wikisource.org/wiki/Ch%C3%AD_Ph%C3%A8o",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 3395.55,
+   "voices": [
+    {
+     "id": "hm",
+     "label": "Giọng nữ",
+     "name": "Hoài My"
+    }
+   ],
+   "units": [
+    {
+     "no": 1,
+     "label": "Chí Phèo",
+     "title": "Chí Phèo",
+     "duration": 3395.55,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/chi-pheo/hm/01.json",
+       "audio": "books/chi-pheo/hm/01.mp3",
+       "duration": 3395.55
+      }
+     }
+    }
+   ],
+   "daisy": {
+    "hm": {
+     "url": "books/chi-pheo/chi-pheo-daisy-hm.zip",
+     "size": "21 MB"
+    }
+   },
+   "cover": "books/chi-pheo/cover.jpg",
+   "coverCredit": {
+    "text": "Bìa lần in đầu năm 1941, nhà Đời Mới, khi truyện còn mang tên Đôi lứa xứng đôi (bản quét của Thư viện Quốc gia Pháp) · Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File%3ADoi_lua_xung_doi.pdf"
+   }
+  },
+  {
    "slug": "co-hang-xen",
    "title": "Cô hàng xén",
    "creator": "Thạch Lam",
@@ -195,7 +241,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/H%C3%A0_N%E1%BB%99i_b%C4%83m_s%C3%A1u_ph%E1%BB%91_ph%C6%B0%E1%BB%9Dng/L%E1%BB%9Di_t%E1%BB%B1a",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 4375.18,
+   "duration": 5079.67,
    "voices": [
     {
      "id": "hm",
@@ -460,25 +506,43 @@
      "no": 19,
      "label": "Bài 19",
      "title": "Bà cụ bán xôi",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 245.38,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/19.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/19.mp3",
+       "duration": 245.38
+      }
+     }
     },
     {
      "no": 20,
      "label": "Bài 20",
      "title": "Hàng nước cô Dần",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 223.77,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/20.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/20.mp3",
+       "duration": 223.77
+      }
+     }
     },
     {
      "no": 21,
      "label": "Bài 21",
      "title": "Các hiệu cao lâu khách",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 235.34,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/21.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/21.mp3",
+       "duration": 235.34
+      }
+     }
     }
    ],
    "daisy": {},
