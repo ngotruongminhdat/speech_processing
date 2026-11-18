@@ -1839,7 +1839,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Vi%E1%BB%87t_Nam_s%E1%BB%AD_l%C6%B0%E1%BB%A3c/Quy%E1%BB%83n_I/T%E1%BB%B1a",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 3024.91,
+   "duration": 4233.99,
    "voices": [
     {
      "id": "hm",
@@ -1936,25 +1936,43 @@
      "no": 7,
      "label": "Mục 7",
      "title": "Bắc thuộc thời đại, chương 1: Bắc Thuộc lần thứ nhất",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 165.95,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/07.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/07.mp3",
+       "duration": 165.95
+      }
+     }
     },
     {
      "no": 8,
      "label": "Mục 8",
      "title": "Bắc thuộc thời đại, chương 2: Trưng Vương",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 163.34,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/08.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/08.mp3",
+       "duration": 163.34
+      }
+     }
     },
     {
      "no": 9,
      "label": "Mục 9",
      "title": "Bắc thuộc thời đại, chương 3: Bắc Thuộc lần thứ hai",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 879.79,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/09.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/09.mp3",
+       "duration": 879.79
+      }
+     }
     },
     {
      "no": 10,
