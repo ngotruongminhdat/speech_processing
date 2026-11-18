@@ -50,7 +50,7 @@ Ràng buộc máy dev: không có CUDA → mọi mô hình phải chạy đượ
 - [ ] Thử với người dùng khiếm thị (hoặc bịt mắt), ghi lại số thao tác và thời gian tới khi nghe được
 - [x] 17/11: đối chiếu với BARD Mobile, Legimus, Voice Dream, Victor Reader Stream: bước nhảy câu/đoạn/30 giây/phần, đánh dấu trang, Đang ở đâu, hướng dẫn, tìm bằng giọng nói, tốc độ tới 3 lần, hẹn giờ hết phần, ghi chú bằng giọng nói, tiếng báo hiệu, nút Quay lại, màu tô câu, tốc độ riêng từng cuốn (82 kiểm thử)
 
-- [x] 18/11: mở rộng thể loại (thơ, tùy bút, truyện truyền kỳ, lịch sử) từ danh sách tài liệu của lớp; ô chọn thể loại ở thư viện; nhập được trang Wikisource ghép từ bản quét
+- [x] 18/11: mở rộng thể loại (thơ, ngâm khúc, tùy bút, truyện truyền kỳ, lịch sử, khảo cứu) từ danh sách tài liệu của lớp; ô chọn thể loại ở thư viện; nhập được trang Wikisource ghép từ bản quét
 
 ## Stage 4 — Phân tích sâu và cải tiến (20%)
 
@@ -68,7 +68,7 @@ Giải pháp được chọn để phân tích: **TTS chạy cục bộ cho sác
 
 ## Stage 5 — Báo cáo và trình bày
 
-- [ ] Báo cáo theo 4 mục chấm điểm; ghi rõ phần kế thừa giữa kỳ và phần làm mới
+- [x] Báo cáo theo 4 mục chấm điểm (`report/bao_cao.md`, bản nháp 18/11); ghi rõ phần kế thừa giữa kỳ và phần làm mới
 - [ ] Slide, video demo quay trên điện thoại thật
 - [ ] Câu hỏi phản biện dự kiến: vì sao web mà không phải app gốc, chất lượng giọng Piper, bản quyền sách
 
