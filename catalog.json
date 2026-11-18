@@ -1700,7 +1700,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Vi%E1%BB%87t_Nam_phong_t%E1%BB%A5c/I.1",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 1745.92,
+   "duration": 1863.74,
    "voices": [
     {
      "id": "hm",
@@ -1797,17 +1797,29 @@
      "no": 7,
      "label": "Mục 7",
      "title": "Sinh nhật",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 31.7,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-phong-tuc-1/hm/07.json",
+       "audio": "books/viet-nam-phong-tuc-1/hm/07.mp3",
+       "duration": 31.7
+      }
+     }
     },
     {
      "no": 8,
      "label": "Mục 8",
      "title": "Thần hoàng",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 86.12,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-phong-tuc-1/hm/08.json",
+       "audio": "books/viet-nam-phong-tuc-1/hm/08.mp3",
+       "duration": 86.12
+      }
+     }
     }
    ],
    "daisy": {},
@@ -1827,7 +1839,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Vi%E1%BB%87t_Nam_s%E1%BB%AD_l%C6%B0%E1%BB%A3c/Quy%E1%BB%83n_I/T%E1%BB%B1a",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 1551.59,
+   "duration": 3024.91,
    "voices": [
     {
      "id": "hm",
@@ -1882,25 +1894,43 @@
      "no": 4,
      "label": "Mục 4",
      "title": "Thượng cổ thời đại, chương 2: Nhà Thục",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 348.14,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/04.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/04.mp3",
+       "duration": 348.14
+      }
+     }
     },
     {
      "no": 5,
      "label": "Mục 5",
      "title": "Thượng cổ thời đại, chương 3: Xã hội nước Tàu",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 555.21,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/05.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/05.mp3",
+       "duration": 555.21
+      }
+     }
     },
     {
      "no": 6,
      "label": "Mục 6",
      "title": "Thượng cổ thời đại, chương 4: Nhà Triệu",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 569.97,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-su-luoc-1/hm/06.json",
+       "audio": "books/viet-nam-su-luoc-1/hm/06.mp3",
+       "duration": 569.97
+      }
+     }
     },
     {
      "no": 7,
