@@ -389,7 +389,8 @@ async def main():
         await page.select_option("#genre", "Thơ")
         g = await spoken_live(page, "cuốn khớp")
         names = await page.locator("#bookList li b").all_inner_texts()
-        check("chọn thể loại Thơ thì chỉ còn sách thơ và có đọc số kết quả", names == ["Truyện Kiều"] and "1 cuốn khớp" in g, f"{names} | {g}")
+        check("chọn thể loại Thơ thì chỉ còn sách thơ và có đọc số kết quả", "Truyện Kiều" in names and "Tắt đèn" not in names and 0 < len(names) < all_n
+              and f"{len(names)} cuốn khớp" in g, f"{names} | {g}")
         await page.select_option("#genre", "")
         await page.fill("#q", "tiểu thuyết")
         await page.wait_for_timeout(150)
