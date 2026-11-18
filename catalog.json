@@ -195,7 +195,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/H%C3%A0_N%E1%BB%99i_b%C4%83m_s%C3%A1u_ph%E1%BB%91_ph%C6%B0%E1%BB%9Dng/L%E1%BB%9Di_t%E1%BB%B1a",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 587.67,
+   "duration": 1983.37,
    "voices": [
     {
      "id": "hm",
@@ -250,25 +250,43 @@
      "no": 4,
      "label": "Bài 4",
      "title": "Hàng mứt, hàng đường, hàng muối trắng tinh",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 472.73,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/04.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/04.mp3",
+       "duration": 472.73
+      }
+     }
     },
     {
      "no": 5,
      "label": "Bài 5",
      "title": "Quà Hà Nội",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 660.47,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/05.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/05.mp3",
+       "duration": 660.47
+      }
+     }
     },
     {
      "no": 6,
      "label": "Bài 6",
      "title": "Vẫn quà Hà Nội",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 262.5,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/06.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/06.mp3",
+       "duration": 262.5
+      }
+     }
     },
     {
      "no": 7,
