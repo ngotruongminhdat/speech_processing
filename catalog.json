@@ -608,7 +608,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Truy%E1%BB%81n_k%E1%BB%B3_m%E1%BA%A1n_l%E1%BB%A5c/1",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 4914.67,
+   "duration": 7454.01,
    "voices": [
     {
      "id": "hm",
@@ -705,25 +705,43 @@
      "no": 7,
      "label": "Truyện 7",
      "title": "Chuyện nghiệp-oan của Đào-thị",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 1053.07,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/07.json",
+       "audio": "books/truyen-ky-man-luc/hm/07.mp3",
+       "duration": 1053.07
+      }
+     }
     },
     {
      "no": 8,
      "label": "Truyện 8",
      "title": "Chuyện chức phán-sự ở đền Tản-viên",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 563.28,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/08.json",
+       "audio": "books/truyen-ky-man-luc/hm/08.mp3",
+       "duration": 563.28
+      }
+     }
     },
     {
      "no": 9,
      "label": "Truyện 9",
      "title": "Chuyện Từ-Thức lấy vợ tiên",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 922.99,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/09.json",
+       "audio": "books/truyen-ky-man-luc/hm/09.mp3",
+       "duration": 922.99
+      }
+     }
     },
     {
      "no": 10,
