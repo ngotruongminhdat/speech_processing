@@ -45,7 +45,7 @@ RETRIES = 60
 FETCH_TIMEOUT = 120  # giây cho một đoạn văn, kể cả lúc chờ máy chủ
 TRUNC_RETRIES = 8    # sau ngần này lần vẫn thiếu từ thì chấp nhận (cách tách từ hai bên khác nhau)
 GAP = 0.3            # giãn nhịp giữa hai yêu cầu, tránh bị bóp tần suất
-PARALLEL = int(os.environ.get("EDGE_PARALLEL", "4"))   # số đoạn tải cùng lúc
+PARALLEL = int(os.environ.get("EDGE_PARALLEL", "8"))   # số đoạn tải cùng lúc
 TOKEN = re.compile(r"\w+")
 
 
