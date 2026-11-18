@@ -241,7 +241,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Truy%E1%BB%87n_Ki%E1%BB%81u",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 6815.62,
+   "duration": 7384.87,
    "voices": [
     {
      "id": "hm",
@@ -422,9 +422,15 @@
      "no": 13,
      "label": "Phần 13",
      "title": "Từ câu 3001 đến câu 3254",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 569.25,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-kieu/hm/13.json",
+       "audio": "books/truyen-kieu/hm/13.mp3",
+       "duration": 569.25
+      }
+     }
     }
    ],
    "daisy": {},
