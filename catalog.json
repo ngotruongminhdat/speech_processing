@@ -11,7 +11,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Chinh_ph%E1%BB%A5_ng%C3%A2m_%28%C4%90o%C3%A0n_Th%E1%BB%8B_%C4%90i%E1%BB%83m_d%E1%BB%8Bch%29",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 463.82,
+   "duration": 952.86,
    "voices": [
     {
      "id": "hm",
@@ -52,17 +52,29 @@
      "no": 3,
      "label": "Phần 3",
      "title": "Từ câu 201 đến câu 300",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 231.94,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/chinh-phu-ngam/hm/03.json",
+       "audio": "books/chinh-phu-ngam/hm/03.mp3",
+       "duration": 231.94
+      }
+     }
     },
     {
      "no": 4,
      "label": "Phần 4",
      "title": "Từ câu 301 đến câu 412",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 257.1,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/chinh-phu-ngam/hm/04.json",
+       "audio": "books/chinh-phu-ngam/hm/04.mp3",
+       "duration": 257.1
+      }
+     }
     }
    ],
    "daisy": {},
@@ -670,6 +682,71 @@
    }
   },
   {
+   "slug": "tho-han-mac-tu",
+   "title": "Thơ Hàn Mặc Tử",
+   "creator": "Hàn Mặc Tử",
+   "subject": "Thơ",
+   "description": "Tuyển thơ Hàn Mặc Tử in năm 1942: Thơ Đường luật, Gái quê, Đau thương, Xuân như ý.",
+   "date": "1942",
+   "narrator": "Hoài My (giọng nữ)",
+   "sourceURL": "https://vi.wikisource.org/wiki/Th%C6%A1_H%C3%A0n_M%E1%BA%B7c_T%E1%BB%AD/Th%C6%A1_%C4%90%C6%B0%E1%BB%9Dng_lu%E1%BA%ADt",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 22.82,
+   "voices": [
+    {
+     "id": "hm",
+     "label": "Giọng nữ",
+     "name": "Hoài My"
+    }
+   ],
+   "units": [
+    {
+     "no": 1,
+     "label": "Phần 1",
+     "title": "Thơ Đường luật",
+     "duration": 22.82,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/tho-han-mac-tu/hm/01.json",
+       "audio": "books/tho-han-mac-tu/hm/01.mp3",
+       "duration": 22.82
+      }
+     }
+    },
+    {
+     "no": 2,
+     "label": "Phần 2",
+     "title": "Gái quê",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 3,
+     "label": "Phần 3",
+     "title": "Đau thương",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 4,
+     "label": "Phần 4",
+     "title": "Xuân như ý",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    }
+   ],
+   "daisy": {},
+   "cover": "books/tho-han-mac-tu/cover.jpg",
+   "coverCredit": {
+    "text": "Bìa Thơ Hàn Mặc Tử, nhà xuất bản Đông Phương, Sài Gòn, 1942 (bản quét của Thư viện Quốc gia Pháp) · Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File%3ATh%C6%A1_H%C3%A0n_M%E1%BA%B7c_T%E1%BB%AD.pdf"
+   }
+  },
+  {
    "slug": "truyen-ky-man-luc",
    "title": "Truyền kỳ mạn lục",
    "creator": "Nguyễn Dữ (Ngô Văn Triện dịch)",
@@ -679,7 +756,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Truy%E1%BB%81n_k%E1%BB%B3_m%E1%BA%A1n_l%E1%BB%A5c/1",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 9419.79,
+   "duration": 11305.54,
    "voices": [
     {
      "id": "hm",
@@ -860,25 +937,43 @@
      "no": 13,
      "label": "Truyện 13",
      "title": "Chuyện cái chùa hoang ở huyện Đông-trào",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 542.3,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/13.json",
+       "audio": "books/truyen-ky-man-luc/hm/13.mp3",
+       "duration": 542.3
+      }
+     }
     },
     {
      "no": 14,
      "label": "Truyện 14",
      "title": "Chuyện nàng Túy-Tiêu",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 887.54,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/14.json",
+       "audio": "books/truyen-ky-man-luc/hm/14.mp3",
+       "duration": 887.54
+      }
+     }
     },
     {
      "no": 15,
      "label": "Truyện 15",
      "title": "Chuyện bữa tiệc đêm ở Đà-giang",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 455.91,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/15.json",
+       "audio": "books/truyen-ky-man-luc/hm/15.mp3",
+       "duration": 455.91
+      }
+     }
     },
     {
      "no": 16,
