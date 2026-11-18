@@ -691,7 +691,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Th%C6%A1_H%C3%A0n_M%E1%BA%B7c_T%E1%BB%AD/Th%C6%A1_%C4%90%C6%B0%E1%BB%9Dng_lu%E1%BA%ADt",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 1353.0,
+   "duration": 2180.61,
    "voices": [
     {
      "id": "hm",
@@ -746,9 +746,15 @@
      "no": 4,
      "label": "Phần 4",
      "title": "Xuân như ý",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 827.61,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/tho-han-mac-tu/hm/04.json",
+       "audio": "books/tho-han-mac-tu/hm/04.mp3",
+       "duration": 827.61
+      }
+     }
     }
    ],
    "daisy": {},
@@ -768,7 +774,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/Truy%E1%BB%81n_k%E1%BB%B3_m%E1%BA%A1n_l%E1%BB%A5c/1",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 13459.08,
+   "duration": 14860.86,
    "voices": [
     {
      "id": "hm",
@@ -1033,17 +1039,29 @@
      "no": 19,
      "label": "Truyện 19",
      "title": "Cuộc nói chuyện thơ ở Kim-hoa",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 688.16,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/19.json",
+       "audio": "books/truyen-ky-man-luc/hm/19.mp3",
+       "duration": 688.16
+      }
+     }
     },
     {
      "no": 20,
      "label": "Truyện 20",
      "title": "Chuyện tướng Dạ-xoa",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 713.62,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/truyen-ky-man-luc/hm/20.json",
+       "audio": "books/truyen-ky-man-luc/hm/20.mp3",
+       "duration": 713.62
+      }
+     }
     }
    ],
    "daisy": {},
@@ -1670,6 +1688,103 @@
    "coverCredit": {
     "text": "Bìa lần in đầu, nhà Mai Lĩnh, 1939 (bản quét của Thư viện Quốc gia Pháp) · Public domain",
     "url": "https://commons.wikimedia.org/wiki/File:Tat_den.pdf"
+   }
+  },
+  {
+   "slug": "viet-nam-phong-tuc-1",
+   "title": "Việt Nam phong tục: phong tục trong gia tộc",
+   "creator": "Phan Kế Bính",
+   "subject": "Khảo cứu",
+   "description": "Tám mục đầu của thiên thứ nhất trong Việt Nam phong tục (1915), biên khảo của Phan Kế Bính về phong tục trong gia tộc người Việt.",
+   "date": "1915",
+   "narrator": "Hoài My (giọng nữ)",
+   "sourceURL": "https://vi.wikisource.org/wiki/Vi%E1%BB%87t_Nam_phong_t%E1%BB%A5c/I.1",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 583.47,
+   "voices": [
+    {
+     "id": "hm",
+     "label": "Giọng nữ",
+     "name": "Hoài My"
+    }
+   ],
+   "units": [
+    {
+     "no": 1,
+     "label": "Mục 1",
+     "title": "Cha mẹ với con",
+     "duration": 583.47,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/viet-nam-phong-tuc-1/hm/01.json",
+       "audio": "books/viet-nam-phong-tuc-1/hm/01.mp3",
+       "duration": 583.47
+      }
+     }
+    },
+    {
+     "no": 2,
+     "label": "Mục 2",
+     "title": "Anh chị em",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 3,
+     "label": "Mục 3",
+     "title": "Thân thuộc",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 4,
+     "label": "Mục 4",
+     "title": "Phụng sự tổ tôn",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 5,
+     "label": "Mục 5",
+     "title": "Đạo làm con",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 6,
+     "label": "Mục 6",
+     "title": "Thượng thọ",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 7,
+     "label": "Mục 7",
+     "title": "Sinh nhật",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 8,
+     "label": "Mục 8",
+     "title": "Thần hoàng",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    }
+   ],
+   "daisy": {},
+   "cover": "books/viet-nam-phong-tuc-1/cover.jpg",
+   "coverCredit": {
+    "text": "Bìa Việt Nam phong tục, bản in năm 1973 của nhà sách Khai Trí · Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File%3AViet_Nam_phong_tuc.pdf"
    }
   },
   {
