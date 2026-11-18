@@ -195,7 +195,7 @@
    "narrator": "Hoài My (giọng nữ)",
    "sourceURL": "https://vi.wikisource.org/wiki/H%C3%A0_N%E1%BB%99i_b%C4%83m_s%C3%A1u_ph%E1%BB%91_ph%C6%B0%E1%BB%9Dng/L%E1%BB%9Di_t%E1%BB%B1a",
    "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
-   "duration": 2200.73,
+   "duration": 3173.79,
    "voices": [
     {
      "id": "hm",
@@ -334,25 +334,43 @@
      "no": 10,
      "label": "Bài 10",
      "title": "Còn quà Hà Nội",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 545.08,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/10.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/10.mp3",
+       "duration": 545.08
+      }
+     }
     },
     {
      "no": 11,
      "label": "Bài 11",
      "title": "Những thứ chuyên môn",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 248.91,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/11.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/11.mp3",
+       "duration": 248.91
+      }
+     }
     },
     {
      "no": 12,
      "label": "Bài 12",
      "title": "Bánh đậu",
-     "duration": 0,
-     "ready": false,
-     "voices": {}
+     "duration": 179.07,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/12.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/12.mp3",
+       "duration": 179.07
+      }
+     }
     },
     {
      "no": 13,
