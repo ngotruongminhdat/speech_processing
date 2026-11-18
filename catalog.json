@@ -186,6 +186,219 @@
    }
   },
   {
+   "slug": "ha-noi-bam-sau-pho-phuong",
+   "title": "Hà Nội băm sáu phố phường",
+   "creator": "Thạch Lam",
+   "subject": "Tùy bút",
+   "description": "Tập tùy bút về phố phường và quà bánh Hà Nội những năm 1940: phở, cốm, bún chả, bánh cuốn, cùng những người bán hàng rong.",
+   "date": "1943",
+   "narrator": "Hoài My (giọng nữ)",
+   "sourceURL": "https://vi.wikisource.org/wiki/H%C3%A0_N%E1%BB%99i_b%C4%83m_s%C3%A1u_ph%E1%BB%91_ph%C6%B0%E1%BB%9Dng/L%E1%BB%9Di_t%E1%BB%B1a",
+   "note": "Văn bản thuộc phạm vi công cộng tại Việt Nam, lấy từ Wikisource.",
+   "duration": 587.67,
+   "voices": [
+    {
+     "id": "hm",
+     "label": "Giọng nữ",
+     "name": "Hoài My"
+    }
+   ],
+   "units": [
+    {
+     "no": 1,
+     "label": "Bài 1",
+     "title": "Lời tựa",
+     "duration": 79.09,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/01.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/01.mp3",
+       "duration": 79.09
+      }
+     }
+    },
+    {
+     "no": 2,
+     "label": "Bài 2",
+     "title": "Những biển hàng",
+     "duration": 217.25,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/02.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/02.mp3",
+       "duration": 217.25
+      }
+     }
+    },
+    {
+     "no": 3,
+     "label": "Bài 3",
+     "title": "Người ta viết chữ Tây",
+     "duration": 291.33,
+     "ready": true,
+     "voices": {
+      "hm": {
+       "data": "books/ha-noi-bam-sau-pho-phuong/hm/03.json",
+       "audio": "books/ha-noi-bam-sau-pho-phuong/hm/03.mp3",
+       "duration": 291.33
+      }
+     }
+    },
+    {
+     "no": 4,
+     "label": "Bài 4",
+     "title": "Hàng mứt, hàng đường, hàng muối trắng tinh",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 5,
+     "label": "Bài 5",
+     "title": "Quà Hà Nội",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 6,
+     "label": "Bài 6",
+     "title": "Vẫn quà Hà Nội",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 7,
+     "label": "Bài 7",
+     "title": "Phụ thêm vào phở",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 8,
+     "label": "Bài 8",
+     "title": "Bổ khuyết",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 9,
+     "label": "Bài 9",
+     "title": "Bún sườn và canh bún",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 10,
+     "label": "Bài 10",
+     "title": "Còn quà Hà Nội",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 11,
+     "label": "Bài 11",
+     "title": "Những thứ chuyên môn",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 12,
+     "label": "Bài 12",
+     "title": "Bánh đậu",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 13,
+     "label": "Bài 13",
+     "title": "Bánh khảo, kẹo lạc",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 14,
+     "label": "Bài 14",
+     "title": "Một thứ quà của lúa non: cốm",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 15,
+     "label": "Bài 15",
+     "title": "Quà ... tức là người",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 16,
+     "label": "Bài 16",
+     "title": "Vài thứ chuyên môn nữa",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 17,
+     "label": "Bài 17",
+     "title": "Những chốn ăn chơi",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 18,
+     "label": "Bài 18",
+     "title": "Chợ mát ban đêm",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 19,
+     "label": "Bài 19",
+     "title": "Bà cụ bán xôi",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 20,
+     "label": "Bài 20",
+     "title": "Hàng nước cô Dần",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    },
+    {
+     "no": 21,
+     "label": "Bài 21",
+     "title": "Các hiệu cao lâu khách",
+     "duration": 0,
+     "ready": false,
+     "voices": {}
+    }
+   ],
+   "daisy": {},
+   "cover": "books/ha-noi-bam-sau-pho-phuong/cover.jpg",
+   "coverCredit": {
+    "text": "Léon Busy, phố Hàng Chén (rue des Tasses), Hà Nội, tháng 5 năm 1915, Archives de la Planète (Musée Albert-Kahn) · CC0",
+    "url": "https://commons.wikimedia.org/wiki/File%3ALa_%22_rue_des_Tasses_%22%2C_bord%C3%A9e_de_flamboyants_en_fleurs_-_A5568.jpg"
+   }
+  },
+  {
    "slug": "lao-hac",
    "title": "Lão Hạc",
    "creator": "Nam Cao",
