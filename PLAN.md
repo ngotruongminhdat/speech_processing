@@ -50,6 +50,8 @@ Ràng buộc máy dev: không có CUDA → mọi mô hình phải chạy đượ
 - [ ] Thử với người dùng khiếm thị (hoặc bịt mắt), ghi lại số thao tác và thời gian tới khi nghe được
 - [x] 17/11: đối chiếu với BARD Mobile, Legimus, Voice Dream, Victor Reader Stream: bước nhảy câu/đoạn/30 giây/phần, đánh dấu trang, Đang ở đâu, hướng dẫn, tìm bằng giọng nói, tốc độ tới 3 lần, hẹn giờ hết phần, ghi chú bằng giọng nói, tiếng báo hiệu, nút Quay lại, màu tô câu, tốc độ riêng từng cuốn (82 kiểm thử)
 
+- [x] 18/11: mở rộng thể loại (thơ, tùy bút, truyện truyền kỳ, lịch sử) từ danh sách tài liệu của lớp; ô chọn thể loại ở thư viện; nhập được trang Wikisource ghép từ bản quét
+
 ## Stage 4 — Phân tích sâu và cải tiến (20%)
 
 Giải pháp được chọn để phân tích: **TTS chạy cục bộ cho sách nói tiếng Việt**. Mạch phân tích đã có: Piper (VITS) là mốc nền, nhanh gấp 27–40 lần thời gian thực nhưng WER 10,0% và gần như không ngắt nghỉ; người nghe thử chê ngữ điệu; cải tiến là chuyển sang VieNeu-TTS (WER 5,1–5,4%, ngắt nghỉ tự nhiên hơn) với cái giá chậm hơn 20–40 lần và nguy cơ đọc sót. Số liệu ở `report/tts_comparison.md`. Việc còn lại, xếp theo giá trị trên công sức:

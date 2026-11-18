@@ -17,6 +17,7 @@ Usage:
       --year 1937 "Tắt đèn/Chương 1" "Tắt đèn/Chương 2"
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -34,9 +35,17 @@ UA = "DAISY-student-project/0.1 (educational; vi.wikisource reader)"
 
 
 def fetch_page(title: str) -> dict:
+    # Bộ đệm trên đĩa (biến môi trường WS_CACHE): trang đã tải thì không hỏi lại Wikisource.
+    cache = os.environ.get("WS_CACHE")
+    if cache:
+        f = Path(cache) / (hashlib.md5(title.encode("utf-8")).hexdigest()[:12] + ".json")
+        if f.exists():
+            d = json.loads(f.read_text(encoding="utf-8"))
+            return {"wikitext": d["wikitext"], "text": d.get("html", ""),
+                    "categories": [{"category": c} for c in d["categories"]]}
     qs = urllib.parse.urlencode({
         "action": "parse", "format": "json", "formatversion": 2,
-        "page": title, "prop": "wikitext|categories", "redirects": 1,
+        "page": title, "prop": "wikitext|text|categories", "redirects": 1,
     })
     req = urllib.request.Request(f"{API}?{qs}", headers={"User-Agent": UA})
     # Tải thong thả: nghỉ giữa các yêu cầu, và nếu bị giới hạn tần suất (429) thì chờ rồi thử lại.
@@ -127,6 +136,53 @@ def to_paragraphs(wikitext: str):
     return out
 
 
+def verse_units(wikitext: str, per_unit: int, per_para: int = 4):
+    """Truyện thơ dài nằm trong một thẻ <poem>: chia thành các phần per_unit câu, mỗi đoạn
+    per_para câu. Không thêm bớt chữ nào; số câu ở lề ({{số|n}}) bị bỏ.
+    -> [(tên phần, [(type, text)])]"""
+    body = wikitext[wikitext.index("<poem>") + 6: wikitext.index("</poem>")]
+    lines = [unicodedata.normalize("NFC", re.sub(r"\s+", " ", clean_inline(strip_templates(ln))).strip())
+             for ln in body.split("\n")]
+    lines = [ln for ln in lines if ln]
+    units = []
+    for a in range(0, len(lines), per_unit):
+        chunk = lines[a: a + per_unit]
+        # phần cuối quá ngắn thì nhập vào phần trước
+        if units and len(chunk) < per_unit // 2:
+            first = units[-1][2]
+            chunk = lines[first:]
+            units.pop()
+            a = first
+        paras = [("p", " ".join(chunk[i: i + per_para])) for i in range(0, len(chunk), per_para)]
+        units.append((f"Từ câu {a + 1} đến câu {a + len(chunk)}", paras, a))
+    return [(name, paras) for name, paras, _ in units]
+
+
+def header_part(wikitext: str) -> str:
+    """Tên phần ghi ở tham số 'phần' của {{đầu đề}}, đã bỏ cú pháp liên kết."""
+    m = re.search(r"\|\s*phần\s*=\s*(.*)", wikitext)
+    return unicodedata.normalize("NFC", clean_inline(m.group(1)).strip()) if m else ""
+
+
+def page_paragraphs(parsed: dict):
+    """Đoạn văn của một trang. Trang ghép từ bản quét (<pages index=.../>) không có chữ trong
+    wikitext nên lấy từ HTML đã dựng; bỏ đề mục 'Chú thích' cuối trang và mọi thứ sau nó."""
+    if "<pages " not in parsed["wikitext"]:
+        return to_paragraphs(parsed["wikitext"])
+    from ws_html import paragraphs
+    out = []
+    for kind, text in paragraphs(parsed.get("text", "")):
+        if kind == "h1" and text.lower().startswith("chú thích"):
+            break
+        out.append((kind, text))
+    return out
+
+
+def same_title(a: str, b: str) -> bool:
+    key = lambda t: re.sub(r"[\W_]+", "", t).casefold()
+    return key(a) == key(b)
+
+
 def roman(text: str) -> int:
     """Giá trị của số La Mã, hoặc 0 nếu không phải số La Mã."""
     if not re.fullmatch(r"M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})", text) or not text:
@@ -148,6 +204,12 @@ def main():
     ap.add_argument("--subject", default="Văn học & Tiểu thuyết")
     ap.add_argument("--description", default="")
     ap.add_argument("--allow-untagged", action="store_true", help="nhập cả trang không có nhãn PVCC")
+    ap.add_argument("--verse", type=int, metavar="N",
+                    help="truyện thơ một trang: chia thành các phần N câu (ví dụ 250)")
+    ap.add_argument("--header-titles", action="store_true",
+                    help="tên đơn vị lấy từ tham số 'phần' ở đầu đề của trang")
+    ap.add_argument("--titles", type=Path, help="file văn bản, mỗi dòng là tên một đơn vị (ghi đè tên lấy từ trang)")
+    ap.add_argument("--unit-word", default="Chương", help="cách gọi một đơn vị: Chương, Phần, Truyện, Bài")
     a = ap.parse_args()
 
     # Tải và kiểm tra nhãn bản quyền của mọi trang trước khi ghi bất cứ thứ gì ra đĩa.
@@ -198,17 +260,38 @@ def main():
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from extract_chapter import write_dtbook
 
-    single = len(a.pages) == 1
-    for unit_no, (page, parsed) in enumerate(zip(a.pages, parsed_pages), start=1):
-        paras = to_paragraphs(parsed["wikitext"])
+    single = len(a.pages) == 1 and not a.verse
+    if a.verse:
+        todo = [(a.pages[0] + "/" + name, paras) for name, paras in verse_units(parsed_pages[0]["wikitext"], a.verse)]
+    else:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        todo = []
+        names = a.titles.read_text(encoding="utf-8").strip().split("\n") if a.titles else None
+        if names and len(names) != len(a.pages):
+            sys.exit(f"❌ --titles có {len(names)} dòng nhưng có {len(a.pages)} trang")
+        for page, parsed in zip(a.pages, parsed_pages):
+            paras = page_paragraphs(parsed)
+            if not paras:
+                sys.exit(f"❌ {page!r}: không rút được đoạn văn nào")
+            part = header_part(parsed["wikitext"]) if a.header_titles else ""
+            if part:   # tên đơn vị lấy từ đầu đề của trang, thay cho đuôi của tên trang (thường chỉ là số)
+                page = page.rsplit("/", 1)[0] + "/" + part.replace("/", " ")
+                # các dòng in hoa ở đầu trang (PHẦN I, CHƯƠNG I, tên chương) lặp lại tên đơn vị
+                while len(paras) > 1 and (same_title(paras[0][1], part) or
+                                          (len(paras[0][1]) < 80 and paras[0][1] == paras[0][1].upper())):
+                    paras = paras[1:]
+            if names:
+                page = page.rsplit("/", 1)[0] + "/" + names[len(todo)].replace("/", " ")
+            todo.append((page, paras))
+    for unit_no, (page, paras) in enumerate(todo, start=1):
         tail = page.split("/")[-1]
         if single:
             unit_title = label = title
-        elif roman(tail):
+        elif roman(tail) and not a.header_titles:
             # Số La Mã mà để nguyên thì TTS đọc thành chữ cái; đổi sang số thường.
             unit_title, label = f"Chương {roman(tail)}", title
         else:
-            unit_title, label = tail, f"Chương {unit_no}"
+            unit_title, label = tail, f"{a.unit_word} {unit_no}"
 
         segments = [{"id": "id_1", "type": "h1", "text": unit_title}]
         for kind, text in paras:

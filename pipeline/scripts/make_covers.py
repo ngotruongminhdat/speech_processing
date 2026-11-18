@@ -29,6 +29,11 @@ BOOKS = {
     "co-hang-xen": dict(title="Cô hàng xén", author="Thạch Lam", crop=(.05, .06, .95, .95), focus=(.5, .5), band="bottom", style="photo"),
     "duoi-bong-hoang-lan": dict(title="Dưới bóng\nhoàng lan", author="Thạch Lam", crop=(0, 0, 1, 1), focus=(.5, .5), band="top", style="plate"),
     "tat-den": dict(crop=(.035, .02, .965, .955), focus=(.5, .8), style="scan"),
+    "truyen-kieu": dict(title="Truyện Kiều", author="Nguyễn Du", crop=(.02, .02, .86, .98), focus=(.5, .35), band="bottom", style="photo"),
+    "truyen-ky-man-luc": dict(crop=(.03, .02, .97, .97), focus=(.5, .3), style="scan"),
+    "chi-pheo": dict(crop=(.02, .015, .98, .955), focus=(.5, .3), style="scan"),
+    "ha-noi-bam-sau-pho-phuong": dict(title="Hà Nội băm sáu\nphố phường", author="Thạch Lam", crop=(.07, .05, .97, .94), focus=(.45, .5), band="bottom", style="photo"),
+    "viet-nam-su-luoc-1": dict(crop=(.02, .02, .98, .98), focus=(.5, .4), style="scan"),
 }
 
 

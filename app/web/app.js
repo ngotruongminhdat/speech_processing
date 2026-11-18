@@ -191,22 +191,33 @@ function renderLibrary() {
     resume.innerHTML = `<a class="btn resume" href="#/r/${recent.slug}/${pos.unit}"><span aria-hidden="true">▶</span> Nghe tiếp: ${esc(recent.title)} · còn ${spoken(left)}</a>`;
   } else { resume.hidden = true; }
 
+  // thể loại có trong thư viện, xếp theo số cuốn; giữ lựa chọn đang có
+  const count = new Map();
+  for (const b of books) if (b.subject) count.set(b.subject, (count.get(b.subject) || 0) + 1);
+  const sel = $('#genre');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">Tất cả thể loại</option>' + [...count].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'vi'))
+    .map(([s, n]) => `<option value="${esc(s)}">${esc(s)} (${n} cuốn)</option>`).join('');
+  sel.value = count.has(cur) ? cur : '';
+
   filterLibrary(false);
 }
 
 function filterLibrary(tell = true) {
   const q = fold($('#q').value.trim());
-  const books = catalog.books.filter((b) => !q || fold(`${b.title} ${b.creator}`).includes(q));
+  const g = $('#genre').value;
+  const books = catalog.books.filter((b) => (!g || b.subject === g)
+    && (!q || fold(`${b.title} ${b.creator} ${b.subject || ''}`).includes(q)));
   $('#bookList').innerHTML = books.map((b) => {
     const p = b.external ? 0 : bookProgress(b);
     const pct = Math.round(p * 100);
     const state = b.external ? 'bản giữa kỳ' : p >= 0.995 ? 'đã nghe xong' : pct > 0 ? `đã nghe ${pct} phần trăm` : '';
     const parts = (b.units?.length || b.unitCount || 1);
     const sub = `${spoken(b.duration)}${parts > 1 ? ` · ${parts} phần` : ''}`;
-    const label = [b.title, b.creator, sub.replace(' · ', ', '), state].filter(Boolean).join(', ');
+    const label = [b.title, b.creator, b.subject, sub.replace(' · ', ', '), state].filter(Boolean).join(', ');
     return `<li><a href="${esc(bookHref(b))}" aria-label="${esc(label)}">
       ${cover(b)}
-      <span class="cap" aria-hidden="true"><b>${esc(b.title)}</b><i>${esc(b.creator)}</i><small>${esc(sub)}</small>
+      <span class="cap" aria-hidden="true"><b>${esc(b.title)}</b><i>${esc(b.creator)}</i><small>${esc([b.subject, sub].filter(Boolean).join(' · '))}</small>
       ${pct > 0 ? `<span class="bar"><span style="width:${pct}%"></span></span>` : ''}
       ${b.external ? '<span class="badge">Bản giữa kỳ</span>' : ''}</span></a></li>`;
   }).join('');
@@ -1054,6 +1065,7 @@ async function route() {
 }
 
 $('#q').addEventListener('input', () => filterLibrary());
+$('#genre').addEventListener('change', () => filterLibrary());
 $('#skip').addEventListener('click', (e) => {
   e.preventDefault();
   const h = $(`#view-${document.body.dataset.view} h1`);

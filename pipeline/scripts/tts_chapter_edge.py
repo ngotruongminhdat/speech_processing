@@ -45,6 +45,7 @@ RETRIES = 60
 FETCH_TIMEOUT = 120  # giây cho một đoạn văn, kể cả lúc chờ máy chủ
 TRUNC_RETRIES = 8    # sau ngần này lần vẫn thiếu từ thì chấp nhận (cách tách từ hai bên khác nhau)
 GAP = 0.3            # giãn nhịp giữa hai yêu cầu, tránh bị bóp tần suất
+PARALLEL = int(os.environ.get("EDGE_PARALLEL", "4"))   # số đoạn tải cùng lúc
 TOKEN = re.compile(r"\w+")
 
 
@@ -99,7 +100,9 @@ async def fetch(text: str, voice: str):
             if attempt == RETRIES - 1:
                 raise
             print(f"   ! lần {attempt + 1}: {type(e).__name__}: {str(e)[:80]} — thử lại", flush=True)
-            await asyncio.sleep(min(30, 2 + attempt))  # bị bóp theo đợt vài phút: chờ dài dần
+            # Đo ngày 18/11: mỗi lần gọi hỏng với xác suất khoảng 3/4 bất kể đã chờ bao lâu,
+            # nên chờ ngắn; chỉ khi hỏng liên tiếp nhiều lần mới coi là bị bóp theo đợt và chờ dài dần.
+            await asyncio.sleep(0.5 if attempt < 12 else min(30, attempt - 8))
 
 
 def sentence_spans(text: str, words, total: float):
@@ -153,10 +156,33 @@ async def main(chapter_no: int, voice: str):
     fetched = unaligned = 0
     t0 = time.perf_counter()
 
-    for i, seg in enumerate(segments):
+    def spoken_text(i, seg):
         text = seg["text"]
         if i == 0 and seg["type"] == "h1" and not text.startswith(label):
             text = f"{label}. {text}"
+        return text
+
+    # Tải trước các đoạn còn thiếu, vài đoạn cùng lúc; vòng lặp bên dưới chỉ còn đọc từ đĩa.
+    gate = asyncio.Semaphore(PARALLEL)
+
+    async def prefetch(i, seg):
+        nonlocal fetched
+        part, meta = parts / f"{seg['id']}.mp3", parts / f"{seg['id']}.json"
+        if part.exists() and meta.exists() and part.stat().st_size > 0:
+            return
+        async with gate:
+            audio, words = await fetch(spoken_text(i, seg), voice)
+            part.write_bytes(audio)
+            meta.write_text(json.dumps(words, ensure_ascii=False), encoding="utf-8")
+            fetched += 1
+            if fetched % 10 == 0:
+                print(f"   … đã tải {fetched} đoạn, {time.perf_counter() - t0:.0f}s", flush=True)
+            await asyncio.sleep(GAP)
+
+    await asyncio.gather(*(prefetch(i, seg) for i, seg in enumerate(segments)))
+
+    for i, seg in enumerate(segments):
+        text = spoken_text(i, seg)
         part, meta = parts / f"{seg['id']}.mp3", parts / f"{seg['id']}.json"
         if part.exists() and meta.exists() and part.stat().st_size > 0:
             audio, words = part.read_bytes(), json.loads(meta.read_text(encoding="utf-8"))

@@ -139,6 +139,8 @@ def main(legacy_totto: bool):
             units.append({"no": seg["chapter"], "label": seg["label"], "title": seg["title"],
                           "duration": first["duration"] if first else 0, "ready": bool(voices), "voices": voices})
         present = [vid for vid in voice_info if any(vid in u["voices"] for u in units)]
+        if not any(u["ready"] for u in units):
+            continue   # sách mới nhập, chưa phần nào có giọng đọc: chưa đưa lên thư viện
         chosen = [vid for vid in present if not voice_info[vid].get("fallback")] or present
         book = {
             "slug": slug, "title": meta["title"], "creator": meta["creator"], "subject": meta["subject"],
@@ -158,7 +160,9 @@ def main(legacy_totto: bool):
             if src.exists():
                 c = json.loads(src.read_text(encoding="utf-8"))
                 book["coverCredit"] = {"text": f"{c['credit']} · {c['license']}", "url": c["page"]}
-        for vid, dirs in daisy_dirs.items():
+        # Sách dài: không kèm file zip tải về (GitHub Pages giới hạn 1 GB, zip lặp lại toàn bộ audio);
+        # bộ file DAISY từng phần vẫn nằm trên trang.
+        for vid, dirs in ({} if meta.get("no_zip") else daisy_dirs).items():
             zip_path = out_dir / f"{slug}-daisy-{vid}.zip"
             write_daisy_zip(zip_path, dirs, single=len(ch_dirs) == 1)
             book["daisy"][vid] = {"url": f"books/{slug}/{zip_path.name}", "size": human_size(zip_path.stat().st_size)}
