@@ -19,7 +19,7 @@ Bốn kết quả chính:
 
 1. **Tổng quan** tám bài báo (sáu bài ở hội nghị hạng A*/A hoặc tạp chí Q1, giai đoạn 2024–2025) và khảo sát giải pháp trong nước, rút ra ba khoảng trống: chưa có số đo tốc độ TTS tiếng Việt trên CPU, chưa có sách nói tiếng Việt điều hướng được ở mức câu cho người khiếm thị, và chưa bài nào đánh giá TTS trong bối cảnh trợ năng.
 2. **Demo**: so sánh ba hệ TTS tiếng Việt (Piper, VieNeu-TTS, giọng Hoài My của Microsoft qua edge-tts) với bảy cấu hình giọng trên cùng một văn bản, đo tốc độ tạo trên CPU, tỉ lệ lỗi từ qua nhận dạng tiếng nói, tốc độ đọc và tỉ lệ khoảng lặng.
-3. **Ứng dụng**: thư viện 15 đầu sách thuộc 9 thể loại (tính cả cuốn giữa kỳ), đồng bộ văn bản với âm thanh ở mức câu, dùng được hoàn toàn bằng bàn phím và trình đọc màn hình, nghe được khi mất mạng, có 89 kiểm thử tự động trên trình duyệt thật.
+3. **Ứng dụng**: thư viện 15 đầu sách thuộc 9 thể loại (tính cả cuốn giữa kỳ), đồng bộ văn bản với âm thanh ở mức câu, dùng được hoàn toàn bằng bàn phím và trình đọc màn hình, nghe được khi mất mạng, có chế độ chạm đơn giản gồm năm nút lớn tự đọc lời nhắc, và có 103 kiểm thử tự động trên trình duyệt thật.
 4. **Phân tích sâu** bước TTS của dây chuyền: vì sao giọng nhanh nhất không phải giọng tốt nhất cho sách nói, phép đo nào giải thích được nhận xét của người nghe, và ba cải tiến đã cài đặt (lấy mốc câu từ mốc từ của dịch vụ, lưới an toàn bắt câu đọc sót, tăng độ bền khi gọi dịch vụ).
 
 Những việc chưa làm được ghi ở mục 6, quan trọng nhất là chưa thử với người khiếm thị và chưa thử trên điện thoại thật với TalkBack hoặc VoiceOver.
@@ -46,7 +46,7 @@ Cuối kỳ:   Wikisource ─► văn bản ─► TTS ─► DAISY 3 + mốc t�
 | Đồng bộ văn bản với âm thanh | Mức đoạn văn | Mức câu |
 | Trình phát | Một trang HTML sinh sẵn cho mỗi chương | Một ứng dụng thiết kế cho điện thoại và trình đọc màn hình |
 | Ngoại tuyến | Không | Lưu sách trên máy, cài lên màn hình chính |
-| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 89 kiểm thử giao diện |
+| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 103 kiểm thử giao diện |
 
 Các script sinh DAISY (`gen_smil.py`, `gen_opf_ncx.py`, `validate_daisy.py`) và ngôn ngữ thiết kế giao diện được kế thừa từ giữa kỳ. Phần còn lại là làm mới.
 
@@ -223,6 +223,7 @@ Thư viện gồm 15 đầu sách. Mười bốn cuốn dựng trong đồ án n
 - Hẹn giờ tắt theo phút hoặc khi hết phần.
 
 **Dùng không cần nhìn**
+- **Chế độ chạm đơn giản:** trình đọc màn hình bắt người dùng vuốt qua từng phần tử rồi nhấp đôi, nên một trang nhiều nút rất tốn thao tác. Chế độ này thay cả màn hình bằng năm nút rất lớn ở vị trí cố định (nhắc lại và hướng dẫn, lùi, tới, nghe hoặc tạm dừng, đổi sách), chạm một lần là chạy, không cuộn, không vuốt. Ứng dụng tự đọc lời nhắc bằng giọng tiếng Việt của máy (Web Speech API) và vặn nhỏ tiếng sách trong lúc đọc, nên dùng được cả khi không bật trình đọc màn hình. Lựa chọn được ghi nhớ cho lần mở sau.
 - Mọi nút có nhãn bằng lời; mọi thay đổi trạng thái (đổi bước nhảy, tới đầu hoặc cuối sách, đã đánh dấu) được báo qua vùng thông báo cho trình đọc màn hình, kèm tiếng báo hiệu ngắn có thể tắt.
 - Nút **Đang ở đâu** đọc tên sách, tên phần, thời điểm, thời gian còn lại và tốc độ.
 - Thứ tự đọc của trang đặt nút điều khiển trước nội dung sách, để người dùng trình đọc màn hình không phải vuốt qua cả chương mới tới nút phát.
@@ -243,7 +244,7 @@ Danh sách tính năng điều hướng được lập bằng cách đối chi�
 ### 4.4. Kiểm thử
 
 - **Cấu trúc DAISY:** `validate_daisy.py` kiểm tra chéo cho từng phần của từng cuốn: mọi đoạn trong DTBook có mốc trong SMIL, mốc thời gian tăng dần và nằm trong thời lượng file âm thanh, OPF và NCX khớp nhau. Mọi phần đã dựng đều qua.
-- **Giao diện:** 89 kiểm thử đầu-cuối chạy trên Chromium qua Playwright ở kích thước màn hình điện thoại (`app/tests/e2e.py`). Chúng kiểm tra hành vi thật chứ không chỉ sự tồn tại của nút: ví dụ nhảy 30 giây thì thời điểm phát tăng trong khoảng 29,5 đến 32 giây; chọn thể loại "Thơ" thì thư viện chỉ còn đúng các tập thơ; ghi âm ghi chú bằng micro giả rồi kiểm tra dữ liệu âm thanh đã nằm trong bộ nhớ của máy.
+- **Giao diện:** 103 kiểm thử đầu-cuối chạy trên Chromium qua Playwright ở kích thước màn hình điện thoại (`app/tests/e2e.py`). Chúng kiểm tra hành vi thật chứ không chỉ sự tồn tại của nút: ví dụ nhảy 30 giây thì thời điểm phát tăng trong khoảng 29,5 đến 32 giây; chọn thể loại "Thơ" thì thư viện chỉ còn đúng các tập thơ; ghi âm ghi chú bằng micro giả rồi kiểm tra dữ liệu âm thanh đã nằm trong bộ nhớ của máy.
 - **Giới hạn của kiểm thử tự động:** nó xác nhận nhãn, vai trò, thứ tự và thông báo có mặt trong trang, không xác nhận TalkBack hay VoiceOver đọc chúng ra sao. Việc này chưa được làm (mục 6).
 
 ---

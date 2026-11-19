@@ -21,6 +21,17 @@
 <!-- Bản nhìn thấy được của các thông báo, cho người còn nhìn được màn hình. -->
 <div id="toast" popover="manual" aria-hidden="true"></div>
 
+<!-- ============ CHẾ ĐỘ CHẠM ĐƠN GIẢN ============
+     Năm nút rất lớn ở vị trí cố định, chạm một lần là chạy, không phải vuốt hay cuộn.
+     Ứng dụng tự đọc lời nhắc nên dùng được cả khi không bật trình đọc màn hình. -->
+<div id="simple" role="region" aria-label="Chế độ chạm đơn giản" hidden>
+  <button type="button" id="sInfo"></button>
+  <button type="button" id="sPrev"><span class="ic" aria-hidden="true">⏮</span><b></b></button>
+  <button type="button" id="sNext"><span class="ic" aria-hidden="true">⏭</span><b></b></button>
+  <button type="button" id="sMain"><span class="ic" aria-hidden="true">▶</span><b></b></button>
+  <button type="button" id="sAlt"></button>
+</div>
+
 <!-- ============ THƯ VIỆN ============ -->
 <div id="view-library" class="view">
   <header class="hero lib">
@@ -30,6 +41,10 @@
       <p class="author">Sách nói tiếng Việt cho người khiếm thị</p>
       <div class="divider" aria-hidden="true"><i>■</i></div>
       <p class="desc" id="librarySummary"></p>
+      <div class="cta simple-cta">
+        <button class="btn primary" type="button" id="simpleOn" aria-describedby="simpleHint">Chế độ chạm đơn giản</button>
+        <p id="simpleHint">Năm nút lớn, chạm một lần là chạy, không cần vuốt. Ứng dụng tự đọc lời nhắc.</p>
+      </div>
       <div class="cta" id="resume" hidden></div>
       <div class="search">
         <label for="q">Tìm sách theo tên, tác giả hoặc thể loại</label>
@@ -76,11 +91,11 @@
     <ol id="tocList"></ol>
   </nav>
 
-  <div class="top-pills">
+  <header class="top-pills">
     <button class="pill-btn" id="openSettings" type="button" aria-haspopup="dialog"><span aria-hidden="true">⚙</span> Cài đặt</button>
     <button class="pill-btn" type="button" data-help aria-haspopup="dialog"><span aria-hidden="true">?</span> Hướng dẫn</button>
     <a class="pill-btn" id="coverBtn" href="#/"><span aria-hidden="true">📖</span> Trang bìa</a>
-  </div>
+  </header>
 
   <main class="read-main">
     <article class="page">
@@ -113,14 +128,14 @@
         </select>
         <label class="sr-only" for="speed">Tốc độ đọc</label>
         <select class="pbtn" id="speed">
-          <option value="0.75">0.75×</option>
-          <option value="1" selected>1×</option>
-          <option value="1.25">1.25×</option>
-          <option value="1.5">1.5×</option>
-          <option value="1.75">1.75×</option>
-          <option value="2">2×</option>
-          <option value="2.5">2.5×</option>
-          <option value="3">3×</option>
+          <option value="0.75">0,75 lần</option>
+          <option value="1" selected>1 lần</option>
+          <option value="1.25">1,25 lần</option>
+          <option value="1.5">1,5 lần</option>
+          <option value="1.75">1,75 lần</option>
+          <option value="2">2 lần</option>
+          <option value="2.5">2,5 lần</option>
+          <option value="3">3 lần</option>
         </select>
         <button class="pbtn" id="where" type="button"><span aria-hidden="true">📍</span><span class="lbl"> Đang ở đâu</span></button>
         <button class="pbtn" id="mark" type="button" aria-pressed="false"><span aria-hidden="true">🔖</span><span class="lbl"> Đánh dấu</span></button>
@@ -206,6 +221,13 @@
   <form method="dialog">
     <h2 id="h-help" tabindex="-1">Hướng dẫn sử dụng</h2>
     <p>Sách Nói là thư viện sách nói tiếng Việt, dùng được với TalkBack trên Android và VoiceOver trên iPhone.</p>
+    <h3>Chế độ chạm đơn giản</h3>
+    <ul>
+      <li>Ở Thư viện, nút Chế độ chạm đơn giản đổi cả màn hình thành năm nút rất lớn, luôn nằm một chỗ. Chạm một lần là chạy, không cần vuốt, không cần cuộn. Ứng dụng tự đọc lời nhắc.</li>
+      <li>Từ trên xuống: nút trên cùng đọc bạn đang ở đâu và đọc lại hướng dẫn, nghe bao nhiêu lần cũng được. Hàng giữa có nút lùi bên trái và nút tới bên phải. Nút lớn nhất ở dưới là Nghe hoặc Tạm dừng. Nút dưới cùng để đổi sách hoặc về giao diện đầy đủ.</li>
+      <li>Khi chọn sách, nút lùi và tới chuyển qua từng cuốn và đọc tên sách. Khi đang nghe, hai nút này lùi và tới 30 giây.</li>
+      <li>Nếu bạn đang bật TalkBack hoặc VoiceOver thì vẫn dùng được: rê ngón tay tới nút rồi nhấp đôi như thường lệ.</li>
+    </ul>
     <h3>Chọn sách</h3>
     <ul>
       <li>Ở Thư viện, gõ tên sách hoặc tác giả vào ô tìm, hoặc nhấn nút Tìm sách bằng giọng nói rồi đọc tên sách.</li>

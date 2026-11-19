@@ -113,7 +113,34 @@ function toast(msg) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { try { el.hidePopover(); } catch { /* không hỗ trợ popover */ } el.classList.remove('show'); }, 4500);
 }
+// ---------- ứng dụng tự đọc lời nhắc (chế độ chạm đơn giản) ----------
+// Dùng giọng tiếng Việt có sẵn trên máy (Web Speech API). Trong lúc đọc lời nhắc thì vặn nhỏ
+// tiếng sách. Máy không có giọng tiếng Việt thì trả về false để dùng vùng thông báo như thường.
+const spokenLog = (window.snSpoken = []);      // để kiểm thử xem đã đọc câu nào
+let synthVoices = [];
+function loadVoices() { try { synthVoices = speechSynthesis.getVoices() || []; } catch { synthVoices = []; } }
+if ('speechSynthesis' in window) { loadVoices(); speechSynthesis.addEventListener?.('voiceschanged', loadVoices); }
+function speak(msg) {
+  spokenLog.push(msg);
+  if (!('speechSynthesis' in window) || !window.SpeechSynthesisUtterance) return false;
+  const vi = synthVoices.find((v) => /^vi/i.test(v.lang));
+  if (synthVoices.length && !vi) return false;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(msg);
+    u.lang = 'vi-VN';
+    if (vi) u.voice = vi;
+    const restore = () => { if (!speechSynthesis.speaking) audio.volume = 1; };
+    u.onstart = () => { audio.volume = 0.25; };
+    u.onend = restore; u.onerror = restore;
+    speechSynthesis.speak(u);
+    return true;
+  } catch { return false; }
+}
+const simpleOn = () => store.get('simple', '0') === '1';
+
 function announce(msg, visible = true) {
+  if (simpleOn() && speak(msg)) return;
   const el = $('#live');
   el.textContent = '';
   clearTimeout(liveTimer);
@@ -281,7 +308,7 @@ async function renderBook(book) {
 
   $('#bookToc').innerHTML = units.length > 1 ? `
     <div class="toc-head" id="muc-luc">
-      <h2>Mục lục</h2>
+      <h2 id="h-toc" tabindex="-1">Mục lục</h2>
       <span class="toc-note"><b>${ready.length}</b>/${units.length} phần đã có audio</span>
     </div>
     <div class="toc-card"><ol>${units.map((u) => {
@@ -298,7 +325,8 @@ async function renderBook(book) {
     ${esc(book.title)} · ${esc(book.creator)}<br>Sách dựng theo chuẩn DAISY 3 · giọng đọc tổng hợp`;
 
   $('.voice-pick')?.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setVoice(b.dataset.v); });
-  $('#tocJump')?.addEventListener('click', (e) => { e.preventDefault(); $('#muc-luc').scrollIntoView({ behavior: 'smooth' }); });
+  // cuộn tới mục lục và đưa focus vào đó, để trình đọc màn hình cũng nhảy theo
+  $('#tocJump')?.addEventListener('click', (e) => { e.preventDefault(); $('#muc-luc').scrollIntoView(); $('#h-toc').focus({ preventScroll: true }); });
   await refreshSaveBtn(book);
 }
 
@@ -312,20 +340,26 @@ async function refreshSaveBtn(book) {
   const btn = $('#saveBtn');
   if (!btn) return;
   const saved = await isSaved(book);
-  btn.disabled = false;
+  btn.removeAttribute('aria-disabled');
   btn.innerHTML = saved ? '<span aria-hidden="true">✓</span> Đã lưu trên máy · Xoá' : '<span aria-hidden="true">⤓</span> Lưu để nghe ngoại tuyến';
   btn.onclick = async () => {
+    if (btn.getAttribute('aria-disabled') === 'true') return announce('Đang lưu, xin chờ.');
     const ready = readyUnits(book);
     if (saved) {
       for (const u of ready) await idb.del(unitKey(book.slug, u.no, voiceOf(u)));
       announce('Đã xoá bản lưu trên máy.');
       return refreshSaveBtn(book);
     }
-    btn.disabled = true;
+    // aria-disabled thay cho disabled: nút vẫn giữ focus nên trình đọc màn hình không bị lạc chỗ
+    btn.setAttribute('aria-disabled', 'true');
+    announce(`Đang lưu ${book.title}, ${ready.length > 1 ? ready.length + ' phần, ' : ''}xin chờ.`);
     try {
       await navigator.storage?.persist?.();
+      let told = 0;
       for (let i = 0; i < ready.length; i++) {
         btn.textContent = `Đang lưu ${i + 1}/${ready.length}…`;
+        const q = Math.floor((i / ready.length) * 4);          // báo tiến độ ở mỗi một phần tư
+        if (q > told) { told = q; announce(`Đã lưu ${i} trên ${ready.length} phần.`, false); }
         const u = ready[i], vid = voiceOf(u), src = u.voices[vid];
         const [data, blob] = await Promise.all([
           fetch(src.data).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }),
@@ -453,7 +487,7 @@ function toggleMark() {
 }
 
 // Trả lời câu hỏi "đang ở đâu": sách, phần, thời điểm, tốc độ, hẹn giờ.
-function whereAmI() {
+function whereAmI(extra = '') {
   if (!R.book || !R.unit) return;
   const many = R.book.units.length > 1;
   const ready = readyUnits(R.book);
@@ -465,7 +499,7 @@ function whereAmI() {
   ];
   if (sleepAtEnd) parts.push('Sẽ tự dừng khi hết phần này');
   else if (sleepEnd) parts.push(`Sẽ tự dừng sau ${Math.max(1, Math.ceil((sleepEnd - Date.now()) / 60000))} phút nữa`);
-  announce(parts.join('. ') + '.');
+  announce(parts.join('. ') + '.' + (typeof extra === 'string' ? extra : ''));
 }
 
 const R = { book: null, unit: null, voice: null, sents: [], cur: -1, objectUrl: null, token: 0, userScrollAt: 0, pendingSeek: null, quietSeek: false,
@@ -567,9 +601,11 @@ async function openReader(book, unitNo, keep = null) {
   else if (notice) announce(notice);
   setMediaSession();
   refreshMarkBtn();
+  renderSimple();
+  const force = R.forcePlay; R.forcePlay = false;
   const held = R.holdNext; R.holdNext = false;
   if (held) announce('Đã hết phần, tạm dừng theo hẹn giờ. Nhấn Phát để nghe phần tiếp theo.');
-  else if (keep ? keep.play : store.get('autoplay', '1') === '1') {
+  else if (keep ? keep.play : (force || store.get('autoplay', '1') === '1')) {
     // Chỉ nhắc nhấn Phát khi trình duyệt chặn tự phát. Lệnh phát bị ngắt vì người nghe đã rời
     // trang đọc hoặc đã mở phần khác (AbortError) thì không nói gì, kẻo đè lên thông báo đang hiện.
     audio.play().catch((e) => {
@@ -819,8 +855,15 @@ audio.addEventListener('loadedmetadata', () => {
   if (R.srcToken === R.token) R.ready = true;
   tick();
 });
-audio.addEventListener('play', () => { setPlayUi(true); cancelAnimationFrame(raf); loop(); });
-audio.addEventListener('pause', () => { setPlayUi(false); savePos(); tick(); });
+audio.addEventListener('play', () => { setPlayUi(true); cancelAnimationFrame(raf); loop(); renderSimple(); });
+audio.addEventListener('pause', () => { setPlayUi(false); savePos(); tick(); renderSimple(); });
+// mạng chậm: im lặng quá 3 giây thì nói rõ là đang tải, kẻo người nghe tưởng ứng dụng hỏng
+let waitTimer;
+audio.addEventListener('waiting', () => {
+  clearTimeout(waitTimer);
+  waitTimer = setTimeout(() => { if (!audio.paused && audio.readyState < 3) announce('Đang tải âm thanh, xin chờ.'); }, 3000);
+});
+for (const ev of ['playing', 'pause', 'emptied']) audio.addEventListener(ev, () => clearTimeout(waitTimer));
 audio.addEventListener('timeupdate', () => { tick(); if (Math.floor(audio.currentTime) % 3 === 0) savePos(); });
 audio.addEventListener('seeked', tick);
 audio.addEventListener('error', () => {
@@ -1033,12 +1076,127 @@ if (SpeechRec) {
   });
 }
 
+// ================= CHẾ ĐỘ CHẠM ĐƠN GIẢN =================
+// Người khiếm thị không phải vuốt qua từng phần tử: cả màn hình là năm nút lớn ở vị trí cố định.
+// Hai trạng thái: đang chọn sách (lùi/tới chuyển qua từng cuốn) và đang nghe (lùi/tới 30 giây).
+const simpleBooks = () => (catalog?.books || []).filter((b) => !b.external && readyUnits(b).length);
+const simpleListening = () => document.body.dataset.view === 'reader' && !!R.book && !!R.unit;
+let sIdx = -1;
+function bookSpeech(b, i, n) {
+  const p = bookProgress(b), pct = Math.round(p * 100);
+  const state = p >= 0.995 ? 'đã nghe xong' : pct > 0 ? `đã nghe ${pct} phần trăm` : '';
+  return [b.title, b.creator, spoken(b.duration), state, `cuốn ${i + 1} trên ${n}`].filter(Boolean).join(', ') + '.';
+}
+const resumable = (b) => { const p = bookProgress(b); return !!getPos(b.slug) && p > 0.002 && p < 0.995; };
+function renderSimple() {
+  const on = simpleOn();
+  document.body.classList.toggle('simple', on);
+  $('#simple').hidden = !on;
+  $('#skip').hidden = on;
+  for (const v of $$('.view')) v.inert = on;      // phần giao diện đầy đủ nằm bên dưới: không cho focus lọt vào
+  if (!on || !catalog) return;
+  const books = simpleBooks();
+  const set = (id, text, icon) => { $(`${id} b`).textContent = text; if (icon) $(`${id} .ic`).textContent = icon; };
+  if (simpleListening()) {
+    const many = R.book.units.length > 1;
+    $('#sInfo').innerHTML = `<small>Đang nghe · chạm để nghe hướng dẫn</small><b>${esc(R.book.title)}</b><span>${esc(many ? unitName(R.book, R.unit) : R.book.creator)}</span>`;
+    set('#sPrev', `Lùi ${TIME_STEP} giây`); set('#sNext', `Tới ${TIME_STEP} giây`);
+    set('#sMain', audio.paused ? 'Phát' : 'Tạm dừng', audio.paused ? '▶' : '⏸');
+    $('#sAlt').textContent = 'Chọn sách khác';
+    sIdx = Math.max(0, books.findIndex((b) => b.slug === R.book.slug));
+  } else if (books.length) {
+    if (sIdx < 0) {       // lần đầu: cuốn nghe gần đây nhất
+      const recent = books.filter((b) => getPos(b.slug)).sort((a, b) => getPos(b.slug).at - getPos(a.slug).at)[0];
+      sIdx = recent ? books.indexOf(recent) : 0;
+    }
+    sIdx = Math.min(sIdx, books.length - 1);
+    const b = books[sIdx];
+    $('#sInfo').innerHTML = `<small>Cuốn ${sIdx + 1} trên ${books.length} · chạm để nghe hướng dẫn</small><b>${esc(b.title)}</b><span>${esc(b.creator)} · ${spoken(b.duration)}</span>`;
+    set('#sPrev', 'Sách trước'); set('#sNext', 'Sách sau');
+    set('#sMain', resumable(b) ? 'Nghe tiếp' : 'Nghe cuốn này', '▶');
+    $('#sAlt').textContent = 'Giao diện đầy đủ';
+  }
+}
+function setSimple(on) {
+  store.set('simple', on ? '1' : '0');
+  if (!on) { try { speechSynthesis.cancel(); } catch { /* không có */ } audio.volume = 1; }
+  renderSimple();
+  if (on) {
+    $('#sMain').focus();
+    const books = simpleBooks();
+    announce('Chế độ chạm đơn giản. Chạm một lần là chạy. Nút trên cùng nhắc lại bạn đang ở đâu. Ở giữa, bên trái là lùi, bên phải là tới. '
+      + 'Nút lớn nhất bên dưới là nghe hoặc tạm dừng. Nút dưới cùng để đổi sách. '
+      + (simpleListening() ? `Đang mở ${R.book.title}.` : `Đang chọn: ${bookSpeech(books[sIdx], sIdx, books.length)}`), false);
+  } else {
+    $(`#view-${document.body.dataset.view} h1`)?.focus({ preventScroll: true });
+    announce('Đã về giao diện đầy đủ.');
+  }
+}
+function simpleStep(dir) {
+  const books = simpleBooks();
+  if (!simpleListening()) {
+    if (!books.length) return;
+    sIdx = (sIdx + dir + books.length) % books.length;       // hết danh sách thì vòng lại
+    renderSimple();
+    return announce(bookSpeech(books[sIdx], sIdx, books.length), false);
+  }
+  // đang nghe: lùi khi mới ở đầu phần thì về phần trước; tới sát cuối phần thì ứng dụng tự sang phần sau
+  const ready = readyUnits(R.book);
+  if (dir < 0 && R.ready && audio.currentTime < 3 && ready.findIndex((u) => u.no === R.unit.no) > 0) { R.forcePlay = !audio.paused; return gotoUnit(-1); }
+  stepTime(dir);
+}
+function simpleMain() {
+  if (simpleListening()) {
+    if (audio.paused) audio.play().catch(() => {});
+    else { audio.pause(); announce('Tạm dừng.', false); }
+    return;
+  }
+  const b = simpleBooks()[sIdx];
+  if (!b) return;
+  const ready = readyUnits(b), pos = getPos(b.slug);
+  let unit = pos && ready.some((u) => u.no === pos.unit) ? pos.unit : ready[0].no;
+  if (bookProgress(b) >= 0.995) { unit = ready[0].no; store.set('pos:' + b.slug, { unit, t: 0, at: Date.now() }); }   // nghe xong rồi: nghe lại từ đầu
+  R.forcePlay = true;
+  const target = `#/r/${b.slug}/${unit}`;
+  if (location.hash === target) route(); else location.hash = target;
+}
+function simpleAlt() {
+  if (!simpleListening()) return setSimple(false);
+  location.hash = '#/';
+}
+// Nút trên cùng là hướng dẫn sử dụng bằng lời, nghe lại được bất cứ lúc nào: đang ở đâu, rồi từng nút làm gì.
+$('#sInfo').addEventListener('click', () => {
+  if (simpleListening()) {
+    return whereAmI(` Hướng dẫn: ở giữa màn hình, bên trái là lùi ${TIME_STEP} giây, bên phải là tới ${TIME_STEP} giây. `
+      + `Nút lớn nhất bên dưới là ${audio.paused ? 'phát' : 'tạm dừng'}. Nút dưới cùng để chọn sách khác. Ứng dụng tự nhớ chỗ bạn đang nghe.`);
+  }
+  const books = simpleBooks();
+  if (books.length) {
+    announce(`Đang chọn sách. ${bookSpeech(books[sIdx], sIdx, books.length)} Hướng dẫn: ở giữa màn hình, bên trái là sách trước, bên phải là sách sau. `
+      + 'Nút lớn nhất bên dưới để nghe cuốn đang chọn. Nút dưới cùng để về giao diện đầy đủ. Mỗi nút chỉ cần chạm một lần.', false);
+  }
+});
+$('#sPrev').addEventListener('click', () => simpleStep(-1));
+$('#sNext').addEventListener('click', () => simpleStep(1));
+$('#sMain').addEventListener('click', simpleMain);
+$('#sAlt').addEventListener('click', simpleAlt);
+$('#simpleOn').addEventListener('click', () => setSimple(true));
+
 // ================= ĐỊNH TUYẾN =================
 function show(view, title, heading) {
   for (const v of ['library', 'book', 'reader']) $(`#view-${v}`).hidden = v !== view;
   document.body.dataset.view = view;
   document.title = title;
   window.scrollTo(0, 0);
+  const was = simpleOn() && $('#sAlt').textContent === 'Chọn sách khác';
+  renderSimple();
+  if (simpleOn()) {
+    // vừa rời trang đọc về chỗ chọn sách: nói rõ đang ở đâu
+    const books = simpleBooks();
+    if (was && view !== 'reader' && books.length) announce(`Chọn sách. ${bookSpeech(books[sIdx], sIdx, books.length)}`, false);
+    if (!$('#simple').contains(document.activeElement)) requestAnimationFrame(() => $('#sMain').focus());
+    return;
+  }
   // đưa focus vào tiêu đề để trình đọc màn hình đọc tên màn hình mới
   requestAnimationFrame(() => heading?.focus({ preventScroll: true }));
 }
@@ -1083,6 +1241,8 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) saveP
     renderVoiceOptions();
   } catch {
     $('#librarySummary').textContent = 'Không tải được danh mục sách. Hãy kiểm tra kết nối mạng rồi tải lại trang.';
+    store.set('simple', '0');
+    announce($('#librarySummary').textContent);
     return;
   }
   await route();

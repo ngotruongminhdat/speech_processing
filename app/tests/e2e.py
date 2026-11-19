@@ -39,6 +39,12 @@ def chromium_path():
     return hits[-1] if hits else None
 
 
+async def slow_route(route):
+    """Làm chậm việc tải, để kịp thấy trạng thái đang lưu."""
+    await asyncio.sleep(0.15)
+    await route.continue_()
+
+
 AUDIO = "document.querySelector('#audio')"
 STATE = f"""(() => {{ const a = {AUDIO}; const on = document.querySelector('.s.on');
   return {{ t: a.currentTime, paused: a.paused, rate: a.playbackRate, dur: a.duration, src: a.currentSrc,
@@ -62,6 +68,9 @@ async def main():
           start() { setTimeout(() => { this.onstart && this.onstart();
             setTimeout(() => { this.onresult && this.onresult({ results: [[{ transcript: 'Thạch Lam.' }]] }); this.onend && this.onend(); }, 150); }, 20); }
           abort() { this.onend && this.onend(); } };""")
+        if "127.0.0.1" in BASE:
+            # bìa cuốn giữa kỳ chỉ có trên trang đã deploy (thư mục build/), bản lắp cục bộ không có
+            await ctx.route("**/build/cover.jpg", lambda r: r.fulfill(status=200, content_type="image/jpeg", body=b""))
         page = await ctx.new_page()
         errors = []
         page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
@@ -98,7 +107,7 @@ async def main():
               await page.locator(".metas div").count() >= 6 and await page.locator('.cta a[href*="-daisy-"]').count() == 1)
 
         print("Trang đọc và đồng bộ câu")
-        await page.click(".cta .btn.primary")
+        await page.click("#bookHero .btn.primary")
         await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentTime > 1.6", timeout=20000)
         s = await page.evaluate(STATE)
         check("chạm Bắt đầu nghe là phát ngay", not s["paused"], f"t={s['t']:.2f}s")
@@ -522,7 +531,7 @@ async def main():
             check("nút tải DAISY đi theo giọng đang chọn",
                   (await page.get_attribute('.cta a[href*="-daisy-"]', "href")).endswith("-daisy-nu.zip"))
 
-            await page.click(".cta .btn.primary")
+            await page.click("#bookHero .btn.primary")
             await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentSrc.includes('/nu/')", timeout=20000)
             check("mặc định phát giọng nữ", True)
             nam = await page.evaluate(
@@ -658,7 +667,7 @@ async def main():
             await page.wait_for_selector("#h-book")
             check("cuốn đã đủ giọng chính thì trang bìa không còn ghi chú hay nút chọn giọng (khi chỉ có một giọng)",
                   len(prim) > 1 or (await page.locator(".voice-note").count() == 0 and await page.locator(".voice-pick").count() == 0))
-            await page.click(".cta .btn.primary")
+            await page.click("#bookHero .btn.primary")
             await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentSrc.includes('/{P['id']}/')", timeout=20000)
             byline = await page.inner_text("#readerByline")
             check("cuốn đã có giọng chính thì phát đúng giọng đó", P["name"] in byline, byline)
@@ -688,6 +697,91 @@ async def main():
                   ("Nhấn nút Phát" in said) == expect, said or "(trống)")
             await page.evaluate(f"{AUDIO}.pause()")
 
+        print("Chế độ chạm đơn giản")
+        await page.goto(BASE + "#/")
+        await page.wait_for_selector("#bookList li")
+        said = lambda: page.evaluate("window.snSpoken.at(-1) || ''")
+        await page.click("#simpleOn")
+        await page.wait_for_timeout(300)
+        box = await page.evaluate("""() => { const r = (s) => document.querySelector(s).getBoundingClientRect();
+          const ids = ['#sInfo', '#sPrev', '#sNext', '#sMain', '#sAlt'];
+          return { min: Math.min(...ids.map((s) => Math.min(r(s).width, r(s).height))), main: r('#sMain').height,
+                   scroll: getComputedStyle(document.body).overflow !== 'hidden' || r('#simple').height > innerHeight + 1, focus: document.activeElement.id,
+                   inert: [...document.querySelectorAll('.view')].every((v) => v.inert),
+                   n: document.querySelectorAll('#simple button').length }; }""")
+        check("chế độ đơn giản: năm nút lớn phủ kín màn hình, không phải cuộn",
+              box["n"] == 5 and box["min"] >= 90 and box["main"] >= 250 and not box["scroll"], str(box))
+        check("chế độ đơn giản: giao diện đầy đủ bên dưới bị khoá, focus nằm ở nút lớn", box["inert"] and box["focus"] == "sMain")
+        s0 = await said()
+        check("chế độ đơn giản: vừa bật là tự đọc cách dùng và cuốn đang chọn", "Chạm một lần là chạy" in s0 and "Đang chọn:" in s0 and "trên 14" in s0, s0[-70:])
+        import re
+        at = int(re.search(r"cuốn (\d+) trên 14", s0).group(1))
+        wrap = lambda k: (k - 1) % 14 + 1
+        await page.click("#sNext")
+        await page.wait_for_timeout(150)
+        s1 = await said()
+        await page.click("#sPrev")
+        await page.click("#sPrev")
+        await page.wait_for_timeout(150)
+        s2 = await said()
+        check("chế độ đơn giản: chạm Sách sau, Sách trước thì đọc tên từng cuốn",
+              f"cuốn {wrap(at + 1)} trên 14" in s1 and f"cuốn {wrap(at - 1)} trên 14" in s2, f"{s1} | {s2}")
+        for _ in range(14):
+            if "Chí Phèo" in await page.inner_text("#sInfo b"):
+                break
+            await page.click("#sNext")
+        await page.click("#sMain")
+        await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentSrc.includes('chi-pheo')", timeout=20000)
+        check("chế độ đơn giản: một lần chạm nút lớn là sách phát", "/r/chi-pheo/" in page.url
+              and (await page.inner_text("#sMain b")) == "Tạm dừng" and (await page.inner_text("#sNext b")) == "Tới 30 giây")
+        await page.wait_for_function(f"{AUDIO}.currentTime > 0.3")
+        t0 = (await page.evaluate(STATE))["t"]
+        await page.click("#sNext")
+        await page.wait_for_timeout(200)
+        t1 = (await page.evaluate(STATE))["t"]
+        check("chế độ đơn giản: khi đang nghe, nút tới nhảy 30 giây", 29 < t1 - t0 < 32, f"{t0:.1f} -> {t1:.1f}")
+        await page.click("#sInfo")
+        await page.wait_for_timeout(150)
+        w = await said()
+        check("chế độ đơn giản: nút trên cùng đọc đang ở đâu rồi đọc hướng dẫn", "Chí Phèo" in w and "Đang nghe tới" in w and "Hướng dẫn:" in w, w)
+        await page.click("#sMain")
+        await page.wait_for_timeout(200)
+        check("chế độ đơn giản: chạm lần nữa thì tạm dừng và nói Tạm dừng",
+              (await page.evaluate(STATE))["paused"] and (await said()) == "Tạm dừng." and (await page.inner_text("#sMain b")) == "Phát")
+        await page.click("#sAlt")
+        await page.wait_for_function("location.hash === '#/'")
+        await page.wait_for_timeout(300)
+        b = await said()
+        check("chế độ đơn giản: Chọn sách khác đưa về chỗ chọn sách, nhớ cuốn vừa nghe",
+              b.startswith("Chọn sách. Chí Phèo") and (await page.inner_text("#sMain b")) == "Nghe tiếp", b)
+        await page.reload()
+        await page.wait_for_function("document.querySelector('#sInfo').textContent.includes('Chí Phèo')", timeout=10000)
+        check("chế độ đơn giản: mở lại ứng dụng vẫn ở chế độ đơn giản", not await page.evaluate("document.querySelector('#simple').hidden"))
+        await page.click("#sAlt")
+        out = await spoken_live(page, "giao diện đầy đủ")
+        check("chế độ đơn giản: thoát được về giao diện đầy đủ",
+              await page.evaluate("document.querySelector('#simple').hidden && !document.querySelector('#view-library').inert")
+              and "giao diện đầy đủ" in out and await page.evaluate("document.activeElement.id") == "h-library", out)
+        await page.evaluate("localStorage.removeItem('sn:pos:chi-pheo')")
+
+        print("Trang bìa với trình đọc màn hình")
+        await page.goto(BASE + "#/b/truyen-kieu")
+        await page.wait_for_selector("#tocJump")
+        await page.click("#tocJump")
+        check("nút Mục lục đưa focus tới mục lục", await page.evaluate("document.activeElement.id") == "h-toc")
+        await page.route("**/books/truyen-kieu/**", lambda r: asyncio.ensure_future(slow_route(r)))
+        await page.click("#saveBtn")
+        st = await spoken_live(page, "Đang lưu Truyện Kiều")
+        check("bấm Lưu thì báo ngay là đang lưu, nút vẫn giữ focus",
+              "Đang lưu Truyện Kiều, 13 phần" in st and await page.evaluate("document.activeElement.id") == "saveBtn"
+              and await page.get_attribute("#saveBtn", "aria-disabled") == "true", st)
+        prog = await spoken_live(page, "trên 13 phần", 30000)
+        check("đang lưu thì báo tiến độ bằng lời", "trên 13 phần" in prog, prog)
+        await page.wait_for_function("document.querySelector('#saveBtn').innerText.includes('Đã lưu')", timeout=120000)
+        await page.unroute("**/books/truyen-kieu/**")
+        await page.click("#saveBtn")
+        await spoken_live(page, "Đã xoá bản lưu")
+
         print("Lưu ngoại tuyến")
         await page.goto(BASE + f"#/b/{SLUG}")
         await page.wait_for_selector("#saveBtn")
@@ -695,7 +789,7 @@ async def main():
         await page.wait_for_function("document.querySelector('#saveBtn').innerText.includes('Đã lưu')", timeout=60000)
         check("lưu sách vào máy", True)
         await ctx.set_offline(True)
-        await page.click(".cta .btn.primary")
+        await page.click("#bookHero .btn.primary")
         await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentSrc.startsWith('blob:')", timeout=15000)
         t0 = (await page.evaluate(STATE))["t"]
         await page.wait_for_timeout(1500)
