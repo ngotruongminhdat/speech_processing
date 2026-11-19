@@ -1082,6 +1082,25 @@ if (SpeechRec) {
 const simpleBooks = () => (catalog?.books || []).filter((b) => !b.external && readyUnits(b).length);
 const simpleListening = () => document.body.dataset.view === 'reader' && !!R.book && !!R.unit;
 let sIdx = -1;
+// Khi đang nghe, hai nút lùi và tới có ba chức năng, đổi bằng nút ở góc dưới bên trái:
+// nhảy 30 giây, chọn phần, đổi tốc độ. Nhờ vậy vẫn chỉ có vài nút lớn mà đủ việc.
+const S_MODES = {
+  time: { name: `${TIME_STEP} giây`, prev: `Lùi ${TIME_STEP} giây`, next: `Tới ${TIME_STEP} giây` },
+  unit: { name: 'Chọn phần', prev: 'Phần trước', next: 'Phần sau' },
+  rate: { name: 'Tốc độ', prev: 'Chậm hơn', next: 'Nhanh hơn' },
+};
+let sMode = 'time';
+const sModeList = () => (R.book && readyUnits(R.book).length > 1 ? ['time', 'unit', 'rate'] : ['time', 'rate']);
+const sModeNow = () => (sModeList().includes(sMode) ? sMode : 'time');
+function cycleSimpleMode() {
+  const list = sModeList();
+  sMode = list[(list.indexOf(sModeNow()) + 1) % list.length];
+  renderSimple();
+  const m = S_MODES[sMode];
+  const extra = sMode === 'unit' ? ` Đang ở phần ${readyUnits(R.book).findIndex((u) => u.no === R.unit.no) + 1} trên ${readyUnits(R.book).length}.`
+    : sMode === 'rate' ? ` Tốc độ hiện tại ${String(audio.playbackRate).replace('.', ' phẩy ')} lần.` : '';
+  announce(`Hai nút lùi và tới bây giờ là ${m.prev.toLowerCase()} và ${m.next.toLowerCase()}.${extra}`, false);
+}
 function bookSpeech(b, i, n) {
   const p = bookProgress(b), pct = Math.round(p * 100);
   const state = p >= 0.995 ? 'đã nghe xong' : pct > 0 ? `đã nghe ${pct} phần trăm` : '';
@@ -1100,7 +1119,11 @@ function renderSimple() {
   if (simpleListening()) {
     const many = R.book.units.length > 1;
     $('#sInfo').innerHTML = `<small>Đang nghe · chạm để nghe hướng dẫn</small><b>${esc(R.book.title)}</b><span>${esc(many ? unitName(R.book, R.unit) : R.book.creator)}</span>`;
-    set('#sPrev', `Lùi ${TIME_STEP} giây`); set('#sNext', `Tới ${TIME_STEP} giây`);
+    const m = S_MODES[sModeNow()];
+    set('#sPrev', m.prev); set('#sNext', m.next);
+    $('#sMode').hidden = false;
+    $('#sMode').innerHTML = `<small>Lùi và tới theo</small>${m.name}`;
+    $('#sMode').setAttribute('aria-label', `Đổi chức năng hai nút lùi và tới. Đang là ${m.prev.toLowerCase()} và ${m.next.toLowerCase()}`);
     set('#sMain', audio.paused ? 'Phát' : 'Tạm dừng', audio.paused ? '▶' : '⏸');
     $('#sAlt').textContent = 'Chọn sách khác';
     sIdx = Math.max(0, books.findIndex((b) => b.slug === R.book.slug));
@@ -1113,6 +1136,7 @@ function renderSimple() {
     const b = books[sIdx];
     $('#sInfo').innerHTML = `<small>Cuốn ${sIdx + 1} trên ${books.length} · chạm để nghe hướng dẫn</small><b>${esc(b.title)}</b><span>${esc(b.creator)} · ${spoken(b.duration)}</span>`;
     set('#sPrev', 'Sách trước'); set('#sNext', 'Sách sau');
+    $('#sMode').hidden = true;
     set('#sMain', resumable(b) ? 'Nghe tiếp' : 'Nghe cuốn này', '▶');
     $('#sAlt').textContent = 'Giao diện đầy đủ';
   }
@@ -1125,7 +1149,7 @@ function setSimple(on) {
     $('#sMain').focus();
     const books = simpleBooks();
     announce('Chế độ chạm đơn giản. Chạm một lần là chạy. Nút trên cùng nhắc lại bạn đang ở đâu. Ở giữa, bên trái là lùi, bên phải là tới. '
-      + 'Nút lớn nhất bên dưới là nghe hoặc tạm dừng. Nút dưới cùng để đổi sách. '
+      + 'Nút lớn nhất bên dưới là nghe hoặc tạm dừng. Hàng dưới cùng để đổi sách, và khi đang nghe có thêm nút chọn phần và đổi tốc độ. '
       + (simpleListening() ? `Đang mở ${R.book.title}.` : `Đang chọn: ${bookSpeech(books[sIdx], sIdx, books.length)}`), false);
   } else {
     $(`#view-${document.body.dataset.view} h1`)?.focus({ preventScroll: true });
@@ -1139,6 +1163,14 @@ function simpleStep(dir) {
     sIdx = (sIdx + dir + books.length) % books.length;       // hết danh sách thì vòng lại
     renderSimple();
     return announce(bookSpeech(books[sIdx], sIdx, books.length), false);
+  }
+  if (sModeNow() === 'rate') return nudgeRate(dir);
+  if (sModeNow() === 'unit') {
+    const list = readyUnits(R.book), to = list[list.findIndex((u) => u.no === R.unit.no) + dir];
+    R.forcePlay = !audio.paused;
+    if (to) announce(`${unitName(R.book, to)}, phần ${list.indexOf(to) + 1} trên ${list.length}.`, false);
+    else R.forcePlay = false;
+    return gotoUnit(dir);       // hết phần để đi thì gotoUnit tự báo
   }
   // đang nghe: lùi khi mới ở đầu phần thì về phần trước; tới sát cuối phần thì ứng dụng tự sang phần sau
   const ready = readyUnits(R.book);
@@ -1157,6 +1189,7 @@ function simpleMain() {
   let unit = pos && ready.some((u) => u.no === pos.unit) ? pos.unit : ready[0].no;
   if (bookProgress(b) >= 0.995) { unit = ready[0].no; store.set('pos:' + b.slug, { unit, t: 0, at: Date.now() }); }   // nghe xong rồi: nghe lại từ đầu
   R.forcePlay = true;
+  sMode = 'time';             // mở sách nào cũng bắt đầu với lùi và tới 30 giây
   const target = `#/r/${b.slug}/${unit}`;
   if (location.hash === target) route(); else location.hash = target;
 }
@@ -1167,8 +1200,10 @@ function simpleAlt() {
 // Nút trên cùng là hướng dẫn sử dụng bằng lời, nghe lại được bất cứ lúc nào: đang ở đâu, rồi từng nút làm gì.
 $('#sInfo').addEventListener('click', () => {
   if (simpleListening()) {
-    return whereAmI(` Hướng dẫn: ở giữa màn hình, bên trái là lùi ${TIME_STEP} giây, bên phải là tới ${TIME_STEP} giây. `
-      + `Nút lớn nhất bên dưới là ${audio.paused ? 'phát' : 'tạm dừng'}. Nút dưới cùng để chọn sách khác. Ứng dụng tự nhớ chỗ bạn đang nghe.`);
+    const m = S_MODES[sModeNow()];
+    return whereAmI(` Hướng dẫn: ở giữa màn hình, bên trái là ${m.prev.toLowerCase()}, bên phải là ${m.next.toLowerCase()}. `
+      + `Nút lớn nhất bên dưới là ${audio.paused ? 'phát' : 'tạm dừng'}. Ở hàng dưới cùng, nút bên trái đổi chức năng hai nút lùi và tới: `
+      + `${sModeList().map((k) => S_MODES[k].name.toLowerCase()).join(', ')}. Nút bên phải để chọn sách khác. Ứng dụng tự nhớ chỗ bạn đang nghe.`);
   }
   const books = simpleBooks();
   if (books.length) {
@@ -1180,6 +1215,7 @@ $('#sPrev').addEventListener('click', () => simpleStep(-1));
 $('#sNext').addEventListener('click', () => simpleStep(1));
 $('#sMain').addEventListener('click', simpleMain);
 $('#sAlt').addEventListener('click', simpleAlt);
+$('#sMode').addEventListener('click', cycleSimpleMode);
 $('#simpleOn').addEventListener('click', () => setSimple(true));
 
 // ================= ĐỊNH TUYẾN =================
