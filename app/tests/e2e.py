@@ -708,7 +708,7 @@ async def main():
           return { min: Math.min(...ids.map((s) => Math.min(r(s).width, r(s).height))), main: r('#sMain').height,
                    scroll: getComputedStyle(document.body).overflow !== 'hidden' || r('#simple').height > innerHeight + 1, focus: document.activeElement.id,
                    inert: [...document.querySelectorAll('.view')].every((v) => v.inert),
-                   n: document.querySelectorAll('#simple button').length }; }""")
+                   n: document.querySelectorAll('#simple button:not([hidden])').length }; }""")
         check("chế độ đơn giản: năm nút lớn phủ kín màn hình, không phải cuộn",
               box["n"] == 5 and box["min"] >= 90 and box["main"] >= 250 and not box["scroll"], str(box))
         check("chế độ đơn giản: giao diện đầy đủ bên dưới bị khoá, focus nằm ở nút lớn", box["inert"] and box["focus"] == "sMain")
@@ -763,6 +763,54 @@ async def main():
               await page.evaluate("document.querySelector('#simple').hidden && !document.querySelector('#view-library').inert")
               and "giao diện đầy đủ" in out and await page.evaluate("document.activeElement.id") == "h-library", out)
         await page.evaluate("localStorage.removeItem('sn:pos:chi-pheo')")
+
+        print("Chế độ chạm đơn giản: chọn phần và đổi tốc độ")
+        await page.goto(BASE + "#/")
+        await page.wait_for_selector("#bookList li")
+        await page.evaluate("localStorage.removeItem('sn:rate:truyen-kieu'); localStorage.setItem('sn:rate', '1')")
+        await page.click("#simpleOn")
+        check("khi chọn sách chưa có nút đổi chức năng", await page.is_hidden("#sMode"))
+        for _ in range(14):
+            if "Truyện Kiều" in await page.inner_text("#sInfo b"):
+                break
+            await page.click("#sNext")
+        await page.click("#sMain")
+        await page.wait_for_function(f"!{AUDIO}.paused && {AUDIO}.currentSrc.includes('truyen-kieu')", timeout=20000)
+        u0 = int(page.url.rsplit("/", 1)[1])
+        await page.click("#sMode")
+        await page.wait_for_timeout(150)
+        m = await said()
+        check("nút đổi chức năng: lần chạm đầu chuyển sang chọn phần và nói rõ",
+              "phần trước và phần sau" in m and "trên 13" in m and (await page.inner_text("#sNext b")) == "Phần sau", m)
+        await page.click("#sNext")
+        await page.wait_for_function(f"location.hash.endsWith('/truyen-kieu/{u0 + 1}') && !{AUDIO}.paused && {AUDIO}.currentSrc.includes('/{u0 + 1:02d}.mp3')", timeout=20000)
+        sp = await page.evaluate("window.snSpoken.slice(-2).join(' | ')")
+        check("chọn phần: một lần chạm sang phần sau, đọc tên phần và phát tiếp", f"phần {u0 + 1} trên 13" in sp, sp)
+        await page.click("#sPrev")
+        await page.wait_for_function(f"location.hash.endsWith('/truyen-kieu/{u0}') && !{AUDIO}.paused", timeout=20000)
+        check("chọn phần: nút bên trái về phần trước", True)
+        await page.click("#sMode")
+        await page.wait_for_timeout(150)
+        m = await said()
+        check("nút đổi chức năng: lần chạm thứ hai chuyển sang tốc độ", "chậm hơn và nhanh hơn" in m and "Tốc độ hiện tại 1 lần" in m, m)
+        await page.click("#sNext")
+        await page.wait_for_timeout(150)
+        r = (await page.evaluate(STATE))["rate"]
+        check("đổi tốc độ: nút bên phải nhanh hơn một nấc và đọc tốc độ mới", r == 1.25 and "1 phẩy 25" in await said(), f"{r}; {await said()}")
+        await page.click("#sPrev")
+        await page.click("#sPrev")
+        await page.wait_for_timeout(150)
+        check("đổi tốc độ: nút bên trái chậm hơn", (await page.evaluate(STATE))["rate"] == 0.75)
+        await page.click("#sNext")
+        await page.click("#sMode")
+        await page.wait_for_timeout(150)
+        check("nút đổi chức năng: chạm lần nữa quay về 30 giây", (await page.inner_text("#sNext b")) == "Tới 30 giây" and "30 giây" in await said())
+        fit = await page.evaluate("""() => ['#sMode', '#sAlt'].map((s) => { const r = document.querySelector(s).getBoundingClientRect(); return Math.min(r.width, r.height); })""")
+        check("hai nút hàng dưới vẫn đủ lớn", min(fit) >= 60, str(fit))
+        await page.click("#sAlt")
+        await page.wait_for_function("location.hash === '#/'")
+        await page.click("#sAlt")
+        await page.evaluate("localStorage.removeItem('sn:pos:truyen-kieu'); localStorage.removeItem('sn:rate:truyen-kieu'); localStorage.setItem('sn:rate', '1.5')")
 
         print("Trang bìa với trình đọc màn hình")
         await page.goto(BASE + "#/b/truyen-kieu")

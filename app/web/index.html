@@ -22,13 +22,14 @@
 <div id="toast" popover="manual" aria-hidden="true"></div>
 
 <!-- ============ CHẾ ĐỘ CHẠM ĐƠN GIẢN ============
-     Năm nút rất lớn ở vị trí cố định, chạm một lần là chạy, không phải vuốt hay cuộn.
+     Vài nút rất lớn ở vị trí cố định, chạm một lần là chạy, không phải vuốt hay cuộn.
      Ứng dụng tự đọc lời nhắc nên dùng được cả khi không bật trình đọc màn hình. -->
 <div id="simple" role="region" aria-label="Chế độ chạm đơn giản" hidden>
   <button type="button" id="sInfo"></button>
   <button type="button" id="sPrev"><span class="ic" aria-hidden="true">⏮</span><b></b></button>
   <button type="button" id="sNext"><span class="ic" aria-hidden="true">⏭</span><b></b></button>
   <button type="button" id="sMain"><span class="ic" aria-hidden="true">▶</span><b></b></button>
+  <button type="button" id="sMode" hidden></button>
   <button type="button" id="sAlt"></button>
 </div>
 
@@ -224,8 +225,9 @@
     <h3>Chế độ chạm đơn giản</h3>
     <ul>
       <li>Ở Thư viện, nút Chế độ chạm đơn giản đổi cả màn hình thành năm nút rất lớn, luôn nằm một chỗ. Chạm một lần là chạy, không cần vuốt, không cần cuộn. Ứng dụng tự đọc lời nhắc.</li>
-      <li>Từ trên xuống: nút trên cùng đọc bạn đang ở đâu và đọc lại hướng dẫn, nghe bao nhiêu lần cũng được. Hàng giữa có nút lùi bên trái và nút tới bên phải. Nút lớn nhất ở dưới là Nghe hoặc Tạm dừng. Nút dưới cùng để đổi sách hoặc về giao diện đầy đủ.</li>
+      <li>Từ trên xuống: nút trên cùng đọc bạn đang ở đâu và đọc lại hướng dẫn, nghe bao nhiêu lần cũng được. Hàng giữa có nút lùi bên trái và nút tới bên phải. Nút lớn nhất ở dưới là Nghe hoặc Tạm dừng. Hàng dưới cùng: bên phải để đổi sách hoặc về giao diện đầy đủ; khi đang nghe, bên trái có thêm nút đổi chức năng.</li>
       <li>Khi chọn sách, nút lùi và tới chuyển qua từng cuốn và đọc tên sách. Khi đang nghe, hai nút này lùi và tới 30 giây.</li>
+      <li>Muốn chọn phần hoặc đổi tốc độ: chạm nút đổi chức năng ở góc dưới bên trái. Mỗi lần chạm, hai nút lùi và tới đổi lần lượt thành 30 giây, phần trước và phần sau, chậm hơn và nhanh hơn. Ứng dụng đọc rõ chức năng vừa chọn.</li>
       <li>Nếu bạn đang bật TalkBack hoặc VoiceOver thì vẫn dùng được: rê ngón tay tới nút rồi nhấp đôi như thường lệ.</li>
     </ul>
     <h3>Chọn sách</h3>
