@@ -46,7 +46,7 @@ Cuối kỳ:   Wikisource ─► văn bản ─► TTS ─► DAISY 3 + mốc t�
 | Đồng bộ văn bản với âm thanh | Mức đoạn văn | Mức câu |
 | Trình phát | Một trang HTML sinh sẵn cho mỗi chương | Một ứng dụng thiết kế cho điện thoại và trình đọc màn hình |
 | Ngoại tuyến | Không | Lưu sách trên máy, cài lên màn hình chính |
-| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 112 kiểm thử giao diện |
+| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 138 kiểm thử giao diện |
 
 Các script sinh DAISY (`gen_smil.py`, `gen_opf_ncx.py`, `validate_daisy.py`) và ngôn ngữ thiết kế giao diện được kế thừa từ giữa kỳ. Phần còn lại là làm mới.
 
@@ -215,15 +215,17 @@ Thư viện gồm 15 đầu sách. Mười bốn cuốn dựng trong đồ án n
 
 **Nghe và điều hướng**
 - Văn bản hiện cùng âm thanh, câu đang đọc được tô sáng; chạm vào một câu để nghe từ câu đó.
-- Một cặp nút lùi và tới với **bước nhảy chọn được**: câu, đoạn, 30 giây, phần. Đây là cách các máy đọc sách cho người mù (Victor Reader Stream) tổ chức điều hướng.
-- Tốc độ từ 0,75 đến 3 lần, nhớ riêng cho từng cuốn. Người dùng trình đọc màn hình lâu năm thường nghe ở tốc độ rất cao.
+- Một cặp nút lùi và tới với **bước nhảy chọn được**: câu, đoạn, 30 giây, phần, dấu trang. Đây là cách các máy đọc sách cho người mù (Victor Reader Stream) tổ chức điều hướng.
+- Tốc độ từ 0,5 đến 3 lần, nhớ riêng cho từng cuốn. Người dùng trình đọc màn hình lâu năm thường nghe ở tốc độ rất cao.
 - Nhớ vị trí từng cuốn, mục "Nghe tiếp" ở đầu thư viện; tự chuyển sang phần sau khi hết phần.
 - Đánh dấu trang, có thể kèm ghi chú bằng giọng nói của người dùng.
 - Nút **Quay lại** để hủy cú nhảy vừa rồi, kể cả khi đã nhảy sang phần khác.
 - Hẹn giờ tắt theo phút hoặc khi hết phần.
+- **Lùi về đầu câu khi nghe tiếp:** sau khi dừng hơn 20 giây hoặc khi mở lại sách, ứng dụng phát lại từ đầu câu đang nghe dở (câu mới nghe chưa tới 2 giây thì lùi thêm một câu) để người nghe bắt lại mạch. Nhờ có mốc thời gian từng câu nên lùi theo câu, không lùi theo số giây cố định như BARD Mobile. Tắt được trong Cài đặt.
+- **Tìm trong sách:** ở trang bìa, gõ một từ hoặc một câu, không cần gõ dấu; ứng dụng tìm trong văn bản của mọi phần, báo số câu tìm thấy bằng lời và mở đúng câu được chọn.
 
 **Dùng không cần nhìn**
-- **Chế độ chạm đơn giản:** trình đọc màn hình bắt người dùng vuốt qua từng phần tử rồi nhấp đôi, nên một trang nhiều nút rất tốn thao tác. Chế độ này thay cả màn hình bằng năm hoặc sáu nút rất lớn ở vị trí cố định (nhắc lại và hướng dẫn, lùi, tới, nghe hoặc tạm dừng, đổi sách), chạm một lần là chạy, không cuộn, không vuốt. Khi đang nghe có thêm một nút đổi chức năng của hai nút lùi và tới giữa ba mức: 30 giây, chọn phần, đổi tốc độ; đây là cách máy đọc sách Victor Reader giữ ít phím mà đủ việc. Ứng dụng tự đọc lời nhắc bằng giọng tiếng Việt của máy (Web Speech API) và vặn nhỏ tiếng sách trong lúc đọc, nên dùng được cả khi không bật trình đọc màn hình. Lựa chọn được ghi nhớ cho lần mở sau.
+- **Chế độ chạm đơn giản:** trình đọc màn hình bắt người dùng vuốt qua từng phần tử rồi nhấp đôi, nên một trang nhiều nút rất tốn thao tác. Chế độ này thay cả màn hình bằng năm hoặc sáu nút rất lớn ở vị trí cố định (nhắc lại và hướng dẫn, lùi, tới, nghe hoặc tạm dừng, đổi sách), chạm một lần là chạy, không cuộn, không vuốt. Khi đang nghe có thêm một nút đổi chức năng của hai nút lùi và tới giữa năm mức: 30 giây, chọn phần, đổi tốc độ, dấu trang (đánh dấu và đi tới dấu trang), hẹn giờ tắt; đây là cách máy đọc sách Victor Reader giữ ít phím mà đủ việc. Ứng dụng tự đọc lời nhắc bằng giọng tiếng Việt của máy (Web Speech API) và vặn nhỏ tiếng sách trong lúc đọc, nên dùng được cả khi không bật trình đọc màn hình. Lựa chọn được ghi nhớ cho lần mở sau.
 - Mọi nút có nhãn bằng lời; mọi thay đổi trạng thái (đổi bước nhảy, tới đầu hoặc cuối sách, đã đánh dấu) được báo qua vùng thông báo cho trình đọc màn hình, kèm tiếng báo hiệu ngắn có thể tắt.
 - Nút **Đang ở đâu** đọc tên sách, tên phần, thời điểm, thời gian còn lại và tốc độ.
 - Thứ tự đọc của trang đặt nút điều khiển trước nội dung sách, để người dùng trình đọc màn hình không phải vuốt qua cả chương mới tới nút phát.
@@ -239,12 +241,12 @@ Thư viện gồm 15 đầu sách. Mười bốn cuốn dựng trong đồ án n
 - Điều khiển phát từ màn hình khóa và tai nghe (Media Session), có ảnh bìa.
 - Lưu từng cuốn để nghe khi mất mạng (âm thanh lưu trong IndexedDB); cài lên màn hình chính.
 
-Danh sách tính năng điều hướng được lập bằng cách đối chiếu với BARD Mobile, Legimus, Voice Dream Reader, Victor Reader Stream và các tiêu chí của DAISY Consortium, rồi bổ sung những gì còn thiếu (17/11).
+Danh sách tính năng điều hướng được lập bằng cách đối chiếu với BARD Mobile, Legimus, Voice Dream Reader, Victor Reader Stream và các tiêu chí của DAISY Consortium, rồi bổ sung những gì còn thiếu (17/11). Lần đối chiếu thứ hai (20/11, thêm Dolphin EasyReader) bổ sung bước nhảy theo dấu trang, tốc độ 0,5 lần, lùi về đầu câu khi nghe tiếp, tìm trong sách, và đưa dấu trang cùng hẹn giờ tắt vào chế độ chạm đơn giản. Những gì các ứng dụng đó có mà Sách Nói chưa có: chỉnh âm sắc, ra lệnh bằng giọng nói khi đang nghe, mở sách của riêng người dùng.
 
 ### 4.4. Kiểm thử
 
 - **Cấu trúc DAISY:** `validate_daisy.py` kiểm tra chéo cho từng phần của từng cuốn: mọi đoạn trong DTBook có mốc trong SMIL, mốc thời gian tăng dần và nằm trong thời lượng file âm thanh, OPF và NCX khớp nhau. Mọi phần đã dựng đều qua.
-- **Giao diện:** 112 kiểm thử đầu-cuối chạy trên Chromium qua Playwright ở kích thước màn hình điện thoại (`app/tests/e2e.py`). Chúng kiểm tra hành vi thật chứ không chỉ sự tồn tại của nút: ví dụ nhảy 30 giây thì thời điểm phát tăng trong khoảng 29,5 đến 32 giây; chọn thể loại "Thơ" thì thư viện chỉ còn đúng các tập thơ; ghi âm ghi chú bằng micro giả rồi kiểm tra dữ liệu âm thanh đã nằm trong bộ nhớ của máy.
+- **Giao diện:** 138 kiểm thử đầu-cuối chạy trên Chromium qua Playwright ở kích thước màn hình điện thoại (`app/tests/e2e.py`). Chúng kiểm tra hành vi thật chứ không chỉ sự tồn tại của nút: ví dụ nhảy 30 giây thì thời điểm phát tăng trong khoảng 29,5 đến 32 giây; chọn thể loại "Thơ" thì thư viện chỉ còn đúng các tập thơ; ghi âm ghi chú bằng micro giả rồi kiểm tra dữ liệu âm thanh đã nằm trong bộ nhớ của máy.
 - **Giới hạn của kiểm thử tự động:** nó xác nhận nhãn, vai trò, thứ tự và thông báo có mặt trong trang, không xác nhận TalkBack hay VoiceOver đọc chúng ra sao. Việc này chưa được làm (mục 6).
 
 ---
