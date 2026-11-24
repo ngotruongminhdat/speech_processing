@@ -120,16 +120,23 @@ const spokenLog = (window.snSpoken = []);      // để kiểm thử xem đã đ
 let synthVoices = [];
 function loadVoices() { try { synthVoices = speechSynthesis.getVoices() || []; } catch { synthVoices = []; } }
 if ('speechSynthesis' in window) { loadVoices(); speechSynthesis.addEventListener?.('voiceschanged', loadVoices); }
+function viVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  if (!synthVoices.length) loadVoices();       // nhiều trình duyệt nạp danh sách giọng chậm
+  return synthVoices.find((v) => /^vi([-_]|$)/i.test(v.lang)) || null;
+}
 function speak(msg) {
   spokenLog.push(msg);
   if (!('speechSynthesis' in window) || !window.SpeechSynthesisUtterance) return false;
-  const vi = synthVoices.find((v) => /^vi/i.test(v.lang));
-  if (synthVoices.length && !vi) return false;
+  // Chỉ đọc khi chắc chắn máy có giọng tiếng Việt. Không có (hoặc danh sách giọng chưa nạp xong) mà vẫn đọc
+  // thì trình duyệt lấy giọng mặc định, thường là giọng tiếng Anh, đọc chữ Việt nghe không ra gì.
+  const vi = viVoice();
+  if (!vi) return false;
   try {
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(msg);
     u.lang = 'vi-VN';
-    if (vi) u.voice = vi;
+    u.voice = vi;
     const restore = () => { if (!speechSynthesis.speaking) audio.volume = 1; };
     u.onstart = () => { audio.volume = 0.25; };
     u.onend = restore; u.onerror = restore;
@@ -138,6 +145,7 @@ function speak(msg) {
   } catch { return false; }
 }
 const simpleOn = () => store.get('simple', '0') === '1';
+const NO_VI_VOICE = 'Máy này chưa có giọng đọc tiếng Việt nên ứng dụng không tự đọc lời nhắc được. Hãy cài giọng tiếng Việt trong phần cài đặt chuyển văn bản thành giọng nói của máy, hoặc bật TalkBack hay VoiceOver.';
 
 function announce(msg, visible = true) {
   if (simpleOn() && speak(msg)) return;
@@ -145,7 +153,7 @@ function announce(msg, visible = true) {
   el.textContent = '';
   clearTimeout(liveTimer);
   liveTimer = setTimeout(() => { el.textContent = msg; }, 60);
-  if (visible) toast(msg);
+  if (visible || simpleOn()) toast(msg);      // chế độ đơn giản mà máy không tự đọc được: luôn hiện bằng chữ
 }
 
 // ---------- tiếng báo hiệu ----------
@@ -1241,6 +1249,7 @@ const resumable = (b) => { const p = bookProgress(b); return !!getPos(b.slug) &&
 function renderSimple() {
   const on = simpleOn();
   document.body.classList.toggle('simple', on);
+  document.body.classList.toggle('novoice', on && !viVoice());      // máy không tự đọc được: hiện lời nhắc bằng chữ
   $('#simple').hidden = !on;
   $('#skip').hidden = on;
   for (const v of $$('.view')) v.inert = on;      // phần giao diện đầy đủ nằm bên dưới: không cho focus lọt vào
@@ -1279,7 +1288,7 @@ function setSimple(on) {
   if (on) {
     $('#sMain').focus();
     const books = simpleBooks();
-    announce('Chế độ chạm đơn giản. Chạm một lần là chạy. Nút trên cùng nhắc lại bạn đang ở đâu. Ở giữa, bên trái là lùi, bên phải là tới. '
+    announce((viVoice() ? '' : NO_VI_VOICE + ' ') + 'Chế độ chạm đơn giản. Chạm một lần là chạy. Nút trên cùng nhắc lại bạn đang ở đâu. Ở giữa, bên trái là lùi, bên phải là tới. '
       + 'Nút lớn nhất bên dưới là nghe hoặc tạm dừng. Hàng dưới cùng để đổi sách, và khi đang nghe có thêm nút đổi chức năng: chọn phần, tốc độ, dấu trang, hẹn giờ tắt. '
       + (simpleListening() ? `Đang mở ${R.book.title}.` : `Đang chọn: ${bookSpeech(books[sIdx], sIdx, books.length)}`), false);
   } else {
