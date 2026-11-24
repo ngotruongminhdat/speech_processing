@@ -350,7 +350,7 @@ dialog.set-panel::backdrop{background:rgba(0,0,0,.28)}
   #sMode small{display:none}
 }
 body.simple{overflow:hidden}
-body.simple #progress,body.simple:not(.novoice) #toast{display:none !important}
+body.simple #progress{display:none !important}
 body.simple #toast{z-index:60}
 
 /* ================= ĐIỆN THOẠI VÀ MÁY TÍNH BẢNG ================= */

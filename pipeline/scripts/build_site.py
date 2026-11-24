@@ -100,6 +100,9 @@ def main(legacy_totto: bool):
         shutil.rmtree(SITE)
     shutil.copytree(WEB, SITE)
     (SITE / ".nojekyll").write_text("")          # GitHub Pages: phát nguyên trạng, không qua Jekyll
+    # lời nhắc thu sẵn của chế độ chạm đơn giản (build_prompts.py), nếu đã thu
+    if (REPO / "prompts" / "index.json").exists():
+        shutil.copytree(REPO / "prompts", SITE / "prompts")
     # trang nghe thử so sánh giọng đọc (demo/make_listen_page.py), nếu đã tạo
     listen = REPO / "demo" / "outputs" / "nghe_thu"
     if (listen / "index.html").exists():

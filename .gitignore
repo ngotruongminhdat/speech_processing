@@ -12,5 +12,6 @@ books/*/dist/
 demo/outputs/
 models/
 site/
+prompts/
 .deploy/
 books/*/voices/

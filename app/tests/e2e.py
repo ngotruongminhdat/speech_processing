@@ -249,7 +249,7 @@ async def main():
         await page.click("#where")
         w = await spoken_live(page, "Tốc độ")
         check("nút Đang ở đâu đọc tên sách, thời điểm, thời gian còn lại và tốc độ",
-              all(x in w for x in ("Lão Hạc", "Đang tạm dừng ở", "còn", "Tốc độ")), w)
+              all(x in w for x in ("Lão Hạc", "Đang tạm dừng ở", "Còn", "Tốc độ")), w)
 
         await page.select_option("#speed", "3")
         check("tốc độ lên được 3 lần", (await page.evaluate(STATE))["rate"] == 3)
@@ -702,7 +702,7 @@ async def main():
         await page.wait_for_selector("#bookList li")
         said = lambda: page.evaluate("window.snSpoken.at(-1) || ''")
         await page.click("#simpleOn")
-        await page.wait_for_timeout(300)
+        await page.wait_for_timeout(1500)
         box = await page.evaluate("""() => { const r = (s) => document.querySelector(s).getBoundingClientRect();
           const ids = ['#sInfo', '#sPrev', '#sNext', '#sMain', '#sAlt'];
           return { min: Math.min(...ids.map((s) => Math.min(r(s).width, r(s).height))), main: r('#sMain').height,
@@ -713,9 +713,9 @@ async def main():
               box["n"] == 5 and box["min"] >= 90 and box["main"] >= 250 and not box["scroll"], str(box))
         check("chế độ đơn giản: giao diện đầy đủ bên dưới bị khoá, focus nằm ở nút lớn", box["inert"] and box["focus"] == "sMain")
         s0 = await said()
-        check("chế độ đơn giản: vừa bật là tự đọc cách dùng và cuốn đang chọn", "Chạm một lần là chạy" in s0 and "Đang chọn:" in s0 and "trên 14" in s0, s0[-70:])
+        check("chế độ đơn giản: vừa bật là tự đọc cách dùng và cuốn đang chọn", "Chạm một lần là chạy" in s0 and "Đang chọn sách." in s0 and "trên 14" in s0, s0[-70:])
         import re
-        at = int(re.search(r"cuốn (\d+) trên 14", s0).group(1))
+        at = int(re.search(r"Cuốn (\d+) trên 14", s0).group(1))
         wrap = lambda k: (k - 1) % 14 + 1
         await page.click("#sNext")
         await page.wait_for_timeout(150)
@@ -725,7 +725,7 @@ async def main():
         await page.wait_for_timeout(150)
         s2 = await said()
         check("chế độ đơn giản: chạm Sách sau, Sách trước thì đọc tên từng cuốn",
-              f"cuốn {wrap(at + 1)} trên 14" in s1 and f"cuốn {wrap(at - 1)} trên 14" in s2, f"{s1} | {s2}")
+              f"Cuốn {wrap(at + 1)} trên 14" in s1 and f"Cuốn {wrap(at - 1)} trên 14" in s2, f"{s1} | {s2}")
         for _ in range(14):
             if "Chí Phèo" in await page.inner_text("#sInfo b"):
                 break
@@ -838,6 +838,15 @@ async def main():
         await page.click("#sMode")
         await page.wait_for_timeout(150)
         check("nút đổi chức năng: chạm lần nữa quay về 30 giây", (await page.inner_text("#sNext b")) == "Tới 30 giây" and "30 giây" in await said())
+        await page.click("#sInfo")
+        try:
+            await page.wait_for_function("!window.snPrompt.paused && window.snPrompt.currentSrc.startsWith('blob:')", timeout=5000)
+            playing = True
+        except Exception:
+            playing = False
+        check("lời nhắc phát bằng bản thu sẵn giọng đọc sách, không dùng giọng của máy", playing, await said())
+        miss = await page.evaluate("window.snMissing")
+        check("mọi lời nhắc trong chế độ đơn giản đều có bản thu sẵn", not miss, " | ".join(miss[:3]))
         fit = await page.evaluate("""() => ['#sMode', '#sAlt'].map((s) => { const r = document.querySelector(s).getBoundingClientRect(); return Math.min(r.width, r.height); })""")
         check("hai nút hàng dưới vẫn đủ lớn", min(fit) >= 60, str(fit))
         await page.click("#sAlt")
@@ -863,7 +872,7 @@ async def main():
         m = await spoken_live(page, "Dấu trang 3 trên 3")
         await page.wait_for_function(f"location.hash.endsWith('/truyen-kieu/2') && {AUDIO}.currentSrc.includes('/02.mp3') && !{AUDIO}.paused && {AUDIO}.currentTime > 0.2", timeout=20000)
         on = (await page.evaluate(STATE))["on"]
-        check("dấu trang ở phần khác: mở đúng phần, đúng câu, đọc tên phần", on == 3 and "Dấu trang 3 trên 3, " in m, f"câu {on}; {m}")
+        check("dấu trang ở phần khác: mở đúng phần, đúng câu, đọc tên phần", on == 3 and "Dấu trang 3 trên 3. " in m, f"câu {on}; {m}")
         await page.click("#next")
         m = await spoken_live(page, "Không còn dấu trang")
         check("hết dấu trang phía sau thì báo", "Không còn dấu trang nào phía sau" in m, m)
