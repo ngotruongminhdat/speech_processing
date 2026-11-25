@@ -66,6 +66,14 @@
     <h2 class="sr-only">Danh sách sách</h2>
     <ul id="bookList" class="shelf"></ul>
     <p id="noResult" class="empty" hidden>Không tìm thấy sách nào khớp.</p>
+    <!-- Nhập sách nói DAISY của riêng người dùng: đọc file zip ngay trên máy, không gửi đi đâu. -->
+    <section class="import" aria-labelledby="h-import">
+      <h2 id="h-import">Sách của bạn</h2>
+      <p>Bạn có sẵn sách nói DAISY trên máy? Nhập file zip của cuốn sách để nghe bằng ứng dụng này. Sách chỉ lưu trên máy bạn, không gửi đi đâu.</p>
+      <button class="btn ghost" id="importBtn" type="button"><span aria-hidden="true">＋</span> Nhập sách DAISY từ máy</button>
+      <input id="importFile" type="file" accept=".zip,application/zip,application/x-zip-compressed" hidden>
+      <p id="importInfo"></p>
+    </section>
   </main>
   <footer class="foot on-dark">
     <span class="mark" aria-hidden="true">◆</span><br>
@@ -263,6 +271,13 @@
       <li>Chọn một cuốn để mở trang bìa, rồi chọn Bắt đầu nghe hoặc Nghe tiếp. Ứng dụng tự nhớ chỗ bạn đang nghe dở.</li>
       <li>Nút Lưu để nghe ngoại tuyến tải cả cuốn về máy, sau đó nghe được khi không có mạng.</li>
       <li>Cuối trang bìa có ô Tìm trong sách: gõ một từ hoặc một câu, không cần gõ dấu, rồi chọn một kết quả để nghe từ đúng câu đó.</li>
+    </ul>
+    <h3>Nhập sách của bạn</h3>
+    <ul>
+      <li>Cuối Thư viện có mục Sách của bạn. Nhấn nút Nhập sách DAISY từ máy rồi chọn file zip chứa cuốn sách nói DAISY, chuẩn 2.02 hoặc chuẩn 3.</li>
+      <li>Nhập xong, cuốn sách nằm ở đầu Thư viện, thuộc thể loại Sách của bạn, và nghe được cả khi không có mạng. Sách chỉ lưu trên máy bạn.</li>
+      <li>Sách có kèm văn bản thì ứng dụng tô sáng theo lời đọc; sách chỉ có tiếng thì vẫn nghe, tua, đánh dấu và chọn phần như thường.</li>
+      <li>Muốn bỏ một cuốn đã nhập, mở trang bìa của nó rồi nhấn Xoá sách này khỏi máy.</li>
     </ul>
     <h3>Khi đang nghe</h3>
     <ul>
