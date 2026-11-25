@@ -235,6 +235,9 @@ h2.seg{font-size:calc(1.3rem * var(--rsize));font-weight:600;line-height:1.4;mar
 .dropcap::first-letter{float:left;font-size:3.4em;line-height:.82;padding:.04em .12em 0 0;color:var(--accent);font-weight:bold}
 .endmark{text-align:center;color:var(--ink-soft);margin-top:2.2rem;font-size:.8rem;letter-spacing:.5em}
 .footnote{font-size:.9em;color:var(--ink-soft);border-left:3px solid var(--accent);background:var(--accent-soft);margin-top:2rem}
+/* thơ: mỗi dòng thơ một dòng, không dàn đều hai lề, không chữ cái đầu phóng to */
+.seg.verse{white-space:pre-line;text-align:left;line-height:1.8}
+.seg.verse.dropcap::first-letter{float:none;font-size:1em;line-height:inherit;padding:0;color:inherit;font-weight:inherit}
 body.legible .seg{font-family:var(--ui);letter-spacing:.02em;word-spacing:.14em;line-height:2.15}
 body.legible .dropcap::first-letter{float:none;font-size:1em;color:inherit;padding:0;font-weight:inherit}
 

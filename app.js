@@ -917,14 +917,16 @@ function renderText(data) {
     const el = document.createElement(p.t === 'h1' ? 'h2' : 'p');
     el.className = 'seg' + (p.t === 'note' ? ' footnote' : '');
     if (p.t === 'p' && firstPara) { el.classList.add('dropcap'); firstPara = false; }
+    if (p.v) el.classList.add('verse');          // thơ: giữ chỗ xuống dòng của bản gốc
     p.s.forEach(([b, e, text], si) => {
       const span = document.createElement('span');
       span.className = 's';
       span.dataset.i = R.sents.length;
-      span.textContent = text;
+      const [, , , brk] = p.s[si];          // vị trí các dấu cách hiện thành xuống dòng
+      span.textContent = brk ? [...text].map((ch, i) => (brk.includes(i) ? '\n' : ch)).join('') : text;
       R.sents.push({ b, e, el: span, para: el });
       el.append(span);
-      if (si < p.s.length - 1) el.append(' ');
+      if (si < p.s.length - 1) el.append(brk?.includes(text.length) ? '\n' : ' ');
     });
     frag.append(el);
   });
@@ -1002,7 +1004,7 @@ function undoJump() {
   announce(`Đã quay lại ${spoken(u.t)}.`);
 }
 
-const sentText = (i) => (R.sents[i]?.el.classList.contains('s') ? R.sents[i].el.textContent : $('#h-reader').textContent);
+const sentText = (i) => (R.sents[i]?.el.classList.contains('s') ? R.sents[i].el.textContent.replace(/\s*\n\s*/g, ' ') : $('#h-reader').textContent);
 // Đang tạm dừng mà nhảy thì không có tiếng nào phát ra: đọc câu vừa tới để người nghe biết mình ở đâu,
 // và cũng là cách nghe lại từng câu bằng trình đọc màn hình.
 function tellSent(i) { if (audio.paused && R.sents[i]) announce(sentText(i), false); }
