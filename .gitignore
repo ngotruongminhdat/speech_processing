@@ -1,0 +1,17 @@
+_old_llm_project/
+.venv/
+__pycache__/
+*.pyc
+runs/
+.DS_Store
+*.wav
+*.mp3
+literature/papers/txt/
+books/*/build/
+books/*/dist/
+demo/outputs/
+models/
+site/
+prompts/
+.deploy/
+books/*/voices/

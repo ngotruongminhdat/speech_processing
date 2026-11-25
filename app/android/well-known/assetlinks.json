@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "io.github.ngotruongminhdat.sachnoi",
+    "sha256_cert_fingerprints": ["F2:6F:1B:F0:36:3F:6C:8B:DE:82:E3:7D:E4:38:E0:CB:A9:5C:64:E8:28:5F:A5:E0:7F:54:56:A1:5D:B4:3D:FB"]
+  }
+}]

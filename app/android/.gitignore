@@ -1,0 +1,6 @@
+node_modules/
+keystore-password.txt
+build.log
+# dự án Android do gen.js sinh lại được; chỉ giữ twa-manifest.json
+twa/*
+!twa/twa-manifest.json
