@@ -46,7 +46,7 @@ Cuối kỳ:   Wikisource ─► văn bản ─► TTS ─► DAISY 3 + mốc t�
 | Đồng bộ văn bản với âm thanh | Mức đoạn văn | Mức câu |
 | Trình phát | Một trang HTML sinh sẵn cho mỗi chương | Một ứng dụng thiết kế cho điện thoại và trình đọc màn hình |
 | Ngoại tuyến | Không | Lưu sách trên máy, cài lên màn hình chính |
-| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 138 kiểm thử giao diện |
+| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 158 kiểm thử giao diện |
 
 Các script sinh DAISY (`gen_smil.py`, `gen_opf_ncx.py`, `validate_daisy.py`) và ngôn ngữ thiết kế giao diện được kế thừa từ giữa kỳ. Phần còn lại là làm mới.
 
@@ -225,13 +225,14 @@ Thư viện gồm 15 đầu sách. Mười bốn cuốn dựng trong đồ án n
 - **Tìm trong sách:** ở trang bìa, gõ một từ hoặc một câu, không cần gõ dấu; ứng dụng tìm trong văn bản của mọi phần, báo số câu tìm thấy bằng lời và mở đúng câu được chọn.
 
 **Dùng không cần nhìn**
-- **Chế độ chạm đơn giản:** trình đọc màn hình bắt người dùng vuốt qua từng phần tử rồi nhấp đôi, nên một trang nhiều nút rất tốn thao tác. Chế độ này thay cả màn hình bằng năm hoặc sáu nút rất lớn ở vị trí cố định (nhắc lại và hướng dẫn, lùi, tới, nghe hoặc tạm dừng, đổi sách), chạm một lần là chạy, không cuộn, không vuốt. Khi đang nghe có thêm một nút đổi chức năng của hai nút lùi và tới giữa năm mức: 30 giây, chọn phần, đổi tốc độ, dấu trang (đánh dấu và đi tới dấu trang), hẹn giờ tắt; đây là cách máy đọc sách Victor Reader giữ ít phím mà đủ việc. Ứng dụng tự đọc lời nhắc và hướng dẫn bằng chính giọng đọc sách (Hoài My) và vặn nhỏ tiếng sách trong lúc đọc, nên dùng được cả khi không bật trình đọc màn hình. Bản đầu dùng giọng tiếng Việt của máy (Web Speech API), nhưng máy không cài giọng tiếng Việt thì trình duyệt đọc chữ Việt bằng giọng tiếng Anh. Vì vậy mọi lời nhắc được viết lại thành các câu ngắn lấy giá trị từ tập đếm được (tên sách, tên phần, số phút, tốc độ), khoảng 1.100 câu, thu sẵn bằng edge-tts (`pipeline/scripts/build_prompts.py`) và phát nối nhau; câu nào không có bản thu thì mới dùng giọng của máy, và máy không có giọng tiếng Việt thì hiện bằng chữ. Lựa chọn được ghi nhớ cho lần mở sau.
+- **Chế độ chạm đơn giản:** trình đọc màn hình bắt người dùng vuốt qua từng phần tử rồi nhấp đôi, nên một trang nhiều nút rất tốn thao tác. Chế độ này thay cả màn hình bằng năm hoặc sáu nút rất lớn ở vị trí cố định (nhắc lại và hướng dẫn, lùi, tới, nghe hoặc tạm dừng, đổi sách), chạm một lần là chạy, không cuộn, không vuốt. Khi đang nghe có thêm một nút đổi chức năng của hai nút lùi và tới giữa năm mức: 30 giây, chọn phần, đổi tốc độ, dấu trang (đánh dấu và đi tới dấu trang), hẹn giờ tắt; đây là cách máy đọc sách Victor Reader giữ ít phím mà đủ việc. Ứng dụng tự đọc lời nhắc và hướng dẫn bằng chính giọng đọc sách (Hoài My) và vặn nhỏ tiếng sách trong lúc đọc, nên dùng được cả khi không bật trình đọc màn hình. Bản đầu dùng giọng tiếng Việt của máy (Web Speech API), nhưng máy không cài giọng tiếng Việt thì trình duyệt đọc chữ Việt bằng giọng tiếng Anh. Vì vậy mọi lời nhắc được viết lại thành các câu ngắn lấy giá trị từ tập đếm được (tên sách, tên phần, số phút, tốc độ), khoảng 1.200 câu, thu sẵn bằng edge-tts (`pipeline/scripts/build_prompts.py`) và phát nối nhau; câu nào không có bản thu thì mới dùng giọng của máy, và máy không có giọng tiếng Việt thì hiện bằng chữ. Lựa chọn được ghi nhớ cho lần mở sau.
 - Mọi nút có nhãn bằng lời; mọi thay đổi trạng thái (đổi bước nhảy, tới đầu hoặc cuối sách, đã đánh dấu) được báo qua vùng thông báo cho trình đọc màn hình, kèm tiếng báo hiệu ngắn có thể tắt.
 - Nút **Đang ở đâu** đọc tên sách, tên phần, thời điểm, thời gian còn lại và tốc độ.
 - Thứ tự đọc của trang đặt nút điều khiển trước nội dung sách, để người dùng trình đọc màn hình không phải vuốt qua cả chương mới tới nút phát.
 - Đang tạm dừng mà nhảy câu thì ứng dụng đọc câu đó lên, cho phép dò từng câu.
 - Phím tắt cho mọi thao tác và một trang hướng dẫn trong ứng dụng.
 - Tìm sách bằng cách gõ tên, tác giả, thể loại, hoặc bằng giọng nói (nếu trình duyệt hỗ trợ nhận dạng tiếng nói); chọn thể loại từ danh sách.
+- **Điều khiển bằng giọng nói:** bấm nút micro một lần, nghe tiếng báo rồi nói một lệnh tiếng Việt: phát, tạm dừng, lùi hoặc tới kèm số giây hay số phút, câu trước, câu sau, phần trước, phần sau, phần số mấy, nhanh hơn, chậm hơn, đánh dấu, tới dấu trang, hẹn giờ kèm số phút, đang ở đâu, thư viện, mở kèm tên sách hoặc tên tác giả. Ứng dụng dùng nhận dạng tiếng nói của trình duyệt (Web Speech API, `vi-VN`) rồi tự hiểu lệnh bằng luật: so khớp từ khoá trên câu đã bỏ dấu để chịu được lỗi dấu, nhưng đọc số trên câu còn dấu để phân biệt "phần sáu" với "phần sau". Chọn cách bấm rồi nói thay vì luôn lắng nghe vì micro sẽ thu lẫn tiếng sách; trong lúc nghe lệnh sách tạm dừng rồi tự phát tiếp. Nút có ở giao diện đầy đủ và ở hàng dưới cùng của chế độ chạm đơn giản, nơi câu trả lời phát bằng bản thu sẵn giọng Hoài My. Tính năng cần mạng và chỉ hiện khi trình duyệt hỗ trợ.
 
 **Dùng với thị lực kém**
 - Ba nền (giấy, tối, tương phản cao), bốn cỡ chữ, một kiểu chữ dễ đọc; câu đang đọc được tô bằng một trong ba màu, gạch chân, hoặc không tô.
@@ -246,7 +247,7 @@ Danh sách tính năng điều hướng được lập bằng cách đối chi�
 ### 4.4. Kiểm thử
 
 - **Cấu trúc DAISY:** `validate_daisy.py` kiểm tra chéo cho từng phần của từng cuốn: mọi đoạn trong DTBook có mốc trong SMIL, mốc thời gian tăng dần và nằm trong thời lượng file âm thanh, OPF và NCX khớp nhau. Mọi phần đã dựng đều qua.
-- **Giao diện:** 138 kiểm thử đầu-cuối chạy trên Chromium qua Playwright ở kích thước màn hình điện thoại (`app/tests/e2e.py`). Chúng kiểm tra hành vi thật chứ không chỉ sự tồn tại của nút: ví dụ nhảy 30 giây thì thời điểm phát tăng trong khoảng 29,5 đến 32 giây; chọn thể loại "Thơ" thì thư viện chỉ còn đúng các tập thơ; ghi âm ghi chú bằng micro giả rồi kiểm tra dữ liệu âm thanh đã nằm trong bộ nhớ của máy.
+- **Giao diện:** 158 kiểm thử đầu-cuối chạy trên Chromium qua Playwright ở kích thước màn hình điện thoại (`app/tests/e2e.py`). Chúng kiểm tra hành vi thật chứ không chỉ sự tồn tại của nút: ví dụ nhảy 30 giây thì thời điểm phát tăng trong khoảng 29,5 đến 32 giây; chọn thể loại "Thơ" thì thư viện chỉ còn đúng các tập thơ; ghi âm ghi chú bằng micro giả rồi kiểm tra dữ liệu âm thanh đã nằm trong bộ nhớ của máy.
 - **Giới hạn của kiểm thử tự động:** nó xác nhận nhãn, vai trò, thứ tự và thông báo có mặt trong trang, không xác nhận TalkBack hay VoiceOver đọc chúng ra sao. Việc này chưa được làm (mục 6).
 
 ---
@@ -336,7 +337,7 @@ Kết luận của phần phân tích: với sách nói, tiêu chí xếp hạng
 ## 6. Hạn chế
 
 - **Chưa thử với người khiếm thị**, và chưa thử trên điện thoại thật với TalkBack hoặc VoiceOver. Mọi kiểm tra trợ năng đến nay là kiểm thử tự động trên Chromium ở kích thước màn hình điện thoại. Đây là hạn chế lớn nhất của đồ án.
-- Micro thật và nhận dạng tiếng nói thật (cho tìm kiếm và ghi chú bằng giọng nói) chưa được thử; kiểm thử dùng thiết bị giả.
+- Micro thật và nhận dạng tiếng nói thật (cho tìm kiếm, ra lệnh và ghi chú bằng giọng nói) chưa được thử; kiểm thử dùng thiết bị giả và đưa thẳng câu chữ vào bộ hiểu lệnh. Vì vậy chưa biết tỉ lệ nhận đúng lệnh khi người thật nói, nhất là trong môi trường ồn hoặc với giọng địa phương.
 - Giọng Hoài My chưa được nghe kiểm tra trên các thể loại mới thêm (thơ, văn bản có nhiều từ Hán Việt gạch nối).
 - Phép đo TTS chỉ trên một văn bản (20 đoạn của một truyện), một lần chạy cho mỗi giọng.
 - Chữ Hán, chữ Nôm và chú thích trong Truyền kỳ mạn lục, Việt Nam sử lược bị lược bỏ khi nhập; vài chỗ còn lỗi chính tả của bản số hóa trên Wikisource.

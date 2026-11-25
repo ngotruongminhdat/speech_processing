@@ -29,8 +29,9 @@
   <button type="button" id="sPrev"><span class="ic" aria-hidden="true">⏮</span><b></b></button>
   <button type="button" id="sNext"><span class="ic" aria-hidden="true">⏭</span><b></b></button>
   <button type="button" id="sMain"><span class="ic" aria-hidden="true">▶</span><b></b></button>
-  <button type="button" id="sMode" hidden></button>
-  <button type="button" id="sAlt"></button>
+  <button type="button" id="sMode" class="sb" hidden></button>
+  <button type="button" id="sVoice" class="sb" aria-label="Ra lệnh bằng giọng nói" aria-pressed="false" hidden><span class="ic" aria-hidden="true">🎤</span><b>Nói lệnh</b></button>
+  <button type="button" id="sAlt" class="sb"></button>
 </div>
 
 <!-- ============ THƯ VIỆN ============ -->
@@ -44,7 +45,7 @@
       <p class="desc" id="librarySummary"></p>
       <div class="cta simple-cta">
         <button class="btn primary" type="button" id="simpleOn" aria-describedby="simpleHint">Chế độ chạm đơn giản</button>
-        <p id="simpleHint">Năm nút lớn, chạm một lần là chạy, không cần vuốt. Ứng dụng tự đọc lời nhắc bằng chính giọng đọc sách.</p>
+        <p id="simpleHint">Vài nút lớn, chạm một lần là chạy, không cần vuốt. Ứng dụng tự đọc lời nhắc bằng chính giọng đọc sách.</p>
       </div>
       <div class="cta" id="resume" hidden></div>
       <div class="search">
@@ -56,7 +57,9 @@
         <label for="genre" class="genre-label">Thể loại</label>
         <select id="genre"><option value="">Tất cả thể loại</option></select>
       </div>
-      <div class="cta"><button class="btn ghost" type="button" data-help>Hướng dẫn sử dụng</button></div>
+      <!-- Điều khiển bằng giọng nói: bấm một lần rồi nói một lệnh. Nút chỉ hiện khi trình duyệt nhận dạng được giọng nói. -->
+      <div class="cta"><button class="btn ghost" type="button" data-voice aria-pressed="false" hidden><span aria-hidden="true">🎤</span> Ra lệnh bằng giọng nói</button>
+        <button class="btn ghost" type="button" data-help>Hướng dẫn sử dụng</button></div>
     </div>
   </header>
   <main class="shelf-wrap">
@@ -76,6 +79,7 @@
   <header class="hero">
     <div class="bg" id="bookBg"></div><div class="tint"></div>
     <a class="pill-btn top-left" href="#/"><span aria-hidden="true">‹</span> Thư viện</a>
+    <button class="pill-btn top-right" type="button" data-voice aria-label="Ra lệnh bằng giọng nói" aria-pressed="false" hidden><span aria-hidden="true">🎤</span> Ra lệnh</button>
     <div class="hero-in" id="bookHero"></div>
   </header>
   <main class="wrap" id="bookToc"></main>
@@ -141,6 +145,7 @@
           <option value="3">3 lần</option>
         </select>
         <button class="pbtn" id="where" type="button"><span aria-hidden="true">📍</span><span class="lbl"> Đang ở đâu</span></button>
+        <button class="pbtn" type="button" data-voice aria-label="Ra lệnh bằng giọng nói" aria-pressed="false" hidden><span aria-hidden="true">🎤</span><span class="lbl"> Ra lệnh</span></button>
         <button class="pbtn" id="mark" type="button" aria-pressed="false"><span aria-hidden="true">🔖</span><span class="lbl"> Đánh dấu</span></button>
         <button class="pbtn" id="undo" type="button" aria-disabled="true"><span aria-hidden="true">↩</span><span class="lbl"> Quay lại</span></button>
         <a class="pbtn" id="dl" href="#" download><span aria-hidden="true">⬇</span><span class="lbl"> DAISY</span></a>
@@ -231,12 +236,19 @@
     <p>Sách Nói là thư viện sách nói tiếng Việt, dùng được với TalkBack trên Android và VoiceOver trên iPhone.</p>
     <h3>Chế độ chạm đơn giản</h3>
     <ul>
-      <li>Ở Thư viện, nút Chế độ chạm đơn giản đổi cả màn hình thành năm nút rất lớn, luôn nằm một chỗ. Chạm một lần là chạy, không cần vuốt, không cần cuộn. Ứng dụng tự đọc lời nhắc bằng chính giọng đọc sách.</li>
+      <li>Ở Thư viện, nút Chế độ chạm đơn giản đổi cả màn hình thành vài nút rất lớn, luôn nằm một chỗ. Chạm một lần là chạy, không cần vuốt, không cần cuộn. Ứng dụng tự đọc lời nhắc bằng chính giọng đọc sách.</li>
       <li>Từ trên xuống: nút trên cùng đọc bạn đang ở đâu và đọc lại hướng dẫn, nghe bao nhiêu lần cũng được. Hàng giữa có nút lùi bên trái và nút tới bên phải. Nút lớn nhất ở dưới là Nghe hoặc Tạm dừng. Hàng dưới cùng: bên phải để đổi sách hoặc về giao diện đầy đủ; khi đang nghe, bên trái có thêm nút đổi chức năng.</li>
       <li>Khi chọn sách, nút lùi và tới chuyển qua từng cuốn và đọc tên sách. Khi đang nghe, hai nút này lùi và tới 30 giây.</li>
       <li>Muốn chọn phần hoặc đổi tốc độ: chạm nút đổi chức năng ở góc dưới bên trái. Mỗi lần chạm, hai nút lùi và tới đổi lần lượt thành 30 giây, phần trước và phần sau, chậm hơn và nhanh hơn, dấu trang, hẹn giờ tắt. Ứng dụng đọc rõ chức năng vừa chọn.</li>
       <li>Ở chức năng dấu trang, nút bên phải đánh dấu chỗ đang nghe, nút bên trái đưa bạn lần lượt tới từng dấu trang. Ở chức năng hẹn giờ tắt, nút bên phải thêm giờ, nút bên trái bớt giờ.</li>
       <li>Nếu bạn đang bật TalkBack hoặc VoiceOver thì vẫn dùng được: rê ngón tay tới nút rồi nhấp đôi như thường lệ.</li>
+    </ul>
+    <h3>Điều khiển bằng giọng nói</h3>
+    <ul>
+      <li>Nhấn nút Ra lệnh bằng giọng nói, có ở Thư viện, ở trang bìa và ngay sau nút Đang ở đâu khi đang nghe, hoặc nhấn phím V trên máy tính. Nghe một tiếng báo ngắn rồi nói một lệnh. Trong chế độ chạm đơn giản, đó là nút Nói lệnh ở hàng dưới cùng.</li>
+      <li>Các lệnh: phát, tạm dừng, lùi 30 giây, tới 2 phút, câu trước, câu sau, đọc lại, phần trước, phần sau, phần 3, nhanh hơn, chậm hơn, tốc độ bình thường, đánh dấu, tới dấu trang, hẹn giờ 20 phút, tắt hẹn giờ, đang ở đâu, thư viện.</li>
+      <li>Muốn mở sách, nói mở và tên sách hoặc tên tác giả, ví dụ: mở Truyện Kiều. Nói trợ giúp để nghe lại danh sách lệnh.</li>
+      <li>Trong lúc nghe lệnh, sách tạm dừng rồi tự phát tiếp. Tính năng này cần mạng và cần bạn cho phép dùng micro; trình duyệt không hỗ trợ thì nút không hiện.</li>
     </ul>
     <h3>Chọn sách</h3>
     <ul>
@@ -266,7 +278,7 @@
       <li>Mũi tên trái và phải: lùi và tới theo bước nhảy đã chọn. Page Up và Page Down: đoạn trước và đoạn sau.</li>
       <li>J và L: lùi và tới 30 giây. Dấu ngoặc vuông mở và đóng: phần trước và phần sau.</li>
       <li>Mũi tên lên và xuống: tăng và giảm tốc độ.</li>
-      <li>I: đang ở đâu. M: đánh dấu. Z: quay lại chỗ trước cú nhảy. Dấu hỏi: mở hướng dẫn này.</li>
+      <li>I: đang ở đâu. M: đánh dấu. Z: quay lại chỗ trước cú nhảy. V: ra lệnh bằng giọng nói. Dấu hỏi: mở hướng dẫn này.</li>
     </ul>
     <button class="set-close" value="close">Đóng hướng dẫn</button>
   </form>

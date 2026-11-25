@@ -63,10 +63,10 @@ async def main():
                                                 "--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"])
         ctx = await browser.new_context(viewport={"width": 390, "height": 844}, locale="vi-VN",
                                         service_workers="block", permissions=["microphone"])
-        # Nhận dạng giọng nói giả: "nghe" được đúng một câu rồi dừng, để thử nút tìm bằng giọng nói.
+        # Nhận dạng giọng nói giả: "nghe" được đúng một câu (window.snSay, mặc định là tên một tác giả) rồi dừng.
         await ctx.add_init_script("""window.webkitSpeechRecognition = window.SpeechRecognition = class {
           start() { setTimeout(() => { this.onstart && this.onstart();
-            setTimeout(() => { this.onresult && this.onresult({ results: [[{ transcript: 'Thạch Lam.' }]] }); this.onend && this.onend(); }, 150); }, 20); }
+            setTimeout(() => { this.onresult && this.onresult({ results: [[{ transcript: window.snSay || 'Thạch Lam.' }]] }); this.onend && this.onend(); }, 150); }, 20); }
           abort() { this.onend && this.onend(); } };""")
         if "127.0.0.1" in BASE:
             # bìa cuốn giữa kỳ chỉ có trên trang đã deploy (thư mục build/), bản lắp cục bộ không có
@@ -704,13 +704,13 @@ async def main():
         await page.click("#simpleOn")
         await page.wait_for_timeout(1500)
         box = await page.evaluate("""() => { const r = (s) => document.querySelector(s).getBoundingClientRect();
-          const ids = ['#sInfo', '#sPrev', '#sNext', '#sMain', '#sAlt'];
+          const ids = ['#sInfo', '#sPrev', '#sNext', '#sMain', '#sVoice', '#sAlt'];
           return { min: Math.min(...ids.map((s) => Math.min(r(s).width, r(s).height))), main: r('#sMain').height,
                    scroll: getComputedStyle(document.body).overflow !== 'hidden' || r('#simple').height > innerHeight + 1, focus: document.activeElement.id,
                    inert: [...document.querySelectorAll('.view')].every((v) => v.inert),
                    n: document.querySelectorAll('#simple button:not([hidden])').length }; }""")
-        check("chế độ đơn giản: năm nút lớn phủ kín màn hình, không phải cuộn",
-              box["n"] == 5 and box["min"] >= 90 and box["main"] >= 250 and not box["scroll"], str(box))
+        check("chế độ đơn giản: sáu nút lớn phủ kín màn hình, không phải cuộn",
+              box["n"] == 6 and box["min"] >= 90 and box["main"] >= 250 and not box["scroll"], str(box))
         check("chế độ đơn giản: giao diện đầy đủ bên dưới bị khoá, focus nằm ở nút lớn", box["inert"] and box["focus"] == "sMain")
         s0 = await said()
         check("chế độ đơn giản: vừa bật là tự đọc cách dùng và cuốn đang chọn", "Chạm một lần là chạy" in s0 and "Đang chọn sách." in s0 and "trên 14" in s0, s0[-70:])
@@ -975,6 +975,112 @@ async def main():
         info = await spoken_live(page, "ít nhất hai")
         check("gõ quá ngắn thì nhắc", "ít nhất hai chữ cái" in info, info)
         await page.evaluate("localStorage.removeItem('sn:pos:truyen-kieu')")
+
+        print("Điều khiển bằng giọng nói")
+        async def until(expr, timeout=10000):
+            try:
+                await page.wait_for_function(expr, timeout=timeout)
+                return True
+            except Exception:
+                return False
+        cmd = lambda t: page.evaluate("(t) => window.snCommand(t)", t)
+        playing = f"!{AUDIO}.paused && {AUDIO}.currentTime > 0.3"
+        await page.goto(BASE + "#/")
+        await page.evaluate("for (const k of Object.keys(localStorage)) if (/^sn:(pos|marks|rate):/.test(k)) localStorage.removeItem(k); localStorage.setItem('sn:rate', '1')")
+        await page.wait_for_selector("#bookList li")
+        check("giao diện đầy đủ có nút ra lệnh bằng giọng nói",
+              await page.is_visible("#view-library [data-voice]") and "Ra lệnh bằng giọng nói" in await page.inner_text("#view-library [data-voice]"))
+        await page.evaluate("window.snSay = 'Mở Truyện Kiều.'")
+        await page.click("#view-library [data-voice]")
+        opened = await until("location.hash.startsWith('#/r/truyen-kieu/')") and await until(playing, 20000)
+        check("bấm nút micro rồi nói mở và tên sách: mở đúng cuốn và phát luôn, có tiếng báo đang nghe",
+              opened and "listen" in await page.evaluate("window.snCues"), await page.evaluate("location.hash"))
+        r = await cmd("tạm dừng")
+        check("lệnh tạm dừng", r == "pause" and (await page.evaluate(STATE))["paused"], r)
+        t0 = (await page.evaluate(STATE))["t"]
+        await cmd("tới 1 phút")
+        await cmd("lùi hai mươi giây")
+        s = await page.evaluate(STATE)
+        check("lệnh tới 1 phút rồi lùi hai mươi giây: số đọc bằng chữ số hay bằng chữ đều hiểu", abs(s["t"] - (t0 + 40)) < 1.5 and s["paused"], f"{t0:.1f} -> {s['t']:.1f}")
+        await cmd("phát")
+        await until(playing)
+        t1 = (await page.evaluate(STATE))["t"]
+        await cmd("lùi 10 giây")
+        s = await page.evaluate(STATE)
+        check("đang phát mà ra lệnh thì sách tự phát tiếp sau lệnh", not s["paused"] and t1 - 11 < s["t"] < t1 - 8, f"{t1:.1f} -> {s['t']:.1f}")
+        await cmd("nhanh hơn")
+        fast = (await page.evaluate(STATE))["rate"]
+        await cmd("tốc độ một phẩy năm")
+        mid = (await page.evaluate(STATE))["rate"]
+        await cmd("tốc độ bình thường")
+        check("lệnh tốc độ: nhanh hơn, một phẩy năm, bình thường", (fast, mid, (await page.evaluate(STATE))["rate"]) == (1.25, 1.5, 1), f"{fast}, {mid}")
+        await cmd("đánh dấu")
+        n1 = await page.evaluate("JSON.parse(localStorage.getItem('sn:marks:truyen-kieu') || '[]').length")
+        await cmd("đánh dấu")
+        again = await spoken_live(page, "đã có dấu trang")
+        await cmd("bỏ dấu trang")
+        n2 = await page.evaluate("JSON.parse(localStorage.getItem('sn:marks:truyen-kieu') || '[]').length")
+        check("lệnh đánh dấu không bỏ nhầm dấu trang đã có, lệnh bỏ dấu trang thì bỏ", n1 == 1 and "đã có dấu trang" in again and n2 == 0, f"{n1}, {n2}, {again}")
+        await cmd("hẹn giờ 20 phút")
+        info = await page.inner_text("#sleepInfo")
+        await cmd("tắt hẹn giờ")
+        check("lệnh hẹn giờ 20 phút rồi tắt hẹn giờ", "20 phút" in info and await page.inner_text("#sleepInfo") == "", info)
+        await cmd("phần sau")
+        nxt = await until("location.hash === '#/r/truyen-kieu/2'") and await until(playing, 20000)
+        await cmd("phần sáu")
+        six = await until("location.hash === '#/r/truyen-kieu/6'")
+        check("phần sau là phần kế tiếp, phần sáu là phần số 6, sách vẫn phát", nxt and six, await page.evaluate("location.hash"))
+        await until(playing, 20000)
+        await cmd("phần 99")
+        none = await spoken_live(page, "không có phần đó")
+        check("phần không có thì nói rõ", "Cuốn này không có phần đó." in none, none)
+        await cmd("đang ở đâu")
+        where = await spoken_live(page, "Truyện Kiều")
+        check("lệnh đang ở đâu", "Truyện Kiều" in where and "phần 6 trên" in where, where)
+        r = await cmd("hôm nay trời đẹp")
+        unknown = await spoken_live(page, "Chưa hiểu lệnh")
+        check("câu không phải lệnh: nhắc lại điều đã nghe và gợi ý lệnh, sách vẫn phát",
+              r == "unknown" and "Bạn nói: hôm nay trời đẹp. Chưa hiểu lệnh." in unknown and not (await page.evaluate(STATE))["paused"], unknown)
+        await cmd("thư viện")
+        back = await until("location.hash === '#/' && document.body.dataset.view === 'library'")
+        r = await cmd("phát")
+        need = await spoken_live(page, "khi đang nghe sách")
+        check("lệnh thư viện đưa về thư viện; ở đó lệnh phát nhắc phải mở sách trước", back and r == "needbook" and "Hãy nói mở và tên sách." in need, need)
+        await cmd("tìm thạch lam")
+        found = await spoken_live(page, "cuốn khớp")
+        check("lệnh tìm lọc thư viện theo điều vừa nói", await page.input_value("#q") == "thạch lam" and "cuốn khớp" in found, found)
+        await page.fill("#q", "")
+        # trong chế độ chạm đơn giản: nút Nói lệnh ở hàng dưới cùng, câu trả lời phát bằng bản thu sẵn
+        await page.click("#simpleOn")
+        await page.wait_for_timeout(1500)
+        b0 = await page.inner_text("#sInfo b")
+        await page.evaluate("window.snSay = 'sách sau'")
+        await page.click("#sVoice")
+        moved = await until(f"document.querySelector('#sInfo b').textContent !== {b0!r}")
+        await page.evaluate("window.snSay = 'nghe'")
+        await page.click("#sVoice")
+        heard = await until("location.hash.startsWith('#/r/')") and await until(playing, 20000)
+        check("chế độ đơn giản: nút Nói lệnh, nói sách sau rồi nói nghe", moved and heard, await page.evaluate("location.hash"))
+        fit = await page.evaluate("""() => ['#sMode', '#sVoice', '#sAlt'].map((s) => { const r = document.querySelector(s).getBoundingClientRect(); return Math.round(Math.min(r.width, r.height)); })""")
+        check("chế độ đơn giản: ba nút hàng dưới cùng vẫn đủ lớn", min(fit) >= 90, str(fit))
+        await cmd("hẹn giờ 7 phút")
+        await page.wait_for_timeout(200)
+        s7 = await said()
+        await cmd("tắt hẹn giờ")
+        await cmd("hôm nay trời đẹp")
+        await page.wait_for_timeout(200)
+        su = await said()
+        await cmd("trợ giúp")
+        await page.wait_for_timeout(200)
+        sh = await said()
+        check("chế độ đơn giản: trả lời lệnh bằng lời", "Sẽ tự dừng sau 7 phút." in s7 and "Chưa hiểu lệnh." in su and "Các lệnh bằng giọng nói gồm" in sh, f"{s7} | {su}")
+        await cmd("thư viện")
+        await until("location.hash === '#/'")
+        await page.wait_for_timeout(300)
+        missing = await page.evaluate("window.snMissing")
+        check("mọi câu trả lời lệnh trong chế độ đơn giản đều có bản thu sẵn", not missing, str(missing[:3]))
+        await page.click("#sAlt")
+        await page.evaluate("for (const k of Object.keys(localStorage)) if (/^sn:(pos|marks|rate):/.test(k)) localStorage.removeItem(k)")
 
         print("Trang bìa với trình đọc màn hình")
         await page.goto(BASE + "#/b/truyen-kieu")
