@@ -30,7 +30,7 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(req.url);
   if (req.method !== 'GET' || url.origin !== location.origin) return;
   // lời nhắc thu sẵn (prompts/) là mp3 nhỏ, tải bằng fetch: cho vào bộ đệm để mất mạng vẫn có
-  if (req.headers.has('range') || (/\.(mp3|zip)$/i.test(url.pathname) && !url.pathname.includes('/prompts/'))) return;
+  if (req.headers.has('range') || (/\.(mp3|zip|apk)$/i.test(url.pathname) && !url.pathname.includes('/prompts/'))) return;
   // các trang của đồ án giữa kỳ nằm dưới build/ — để nguyên, không can thiệp
   const scope = new URL(self.registration.scope).pathname;
   if (url.pathname.startsWith(scope + 'build/')) return;
