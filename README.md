@@ -16,6 +16,10 @@ Thư viện sách nói theo chuẩn DAISY 3, nghe trên trình duyệt điện t
 
 Các cách cài trên chưa được thử trên điện thoại thật.
 
+## Nhập sách của riêng bạn
+
+Cuối Thư viện có mục "Sách của bạn": nhấn "Nhập sách DAISY từ máy" rồi chọn file zip chứa sách nói DAISY 2.02 hoặc DAISY 3. File được đọc ngay trên máy (`app/web/daisy-import.js`), sách lưu trong trình duyệt và nghe được khi không có mạng. Sách mẫu để thử: https://daisy.org/info-help/document-archive/sample-files/
+
 ## Dòng dữ liệu
 
 ```

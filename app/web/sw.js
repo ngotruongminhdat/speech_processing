@@ -3,7 +3,7 @@
 // deploy thêm sách người dùng thấy ngay; khi mất mạng thì dùng bản đã lưu.
 // Audio KHÔNG đi qua đây: sách lưu ngoại tuyến nằm trong IndexedDB (xem app.js).
 const CACHE = 'sach-noi-v1';
-const SHELL = ['./', 'index.html', 'app.css', 'app.js', 'manifest.webmanifest', 'catalog.json',
+const SHELL = ['./', 'index.html', 'app.css', 'app.js', 'daisy-import.js', 'manifest.webmanifest', 'catalog.json',
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png',
   'fonts/lora-400-normal-vietnamese.woff2', 'fonts/lora-400-normal-latin.woff2',
   'fonts/lora-400-italic-vietnamese.woff2', 'fonts/lora-400-italic-latin.woff2',

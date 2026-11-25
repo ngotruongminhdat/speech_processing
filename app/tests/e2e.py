@@ -1094,6 +1094,136 @@ async def main():
         check("hướng dẫn có cách cài trên iPhone", "Thêm vào Màn hình chính" in await page.inner_text("#help"))
         await page.keyboard.press("Escape")
 
+        print("Nhập sách của riêng người dùng")
+        import io, zipfile, json as _json
+        async def grab(path):
+            r = await page.request.get(BASE + path)
+            return await r.body()
+        z1 = await grab("books/lao-hac/lao-hac-daisy-hm.zip")
+        z2 = await grab("books/hai-dua-tre/hai-dua-tre-daisy-hm.zip")
+        lao = _json.loads(await grab("books/lao-hac/hm/01.json"))["paras"]
+        f1, f2 = zipfile.ZipFile(io.BytesIO(z1)), zipfile.ZipFile(io.BytesIO(z2))
+        mp3a, mp3b = f1.read("chuong01.mp3"), f2.read("chuong01.mp3")
+        # bộ thứ hai: hai chương đóng riêng trong hai thư mục, không nén (kiểu zip "stored")
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_STORED) as z:
+            for k, src in enumerate((f1, f2), 1):
+                for n in src.namelist():
+                    z.writestr(f"chapter_{k:02d}/{n}", src.read(n))
+        multi = buf.getvalue()
+        # bộ thứ ba: DAISY 2.02 tự dựng. Chương một có văn bản đồng bộ tới từng câu, chương hai chỉ có tiếng.
+        body, pars, nsent = [], [], 0
+        for p in lao[1:6]:
+            spans = []
+            for b, e, text in p["s"]:
+                nsent += 1
+                spans.append(f'<span class="sentence" id="s{nsent}">{text.replace("&", "&amp;").replace("<", "&lt;")}</span>')
+                mid = (b + e) / 2      # một câu cắt làm hai đoạn âm thanh, như sách thật hay gặp
+                pars.append(f'<par endsync="last"><text src="content.html#s{nsent}"/><seq><audio src="A1.MP3" clip-begin="npt={b:.3f}s" clip-end="npt={mid:.3f}s"/>'
+                            f'<audio src="A1.MP3" clip-begin="npt={mid:.3f}s" clip-end="npt={e:.3f}s"/></seq></par>')
+            body.append("<p>" + "&nbsp;".join(spans) + "</p>")
+        head = '<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml">'
+        smil = '<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE smil PUBLIC "-//W3C//DTD SMIL 1.0//EN" "http://www.w3.org/TR/REC-smil/SMIL10.dtd">\n<smil><head><meta name="dc:format" content="Daisy 2.02"/></head><body><seq>{}</seq></body></smil>'
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+            z.writestr("Sach thu/ncc.html", head + '<head><title>Sách thử</title><meta name="dc:title" content="Sách thử DAISY 2.02"/><meta name="dc:creator" content="Người Thử"/>'
+                       '<meta name="ncc:narrator" content="Giọng thử"/></head><body><h1 class="title" id="h1"><a href="s1.smil#t0">Chương một có chữ</a></h1>'
+                       '<h1 id="h2"><a href="s2.smil#t0">Chương hai chỉ có tiếng</a></h1></body></html>')
+            z.writestr("Sach thu/content.html", head + '<head><title>Sách thử</title></head><body><h1 id="c1">Chương một có chữ</h1>' + "".join(body) + "</body></html>")
+            z.writestr("Sach thu/s1.smil", smil.format('<par endsync="last" id="t0"><text src="content.html#c1"/><audio src="A1.MP3" clip-begin="npt=0.000s" clip-end="npt=1.610s"/></par>' + "".join(pars)))
+            z.writestr("Sach thu/s2.smil", smil.format('<par endsync="last" id="t0"><text src="ncc.html#h2"/><seq><audio src="a2.mp3" clip-begin="npt=0.000s" clip-end="npt=30.000s"/>'
+                                                       '<audio src="a2.mp3" clip-begin="npt=30.000s" clip-end="npt=60.000s"/></seq></par>'))
+            z.writestr("Sach thu/a1.mp3", mp3a)
+            z.writestr("Sach thu/a2.mp3", mp3b)
+        d202 = buf.getvalue()
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as z:
+            z.writestr("ghi-chu.txt", "không phải sách")
+        nodaisy = buf.getvalue()
+
+        async def bring(name, data, want="Đã nhập"):
+            await page.goto(BASE + "#/")
+            await page.wait_for_selector("#bookList li")
+            await page.set_input_files("#importFile", {"name": name, "mimeType": "application/zip", "buffer": data})
+            await until(f"/{want}|Không|không/.test(document.querySelector('#importInfo').textContent)", 90000)
+            return await page.inner_text("#importInfo")
+        async def drop():
+            page.once("dialog", lambda d: asyncio.ensure_future(d.accept()))
+            await page.click("#saveBtn")
+            return await until("document.body.dataset.view === 'library'")
+        first = lambda: page.get_attribute("#bookList li:first-child a", "aria-label")
+        await page.goto(BASE + "#/")
+        await page.wait_for_selector("#bookList li")
+        n0 = await page.locator("#bookList li").count()
+        check("thư viện có mục Sách của bạn với nút nhập sách DAISY", await page.is_visible("#importBtn") and "Nhập sách DAISY" in await page.inner_text("#importBtn"))
+        msg = await bring("lao-hac-daisy.zip", z1)
+        label = await first()
+        check("nhập file zip DAISY 3: báo kết quả bằng lời, sách đứng đầu thư viện trong thể loại Sách của bạn",
+              "Đã nhập Lão Hạc" in msg and "20 phút" in msg and label.startswith("Lão Hạc, Nam Cao, Sách của bạn") and await page.locator("#bookList li").count() == n0 + 1, f"{msg} | {label}")
+        check("nhập xong thì focus nằm ở cuốn vừa nhập", await page.evaluate("document.activeElement.getAttribute('href') || ''") == await page.get_attribute("#bookList li:first-child a", "href"))
+        await page.click("#bookList li:first-child a")
+        await page.wait_for_selector("#saveBtn")
+        metas = await page.inner_text("#bookHero .metas")
+        check("trang bìa sách đã nhập: ghi định dạng DAISY 3 và có nút xoá khỏi máy", "Sách nói DAISY 3" in metas and "Xoá sách này khỏi máy" in await page.inner_text("#saveBtn"), metas[:120])
+        await ctx.set_offline(True)
+        await page.click("#bookHero .btn.primary")
+        ok = await until(playing, 20000)
+        s = await page.evaluate(STATE)
+        check("sách đã nhập nghe được khi không có mạng, đủ số đoạn văn", ok and s["src"].startswith("blob:") and s["n"] == len(lao) - 1, f"{s['n']} câu, src {s['src'][:12]}")
+        await page.click(".s[data-i='10']")
+        await page.wait_for_timeout(300)
+        s = await page.evaluate(STATE)
+        check("chạm một đoạn của sách đã nhập thì nghe đúng từ mốc của đoạn đó", s["on"] == 10 and abs(s["t"] - lao[10]["b"]) < 0.8, f"t={s['t']:.2f}, mốc {lao[10]['b']}")
+        await ctx.set_offline(False)
+        await page.reload()
+        await page.wait_for_selector("#text .s")
+        await page.goto(BASE + "#/")
+        await page.wait_for_selector("#bookList li")
+        check("tải lại trang, sách đã nhập vẫn còn", (await first()).startswith("Lão Hạc, Nam Cao, Sách của bạn"))
+        await page.click("#bookList li:first-child a")
+        await page.wait_for_selector("#saveBtn")
+        gone = await drop()
+        left = await page.evaluate("""() => new Promise((res) => { const r = indexedDB.open('sach-noi', 1);
+          r.onsuccess = () => { const q = r.result.transaction('units').objectStore('units').getAllKeys();
+            q.onsuccess = () => res(q.result.filter((x) => String(x).startsWith('nhap-')).length); }; })""")
+        check("xoá sách đã nhập: hỏi lại rồi xoá cả âm thanh trên máy", gone and left == 0 and await page.locator("#bookList li").count() == n0, f"còn {left} phần")
+
+        msg = await bring("hai-chuong.zip", multi)
+        await page.click("#bookList li:first-child a")
+        await page.wait_for_selector("#saveBtn")
+        toc = await page.locator("#bookToc .t").all_inner_texts()
+        check("file zip nhiều chương đóng riêng, không nén: mỗi chương thành một phần, lấy tên từ tiêu đề chương", "2 phần" in msg and toc == ["Lão Hạc", "Hai đứa trẻ"], f"{msg} | {toc}")
+        await drop()
+
+        msg = await bring("sach-thu-202.zip", d202)
+        label = await first()
+        check("nhập sách DAISY 2.02: đọc tên sách và tác giả từ ncc.html", "Đã nhập Sách thử DAISY 2.02, 2 phần" in msg and label.startswith("Sách thử DAISY 2.02, Người Thử"), f"{msg} | {label}")
+        await page.click("#bookList li:first-child a")
+        await page.wait_for_selector("#saveBtn")
+        metas = await page.inner_text("#bookHero .metas")
+        slug = (await page.evaluate("location.hash")).split("/")[2]
+        await page.goto(BASE + f"#/r/{slug}/1")
+        await until(playing, 20000)
+        s = await page.evaluate(STATE)
+        shape = await page.evaluate("[...document.querySelectorAll('#text p')].map((p) => p.querySelectorAll('.s').length)")
+        check("DAISY 2.02 có văn bản: giữ đúng đoạn và câu, mỗi câu một mốc dù âm thanh bị cắt làm nhiều đoạn",
+              "Sách nói DAISY 2.02" in metas and shape == [len(p["s"]) for p in lao[1:6]] and await page.inner_text("#h-reader") == "Chương một có chữ", str(shape))
+        await page.click(".s[data-i='3']")
+        await page.wait_for_timeout(300)
+        s = await page.evaluate(STATE)
+        check("DAISY 2.02: chạm một câu thì nghe đúng từ câu đó", abs(s["t"] - lao[1]["s"][2][0]) < 0.8, f"t={s['t']:.2f}, mốc {lao[1]['s'][2][0]}")
+        await page.goto(BASE + f"#/r/{slug}/2")
+        ok = await until(f"{AUDIO}.currentSrc.startsWith('blob:') && " + playing, 20000)
+        check("DAISY 2.02 chỉ có tiếng: vẫn nghe được, tên chương lấy từ mục lục", ok and await page.inner_text("#h-reader") == "Chương hai chỉ có tiếng", await page.inner_text("#h-reader"))
+        await page.goto(BASE + f"#/b/{slug}")
+        await page.wait_for_selector("#saveBtn")
+        await drop()
+
+        msg = await bring("hong.zip", b"day khong phai la file zip" * 40, "File này")
+        check("file không phải zip thì nói rõ", "không phải file zip" in msg, msg)
+        msg = await bring("ghi-chu.zip", nodaisy, "Không tìm thấy")
+        check("file zip không chứa sách DAISY thì nói rõ, thư viện không đổi", "Không tìm thấy sách DAISY" in msg and await page.locator("#bookList li").count() == n0, msg)
+
         print("Trang bìa với trình đọc màn hình")
         await page.goto(BASE + "#/b/truyen-kieu")
         await page.wait_for_selector("#tocJump")

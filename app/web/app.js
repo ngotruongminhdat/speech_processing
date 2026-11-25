@@ -5,6 +5,8 @@
 //   #/r/<slug>/<phần>   trang đọc (thêm /s<số câu> để mở đúng một câu, dùng cho dấu trang)
 // Dữ liệu: catalog.json và books/<slug>/<NN>.json do pipeline/scripts/build_site.py sinh ra.
 
+import { readDaisy } from './daisy-import.js';
+
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -349,7 +351,7 @@ async function renderBook(book) {
     ['Thể loại', esc(book.subject)],
     ['Ngôn ngữ', 'Tiếng Việt'],
     ['Giọng đọc', esc(book.narrator)],
-    ['Định dạng', 'Sách nói DAISY 3 (Audio MP3)'],
+    ['Định dạng', book.local ? esc(book.format) : 'Sách nói DAISY 3 (Audio MP3)'],
     ['Thời lượng', `${clock(book.duration)} <span class="sr-only">(${spoken(book.duration)})</span>`],
     ['Nguồn văn bản', book.sourceURL ? `<a href="${esc(book.sourceURL)}" rel="noopener">Wikisource tiếng Việt</a>` : ''],
     ['Bản quyền', esc(book.note)],
@@ -374,7 +376,7 @@ async function renderBook(book) {
       ${voices.length > 1 ? `<div class="voice-pick" role="group" aria-labelledby="l-bvoice">
         <span id="l-bvoice">Giọng đọc</span>
         ${voices.map((v) => `<button type="button" data-v="${esc(v.id)}" aria-pressed="${v.id === bv}">${esc(v.label)} · ${esc(v.name)}</button>`).join('')}
-      </div>` : (bv && voiceInfo(book, bv).fallback && primaryVoices().length
+      </div>` : (bv && !book.local && voiceInfo(book, bv).fallback && primaryVoices().length
         ? `<p class="voice-note">${esc(voiceTitle(primaryVoices()[0]))} đang được chuẩn bị cho cuốn này. Hiện phát ${esc(voiceText(voiceInfo(book, bv)))}.</p>`
         : '')}
     </div>`;
@@ -396,7 +398,7 @@ async function renderBook(book) {
   renderFind(book);
 
   $('#bookFoot').innerHTML = `<span class="mark" aria-hidden="true">◆</span><br>
-    ${esc(book.title)} · ${esc(book.creator)}<br>Sách dựng theo chuẩn DAISY 3 · giọng đọc tổng hợp`;
+    ${esc(book.title)} · ${esc(book.creator)}<br>${book.local ? 'Sách bạn tự nhập · chỉ lưu trên máy này' : 'Sách dựng theo chuẩn DAISY 3 · giọng đọc tổng hợp'}`;
 
   $('.voice-pick')?.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setVoice(b.dataset.v); });
   // cuộn tới mục lục và đưa focus vào đó, để trình đọc màn hình cũng nhảy theo
@@ -413,6 +415,16 @@ async function isSaved(book) {
 async function refreshSaveBtn(book) {
   const btn = $('#saveBtn');
   if (!btn) return;
+  if (book.local) {       // sách tự nhập vốn đã nằm trên máy: nút này để xoá hẳn
+    btn.innerHTML = '<span aria-hidden="true">🗑</span> Xoá sách này khỏi máy';
+    btn.onclick = async () => {
+      if (!confirm(`Xoá cuốn ${book.title} khỏi máy? Muốn nghe lại bạn phải nhập lại file.`)) return;
+      await removeImported(book);
+      location.hash = '#/';
+      setTimeout(() => announce(`Đã xoá ${book.title} khỏi máy.`), 300);
+    };
+    return;
+  }
   const saved = await isSaved(book);
   btn.removeAttribute('aria-disabled');
   btn.innerHTML = saved ? '<span aria-hidden="true">✓</span> Đã lưu trên máy · Xoá' : '<span aria-hidden="true">⤓</span> Lưu để nghe ngoại tuyến';
@@ -814,7 +826,7 @@ async function openReader(book, unitNo, keep = null) {
 
   // người nghe chọn một giọng mà phần này chưa có: nói rõ đang phát giọng nào
   const want = prefVoice();
-  const notice = !keep && vid !== want
+  const notice = !keep && !book.local && vid !== want
     ? `${pickable(book).some((v) => v.id === want) ? 'Phần' : 'Cuốn'} này chưa có ${voiceText(voiceInfo(book, want))}, đang phát ${voiceText(voiceInfo(book, vid))}.`
     : '';
   refreshVoiceNote();
@@ -864,7 +876,7 @@ function refreshVoiceNote() {
   const note = $('#voiceInfo');
   const want = prefVoice();
   const inReader = document.body.dataset.view === 'reader' && R.book && R.unit && R.voice;
-  note.textContent = inReader && R.voice !== want
+  note.textContent = inReader && !R.book.local && R.voice !== want
     ? `Phần đang nghe chưa có ${voiceText(voiceInfo(R.book, want))}, nên vẫn phát ${voiceText(voiceInfo(R.book, R.voice))}. Giọng mới đang được chuẩn bị.`
     : '';
 }
@@ -1510,6 +1522,71 @@ $('#sAlt').addEventListener('click', simpleAlt);
 $('#sMode').addEventListener('click', cycleSimpleMode);
 $('#simpleOn').addEventListener('click', () => setSimple(true));
 
+// ================= NHẬP SÁCH CỦA RIÊNG NGƯỜI DÙNG =================
+// Người dùng chọn một file zip chứa sách nói DAISY (2.02 hoặc 3). File được đọc ngay trên máy
+// (daisy-import.js), từng phần lưu vào IndexedDB đúng như sách lưu để nghe ngoại tuyến, nên trang đọc
+// dùng lại được nguyên vẹn. Danh sách sách đã nhập nằm trong localStorage (khoá sn:imported).
+const LOCAL_VOICE = 'goc';
+const IMPORT_ERRORS = {
+  notzip: 'File này không phải file zip. Hãy chọn file zip chứa sách nói DAISY.',
+  nodaisy: 'Không tìm thấy sách DAISY trong file này. File zip cần có file ncc.html hoặc file đuôi opf.',
+  noaudio: 'Sách trong file này không có âm thanh nên không nghe được.',
+  toobig: 'File này quá lớn, ứng dụng chưa đọc được file zip trên 4 GB.',
+  locked: 'File zip này có mật khẩu nên không đọc được.',
+  compress: 'Trình duyệt này không giải nén được file. Hãy thử bằng Chrome hoặc Safari bản mới.',
+  broken: 'File bị hỏng hoặc không đúng chuẩn DAISY nên không đọc được.',
+};
+const hash = (s) => { let h = 5381; for (const c of s) h = ((h * 33) ^ c.codePointAt(0)) >>> 0; return h.toString(36); };
+async function importBook(file) {
+  const btn = $('#importBtn'), info = $('#importInfo');
+  if (btn.getAttribute('aria-disabled') === 'true') return announce('Đang nhập sách, xin chờ.');
+  btn.setAttribute('aria-disabled', 'true');
+  const tell = (msg) => { info.textContent = msg; announce(msg); };
+  tell(`Đang đọc file ${file.name}, xin chờ.`);
+  const written = [];
+  try {
+    const book = await readDaisy(file, (done, total) => { info.textContent = `Đang đọc phần ${done} trên ${total}…`; });
+    const slug = 'nhap-' + hash(`${file.name}:${file.size}:${book.title}`);
+    await navigator.storage?.persist?.();
+    const units = [];
+    for (const [i, u] of book.units.entries()) {
+      const no = i + 1, label = `Phần ${no}`;
+      info.textContent = `Đang lưu phần ${no} trên ${book.units.length}…`;
+      const key = unitKey(slug, no, LOCAL_VOICE);
+      await idb.put(key, { data: { slug, no, voice: LOCAL_VOICE, label, title: u.title, duration: u.duration, paras: u.paras }, blob: u.blob });
+      written.push(key);
+      units.push({ no, label, title: u.title, duration: u.duration, ready: true, voices: { [LOCAL_VOICE]: { duration: u.duration } } });
+    }
+    const entry = {
+      slug, local: true, title: book.title, creator: book.creator || 'Chưa rõ tác giả', subject: 'Sách của bạn',
+      description: `Sách bạn nhập từ file ${file.name}. Sách chỉ lưu trên máy này.`, narrator: book.narrator, date: book.date, format: `Sách nói ${book.format}`,
+      duration: units.reduce((s, u) => s + u.duration, 0), units, added: Date.now(),
+      voices: [{ id: LOCAL_VOICE, label: 'Bản thu', name: 'gốc', fallback: true }],
+    };
+    store.set('imported', [entry, ...store.get('imported', []).filter((b) => b.slug !== slug)]);
+    if (!store.get('imported', []).some((b) => b.slug === slug)) throw new DOMException('', 'QuotaExceededError');
+    catalog.books = [entry, ...catalog.books.filter((b) => b.slug !== slug)];
+    renderLibrary();
+    tell(`Đã nhập ${entry.title}, ${units.length > 1 ? units.length + ' phần, ' : ''}dài ${spoken(entry.duration)}. Sách nằm ở đầu thư viện.`);
+    $(`#bookList a[href="#/b/${slug}"]`)?.focus();
+  } catch (e) {
+    for (const key of written) await idb.del(key).catch(() => {});
+    tell(e?.name === 'QuotaExceededError' ? 'Máy không còn đủ chỗ trống để lưu cuốn sách này.'
+      : IMPORT_ERRORS[e?.code] || 'Không nhập được sách từ file này.');
+  }
+  btn.removeAttribute('aria-disabled');
+}
+async function removeImported(book) {
+  for (const u of book.units) await idb.del(unitKey(book.slug, u.no, LOCAL_VOICE)).catch(() => {});
+  for (const m of getMarks(book.slug)) idb.del(noteKey(book.slug, m)).catch(() => {});
+  for (const k of ['pos', 'marks', 'rate', 'seen']) { try { localStorage.removeItem(`sn:${k}:${book.slug}`); } catch { /* bỏ qua */ } }
+  store.set('imported', store.get('imported', []).filter((b) => b.slug !== book.slug));
+  catalog.books = catalog.books.filter((b) => b.slug !== book.slug);
+  if (R.book?.slug === book.slug) { audio.pause(); audio.removeAttribute('src'); R.book = R.unit = null; R.ready = false; }
+}
+$('#importBtn').addEventListener('click', () => $('#importFile').click());
+$('#importFile').addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; if (f) importBook(f); });
+
 // ================= ĐIỀU KHIỂN BẰNG GIỌNG NÓI =================
 // Bấm nút micro một lần rồi nói một lệnh ngắn. Trong lúc nghe lệnh thì tạm dừng sách, để micro
 // không thu lẫn tiếng sách; xong lệnh thì sách phát tiếp nếu trước đó đang phát.
@@ -1737,6 +1814,7 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) saveP
     const res = await fetch('catalog.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error(res.status);
     catalog = await res.json();
+    catalog.books = [...store.get('imported', []), ...catalog.books];       // sách người dùng tự nhập đứng đầu
     renderVoiceOptions();
     loadPrompts();
   } catch {
