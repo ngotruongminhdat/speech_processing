@@ -315,7 +315,7 @@ dialog.set-panel::backdrop{background:rgba(0,0,0,.28)}
 .simple-cta .btn{min-height:60px;font-size:1.05rem;padding:.9rem 1.8rem}
 .simple-cta p{margin:0;font:.84rem/1.5 var(--ui);opacity:.9;max-width:32ch}
 #simple{position:fixed;inset:0;z-index:50;display:grid;gap:10px;background:#140c07;font-family:var(--ui);
-  grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1.15fr) minmax(0,1.15fr) minmax(0,2fr) minmax(0,.7fr);
+  grid-template-columns:repeat(6,1fr);grid-template-rows:minmax(0,1.15fr) minmax(0,1.15fr) minmax(0,2fr) minmax(0,.7fr);
   padding:calc(10px + env(safe-area-inset-top)) 10px calc(10px + env(safe-area-inset-bottom))}
 #simple button{min-width:0;min-height:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25rem;
   padding:.4rem .7rem;border-radius:22px;border:3px solid #fff8ee;background:#2e1c11;color:#fff8ee;cursor:pointer;
@@ -323,7 +323,11 @@ dialog.set-panel::backdrop{background:rgba(0,0,0,.28)}
 #simple button:active{background:#5a3a22}
 #simple button b{font:inherit}
 #simple .ic{font-size:2.2rem;line-height:1}
-#sInfo,#sMain,#sMode[hidden]+#sAlt{grid-column:1/-1}
+#sInfo,#sMain,#simple[data-bottom="1"] .sb{grid-column:1/-1}
+#sPrev,#sNext,#simple .sb{grid-column:span 3}
+#simple[data-bottom="3"] .sb{grid-column:span 2}
+#simple button[aria-pressed="true"]{background:#f0c35a;color:#2b1408}
+#simple #sVoice .ic{font-size:1.5rem}
 #simple #sInfo{border-style:dashed;border-width:2px;background:transparent}
 #sInfo small{font:600 .8rem var(--ui);letter-spacing:.12em;text-transform:uppercase;opacity:.85}
 #sInfo b{font:600 1.55rem/1.2 var(--serif) !important;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
@@ -331,7 +335,7 @@ dialog.set-panel::backdrop{background:rgba(0,0,0,.28)}
 #simple #sMain{background:#fff8ee;color:#2b1408;font-size:2.1rem}
 #simple #sMain:active{background:#f0c35a}
 #sMain .ic{font-size:4rem}
-#simple #sAlt,#simple #sMode{font-size:1.1rem;border-width:2px;gap:0}
+#simple .sb{font-size:1.1rem;border-width:2px;gap:0}
 #sMode small{font:600 .72rem var(--ui);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
 #simple :focus-visible{outline:5px solid #ffd23e;outline-offset:-9px}
 #simple #sMain:focus-visible{outline-color:#1a5fd0}
@@ -346,9 +350,11 @@ dialog.set-panel::backdrop{background:rgba(0,0,0,.28)}
   #simple .ic{font-size:1.5rem}
   #simple #sMain{font-size:1.7rem}
   #sMain .ic{font-size:2.4rem}
-  #simple #sAlt,#simple #sMode{font-size:1rem}
+  #simple .sb{font-size:1rem}
   #sMode small{display:none}
 }
+[data-voice][aria-pressed="true"]{background:#f0c35a !important;color:#2b1408 !important}
+.pill-btn.top-right{position:absolute;top:.9rem;right:.9rem;z-index:5;color:var(--hero-ink);background:rgba(30,15,6,.45);border-color:rgba(255,248,238,.45);box-shadow:none}
 body.simple{overflow:hidden}
 body.simple #progress{display:none !important}
 body.simple #toast{z-index:60}

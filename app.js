@@ -229,11 +229,12 @@ const CUES = {
   mark: [[880, 0, 0.08]],                              // một tiếng cao: đã đánh dấu
   undo: [[494, 0, 0.08], [660, 0.1, 0.1]],
   sleep: [[440, 0, 0.25]],
+  listen: [[660, 0, 0.08], [880, 0.1, 0.1]],          // đi lên, ngắn: đang nghe lệnh
 };
 let cueCtx = null;
 const cueLog = (window.snCues = []);      // để kiểm thử xem tiếng nào đã phát
-function cue(kind) {
-  if (store.get('cue', '1') !== '1' || !CUES[kind]) return;
+function cue(kind, force = false) {
+  if ((!force && store.get('cue', '1') !== '1') || !CUES[kind]) return;
   cueLog.push(kind);
   try {
     cueCtx = cueCtx || new (window.AudioContext || window.webkitAudioContext)();
@@ -666,6 +667,10 @@ const P = {
   guideMain: (paused) => `Nút lớn nhất bên dưới là ${paused ? 'phát' : 'tạm dừng'}.`,
   guideModes: (list) => `Ở hàng dưới cùng, nút bên trái đổi chức năng hai nút lùi và tới: ${list.map((k) => S_MODES[k].name.toLowerCase()).join(', ')}.`,
 };
+// Lời gợi ý và danh sách lệnh của phần điều khiển bằng giọng nói.
+const VOICE_HINT = 'Hãy nói, ví dụ: tạm dừng, lùi ba mươi giây, phần sau, nhanh hơn, đánh dấu, hoặc mở và tên sách.';
+const VOICE_HELP = 'Các lệnh bằng giọng nói gồm: phát, tạm dừng, lùi hoặc tới kèm số giây hay số phút, câu trước, câu sau, phần trước, phần sau, '
+  + 'phần số mấy, nhanh hơn, chậm hơn, đánh dấu, tới dấu trang, hẹn giờ kèm số phút, tắt hẹn giờ, đang ở đâu, thư viện, và mở kèm tên sách.';
 // Những câu cố định, không có chỗ điền.
 const P_STATIC = [
   'Đã nghe xong.', 'Đang chọn sách.', 'Chọn sách.', 'Đang mở sách.', 'Tạm dừng.',
@@ -684,6 +689,12 @@ const P_STATIC = [
   'Đã hết phần, tạm dừng theo hẹn giờ.', 'Nhấn Phát để nghe phần tiếp theo.', 'Nhấn nút Phát để bắt đầu nghe.',
   'Đang tải âm thanh, xin chờ.', 'Không phát được audio.', 'Hãy kiểm tra kết nối mạng.', 'Phần này đang được chuẩn bị audio.',
   'Không tải được nội dung.', 'Hãy kiểm tra kết nối mạng, hoặc lưu sách để nghe ngoại tuyến.',
+  // điều khiển bằng giọng nói
+  'Hàng dưới cùng còn có nút nói lệnh, để điều khiển bằng giọng nói.', 'Nút ở giữa để ra lệnh bằng giọng nói.',
+  'Ở hàng dưới cùng, nút bên trái để ra lệnh bằng giọng nói, nút bên phải để về giao diện đầy đủ.',
+  'Không nghe thấy gì.', 'Không nghe rõ.', 'Hãy chạm nút nói lệnh và nói lại.', 'Chưa được phép dùng micro.', 'Hãy cho phép trong cài đặt trình duyệt.',
+  'Không dùng được giọng nói lúc này.', 'Chưa hiểu lệnh.', VOICE_HINT, VOICE_HELP, 'Lệnh này chỉ dùng khi đang nghe sách.', 'Hãy nói mở và tên sách.',
+  'Không tìm thấy sách đó.', 'Cuốn này không có phần đó.', 'Câu này đã có dấu trang.', 'Câu này chưa có dấu trang.',
 ];
 const MARK_CLIPS = 20, SLEEP_CLIPS = 60;       // số dấu trang và số phút lớn nhất có bản thu
 // Mọi câu cần thu, tính từ danh mục sách đang có. build_prompts.py gọi hàm này qua trình duyệt.
@@ -702,7 +713,7 @@ function promptList() {
   for (let n = 1; n <= 99; n++) out.add(P.pct(n));
   for (let m = 0; m <= maxMin + 1; m++) for (const s of [P.at(true, m * 60), P.at(false, m * 60), P.len(m * 60), P.left(m * 60), P.resume(m * 60), P.time(m * 60)]) out.add(s);
   for (const r of $$('#speed option').map((o) => Number(o.value))) { out.add(P.rate(r)); out.add(P.rateNow(r)); }
-  for (let n = 1; n <= SLEEP_CLIPS; n++) out.add(P.sleepIn(n));
+  for (let n = 1; n <= SLEEP_CLIPS; n++) { out.add(P.sleepIn(n)); out.add(`Sẽ tự dừng sau ${n} phút.`); }
   for (let n = 0; n <= MARK_CLIPS; n++) { out.add(P.marks(n)); for (let k = 1; k <= n; k++) out.add(P.markAt(k, n)); }
   for (const m of Object.values(S_MODES)) { out.add(P.mode(m)); out.add(P.guideMid(m)); }
   for (const paused of [true, false]) out.add(P.guideMain(paused));
@@ -1039,11 +1050,11 @@ function rewindPoint(t) {
   return t - b > 15 ? Math.max(0, t - 5) : Math.min(t, b);
 }
 const TIME_STEP = 30;
-function stepTime(dir) {
+function stepTime(dir, secs = TIME_STEP) {
   if (!R.ready) return;
   noteJump();
   const d = audio.duration || 0;
-  audio.currentTime = Math.max(0, Math.min(Math.max(0, d - 0.5), audio.currentTime + dir * TIME_STEP));
+  audio.currentTime = Math.max(0, Math.min(Math.max(0, d - 0.5), audio.currentTime + dir * secs));
   R.userScrollAt = 0;
   tick();
   if (audio.paused) announce(P.time(audio.currentTime), false);
@@ -1202,6 +1213,7 @@ addEventListener('keydown', (e) => {
   if ($('#settings').open || $('#help').open) return;
   if (e.target.matches('input, select, textarea') || e.ctrlKey || e.metaKey || e.altKey) return;
   if (e.key === '?') { e.preventDefault(); return openHelp(); }
+  if (e.key.toLowerCase() === 'v' && SpeechRec && !simpleOn()) { e.preventDefault(); return listenCommand($(`#view-${document.body.dataset.view} [data-voice]`)); }
   if (document.body.dataset.view !== 'reader') return;
   const act = {
     ' ': () => (audio.paused ? audio.play().catch(() => {}) : audio.pause()),
@@ -1320,32 +1332,32 @@ $('#help').addEventListener('click', (e) => { if (e.target === e.currentTarget) 
 
 // Tìm sách bằng giọng nói (Web Speech API; có trên Chrome Android và Safari). Không có thì ẩn nút.
 const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+let rec = null;
+// Nghe một câu. Đang nghe mà bấm lần nữa thì thôi. onFail nhận: denied, network, silent, aborted hoặc unclear.
+function hear(btn, onStart, onText, onFail) {
+  if (rec) { rec.abort(); return; }
+  rec = new SpeechRec();
+  rec.lang = 'vi-VN'; rec.interimResults = false; rec.maxAlternatives = 1;
+  let done = false;
+  rec.onstart = () => { btn.setAttribute('aria-pressed', 'true'); onStart(); };
+  rec.onresult = (e) => { done = true; onText(e.results[0][0].transcript.replace(/[.?!]+$/, '').trim()); };
+  rec.onerror = (e) => {
+    done = true;
+    onFail(e.error === 'not-allowed' || e.error === 'service-not-allowed' ? 'denied' : e.error === 'network' ? 'network'
+      : e.error === 'no-speech' ? 'silent' : e.error === 'aborted' ? 'aborted' : 'unclear');
+  };
+  rec.onend = () => { btn.setAttribute('aria-pressed', 'false'); rec = null; if (!done) onFail('silent'); };
+  try { rec.start(); } catch { rec = null; }
+}
 if (SpeechRec) {
   const mic = $('#voiceSearch');
   mic.hidden = false;
-  let rec = null;
-  mic.addEventListener('click', () => {
-    if (rec) { rec.abort(); return; }
-    rec = new SpeechRec();
-    rec.lang = 'vi-VN'; rec.interimResults = false; rec.maxAlternatives = 1;
-    let heard = false;
-    rec.onstart = () => { mic.setAttribute('aria-pressed', 'true'); announce('Đang nghe. Hãy đọc tên sách hoặc tên tác giả.'); };
-    rec.onresult = (e) => {
-      heard = true;
-      const said = e.results[0][0].transcript.replace(/[.?!]+$/, '').trim();
-      $('#q').value = said;
-      const n = filterLibrary(false);
-      announce(n ? `Bạn nói: ${said}. ${n} cuốn khớp.` : `Bạn nói: ${said}. Không tìm thấy sách nào khớp.`);
-    };
-    rec.onerror = (e) => {
-      heard = true;
-      announce(e.error === 'not-allowed' || e.error === 'service-not-allowed'
-        ? 'Chưa được phép dùng micro. Hãy cho phép trong cài đặt trình duyệt, hoặc gõ tên sách.'
-        : 'Không nghe rõ. Hãy nhấn nút và nói lại.');
-    };
-    rec.onend = () => { mic.setAttribute('aria-pressed', 'false'); if (!heard) announce('Không nghe thấy gì. Hãy nhấn nút và nói lại.'); rec = null; };
-    try { rec.start(); } catch { rec = null; }
-  });
+  mic.addEventListener('click', () => hear(mic, () => announce('Đang nghe. Hãy đọc tên sách hoặc tên tác giả.'), (said) => {
+    $('#q').value = said;
+    const n = filterLibrary(false);
+    announce(n ? `Bạn nói: ${said}. ${n} cuốn khớp.` : `Bạn nói: ${said}. Không tìm thấy sách nào khớp.`);
+  }, (kind) => announce(kind === 'denied' ? 'Chưa được phép dùng micro. Hãy cho phép trong cài đặt trình duyệt, hoặc gõ tên sách.'
+    : kind === 'silent' ? 'Không nghe thấy gì. Hãy nhấn nút và nói lại.' : 'Không nghe rõ. Hãy nhấn nút và nói lại.')));
 }
 
 // ================= CHẾ ĐỘ CHẠM ĐƠN GIẢN =================
@@ -1390,6 +1402,7 @@ function renderSimple() {
   $('#skip').hidden = on;
   for (const v of $$('.view')) v.inert = on;      // phần giao diện đầy đủ nằm bên dưới: không cho focus lọt vào
   if (!on || !catalog) return;
+  $('#sVoice').hidden = !SpeechRec;
   const books = simpleBooks();
   const set = (id, text, icon) => { $(`${id} b`).textContent = text; if (icon) $(`${id} .ic`).textContent = icon; };
   if (simpleListening()) {
@@ -1416,6 +1429,7 @@ function renderSimple() {
     set('#sMain', resumable(b) ? 'Nghe tiếp' : 'Nghe cuốn này', '▶');
     $('#sAlt').textContent = 'Giao diện đầy đủ';
   }
+  $('#simple').dataset.bottom = $$('#simple .sb:not([hidden])').length;
 }
 function setSimple(on) {
   store.set('simple', on ? '1' : '0');
@@ -1426,6 +1440,7 @@ function setSimple(on) {
     const books = simpleBooks();
     const intro = () => announce('Chế độ chạm đơn giản. Chạm một lần là chạy. Nút trên cùng nhắc lại bạn đang ở đâu. Ở giữa, bên trái là lùi, bên phải là tới. '
       + 'Nút lớn nhất bên dưới là nghe hoặc tạm dừng. Hàng dưới cùng để đổi sách, và khi đang nghe có thêm nút đổi chức năng: chọn phần, tốc độ, dấu trang, hẹn giờ tắt. '
+      + (SpeechRec ? 'Hàng dưới cùng còn có nút nói lệnh, để điều khiển bằng giọng nói. ' : '')
       + (simpleListening() ? `Đang mở sách. ${P.title(R.book)}` : `Đang chọn sách. ${bookSpeech(books[sIdx], sIdx, books.length)}`), false);
     if (promptIndex) intro(); else loadPrompts().then(intro);       // chờ bảng lời nhắc thu sẵn rồi mới nói
   } else {
@@ -1444,7 +1459,9 @@ function simpleStep(dir) {
   if (sModeNow() === 'rate') return nudgeRate(dir);
   if (sModeNow() === 'mark') return dir < 0 ? stepMark(1, true) : toggleMark();
   if (sModeNow() === 'sleep') {
-    const at = SLEEP_OPTS.indexOf(sleepSet) + dir;
+    let cur = SLEEP_OPTS.indexOf(sleepSet);
+    if (cur < 0) cur = SLEEP_OPTS.findIndex((v) => v > sleepSet) - (dir > 0 ? 1 : 0);      // số phút đặt bằng giọng nói, nằm giữa hai mức
+    const at = cur + dir;
     if (at < 0) { cue('limit'); return announce('Hẹn giờ đang tắt.'); }
     if (at >= SLEEP_OPTS.length) { cue('limit'); return announce('Đây là mức cuối: tự dừng khi hết phần đang nghe.'); }
     return setSleep(SLEEP_OPTS[at]);
@@ -1468,14 +1485,7 @@ function simpleMain() {
     return;
   }
   const b = simpleBooks()[sIdx];
-  if (!b) return;
-  const ready = readyUnits(b), pos = getPos(b.slug);
-  let unit = pos && ready.some((u) => u.no === pos.unit) ? pos.unit : ready[0].no;
-  if (bookProgress(b) >= 0.995) { unit = ready[0].no; store.set('pos:' + b.slug, { unit, t: 0, at: Date.now() }); }   // nghe xong rồi: nghe lại từ đầu
-  R.forcePlay = true;
-  sMode = 'time';             // mở sách nào cũng bắt đầu với lùi và tới 30 giây
-  const target = `#/r/${b.slug}/${unit}`;
-  if (location.hash === target) route(); else location.hash = target;
+  if (b) playBook(b);
 }
 function simpleAlt() {
   if (!simpleListening()) return setSimple(false);
@@ -1485,12 +1495,12 @@ function simpleAlt() {
 $('#sInfo').addEventListener('click', () => {
   if (simpleListening()) {
     const m = S_MODES[sModeNow()];
-    return whereAmI(` ${P.guideMid(m)} ${P.guideMain(audio.paused)} ${P.guideModes(sModeList())} Nút bên phải để chọn sách khác. Ứng dụng tự nhớ chỗ bạn đang nghe.`);
+    return whereAmI(` ${P.guideMid(m)} ${P.guideMain(audio.paused)} ${P.guideModes(sModeList())}${SpeechRec ? ' Nút ở giữa để ra lệnh bằng giọng nói.' : ''} Nút bên phải để chọn sách khác. Ứng dụng tự nhớ chỗ bạn đang nghe.`);
   }
   const books = simpleBooks();
   if (books.length) {
     announce(`Đang chọn sách. ${bookSpeech(books[sIdx], sIdx, books.length)} Hướng dẫn: ở giữa màn hình, bên trái là sách trước, bên phải là sách sau. `
-      + 'Nút lớn nhất bên dưới để nghe cuốn đang chọn. Nút dưới cùng để về giao diện đầy đủ. Mỗi nút chỉ cần chạm một lần.', false);
+      + `Nút lớn nhất bên dưới để nghe cuốn đang chọn. ${SpeechRec ? 'Ở hàng dưới cùng, nút bên trái để ra lệnh bằng giọng nói, nút bên phải để về giao diện đầy đủ.' : 'Nút dưới cùng để về giao diện đầy đủ.'} Mỗi nút chỉ cần chạm một lần.`, false);
   }
 });
 $('#sPrev').addEventListener('click', () => simpleStep(-1));
@@ -1499,6 +1509,177 @@ $('#sMain').addEventListener('click', simpleMain);
 $('#sAlt').addEventListener('click', simpleAlt);
 $('#sMode').addEventListener('click', cycleSimpleMode);
 $('#simpleOn').addEventListener('click', () => setSimple(true));
+
+// ================= ĐIỀU KHIỂN BẰNG GIỌNG NÓI =================
+// Bấm nút micro một lần rồi nói một lệnh ngắn. Trong lúc nghe lệnh thì tạm dừng sách, để micro
+// không thu lẫn tiếng sách; xong lệnh thì sách phát tiếp nếu trước đó đang phát.
+// Chữ thường, còn nguyên dấu: cần dấu để phân biệt "phần sáu" (số 6) với "phần sau".
+const lowVi = (s) => s.normalize('NFC').toLowerCase().replace(/[.,](?!\d)|[!?;:"“”]/g, ' ').replace(/\s+/g, ' ').trim();
+const NUM = { 'không': 0, 'một': 1, 'mốt': 1, 'hai': 2, 'ba': 3, 'bốn': 4, 'tư': 4, 'năm': 5, 'lăm': 5, 'nhăm': 5, 'sáu': 6, 'bảy': 7, 'bẩy': 7, 'tám': 8, 'chín': 9 };
+// Số đầu tiên trong câu, viết bằng chữ số hoặc bằng chữ ("ba mươi", "mười lăm", "một phẩy năm").
+function numIn(t) {
+  const d = /\d+(?:[.,]\d+)?/.exec(t);
+  if (d) return parseFloat(d[0].replace(',', '.'));
+  const w = t.split(' '), ten = (x) => x === 'mười' || x === 'mươi';
+  for (let i = 0; i < w.length; i++) {
+    if (ten(w[i])) return 10 + (NUM[w[i + 1]] ?? 0);
+    const a = NUM[w[i]];
+    if (a == null) continue;
+    if (ten(w[i + 1])) return a * 10 + (NUM[w[i + 2]] ?? 0);
+    if (w[i + 1] === 'phẩy' && NUM[w[i + 2]] != null) return a + NUM[w[i + 2]] / 10;
+    if (w[i + 1] === 'rưỡi') return a + 0.5;
+    return a;
+  }
+  return null;
+}
+// Tìm cuốn sách theo tên (hoặc tên tác giả) người dùng vừa nói. q đã bỏ dấu.
+function matchBook(q, loose) {
+  q = q.replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+  if (q.length < 2 || (!loose && !q.includes(' '))) return null;
+  const key = (s) => ` ${fold(s).replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim()} `;
+  const books = simpleBooks(), w = ` ${q} `;
+  return books.find((b) => key(b.title) === w) || books.find((b) => key(b.title).includes(w) || w.includes(key(b.title)))
+    || books.find((b) => key(b.creator).includes(w) || w.includes(key(b.creator))) || null;
+}
+// Mở một cuốn và phát luôn, từ chỗ đang nghe dở nếu có.
+function playBook(b) {
+  const ready = readyUnits(b), pos = getPos(b.slug);
+  let unit = pos && ready.some((u) => u.no === pos.unit) ? pos.unit : ready[0].no;
+  if (bookProgress(b) >= 0.995) { unit = ready[0].no; store.set('pos:' + b.slug, { unit, t: 0, at: Date.now() }); }   // nghe xong rồi: nghe lại từ đầu
+  R.forcePlay = true;
+  sMode = 'time';             // mở sách nào cũng bắt đầu với lùi và tới 30 giây
+  const target = `#/r/${b.slug}/${unit}`;
+  if (location.hash === target) route(); else location.hash = target;
+}
+// Các lệnh chỉ có nghĩa khi đang nghe một cuốn sách. Trả về [tên lệnh, việc cần làm] hoặc null.
+function readerCommand(low, f) {
+  const has = (re) => re.test(f), n = numIn(low);
+  if (has(/hen gio|tu (dung|tat)/)) {
+    if (has(/\b(tat|bo|huy|xoa|thoi) (che do )?hen gio|khong hen gio/)) return ['sleep', () => setSleep(0)];
+    if (has(/het (phan|chuong|bai)/)) return ['sleep', () => setSleep(-1)];
+    const min = n == null ? 30 : has(/tieng/) ? n * 60 : n;
+    return ['sleep', () => setSleep(Math.max(1, Math.min(SLEEP_CLIPS, Math.round(min))))];
+  }
+  if (has(/(bo|xoa|huy) (danh )?dau/)) return ['unmark', () => (markIndex() >= 0 ? toggleMark() : announce('Câu này chưa có dấu trang.'))];
+  if (has(/danh dau|ghi nho/)) return ['mark', () => (markIndex() < 0 ? toggleMark() : announce('Câu này đã có dấu trang.'))];
+  if (has(/dau trang/)) return ['mark-go', () => stepMark(has(/truoc/) ? -1 : 1, true)];
+  if (has(/nhanh hon|nhanh len|tang toc/)) return ['rate', () => nudgeRate(1)];
+  if (has(/cham hon|cham lai|giam toc/)) return ['rate', () => nudgeRate(-1)];
+  if (has(/binh thuong/)) return ['rate', () => setRate(1)];
+  if (has(/toc do/)) {
+    const opts = $$('#speed option').map((o) => Number(o.value));
+    return ['rate', () => (n == null ? announce(P.rateNow(audio.playbackRate)) : setRate(opts.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a))))];
+  }
+  if (has(/\b(phan|chuong|bai|hoi|muc)\b/)) {
+    const list = readyUnits(R.book), at = list.findIndex((u) => u.no === R.unit.no);
+    const k = numIn(low.replace(/^.*?(phần|chương|bài|hồi|mục)/, ''));
+    const to = k != null ? Math.round(k) - 1 : has(/truoc/) ? at - 1 : has(/\b(sau|ke|tiep|toi)\b/) ? at + 1 : has(/cuoi/) ? list.length - 1 : has(/\bdau\b/) ? 0 : at;
+    return ['unit', () => {
+      const u = list[to];
+      if (!u) { cue('limit'); return announce(k != null ? 'Cuốn này không có phần đó.' : to < 0 ? 'Đây là phần đầu.' : 'Đây là phần cuối.'); }
+      if (to === at) return whereAmI();
+      R.forcePlay = !audio.paused;
+      if (simpleOn()) announce(P.unit(R.book, u), false);
+      noteJump();
+      location.hash = `#/r/${R.book.slug}/${u.no}`;
+    }];
+  }
+  // lệnh theo câu luôn phát luôn từ câu đó: người nghe muốn nghe lại, không cần ứng dụng đọc hộ
+  const sentGo = (d) => { if (!R.sents.length) return; noteJump(); seekSent(d == null ? 0 : sentAt(audio.currentTime) + d, true); };
+  if (has(/\bcau\b/)) return ['sent', () => sentGo(has(/truoc|lui/) ? -1 : has(/\b(sau|ke|tiep|toi)\b/) ? 1 : 0)];
+  if (has(/tu dau/)) return ['sent', () => sentGo(null)];
+  if (has(/(doc|nghe|nhac|lap|noi) lai/)) return ['sent', () => sentGo(0)];
+  if (has(/hoan tac|cho cu/)) return ['undo', () => undoJump()];
+  if (has(/\b(dung|ngung|nghi|im|thoi|tat)\b/)) return ['pause', () => { audio.pause(); announce('Tạm dừng.', false); }];
+  const back = has(/\b(lui|nguoc)\b|(tua|quay|tro) lai/);
+  if (back || has(/\b(toi|tua|tien|qua)\b/)) {
+    const secs = has(/nua phut/) ? 30 : has(/phut/) ? (n ?? 1) * 60 + (has(/phut ruoi/) ? 30 : 0) : has(/giay/) && n ? n : TIME_STEP;
+    return ['time', () => stepTime(back ? -1 : 1, Math.max(1, Math.min(3600, secs)))];
+  }
+  if (has(/\b(phat|nghe|doc|choi|chay|tiep)\b|bat dau/)) return ['play', () => audio.play().catch(() => {})];
+  return null;
+}
+// Hiểu và làm theo một câu lệnh. wasPlaying: sách đang phát trước khi bấm nút micro. Trả về tên lệnh (để kiểm thử).
+function voiceCommand(said, wasPlaying = false) {
+  const low = lowVi(said), f = fold(low), has = (re) => re.test(f);
+  const keep = () => { if (wasPlaying && simpleListening()) audio.play().catch(() => {}); };
+  const inBook = simpleListening(), view = document.body.dataset.view, books = simpleBooks();
+  toast(`Bạn nói: ${said}`);
+  const open = /^(mo|tim|nghe|doc|phat|bat)((?: sach| cuon| quyen| truyen| tac pham)*)(?: cua)? (.+)$/.exec(f);
+  const explicit = open && (open[1] === 'mo' || open[1] === 'tim');
+  const filter = explicit && open[1] === 'tim' && !simpleOn();       // giao diện đầy đủ: "tìm …" là lọc thư viện
+  const named = filter ? null : (open && matchBook(open[3], explicit || !!open[2])) || matchBook(f, false);
+  if (named) {
+    sIdx = Math.max(0, books.indexOf(named));
+    if (simpleOn()) announce(P.title(named), false);
+    playBook(named);
+    return 'open';
+  }
+  if (has(/tro giup|huong dan|cac lenh|lenh gi|noi duoc gi/)) { keep(); announce(VOICE_HELP); return 'help'; }
+  if (has(/che do (cham )?don gian/)) { keep(); if (!simpleOn()) setSimple(true); return 'simple'; }
+  if (has(/(giao dien|che do) day du/)) { keep(); if (simpleOn()) setSimple(false); return 'full'; }
+  if (has(/\b(o|toi|den) dau\b|dang nghe gi|\b(sach|cuon|phan|chuong) (gi|nao)\b/)) {
+    keep();
+    if (inBook) whereAmI();
+    else if (simpleOn() && books.length) announce(`Đang chọn sách. ${bookSpeech(books[sIdx], sIdx, books.length)}`, false);
+    else announce(view === 'book' ? `Bạn đang ở trang bìa của cuốn ${$('#h-book').textContent}.` : 'Bạn đang ở thư viện.');
+    return 'where';
+  }
+  if (has(/thu vien|sach khac|doi sach|ke sach|trang chu/)) {
+    if (view !== 'library') location.hash = '#/';
+    else if (simpleOn() && books.length) announce(`Đang chọn sách. ${bookSpeech(books[sIdx], sIdx, books.length)}`, false);
+    else announce('Bạn đang ở thư viện.');
+    return 'library';
+  }
+  if (simpleOn() && !inBook && has(/\b(sach|cuon) (sau|ke|tiep|truoc)\b/)) { simpleStep(has(/truoc/) ? -1 : 1); return 'book-step'; }
+  if (filter) {
+    const q = low.replace(/^\S+\s+/, '');
+    const go = () => {
+      $('#q').value = q;
+      const n = filterLibrary(false);
+      announce(n ? `Bạn nói: ${q}. ${n} cuốn khớp.` : `Bạn nói: ${q}. Không tìm thấy sách nào khớp.`);
+    };
+    if (view === 'library') go();
+    else { addEventListener('hashchange', () => setTimeout(go, 80), { once: true }); location.hash = '#/'; }
+    return 'find';
+  }
+  if (explicit) { keep(); announce(simpleOn() ? 'Không tìm thấy sách đó.' : `Không tìm thấy sách “${low.replace(/^\S+\s+/, '')}”.`); return 'nobook'; }
+  const cmd = readerCommand(low, f);
+  if (cmd && !inBook) {
+    const b = cmd[0] !== 'play' ? null : simpleOn() ? books[sIdx] : view === 'book' ? findBook(decodeURIComponent(location.hash.split('/')[2] || '')) : null;
+    if (b) { playBook(b); return 'open'; }
+    announce('Lệnh này chỉ dùng khi đang nghe sách. Hãy nói mở và tên sách.');
+    return 'needbook';
+  }
+  if (cmd) {
+    if (cmd[0] !== 'pause') keep();
+    cmd[1]();
+    return cmd[0];
+  }
+  keep();
+  announce(simpleOn() ? `Chưa hiểu lệnh. ${VOICE_HINT}` : `Bạn nói: ${said}. Chưa hiểu lệnh. ${VOICE_HINT}`);
+  return 'unknown';
+}
+window.snCommand = (said) => { const was = !audio.paused; audio.pause(); return voiceCommand(said, was); };       // để kiểm thử bộ hiểu lệnh
+function listenCommand(btn) {
+  if (rec) return rec.abort();
+  const was = !audio.paused;
+  stopPrompts();
+  try { speechSynthesis.cancel(); } catch { /* không có */ }
+  audio.pause();
+  cue('listen', true);
+  hear(btn, () => toast('Đang nghe lệnh. Hãy nói, ví dụ: tạm dừng.'), (said) => voiceCommand(said, was), (kind) => {
+    if (was && simpleListening()) audio.play().catch(() => {});
+    if (kind === 'aborted') return;
+    announce(kind === 'denied' ? 'Chưa được phép dùng micro. Hãy cho phép trong cài đặt trình duyệt.'
+      : kind === 'network' ? 'Không dùng được giọng nói lúc này. Hãy kiểm tra kết nối mạng.'
+      : `${kind === 'silent' ? 'Không nghe thấy gì.' : 'Không nghe rõ.'} Hãy chạm nút nói lệnh và nói lại.`);
+  });
+}
+if (SpeechRec) {
+  for (const b of $$('[data-voice]')) { b.hidden = false; b.addEventListener('click', () => listenCommand(b)); }
+  $('#sVoice').addEventListener('click', (e) => listenCommand(e.currentTarget));
+}
 
 // ================= ĐỊNH TUYẾN =================
 function show(view, title, heading) {
