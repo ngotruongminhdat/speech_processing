@@ -46,7 +46,7 @@ Cuối kỳ:   Wikisource ─► văn bản ─► TTS ─► DAISY 3 + mốc t�
 | Đồng bộ văn bản với âm thanh | Mức đoạn văn | Mức câu |
 | Trình phát | Một trang HTML sinh sẵn cho mỗi chương | Một ứng dụng thiết kế cho điện thoại và trình đọc màn hình |
 | Ngoại tuyến | Không | Lưu sách trên máy, cài lên màn hình chính |
-| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 175 kiểm thử giao diện |
+| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 178 kiểm thử giao diện |
 
 Các script sinh DAISY (`gen_smil.py`, `gen_opf_ncx.py`, `validate_daisy.py`) và ngôn ngữ thiết kế giao diện được kế thừa từ giữa kỳ. Phần còn lại là làm mới.
 
@@ -243,6 +243,7 @@ Thư viện gồm 15 đầu sách. Mười bốn cuốn dựng trong đồ án n
 **Di động**
 - Điều khiển phát từ màn hình khóa và tai nghe (Media Session), có ảnh bìa.
 - Lưu từng cuốn để nghe khi mất mạng (âm thanh lưu trong IndexedDB); cài lên màn hình chính.
+- **Thơ hiện theo từng dòng thơ:** lúc nhập văn bản, các dòng thơ được nối thành đoạn để giọng đọc đọc liền mạch, nên trang đọc từng hiện thơ như văn xuôi. `pipeline/scripts/verse_lines.py` lấy lại từng dòng thơ từ Wikisource; khi lắp trang, `build_site.py` so khớp các dòng đó với văn bản từng câu và chỉ ghi thêm vị trí cần xuống dòng. Chữ, âm thanh và mốc thời gian không đổi nên không phải thu lại. Truyện Kiều (820 đoạn) và Chinh phụ ngâm (103 đoạn) khớp toàn bộ; Thơ Hàn Mặc Tử khớp 68 trên 80 đoạn, 12 đoạn còn lại là thơ văn xuôi vốn không ngắt dòng.
 - **Nhập sách của riêng người dùng:** ở cuối Thư viện, người dùng chọn một file zip chứa sách nói DAISY 2.02 hoặc DAISY 3 có sẵn trên máy. Ứng dụng đọc file ngay trong trình duyệt (`app/web/daisy-import.js`, không gửi gì lên mạng): đọc mục lục zip rồi cắt từng file khi cần để sách vài trăm MB không phải nạp cả vào bộ nhớ, lấy thứ tự đọc từ OPF hoặc `ncc.html`, lấy mốc thời gian từ SMIL và văn bản từ DTBook hoặc HTML, rồi lưu mỗi file âm thanh thành một phần trong IndexedDB theo đúng dạng của sách lưu ngoại tuyến. Nhờ vậy trang đọc dùng lại nguyên vẹn: tô sáng theo lời đọc nếu sách có văn bản, còn sách chỉ có tiếng thì vẫn tua, đánh dấu, chọn phần và hẹn giờ như thường. Bộ đọc đã được thử với bốn cuốn mẫu của DAISY Consortium (hai cuốn 2.02 chỉ có mục lục, một cuốn 2.02 đủ văn bản, một cuốn DAISY 3) và với các file do chính dây chuyền của đồ án sinh ra.
 
 Danh sách tính năng điều hướng được lập bằng cách đối chiếu với BARD Mobile, Legimus, Voice Dream Reader, Victor Reader Stream và các tiêu chí của DAISY Consortium, rồi bổ sung những gì còn thiếu (17/11). Lần đối chiếu thứ hai (20/11, thêm Dolphin EasyReader) bổ sung bước nhảy theo dấu trang, tốc độ 0,5 lần, lùi về đầu câu khi nghe tiếp, tìm trong sách, và đưa dấu trang cùng hẹn giờ tắt vào chế độ chạm đơn giản. Những gì các ứng dụng đó có mà Sách Nói chưa có: chỉnh âm sắc, ra lệnh bằng giọng nói khi đang nghe, mở sách của riêng người dùng.
@@ -250,7 +251,7 @@ Danh sách tính năng điều hướng được lập bằng cách đối chi�
 ### 4.4. Kiểm thử
 
 - **Cấu trúc DAISY:** `validate_daisy.py` kiểm tra chéo cho từng phần của từng cuốn: mọi đoạn trong DTBook có mốc trong SMIL, mốc thời gian tăng dần và nằm trong thời lượng file âm thanh, OPF và NCX khớp nhau. Mọi phần đã dựng đều qua.
-- **Giao diện:** 175 kiểm thử đầu-cuối chạy trên Chromium qua Playwright ở kích thước màn hình điện thoại (`app/tests/e2e.py`). Chúng kiểm tra hành vi thật chứ không chỉ sự tồn tại của nút: ví dụ nhảy 30 giây thì thời điểm phát tăng trong khoảng 29,5 đến 32 giây; chọn thể loại "Thơ" thì thư viện chỉ còn đúng các tập thơ; ghi âm ghi chú bằng micro giả rồi kiểm tra dữ liệu âm thanh đã nằm trong bộ nhớ của máy.
+- **Giao diện:** 178 kiểm thử đầu-cuối chạy trên Chromium qua Playwright ở kích thước màn hình điện thoại (`app/tests/e2e.py`). Chúng kiểm tra hành vi thật chứ không chỉ sự tồn tại của nút: ví dụ nhảy 30 giây thì thời điểm phát tăng trong khoảng 29,5 đến 32 giây; chọn thể loại "Thơ" thì thư viện chỉ còn đúng các tập thơ; ghi âm ghi chú bằng micro giả rồi kiểm tra dữ liệu âm thanh đã nằm trong bộ nhớ của máy.
 - **Giới hạn của kiểm thử tự động:** nó xác nhận nhãn, vai trò, thứ tự và thông báo có mặt trong trang, không xác nhận TalkBack hay VoiceOver đọc chúng ra sao. Việc này chưa được làm (mục 6).
 
 ---

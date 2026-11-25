@@ -23,8 +23,10 @@ Usage: python3 pipeline/scripts/build_site.py [--legacy-totto]
 import argparse
 import csv
 import json
+import re
 import shutil
 import sys
+import unicodedata
 import zipfile
 from pathlib import Path
 
@@ -52,6 +54,51 @@ def human_size(n: int) -> str:
     return f"{n / 1e6:.0f} MB" if n >= 10e6 else f"{n / 1e6:.1f} MB"
 
 
+def mark_verse(paras, lines):
+    """Sách thơ: đánh dấu chỗ xuống dòng trong từng câu, theo các dòng thơ của bản gốc
+    (books/<slug>/metadata/verse_lines.json, do verse_lines.py ghi). Chữ và mốc thời gian không đổi:
+    mỗi câu chỉ có thêm phần tử thứ tư là vị trí các dấu cách cần hiện thành xuống dòng (bằng độ dài
+    câu nếu câu kết thúc đúng ở cuối một dòng thơ), và đoạn có thêm cờ "v"."""
+    # bản gõ cũ hay dùng chữ Ð (eth) thay cho Đ: coi như một
+    norm = lambda t: re.sub(r"\s+", "", unicodedata.normalize("NFC", t)).casefold().replace("ð", "đ")
+    index = {}
+    for ln in lines:
+        k = norm(ln)
+        if len(k) >= 2:
+            index.setdefault(k[:4], set()).add(k)
+    for p in paras:
+        if p["t"] != "p":
+            continue
+        stream = "".join(norm(s[2]) for s in p["s"])
+        pos, ends = 0, []
+        while pos < len(stream):
+            cands = [k for n in (4, 3, 2) for k in index.get(stream[pos:pos + n], ()) if stream.startswith(k, pos)]
+            if not cands:
+                break
+            pos += len(max(cands, key=len))
+            ends.append(pos)
+        if pos != len(stream) or len(ends) < 2:      # không khớp trọn đoạn, hoặc đoạn chỉ có một dòng: để nguyên
+            continue
+        base = 0
+        for s in p["s"]:
+            text, n = s[2], len(norm(s[2]))
+            want = {e - base for e in ends if base < e <= base + n}
+            brk, count = [], 0
+            for i, ch in enumerate(text):
+                if ch.isspace():
+                    if count in want:
+                        brk.append(i)
+                        want.discard(count)
+                else:
+                    count += 1
+            if n in want:
+                brk.append(len(text))
+            if brk:
+                s.append(brk)
+            base += n
+        p["v"] = 1
+
+
 def build_unit(ch_dir: Path, out_dir: Path, slug: str, vid: str):
     """Xuất một phần của một giọng -> {data, audio, duration} hoặc None nếu chưa dựng xong."""
     ts_file = ch_dir / "timestamps.csv"
@@ -73,6 +120,9 @@ def build_unit(ch_dir: Path, out_dir: Path, slug: str, vid: str):
         b, e = clips[s["id"]]
         paras.append({"id": s["id"], "t": s["type"], "b": round(b, 3), "e": round(e, 3),
                       "s": sents.get(s["id"]) or [[round(b, 3), round(e, 3), s["text"]]]})
+    verse = REPO / "books" / slug / "metadata" / "verse_lines.json"
+    if verse.exists():
+        mark_verse(paras, json.loads(verse.read_text(encoding="utf-8"))["lines"])
     duration = round(max(e for _, e in clips.values()), 3)
 
     name = f"{no:02d}"

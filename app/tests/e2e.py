@@ -1150,7 +1150,8 @@ async def main():
         async def drop():
             page.once("dialog", lambda d: asyncio.ensure_future(d.accept()))
             await page.click("#saveBtn")
-            return await until("document.body.dataset.view === 'library'")
+            gone = await until("document.body.dataset.view === 'library'")
+            return gone and "khỏi máy" in await spoken_live(page, "Đã xoá")      # lời báo đã xoá tới sau khi về thư viện
         first = lambda: page.get_attribute("#bookList li:first-child a", "aria-label")
         await page.goto(BASE + "#/")
         await page.wait_for_selector("#bookList li")
@@ -1223,6 +1224,21 @@ async def main():
         check("file không phải zip thì nói rõ", "không phải file zip" in msg, msg)
         msg = await bring("ghi-chu.zip", nodaisy, "Không tìm thấy")
         check("file zip không chứa sách DAISY thì nói rõ, thư viện không đổi", "Không tìm thấy sách DAISY" in msg and await page.locator("#bookList li").count() == n0, msg)
+
+        print("Thơ hiện theo từng dòng thơ")
+        await page.goto(BASE + "#/r/truyen-kieu/1")
+        await page.wait_for_selector("#text .s")
+        v = await page.evaluate("""() => { const p = document.querySelector('#text p'); const s = p.querySelector('.s');
+          return { verse: p.classList.contains('verse'), ws: getComputedStyle(p).whiteSpace, lines: p.textContent.split('\\n'), nS: p.querySelectorAll('.s').length,
+                   rows: Math.round(p.getBoundingClientRect().height / parseFloat(getComputedStyle(p).lineHeight)), first: s.textContent }; }""")
+        check("Truyện Kiều: mỗi câu thơ một dòng, không viết liền như văn xuôi",
+              v["verse"] and v["ws"] == "pre-line" and v["lines"][:2] == ["Trăm năm trong cõi người ta,", "Chữ tài chữ mệnh khéo là ghét nhau."] and len(v["lines"]) == 4 and v["rows"] >= 4, str(v["lines"]))
+        check("xuống dòng chỉ là cách hiện: số câu đồng bộ với âm thanh không đổi", v["nS"] == 2 and (await page.evaluate(STATE))["n"] > 100, str(v["nS"]))
+        await page.goto(BASE + "#/r/lao-hac/1")
+        await page.wait_for_selector("#text .s")
+        check("văn xuôi vẫn hiện thành đoạn như cũ", await page.evaluate("document.querySelectorAll('#text .verse').length") == 0)
+        await page.goto(BASE + "#/")
+        await page.wait_for_selector("#bookList li")
 
         print("Trang bìa với trình đọc màn hình")
         await page.goto(BASE + "#/b/truyen-kieu")
