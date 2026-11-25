@@ -100,6 +100,10 @@ def main(legacy_totto: bool):
         shutil.rmtree(SITE)
     shutil.copytree(WEB, SITE)
     (SITE / ".nojekyll").write_text("")          # GitHub Pages: phát nguyên trạng, không qua Jekyll
+    # bản cài cho Android, để tải thẳng từ trang (mục Cài ứng dụng trong Hướng dẫn)
+    apk = REPO / "app" / "android" / "SachNoi-1.0.0.apk"
+    if apk.exists():
+        shutil.copyfile(apk, SITE / "SachNoi.apk")
     # lời nhắc thu sẵn của chế độ chạm đơn giản (build_prompts.py), nếu đã thu
     if (REPO / "prompts" / "index.json").exists():
         shutil.copytree(REPO / "prompts", SITE / "prompts")

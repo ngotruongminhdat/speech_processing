@@ -1082,6 +1082,18 @@ async def main():
         await page.click("#sAlt")
         await page.evaluate("for (const k of Object.keys(localStorage)) if (/^sn:(pos|marks|rate):/.test(k)) localStorage.removeItem(k)")
 
+        print("Cài ứng dụng")
+        await page.goto(BASE + "#/")
+        await page.wait_for_selector("#bookList li")
+        await page.click("#view-library [data-help]")
+        href = await page.get_attribute("#apkLink", "href")
+        apk = await page.request.get(BASE + href)
+        head = (await apk.body())[:2]
+        check("hướng dẫn có mục Cài ứng dụng, đường dẫn tải APK cho Android mở được",
+              await page.is_visible("#apkLink") and apk.status == 200 and head == b"PK", f"{href}: {apk.status}")
+        check("hướng dẫn có cách cài trên iPhone", "Thêm vào Màn hình chính" in await page.inner_text("#help"))
+        await page.keyboard.press("Escape")
+
         print("Trang bìa với trình đọc màn hình")
         await page.goto(BASE + "#/b/truyen-kieu")
         await page.wait_for_selector("#tocJump")

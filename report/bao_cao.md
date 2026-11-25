@@ -46,7 +46,7 @@ Cuối kỳ:   Wikisource ─► văn bản ─► TTS ─► DAISY 3 + mốc t�
 | Đồng bộ văn bản với âm thanh | Mức đoạn văn | Mức câu |
 | Trình phát | Một trang HTML sinh sẵn cho mỗi chương | Một ứng dụng thiết kế cho điện thoại và trình đọc màn hình |
 | Ngoại tuyến | Không | Lưu sách trên máy, cài lên màn hình chính |
-| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 158 kiểm thử giao diện |
+| Kiểm thử | Kiểm tra cấu trúc DAISY | Thêm 160 kiểm thử giao diện |
 
 Các script sinh DAISY (`gen_smil.py`, `gen_opf_ncx.py`, `validate_daisy.py`) và ngôn ngữ thiết kế giao diện được kế thừa từ giữa kỳ. Phần còn lại là làm mới.
 
@@ -189,6 +189,8 @@ site/ ─► deploy_site.py ─► GitHub Pages
 
 Ứng dụng là trang web tĩnh viết bằng HTML, CSS và JavaScript thuần (không dùng khung giao diện), cài được lên màn hình chính như một ứng dụng (PWA). Lý do chọn web thay cho ứng dụng gốc: chạy ngay trên mọi điện thoại không cần cài qua kho ứng dụng, triển khai bằng GitHub Pages không tốn chi phí máy chủ, và trình đọc màn hình của cả Android lẫn iOS đều hỗ trợ tốt nội dung web có đánh dấu ngữ nghĩa. Cái giá là không dùng được một số khả năng của hệ điều hành (ví dụ phím âm lượng làm cử chỉ).
 
+**Cài lên điện thoại.** Có ba cách, đều ghi trong mục Cài ứng dụng của trang Hướng dẫn. Trên Android, người dùng tải file `SachNoi.apk` ngay từ trang; đây là bản đóng gói Trusted Web Activity dựng bằng Bubblewrap (`app/android`), nặng chưa tới 1 MB vì nó chỉ mở trang web trong Chrome ở chế độ toàn màn hình, nhờ vậy mọi cập nhật của trang có ngay trong ứng dụng mà không phải dựng lại APK. Cũng trên Android có thể chọn Thêm vào màn hình chính trong Chrome. Trên iPhone và iPad, người dùng mở trang bằng Safari rồi chọn Thêm vào Màn hình chính; đồ án không có bản cài riêng cho iOS vì việc đó cần máy Mac và tài khoản Apple Developer. Hai giới hạn: APK còn hiện một thanh địa chỉ mỏng do chưa đặt được file `assetlinks.json` ở gốc tên miền, và cả ba cách cài chưa được thử trên điện thoại thật.
+
 Mỗi cuốn sách vẫn là một bộ DAISY 3 hợp lệ (DTBook, SMIL, OPF, NCX), mở được bằng phần mềm đọc DAISY khác. Ứng dụng đọc một bản rút gọn dạng JSON sinh từ chính bộ DAISY đó để tải nhanh trên điện thoại.
 
 ### 4.2. Thư viện
@@ -247,7 +249,7 @@ Danh sách tính năng điều hướng được lập bằng cách đối chi�
 ### 4.4. Kiểm thử
 
 - **Cấu trúc DAISY:** `validate_daisy.py` kiểm tra chéo cho từng phần của từng cuốn: mọi đoạn trong DTBook có mốc trong SMIL, mốc thời gian tăng dần và nằm trong thời lượng file âm thanh, OPF và NCX khớp nhau. Mọi phần đã dựng đều qua.
-- **Giao diện:** 158 kiểm thử đầu-cuối chạy trên Chromium qua Playwright ở kích thước màn hình điện thoại (`app/tests/e2e.py`). Chúng kiểm tra hành vi thật chứ không chỉ sự tồn tại của nút: ví dụ nhảy 30 giây thì thời điểm phát tăng trong khoảng 29,5 đến 32 giây; chọn thể loại "Thơ" thì thư viện chỉ còn đúng các tập thơ; ghi âm ghi chú bằng micro giả rồi kiểm tra dữ liệu âm thanh đã nằm trong bộ nhớ của máy.
+- **Giao diện:** 160 kiểm thử đầu-cuối chạy trên Chromium qua Playwright ở kích thước màn hình điện thoại (`app/tests/e2e.py`). Chúng kiểm tra hành vi thật chứ không chỉ sự tồn tại của nút: ví dụ nhảy 30 giây thì thời điểm phát tăng trong khoảng 29,5 đến 32 giây; chọn thể loại "Thơ" thì thư viện chỉ còn đúng các tập thơ; ghi âm ghi chú bằng micro giả rồi kiểm tra dữ liệu âm thanh đã nằm trong bộ nhớ của máy.
 - **Giới hạn của kiểm thử tự động:** nó xác nhận nhãn, vai trò, thứ tự và thông báo có mặt trong trang, không xác nhận TalkBack hay VoiceOver đọc chúng ra sao. Việc này chưa được làm (mục 6).
 
 ---

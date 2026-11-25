@@ -6,6 +6,16 @@
 
 Thư viện sách nói theo chuẩn DAISY 3, nghe trên trình duyệt điện thoại: văn bản tô sáng theo từng câu, nút lớn, đọc được bằng trình đọc màn hình, điều khiển từ màn hình khóa, nhớ chỗ đang nghe, lưu sách để nghe khi mất mạng.
 
+## Cài đặt ứng dụng
+
+Ứng dụng chạy ngay trên trình duyệt tại https://ngotruongminhdat.github.io/speech_processing/, không bắt buộc phải cài. Muốn có biểu tượng riêng trên màn hình chính và mở toàn màn hình:
+
+- **Android (file APK):** tải https://ngotruongminhdat.github.io/speech_processing/SachNoi.apk (cũng là file `app/android/SachNoi-1.0.0.apk` trong repo), mở file vừa tải, cho phép "Cài ứng dụng từ nguồn không xác định". Cần Android 7 trở lên và có Chrome. Chi tiết và cách dựng lại: `app/android/README.md`.
+- **Android (không cần APK):** mở trang bằng Chrome, trình đơn ba chấm, chọn "Thêm vào màn hình chính" hoặc "Cài đặt ứng dụng".
+- **iPhone, iPad:** mở trang bằng Safari, nhấn nút Chia sẻ, chọn "Thêm vào Màn hình chính". Chưa có bản cài riêng cho iOS vì việc đó cần máy Mac và tài khoản Apple Developer.
+
+Các cách cài trên chưa được thử trên điện thoại thật.
+
 ## Dòng dữ liệu
 
 ```
