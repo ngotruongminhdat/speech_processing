@@ -25,6 +25,7 @@ class _Extract(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.out, self.buf = [], []
+        self.lines = []          # từng dòng trước khi nối thành đoạn (để giữ chỗ ngắt dòng của thơ)
         self.stack = []          # (tag, bỏ qua?, là thơ?)
         self.skip = 0
         self.head = False
@@ -36,6 +37,7 @@ class _Extract(HTMLParser):
         # chữ Hán: bỏ chữ, giữ phần còn lại của dòng; dòng chỉ có chữ Hán thì mất hẳn
         lines = [re.sub(r"\(\s*\)", "", re.sub(r"\s+", " ", CJK.sub("", ln))).strip() for ln in lines]
         lines = [ln for ln in lines if re.search(r"\w", ln)]
+        self.lines += [unicodedata.normalize("NFC", ln) for ln in lines]
         text = unicodedata.normalize("NFC", " ".join(lines)).strip()
         text = re.sub(r"\s+([,.;:!?…])", r"\1", text)
         if re.search(r"\w", text):
@@ -73,6 +75,17 @@ class _Extract(HTMLParser):
     def handle_data(self, data):
         if not self.skip:
             self.buf.append(data.replace("\n", " "))
+
+
+def lines(html: str):
+    """Từng dòng chữ theo thứ tự trong trang, chưa nối thành đoạn: dùng để giữ chỗ ngắt dòng của thơ."""
+    i = html.find('class="prp-pages-output"')
+    if i >= 0:
+        html = html[html.rfind("<", 0, i):]
+    p = _Extract()
+    p.feed(html)
+    p.flush()
+    return p.lines
 
 
 def paragraphs(html: str):

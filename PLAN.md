@@ -68,7 +68,7 @@ Giải pháp được chọn để phân tích: **TTS chạy cục bộ cho sác
 
 ## Stage 5 — Báo cáo và trình bày
 
-- [x] Báo cáo theo 4 mục chấm điểm (`report/bao_cao.md`, bản nháp 18/11); ghi rõ phần kế thừa giữa kỳ và phần làm mới
+- [x] Báo cáo theo 4 mục chấm điểm (`report/bao_cao.tex`, bản PDF `report/bao_cao.pdf`, bản nháp 18/11); ghi rõ phần kế thừa giữa kỳ và phần làm mới
 - [ ] Slide, video demo quay trên điện thoại thật
 - [ ] Câu hỏi phản biện dự kiến: vì sao web mà không phải app gốc, chất lượng giọng Piper, bản quyền sách
 

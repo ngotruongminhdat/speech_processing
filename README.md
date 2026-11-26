@@ -1,6 +1,6 @@
 # Sách Nói — ứng dụng đọc sách tiếng Việt cho người khiếm thị
 
-Đồ án cuối kỳ môn Xử lý tiếng nói (branch `final_project`), kế thừa đồ án giữa kỳ (branch `mid_term_project`, sách nói DAISY của Totto-chan).
+Đồ án cuối kỳ môn Xử lý tiếng nói (branch `main`, phát triển trên branch `final_project`), kế thừa đồ án giữa kỳ (branch `mid_term_project`, sách nói DAISY của Totto-chan).
 
 **Dùng thử:** https://ngotruongminhdat.github.io/speech_processing/
 
@@ -15,6 +15,10 @@ Thư viện sách nói theo chuẩn DAISY 3, nghe trên trình duyệt điện t
 - **iPhone, iPad:** mở trang bằng Safari, nhấn nút Chia sẻ, chọn "Thêm vào Màn hình chính". Chưa có bản cài riêng cho iOS vì việc đó cần máy Mac và tài khoản Apple Developer.
 
 Các cách cài trên chưa được thử trên điện thoại thật.
+
+## Nhập sách của riêng bạn
+
+Cuối Thư viện có mục "Sách của bạn": nhấn "Nhập sách DAISY từ máy" rồi chọn file zip chứa sách nói DAISY 2.02 hoặc DAISY 3. File được đọc ngay trên máy (`app/web/daisy-import.js`), sách lưu trong trình duyệt và nghe được khi không có mạng. Sách mẫu để thử: https://daisy.org/info-help/document-archive/sample-files/
 
 ## Dòng dữ liệu
 

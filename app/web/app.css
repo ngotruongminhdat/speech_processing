@@ -235,6 +235,9 @@ h2.seg{font-size:calc(1.3rem * var(--rsize));font-weight:600;line-height:1.4;mar
 .dropcap::first-letter{float:left;font-size:3.4em;line-height:.82;padding:.04em .12em 0 0;color:var(--accent);font-weight:bold}
 .endmark{text-align:center;color:var(--ink-soft);margin-top:2.2rem;font-size:.8rem;letter-spacing:.5em}
 .footnote{font-size:.9em;color:var(--ink-soft);border-left:3px solid var(--accent);background:var(--accent-soft);margin-top:2rem}
+/* thơ: mỗi dòng thơ một dòng, không dàn đều hai lề, không chữ cái đầu phóng to */
+.seg.verse{white-space:pre-line;text-align:left;line-height:1.8}
+.seg.verse.dropcap::first-letter{float:none;font-size:1em;line-height:inherit;padding:0;color:inherit;font-weight:inherit}
 body.legible .seg{font-family:var(--ui);letter-spacing:.02em;word-spacing:.14em;line-height:2.15}
 body.legible .dropcap::first-letter{float:none;font-size:1em;color:inherit;padding:0;font-weight:inherit}
 
@@ -355,6 +358,11 @@ dialog.set-panel::backdrop{background:rgba(0,0,0,.28)}
 }
 [data-voice][aria-pressed="true"]{background:#f0c35a !important;color:#2b1408 !important}
 .pill-btn.top-right{position:absolute;top:.9rem;right:.9rem;z-index:5;color:var(--hero-ink);background:rgba(30,15,6,.45);border-color:rgba(255,248,238,.45);box-shadow:none}
+.import{max-width:34rem;margin:2.2rem auto 0;padding-top:1.6rem;border-top:1px solid rgba(255,248,238,.3);text-align:center;font-family:var(--ui)}
+.import h2{font:600 1.25rem var(--serif);margin:0 0 .5rem}
+.import p{margin:.5rem 0 1rem;font-size:.92rem;line-height:1.6;opacity:.92}
+.import #importInfo{margin:1rem 0 0;min-height:1.5em;font-weight:600}
+.import .btn[aria-disabled="true"]{opacity:.6}
 body.simple{overflow:hidden}
 body.simple #progress{display:none !important}
 body.simple #toast{z-index:60}
