@@ -1,6 +1,6 @@
 # Sách Nói — ứng dụng đọc sách tiếng Việt cho người khiếm thị
 
-Đồ án cuối kỳ môn Xử lý tiếng nói (branch `final_project`), kế thừa đồ án giữa kỳ (branch `mid_term_project`, sách nói DAISY của Totto-chan).
+Đồ án cuối kỳ môn Xử lý tiếng nói (branch `main`, phát triển trên branch `final_project`), kế thừa đồ án giữa kỳ (branch `mid_term_project`, sách nói DAISY của Totto-chan).
 
 **Dùng thử:** https://ngotruongminhdat.github.io/speech_processing/
 
